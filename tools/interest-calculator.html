@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Simple & Compound Interest Calculator Online | Fixora</title>
+  <meta name="description" content="Calculate simple or compound interest online for free. See total interest earned and final balance over time. No sign-up." />
+  <meta name="keywords" content="interest calculator, compound interest calculator online free, simple interest calculator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/interest-calculator.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Simple & Compound Interest Calculator" />
+  <meta property="og:description" content="Calculate simple or compound interest online for free." />
+  <meta property="og:url" content="https://www.fixora.com/tools/interest-calculator.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Simple & Compound Interest Calculator" />
+  <meta name="twitter:description" content="Calculate simple or compound interest online for free." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Interest Calculator",
+    "url": "https://www.fixora.com/tools/interest-calculator.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Interest Calculator", "item": "https://www.fixora.com/tools/interest-calculator.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What's the real difference between simple and compound interest?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Simple interest is calculated only on your original principal every year, Final = P × (1 + r × t), so it grows at a constant rate; compound interest is calculated on your principal plus any interest already earned, Final = P × (1 + r/n)^(n×t), so it grows faster over time because you earn interest on interest." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the Compounded dropdown actually change?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It sets how many times per year interest is added to your balance — daily compounding yields slightly more than monthly, which yields more than annual, because interest gets added to the balance more frequently and starts earning its own interest sooner." }
+      },
+      {
+        "@type": "Question",
+        "name": "Which compounding frequency should I pick to match my bank or investment account?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Match whatever your account statement or terms specify — savings accounts commonly compound daily or monthly, while some bonds or fixed-term products compound annually or semi-annually, so check your account disclosures for the exact figure." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this calculator account for taxes or fees on interest earned?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — it shows the raw interest calculation based on the rate, principal, and time you enter, without deducting any taxes, account fees, or withdrawal penalties that might apply to a real account." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this financial or investment advice?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — this tool performs a mathematical projection based on a fixed rate you provide; real interest rates on savings, investments, and loans can change over time, so treat the result as an estimate rather than a guarantee or professional recommendation." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Interest Calculator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">📈</div>
+      <h1>Simple & Compound Interest Calculator</h1>
+      <p>See how much interest your money earns over time — simple or compound.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="pill-row" id="modeRow">
+          <button class="pill" data-mode="simple" type="button">Simple Interest</button>
+          <button class="pill active" data-mode="compound" type="button">Compound Interest</button>
+        </div>
+
+        <div class="row" style="margin-top:16px;">
+          <div class="field">
+            <label for="principal">Starting amount</label>
+            <input type="number" id="principal" placeholder="e.g. 5000" step="0.01" />
+          </div>
+          <div class="field">
+            <label for="rate">Annual interest rate (%)</label>
+            <input type="number" id="rate" placeholder="e.g. 5" step="0.01" />
+          </div>
+          <div class="field">
+            <label for="years">Number of years</label>
+            <input type="number" id="years" placeholder="e.g. 10" step="1" />
+          </div>
+        </div>
+
+        <div class="field" id="compoundFrequencyField" style="max-width:280px;">
+          <label for="compoundFrequency">Compounded</label>
+          <select id="compoundFrequency">
+            <option value="1">Annually</option>
+            <option value="2">Semi-annually</option>
+            <option value="4">Quarterly</option>
+            <option value="12" selected>Monthly</option>
+            <option value="365">Daily</option>
+          </select>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="calcBtn">Calculate</button>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+
+        <div class="stat-row" id="resultRow" style="display:none;">
+          <div class="stat"><strong id="statInterest">–</strong><span>Total Interest Earned</span></div>
+          <div class="stat"><strong id="statFinal">–</strong><span>Final Balance</span></div>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Calculate Interest Earned</h2>
+        <ol class="howto-steps">
+          <li>Choose Simple Interest or Compound Interest using the toggle pills.</li>
+          <li>Enter your starting amount (principal), annual interest rate, and number of years.</li>
+          <li>If using Compound Interest, also choose how often it compounds — annually, semi-annually, quarterly, monthly, or daily.</li>
+          <li>Click "Calculate" to see your total interest earned and final balance.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What's the real difference between simple and compound interest?</summary>
+          <p>Simple interest is calculated only on your original principal every year, Final = P × (1 + r × t), so it grows at a constant rate; compound interest is calculated on your principal plus any interest already earned, Final = P × (1 + r/n)^(n×t), so it grows faster over time because you earn interest on interest.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the Compounded dropdown actually change?</summary>
+          <p>It sets how many times per year interest is added to your balance — daily compounding yields slightly more than monthly, which yields more than annual, because interest gets added to the balance more frequently and starts earning its own interest sooner.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Which compounding frequency should I pick to match my bank or investment account?</summary>
+          <p>Match whatever your account statement or terms specify — savings accounts commonly compound daily or monthly, while some bonds or fixed-term products compound annually or semi-annually, so check your account disclosures for the exact figure.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this calculator account for taxes or fees on interest earned?</summary>
+          <p>No — it shows the raw interest calculation based on the rate, principal, and time you enter, without deducting any taxes, account fees, or withdrawal penalties that might apply to a real account.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is this financial or investment advice?</summary>
+          <p>No — this tool performs a mathematical projection based on a fixed rate you provide; real interest rates on savings, investments, and loans can change over time, so treat the result as an estimate rather than a guarantee or professional recommendation.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="loan-calculator.html">
+            <span class="icon" aria-hidden="true">🏦</span>
+            <h3>Loan Calculator</h3>
+            <p>Calculate a loan's monthly payment.</p>
+          </a>
+          <a class="card" href="percentage-calculator.html">
+            <span class="icon" aria-hidden="true">💯</span>
+            <h3>Percentage Calculator</h3>
+            <p>Quick percentage math, three ways.</p>
+          </a>
+          <a class="card" href="discount-calculator.html">
+            <span class="icon" aria-hidden="true">🏷️</span>
+            <h3>Discount Calculator</h3>
+            <p>Find the final price after a discount.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var mode = "compound";
+    var compoundFrequencyField = document.getElementById("compoundFrequencyField");
+    var statusBox = document.getElementById("statusBox");
+    var resultRow = document.getElementById("resultRow");
+
+    document.querySelectorAll("#modeRow [data-mode]").forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        document.querySelectorAll("#modeRow [data-mode]").forEach(function (p) { p.classList.remove("active"); });
+        pill.classList.add("active");
+        mode = pill.getAttribute("data-mode");
+        compoundFrequencyField.style.display = mode === "compound" ? "block" : "none";
+      });
+    });
+
+    function formatMoney(n) {
+      return "$" + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    document.getElementById("calcBtn").addEventListener("click", function () {
+      var principal = parseFloat(document.getElementById("principal").value);
+      var ratePct = parseFloat(document.getElementById("rate").value);
+      var years = parseFloat(document.getElementById("years").value);
+
+      if (isNaN(principal) || principal <= 0 || isNaN(ratePct) || ratePct < 0 || isNaN(years) || years <= 0) {
+        statusBox.textContent = "Please fill in the starting amount, rate, and years with valid numbers.";
+        return;
+      }
+
+      var rate = ratePct / 100;
+      var finalAmount;
+
+      if (mode === "simple") {
+        finalAmount = principal * (1 + rate * years);
+      } else {
+        var n = parseFloat(document.getElementById("compoundFrequency").value);
+        finalAmount = principal * Math.pow(1 + rate / n, n * years);
+      }
+
+      var totalInterest = finalAmount - principal;
+
+      resultRow.style.display = "flex";
+      document.getElementById("statInterest").textContent = formatMoney(totalInterest);
+      document.getElementById("statFinal").textContent = formatMoney(finalAmount);
+
+      statusBox.textContent = "After " + years + " year(s), you'll have earned " + formatMoney(totalInterest) + " in interest.";
+    });
+  </script>
+</body>
+</html>

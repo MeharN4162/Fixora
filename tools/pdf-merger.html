@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free PDF Merger Online — Combine PDF Files | Fixora</title>
+  <meta name="description" content="Merge multiple PDF files into one document online for free, right in your browser. Reorder pages before combining. No uploads, no sign-up." />
+  <meta name="keywords" content="pdf merger, combine pdf files, merge pdf online free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/pdf-merger.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free PDF Merger Online — Combine PDF Files" />
+  <meta property="og:description" content="Merge multiple PDF files into one document online for free, right in your browser." />
+  <meta property="og:url" content="https://www.fixora.com/tools/pdf-merger.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free PDF Merger Online — Combine PDF Files" />
+  <meta name="twitter:description" content="Merge multiple PDF files into one document online for free." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PDF Merger",
+    "url": "https://www.fixora.com/tools/pdf-merger.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "PDF Merger", "item": "https://www.fixora.com/tools/pdf-merger.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why is the Merge PDFs button disabled?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It only activates once you've added at least two PDF files — merging a single file wouldn't do anything, so the tool blocks the button and shows \"Add at least one more PDF to merge\" until a second file is added." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does merging preserve bookmarks, links, or form fields inside each PDF?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Pages are copied over using pdf-lib's page-copying, which brings over each page's visual content faithfully, but complex features like cross-document bookmarks or interactive forms may not carry over perfectly since each source file's internal structure is being recombined into a new document." }
+      },
+      {
+        "@type": "Question",
+        "name": "In what order will my files be merged?",
+        "acceptedAnswer": { "@type": "Answer", "text": "In the order shown in the file list, top to bottom — the order you upload them isn't final, so reorder with the up/down arrows before clicking Merge." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a limit to how many PDFs I can merge at once?",
+        "acceptedAnswer": { "@type": "Answer", "text": "There's no hard-coded limit, but every page of every file is rendered as a thumbnail in your browser, so merging a very large number of large PDFs may slow down or strain your browser's memory since it's all happening on your device." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I merge PDFs that have different page sizes?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — each source PDF's pages are copied as-is, so a merged file can freely mix page sizes (e.g. some A4, some Letter) without being forced onto a single uniform size." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>PDF Merger</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">📎</div>
+      <h1>PDF Merger</h1>
+      <p>Combine multiple PDF files into a single document — reorder them however you like, all processed locally in your browser.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload PDF files">
+          <div class="dz-icon" aria-hidden="true">📤</div>
+          <strong>Click to upload or drag PDF files here</strong>
+          <small>Select two or more PDFs — you can reorder them below</small>
+          <input type="file" id="fileInput" accept="application/pdf" multiple hidden />
+        </div>
+
+        <div class="file-list" id="fileList"></div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="mergeBtn" disabled>Merge PDFs</button>
+          <a class="btn btn-secondary" id="downloadBtn" style="display:none;" download="merged.pdf">Download Merged PDF</a>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Merge PDF Files</h2>
+        <ol class="howto-steps">
+          <li>Upload two or more PDF files (click or drag — the Merge button stays disabled until you have at least two).</li>
+          <li>Each file shows a thumbnail of its first page — use the up/down buttons to put the files in the order you want them combined.</li>
+          <li>Click "Merge PDFs".</li>
+          <li>Download the single combined PDF.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Why is the Merge PDFs button disabled?</summary>
+          <p>It only activates once you've added at least two PDF files — merging a single file wouldn't do anything, so the tool blocks the button and shows "Add at least one more PDF to merge" until a second file is added.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does merging preserve bookmarks, links, or form fields inside each PDF?</summary>
+          <p>Pages are copied over using pdf-lib's page-copying, which brings over each page's visual content faithfully, but complex features like cross-document bookmarks or interactive forms may not carry over perfectly since each source file's internal structure is being recombined into a new document.</p>
+        </details>
+        <details class="faq-item">
+          <summary>In what order will my files be merged?</summary>
+          <p>In the order shown in the file list, top to bottom — the order you upload them isn't final, so reorder with the up/down arrows before clicking Merge.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is there a limit to how many PDFs I can merge at once?</summary>
+          <p>There's no hard-coded limit, but every page of every file is rendered as a thumbnail in your browser, so merging a very large number of large PDFs may slow down or strain your browser's memory since it's all happening on your device.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I merge PDFs that have different page sizes?</summary>
+          <p>Yes — each source PDF's pages are copied as-is, so a merged file can freely mix page sizes (e.g. some A4, some Letter) without being forced onto a single uniform size.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="pdf-splitter.html">
+            <span class="icon" aria-hidden="true">✂️</span>
+            <h3>PDF Splitter</h3>
+            <p>Extract specific pages into a new PDF.</p>
+          </a>
+          <a class="card" href="pdf-compressor.html">
+            <span class="icon" aria-hidden="true">📄</span>
+            <h3>PDF Compressor</h3>
+            <p>Shrink large PDF files without losing readability.</p>
+          </a>
+          <a class="card" href="../blog/compress-pdf-guide.html">
+            <span class="icon" aria-hidden="true">📄</span>
+            <h3>Guide: Compress a PDF Properly</h3>
+            <p>Understand what makes PDFs large and how to shrink them.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/vendor/pdf-lib.min.js"></script>
+  <script type="module">
+    import * as pdfjsLib from "../assets/js/vendor/pdf.min.mjs";
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "../assets/js/vendor/pdf.worker.min.mjs";
+    var dropzone = document.getElementById("dropzone");
+    var fileInput = document.getElementById("fileInput");
+    var fileListEl = document.getElementById("fileList");
+    var mergeBtn = document.getElementById("mergeBtn");
+    var downloadBtn = document.getElementById("downloadBtn");
+    var statusBox = document.getElementById("statusBox");
+
+    var files = []; // { file, thumb }
+
+    function renderList() {
+      fileListEl.innerHTML = "";
+      files.forEach(function (entry, index) {
+        var item = document.createElement("div");
+        item.className = "file-list-item";
+
+        var thumbHtml = entry.thumb
+          ? '<img class="file-thumb" src="' + entry.thumb + '" alt="First page of ' + entry.file.name + '" />'
+          : '<span class="file-thumb" aria-hidden="true"></span>';
+
+        item.innerHTML =
+          thumbHtml +
+          '<span class="file-name">' + (index + 1) + '. ' + entry.file.name + '</span>' +
+          '<span class="file-meta">' + Fixora.formatBytes(entry.file.size) + '</span>' +
+          '<span class="file-actions">' +
+          '<button type="button" data-action="up" data-index="' + index + '" aria-label="Move up">↑</button>' +
+          '<button type="button" data-action="down" data-index="' + index + '" aria-label="Move down">↓</button>' +
+          '<button type="button" data-action="remove" data-index="' + index + '" aria-label="Remove">✕</button>' +
+          '</span>';
+        fileListEl.appendChild(item);
+      });
+
+      mergeBtn.disabled = files.length < 2;
+      statusBox.textContent = files.length === 0
+        ? ""
+        : files.length === 1
+          ? "Add at least one more PDF to merge."
+          : files.length + " PDFs ready — reorder if needed, then click Merge PDFs.";
+    }
+
+    async function generateThumb(entry) {
+      try {
+        var bytes = await entry.file.arrayBuffer();
+        var pdf = await pdfjsLib.getDocument({ data: bytes }).promise;
+        var page = await pdf.getPage(1);
+        var viewport = page.getViewport({ scale: 1 });
+        var scale = 80 / viewport.width;
+        var scaledViewport = page.getViewport({ scale: scale });
+
+        var canvas = document.createElement("canvas");
+        canvas.width = scaledViewport.width;
+        canvas.height = scaledViewport.height;
+        var ctx = canvas.getContext("2d");
+        await page.render({ canvasContext: ctx, viewport: scaledViewport }).promise;
+
+        entry.thumb = canvas.toDataURL("image/jpeg", 0.7);
+        renderList();
+      } catch (err) {
+        // leave thumb blank on failure — not fatal to merging
+      }
+    }
+
+    var lastDownloadUrl = null;
+
+    function resetDownload() {
+      if (lastDownloadUrl) {
+        URL.revokeObjectURL(lastDownloadUrl);
+        lastDownloadUrl = null;
+      }
+      downloadBtn.style.display = "none";
+    }
+
+    fileListEl.addEventListener("click", function (e) {
+      var btn = e.target.closest("button");
+      if (!btn) return;
+      var index = parseInt(btn.getAttribute("data-index"), 10);
+      var action = btn.getAttribute("data-action");
+
+      if (action === "remove") {
+        files.splice(index, 1);
+      } else if (action === "up" && index > 0) {
+        var tmp = files[index - 1];
+        files[index - 1] = files[index];
+        files[index] = tmp;
+      } else if (action === "down" && index < files.length - 1) {
+        var tmp2 = files[index + 1];
+        files[index + 1] = files[index];
+        files[index] = tmp2;
+      }
+      renderList();
+      resetDownload();
+    });
+
+    function handleFiles(fileListInput) {
+      Array.prototype.forEach.call(fileListInput, function (f) {
+        if (f.type === "application/pdf") {
+          var entry = { file: f, thumb: null };
+          files.push(entry);
+          generateThumb(entry);
+        }
+      });
+      resetDownload();
+      renderList();
+    }
+
+    Fixora.setupDropzone(dropzone, fileInput, handleFiles);
+    dropzone.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") fileInput.click();
+    });
+
+    mergeBtn.addEventListener("click", async function () {
+      mergeBtn.disabled = true;
+      statusBox.textContent = "Merging PDFs…";
+
+      try {
+        var mergedPdf = await PDFLib.PDFDocument.create();
+
+        for (var i = 0; i < files.length; i++) {
+          statusBox.textContent = "Adding file " + (i + 1) + " of " + files.length + "…";
+          var bytes = await files[i].file.arrayBuffer();
+          var srcDoc = await PDFLib.PDFDocument.load(bytes);
+          var pageIndices = srcDoc.getPageIndices();
+          var copiedPages = await mergedPdf.copyPages(srcDoc, pageIndices);
+          copiedPages.forEach(function (page) { mergedPdf.addPage(page); });
+        }
+
+        var mergedBytes = await mergedPdf.save();
+        var blob = new Blob([mergedBytes], { type: "application/pdf" });
+        var url = URL.createObjectURL(blob);
+        lastDownloadUrl = url;
+
+        downloadBtn.href = url;
+        downloadBtn.download = "merged.pdf";
+        downloadBtn.style.display = "inline-flex";
+
+        statusBox.textContent = "Done! Merged " + files.length + " PDFs into one " + Fixora.formatBytes(blob.size) + " file.";
+      } catch (err) {
+        console.error(err);
+        statusBox.textContent = "Something went wrong merging those PDFs. Make sure all files are valid PDFs.";
+      } finally {
+        mergeBtn.disabled = files.length < 2;
+      }
+    });
+  </script>
+</body>
+</html>

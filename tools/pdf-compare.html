@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free PDF Comparison Tool Online — Compare Two PDFs | Fixora</title>
+  <meta name="description" content="Compare two PDF files online for free and see exactly what text changed between them. Right in your browser, no uploads, no sign-up." />
+  <meta name="keywords" content="compare pdf, pdf diff checker online free, compare two pdf files" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/pdf-compare.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free PDF Comparison Tool Online" />
+  <meta property="og:description" content="Compare two PDF files online for free and see exactly what text changed." />
+  <meta property="og:url" content="https://www.fixora.com/tools/pdf-compare.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free PDF Comparison Tool Online" />
+  <meta name="twitter:description" content="Compare two PDF files online for free." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PDF Comparison Tool",
+    "url": "https://www.fixora.com/tools/pdf-compare.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Compare PDFs", "item": "https://www.fixora.com/tools/pdf-compare.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What exactly gets compared — the text or the visual layout?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Just the text. Each PDF's text is extracted page by page (with a \"--- Page N ---\" marker between them) and compared line by line, so this tool won't catch changes to fonts, colors, images, or layout — only differences in the actual words." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does it say these PDFs are \"too large to compare\"?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The comparison algorithm's cost grows with the product of both documents' line counts, and the tool stops itself once that product passes 4 million to avoid freezing your browser. This typically only happens with very long documents on both sides at once." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will formatting differences like an extra space or line break show as changes?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Possibly. Since text is extracted per page and joined by spaces, a paragraph that reflows differently between two PDF versions can shift where line breaks land, which may show up as several lines marked added/removed even if the actual wording didn't change." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I compare a scanned PDF to a text-based PDF?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Only if both have a real text layer to extract from. A scanned page with no underlying text will contribute an empty string for that page, so genuine content differences on that page won't be detected." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the diff show which page a change happened on?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — each page's extracted text is preceded by a \"--- Page N ---\" marker line, so added/removed markers around that line indicate roughly where in the document the changes fall." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .diff-output {
+      margin-top: 20px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: auto;
+      max-height: 480px;
+      font-family: monospace;
+      font-size: 0.88rem;
+      background: #fff;
+    }
+    .diff-line {
+      display: flex;
+      padding: 3px 12px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .diff-line.added { background: #dcfce7; }
+    .diff-line.removed { background: #fee2e2; }
+    .diff-line .marker { width: 20px; flex-shrink: 0; color: var(--color-text-muted); user-select: none; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Compare PDFs</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🔍</div>
+      <h1>Compare PDFs</h1>
+      <p>Upload two PDFs and instantly see exactly which lines of text were added, removed, or unchanged.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="row">
+          <div class="field">
+            <label for="fileInputA">Original PDF</label>
+            <div class="dropzone" id="dropzoneA" tabindex="0" role="button" aria-label="Upload the original PDF">
+              <div class="dz-icon" aria-hidden="true">📤</div>
+              <strong id="labelA">Click to upload or drag a PDF here</strong>
+              <input type="file" id="fileInputA" accept="application/pdf" hidden />
+            </div>
+          </div>
+          <div class="field">
+            <label for="fileInputB">Changed PDF</label>
+            <div class="dropzone" id="dropzoneB" tabindex="0" role="button" aria-label="Upload the changed PDF">
+              <div class="dz-icon" aria-hidden="true">📤</div>
+              <strong id="labelB">Click to upload or drag a PDF here</strong>
+              <input type="file" id="fileInputB" accept="application/pdf" hidden />
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="compareBtn" disabled>Compare PDFs</button>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+        <div class="diff-output" id="diffOutput"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Compare Two PDFs</h2>
+        <ol class="howto-steps">
+          <li>Upload the original PDF into the first box, and the changed/updated version into the second box.</li>
+          <li>Click "Compare PDFs" once both files are loaded.</li>
+          <li>Review the line-by-line diff — green lines were added in the second file, red lines were removed from the first, and everything else is unchanged.</li>
+          <li>Check the status line for a quick added/removed count summary.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What exactly gets compared — the text or the visual layout?</summary>
+          <p>Just the text. Each PDF's text is extracted page by page (with a "--- Page N ---" marker between them) and compared line by line, so this tool won't catch changes to fonts, colors, images, or layout — only differences in the actual words.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why does it say these PDFs are "too large to compare"?</summary>
+          <p>The comparison algorithm's cost grows with the product of both documents' line counts, and the tool stops itself once that product passes 4 million to avoid freezing your browser. This typically only happens with very long documents on both sides at once.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Will formatting differences like an extra space or line break show as changes?</summary>
+          <p>Possibly. Since text is extracted per page and joined by spaces, a paragraph that reflows differently between two PDF versions can shift where line breaks land, which may show up as several lines marked added/removed even if the actual wording didn't change.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I compare a scanned PDF to a text-based PDF?</summary>
+          <p>Only if both have a real text layer to extract from. A scanned page with no underlying text will contribute an empty string for that page, so genuine content differences on that page won't be detected.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does the diff show which page a change happened on?</summary>
+          <p>Yes — each page's extracted text is preceded by a "--- Page N ---" marker line, so added/removed markers around that line indicate roughly where in the document the changes fall.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="text-diff-checker.html">
+            <span class="icon" aria-hidden="true">🔍</span>
+            <h3>Text Diff Checker</h3>
+            <p>Compare two blocks of plain text.</p>
+          </a>
+          <a class="card" href="pdf-to-text.html">
+            <span class="icon" aria-hidden="true">📄</span>
+            <h3>PDF to Text</h3>
+            <p>Extract text from a single PDF.</p>
+          </a>
+          <a class="card" href="pdf-metadata.html">
+            <span class="icon" aria-hidden="true">🏷️</span>
+            <h3>PDF Metadata Editor</h3>
+            <p>View or strip a PDF's metadata.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script type="module">
+    import * as pdfjsLib from "../assets/js/vendor/pdf.min.mjs";
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "../assets/js/vendor/pdf.worker.min.mjs";
+
+    var statusBox = document.getElementById("statusBox");
+    var diffOutput = document.getElementById("diffOutput");
+    var compareBtn = document.getElementById("compareBtn");
+
+    var fileA = null, fileB = null;
+
+    function wireDropzone(dzId, inputId, labelId, onSet) {
+      var dz = document.getElementById(dzId);
+      var input = document.getElementById(inputId);
+      var label = document.getElementById(labelId);
+      Fixora.setupDropzone(dz, input, function (files) {
+        var file = files[0];
+        if (!file || file.type !== "application/pdf") {
+          statusBox.textContent = "Please choose a valid PDF file.";
+          return;
+        }
+        onSet(file);
+        label.textContent = file.name;
+        compareBtn.disabled = !(fileA && fileB);
+      });
+      dz.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") input.click();
+      });
+    }
+
+    wireDropzone("dropzoneA", "fileInputA", "labelA", function (f) { fileA = f; });
+    wireDropzone("dropzoneB", "fileInputB", "labelB", function (f) { fileB = f; });
+
+    async function extractText(file) {
+      var arrayBuffer = await file.arrayBuffer();
+      var pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      var lines = [];
+      for (var i = 1; i <= pdf.numPages; i++) {
+        var page = await pdf.getPage(i);
+        var content = await page.getTextContent();
+        var text = content.items.map(function (item) { return item.str; }).join(" ");
+        lines.push("--- Page " + i + " ---");
+        lines.push(text.trim());
+      }
+      return lines;
+    }
+
+    function computeLcsDiff(linesA, linesB) {
+      var n = linesA.length, m = linesB.length;
+      var dp = new Array(n + 1);
+      for (var i = 0; i <= n; i++) dp[i] = new Int32Array(m + 1);
+
+      for (var i = n - 1; i >= 0; i--) {
+        for (var j = m - 1; j >= 0; j--) {
+          dp[i][j] = linesA[i] === linesB[j]
+            ? dp[i + 1][j + 1] + 1
+            : Math.max(dp[i + 1][j], dp[i][j + 1]);
+        }
+      }
+
+      var result = [];
+      var i = 0, j = 0;
+      while (i < n && j < m) {
+        if (linesA[i] === linesB[j]) {
+          result.push({ type: "same", text: linesA[i] });
+          i++; j++;
+        } else if (dp[i + 1][j] >= dp[i][j + 1]) {
+          result.push({ type: "removed", text: linesA[i] });
+          i++;
+        } else {
+          result.push({ type: "added", text: linesB[j] });
+          j++;
+        }
+      }
+      while (i < n) { result.push({ type: "removed", text: linesA[i] }); i++; }
+      while (j < m) { result.push({ type: "added", text: linesB[j] }); j++; }
+
+      return result;
+    }
+
+    function escapeHtml(str) {
+      var div = document.createElement("div");
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    compareBtn.addEventListener("click", async function () {
+      if (!fileA || !fileB) return;
+      compareBtn.disabled = true;
+      diffOutput.innerHTML = "";
+      statusBox.textContent = "Reading both PDFs…";
+
+      try {
+        var linesA = await extractText(fileA);
+        var linesB = await extractText(fileB);
+
+        if (linesA.length * linesB.length > 4000000) {
+          statusBox.textContent = "These PDFs are too large to compare in the browser.";
+          return;
+        }
+
+        statusBox.textContent = "Comparing…";
+        var diff = computeLcsDiff(linesA, linesB);
+        var added = diff.filter(function (d) { return d.type === "added"; }).length;
+        var removed = diff.filter(function (d) { return d.type === "removed"; }).length;
+
+        statusBox.textContent = diff.every(function (d) { return d.type === "same"; })
+          ? "No text differences found — these PDFs have identical text content."
+          : added + " line(s) added, " + removed + " line(s) removed.";
+
+        diffOutput.innerHTML = diff.map(function (d) {
+          var marker = d.type === "added" ? "+" : d.type === "removed" ? "−" : " ";
+          return '<div class="diff-line ' + d.type + '"><span class="marker">' + marker + '</span><span>' + (escapeHtml(d.text) || " ") + '</span></div>';
+        }).join("");
+      } catch (err) {
+        console.error(err);
+        statusBox.textContent = "Something went wrong comparing those PDFs.";
+      } finally {
+        compareBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

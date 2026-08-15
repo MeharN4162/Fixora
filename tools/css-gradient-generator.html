@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free CSS Gradient Generator Online | Fixora</title>
+  <meta name="description" content="Create linear or radial CSS gradients online for free with a live preview and ready-to-paste CSS code. Add up to four color stops. No uploads, no sign-up." />
+  <meta name="keywords" content="css gradient generator, css gradient maker online free, linear gradient generator, radial gradient generator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/css-gradient-generator.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free CSS Gradient Generator Online" />
+  <meta property="og:description" content="Create linear or radial CSS gradients online for free with a live preview and ready-to-paste CSS code." />
+  <meta property="og:url" content="https://www.fixora.com/tools/css-gradient-generator.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free CSS Gradient Generator Online" />
+  <meta name="twitter:description" content="Create linear or radial CSS gradients online for free with a live preview and ready-to-paste CSS code." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "CSS Gradient Generator",
+    "url": "https://www.fixora.com/tools/css-gradient-generator.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "CSS Gradient Generator", "item": "https://www.fixora.com/tools/css-gradient-generator.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I use more than two colors in my gradient?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — you can add up to four color stops using the \"+ Add Color Stop\" button, each with its own color and position, and the preview and CSS output update instantly to include every stop you add." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this work in older browsers?",
+        "acceptedAnswer": { "@type": "Answer", "text": "CSS gradients created here use the standard linear-gradient() and radial-gradient() syntax, which has been supported by all major browsers (Chrome, Firefox, Safari, Edge) for many years, so the generated CSS should work virtually anywhere without vendor prefixes." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I generate a radial gradient, not just linear?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — switch the \"Gradient Type\" dropdown to \"Radial\" and the preview and CSS output switch to a radial-gradient() immediately; the angle control is hidden in this mode since radial gradients don't use a directional angle the same way linear gradients do." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my color data sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — everything is generated locally with plain JavaScript in your browser tab; nothing is uploaded to a server." }
+      },
+      {
+        "@type": "Question",
+        "name": "What do the position percentages next to each color mean?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Each percentage sets where along the gradient that color reaches full strength — 0% is the start of the gradient and 100% is the end, so spacing stops unevenly lets you control exactly how much of the gradient each color dominates." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .gradient-preview {
+      width: 100%;
+      height: 200px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+    }
+    .stop-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      background: var(--color-bg-soft);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+    }
+    .stop-row input[type="color"] {
+      width: 44px;
+      height: 36px;
+      padding: 0;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      background: none;
+      flex: none;
+      cursor: pointer;
+    }
+    .stop-row input[type="range"] {
+      flex: 1;
+      min-width: 100px;
+    }
+    .stop-pos-value {
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      width: 40px;
+      flex: none;
+      text-align: right;
+    }
+    .stop-row .btn {
+      flex: none;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+    }
+    .stop-row .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>CSS Gradient Generator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🎨</div>
+      <h1>CSS Gradient Generator</h1>
+      <p>Build a linear or radial CSS gradient with a live preview, then copy the ready-to-paste CSS code.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="row">
+          <div class="field">
+            <label for="gradientType">Gradient Type</label>
+            <select id="gradientType">
+              <option value="linear" selected>Linear</option>
+              <option value="radial">Radial</option>
+            </select>
+          </div>
+          <div class="field" id="angleField">
+            <label for="angleInput">Angle: <span id="angleValue">135</span>°</label>
+            <input type="range" id="angleInput" min="0" max="360" value="135" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Color Stops</label>
+          <div id="stopsList"></div>
+          <button class="btn btn-secondary" id="addStopBtn" type="button">+ Add Color Stop</button>
+        </div>
+
+        <div class="field">
+          <label for="gradientPreview">Live Preview</label>
+          <div id="gradientPreview" class="gradient-preview"></div>
+        </div>
+
+        <div class="field">
+          <label for="cssOutput">CSS Output</label>
+          <textarea id="cssOutput" readonly style="min-height:70px;font-family:monospace;font-size:0.92rem;"></textarea>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="copyCssBtn">Copy CSS</button>
+        </div>
+        <div class="copy-note" id="copyNote"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Create a CSS Gradient</h2>
+        <ol class="howto-steps">
+          <li>Choose Linear or Radial from the "Gradient Type" dropdown.</li>
+          <li>For linear gradients, drag the angle slider to set the direction.</li>
+          <li>Pick a color and position for each stop, and add up to four stops with "+ Add Color Stop".</li>
+          <li>Watch the preview box update instantly with your real generated gradient.</li>
+          <li>Click "Copy CSS" to copy the ready-to-paste background CSS.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Can I use more than two colors in my gradient?</summary>
+          <p>Yes — you can add up to four color stops using the "+ Add Color Stop" button, each with its own color and position, and the preview and CSS output update instantly to include every stop you add.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this work in older browsers?</summary>
+          <p>CSS gradients created here use the standard linear-gradient() and radial-gradient() syntax, which has been supported by all major browsers (Chrome, Firefox, Safari, Edge) for many years, so the generated CSS should work virtually anywhere without vendor prefixes.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I generate a radial gradient, not just linear?</summary>
+          <p>Yes — switch the "Gradient Type" dropdown to "Radial" and the preview and CSS output switch to a radial-gradient() immediately; the angle control is hidden in this mode since radial gradients don't use a directional angle the same way linear gradients do.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my color data sent anywhere?</summary>
+          <p>No — everything is generated locally with plain JavaScript in your browser tab; nothing is uploaded to a server.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What do the position percentages next to each color mean?</summary>
+          <p>Each percentage sets where along the gradient that color reaches full strength — 0% is the start of the gradient and 100% is the end, so spacing stops unevenly lets you control exactly how much of the gradient each color dominates.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="color-converter.html">
+            <span class="icon" aria-hidden="true">🎨</span>
+            <h3>Color Converter</h3>
+            <p>Convert colors between HEX, RGB, and HSL — edit any field and the others update instantly.</p>
+          </a>
+          <a class="card" href="favicon-generator.html">
+            <span class="icon" aria-hidden="true">⭐</span>
+            <h3>Favicon Generator</h3>
+            <p>Upload any image and get a complete favicon set — favicon.ico plus every standard PNG size — with the HTML tags ready to paste.</p>
+          </a>
+          <a class="card" href="json-formatter.html">
+            <span class="icon" aria-hidden="true">{ }</span>
+            <h3>JSON Formatter & Validator</h3>
+            <p>Beautify, minify, and validate JSON — with clear error messages when something's wrong.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var gradientTypeSelect = document.getElementById("gradientType");
+    var angleField = document.getElementById("angleField");
+    var angleInput = document.getElementById("angleInput");
+    var angleValue = document.getElementById("angleValue");
+    var stopsList = document.getElementById("stopsList");
+    var addStopBtn = document.getElementById("addStopBtn");
+    var gradientPreview = document.getElementById("gradientPreview");
+    var cssOutput = document.getElementById("cssOutput");
+    var copyNote = document.getElementById("copyNote");
+
+    var stops = [
+      { color: "#2563eb", pos: 0 },
+      { color: "#06b6d4", pos: 100 }
+    ];
+
+    var defaultNewColors = ["#a855f7", "#f97316"];
+
+    function buildGradientString() {
+      var type = gradientTypeSelect.value;
+      var stopsStr = stops.map(function (s) {
+        return s.color + " " + s.pos + "%";
+      }).join(", ");
+      if (type === "linear") {
+        return "linear-gradient(" + angleInput.value + "deg, " + stopsStr + ")";
+      }
+      return "radial-gradient(circle, " + stopsStr + ")";
+    }
+
+    function render() {
+      var gradientStr = buildGradientString();
+      gradientPreview.style.background = gradientStr;
+      cssOutput.value = "background: " + gradientStr + ";";
+    }
+
+    function renderStops() {
+      stopsList.innerHTML = "";
+      stops.forEach(function (stop, i) {
+        var row = document.createElement("div");
+        row.className = "stop-row";
+        row.innerHTML =
+          '<input type="color" value="' + stop.color + '" data-index="' + i + '" data-field="color" aria-label="Color stop ' + (i + 1) + '" />' +
+          '<input type="range" min="0" max="100" value="' + stop.pos + '" data-index="' + i + '" data-field="pos" aria-label="Position for color stop ' + (i + 1) + '" />' +
+          '<span class="stop-pos-value">' + stop.pos + '%</span>' +
+          '<button type="button" class="btn btn-secondary stop-remove" data-index="' + i + '"' + (stops.length <= 2 ? " disabled" : "") + '>Remove</button>';
+        stopsList.appendChild(row);
+      });
+      addStopBtn.disabled = stops.length >= 4;
+    }
+
+    stopsList.addEventListener("input", function (e) {
+      var idxAttr = e.target.getAttribute("data-index");
+      if (idxAttr === null) return;
+      var idx = parseInt(idxAttr, 10);
+      var field = e.target.getAttribute("data-field");
+      if (field === "color") {
+        stops[idx].color = e.target.value;
+      } else if (field === "pos") {
+        stops[idx].pos = parseInt(e.target.value, 10);
+        var span = e.target.parentElement.querySelector(".stop-pos-value");
+        if (span) span.textContent = stops[idx].pos + "%";
+      }
+      render();
+    });
+
+    stopsList.addEventListener("click", function (e) {
+      if (e.target.classList.contains("stop-remove") && stops.length > 2) {
+        var idx = parseInt(e.target.getAttribute("data-index"), 10);
+        stops.splice(idx, 1);
+        renderStops();
+        render();
+      }
+    });
+
+    addStopBtn.addEventListener("click", function () {
+      if (stops.length < 4) {
+        var nextColor = defaultNewColors[stops.length - 2] || "#22c55e";
+        stops.push({ color: nextColor, pos: 50 });
+        renderStops();
+        render();
+      }
+    });
+
+    gradientTypeSelect.addEventListener("change", function () {
+      angleField.style.display = gradientTypeSelect.value === "linear" ? "" : "none";
+      render();
+    });
+
+    angleInput.addEventListener("input", function () {
+      angleValue.textContent = angleInput.value;
+      render();
+    });
+
+    document.getElementById("copyCssBtn").addEventListener("click", function () {
+      Fixora.copyText(cssOutput.value, copyNote);
+    });
+
+    renderStops();
+    render();
+  </script>
+</body>
+</html>

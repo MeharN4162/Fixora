@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Time Zone Converter Online | Fixora</title>
+  <meta name="description" content="Convert a date and time between time zones online for free. See the same moment across major world cities instantly. No sign-up." />
+  <meta name="keywords" content="time zone converter, convert time zones online free, world clock" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/time-zone-converter.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Time Zone Converter Online" />
+  <meta property="og:description" content="Convert a date and time between time zones online for free." />
+  <meta property="og:url" content="https://www.fixora.com/tools/time-zone-converter.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Time Zone Converter Online" />
+  <meta name="twitter:description" content="Convert a date and time between time zones online for free." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Time Zone Converter",
+    "url": "https://www.fixora.com/tools/time-zone-converter.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Time Zone Converter", "item": "https://www.fixora.com/tools/time-zone-converter.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does the tool know my device's time zone?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It reads your browser's detected time zone using the Intl.DateTimeFormat API and lists it at the top of the dropdown as your device zone, pre-selected by default." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the converter account for daylight saving time?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — because it calculates each zone's UTC offset based on the actual date you entered rather than a fixed offset, it correctly reflects daylight saving time rules for that specific date in each region." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is one row in the results table highlighted?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The highlighted row shows the same time zone you selected as your source zone, so you can quickly confirm your input against the row for that city." }
+      },
+      {
+        "@type": "Question",
+        "name": "What if the city I need isn't in the list?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The tool covers 15 major world time zones spanning every UTC offset, plus your own device's zone — if your exact city isn't listed, pick the closest listed city that shares the same time zone." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the converted time based on a 12-hour or 24-hour clock?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Results are displayed in 12-hour format with AM/PM, along with the weekday, month, and day, for each time zone in the table." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .tz-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .tz-table tr { border-bottom: 1px solid var(--color-border); }
+    .tz-table tr:last-child { border-bottom: none; }
+    .tz-table td { padding: 10px 8px; font-size: 0.92rem; }
+    .tz-table td:first-child { color: var(--color-text-muted); }
+    .tz-table td:last-child { text-align: right; font-family: var(--font-display); font-weight: 600; }
+    .tz-table tr.is-source { background: rgba(37,99,235,0.06); }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Time Zone Converter</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🌍</div>
+      <h1>Time Zone Converter</h1>
+      <p>Pick a date, time, and zone — see that exact moment across major cities worldwide.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="row">
+          <div class="field">
+            <label for="dateTimeInput">Date & time</label>
+            <input type="datetime-local" id="dateTimeInput" />
+          </div>
+          <div class="field">
+            <label for="sourceZone">In this time zone</label>
+            <select id="sourceZone"></select>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="convertBtn">Convert</button>
+          <button class="btn btn-secondary" id="nowBtn">Use Current Time</button>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+
+        <table class="tz-table" id="resultTable"></table>
+      </div>
+
+      <div class="howto">
+        <h2>How to Convert a Time Zone</h2>
+        <ol class="howto-steps">
+          <li>Enter a date and time in the "Date & time" field.</li>
+          <li>Choose the time zone that date and time refers to from the "In this time zone" dropdown (it defaults to your device's detected zone).</li>
+          <li>Click "Convert" to see that exact moment translated across 15+ major world city time zones in the results table.</li>
+          <li>Click "Use Current Time" anytime to reset the inputs to the present moment in your local time zone.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How does the tool know my device's time zone?</summary>
+          <p>It reads your browser's detected time zone using the Intl.DateTimeFormat API and lists it at the top of the dropdown as your device zone, pre-selected by default.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does the converter account for daylight saving time?</summary>
+          <p>Yes — because it calculates each zone's UTC offset based on the actual date you entered rather than a fixed offset, it correctly reflects daylight saving time rules for that specific date in each region.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why is one row in the results table highlighted?</summary>
+          <p>The highlighted row shows the same time zone you selected as your source zone, so you can quickly confirm your input against the row for that city.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What if the city I need isn't in the list?</summary>
+          <p>The tool covers 15 major world time zones spanning every UTC offset, plus your own device's zone — if your exact city isn't listed, pick the closest listed city that shares the same time zone.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is the converted time based on a 12-hour or 24-hour clock?</summary>
+          <p>Results are displayed in 12-hour format with AM/PM, along with the weekday, month, and day, for each time zone in the table.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="date-difference-calculator.html">
+            <span class="icon" aria-hidden="true">📅</span>
+            <h3>Date Difference Calculator</h3>
+            <p>Find the number of days between two dates.</p>
+          </a>
+          <a class="card" href="timestamp-converter.html">
+            <span class="icon" aria-hidden="true">🕒</span>
+            <h3>Timestamp Converter</h3>
+            <p>Convert Unix timestamps to readable dates.</p>
+          </a>
+          <a class="card" href="countdown-timer.html">
+            <span class="icon" aria-hidden="true">⏱️</span>
+            <h3>Countdown Timer & Stopwatch</h3>
+            <p>Time an event or count down to a date.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var ZONES = [
+      { id: "Pacific/Auckland", label: "Auckland" },
+      { id: "Australia/Sydney", label: "Sydney" },
+      { id: "Asia/Tokyo", label: "Tokyo" },
+      { id: "Asia/Shanghai", label: "Shanghai / Singapore" },
+      { id: "Asia/Bangkok", label: "Bangkok" },
+      { id: "Asia/Kolkata", label: "Mumbai / Delhi" },
+      { id: "Asia/Dubai", label: "Dubai" },
+      { id: "Europe/Moscow", label: "Moscow" },
+      { id: "Europe/Berlin", label: "Berlin / Paris" },
+      { id: "Europe/London", label: "London" },
+      { id: "America/Sao_Paulo", label: "São Paulo" },
+      { id: "America/New_York", label: "New York" },
+      { id: "America/Chicago", label: "Chicago" },
+      { id: "America/Denver", label: "Denver" },
+      { id: "America/Los_Angeles", label: "Los Angeles" }
+    ];
+
+    var sourceZone = document.getElementById("sourceZone");
+    var dateTimeInput = document.getElementById("dateTimeInput");
+    var statusBox = document.getElementById("statusBox");
+    var resultTable = document.getElementById("resultTable");
+
+    var deviceZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+    var localOption = document.createElement("option");
+    localOption.value = deviceZone;
+    localOption.textContent = "This device (" + deviceZone + ")";
+    sourceZone.appendChild(localOption);
+
+    ZONES.forEach(function (z) {
+      var opt = document.createElement("option");
+      opt.value = z.id;
+      opt.textContent = z.label + " (" + z.id + ")";
+      sourceZone.appendChild(opt);
+    });
+    sourceZone.value = deviceZone;
+
+    function pad(n) { return n < 10 ? "0" + n : "" + n; }
+
+    function toDateTimeLocalValue(date) {
+      return date.getFullYear() + "-" + pad(date.getMonth() + 1) + "-" + pad(date.getDate()) +
+        "T" + pad(date.getHours()) + ":" + pad(date.getMinutes());
+    }
+
+    dateTimeInput.value = toDateTimeLocalValue(new Date());
+
+    function getTimeZoneOffsetMinutes(date, timeZone) {
+      var dtf = new Intl.DateTimeFormat("en-US", {
+        timeZone: timeZone, hourCycle: "h23",
+        year: "numeric", month: "2-digit", day: "2-digit",
+        hour: "2-digit", minute: "2-digit", second: "2-digit"
+      });
+      var parts = dtf.formatToParts(date);
+      var map = {};
+      parts.forEach(function (p) { map[p.type] = p.value; });
+      var asUTC = Date.UTC(map.year, map.month - 1, map.day, map.hour, map.minute, map.second);
+      return (asUTC - date.getTime()) / 60000;
+    }
+
+    function zonedTimeToUtc(y, mo, d, h, mi, timeZone) {
+      var guess = new Date(Date.UTC(y, mo, d, h, mi, 0));
+      var offset = getTimeZoneOffsetMinutes(guess, timeZone);
+      var utc = new Date(guess.getTime() - offset * 60000);
+      var offset2 = getTimeZoneOffsetMinutes(utc, timeZone);
+      if (offset2 !== offset) {
+        utc = new Date(guess.getTime() - offset2 * 60000);
+      }
+      return utc;
+    }
+
+    function formatInZone(date, timeZone) {
+      return new Intl.DateTimeFormat("en-US", {
+        timeZone: timeZone,
+        weekday: "short", month: "short", day: "numeric",
+        hour: "2-digit", minute: "2-digit", hour12: true
+      }).format(date);
+    }
+
+    function convert() {
+      var raw = dateTimeInput.value;
+      if (!raw) {
+        statusBox.textContent = "Please choose a date and time.";
+        return;
+      }
+      var parts = raw.split(/[-T:]/).map(Number);
+      var y = parts[0], mo = parts[1] - 1, d = parts[2], h = parts[3], mi = parts[4];
+
+      var fromZone = sourceZone.value;
+      var utcInstant;
+      try {
+        utcInstant = zonedTimeToUtc(y, mo, d, h, mi, fromZone);
+      } catch (e) {
+        statusBox.textContent = "Something went wrong converting that time. Please try again.";
+        return;
+      }
+
+      resultTable.innerHTML = "";
+
+      var allZones = [{ id: deviceZone, label: "This device (" + deviceZone + ")" }].concat(ZONES);
+      var seen = {};
+      allZones.forEach(function (z) {
+        if (seen[z.id]) return;
+        seen[z.id] = true;
+
+        var row = document.createElement("tr");
+        if (z.id === fromZone) row.className = "is-source";
+
+        var td1 = document.createElement("td");
+        td1.textContent = z.label || z.id;
+        var td2 = document.createElement("td");
+        td2.textContent = formatInZone(utcInstant, z.id);
+
+        row.appendChild(td1);
+        row.appendChild(td2);
+        resultTable.appendChild(row);
+      });
+
+      statusBox.textContent = "Showing that moment across " + allZones.length + " time zones.";
+    }
+
+    document.getElementById("convertBtn").addEventListener("click", convert);
+    document.getElementById("nowBtn").addEventListener("click", function () {
+      dateTimeInput.value = toDateTimeLocalValue(new Date());
+      sourceZone.value = deviceZone;
+      convert();
+    });
+
+    convert();
+  </script>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Number Base Converter Online — Binary, Hex, Octal, Decimal | Fixora</title>
+  <meta name="description" content="Convert numbers between decimal, binary, octal, and hexadecimal instantly. Type in any field and watch the other three update live, right in your browser." />
+  <meta name="keywords" content="number base converter, decimal to binary, binary to hex, hex to decimal, octal converter" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/number-base-converter.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Number Base Converter Online" />
+  <meta property="og:description" content="Convert numbers between decimal, binary, octal, and hexadecimal instantly, live in your browser." />
+  <meta property="og:url" content="https://www.fixora.com/tools/number-base-converter.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Number Base Converter Online" />
+  <meta name="twitter:description" content="Convert numbers between decimal, binary, octal, and hexadecimal instantly." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Number Base Converter",
+    "url": "https://www.fixora.com/tools/number-base-converter.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Number Base Converter", "item": "https://www.fixora.com/tools/number-base-converter.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does this support negative numbers?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — this tool only supports non-negative integers (0 and up). Binary, octal, and hexadecimal representations of negative numbers depend on a chosen bit width and encoding (like two's complement), which varies by system, so supporting negatives correctly would require assumptions this tool can't make on your behalf. Stick to whole numbers of zero or greater." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if I type an invalid character?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Each field filters out characters that aren't valid in its base as you type — for example, the binary field only accepts 0 and 1, and the octal field only accepts 0-7 — so you can't enter something that field's base can't represent. If a field ends up empty or unparseable, the other three fields are simply cleared instead of showing an error." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the hexadecimal output use uppercase letters?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Uppercase hex digits (A-F) are simply this tool's display convention and are the most common style in documentation and programming references. The hex input field itself accepts both uppercase and lowercase letters." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a limit to how large a number I can convert?",
+        "acceptedAnswer": { "@type": "Answer", "text": "This tool uses standard JavaScript number parsing, which reliably handles integers up to 2^53 - 1 (9,007,199,254,740,991). Beyond that, floating-point precision limits mean extremely large numbers may lose accuracy." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to click a button to convert?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — conversion happens instantly as you type in any of the four fields. There's no convert button because the whole point of this tool is live, no-click conversion." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Number Base Converter</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🔢</div>
+      <h1>Number Base Converter</h1>
+      <p>Convert numbers between decimal, binary, octal, and hexadecimal — type in any field and the other three update live.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="decimalField">Decimal (Base 10)</label>
+          <input type="text" id="decimalField" inputmode="numeric" autocomplete="off" spellcheck="false" style="font-family:monospace;font-size:1.05rem;" />
+        </div>
+        <div class="field">
+          <label for="binaryField">Binary (Base 2)</label>
+          <input type="text" id="binaryField" inputmode="numeric" autocomplete="off" spellcheck="false" style="font-family:monospace;font-size:1.05rem;" />
+        </div>
+        <div class="field">
+          <label for="octalField">Octal (Base 8)</label>
+          <input type="text" id="octalField" inputmode="numeric" autocomplete="off" spellcheck="false" style="font-family:monospace;font-size:1.05rem;" />
+        </div>
+        <div class="field">
+          <label for="hexField">Hexadecimal (Base 16)</label>
+          <input type="text" id="hexField" autocomplete="off" spellcheck="false" style="font-family:monospace;font-size:1.05rem;" />
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-secondary" id="resetBtn" type="button">Reset to Example</button>
+        </div>
+
+        <div class="output-box" id="statusBox">Supports non-negative whole numbers only. Values update live as you type.</div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Convert Between Number Bases</h2>
+        <ol class="howto-steps">
+          <li>Type a number into any one of the four fields: Decimal, Binary, Octal, or Hexadecimal.</li>
+          <li>The other three fields update instantly with the equivalent value in their base.</li>
+          <li>Each field only accepts valid characters for its base, so typos are filtered out automatically.</li>
+          <li>Clear a field to reset all four fields, then start fresh.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Does this support negative numbers?</summary>
+          <p>No — this tool only supports non-negative integers (0 and up). Binary, octal, and hexadecimal representations of negative numbers depend on a chosen bit width and encoding (like two's complement), which varies by system, so supporting negatives correctly would require assumptions this tool can't make on your behalf. Stick to whole numbers of zero or greater.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What happens if I type an invalid character?</summary>
+          <p>Each field filters out characters that aren't valid in its base as you type — for example, the binary field only accepts 0 and 1, and the octal field only accepts 0-7 — so you can't enter something that field's base can't represent. If a field ends up empty or unparseable, the other three fields are simply cleared instead of showing an error.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why does the hexadecimal output use uppercase letters?</summary>
+          <p>Uppercase hex digits (A-F) are simply this tool's display convention and are the most common style in documentation and programming references. The hex input field itself accepts both uppercase and lowercase letters.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is there a limit to how large a number I can convert?</summary>
+          <p>This tool uses standard JavaScript number parsing, which reliably handles integers up to 2^53 - 1 (9,007,199,254,740,991). Beyond that, floating-point precision limits mean extremely large numbers may lose accuracy.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Do I need to click a button to convert?</summary>
+          <p>No — conversion happens instantly as you type in any of the four fields. There's no convert button because the whole point of this tool is live, no-click conversion.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="hash-generator.html">
+            <span class="icon" aria-hidden="true">#️⃣</span>
+            <h3>Hash Generator</h3>
+            <p>Generate SHA-1, SHA-256, and SHA-512 hashes.</p>
+          </a>
+          <a class="card" href="base64-converter.html">
+            <span class="icon" aria-hidden="true">🔣</span>
+            <h3>Base64 Converter</h3>
+            <p>Encode or decode Base64 text.</p>
+          </a>
+          <a class="card" href="color-converter.html">
+            <span class="icon" aria-hidden="true">🎨</span>
+            <h3>Color Converter</h3>
+            <p>Convert colors between HEX, RGB, and HSL.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var decimalField = document.getElementById("decimalField");
+    var binaryField = document.getElementById("binaryField");
+    var octalField = document.getElementById("octalField");
+    var hexField = document.getElementById("hexField");
+    var statusBox = document.getElementById("statusBox");
+
+    var DEFAULT_MSG = "Supports non-negative whole numbers only. Values update live as you type.";
+
+    function sanitize(value, allowedPattern) {
+      var out = "";
+      for (var i = 0; i < value.length; i++) {
+        if (allowedPattern.test(value[i])) out += value[i];
+      }
+      return out;
+    }
+
+    function updateFrom(sourceField, radix) {
+      var raw = sourceField.value;
+      if (raw === "") {
+        [decimalField, binaryField, octalField, hexField].forEach(function (f) {
+          if (f !== sourceField) f.value = "";
+        });
+        statusBox.textContent = DEFAULT_MSG;
+        return;
+      }
+
+      var num = parseInt(raw, radix);
+      if (isNaN(num) || num < 0) {
+        [decimalField, binaryField, octalField, hexField].forEach(function (f) {
+          if (f !== sourceField) f.value = "";
+        });
+        statusBox.textContent = "Waiting for a valid number…";
+        return;
+      }
+
+      if (sourceField !== decimalField) decimalField.value = num.toString(10);
+      if (sourceField !== binaryField) binaryField.value = num.toString(2);
+      if (sourceField !== octalField) octalField.value = num.toString(8);
+      if (sourceField !== hexField) hexField.value = num.toString(16).toUpperCase();
+      statusBox.textContent = "Converted successfully.";
+    }
+
+    decimalField.addEventListener("input", function () {
+      decimalField.value = sanitize(decimalField.value, /[0-9]/);
+      updateFrom(decimalField, 10);
+    });
+    binaryField.addEventListener("input", function () {
+      binaryField.value = sanitize(binaryField.value, /[01]/);
+      updateFrom(binaryField, 2);
+    });
+    octalField.addEventListener("input", function () {
+      octalField.value = sanitize(octalField.value, /[0-7]/);
+      updateFrom(octalField, 8);
+    });
+    hexField.addEventListener("input", function () {
+      hexField.value = sanitize(hexField.value, /[0-9a-fA-F]/);
+      updateFrom(hexField, 16);
+    });
+
+    function loadExample() {
+      decimalField.value = "255";
+      updateFrom(decimalField, 10);
+    }
+
+    document.getElementById("resetBtn").addEventListener("click", loadExample);
+
+    loadExample();
+  </script>
+</body>
+</html>

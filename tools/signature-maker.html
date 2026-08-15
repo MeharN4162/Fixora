@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Online Signature Maker — Draw or Type Your Signature | Fixora</title>
+  <meta name="description" content="Create a signature online for free, right in your browser — draw with your mouse or type your name in a cursive font. Download a transparent PNG. No uploads." />
+  <meta name="keywords" content="signature maker, create signature online free, draw signature, type signature online" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/signature-maker.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Online Signature Maker" />
+  <meta property="og:description" content="Create a signature online for free, right in your browser — draw or type it, and download a transparent PNG." />
+  <meta property="og:url" content="https://www.fixora.com/tools/signature-maker.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Online Signature Maker" />
+  <meta name="twitter:description" content="Create a signature online for free, right in your browser — draw or type it." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Signature Maker",
+    "url": "https://www.fixora.com/tools/signature-maker.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Signature Maker", "item": "https://www.fixora.com/tools/signature-maker.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What's the difference between this and Fixora's PDF Signer?",
+        "acceptedAnswer": { "@type": "Answer", "text": "This tool creates a standalone signature image file you can download and reuse anywhere - in an email signature, a Word document, or uploaded into other apps. The PDF Signer instead places a signature directly onto a specific PDF page and outputs a signed PDF. Use this tool first if you just want a reusable signature image." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the downloaded PNG really transparent, or does it have a white background?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's genuinely transparent. The canvas is never filled with a background color before your strokes or text are drawn, so canvas.toDataURL(\"image/png\") exports only the ink or text pixels with everything else at zero alpha - it will look correct pasted onto any background color." }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I draw my signature or type it?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Drawing with your mouse, trackpad, or finger gives a more personal, handwritten look closer to your real signature. Typing renders your name in a cursive webfont, which looks clean and consistent but won't match your actual handwriting - pick whichever suits your use case." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I change the color or thickness of my signature?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. In Draw mode, use the pen color picker and thickness slider before you start drawing. In Type mode, use the color picker and font-size slider, which update the rendered text live." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this a legally binding electronic signature?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No - this produces a visual image of a signature, similar to signing on paper and scanning it in. It doesn't provide the cryptographic verification or audit trail that dedicated e-signature services offer for legally binding contracts." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .sig-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .sig-pad-wrap {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background:
+        linear-gradient(45deg, var(--color-bg-soft) 25%, transparent 25%),
+        linear-gradient(-45deg, var(--color-bg-soft) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--color-bg-soft) 75%),
+        linear-gradient(-45deg, transparent 75%, var(--color-bg-soft) 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    }
+    #sigPad, #typeCanvas {
+      display: block;
+      width: 100%;
+      height: 220px;
+      touch-action: none;
+      cursor: crosshair;
+    }
+    #typeCanvas { cursor: default; }
+    .sig-name-input {
+      font-family: var(--font-main);
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Signature Maker</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">✍️</div>
+      <h1>Signature Maker</h1>
+      <p>Draw or type your signature and download it as a transparent PNG — for emails, documents, or anywhere else.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="sig-tabs">
+          <button class="pill active" type="button" data-sig-tab="draw">Draw</button>
+          <button class="pill" type="button" data-sig-tab="type">Type</button>
+        </div>
+
+        <div id="drawPane">
+          <div class="sig-pad-wrap">
+            <canvas id="sigPad"></canvas>
+          </div>
+          <div class="row" style="margin-top:16px;">
+            <div class="field">
+              <label for="penColor">Pen Color</label>
+              <input type="color" id="penColor" value="#111111" style="width:100%;height:44px;border:1px solid var(--color-border);border-radius:8px;cursor:pointer;" />
+            </div>
+            <div class="field">
+              <label for="penThickness">Thickness: <span id="penThicknessValue">3</span>px</label>
+              <input type="range" id="penThickness" min="1" max="10" value="3" style="width:100%;" />
+            </div>
+          </div>
+          <div class="actions">
+            <button class="btn btn-secondary" id="clearSigBtn" type="button">Clear</button>
+          </div>
+        </div>
+
+        <div id="typePane" style="display:none;">
+          <div class="field">
+            <label for="nameInput">Your Name</label>
+            <input type="text" id="nameInput" class="sig-name-input" placeholder="Type your name…" maxlength="60" />
+          </div>
+          <div class="sig-pad-wrap">
+            <canvas id="typeCanvas"></canvas>
+          </div>
+          <div class="row" style="margin-top:16px;">
+            <div class="field">
+              <label for="typeColor">Color</label>
+              <input type="color" id="typeColor" value="#111111" style="width:100%;height:44px;border:1px solid var(--color-border);border-radius:8px;cursor:pointer;" />
+            </div>
+            <div class="field">
+              <label for="typeSize">Font Size: <span id="typeSizeValue">64</span>px</label>
+              <input type="range" id="typeSize" min="24" max="120" value="64" style="width:100%;" />
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="downloadBtn" type="button">Download Signature</button>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Create a Signature</h2>
+        <ol class="howto-steps">
+          <li>Choose "Draw" to sign with your mouse, trackpad, or finger, or "Type" to render your name in a cursive font.</li>
+          <li>In Draw mode, pick a pen color and thickness before you start; in Type mode, type your name and adjust its color and size.</li>
+          <li>Redo it as many times as you like — use "Clear" in Draw mode, or just keep editing the text in Type mode.</li>
+          <li>Click "Download Signature" to save a transparent PNG.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What's the difference between this and Fixora's PDF Signer?</summary>
+          <p>This tool creates a standalone signature image file you can download and reuse anywhere - in an email signature, a Word document, or uploaded into other apps. The PDF Signer instead places a signature directly onto a specific PDF page and outputs a signed PDF. Use this tool first if you just want a reusable signature image.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is the downloaded PNG really transparent, or does it have a white background?</summary>
+          <p>It's genuinely transparent. The canvas is never filled with a background color before your strokes or text are drawn, so canvas.toDataURL("image/png") exports only the ink or text pixels with everything else at zero alpha - it will look correct pasted onto any background color.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Should I draw my signature or type it?</summary>
+          <p>Drawing with your mouse, trackpad, or finger gives a more personal, handwritten look closer to your real signature. Typing renders your name in a cursive webfont, which looks clean and consistent but won't match your actual handwriting - pick whichever suits your use case.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I change the color or thickness of my signature?</summary>
+          <p>Yes. In Draw mode, use the pen color picker and thickness slider before you start drawing. In Type mode, use the color picker and font-size slider, which update the rendered text live.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is this a legally binding electronic signature?</summary>
+          <p>No - this produces a visual image of a signature, similar to signing on paper and scanning it in. It doesn't provide the cryptographic verification or audit trail that dedicated e-signature services offer for legally binding contracts.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="pdf-signer.html">
+            <span class="icon" aria-hidden="true">✍️</span>
+            <h3>PDF Signer</h3>
+            <p>Place a signature directly on a PDF.</p>
+          </a>
+          <a class="card" href="invoice-generator.html">
+            <span class="icon" aria-hidden="true">🧾</span>
+            <h3>Invoice Generator</h3>
+            <p>Create a PDF invoice and sign it.</p>
+          </a>
+          <a class="card" href="favicon-generator.html">
+            <span class="icon" aria-hidden="true">⭐</span>
+            <h3>Favicon Generator</h3>
+            <p>Turn any image into a favicon set.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var sigPad = document.getElementById("sigPad");
+    var typeCanvas = document.getElementById("typeCanvas");
+    var drawPane = document.getElementById("drawPane");
+    var typePane = document.getElementById("typePane");
+    var penColor = document.getElementById("penColor");
+    var penThickness = document.getElementById("penThickness");
+    var penThicknessValue = document.getElementById("penThicknessValue");
+    var clearSigBtn = document.getElementById("clearSigBtn");
+    var nameInput = document.getElementById("nameInput");
+    var typeColor = document.getElementById("typeColor");
+    var typeSize = document.getElementById("typeSize");
+    var typeSizeValue = document.getElementById("typeSizeValue");
+    var downloadBtn = document.getElementById("downloadBtn");
+    var statusBox = document.getElementById("statusBox");
+
+    var activeTab = "draw";
+    var sigCtx = sigPad.getContext("2d");
+    var typeCtx = typeCanvas.getContext("2d");
+    var dpr = window.devicePixelRatio || 1;
+
+    function resizeCanvas(canvas, ctx) {
+      var rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function setupPads() {
+      resizeCanvas(sigPad, sigCtx);
+      sigCtx.lineCap = "round";
+      sigCtx.lineJoin = "round";
+      resizeCanvas(typeCanvas, typeCtx);
+      drawTypeSignature();
+    }
+    window.addEventListener("resize", setupPads);
+
+    document.querySelectorAll("[data-sig-tab]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        document.querySelectorAll("[data-sig-tab]").forEach(function (b) { b.classList.remove("active"); });
+        btn.classList.add("active");
+        activeTab = btn.getAttribute("data-sig-tab");
+        drawPane.style.display = activeTab === "draw" ? "block" : "none";
+        typePane.style.display = activeTab === "type" ? "block" : "none";
+        if (activeTab === "type") {
+          // The type canvas was hidden (display:none) at initial layout time,
+          // so its bounding rect was 0x0 when first resized — re-measure now.
+          resizeCanvas(typeCanvas, typeCtx);
+          drawTypeSignature();
+        }
+      });
+    });
+
+    // ---- Draw mode ----
+    var drawing = false;
+    var lastPt = null;
+
+    function getPos(canvas, e) {
+      var rect = canvas.getBoundingClientRect();
+      var point = e.touches ? e.touches[0] : e;
+      return { x: point.clientX - rect.left, y: point.clientY - rect.top };
+    }
+
+    sigPad.addEventListener("pointerdown", function (e) {
+      drawing = true;
+      lastPt = getPos(sigPad, e);
+    });
+    sigPad.addEventListener("pointermove", function (e) {
+      if (!drawing) return;
+      var pt = getPos(sigPad, e);
+      sigCtx.strokeStyle = penColor.value;
+      sigCtx.lineWidth = parseInt(penThickness.value, 10);
+      sigCtx.beginPath();
+      sigCtx.moveTo(lastPt.x, lastPt.y);
+      sigCtx.lineTo(pt.x, pt.y);
+      sigCtx.stroke();
+      lastPt = pt;
+    });
+    window.addEventListener("pointerup", function () { drawing = false; });
+
+    penThickness.addEventListener("input", function () {
+      penThicknessValue.textContent = penThickness.value;
+    });
+
+    clearSigBtn.addEventListener("click", function () {
+      sigCtx.clearRect(0, 0, sigPad.width, sigPad.height);
+    });
+
+    // ---- Type mode ----
+    function drawTypeSignature() {
+      var rect = typeCanvas.getBoundingClientRect();
+      typeCtx.clearRect(0, 0, typeCanvas.width, typeCanvas.height);
+      var text = nameInput.value.trim();
+      if (!text) return;
+
+      var fontSize = parseInt(typeSize.value, 10);
+      typeCtx.fillStyle = typeColor.value;
+      typeCtx.textAlign = "center";
+      typeCtx.textBaseline = "middle";
+      typeCtx.font = fontSize + "px 'Dancing Script', cursive";
+
+      var maxWidth = rect.width - 40;
+      var measured = typeCtx.measureText(text).width;
+      if (measured > maxWidth && measured > 0) {
+        var scaled = fontSize * (maxWidth / measured);
+        typeCtx.font = scaled + "px 'Dancing Script', cursive";
+      }
+
+      typeCtx.fillText(text, rect.width / 2, rect.height / 2);
+    }
+
+    nameInput.addEventListener("input", drawTypeSignature);
+    typeColor.addEventListener("input", drawTypeSignature);
+    typeSize.addEventListener("input", function () {
+      typeSizeValue.textContent = typeSize.value;
+      drawTypeSignature();
+    });
+
+    if (document.fonts && document.fonts.load) {
+      document.fonts.load('64px "Dancing Script"').then(drawTypeSignature).catch(function () {});
+      document.fonts.ready.then(drawTypeSignature);
+    }
+
+    requestAnimationFrame(setupPads);
+
+    downloadBtn.addEventListener("click", function () {
+      var canvas = activeTab === "draw" ? sigPad : typeCanvas;
+
+      if (activeTab === "draw") {
+        var imgData = sigCtx.getImageData(0, 0, sigPad.width, sigPad.height).data;
+        var hasInk = false;
+        for (var i = 3; i < imgData.length; i += 4) {
+          if (imgData[i] > 0) { hasInk = true; break; }
+        }
+        if (!hasInk) {
+          statusBox.textContent = "Please draw a signature first.";
+          return;
+        }
+      } else if (!nameInput.value.trim()) {
+        statusBox.textContent = "Please type your name first.";
+        return;
+      }
+
+      canvas.toBlob(function (blob) {
+        Fixora.downloadBlob(blob, "signature.png");
+        statusBox.textContent = "Done! Downloaded a transparent PNG signature.";
+      }, "image/png");
+    });
+  </script>
+</body>
+</html>

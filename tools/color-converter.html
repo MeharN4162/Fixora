@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Color Converter Online — HEX, RGB, HSL | Fixora</title>
+  <meta name="description" content="Convert colors between HEX, RGB, and HSL instantly online for free. Live preview swatch, no sign-up required." />
+  <meta name="keywords" content="color converter, hex to rgb, rgb to hsl, color code converter online free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/color-converter.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Color Converter Online" />
+  <meta property="og:description" content="Convert colors between HEX, RGB, and HSL instantly online for free." />
+  <meta property="og:url" content="https://www.fixora.com/tools/color-converter.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Color Converter Online" />
+  <meta name="twitter:description" content="Convert colors between HEX, RGB, and HSL instantly." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Color Converter",
+    "url": "https://www.fixora.com/tools/color-converter.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Color Converter", "item": "https://www.fixora.com/tools/color-converter.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What color formats does this tool support?",
+        "acceptedAnswer": { "@type": "Answer", "text": "HEX (e.g., #2563eb), RGB (red/green/blue values 0-255), and HSL (hue 0-360°, saturation and lightness as percentages) — you can enter a value in any one of the three and the others recalculate instantly." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do my RGB and HSL values sometimes look slightly different after converting?",
+        "acceptedAnswer": { "@type": "Answer", "text": "HSL and RGB use different math models, so converting from RGB to HSL and back can introduce tiny rounding differences of about ±1 — this is normal and won't be visible to the eye." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the HEX field accept 3-character shorthand codes?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, shorthand HEX codes like #06c are automatically expanded to their full 6-character form (#0066cc) before conversion." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use the copied rgb() and hsl() values directly in CSS?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — the Copy rgb() and Copy hsl() buttons generate valid CSS color function syntax, like rgb(37, 99, 235), that you can paste straight into a stylesheet." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if I type an invalid HEX code?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Invalid HEX input — anything that isn't 3 or 6 valid hexadecimal characters — is ignored, and the other fields won't update until you enter a valid code." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Color Converter</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🎨</div>
+      <h1>Color Converter</h1>
+      <p>Convert colors between HEX, RGB, and HSL — edit any field and the others update instantly.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="color-swatch" id="swatch"></div>
+
+        <div class="field" style="margin-top:20px;">
+          <label for="colorPicker">Pick a Color</label>
+          <input type="color" id="colorPicker" value="#2563eb" style="width:100%;height:44px;border:1px solid var(--color-border);border-radius:8px;cursor:pointer;" />
+        </div>
+
+        <div class="field">
+          <label for="hexInput">HEX</label>
+          <input type="text" id="hexInput" value="#2563eb" />
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="rInput">R</label>
+            <input type="number" id="rInput" min="0" max="255" />
+          </div>
+          <div class="field">
+            <label for="gInput">G</label>
+            <input type="number" id="gInput" min="0" max="255" />
+          </div>
+          <div class="field">
+            <label for="bInput">B</label>
+            <input type="number" id="bInput" min="0" max="255" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="hInput">H</label>
+            <input type="number" id="hInput" min="0" max="360" />
+          </div>
+          <div class="field">
+            <label for="sInput">S %</label>
+            <input type="number" id="sInput" min="0" max="100" />
+          </div>
+          <div class="field">
+            <label for="lInput">L %</label>
+            <input type="number" id="lInput" min="0" max="100" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-secondary" id="copyRgbBtn">Copy rgb()</button>
+          <button class="btn btn-secondary" id="copyHslBtn">Copy hsl()</button>
+        </div>
+        <div class="copy-note" id="copyNote"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Convert a Color</h2>
+        <ol class="howto-steps">
+          <li>Pick a color using the color swatch/picker, or type a value directly into the HEX, RGB, or HSL fields.</li>
+          <li>Watch the other two formats update automatically — all three stay in sync no matter which one you edit.</li>
+          <li>Use the live swatch above the fields to preview the exact color as you adjust it.</li>
+          <li>Click "Copy rgb()" or "Copy hsl()" to copy a ready-to-use CSS color string to your clipboard.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What color formats does this tool support?</summary>
+          <p>HEX (e.g., #2563eb), RGB (red/green/blue values 0-255), and HSL (hue 0-360°, saturation and lightness as percentages) — you can enter a value in any one of the three and the others recalculate instantly.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why do my RGB and HSL values sometimes look slightly different after converting?</summary>
+          <p>HSL and RGB use different math models, so converting from RGB to HSL and back can introduce tiny rounding differences of about ±1 — this is normal and won't be visible to the eye.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does the HEX field accept 3-character shorthand codes?</summary>
+          <p>Yes, shorthand HEX codes like #06c are automatically expanded to their full 6-character form (#0066cc) before conversion.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I use the copied rgb() and hsl() values directly in CSS?</summary>
+          <p>Yes — the Copy rgb() and Copy hsl() buttons generate valid CSS color function syntax, like rgb(37, 99, 235), that you can paste straight into a stylesheet.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What happens if I type an invalid HEX code?</summary>
+          <p>Invalid HEX input — anything that isn't 3 or 6 valid hexadecimal characters — is ignored, and the other fields won't update until you enter a valid code.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="favicon-generator.html">
+            <span class="icon" aria-hidden="true">⭐</span>
+            <h3>Favicon Generator</h3>
+            <p>Create a favicon set from any image.</p>
+          </a>
+          <a class="card" href="json-formatter.html">
+            <span class="icon" aria-hidden="true">{ }</span>
+            <h3>JSON Formatter</h3>
+            <p>Format and validate JSON instantly.</p>
+          </a>
+          <a class="card" href="../blog/image-format-guide.html">
+            <span class="icon" aria-hidden="true">🖼️</span>
+            <h3>Guide: JPG vs PNG vs WebP</h3>
+            <p>Understand image formats and color.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var swatch = document.getElementById("swatch");
+    var colorPicker = document.getElementById("colorPicker");
+    var hexInput = document.getElementById("hexInput");
+    var rInput = document.getElementById("rInput"), gInput = document.getElementById("gInput"), bInput = document.getElementById("bInput");
+    var hInput = document.getElementById("hInput"), sInput = document.getElementById("sInput"), lInput = document.getElementById("lInput");
+    var copyNote = document.getElementById("copyNote");
+    var updating = false;
+
+    function hexToRgb(hex) {
+      hex = hex.replace("#", "");
+      if (hex.length === 3) hex = hex.split("").map(function (c) { return c + c; }).join("");
+      if (!/^[0-9a-fA-F]{6}$/.test(hex)) return null;
+      return {
+        r: parseInt(hex.substring(0, 2), 16),
+        g: parseInt(hex.substring(2, 4), 16),
+        b: parseInt(hex.substring(4, 6), 16)
+      };
+    }
+
+    function rgbToHex(r, g, b) {
+      return "#" + [r, g, b].map(function (v) {
+        return Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, "0");
+      }).join("");
+    }
+
+    function rgbToHsl(r, g, b) {
+      r /= 255; g /= 255; b /= 255;
+      var max = Math.max(r, g, b), min = Math.min(r, g, b);
+      var h, s, l = (max + min) / 2;
+
+      if (max === min) {
+        h = s = 0;
+      } else {
+        var d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+          case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+          case g: h = (b - r) / d + 2; break;
+          case b: h = (r - g) / d + 4; break;
+        }
+        h *= 60;
+      }
+      return { h: Math.round(h), s: Math.round(s * 100), l: Math.round(l * 100) };
+    }
+
+    function hslToRgb(h, s, l) {
+      h /= 360; s /= 100; l /= 100;
+      var r, g, b;
+
+      if (s === 0) {
+        r = g = b = l;
+      } else {
+        var hue2rgb = function (p, q, t) {
+          if (t < 0) t += 1;
+          if (t > 1) t -= 1;
+          if (t < 1 / 6) return p + (q - p) * 6 * t;
+          if (t < 1 / 2) return q;
+          if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+          return p;
+        };
+        var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        var p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1 / 3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1 / 3);
+      }
+      return { r: Math.round(r * 255), g: Math.round(g * 255), b: Math.round(b * 255) };
+    }
+
+    function applyColor(r, g, b, source) {
+      if (updating) return;
+      updating = true;
+
+      var hex = rgbToHex(r, g, b);
+      var hsl = rgbToHsl(r, g, b);
+
+      swatch.style.background = hex;
+      colorPicker.value = hex;
+      if (source !== "hex") hexInput.value = hex;
+      if (source !== "rgb") { rInput.value = r; gInput.value = g; bInput.value = b; }
+      if (source !== "hsl") { hInput.value = hsl.h; sInput.value = hsl.s; lInput.value = hsl.l; }
+
+      updating = false;
+    }
+
+    colorPicker.addEventListener("input", function () {
+      var rgb = hexToRgb(colorPicker.value);
+      if (rgb) applyColor(rgb.r, rgb.g, rgb.b, "picker");
+    });
+
+    hexInput.addEventListener("input", function () {
+      var rgb = hexToRgb(hexInput.value);
+      if (rgb) applyColor(rgb.r, rgb.g, rgb.b, "hex");
+    });
+
+    [rInput, gInput, bInput].forEach(function (el) {
+      el.addEventListener("input", function () {
+        var r = parseInt(rInput.value, 10) || 0;
+        var g = parseInt(gInput.value, 10) || 0;
+        var b = parseInt(bInput.value, 10) || 0;
+        applyColor(r, g, b, "rgb");
+      });
+    });
+
+    [hInput, sInput, lInput].forEach(function (el) {
+      el.addEventListener("input", function () {
+        var h = parseInt(hInput.value, 10) || 0;
+        var s = parseInt(sInput.value, 10) || 0;
+        var l = parseInt(lInput.value, 10) || 0;
+        var rgb = hslToRgb(h, s, l);
+        applyColor(rgb.r, rgb.g, rgb.b, "hsl");
+      });
+    });
+
+    document.getElementById("copyRgbBtn").addEventListener("click", function () {
+      Fixora.copyText("rgb(" + rInput.value + ", " + gInput.value + ", " + bInput.value + ")", copyNote);
+    });
+    document.getElementById("copyHslBtn").addEventListener("click", function () {
+      Fixora.copyText("hsl(" + hInput.value + ", " + sInput.value + "%, " + lInput.value + "%)", copyNote);
+    });
+
+    applyColor(37, 99, 235, "init");
+  </script>
+</body>
+</html>

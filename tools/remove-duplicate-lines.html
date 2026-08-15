@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Duplicate Line Remover & Text Sorter Online | Fixora</title>
+  <meta name="description" content="Remove duplicate lines, strip blank lines, trim whitespace, and sort text alphabetically online for free. Paste a list and clean it up instantly in your browser." />
+  <meta name="keywords" content="remove duplicate lines, duplicate line remover, unique lines tool, text sorter online" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/remove-duplicate-lines.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Duplicate Line Remover & Text Sorter Online" />
+  <meta property="og:description" content="Remove duplicate lines, strip blank lines, trim whitespace, and sort text online for free." />
+  <meta property="og:url" content="https://www.fixora.com/tools/remove-duplicate-lines.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Duplicate Line Remover & Text Sorter Online" />
+  <meta name="twitter:description" content="Remove duplicate lines, strip blank lines, and sort text online for free." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Duplicate Line Remover",
+    "url": "https://www.fixora.com/tools/remove-duplicate-lines.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Duplicate Line Remover", "item": "https://www.fixora.com/tools/remove-duplicate-lines.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does this work on very large lists?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — processing runs entirely in your browser tab using plain JavaScript string operations, so it can comfortably handle lists of thousands of lines. Extremely large pastes (hundreds of thousands of lines) are limited only by your browser's available memory, not by any artificial cap in the tool." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I keep the last occurrence instead of the first?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — this tool always keeps the first occurrence of each unique line and discards later repeats. There's no option to keep the last occurrence instead; if you need that behavior, you could reverse your input before pasting it in, run the tool, then reverse the output back." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does case-insensitive duplicate matching actually do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "When enabled, two lines that differ only in letter case — like \"Apple\" and \"apple\" — are treated as the same line for duplicate detection, and only the first one encountered is kept in its original casing. When disabled, comparison is exact, so \"Apple\" and \"apple\" are both kept as distinct lines." }
+      },
+      {
+        "@type": "Question",
+        "name": "In what order are the options applied?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The tool trims whitespace from each line first (if enabled), then removes blank lines (if enabled), then removes duplicates (if enabled), and finally applies sorting (if selected). This order means trimming can turn a line that looked non-empty into an empty one before the blank-line filter runs, and sorting always happens last." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my text uploaded anywhere while I use this tool?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — everything happens locally in your browser tab with plain JavaScript. Nothing you paste is sent to a server." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Duplicate Line Remover</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🧹</div>
+      <h1>Duplicate Line Remover & Text Sorter</h1>
+      <p>Paste a list of lines, remove duplicates and blank lines, trim whitespace, and sort — all instantly in your browser.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="inputText">Input Text</label>
+          <textarea id="inputText" spellcheck="false" style="min-height:200px;font-family:monospace;" placeholder="Paste your list here, one item per line…">apple
+banana
+apple
+BANANA
+
+cherry
+  cherry
+date</textarea>
+        </div>
+
+        <label class="check-row" id="dedupeOption"><input type="checkbox" id="dedupeCheck" checked /> Remove duplicate lines</label>
+        <label class="check-row" id="caseOption" style="padding-left:25px;"><input type="checkbox" id="caseCheck" /> Case-insensitive duplicate matching</label>
+        <label class="check-row"><input type="checkbox" id="blankCheck" checked /> Remove empty/blank lines</label>
+        <label class="check-row"><input type="checkbox" id="trimCheck" checked /> Trim whitespace from start/end of each line</label>
+
+        <div class="field" style="max-width:340px;">
+          <label for="sortSelect">Sort Order</label>
+          <select id="sortSelect">
+            <option value="none">No sorting (keep original order)</option>
+            <option value="asc">Sort A → Z</option>
+            <option value="desc">Sort Z → A</option>
+          </select>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="processBtn" type="button">Process</button>
+          <button class="btn btn-secondary" id="clearBtn" type="button">Clear</button>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+
+        <div class="field" style="margin-top:20px;">
+          <label for="outputText">Result</label>
+          <textarea id="outputText" readonly spellcheck="false" style="min-height:200px;font-family:monospace;"></textarea>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-secondary" id="copyBtn" type="button">Copy Result</button>
+        </div>
+        <div class="copy-note" id="copyNote"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Remove Duplicate Lines</h2>
+        <ol class="howto-steps">
+          <li>Paste your list of lines into the input box (a sample with duplicates is pre-filled).</li>
+          <li>Choose which options to apply: remove duplicates, case-insensitive matching, remove blank lines, and/or trim whitespace.</li>
+          <li>Pick a sort order if you want the result alphabetized, or leave it as "No sorting" to preserve original order.</li>
+          <li>Click "Process" to see the cleaned-up result and a stats line showing how many lines were removed.</li>
+          <li>Click "Copy Result" to copy the output to your clipboard.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Does this work on very large lists?</summary>
+          <p>Yes — processing runs entirely in your browser tab using plain JavaScript string operations, so it can comfortably handle lists of thousands of lines. Extremely large pastes (hundreds of thousands of lines) are limited only by your browser's available memory, not by any artificial cap in the tool.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I keep the last occurrence instead of the first?</summary>
+          <p>No — this tool always keeps the first occurrence of each unique line and discards later repeats. There's no option to keep the last occurrence instead; if you need that behavior, you could reverse your input before pasting it in, run the tool, then reverse the output back.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does case-insensitive duplicate matching actually do?</summary>
+          <p>When enabled, two lines that differ only in letter case — like "Apple" and "apple" — are treated as the same line for duplicate detection, and only the first one encountered is kept in its original casing. When disabled, comparison is exact, so "Apple" and "apple" are both kept as distinct lines.</p>
+        </details>
+        <details class="faq-item">
+          <summary>In what order are the options applied?</summary>
+          <p>The tool trims whitespace from each line first (if enabled), then removes blank lines (if enabled), then removes duplicates (if enabled), and finally applies sorting (if selected). This order means trimming can turn a line that looked non-empty into an empty one before the blank-line filter runs, and sorting always happens last.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my text uploaded anywhere while I use this tool?</summary>
+          <p>No — everything happens locally in your browser tab with plain JavaScript. Nothing you paste is sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="word-counter.html">
+            <span class="icon" aria-hidden="true">🔤</span>
+            <h3>Word Counter</h3>
+            <p>Count words, characters, and sentences.</p>
+          </a>
+          <a class="card" href="text-case-converter.html">
+            <span class="icon" aria-hidden="true">🔡</span>
+            <h3>Text Case Converter</h3>
+            <p>Convert text between upper, lower, and title case.</p>
+          </a>
+          <a class="card" href="slug-generator.html">
+            <span class="icon" aria-hidden="true">🔗</span>
+            <h3>Slug Generator</h3>
+            <p>Turn text into clean, URL-friendly slugs.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var inputText = document.getElementById("inputText");
+    var outputText = document.getElementById("outputText");
+    var statusBox = document.getElementById("statusBox");
+    var copyNote = document.getElementById("copyNote");
+    var dedupeCheck = document.getElementById("dedupeCheck");
+    var caseCheck = document.getElementById("caseCheck");
+    var caseOption = document.getElementById("caseOption");
+    var blankCheck = document.getElementById("blankCheck");
+    var trimCheck = document.getElementById("trimCheck");
+    var sortSelect = document.getElementById("sortSelect");
+
+    function updateCaseOptionState() {
+      caseCheck.disabled = !dedupeCheck.checked;
+      caseOption.style.opacity = dedupeCheck.checked ? "1" : "0.5";
+    }
+    dedupeCheck.addEventListener("change", updateCaseOptionState);
+    updateCaseOptionState();
+
+    function process() {
+      var raw = inputText.value;
+      var inputLineCount = raw === "" ? 0 : raw.split(/\r\n|\r|\n/).length;
+
+      var lines = raw.split(/\r\n|\r|\n/);
+
+      if (trimCheck.checked) {
+        lines = lines.map(function (l) { return l.trim(); });
+      }
+
+      if (blankCheck.checked) {
+        lines = lines.filter(function (l) { return l.trim() !== ""; });
+      }
+
+      if (dedupeCheck.checked) {
+        var seen = {};
+        var out = [];
+        lines.forEach(function (l) {
+          var key = caseCheck.checked ? l.toLowerCase() : l;
+          if (!Object.prototype.hasOwnProperty.call(seen, key)) {
+            seen[key] = true;
+            out.push(l);
+          }
+        });
+        lines = out;
+      }
+
+      var sortMode = sortSelect.value;
+      if (sortMode === "asc") {
+        lines = lines.slice().sort(function (a, b) { return a.localeCompare(b); });
+      } else if (sortMode === "desc") {
+        lines = lines.slice().sort(function (a, b) { return b.localeCompare(a); });
+      }
+
+      var result = lines.join("\n");
+      outputText.value = result;
+
+      var outputLineCount = raw === "" ? 0 : (lines.length);
+      var removed = inputLineCount - outputLineCount;
+      if (removed < 0) removed = 0;
+      statusBox.textContent = "Input: " + inputLineCount + " line" + (inputLineCount === 1 ? "" : "s") +
+        " → Output: " + outputLineCount + " line" + (outputLineCount === 1 ? "" : "s") +
+        " (" + removed + " removed)";
+      statusBox.style.color = "var(--color-text-muted)";
+    }
+
+    document.getElementById("processBtn").addEventListener("click", process);
+
+    document.getElementById("clearBtn").addEventListener("click", function () {
+      inputText.value = "";
+      outputText.value = "";
+      statusBox.textContent = "";
+      inputText.focus();
+    });
+
+    document.getElementById("copyBtn").addEventListener("click", function () {
+      Fixora.copyText(outputText.value, copyNote);
+    });
+
+    process();
+  </script>
+</body>
+</html>

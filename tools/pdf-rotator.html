@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free PDF Rotator Online — Rotate PDF Pages | Fixora</title>
+  <meta name="description" content="Rotate all or specific pages of a PDF online for free, right in your browser. Fix sideways or upside-down scans instantly. No uploads, no sign-up." />
+  <meta name="keywords" content="pdf rotator, rotate pdf pages online free, fix sideways pdf" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/pdf-rotator.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free PDF Rotator Online — Rotate PDF Pages" />
+  <meta property="og:description" content="Rotate all or specific pages of a PDF online for free, right in your browser." />
+  <meta property="og:url" content="https://www.fixora.com/tools/pdf-rotator.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free PDF Rotator Online — Rotate PDF Pages" />
+  <meta name="twitter:description" content="Rotate all or specific pages of a PDF online for free." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PDF Rotator",
+    "url": "https://www.fixora.com/tools/pdf-rotator.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "PDF Rotator", "item": "https://www.fixora.com/tools/pdf-rotator.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I rotate different pages by different amounts?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Select just the pages that need rotating, apply left/right rotation to that selection, then select a different set of pages and rotate them separately before generating the final PDF — each page's rotation is tracked independently." }
+      },
+      {
+        "@type": "Question",
+        "name": "What if I rotate a page 90° left and then 90° right?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The rotations cancel out. Rotation is tracked cumulatively per page (e.g. left then right returns it to 0°), and the small degree label under each thumbnail always shows the page's current net rotation." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does rotating change the page's stored content, or just how it displays?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It sets the PDF page's rotation flag (the same mechanism PDF viewers use to display pages sideways), rather than re-rendering the content itself, so quality and selectable text are fully preserved." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I rotate by an angle other than 90°?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — each click rotates the selected pages by exactly 90°, so you can only land on 0°, 90°, 180°, or 270°. For fine-grained tilt correction, this tool isn't the right fit." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is the \"Generate Rotated PDF\" button disabled at first?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It stays disabled until at least one page has a non-zero rotation applied, since generating a PDF with no rotations would just recreate the original file." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>PDF Rotator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🔃</div>
+      <h1>PDF Rotator</h1>
+      <p>See every page, click to select the ones that are sideways or upside-down, and rotate just those — with a live preview.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload a PDF file">
+          <div class="dz-icon" aria-hidden="true">📤</div>
+          <strong>Click to upload or drag a PDF here</strong>
+          <small>We'll show every page so you can click to select</small>
+          <input type="file" id="fileInput" accept="application/pdf" hidden />
+        </div>
+
+        <div class="page-select-toolbar" id="toolbar" style="display:none;">
+          <button class="btn btn-secondary" id="selectAllBtn" type="button">Select All</button>
+          <button class="btn btn-secondary" id="selectNoneBtn" type="button">Select None</button>
+          <span class="psel-count" id="pselCount">0 of 0 pages selected</span>
+        </div>
+
+        <div class="page-select-grid" id="pageGrid"></div>
+
+        <div class="actions" id="rotateActions" style="display:none;">
+          <button class="btn btn-secondary" id="rotateLeftBtn" type="button">↺ Rotate Left 90°</button>
+          <button class="btn btn-secondary" id="rotateRightBtn" type="button">↻ Rotate Right 90°</button>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="rotateBtn" disabled>Generate Rotated PDF</button>
+          <a class="btn btn-secondary" id="downloadBtn" style="display:none;" download="rotated.pdf">Download Rotated PDF</a>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Rotate PDF Pages</h2>
+        <ol class="howto-steps">
+          <li>Upload your PDF — every page renders as a thumbnail.</li>
+          <li>Click one or more page thumbnails to select them (click again to deselect), or use "Select All"/"Select None".</li>
+          <li>With pages selected, click "Rotate Left 90°" or "Rotate Right 90°" as many times as needed — the thumbnail preview updates live and shows the current rotation angle.</li>
+          <li>Click "Generate Rotated PDF" and download the result.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Can I rotate different pages by different amounts?</summary>
+          <p>Yes. Select just the pages that need rotating, apply left/right rotation to that selection, then select a different set of pages and rotate them separately before generating the final PDF — each page's rotation is tracked independently.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What if I rotate a page 90° left and then 90° right?</summary>
+          <p>The rotations cancel out. Rotation is tracked cumulatively per page (e.g. left then right returns it to 0°), and the small degree label under each thumbnail always shows the page's current net rotation.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does rotating change the page's stored content, or just how it displays?</summary>
+          <p>It sets the PDF page's rotation flag (the same mechanism PDF viewers use to display pages sideways), rather than re-rendering the content itself, so quality and selectable text are fully preserved.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I rotate by an angle other than 90°?</summary>
+          <p>No — each click rotates the selected pages by exactly 90°, so you can only land on 0°, 90°, 180°, or 270°. For fine-grained tilt correction, this tool isn't the right fit.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why is the "Generate Rotated PDF" button disabled at first?</summary>
+          <p>It stays disabled until at least one page has a non-zero rotation applied, since generating a PDF with no rotations would just recreate the original file.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="pdf-splitter.html">
+            <span class="icon" aria-hidden="true">✂️</span>
+            <h3>PDF Splitter</h3>
+            <p>Extract specific pages into a new PDF.</p>
+          </a>
+          <a class="card" href="pdf-watermark.html">
+            <span class="icon" aria-hidden="true">💧</span>
+            <h3>PDF Watermark</h3>
+            <p>Add a text watermark to every page.</p>
+          </a>
+          <a class="card" href="pdf-merger.html">
+            <span class="icon" aria-hidden="true">📎</span>
+            <h3>PDF Merger</h3>
+            <p>Combine multiple PDFs into one file.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/vendor/pdf-lib.min.js"></script>
+  <script type="module">
+    import * as pdfjsLib from "../assets/js/vendor/pdf.min.mjs";
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "../assets/js/vendor/pdf.worker.min.mjs";
+
+    var dropzone = document.getElementById("dropzone");
+    var fileInput = document.getElementById("fileInput");
+    var rotateBtn = document.getElementById("rotateBtn");
+    var downloadBtn = document.getElementById("downloadBtn");
+    var statusBox = document.getElementById("statusBox");
+    var toolbar = document.getElementById("toolbar");
+    var rotateActions = document.getElementById("rotateActions");
+    var pageGrid = document.getElementById("pageGrid");
+    var pselCount = document.getElementById("pselCount");
+
+    var currentFile = null;
+    var totalPages = 0;
+    var selected = new Set();
+    var rotations = []; // cumulative degrees per page index, e.g. 0/90/180/270
+    var itemEls = [];
+
+    var lastDownloadUrl = null;
+
+    function resetDownload() {
+      if (lastDownloadUrl) {
+        URL.revokeObjectURL(lastDownloadUrl);
+        lastDownloadUrl = null;
+      }
+      downloadBtn.style.display = "none";
+    }
+
+    function updateCount() {
+      pselCount.textContent = selected.size + " of " + totalPages + " page(s) selected";
+    }
+
+    function toggleItem(item, index) {
+      if (selected.has(index)) {
+        selected.delete(index);
+        item.classList.remove("selected");
+      } else {
+        selected.add(index);
+        item.classList.add("selected");
+      }
+      updateCount();
+    }
+
+    function applyRotationVisual(index) {
+      var item = itemEls[index];
+      var img = item.querySelector("img");
+      var deg = rotations[index];
+      img.style.transform = "rotate(" + deg + "deg)";
+
+      var rotLabel = item.querySelector(".psel-rotation");
+      if (deg % 360 === 0) {
+        item.classList.remove("rotated");
+      } else {
+        item.classList.add("rotated");
+        rotLabel.textContent = deg + "°";
+      }
+    }
+
+    function rotateSelected(delta) {
+      if (selected.size === 0) {
+        statusBox.textContent = "Click one or more pages first, then rotate.";
+        return;
+      }
+      selected.forEach(function (index) {
+        rotations[index] = ((rotations[index] + delta) % 360 + 360) % 360;
+        applyRotationVisual(index);
+      });
+      var anyRotated = rotations.some(function (r) { return r !== 0; });
+      rotateBtn.disabled = !anyRotated;
+      statusBox.textContent = "Rotation preview updated. Click Generate Rotated PDF when ready.";
+      resetDownload();
+    }
+
+    async function renderThumbnails(file) {
+      pageGrid.innerHTML = "";
+      itemEls = [];
+      statusBox.textContent = "Loading pages…";
+
+      var arrayBuffer = await file.arrayBuffer();
+      var pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      totalPages = pdf.numPages;
+      rotations = new Array(totalPages).fill(0);
+      toolbar.style.display = "flex";
+      rotateActions.style.display = "flex";
+      selected = new Set();
+      updateCount();
+
+      for (var i = 1; i <= totalPages; i++) {
+        statusBox.textContent = "Rendering page " + i + " of " + totalPages + "…";
+        var page = await pdf.getPage(i);
+        var viewport = page.getViewport({ scale: 1 });
+        var scale = 160 / viewport.width;
+        var scaledViewport = page.getViewport({ scale: scale });
+
+        var canvas = document.createElement("canvas");
+        canvas.width = scaledViewport.width;
+        canvas.height = scaledViewport.height;
+        var ctx = canvas.getContext("2d");
+        await page.render({ canvasContext: ctx, viewport: scaledViewport }).promise;
+
+        (function (pageIndex, pageNum) {
+          var item = document.createElement("div");
+          item.className = "page-select-item";
+          var stage = document.createElement("div");
+          stage.className = "psel-thumb-stage";
+          var img = document.createElement("img");
+          img.src = canvas.toDataURL("image/jpeg", 0.75);
+          img.alt = "Page " + pageNum + " preview";
+          img.loading = "lazy";
+          stage.appendChild(img);
+          var label = document.createElement("div");
+          label.className = "psel-label";
+          label.textContent = "Page " + pageNum;
+          var badge = document.createElement("div");
+          badge.className = "psel-badge";
+          badge.textContent = "✓";
+          var rotLabel = document.createElement("div");
+          rotLabel.className = "psel-rotation";
+          rotLabel.textContent = "0°";
+
+          item.appendChild(stage);
+          item.appendChild(rotLabel);
+          item.appendChild(label);
+          item.appendChild(badge);
+          item.addEventListener("click", function () { toggleItem(item, pageIndex); });
+          pageGrid.appendChild(item);
+          itemEls[pageIndex] = item;
+        })(i - 1, i);
+      }
+
+      statusBox.textContent = "Loaded " + totalPages + " page(s). Click pages to select, then rotate them.";
+    }
+
+    function handleFiles(files) {
+      var file = files[0];
+      if (!file || file.type !== "application/pdf") {
+        statusBox.textContent = "Please choose a valid PDF file.";
+        return;
+      }
+      currentFile = file;
+      resetDownload();
+      rotateBtn.disabled = true;
+      renderThumbnails(file).catch(function () {
+        statusBox.textContent = "Couldn't read that PDF. Please try a different file.";
+      });
+    }
+
+    Fixora.setupDropzone(dropzone, fileInput, handleFiles);
+    dropzone.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") fileInput.click();
+    });
+
+    document.getElementById("selectAllBtn").addEventListener("click", function () {
+      selected = new Set(Array.from({ length: totalPages }, function (_, i) { return i; }));
+      itemEls.forEach(function (el) { el.classList.add("selected"); });
+      updateCount();
+    });
+
+    document.getElementById("selectNoneBtn").addEventListener("click", function () {
+      selected = new Set();
+      itemEls.forEach(function (el) { el.classList.remove("selected"); });
+      updateCount();
+    });
+
+    document.getElementById("rotateLeftBtn").addEventListener("click", function () { rotateSelected(-90); });
+    document.getElementById("rotateRightBtn").addEventListener("click", function () { rotateSelected(90); });
+
+    rotateBtn.addEventListener("click", async function () {
+      if (!currentFile) return;
+
+      rotateBtn.disabled = true;
+      statusBox.textContent = "Generating rotated PDF…";
+
+      try {
+        var bytes = await currentFile.arrayBuffer();
+        var doc = await PDFLib.PDFDocument.load(bytes);
+        var pages = doc.getPages();
+        var rotatedCount = 0;
+
+        pages.forEach(function (page, i) {
+          if (rotations[i]) {
+            var current = page.getRotation().angle;
+            page.setRotation(PDFLib.degrees((current + rotations[i]) % 360));
+            rotatedCount++;
+          }
+        });
+
+        var newBytes = await doc.save();
+        var blob = new Blob([newBytes], { type: "application/pdf" });
+        var url = URL.createObjectURL(blob);
+        lastDownloadUrl = url;
+
+        downloadBtn.href = url;
+        downloadBtn.download = currentFile.name.replace(/\.pdf$/i, "") + "-rotated.pdf";
+        downloadBtn.style.display = "inline-flex";
+
+        statusBox.textContent = "Done! Rotated " + rotatedCount + " page(s).";
+      } catch (err) {
+        console.error(err);
+        statusBox.textContent = "Something went wrong rotating that PDF.";
+      } finally {
+        rotateBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

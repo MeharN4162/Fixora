@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free UUID / GUID Generator Online | Fixora</title>
+  <meta name="description" content="Generate random UUID v4 / GUID values online for free, right in your browser. Generate one or many at once. No sign-up." />
+  <meta name="keywords" content="uuid generator, guid generator online free, random uuid v4" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/uuid-generator.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free UUID / GUID Generator Online" />
+  <meta property="og:description" content="Generate random UUID v4 / GUID values online for free, right in your browser." />
+  <meta property="og:url" content="https://www.fixora.com/tools/uuid-generator.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free UUID / GUID Generator Online" />
+  <meta name="twitter:description" content="Generate random UUID v4 / GUID values online for free, right in your browser." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "UUID / GUID Generator",
+    "url": "https://www.fixora.com/tools/uuid-generator.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "UUID Generator", "item": "https://www.fixora.com/tools/uuid-generator.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What version of UUID does this generate?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Version 4 — a randomly generated UUID as defined by RFC 4122, where the version and variant bits are set rather than derived from a MAC address or timestamp like version 1, so each ID is effectively random rather than sequential or traceable to your machine." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is the randomness actually generated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The tool first tries crypto.randomUUID(), a built-in browser method for generating RFC-compliant v4 UUIDs. If that isn't available, it falls back to manually building one from 16 random bytes pulled from crypto.getRandomValues() and setting the version and variant bits by hand." }
+      },
+      {
+        "@type": "Question",
+        "name": "What do the letter case and format options change?",
+        "acceptedAnswer": { "@type": "Answer", "text": "They only affect how the UUID is displayed — uppercase versus lowercase letters, and whether hyphens are included between the groups. The underlying 128-bit random value and its uniqueness are identical either way." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can two generated UUIDs collide?",
+        "acceptedAnswer": { "@type": "Answer", "text": "In practice, no. With 122 random bits in a v4 UUID, the probability of ever generating a duplicate is astronomically small, which is why UUIDs are widely used as unique identifiers for database rows and API resources without checking for collisions." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a limit to how many UUIDs I can generate at once?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — the count field accepts 1 to 100 per click; entering a higher number is automatically capped at 100." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .uuid-list {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .uuid-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: monospace;
+      font-size: 0.95rem;
+      background: var(--color-bg-soft, #f8f9fb);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+    }
+    .uuid-row span { flex: 1; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>UUID Generator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🆔</div>
+      <h1>UUID / GUID Generator</h1>
+      <p>Generate random version-4 UUIDs, using your browser's cryptographically secure random generator.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="row">
+          <div class="field">
+            <label for="countInput">How many?</label>
+            <input type="number" id="countInput" value="5" min="1" max="100" />
+          </div>
+          <div class="field">
+            <label for="caseSelect">Letter case</label>
+            <select id="caseSelect">
+              <option value="lower">lowercase</option>
+              <option value="upper">UPPERCASE</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="hyphensSelect">Format</label>
+            <select id="hyphensSelect">
+              <option value="hyphens">With hyphens</option>
+              <option value="nohyphens">No hyphens</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="generateBtn">Generate</button>
+          <button class="btn btn-secondary" id="copyAllBtn">Copy All</button>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+
+        <div class="uuid-list" id="uuidList"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Generate UUIDs</h2>
+        <ol class="howto-steps">
+          <li>Enter how many UUIDs you want (1 to 100) in the "How many?" field.</li>
+          <li>Choose lowercase or UPPERCASE letters, and whether to include hyphens, from the two dropdowns.</li>
+          <li>Click "Generate" to produce the list.</li>
+          <li>Copy one UUID with its row's "Copy" button, or click "Copy All" to copy the whole list at once, one per line.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What version of UUID does this generate?</summary>
+          <p>Version 4 — a randomly generated UUID as defined by RFC 4122, where the version and variant bits are set rather than derived from a MAC address or timestamp like version 1, so each ID is effectively random rather than sequential or traceable to your machine.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How is the randomness actually generated?</summary>
+          <p>The tool first tries crypto.randomUUID(), a built-in browser method for generating RFC-compliant v4 UUIDs. If that isn't available, it falls back to manually building one from 16 random bytes pulled from crypto.getRandomValues() and setting the version and variant bits by hand.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What do the letter case and format options change?</summary>
+          <p>They only affect how the UUID is displayed — uppercase versus lowercase letters, and whether hyphens are included between the groups. The underlying 128-bit random value and its uniqueness are identical either way.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can two generated UUIDs collide?</summary>
+          <p>In practice, no. With 122 random bits in a v4 UUID, the probability of ever generating a duplicate is astronomically small, which is why UUIDs are widely used as unique identifiers for database rows and API resources without checking for collisions.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is there a limit to how many UUIDs I can generate at once?</summary>
+          <p>Yes — the count field accepts 1 to 100 per click; entering a higher number is automatically capped at 100.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="hash-generator.html">
+            <span class="icon" aria-hidden="true">#️⃣</span>
+            <h3>Hash Generator</h3>
+            <p>Generate SHA-1, SHA-256, and SHA-512 hashes.</p>
+          </a>
+          <a class="card" href="password-generator.html">
+            <span class="icon" aria-hidden="true">🔐</span>
+            <h3>Password Generator</h3>
+            <p>Generate a secure random password.</p>
+          </a>
+          <a class="card" href="random-number-generator.html">
+            <span class="icon" aria-hidden="true">🔢</span>
+            <h3>Random Number Generator</h3>
+            <p>Generate random numbers in any range.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var countInput = document.getElementById("countInput");
+    var caseSelect = document.getElementById("caseSelect");
+    var hyphensSelect = document.getElementById("hyphensSelect");
+    var statusBox = document.getElementById("statusBox");
+    var uuidList = document.getElementById("uuidList");
+
+    var lastUuids = [];
+
+    function generateUuidV4() {
+      if (window.crypto && crypto.randomUUID) {
+        return crypto.randomUUID();
+      }
+      var bytes = new Uint8Array(16);
+      crypto.getRandomValues(bytes);
+      bytes[6] = (bytes[6] & 0x0f) | 0x40;
+      bytes[8] = (bytes[8] & 0x3f) | 0x80;
+      var hex = [];
+      for (var i = 0; i < 16; i++) hex.push(bytes[i].toString(16).padStart(2, "0"));
+      return hex[0] + hex[1] + hex[2] + hex[3] + "-" +
+        hex[4] + hex[5] + "-" +
+        hex[6] + hex[7] + "-" +
+        hex[8] + hex[9] + "-" +
+        hex[10] + hex[11] + hex[12] + hex[13] + hex[14] + hex[15];
+    }
+
+    document.getElementById("generateBtn").addEventListener("click", function () {
+      var count = parseInt(countInput.value, 10);
+      if (isNaN(count) || count < 1) {
+        statusBox.textContent = "Please generate at least 1 UUID.";
+        return;
+      }
+      count = Math.min(count, 100);
+
+      var results = [];
+      for (var i = 0; i < count; i++) {
+        var uuid = generateUuidV4();
+        if (hyphensSelect.value === "nohyphens") uuid = uuid.replace(/-/g, "");
+        if (caseSelect.value === "upper") uuid = uuid.toUpperCase();
+        results.push(uuid);
+      }
+
+      lastUuids = results;
+      uuidList.innerHTML = "";
+      results.forEach(function (uuid) {
+        var row = document.createElement("div");
+        row.className = "uuid-row";
+        var span = document.createElement("span");
+        span.textContent = uuid;
+        var btn = document.createElement("button");
+        btn.className = "btn btn-secondary";
+        btn.textContent = "Copy";
+        btn.type = "button";
+        btn.addEventListener("click", function () { Fixora.copyText(uuid); });
+        row.appendChild(span);
+        row.appendChild(btn);
+        uuidList.appendChild(row);
+      });
+
+      statusBox.textContent = "Generated " + count + " UUID(s).";
+    });
+
+    document.getElementById("copyAllBtn").addEventListener("click", function () {
+      if (!lastUuids.length) {
+        statusBox.textContent = "Generate some UUIDs first.";
+        return;
+      }
+      Fixora.copyText(lastUuids.join("\n"));
+    });
+
+    document.getElementById("generateBtn").click();
+  </script>
+</body>
+</html>

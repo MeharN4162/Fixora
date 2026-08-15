@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Image Metadata & EXIF Viewer Online | Fixora</title>
+  <meta name="description" content="View an image's file info and EXIF data online for free — camera, date taken, and GPS location if present. Check what a photo reveals before you share it. No uploads, no sign-up." />
+  <meta name="keywords" content="image metadata viewer, exif viewer online free, check photo gps location" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/image-metadata-viewer.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Image Metadata & EXIF Viewer Online" />
+  <meta property="og:description" content="View an image's file info and EXIF data online for free — camera, date taken, and GPS location if present." />
+  <meta property="og:url" content="https://www.fixora.com/tools/image-metadata-viewer.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Image Metadata & EXIF Viewer Online" />
+  <meta name="twitter:description" content="View an image's file info and EXIF data online for free — camera, date taken, and GPS location if present." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Image Metadata & EXIF Viewer",
+    "url": "https://www.fixora.com/tools/image-metadata-viewer.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Image Metadata Viewer", "item": "https://www.fixora.com/tools/image-metadata-viewer.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why does this tool warn me about GPS coordinates?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Many phone cameras embed the exact latitude and longitude where a photo was taken inside its EXIF data. This tool parses that data locally and, if it finds GPS coordinates, displays a clear warning - because anyone who receives your original, un-stripped file could see precisely where the photo was taken." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why don't PNG or WebP files show any EXIF data?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The metadata parser reads the JPEG file structure specifically, looking for an APP1 segment containing an Exif marker. PNG and WebP files don't use this structure, so the tool falls back to showing basic file info only (name, size, dimensions) for those formats - this is a real limitation of the parser, not a sign your file is missing something." }
+      },
+      {
+        "@type": "Question",
+        "name": "My photo shows no EXIF data at all - is that normal?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, very common. Screenshots never have camera EXIF to begin with, and many messaging apps and social platforms automatically strip EXIF data from photos on upload or send, specifically for privacy reasons." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my photo uploaded anywhere to read its metadata?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. The image is read locally with the FileReader API, and a hand-written parser walks the raw JPEG bytes in your browser to find and decode the EXIF segment - the file itself is never transmitted anywhere." }
+      },
+      {
+        "@type": "Question",
+        "name": "What camera details can this tool show, beyond GPS?",
+        "acceptedAnswer": { "@type": "Answer", "text": "When present in the file, it displays camera make and model, date taken, exposure time, aperture (f-number), ISO, focal length, image orientation, and the software used to process the image - everything the tool can extract from the standard EXIF and GPS IFD tags." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .meta-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+    .meta-table tr { border-bottom: 1px solid var(--color-border); }
+    .meta-table tr:last-child { border-bottom: none; }
+    .meta-table td {
+      padding: 10px 8px;
+      font-size: 0.92rem;
+    }
+    .meta-table td:first-child {
+      color: var(--color-text-muted);
+      width: 40%;
+    }
+    .meta-section-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      margin-top: 24px;
+      margin-bottom: 4px;
+    }
+    .gps-warning {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Image Metadata Viewer</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🔎</div>
+      <h1>Image Metadata & EXIF Viewer</h1>
+      <p>See exactly what's embedded in a photo — camera details, timestamps, and GPS location if present — before you share it.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload an image">
+          <div class="dz-icon" aria-hidden="true">🖼️</div>
+          <strong>Click to upload or drag an image here</strong>
+          <small>JPG works best for EXIF data — PNG/WebP show basic file info only</small>
+          <input type="file" id="fileInput" accept="image/*" hidden />
+        </div>
+
+        <div id="resultsWrap" style="display:none;">
+          <div class="meta-section-title">File Info</div>
+          <table class="meta-table" id="fileTable"></table>
+
+          <div id="exifWrap" style="display:none;">
+            <div class="meta-section-title">Camera / EXIF</div>
+            <table class="meta-table" id="exifTable"></table>
+          </div>
+
+          <div id="gpsWarning" class="gps-warning" style="display:none;"></div>
+
+          <div id="noExifNote" class="output-box" style="display:none;">No EXIF data found in this image. This is normal for screenshots, PNGs, WebP files, or photos already stripped of metadata (many messaging apps do this automatically).</div>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to View an Image's Metadata and EXIF Data</h2>
+        <ol class="howto-steps">
+          <li>Click the upload area or drag in an image — JPGs from cameras and phones carry the most detail.</li>
+          <li>The tool immediately shows basic File Info: name, type, size, dimensions, and last modified date.</li>
+          <li>If the file is a JPG with an embedded EXIF segment, a Camera / EXIF section appears with details like make, model, date taken, exposure settings, and GPS coordinates if present.</li>
+          <li>If GPS data is found, read the on-page privacy warning before sharing the original file with anyone.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Why does this tool warn me about GPS coordinates?</summary>
+          <p>Many phone cameras embed the exact latitude and longitude where a photo was taken inside its EXIF data. This tool parses that data locally and, if it finds GPS coordinates, displays a clear warning - because anyone who receives your original, un-stripped file could see precisely where the photo was taken.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why don't PNG or WebP files show any EXIF data?</summary>
+          <p>The metadata parser reads the JPEG file structure specifically, looking for an APP1 segment containing an Exif marker. PNG and WebP files don't use this structure, so the tool falls back to showing basic file info only (name, size, dimensions) for those formats - this is a real limitation of the parser, not a sign your file is missing something.</p>
+        </details>
+        <details class="faq-item">
+          <summary>My photo shows no EXIF data at all - is that normal?</summary>
+          <p>Yes, very common. Screenshots never have camera EXIF to begin with, and many messaging apps and social platforms automatically strip EXIF data from photos on upload or send, specifically for privacy reasons.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my photo uploaded anywhere to read its metadata?</summary>
+          <p>No. The image is read locally with the FileReader API, and a hand-written parser walks the raw JPEG bytes in your browser to find and decode the EXIF segment - the file itself is never transmitted anywhere.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What camera details can this tool show, beyond GPS?</summary>
+          <p>When present in the file, it displays camera make and model, date taken, exposure time, aperture (f-number), ISO, focal length, image orientation, and the software used to process the image - everything the tool can extract from the standard EXIF and GPS IFD tags.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="pdf-metadata.html">
+            <span class="icon" aria-hidden="true">🏷️</span>
+            <h3>PDF Metadata Editor</h3>
+            <p>View and edit metadata on a PDF instead.</p>
+          </a>
+          <a class="card" href="image-compressor.html">
+            <span class="icon" aria-hidden="true">🗜️</span>
+            <h3>Image Compressor</h3>
+            <p>Re-encoding a photo strips its EXIF data too.</p>
+          </a>
+          <a class="card" href="image-color-picker.html">
+            <span class="icon" aria-hidden="true">🎨</span>
+            <h3>Image Color Picker</h3>
+            <p>Grab an exact color from any photo.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var dropzone = document.getElementById("dropzone");
+    var fileInput = document.getElementById("fileInput");
+    var resultsWrap = document.getElementById("resultsWrap");
+    var fileTable = document.getElementById("fileTable");
+    var exifWrap = document.getElementById("exifWrap");
+    var exifTable = document.getElementById("exifTable");
+    var gpsWarning = document.getElementById("gpsWarning");
+    var noExifNote = document.getElementById("noExifNote");
+    var statusBox = document.getElementById("statusBox");
+
+    var TYPE_SIZES = { 1: 1, 2: 1, 3: 2, 4: 4, 5: 8, 7: 1, 9: 4, 10: 8 };
+
+    function parseExif(buffer) {
+      var view = new DataView(buffer);
+      if (view.byteLength < 4 || view.getUint16(0) !== 0xffd8) return null;
+
+      var offset = 2;
+      while (offset + 4 <= view.byteLength) {
+        var marker = view.getUint16(offset);
+        if ((marker & 0xff00) !== 0xff00) break;
+        if (marker === 0xffd8) { offset += 2; continue; }
+        if (marker === 0xffd9 || marker === 0xffda) break;
+
+        var segLength = view.getUint16(offset + 2);
+        if (marker === 0xffe1 && offset + 10 <= view.byteLength) {
+          var tag = "";
+          for (var i = 0; i < 4; i++) tag += String.fromCharCode(view.getUint8(offset + 4 + i));
+          if (tag === "Exif") {
+            return parseTiff(view, offset + 4 + 6);
+          }
+        }
+        offset += 2 + segLength;
+      }
+      return null;
+    }
+
+    function parseTiff(view, tiffStart) {
+      var little = view.getUint16(tiffStart) === 0x4949;
+      var ifd0Offset = view.getUint32(tiffStart + 4, little);
+
+      function readValue(type, count, valueFieldOffset) {
+        var size = (TYPE_SIZES[type] || 1) * count;
+        var dataOffset = size > 4 ? tiffStart + view.getUint32(valueFieldOffset, little) : valueFieldOffset;
+
+        if (type === 2) {
+          var str = "";
+          for (var i = 0; i < count - 1; i++) str += String.fromCharCode(view.getUint8(dataOffset + i));
+          return str.trim();
+        }
+        if (type === 3) {
+          if (count === 1) return view.getUint16(dataOffset, little);
+          var arrS = [];
+          for (var j = 0; j < count; j++) arrS.push(view.getUint16(dataOffset + j * 2, little));
+          return arrS;
+        }
+        if (type === 4) {
+          if (count === 1) return view.getUint32(dataOffset, little);
+          var arrL = [];
+          for (var k = 0; k < count; k++) arrL.push(view.getUint32(dataOffset + k * 4, little));
+          return arrL;
+        }
+        if (type === 5 || type === 10) {
+          function readRational(o) {
+            var num = little ? view.getInt32(o, true) : view.getInt32(o, false);
+            var den = little ? view.getInt32(o + 4, true) : view.getInt32(o + 4, false);
+            return den === 0 ? 0 : num / den;
+          }
+          if (count === 1) return readRational(dataOffset);
+          var arrR = [];
+          for (var m = 0; m < count; m++) arrR.push(readRational(dataOffset + m * 8));
+          return arrR;
+        }
+        return null;
+      }
+
+      function readIFD(ifdOffset) {
+        var entries = {};
+        var base = tiffStart + ifdOffset;
+        var numEntries = view.getUint16(base, little);
+        for (var i = 0; i < numEntries; i++) {
+          var entryOffset = base + 2 + i * 12;
+          var tagId = view.getUint16(entryOffset, little);
+          var type = view.getUint16(entryOffset + 2, little);
+          var count = view.getUint32(entryOffset + 4, little);
+          try {
+            entries[tagId] = readValue(type, count, entryOffset + 8);
+          } catch (e) {
+            entries[tagId] = null;
+          }
+        }
+        return entries;
+      }
+
+      var result = {};
+      var ifd0 = readIFD(ifd0Offset);
+      result.make = ifd0[0x010f];
+      result.model = ifd0[0x0110];
+      result.orientation = ifd0[0x0112];
+      result.dateTime = ifd0[0x0132];
+      result.software = ifd0[0x0131];
+
+      if (ifd0[0x8769]) {
+        try {
+          var exifIFD = readIFD(ifd0[0x8769]);
+          result.dateTimeOriginal = exifIFD[0x9003];
+          result.exposureTime = exifIFD[0x829a];
+          result.fNumber = exifIFD[0x829d];
+          result.iso = exifIFD[0x8827];
+          result.focalLength = exifIFD[0x920a];
+        } catch (e) {}
+      }
+
+      if (ifd0[0x8825]) {
+        try {
+          var gpsIFD = readIFD(ifd0[0x8825]);
+          var latRef = gpsIFD[0x0001];
+          var lat = gpsIFD[0x0002];
+          var lonRef = gpsIFD[0x0003];
+          var lon = gpsIFD[0x0004];
+          if (lat && lon && lat.length === 3 && lon.length === 3) {
+            var latDeg = lat[0] + lat[1] / 60 + lat[2] / 3600;
+            var lonDeg = lon[0] + lon[1] / 60 + lon[2] / 3600;
+            if (latRef === "S") latDeg = -latDeg;
+            if (lonRef === "W") lonDeg = -lonDeg;
+            result.gpsLat = latDeg;
+            result.gpsLon = lonDeg;
+          }
+        } catch (e) {}
+      }
+
+      return result;
+    }
+
+    function addRow(table, label, value) {
+      if (value === undefined || value === null || value === "") return;
+      var row = document.createElement("tr");
+      var td1 = document.createElement("td");
+      td1.textContent = label;
+      var td2 = document.createElement("td");
+      td2.textContent = value;
+      row.appendChild(td1);
+      row.appendChild(td2);
+      table.appendChild(row);
+    }
+
+    var ORIENTATION_LABELS = {
+      1: "Normal", 2: "Flipped horizontally", 3: "Rotated 180°",
+      4: "Flipped vertically", 5: "Rotated 90° CW + flipped", 6: "Rotated 90° CW",
+      7: "Rotated 270° CW + flipped", 8: "Rotated 270° CW"
+    };
+
+    function handleFiles(files) {
+      var file = files[0];
+      if (!file || file.type.indexOf("image/") !== 0) {
+        statusBox.textContent = "Please choose a valid image file.";
+        return;
+      }
+
+      statusBox.textContent = "Reading file…";
+      fileTable.innerHTML = "";
+      exifTable.innerHTML = "";
+      exifWrap.style.display = "none";
+      gpsWarning.style.display = "none";
+      noExifNote.style.display = "none";
+
+      var img = new Image();
+      var objectUrl = URL.createObjectURL(file);
+      img.onload = function () {
+        addRow(fileTable, "File name", file.name);
+        addRow(fileTable, "File type", file.type || "Unknown");
+        addRow(fileTable, "File size", Fixora.formatBytes(file.size));
+        addRow(fileTable, "Dimensions", img.naturalWidth + " × " + img.naturalHeight + "px");
+        addRow(fileTable, "Last modified", file.lastModified ? new Date(file.lastModified).toLocaleString() : "Unknown");
+        URL.revokeObjectURL(objectUrl);
+      };
+      img.src = objectUrl;
+
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var exif = null;
+        try {
+          exif = parseExif(e.target.result);
+        } catch (err) {
+          exif = null;
+        }
+
+        resultsWrap.style.display = "block";
+
+        if (exif) {
+          var hasAnyExif = false;
+          if (exif.make) { addRow(exifTable, "Camera Make", exif.make); hasAnyExif = true; }
+          if (exif.model) { addRow(exifTable, "Camera Model", exif.model); hasAnyExif = true; }
+          if (exif.dateTimeOriginal || exif.dateTime) { addRow(exifTable, "Date Taken", exif.dateTimeOriginal || exif.dateTime); hasAnyExif = true; }
+          if (exif.exposureTime) { addRow(exifTable, "Exposure Time", (exif.exposureTime < 1 ? "1/" + Math.round(1 / exif.exposureTime) : exif.exposureTime) + " s"); hasAnyExif = true; }
+          if (exif.fNumber) { addRow(exifTable, "Aperture", "f/" + exif.fNumber.toFixed(1)); hasAnyExif = true; }
+          if (exif.iso) { addRow(exifTable, "ISO", exif.iso); hasAnyExif = true; }
+          if (exif.focalLength) { addRow(exifTable, "Focal Length", exif.focalLength.toFixed(1) + " mm"); hasAnyExif = true; }
+          if (exif.orientation) { addRow(exifTable, "Orientation", ORIENTATION_LABELS[exif.orientation] || exif.orientation); hasAnyExif = true; }
+          if (exif.software) { addRow(exifTable, "Software", exif.software); hasAnyExif = true; }
+
+          if (typeof exif.gpsLat === "number" && typeof exif.gpsLon === "number") {
+            addRow(exifTable, "GPS Location", exif.gpsLat.toFixed(6) + ", " + exif.gpsLon.toFixed(6));
+            hasAnyExif = true;
+            gpsWarning.style.display = "block";
+            gpsWarning.innerHTML = "⚠️ <strong>This photo contains GPS coordinates.</strong> Anyone who gets the original file could see exactly where it was taken. Most social platforms strip this automatically on upload, but direct file shares (email, messaging apps, cloud drives) often don't.";
+          }
+
+          if (hasAnyExif) {
+            exifWrap.style.display = "block";
+          } else {
+            noExifNote.style.display = "block";
+          }
+        } else {
+          noExifNote.style.display = "block";
+        }
+
+        statusBox.textContent = "Done.";
+      };
+      reader.onerror = function () {
+        statusBox.textContent = "Couldn't read that file. Please try again.";
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    Fixora.setupDropzone(dropzone, fileInput, handleFiles);
+    dropzone.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") fileInput.click();
+    });
+  </script>
+</body>
+</html>

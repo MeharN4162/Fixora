@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Word to PDF Converter Online | Fixora</title>
+  <meta name="description" content="Convert a Word (.docx) document to PDF online for free, right in your browser. No uploads, no sign-up, formatting preserved." />
+  <meta name="keywords" content="word to pdf, convert docx to pdf online free, doc to pdf" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/word-to-pdf.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Word to PDF Converter Online" />
+  <meta property="og:description" content="Convert a Word (.docx) document to PDF online for free, right in your browser." />
+  <meta property="og:url" content="https://www.fixora.com/tools/word-to-pdf.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Word to PDF Converter Online" />
+  <meta name="twitter:description" content="Convert a Word (.docx) document to PDF online for free, right in your browser." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Word to PDF Converter",
+    "url": "https://www.fixora.com/tools/word-to-pdf.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Word to PDF", "item": "https://www.fixora.com/tools/word-to-pdf.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why do I need to use my browser's print dialog instead of getting a direct download?",
+        "acceptedAnswer": { "@type": "Answer", "text": "This tool converts your .docx into formatted HTML locally, then hands that off to your browser's own \"Save as PDF\" printing feature rather than building the PDF file itself — which means no server-side conversion library is needed, but it does mean an extra step through the print dialog." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why can't I upload a .doc file?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Only the newer .docx format (used by Word 2007 and later) is supported, since the conversion library reads the modern XML-based .docx structure — if you have an older .doc file, open it in Word (or a free alternative) and use \"Save As\" to convert it to .docx first." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will my document's formatting (bold, headings, images, tables) be preserved?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Most common formatting carries over — headings, bold/italic text, images, lists, and tables all convert to HTML — but very complex layouts, custom fonts, or unusual Word features may not translate perfectly, and you'll see a note in the status message if the converter had to make any formatting decisions." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does \"converted with minor formatting note(s)\" mean?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The conversion library flags certain elements it couldn't map perfectly to HTML (like an unsupported style or an unusual list format) — these are typically small formatting quirks, not lost content, so it's worth reviewing the preview before saving." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this upload my Word document to a server?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the .docx file is read and converted entirely in your browser using a JavaScript library, and the \"Save as PDF\" step uses your own browser's built-in print engine, so your document never leaves your device." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .doc-preview {
+      display: none;
+      margin-top: 20px;
+      max-height: 65vh;
+      overflow-y: auto;
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 40px 48px;
+      color: #111;
+    }
+    .doc-preview img { max-width: 100%; height: auto; }
+    .doc-preview table { border-collapse: collapse; max-width: 100%; }
+    .doc-preview table td, .doc-preview table th { border: 1px solid #ccc; padding: 6px 10px; }
+
+    @media print {
+      .no-print { display: none !important; }
+      #printArea {
+        display: block !important;
+        max-height: none !important;
+        overflow: visible !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header no-print">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container no-print">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Word to PDF</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container no-print">
+      <div class="icon-lg" aria-hidden="true">📄</div>
+      <h1>Word to PDF Converter</h1>
+      <p>Convert a .docx file to PDF using your browser's own print engine — preserves formatting honestly, no server upload.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="dropzone no-print" id="dropzone" tabindex="0" role="button" aria-label="Upload a Word document">
+          <div class="dz-icon" aria-hidden="true">📤</div>
+          <strong>Click to upload or drag a .docx file here</strong>
+          <small>Only .docx is supported (not the older .doc format)</small>
+          <input type="file" id="fileInput" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" hidden />
+        </div>
+
+        <div class="actions no-print">
+          <button class="btn btn-primary" id="downloadBtn" style="display:none;">Save as PDF</button>
+        </div>
+
+        <div class="output-box no-print" id="statusBox"></div>
+
+        <div class="doc-preview" id="printArea"></div>
+
+        <p class="no-print" style="font-size:0.85rem;color:var(--color-text-muted);margin-top:18px;">
+          <strong>How it works:</strong> your document is converted to formatted HTML right in your browser, then handed to your browser's built-in "Print to PDF" — the same engine that renders and prints any web page. Clicking Save as PDF opens the print dialog; choose "Save as PDF" (or "Microsoft Print to PDF" on Windows) as the destination.
+        </p>
+      </div>
+
+      <div class="howto no-print">
+        <h2>How to Convert Word to PDF</h2>
+        <ol class="howto-steps">
+          <li>Upload a .docx file (older .doc files need to be re-saved as .docx first).</li>
+          <li>Wait for the conversion — your document appears as formatted HTML in the preview area below.</li>
+          <li>Click "Save as PDF" — this opens your browser's print dialog.</li>
+          <li>In the print dialog, choose "Save as PDF" (or "Microsoft Print to PDF" on Windows) as the destination, then save.</li>
+        </ol>
+      </div>
+
+      <div class="faq no-print">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Why do I need to use my browser's print dialog instead of getting a direct download?</summary>
+          <p>This tool converts your .docx into formatted HTML locally, then hands that off to your browser's own "Save as PDF" printing feature rather than building the PDF file itself — which means no server-side conversion library is needed, but it does mean an extra step through the print dialog.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why can't I upload a .doc file?</summary>
+          <p>Only the newer .docx format (used by Word 2007 and later) is supported, since the conversion library reads the modern XML-based .docx structure — if you have an older .doc file, open it in Word (or a free alternative) and use "Save As" to convert it to .docx first.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Will my document's formatting (bold, headings, images, tables) be preserved?</summary>
+          <p>Most common formatting carries over — headings, bold/italic text, images, lists, and tables all convert to HTML — but very complex layouts, custom fonts, or unusual Word features may not translate perfectly, and you'll see a note in the status message if the converter had to make any formatting decisions.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does "converted with minor formatting note(s)" mean?</summary>
+          <p>The conversion library flags certain elements it couldn't map perfectly to HTML (like an unsupported style or an unusual list format) — these are typically small formatting quirks, not lost content, so it's worth reviewing the preview before saving.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this upload my Word document to a server?</summary>
+          <p>No — the .docx file is read and converted entirely in your browser using a JavaScript library, and the "Save as PDF" step uses your own browser's built-in print engine, so your document never leaves your device.</p>
+        </details>
+      </div>
+
+      <div class="related no-print">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="pdf-to-text.html">
+            <span class="icon" aria-hidden="true">📝</span>
+            <h3>Extract Text from PDF</h3>
+            <p>Pull plain text out of a PDF.</p>
+          </a>
+          <a class="card" href="text-to-pdf.html">
+            <span class="icon" aria-hidden="true">📄</span>
+            <h3>Text to PDF</h3>
+            <p>Turn plain text into a PDF, no formatting needed.</p>
+          </a>
+          <a class="card" href="pdf-compressor.html">
+            <span class="icon" aria-hidden="true">🗜️</span>
+            <h3>PDF Compressor</h3>
+            <p>Shrink large PDF files.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer no-print">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/vendor/mammoth.browser.min.js"></script>
+  <script>
+    var dropzone = document.getElementById("dropzone");
+    var fileInput = document.getElementById("fileInput");
+    var downloadBtn = document.getElementById("downloadBtn");
+    var statusBox = document.getElementById("statusBox");
+    var printArea = document.getElementById("printArea");
+
+    function handleFiles(files) {
+      var file = files[0];
+      var isDocx = file && /\.docx$/i.test(file.name);
+      if (!file || !isDocx) {
+        statusBox.textContent = "Please choose a .docx file (older .doc files aren't supported — re-save as .docx first).";
+        return;
+      }
+
+      downloadBtn.style.display = "none";
+      printArea.style.display = "none";
+      statusBox.textContent = "Converting " + file.name + "…";
+
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        mammoth.convertToHtml({ arrayBuffer: e.target.result })
+          .then(function (result) {
+            printArea.innerHTML = result.value;
+            printArea.style.display = "block";
+            downloadBtn.style.display = "inline-flex";
+
+            if (result.messages && result.messages.length) {
+              statusBox.textContent = "Converted with " + result.messages.length + " minor formatting note(s). Preview below, then click Save as PDF.";
+            } else {
+              statusBox.textContent = "Converted! Preview your document below, then click Save as PDF.";
+            }
+          })
+          .catch(function (err) {
+            console.error(err);
+            statusBox.textContent = "Something went wrong reading that document. Please make sure it's a valid .docx file.";
+          });
+      };
+      reader.onerror = function () {
+        statusBox.textContent = "Couldn't read that file. Please try again.";
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    Fixora.setupDropzone(dropzone, fileInput, handleFiles);
+    dropzone.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") fileInput.click();
+    });
+
+    downloadBtn.addEventListener("click", function () {
+      window.print();
+    });
+  </script>
+</body>
+</html>

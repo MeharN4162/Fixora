@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free PDF Page Reorder Tool Online | Fixora</title>
+  <meta name="description" content="Reorder the pages of a PDF online for free, right in your browser. See every page and rearrange them exactly how you want. No uploads, no sign-up." />
+  <meta name="keywords" content="reorder pdf pages, rearrange pdf pages online free, pdf page organizer" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/pdf-reorder.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free PDF Page Reorder Tool Online" />
+  <meta property="og:description" content="Reorder the pages of a PDF online for free, right in your browser." />
+  <meta property="og:url" content="https://www.fixora.com/tools/pdf-reorder.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free PDF Page Reorder Tool Online" />
+  <meta name="twitter:description" content="Reorder the pages of a PDF online for free." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PDF Page Reorder",
+    "url": "https://www.fixora.com/tools/pdf-reorder.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Reorder PDF Pages", "item": "https://www.fixora.com/tools/pdf-reorder.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I drag and drop pages to reorder them?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — reordering works through the up and down buttons on each page thumbnail, which move a page one position earlier or later per click. There's no drag-and-drop in this tool." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I know what the new page order will be before saving?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Each thumbnail's label shows both its current position and its original page number (e.g. \"Position 3 (was page 7)\"), so you can confirm the exact order before clicking Save." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does reordering affect page rotation or content quality?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — pages are copied directly from the source PDF's structure using pdf-lib rather than being re-rendered, so their rotation, selectable text, and image quality all stay exactly as they were." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I move a page to the very top or bottom quickly?",
+        "acceptedAnswer": { "@type": "Answer", "text": "You'll need to click the up or down button repeatedly to move a page across many positions, since each click only shifts it by one — there's no jump-to-top shortcut." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a limit to how many pages I can reorder?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No hard limit, but every page is rendered as a thumbnail image in your browser when the file loads, so very long documents may take longer to load and use more memory since everything runs locally on your device." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .reorder-item .psel-badge { display: none; }
+    .reorder-item {
+      cursor: default;
+    }
+    .reorder-item .reorder-controls {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      display: flex;
+      gap: 4px;
+    }
+    .reorder-item .reorder-controls button {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      border: none;
+      background: rgba(11, 18, 32, 0.75);
+      color: #fff;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .reorder-item .reorder-controls button:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Reorder PDF Pages</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🔀</div>
+      <h1>Reorder PDF Pages</h1>
+      <p>See every page and use the arrows to rearrange them into the order you want.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload a PDF file">
+          <div class="dz-icon" aria-hidden="true">📤</div>
+          <strong>Click to upload or drag a PDF here</strong>
+          <small>We'll show every page so you can reorder them</small>
+          <input type="file" id="fileInput" accept="application/pdf" hidden />
+        </div>
+
+        <div class="page-select-grid" id="pageGrid"></div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="saveBtn" disabled>Save Reordered PDF</button>
+          <a class="btn btn-secondary" id="downloadBtn" style="display:none;" download="reordered.pdf">Download PDF</a>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Reorder PDF Pages</h2>
+        <ol class="howto-steps">
+          <li>Upload your PDF — every page renders as a thumbnail labeled with its position and original page number.</li>
+          <li>Use the up and down buttons on each thumbnail to move it earlier or later in the sequence.</li>
+          <li>Watch the "Position N (was page M)" label update as you move pages around, confirming the new order.</li>
+          <li>Click "Save Reordered PDF" and download the result.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Can I drag and drop pages to reorder them?</summary>
+          <p>No — reordering works through the up and down buttons on each page thumbnail, which move a page one position earlier or later per click. There's no drag-and-drop in this tool.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How do I know what the new page order will be before saving?</summary>
+          <p>Each thumbnail's label shows both its current position and its original page number (e.g. "Position 3 (was page 7)"), so you can confirm the exact order before clicking Save.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does reordering affect page rotation or content quality?</summary>
+          <p>No — pages are copied directly from the source PDF's structure using pdf-lib rather than being re-rendered, so their rotation, selectable text, and image quality all stay exactly as they were.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I move a page to the very top or bottom quickly?</summary>
+          <p>You'll need to click the up or down button repeatedly to move a page across many positions, since each click only shifts it by one — there's no jump-to-top shortcut.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is there a limit to how many pages I can reorder?</summary>
+          <p>No hard limit, but every page is rendered as a thumbnail image in your browser when the file loads, so very long documents may take longer to load and use more memory since everything runs locally on your device.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="pdf-splitter.html">
+            <span class="icon" aria-hidden="true">✂️</span>
+            <h3>PDF Splitter</h3>
+            <p>Remove or extract specific pages.</p>
+          </a>
+          <a class="card" href="pdf-rotator.html">
+            <span class="icon" aria-hidden="true">🔃</span>
+            <h3>PDF Rotator</h3>
+            <p>Fix sideways or upside-down pages.</p>
+          </a>
+          <a class="card" href="pdf-merger.html">
+            <span class="icon" aria-hidden="true">📎</span>
+            <h3>PDF Merger</h3>
+            <p>Combine multiple PDFs into one file.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/vendor/pdf-lib.min.js"></script>
+  <script type="module">
+    import * as pdfjsLib from "../assets/js/vendor/pdf.min.mjs";
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "../assets/js/vendor/pdf.worker.min.mjs";
+
+    var dropzone = document.getElementById("dropzone");
+    var fileInput = document.getElementById("fileInput");
+    var pageGrid = document.getElementById("pageGrid");
+    var saveBtn = document.getElementById("saveBtn");
+    var downloadBtn = document.getElementById("downloadBtn");
+    var statusBox = document.getElementById("statusBox");
+
+    var currentFile = null;
+    var pageOrder = []; // array of original 0-based indices, in current display order
+    var thumbDataUrls = [];
+    var lastDownloadUrl = null;
+
+    function resetDownload() {
+      if (lastDownloadUrl) { URL.revokeObjectURL(lastDownloadUrl); lastDownloadUrl = null; }
+      downloadBtn.style.display = "none";
+    }
+
+    function renderGrid() {
+      pageGrid.innerHTML = "";
+      pageOrder.forEach(function (origIndex, position) {
+        var item = document.createElement("div");
+        item.className = "page-select-item reorder-item";
+
+        var stage = document.createElement("div");
+        stage.className = "psel-thumb-stage";
+        var img = document.createElement("img");
+        img.src = thumbDataUrls[origIndex];
+        img.alt = "Page " + (origIndex + 1) + " preview";
+        stage.appendChild(img);
+
+        var label = document.createElement("div");
+        label.className = "psel-label";
+        label.textContent = "Position " + (position + 1) + " (was page " + (origIndex + 1) + ")";
+
+        var controls = document.createElement("div");
+        controls.className = "reorder-controls";
+        var upBtn = document.createElement("button");
+        upBtn.type = "button";
+        upBtn.textContent = "↑";
+        upBtn.disabled = position === 0;
+        upBtn.setAttribute("aria-label", "Move page earlier");
+        upBtn.addEventListener("click", function () {
+          var tmp = pageOrder[position - 1];
+          pageOrder[position - 1] = pageOrder[position];
+          pageOrder[position] = tmp;
+          renderGrid();
+          resetDownload();
+        });
+
+        var downBtn = document.createElement("button");
+        downBtn.type = "button";
+        downBtn.textContent = "↓";
+        downBtn.disabled = position === pageOrder.length - 1;
+        downBtn.setAttribute("aria-label", "Move page later");
+        downBtn.addEventListener("click", function () {
+          var tmp = pageOrder[position + 1];
+          pageOrder[position + 1] = pageOrder[position];
+          pageOrder[position] = tmp;
+          renderGrid();
+          resetDownload();
+        });
+
+        controls.appendChild(upBtn);
+        controls.appendChild(downBtn);
+
+        item.appendChild(stage);
+        item.appendChild(controls);
+        item.appendChild(label);
+        pageGrid.appendChild(item);
+      });
+    }
+
+    async function renderThumbnails(file) {
+      pageGrid.innerHTML = "";
+      thumbDataUrls = [];
+      statusBox.textContent = "Loading pages…";
+
+      var arrayBuffer = await file.arrayBuffer();
+      var pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      var totalPages = pdf.numPages;
+
+      for (var i = 1; i <= totalPages; i++) {
+        statusBox.textContent = "Rendering page " + i + " of " + totalPages + "…";
+        var page = await pdf.getPage(i);
+        var viewport = page.getViewport({ scale: 1 });
+        var scale = 160 / viewport.width;
+        var scaledViewport = page.getViewport({ scale: scale });
+
+        var canvas = document.createElement("canvas");
+        canvas.width = scaledViewport.width;
+        canvas.height = scaledViewport.height;
+        var ctx = canvas.getContext("2d");
+        await page.render({ canvasContext: ctx, viewport: scaledViewport }).promise;
+
+        thumbDataUrls.push(canvas.toDataURL("image/jpeg", 0.75));
+      }
+
+      pageOrder = thumbDataUrls.map(function (_, i) { return i; });
+      renderGrid();
+      saveBtn.disabled = false;
+      statusBox.textContent = "Loaded " + totalPages + " page(s). Use the arrows to reorder, then save.";
+    }
+
+    function handleFiles(files) {
+      var file = files[0];
+      if (!file || file.type !== "application/pdf") {
+        statusBox.textContent = "Please choose a valid PDF file.";
+        return;
+      }
+      currentFile = file;
+      resetDownload();
+      renderThumbnails(file).catch(function () {
+        statusBox.textContent = "Couldn't read that PDF. Please try a different file.";
+      });
+    }
+
+    Fixora.setupDropzone(dropzone, fileInput, handleFiles);
+    dropzone.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") fileInput.click();
+    });
+
+    saveBtn.addEventListener("click", async function () {
+      if (!currentFile) return;
+      saveBtn.disabled = true;
+      statusBox.textContent = "Building reordered PDF…";
+
+      try {
+        var bytes = await currentFile.arrayBuffer();
+        var srcDoc = await PDFLib.PDFDocument.load(bytes);
+        var newDoc = await PDFLib.PDFDocument.create();
+        var copiedPages = await newDoc.copyPages(srcDoc, pageOrder);
+        copiedPages.forEach(function (page) { newDoc.addPage(page); });
+
+        var newBytes = await newDoc.save();
+        var blob = new Blob([newBytes], { type: "application/pdf" });
+        var url = URL.createObjectURL(blob);
+        lastDownloadUrl = url;
+
+        downloadBtn.href = url;
+        downloadBtn.download = currentFile.name.replace(/\.pdf$/i, "") + "-reordered.pdf";
+        downloadBtn.style.display = "inline-flex";
+
+        statusBox.textContent = "Done! Your reordered PDF is ready to download.";
+      } catch (err) {
+        console.error(err);
+        statusBox.textContent = "Something went wrong reordering that PDF.";
+      } finally {
+        saveBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

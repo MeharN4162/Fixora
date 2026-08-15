@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Text to Speech Online | Fixora</title>
+  <meta name="description" content="Convert text to spoken audio online for free, using your browser's built-in voices. Adjust rate, pitch, and voice. No sign-up, no downloads required." />
+  <meta name="keywords" content="text to speech, text to speech online free, tts converter" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/text-to-speech.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Text to Speech Online" />
+  <meta property="og:description" content="Convert text to spoken audio online for free, using your browser's built-in voices." />
+  <meta property="og:url" content="https://www.fixora.com/tools/text-to-speech.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Text to Speech Online" />
+  <meta name="twitter:description" content="Convert text to spoken audio online for free." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Text to Speech",
+    "url": "https://www.fixora.com/tools/text-to-speech.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Text to Speech", "item": "https://www.fixora.com/tools/text-to-speech.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where do the voices in the dropdown come from?",
+        "acceptedAnswer": { "@type": "Answer", "text": "This tool uses your browser's built-in Web Speech API, so the voice list is pulled directly from the text-to-speech voices already installed on your operating system and browser — not from Fixora's servers. That's why the available voices differ between Chrome, Safari, and different operating systems." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is the voice list empty or very short on my device?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Some browsers don't support the Web Speech API at all, in which case the tool disables the Speak button and shows an error. On supported browsers, voices sometimes load asynchronously after the page opens, so the list can briefly appear empty until the browser reports its voices are ready." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this tool record, save, or upload the audio it plays?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. The speech is synthesized locally by your browser and operating system and played straight through your speakers — nothing is recorded, saved as a file, or sent to a server." }
+      },
+      {
+        "@type": "Question",
+        "name": "What do the Speed and Pitch sliders control?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Speed sets the playback rate from 0.5x to 2x (1.0x is normal speed), and Pitch adjusts the voice's pitch from 0 (low) to 2 (high), with 1.0 as the default. Both values are passed directly to the browser's speech engine when you click Speak." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I download the spoken text as an MP3 or WAV file?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. This tool only plays audio live through your browser's speech engine — it doesn't record or export an audio file, so you'd need separate screen- or audio-recording software to capture it." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Text to Speech</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🔊</div>
+      <h1>Text to Speech</h1>
+      <p>Have any text read aloud using your browser's built-in voices — adjust the voice, speed, and pitch.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="ttsText">Text to Read</label>
+          <textarea id="ttsText" placeholder="Type or paste text here…" style="min-height:160px;">Welcome to Fixora — free online tools that just work.</textarea>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="voiceSelect">Voice</label>
+            <select id="voiceSelect"></select>
+          </div>
+          <div class="field">
+            <label for="rateRange">Speed: <span id="rateValue">1.0</span>x</label>
+            <input type="range" id="rateRange" min="0.5" max="2" step="0.1" value="1" style="width:100%;" />
+          </div>
+          <div class="field">
+            <label for="pitchRange">Pitch: <span id="pitchValue">1.0</span></label>
+            <input type="range" id="pitchRange" min="0" max="2" step="0.1" value="1" style="width:100%;" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="speakBtn">▶ Speak</button>
+          <button class="btn btn-secondary" id="pauseBtn">⏸ Pause</button>
+          <button class="btn btn-secondary" id="stopBtn">⏹ Stop</button>
+        </div>
+
+        <div class="output-box" id="statusBox">Not all browsers support every voice — availability depends on your operating system.</div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Convert Text to Speech</h2>
+        <ol class="howto-steps">
+          <li>Type or paste the text you want read aloud into the box (a sample sentence is pre-filled to try it instantly).</li>
+          <li>Choose a voice from the dropdown — the list is populated from the voices installed on your browser and operating system.</li>
+          <li>Adjust the Speed (0.5x-2x) and Pitch (0-2) sliders to change how the voice sounds.</li>
+          <li>Click ▶ Speak to start playback; use ⏸ Pause to pause and resume, or ⏹ Stop to end it immediately.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Where do the voices in the dropdown come from?</summary>
+          <p>This tool uses your browser's built-in Web Speech API, so the voice list is pulled directly from the text-to-speech voices already installed on your operating system and browser — not from Fixora's servers. That's why the available voices differ between Chrome, Safari, and different operating systems.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why is the voice list empty or very short on my device?</summary>
+          <p>Some browsers don't support the Web Speech API at all, in which case the tool disables the Speak button and shows an error. On supported browsers, voices sometimes load asynchronously after the page opens, so the list can briefly appear empty until the browser reports its voices are ready.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this tool record, save, or upload the audio it plays?</summary>
+          <p>No. The speech is synthesized locally by your browser and operating system and played straight through your speakers — nothing is recorded, saved as a file, or sent to a server.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What do the Speed and Pitch sliders control?</summary>
+          <p>Speed sets the playback rate from 0.5x to 2x (1.0x is normal speed), and Pitch adjusts the voice's pitch from 0 (low) to 2 (high), with 1.0 as the default. Both values are passed directly to the browser's speech engine when you click Speak.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I download the spoken text as an MP3 or WAV file?</summary>
+          <p>No. This tool only plays audio live through your browser's speech engine — it doesn't record or export an audio file, so you'd need separate screen- or audio-recording software to capture it.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="word-counter.html">
+            <span class="icon" aria-hidden="true">🔤</span>
+            <h3>Word Counter</h3>
+            <p>Count words and estimate reading time.</p>
+          </a>
+          <a class="card" href="image-to-text.html">
+            <span class="icon" aria-hidden="true">📝</span>
+            <h3>Image to Text (OCR)</h3>
+            <p>Extract text from an image first.</p>
+          </a>
+          <a class="card" href="text-case-converter.html">
+            <span class="icon" aria-hidden="true">🔡</span>
+            <h3>Text Case Converter</h3>
+            <p>Clean up text formatting.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var ttsText = document.getElementById("ttsText");
+    var voiceSelect = document.getElementById("voiceSelect");
+    var rateRange = document.getElementById("rateRange");
+    var pitchRange = document.getElementById("pitchRange");
+    var statusBox = document.getElementById("statusBox");
+    var voices = [];
+
+    if (!("speechSynthesis" in window)) {
+      statusBox.textContent = "Sorry, your browser doesn't support text-to-speech.";
+      document.getElementById("speakBtn").disabled = true;
+    } else {
+      function loadVoices() {
+        voices = speechSynthesis.getVoices();
+        voiceSelect.innerHTML = voices.map(function (v, i) {
+          return '<option value="' + i + '">' + v.name + " (" + v.lang + ")</option>";
+        }).join("");
+      }
+      loadVoices();
+      if (speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = loadVoices;
+      }
+
+      rateRange.addEventListener("input", function () {
+        document.getElementById("rateValue").textContent = parseFloat(rateRange.value).toFixed(1);
+      });
+      pitchRange.addEventListener("input", function () {
+        document.getElementById("pitchValue").textContent = parseFloat(pitchRange.value).toFixed(1);
+      });
+
+      document.getElementById("speakBtn").addEventListener("click", function () {
+        var text = ttsText.value.trim();
+        if (!text) {
+          statusBox.textContent = "Enter some text first.";
+          return;
+        }
+        speechSynthesis.cancel();
+        var utter = new SpeechSynthesisUtterance(text);
+        var voiceIndex = parseInt(voiceSelect.value, 10);
+        if (voices[voiceIndex]) utter.voice = voices[voiceIndex];
+        utter.rate = parseFloat(rateRange.value);
+        utter.pitch = parseFloat(pitchRange.value);
+
+        utter.onstart = function () { statusBox.textContent = "Speaking…"; };
+        utter.onend = function () { statusBox.textContent = "Done speaking."; };
+        utter.onerror = function () { statusBox.textContent = "Something went wrong during playback."; };
+
+        speechSynthesis.speak(utter);
+      });
+
+      document.getElementById("pauseBtn").addEventListener("click", function () {
+        if (speechSynthesis.speaking && !speechSynthesis.paused) {
+          speechSynthesis.pause();
+          statusBox.textContent = "Paused.";
+        } else if (speechSynthesis.paused) {
+          speechSynthesis.resume();
+          statusBox.textContent = "Speaking…";
+        }
+      });
+
+      document.getElementById("stopBtn").addEventListener("click", function () {
+        speechSynthesis.cancel();
+        statusBox.textContent = "Stopped.";
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Text to PDF Converter Online | Fixora</title>
+  <meta name="description" content="Convert plain text to a PDF online for free, right in your browser. Paste or upload a .txt file and download a paginated PDF. No uploads to a server, no sign-up." />
+  <meta name="keywords" content="text to pdf, convert txt to pdf online free, plain text to pdf" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/text-to-pdf.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Text to PDF Converter Online" />
+  <meta property="og:description" content="Convert plain text to a PDF online for free, right in your browser." />
+  <meta property="og:url" content="https://www.fixora.com/tools/text-to-pdf.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Text to PDF Converter Online" />
+  <meta name="twitter:description" content="Convert plain text to a PDF online for free, right in your browser." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Text to PDF Converter",
+    "url": "https://www.fixora.com/tools/text-to-pdf.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Text to PDF", "item": "https://www.fixora.com/tools/text-to-pdf.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does the tool decide where to break lines and pages?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It measures the actual rendered width of your text at the chosen font size and wraps each line just before it would overflow the page's margins; when the accumulated lines run past the bottom margin, it automatically starts a new page — so you don't need to add manual line or page breaks." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens to a single word that's too long to fit on one line?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It gets force-split mid-word using a binary search that finds the longest chunk of the word that still fits within the page width, so an extremely long unbroken string (like a URL) won't overflow the page — it'll just wrap awkwardly across lines." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it preserve blank lines and paragraph spacing from my original text?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — line breaks in your pasted or uploaded text are respected, including blank lines, since the text is split on newlines before wrapping, so paragraph spacing in your source text carries through to the PDF." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use a custom font or change text color?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — this tool always uses the standard Helvetica font in plain black text; there's no option for custom fonts, bold/italic formatting, or color in the current version." }
+      },
+      {
+        "@type": "Question",
+        "name": "What file types can I upload with \"Upload .txt File\"?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Plain .txt files — the button reads the file as raw text and drops its contents straight into the text box, where you can edit it further before converting." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Text to PDF</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">📄</div>
+      <h1>Text to PDF Converter</h1>
+      <p>Paste in plain text (or upload a .txt file) and get back a clean, paginated PDF.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="textInput">Paste or type your text</label>
+          <textarea id="textInput" placeholder="Start typing or paste your text here…" style="min-height:260px;"></textarea>
+        </div>
+
+        <div class="actions" style="margin-top:8px;">
+          <button class="btn btn-secondary" id="uploadTxtBtn" type="button">Upload .txt File</button>
+          <input type="file" id="txtFileInput" accept=".txt,text/plain" hidden />
+          <button class="btn btn-secondary" id="clearBtn" type="button">Clear Text</button>
+        </div>
+
+        <div class="field-row" style="display:flex;gap:16px;flex-wrap:wrap;margin-top:20px;">
+          <div class="field" style="flex:1;min-width:180px;">
+            <label for="pageSizeSelect">Page Size</label>
+            <select id="pageSizeSelect">
+              <option value="letter" selected>Letter (8.5 × 11 in)</option>
+              <option value="a4">A4</option>
+            </select>
+          </div>
+          <div class="field" style="flex:1;min-width:180px;">
+            <label for="fontSizeSelect">Font Size</label>
+            <select id="fontSizeSelect">
+              <option value="10">Small (10pt)</option>
+              <option value="12" selected>Normal (12pt)</option>
+              <option value="14">Large (14pt)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="convertBtn">Convert to PDF</button>
+          <a class="btn btn-secondary" id="downloadBtn" style="display:none;" download="document.pdf">Download PDF</a>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Convert Text to PDF</h2>
+        <ol class="howto-steps">
+          <li>Type or paste your text into the box, or click "Upload .txt File" to load a text file.</li>
+          <li>Choose a Page Size (Letter or A4) and Font Size (Small/Normal/Large).</li>
+          <li>Click "Convert to PDF" — long lines wrap automatically and new pages are added as needed.</li>
+          <li>Download the finished PDF.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How does the tool decide where to break lines and pages?</summary>
+          <p>It measures the actual rendered width of your text at the chosen font size and wraps each line just before it would overflow the page's margins; when the accumulated lines run past the bottom margin, it automatically starts a new page — so you don't need to add manual line or page breaks.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What happens to a single word that's too long to fit on one line?</summary>
+          <p>It gets force-split mid-word using a binary search that finds the longest chunk of the word that still fits within the page width, so an extremely long unbroken string (like a URL) won't overflow the page — it'll just wrap awkwardly across lines.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does it preserve blank lines and paragraph spacing from my original text?</summary>
+          <p>Yes — line breaks in your pasted or uploaded text are respected, including blank lines, since the text is split on newlines before wrapping, so paragraph spacing in your source text carries through to the PDF.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I use a custom font or change text color?</summary>
+          <p>No — this tool always uses the standard Helvetica font in plain black text; there's no option for custom fonts, bold/italic formatting, or color in the current version.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What file types can I upload with "Upload .txt File"?</summary>
+          <p>Plain .txt files — the button reads the file as raw text and drops its contents straight into the text box, where you can edit it further before converting.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="pdf-to-text.html">
+            <span class="icon" aria-hidden="true">📝</span>
+            <h3>Extract Text from PDF</h3>
+            <p>Go the other way — pull text out of a PDF.</p>
+          </a>
+          <a class="card" href="word-to-pdf.html">
+            <span class="icon" aria-hidden="true">📄</span>
+            <h3>Word to PDF</h3>
+            <p>Convert a formatted .docx document to PDF.</p>
+          </a>
+          <a class="card" href="word-counter.html">
+            <span class="icon" aria-hidden="true">🔤</span>
+            <h3>Word Counter</h3>
+            <p>Count words and characters instantly.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/vendor/pdf-lib.min.js"></script>
+  <script>
+    var textInput = document.getElementById("textInput");
+    var uploadTxtBtn = document.getElementById("uploadTxtBtn");
+    var txtFileInput = document.getElementById("txtFileInput");
+    var clearBtn = document.getElementById("clearBtn");
+    var pageSizeSelect = document.getElementById("pageSizeSelect");
+    var fontSizeSelect = document.getElementById("fontSizeSelect");
+    var convertBtn = document.getElementById("convertBtn");
+    var downloadBtn = document.getElementById("downloadBtn");
+    var statusBox = document.getElementById("statusBox");
+
+    var lastDownloadUrl = null;
+
+    var PAGE_SIZES = {
+      letter: [612, 792],
+      a4: [595.28, 841.89]
+    };
+
+    function resetDownload() {
+      if (lastDownloadUrl) {
+        URL.revokeObjectURL(lastDownloadUrl);
+        lastDownloadUrl = null;
+      }
+      downloadBtn.style.display = "none";
+      downloadBtn.removeAttribute("href");
+    }
+
+    textInput.addEventListener("input", resetDownload);
+    pageSizeSelect.addEventListener("change", resetDownload);
+    fontSizeSelect.addEventListener("change", resetDownload);
+
+    uploadTxtBtn.addEventListener("click", function () { txtFileInput.click(); });
+    txtFileInput.addEventListener("change", function () {
+      var file = txtFileInput.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        textInput.value = e.target.result;
+        resetDownload();
+        statusBox.textContent = file.name + " loaded. Click Convert to PDF.";
+      };
+      reader.onerror = function () {
+        statusBox.textContent = "Couldn't read that file. Please try again.";
+      };
+      reader.readAsText(file);
+      txtFileInput.value = "";
+    });
+
+    clearBtn.addEventListener("click", function () {
+      textInput.value = "";
+      resetDownload();
+      statusBox.textContent = "";
+      textInput.focus();
+    });
+
+    function wrapLineToWidth(line, font, size, maxWidth) {
+      if (line === "") return [""];
+      var words = line.split(" ");
+      var lines = [];
+      var current = "";
+
+      words.forEach(function (word) {
+        var candidate = current ? current + " " + word : word;
+        if (font.widthOfTextAtSize(candidate, size) <= maxWidth || !current) {
+          current = candidate;
+        } else {
+          lines.push(current);
+          current = word;
+        }
+
+        while (font.widthOfTextAtSize(current, size) > maxWidth && current.length > 1) {
+          var lo = 1, hi = current.length;
+          while (lo < hi) {
+            var mid = Math.ceil((lo + hi) / 2);
+            if (font.widthOfTextAtSize(current.slice(0, mid), size) <= maxWidth) lo = mid;
+            else hi = mid - 1;
+          }
+          lines.push(current.slice(0, lo));
+          current = current.slice(lo);
+        }
+      });
+
+      if (current) lines.push(current);
+      return lines.length ? lines : [""];
+    }
+
+    convertBtn.addEventListener("click", async function () {
+      var text = textInput.value;
+      if (!text.trim()) {
+        statusBox.textContent = "Please enter some text first.";
+        return;
+      }
+
+      convertBtn.disabled = true;
+      resetDownload();
+      statusBox.textContent = "Building PDF…";
+
+      try {
+        var pageSize = PAGE_SIZES[pageSizeSelect.value];
+        var fontSize = parseInt(fontSizeSelect.value, 10);
+        var margin = 56;
+        var lineHeight = fontSize * 1.35;
+        var contentWidth = pageSize[0] - margin * 2;
+
+        var doc = await PDFLib.PDFDocument.create();
+        var font = await doc.embedFont(PDFLib.StandardFonts.Helvetica);
+
+        var rawLines = text.replace(/\r\n/g, "\n").split("\n");
+        var allLines = [];
+        rawLines.forEach(function (line) {
+          wrapLineToWidth(line, font, fontSize, contentWidth).forEach(function (wrapped) {
+            allLines.push(wrapped);
+          });
+        });
+
+        var page = doc.addPage(pageSize);
+        var y = pageSize[1] - margin;
+
+        allLines.forEach(function (line) {
+          if (y < margin) {
+            page = doc.addPage(pageSize);
+            y = pageSize[1] - margin;
+          }
+          if (line) {
+            page.drawText(line, { x: margin, y: y, size: fontSize, font: font });
+          }
+          y -= lineHeight;
+        });
+
+        var bytes = await doc.save();
+        var blob = new Blob([bytes], { type: "application/pdf" });
+        var url = URL.createObjectURL(blob);
+        lastDownloadUrl = url;
+
+        downloadBtn.href = url;
+        downloadBtn.download = "text-document.pdf";
+        downloadBtn.style.display = "inline-flex";
+
+        statusBox.textContent = "Done! Created a " + doc.getPageCount() + "-page PDF (" + Fixora.formatBytes(blob.size) + ").";
+      } catch (err) {
+        console.error(err);
+        statusBox.textContent = "Something went wrong building that PDF. Please try again.";
+      } finally {
+        convertBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

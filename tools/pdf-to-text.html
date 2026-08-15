@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free PDF to Text Converter Online — Extract Text | Fixora</title>
+  <meta name="description" content="Extract all the text from a PDF online for free, right in your browser. Copy or download as a .txt file instantly. No uploads, no sign-up." />
+  <meta name="keywords" content="pdf to text, extract text from pdf online free, pdf text extractor" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/pdf-to-text.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free PDF to Text Converter Online" />
+  <meta property="og:description" content="Extract all the text from a PDF online for free, right in your browser." />
+  <meta property="og:url" content="https://www.fixora.com/tools/pdf-to-text.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free PDF to Text Converter Online" />
+  <meta name="twitter:description" content="Extract all the text from a PDF online for free." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PDF to Text",
+    "url": "https://www.fixora.com/tools/pdf-to-text.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "PDF to Text", "item": "https://www.fixora.com/tools/pdf-to-text.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why did I get \"No selectable text found\"?",
+        "acceptedAnswer": { "@type": "Answer", "text": "This tool reads the PDF's underlying text layer — it can't recognize text inside a scanned image or photo, since there is no text layer to read, just pixels. For scanned documents, use the Image to Text (OCR) tool instead, which is built to recognize characters in images." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it preserve the original formatting, like columns or tables?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Not exactly — each page's text items are joined with simple spaces in the order pdf.js reports them, and pages are separated by a blank line. Multi-column layouts or tables may come out in an order that doesn't match the visual layout, since PDFs don't store text in a strict reading order." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I extract text from just one page instead of the whole document?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No, this tool processes every page and combines the results into one text block. To grab a single page's text, use the PDF Splitter to extract just that page first, then run the result through this tool." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the extracted text editable before I download it?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The textarea is read-only, but you can copy the text and paste it into any text editor to make changes before saving." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the word count in the status message get calculated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It splits the entire extracted text on whitespace and counts the resulting chunks, so it's a straightforward word count across all pages combined, shown once extraction finishes." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>PDF to Text</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">📄</div>
+      <h1>PDF to Text</h1>
+      <p>Pull every word out of a PDF's text layer — instant, accurate, and processed entirely in your browser.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload a PDF file">
+          <div class="dz-icon" aria-hidden="true">📤</div>
+          <strong>Click to upload or drag a PDF here</strong>
+          <small>Works on any PDF that has selectable text — for scanned images, try our OCR tool</small>
+          <input type="file" id="fileInput" accept="application/pdf" hidden />
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-secondary" id="copyBtn">Copy Text</button>
+          <a class="btn btn-secondary" id="downloadBtn" style="display:none;" download="extracted.txt">Download .txt</a>
+        </div>
+        <div class="copy-note" id="copyNote"></div>
+
+        <div class="output-box" id="statusBox"></div>
+
+        <div class="field" style="margin-top:16px;">
+          <label for="resultText">Extracted Text</label>
+          <textarea id="resultText" readonly style="min-height:320px;"></textarea>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Extract Text from a PDF</h2>
+        <ol class="howto-steps">
+          <li>Upload your PDF — extraction starts automatically, no button to click.</li>
+          <li>Watch the status message as it works through each page.</li>
+          <li>Review the extracted text in the text box below.</li>
+          <li>Click "Copy Text" to copy it to your clipboard, or "Download .txt" to save it as a plain text file.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Why did I get "No selectable text found"?</summary>
+          <p>This tool reads the PDF's underlying text layer — it can't recognize text inside a scanned image or photo, since there is no text layer to read, just pixels. For scanned documents, use the Image to Text (OCR) tool instead, which is built to recognize characters in images.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does it preserve the original formatting, like columns or tables?</summary>
+          <p>Not exactly — each page's text items are joined with simple spaces in the order pdf.js reports them, and pages are separated by a blank line. Multi-column layouts or tables may come out in an order that doesn't match the visual layout, since PDFs don't store text in a strict reading order.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I extract text from just one page instead of the whole document?</summary>
+          <p>No, this tool processes every page and combines the results into one text block. To grab a single page's text, use the PDF Splitter to extract just that page first, then run the result through this tool.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is the extracted text editable before I download it?</summary>
+          <p>The textarea is read-only, but you can copy the text and paste it into any text editor to make changes before saving.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does the word count in the status message get calculated?</summary>
+          <p>It splits the entire extracted text on whitespace and counts the resulting chunks, so it's a straightforward word count across all pages combined, shown once extraction finishes.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="image-to-text.html">
+            <span class="icon" aria-hidden="true">📝</span>
+            <h3>Image to Text (OCR)</h3>
+            <p>Extract text from scanned or photographed pages.</p>
+          </a>
+          <a class="card" href="text-to-pdf.html">
+            <span class="icon" aria-hidden="true">📄</span>
+            <h3>Text to PDF</h3>
+            <p>Go the other way — turn plain text into a PDF.</p>
+          </a>
+          <a class="card" href="pdf-compare.html">
+            <span class="icon" aria-hidden="true">🔍</span>
+            <h3>Compare PDFs</h3>
+            <p>See exactly what changed between two PDFs.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script type="module">
+    import * as pdfjsLib from "../assets/js/vendor/pdf.min.mjs";
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "../assets/js/vendor/pdf.worker.min.mjs";
+
+    var dropzone = document.getElementById("dropzone");
+    var fileInput = document.getElementById("fileInput");
+    var statusBox = document.getElementById("statusBox");
+    var resultText = document.getElementById("resultText");
+    var downloadBtn = document.getElementById("downloadBtn");
+    var copyNote = document.getElementById("copyNote");
+    var lastDownloadUrl = null;
+
+    function handleFiles(files) {
+      var file = files[0];
+      if (!file || file.type !== "application/pdf") {
+        statusBox.textContent = "Please choose a valid PDF file.";
+        return;
+      }
+      extract(file);
+    }
+
+    async function extract(file) {
+      statusBox.textContent = "Reading PDF…";
+      resultText.value = "";
+      downloadBtn.style.display = "none";
+
+      try {
+        var arrayBuffer = await file.arrayBuffer();
+        var pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        var pages = [];
+
+        for (var i = 1; i <= pdf.numPages; i++) {
+          statusBox.textContent = "Extracting page " + i + " of " + pdf.numPages + "…";
+          var page = await pdf.getPage(i);
+          var content = await page.getTextContent();
+          var text = content.items.map(function (item) { return item.str; }).join(" ");
+          pages.push(text.trim());
+        }
+
+        var fullText = pages.join("\n\n");
+        resultText.value = fullText;
+
+        if (!fullText.trim()) {
+          statusBox.textContent = "No selectable text found — this PDF may be a scanned image. Try our Image to Text (OCR) tool instead.";
+          return;
+        }
+
+        var blob = new Blob([fullText], { type: "text/plain" });
+        var url = URL.createObjectURL(blob);
+        if (lastDownloadUrl) URL.revokeObjectURL(lastDownloadUrl);
+        lastDownloadUrl = url;
+        downloadBtn.href = url;
+        downloadBtn.download = file.name.replace(/\.pdf$/i, "") + ".txt";
+        downloadBtn.style.display = "inline-flex";
+
+        var wordCount = fullText.trim().split(/\s+/).length;
+        statusBox.textContent = "Done! Extracted " + wordCount + " word(s) across " + pdf.numPages + " page(s).";
+      } catch (err) {
+        console.error(err);
+        statusBox.textContent = "Couldn't read that PDF. Please try a different file.";
+      }
+    }
+
+    Fixora.setupDropzone(dropzone, fileInput, handleFiles);
+    dropzone.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") fileInput.click();
+    });
+
+    document.getElementById("copyBtn").addEventListener("click", function () {
+      Fixora.copyText(resultText.value, copyNote);
+    });
+  </script>
+</body>
+</html>

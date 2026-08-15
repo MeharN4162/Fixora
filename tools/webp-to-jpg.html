@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free WebP to JPG Converter Online | Fixora</title>
+  <meta name="description" content="Convert WebP images to JPG format online for free, right in your browser. Ideal for sites and apps that don't accept WebP. No uploads, no sign-up." />
+  <meta name="keywords" content="webp to jpg, convert webp to jpg online free, webp converter" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/webp-to-jpg.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free WebP to JPG Converter Online" />
+  <meta property="og:description" content="Convert WebP images to JPG format online for free, right in your browser." />
+  <meta property="og:url" content="https://www.fixora.com/tools/webp-to-jpg.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free WebP to JPG Converter Online" />
+  <meta name="twitter:description" content="Convert WebP images to JPG format online for free, right in your browser." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "WebP to JPG Converter",
+    "url": "https://www.fixora.com/tools/webp-to-jpg.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "WebP to JPG", "item": "https://www.fixora.com/tools/webp-to-jpg.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What happens to transparency in my WebP file?",
+        "acceptedAnswer": { "@type": "Answer", "text": "JPEG doesn't support transparency, so the canvas is filled with solid white before your image is drawn on top - any transparent areas in the source WebP become white in the resulting JPG." }
+      },
+      {
+        "@type": "Question",
+        "name": "My browser says it can't read the WebP file - why?",
+        "acceptedAnswer": { "@type": "Answer", "text": "WebP decoding (viewing) is supported by virtually all current browsers, but if you're on an older browser version the image load can still fail; the tool catches that and tells you to try a recent version of Chrome, Firefox, Edge, or Safari." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why would I convert WebP back to JPG?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Some older software, email clients, or platforms still don't accept WebP uploads. Converting to JPG trades WebP's smaller file size for compatibility with tools that expect a traditional format." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the Quality slider control here?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It sets the JPEG re-encoding quality from 40% to 100%, applied by the browser's canvas encoder. The preview and file-size stats refresh automatically shortly after you release the slider." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my WebP file uploaded anywhere during conversion?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. The file is read and decoded locally via the FileReader and Image APIs, and the JPG is produced entirely client-side with canvas.toBlob()." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>WebP to JPG</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🔄</div>
+      <h1>WebP to JPG Converter</h1>
+      <p>Convert a WebP image to JPG — for the sites and apps that still don't accept WebP.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload a WebP image">
+          <div class="dz-icon" aria-hidden="true">🖼️</div>
+          <strong>Click to upload or drag a WebP here</strong>
+          <small>WebP files only. Transparent areas become white.</small>
+          <input type="file" id="fileInput" accept="image/webp" hidden />
+        </div>
+
+        <img id="previewImg" class="preview-img" style="display:none;" alt="Preview of converted JPG image" />
+
+        <div class="field" style="margin-top:16px;">
+          <label for="qualityRange">JPG Quality: <span id="qualityValue">90%</span></label>
+          <input type="range" id="qualityRange" min="40" max="100" value="90" style="width:100%;" />
+        </div>
+
+        <div class="stat-row" id="fileInfo" style="display:none;">
+          <div class="stat"><strong id="statOriginal">–</strong><span>WebP Size</span></div>
+          <div class="stat"><strong id="statNew">–</strong><span>JPG Size</span></div>
+          <div class="stat"><strong id="statDims">–</strong><span>Dimensions</span></div>
+        </div>
+
+        <div class="actions">
+          <a class="btn btn-primary" id="downloadBtn" style="display:none;" download="converted.jpg">Download JPG</a>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Convert a WebP to JPG</h2>
+        <ol class="howto-steps">
+          <li>Click the upload area or drag a WebP file onto it.</li>
+          <li>The tool decodes the WebP locally — if your browser is too old to read WebP files, an error message tells you to update or switch browsers.</li>
+          <li>Adjust the "JPG Quality" slider (40–100%, default 90%) to set the output compression.</li>
+          <li>Compare WebP Size vs. JPG Size, then click "Download JPG".</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What happens to transparency in my WebP file?</summary>
+          <p>JPEG doesn't support transparency, so the canvas is filled with solid white before your image is drawn on top - any transparent areas in the source WebP become white in the resulting JPG.</p>
+        </details>
+        <details class="faq-item">
+          <summary>My browser says it can't read the WebP file - why?</summary>
+          <p>WebP decoding (viewing) is supported by virtually all current browsers, but if you're on an older browser version the image load can still fail; the tool catches that and tells you to try a recent version of Chrome, Firefox, Edge, or Safari.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why would I convert WebP back to JPG?</summary>
+          <p>Some older software, email clients, or platforms still don't accept WebP uploads. Converting to JPG trades WebP's smaller file size for compatibility with tools that expect a traditional format.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the Quality slider control here?</summary>
+          <p>It sets the JPEG re-encoding quality from 40% to 100%, applied by the browser's canvas encoder. The preview and file-size stats refresh automatically shortly after you release the slider.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my WebP file uploaded anywhere during conversion?</summary>
+          <p>No. The file is read and decoded locally via the FileReader and Image APIs, and the JPG is produced entirely client-side with canvas.toBlob().</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="jpg-to-webp.html">
+            <span class="icon" aria-hidden="true">🔄</span>
+            <h3>JPG to WebP</h3>
+            <p>Convert the other way around.</p>
+          </a>
+          <a class="card" href="webp-to-png.html">
+            <span class="icon" aria-hidden="true">🔄</span>
+            <h3>WebP to PNG</h3>
+            <p>Keep transparency instead of flattening to white.</p>
+          </a>
+          <a class="card" href="../blog/image-format-guide.html">
+            <span class="icon" aria-hidden="true">🖼️</span>
+            <h3>Guide: JPG vs PNG vs WebP</h3>
+            <p>Understand exactly when to use each format.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var dropzone = document.getElementById("dropzone");
+    var fileInput = document.getElementById("fileInput");
+    var previewImg = document.getElementById("previewImg");
+    var downloadBtn = document.getElementById("downloadBtn");
+    var statusBox = document.getElementById("statusBox");
+    var fileInfo = document.getElementById("fileInfo");
+    var qualityRange = document.getElementById("qualityRange");
+    var qualityValue = document.getElementById("qualityValue");
+
+    var currentFile = null;
+    var currentImg = null;
+    var lastConvertedUrl = null;
+    var convertGeneration = 0;
+    var convertTimer = null;
+
+    qualityRange.addEventListener("input", function () {
+      qualityValue.textContent = qualityRange.value + "%";
+      if (currentImg) {
+        clearTimeout(convertTimer);
+        convertTimer = setTimeout(convert, 120);
+      }
+    });
+
+    function handleFiles(files) {
+      var file = files[0];
+      if (!file || file.type !== "image/webp") {
+        statusBox.textContent = "Please choose a WebP image.";
+        return;
+      }
+      currentFile = file;
+      statusBox.textContent = "Reading WebP…";
+
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var img = new Image();
+        img.onload = function () {
+          currentImg = img;
+          convert();
+        };
+        img.onerror = function () {
+          statusBox.textContent = "This browser couldn't decode that WebP file. Please try a recent version of Chrome, Firefox, Edge, or Safari.";
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function convert() {
+      var canvas = document.createElement("canvas");
+      canvas.width = currentImg.naturalWidth;
+      canvas.height = currentImg.naturalHeight;
+      var ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(currentImg, 0, 0);
+
+      var quality = parseInt(qualityRange.value, 10) / 100;
+      convertGeneration++;
+      var myGeneration = convertGeneration;
+
+      canvas.toBlob(function (blob) {
+        if (myGeneration !== convertGeneration) return;
+
+        var url = URL.createObjectURL(blob);
+        if (lastConvertedUrl) URL.revokeObjectURL(lastConvertedUrl);
+        lastConvertedUrl = url;
+
+        previewImg.src = url;
+        previewImg.style.display = "block";
+
+        downloadBtn.href = url;
+        downloadBtn.download = currentFile.name.replace(/\.webp$/i, "") + ".jpg";
+        downloadBtn.style.display = "inline-flex";
+
+        fileInfo.style.display = "flex";
+        document.getElementById("statOriginal").textContent = Fixora.formatBytes(currentFile.size);
+        document.getElementById("statNew").textContent = Fixora.formatBytes(blob.size);
+        document.getElementById("statDims").textContent = canvas.width + " × " + canvas.height;
+
+        statusBox.textContent = "Done! Your JPG is ready to download.";
+      }, "image/jpeg", quality);
+    }
+
+    Fixora.setupDropzone(dropzone, fileInput, handleFiles);
+    dropzone.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") fileInput.click();
+    });
+  </script>
+</body>
+</html>

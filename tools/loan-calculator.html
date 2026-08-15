@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Loan & Mortgage Calculator Online | Fixora</title>
+  <meta name="description" content="Calculate your monthly loan or mortgage payment online for free. See total interest, total cost, and a full amortization breakdown. No sign-up required." />
+  <meta name="keywords" content="loan calculator, mortgage calculator online free, monthly payment calculator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/loan-calculator.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Loan & Mortgage Calculator Online" />
+  <meta property="og:description" content="Calculate your monthly loan or mortgage payment online for free." />
+  <meta property="og:url" content="https://www.fixora.com/tools/loan-calculator.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Loan & Mortgage Calculator Online" />
+  <meta name="twitter:description" content="Calculate your monthly loan or mortgage payment online for free." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Loan & Mortgage Calculator",
+    "url": "https://www.fixora.com/tools/loan-calculator.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Loan Calculator", "item": "https://www.fixora.com/tools/loan-calculator.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What formula does this calculator use?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It uses the standard fixed-rate amortization formula: M = P × [r(1+r)^n] / [(1+r)^n − 1], where P is the principal, r is the monthly interest rate (annual rate divided by 12 and by 100), and n is the total number of monthly payments (years times 12)." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this calculator include property tax, insurance, or PMI?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. It calculates only principal and interest on a fixed-rate loan — for a mortgage, your actual monthly payment will likely be higher once taxes, homeowners insurance, and any mortgage insurance are added." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if I enter a 0% interest rate?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The calculator switches to a simple division of principal by the number of months, since the standard amortization formula involves dividing by zero when the rate is zero." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Total Interest the same as what I'd pay with a variable-rate loan?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — this calculator assumes a fixed interest rate for the entire term. A variable or adjustable-rate loan's total interest would differ because the rate itself can change over time." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this financial advice?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — this tool gives a mathematical estimate based on the numbers you enter. Actual loan terms, fees, and eligibility depend on your lender, so treat the result as a planning estimate rather than a loan offer." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Loan Calculator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🏦</div>
+      <h1>Loan & Mortgage Calculator</h1>
+      <p>Estimate your monthly payment, total interest, and total cost for any fixed-rate loan.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="row">
+          <div class="field">
+            <label for="principal">Loan Amount</label>
+            <input type="number" id="principal" placeholder="e.g. 300000" value="300000" />
+          </div>
+          <div class="field">
+            <label for="rate">Annual Interest Rate (%)</label>
+            <input type="number" id="rate" step="0.01" placeholder="e.g. 6.5" value="6.5" />
+          </div>
+          <div class="field">
+            <label for="years">Loan Term (years)</label>
+            <input type="number" id="years" placeholder="e.g. 30" value="30" />
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat"><strong id="statMonthly">–</strong><span>Monthly Payment</span></div>
+          <div class="stat"><strong id="statTotalInterest">–</strong><span>Total Interest</span></div>
+          <div class="stat"><strong id="statTotalCost">–</strong><span>Total Cost</span></div>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Calculate a Loan Payment</h2>
+        <ol class="howto-steps">
+          <li>Enter the loan amount (principal) you're borrowing.</li>
+          <li>Enter the annual interest rate (APR) as a percentage.</li>
+          <li>Enter the loan term in years.</li>
+          <li>Read your monthly payment, total interest, and total cost — all three recalculate live as you adjust any field.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What formula does this calculator use?</summary>
+          <p>It uses the standard fixed-rate amortization formula: M = P × [r(1+r)^n] / [(1+r)^n − 1], where P is the principal, r is the monthly interest rate (annual rate divided by 12 and by 100), and n is the total number of monthly payments (years times 12).</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this calculator include property tax, insurance, or PMI?</summary>
+          <p>No. It calculates only principal and interest on a fixed-rate loan — for a mortgage, your actual monthly payment will likely be higher once taxes, homeowners insurance, and any mortgage insurance are added.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What happens if I enter a 0% interest rate?</summary>
+          <p>The calculator switches to a simple division of principal by the number of months, since the standard amortization formula involves dividing by zero when the rate is zero.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is Total Interest the same as what I'd pay with a variable-rate loan?</summary>
+          <p>No — this calculator assumes a fixed interest rate for the entire term. A variable or adjustable-rate loan's total interest would differ because the rate itself can change over time.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is this financial advice?</summary>
+          <p>No — this tool gives a mathematical estimate based on the numbers you enter. Actual loan terms, fees, and eligibility depend on your lender, so treat the result as a planning estimate rather than a loan offer.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="tip-calculator.html">
+            <span class="icon" aria-hidden="true">🧾</span>
+            <h3>Tip Calculator</h3>
+            <p>Split the bill and calculate a tip.</p>
+          </a>
+          <a class="card" href="percentage-calculator.html">
+            <span class="icon" aria-hidden="true">💯</span>
+            <h3>Percentage Calculator</h3>
+            <p>Quick percentage math, three ways.</p>
+          </a>
+          <a class="card" href="unit-converter.html">
+            <span class="icon" aria-hidden="true">📏</span>
+            <h3>Unit Converter</h3>
+            <p>Convert length, weight, and temperature.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var principal = document.getElementById("principal");
+    var rate = document.getElementById("rate");
+    var years = document.getElementById("years");
+    var statusBox = document.getElementById("statusBox");
+
+    function formatMoney(n) {
+      return "$" + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function calculate() {
+      var p = parseFloat(principal.value);
+      var annualRate = parseFloat(rate.value);
+      var termYears = parseFloat(years.value);
+
+      if (!p || p <= 0 || !termYears || termYears <= 0 || isNaN(annualRate) || annualRate < 0) {
+        document.getElementById("statMonthly").textContent = "–";
+        document.getElementById("statTotalInterest").textContent = "–";
+        document.getElementById("statTotalCost").textContent = "–";
+        statusBox.textContent = "Enter a valid loan amount, rate, and term.";
+        return;
+      }
+
+      var n = termYears * 12;
+      var monthly;
+
+      if (annualRate === 0) {
+        monthly = p / n;
+      } else {
+        var r = annualRate / 100 / 12;
+        monthly = p * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+      }
+
+      var totalCost = monthly * n;
+      var totalInterest = totalCost - p;
+
+      document.getElementById("statMonthly").textContent = formatMoney(monthly);
+      document.getElementById("statTotalInterest").textContent = formatMoney(totalInterest);
+      document.getElementById("statTotalCost").textContent = formatMoney(totalCost);
+      statusBox.textContent = "Based on a " + termYears + "-year loan of " + formatMoney(p) + " at " + annualRate + "% APR, fixed rate.";
+    }
+
+    [principal, rate, years].forEach(function (el) {
+      el.addEventListener("input", calculate);
+    });
+
+    calculate();
+  </script>
+</body>
+</html>

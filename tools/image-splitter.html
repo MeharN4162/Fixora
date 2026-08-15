@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Image Splitter Online — Split Photos into a Grid | Fixora</title>
+  <meta name="description" content="Split one photo into a grid of equal pieces online for free, right in your browser — perfect for Instagram grid posts. No uploads, no sign-up." />
+  <meta name="keywords" content="image splitter, split image into grid, instagram grid maker, photo grid splitter online free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/image-splitter.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Image Splitter Online" />
+  <meta property="og:description" content="Split one photo into a grid of equal pieces online for free, right in your browser." />
+  <meta property="og:url" content="https://www.fixora.com/tools/image-splitter.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Image Splitter Online" />
+  <meta name="twitter:description" content="Split one photo into a grid of equal pieces online for free, right in your browser." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Image Splitter",
+    "url": "https://www.fixora.com/tools/image-splitter.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Image Splitter", "item": "https://www.fixora.com/tools/image-splitter.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is this tool useful for?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The most common use is creating an Instagram \"grid post\" — one wide photo split into equal tiles that line up into a single image across your profile grid when posted in order. It's also handy for puzzles, print tiling, or any project that needs a photo cut into equal pieces." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I download all the pieces as one ZIP file?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No - this tool doesn't bundle a ZIP library, so each piece downloads individually as its own PNG file with a numbered filename like split-1-1.png, split-1-2.png, and so on, matching its row and column position." }
+      },
+      {
+        "@type": "Question",
+        "name": "How many rows and columns can I split into?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Between 1 and 5 for each, so up to a 5×5 grid (25 pieces). The preview overlays grid lines on your uploaded photo so you can see exactly where each cut will fall before splitting." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does splitting the image lose any quality?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No - each piece is drawn directly from your original full-resolution image using the Canvas API, so no extra compression or resizing is applied beyond exporting as PNG." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my image uploaded to split it?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Splitting happens entirely on the Canvas API in your browser tab - your file never leaves your device." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .split-stage {
+      position: relative;
+      max-width: 100%;
+      margin: 20px auto 0;
+      display: none;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--color-bg-soft);
+    }
+    .split-stage img { display: block; max-width: 100%; max-height: 60vh; width: auto; height: auto; margin: 0 auto; }
+    .split-grid-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .split-line {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
+    }
+    .split-line.v { top: 0; bottom: 0; width: 2px; }
+    .split-line.h { left: 0; right: 0; height: 2px; }
+    .pieces-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .piece-item {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: var(--color-surface);
+      text-align: center;
+    }
+    .piece-item img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+    .piece-item .piece-label {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      padding: 6px 4px 0;
+    }
+    .piece-item button {
+      width: calc(100% - 12px);
+      margin: 8px 6px 8px;
+      padding: 6px 8px;
+      font-size: 0.78rem;
+      border-radius: 6px;
+      border: none;
+      background: var(--color-bg-alt);
+      color: var(--color-primary-dark);
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .piece-item button:hover { background: #dfe8ff; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Image Splitter</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">✂️</div>
+      <h1>Image Splitter</h1>
+      <p>Split one photo into an equal grid of pieces — great for Instagram grid posts.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload an image">
+          <div class="dz-icon" aria-hidden="true">🖼️</div>
+          <strong>Click to upload or drag an image here</strong>
+          <small>JPG, PNG, or WebP supported</small>
+          <input type="file" id="fileInput" accept="image/*" hidden />
+        </div>
+
+        <div class="split-stage" id="splitStage">
+          <img id="splitImg" alt="Image to split" />
+          <div class="split-grid-overlay" id="gridOverlay"></div>
+        </div>
+
+        <div class="row" id="rowsColsField" style="display:none;margin-top:18px;">
+          <div class="field">
+            <label for="rowsInput">Rows</label>
+            <input type="number" id="rowsInput" min="1" max="5" value="3" />
+          </div>
+          <div class="field">
+            <label for="colsInput">Columns</label>
+            <input type="number" id="colsInput" min="1" max="5" value="3" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="splitBtn" disabled>Split Image</button>
+          <button class="btn btn-secondary" id="downloadAllBtn" style="display:none;" type="button">Download All Pieces</button>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+
+        <div class="pieces-grid" id="piecesGrid"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Split an Image into a Grid</h2>
+        <ol class="howto-steps">
+          <li>Click the upload area or drag in a JPG, PNG, or WebP image.</li>
+          <li>Set the number of rows and columns (1–5 each) — grid lines on the preview show exactly where the cuts will be.</li>
+          <li>Click "Split Image" to generate every piece as its own thumbnail.</li>
+          <li>Download pieces one at a time, or click "Download All Pieces" to save them all with numbered filenames.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What is this tool useful for?</summary>
+          <p>The most common use is creating an Instagram "grid post" — one wide photo split into equal tiles that line up into a single image across your profile grid when posted in order. It's also handy for puzzles, print tiling, or any project that needs a photo cut into equal pieces.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I download all the pieces as one ZIP file?</summary>
+          <p>No - this tool doesn't bundle a ZIP library, so each piece downloads individually as its own PNG file with a numbered filename like split-1-1.png, split-1-2.png, and so on, matching its row and column position.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How many rows and columns can I split into?</summary>
+          <p>Between 1 and 5 for each, so up to a 5×5 grid (25 pieces). The preview overlays grid lines on your uploaded photo so you can see exactly where each cut will fall before splitting.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does splitting the image lose any quality?</summary>
+          <p>No - each piece is drawn directly from your original full-resolution image using the Canvas API, so no extra compression or resizing is applied beyond exporting as PNG.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my image uploaded to split it?</summary>
+          <p>No. Splitting happens entirely on the Canvas API in your browser tab - your file never leaves your device.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="image-cropper.html">
+            <span class="icon" aria-hidden="true">✂️</span>
+            <h3>Image Cropper</h3>
+            <p>Crop an image to a single area.</p>
+          </a>
+          <a class="card" href="image-resizer.html">
+            <span class="icon" aria-hidden="true">📐</span>
+            <h3>Image Resizer</h3>
+            <p>Resize an image to exact dimensions.</p>
+          </a>
+          <a class="card" href="image-rotator.html">
+            <span class="icon" aria-hidden="true">🔄</span>
+            <h3>Image Rotator</h3>
+            <p>Rotate an image before splitting it.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var dropzone = document.getElementById("dropzone");
+    var fileInput = document.getElementById("fileInput");
+    var splitStage = document.getElementById("splitStage");
+    var splitImg = document.getElementById("splitImg");
+    var gridOverlay = document.getElementById("gridOverlay");
+    var rowsColsField = document.getElementById("rowsColsField");
+    var rowsInput = document.getElementById("rowsInput");
+    var colsInput = document.getElementById("colsInput");
+    var splitBtn = document.getElementById("splitBtn");
+    var downloadAllBtn = document.getElementById("downloadAllBtn");
+    var statusBox = document.getElementById("statusBox");
+    var piecesGrid = document.getElementById("piecesGrid");
+
+    var naturalImg = null;
+    var pieceCanvases = [];
+
+    function clampRC() {
+      var r = Math.max(1, Math.min(5, parseInt(rowsInput.value, 10) || 1));
+      var c = Math.max(1, Math.min(5, parseInt(colsInput.value, 10) || 1));
+      rowsInput.value = r;
+      colsInput.value = c;
+      return { rows: r, cols: c };
+    }
+
+    function drawGridOverlay() {
+      var rc = clampRC();
+      gridOverlay.innerHTML = "";
+      for (var c = 1; c < rc.cols; c++) {
+        var v = document.createElement("div");
+        v.className = "split-line v";
+        v.style.left = (c / rc.cols * 100) + "%";
+        gridOverlay.appendChild(v);
+      }
+      for (var r = 1; r < rc.rows; r++) {
+        var h = document.createElement("div");
+        h.className = "split-line h";
+        h.style.top = (r / rc.rows * 100) + "%";
+        gridOverlay.appendChild(h);
+      }
+    }
+
+    function handleFiles(files) {
+      var file = files[0];
+      if (!file || file.type.indexOf("image/") !== 0) {
+        statusBox.textContent = "Please choose a valid image file.";
+        return;
+      }
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var img = new Image();
+        img.onload = function () {
+          naturalImg = img;
+          splitImg.src = e.target.result;
+          splitStage.style.display = "block";
+          rowsColsField.style.display = "flex";
+          splitBtn.disabled = false;
+          downloadAllBtn.style.display = "none";
+          piecesGrid.innerHTML = "";
+          pieceCanvases = [];
+          requestAnimationFrame(drawGridOverlay);
+          statusBox.textContent = "Set rows and columns, then click Split Image.";
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    Fixora.setupDropzone(dropzone, fileInput, handleFiles);
+    dropzone.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") fileInput.click();
+    });
+
+    rowsInput.addEventListener("input", drawGridOverlay);
+    colsInput.addEventListener("input", drawGridOverlay);
+    window.addEventListener("resize", function () { if (naturalImg) drawGridOverlay(); });
+
+    function splitImage() {
+      if (!naturalImg) return;
+      var rc = clampRC();
+      var pieceW = naturalImg.naturalWidth / rc.cols;
+      var pieceH = naturalImg.naturalHeight / rc.rows;
+
+      pieceCanvases = [];
+      piecesGrid.innerHTML = "";
+
+      for (var r = 0; r < rc.rows; r++) {
+        for (var c = 0; c < rc.cols; c++) {
+          var sx = c * pieceW;
+          var sy = r * pieceH;
+          var canvas = document.createElement("canvas");
+          canvas.width = Math.round(pieceW);
+          canvas.height = Math.round(pieceH);
+          var pctx = canvas.getContext("2d");
+          pctx.drawImage(naturalImg, sx, sy, pieceW, pieceH, 0, 0, canvas.width, canvas.height);
+
+          var filename = "split-" + (r + 1) + "-" + (c + 1) + ".png";
+          pieceCanvases.push({ canvas: canvas, filename: filename });
+
+          var item = document.createElement("div");
+          item.className = "piece-item";
+          var imgEl = document.createElement("img");
+          imgEl.src = canvas.toDataURL("image/png");
+          imgEl.alt = "Piece row " + (r + 1) + " column " + (c + 1);
+          var label = document.createElement("div");
+          label.className = "piece-label";
+          label.textContent = "Row " + (r + 1) + ", Col " + (c + 1);
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.textContent = "Download";
+          btn.addEventListener("click", (function (idx) {
+            return function () {
+              pieceCanvases[idx].canvas.toBlob(function (blob) {
+                Fixora.downloadBlob(blob, pieceCanvases[idx].filename);
+              }, "image/png");
+            };
+          })(pieceCanvases.length - 1));
+
+          item.appendChild(imgEl);
+          item.appendChild(label);
+          item.appendChild(btn);
+          piecesGrid.appendChild(item);
+        }
+      }
+
+      downloadAllBtn.style.display = "inline-flex";
+      statusBox.textContent = "Split into " + pieceCanvases.length + " pieces (" + rc.rows + " rows × " + rc.cols + " columns).";
+    }
+
+    splitBtn.addEventListener("click", splitImage);
+
+    downloadAllBtn.addEventListener("click", function () {
+      pieceCanvases.forEach(function (p, i) {
+        setTimeout(function () {
+          p.canvas.toBlob(function (blob) {
+            Fixora.downloadBlob(blob, p.filename);
+          }, "image/png");
+        }, i * 250);
+      });
+    });
+  </script>
+</body>
+</html>

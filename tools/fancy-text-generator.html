@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Fancy Text Generator — Cool Fonts for Bio & Social Media | Fixora</title>
+  <meta name="description" content="Turn plain text into bold, italic, double-struck, circled, small caps, strikethrough, and upside-down styles using real Unicode characters. Free, instant, no sign-up." />
+  <meta name="keywords" content="fancy text generator, cool fonts for instagram bio, unicode text generator, bold text generator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/fancy-text-generator.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Fancy Text Generator" />
+  <meta property="og:description" content="Turn plain text into bold, italic, double-struck, circled, small caps, and more using real Unicode characters." />
+  <meta property="og:url" content="https://www.fixora.com/tools/fancy-text-generator.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Fancy Text Generator" />
+  <meta name="twitter:description" content="Turn plain text into bold, italic, double-struck, circled, small caps, and more using real Unicode characters." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Fancy Text Generator",
+    "url": "https://www.fixora.com/tools/fancy-text-generator.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Fancy Text Generator", "item": "https://www.fixora.com/tools/fancy-text-generator.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Will these fonts work everywhere I paste them?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Mostly, yes — these aren't actual fonts, they're real Unicode characters from the Mathematical Alphanumeric Symbols and other blocks, so they display consistently on almost any modern platform, browser, or app. A few very old or limited systems may show empty boxes for less common characters, but major social platforms like Instagram, Twitter/X, TikTok, and Discord render them fine." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why don't italic and bold italic styles include styled numbers?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Because Unicode simply never assigned mathematical italic or bold-italic code points to digits — that block of the standard only defines styled letters, not numbers. Bold, Double-Struck, Fullwidth, and Circled styles do include styled digits because separate code points exist for those." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does lowercase 'h' look different in the Italic style?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's a genuine Unicode quirk: lowercase italic h isn't part of the systematic Mathematical Alphanumeric block like the other letters — it reuses the pre-existing Planck constant symbol (U+210E) instead, so this tool hardcodes that one exception to match real Unicode." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are these accessible to screen readers?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Not reliably. Screen readers are built around normal Unicode text, and styled characters like these are technically different code points than regular letters, so many screen readers either mispronounce them, spell them out letter by letter, or skip them entirely. Avoid using them for important or accessibility-critical text." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is any of my text sent to a server to generate these styles?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — every style is computed instantly in your browser using JavaScript character-code math. Nothing you type is uploaded anywhere." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Fancy Text Generator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">✨</div>
+      <h1>Fancy Text Generator</h1>
+      <p>Turn plain text into bold, italic, double-struck, circled, small caps, and other cool Unicode styles for your bio or captions.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="fancyInput">Your Text</label>
+          <input type="text" id="fancyInput" placeholder="Type something…" maxlength="200" />
+        </div>
+
+        <div class="field" id="fancyResults" style="margin-top:22px;"></div>
+
+        <div class="copy-note" id="copyNote"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Generate Fancy Text</h2>
+        <ol class="howto-steps">
+          <li>Type or paste your text into the box at the top.</li>
+          <li>All 10 styled versions below update instantly as you type.</li>
+          <li>Scroll through Bold, Italic, Bold Italic, Double-Struck, Fullwidth, Circled, Small Caps, Strikethrough, Underline, and Upside Down.</li>
+          <li>Click "Copy" next to any style to copy that exact version to your clipboard.</li>
+          <li>Paste it into your bio, username, caption, or wherever you like.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Will these fonts work everywhere I paste them?</summary>
+          <p>Mostly, yes — these aren't actual fonts, they're real Unicode characters from the Mathematical Alphanumeric Symbols and other blocks, so they display consistently on almost any modern platform, browser, or app. A few very old or limited systems may show empty boxes for less common characters, but major social platforms like Instagram, Twitter/X, TikTok, and Discord render them fine.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why don't italic and bold italic styles include styled numbers?</summary>
+          <p>Because Unicode simply never assigned mathematical italic or bold-italic code points to digits — that block of the standard only defines styled letters, not numbers. Bold, Double-Struck, Fullwidth, and Circled styles do include styled digits because separate code points exist for those.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why does lowercase 'h' look different in the Italic style?</summary>
+          <p>It's a genuine Unicode quirk: lowercase italic h isn't part of the systematic Mathematical Alphanumeric block like the other letters — it reuses the pre-existing Planck constant symbol (U+210E) instead, so this tool hardcodes that one exception to match real Unicode.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Are these accessible to screen readers?</summary>
+          <p>Not reliably. Screen readers are built around normal Unicode text, and styled characters like these are technically different code points than regular letters, so many screen readers either mispronounce them, spell them out letter by letter, or skip them entirely. Avoid using them for important or accessibility-critical text.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is any of my text sent to a server to generate these styles?</summary>
+          <p>No — every style is computed instantly in your browser using JavaScript character-code math. Nothing you type is uploaded anywhere.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="text-case-converter.html">
+            <span class="icon" aria-hidden="true">🔡</span>
+            <h3>Text Case Converter</h3>
+            <p>Switch text between UPPERCASE, Title Case, and more.</p>
+          </a>
+          <a class="card" href="emoji-picker.html">
+            <span class="icon" aria-hidden="true">😀</span>
+            <h3>Emoji Picker</h3>
+            <p>Find and copy the perfect emoji instantly.</p>
+          </a>
+          <a class="card" href="slug-generator.html">
+            <span class="icon" aria-hidden="true">🔗</span>
+            <h3>Slug Generator</h3>
+            <p>Turn any title into a clean URL slug.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var fancyInput = document.getElementById("fancyInput");
+    var fancyResults = document.getElementById("fancyResults");
+    var copyNote = document.getElementById("copyNote");
+
+    function mapEach(str, fn) {
+      var out = "";
+      for (var i = 0; i < str.length; i++) out += fn(str[i]);
+      return out;
+    }
+
+    function mapBold(ch) {
+      var c = ch.charCodeAt(0);
+      if (c >= 65 && c <= 90) return String.fromCodePoint(0x1D400 + (c - 65));
+      if (c >= 97 && c <= 122) return String.fromCodePoint(0x1D41A + (c - 97));
+      if (c >= 48 && c <= 57) return String.fromCodePoint(0x1D7CE + (c - 48));
+      return ch;
+    }
+
+    function mapItalic(ch) {
+      if (ch === "h") return "ℎ";
+      var c = ch.charCodeAt(0);
+      if (c >= 65 && c <= 90) return String.fromCodePoint(0x1D434 + (c - 65));
+      if (c >= 97 && c <= 122) return String.fromCodePoint(0x1D44E + (c - 97));
+      return ch;
+    }
+
+    function mapBoldItalic(ch) {
+      var c = ch.charCodeAt(0);
+      if (c >= 65 && c <= 90) return String.fromCodePoint(0x1D468 + (c - 65));
+      if (c >= 97 && c <= 122) return String.fromCodePoint(0x1D482 + (c - 97));
+      return ch;
+    }
+
+    var DOUBLE_STRUCK_EXCEPTIONS = { 67: 0x2102, 72: 0x210D, 78: 0x2115, 80: 0x2119, 81: 0x211A, 82: 0x211D, 90: 0x2124 };
+    function mapDoubleStruck(ch) {
+      var c = ch.charCodeAt(0);
+      if (c >= 65 && c <= 90) {
+        if (DOUBLE_STRUCK_EXCEPTIONS[c]) return String.fromCodePoint(DOUBLE_STRUCK_EXCEPTIONS[c]);
+        return String.fromCodePoint(0x1D538 + (c - 65));
+      }
+      if (c >= 97 && c <= 122) return String.fromCodePoint(0x1D552 + (c - 97));
+      if (c >= 48 && c <= 57) return String.fromCodePoint(0x1D7D8 + (c - 48));
+      return ch;
+    }
+
+    function mapFullwidth(ch) {
+      var c = ch.charCodeAt(0);
+      if (c >= 65 && c <= 90) return String.fromCodePoint(0xFF21 + (c - 65));
+      if (c >= 97 && c <= 122) return String.fromCodePoint(0xFF41 + (c - 97));
+      if (c >= 48 && c <= 57) return String.fromCodePoint(0xFF10 + (c - 48));
+      if (ch === " ") return "　";
+      return ch;
+    }
+
+    function mapCircled(ch) {
+      var c = ch.charCodeAt(0);
+      if (c >= 65 && c <= 90) return String.fromCodePoint(0x24B6 + (c - 65));
+      if (c >= 97 && c <= 122) return String.fromCodePoint(0x24D0 + (c - 97));
+      if (c === 48) return "⓪";
+      if (c >= 49 && c <= 57) return String.fromCodePoint(0x2460 + (c - 49));
+      return ch;
+    }
+
+    var SMALL_CAPS_CODES = [0x1D00, 0x0299, 0x1D04, 0x1D05, 0x1D07, 0xA730, 0x0262, 0x029C, 0x026A, 0x1D0A, 0x1D0B, 0x029F, 0x1D0D, 0x0274, 0x1D0F, 0x1D18, 0x71, 0x0280, 0xA731, 0x1D1B, 0x1D1C, 0x1D20, 0x1D21, 0x78, 0x028F, 0x1D22];
+    var SMALL_CAPS = SMALL_CAPS_CODES.map(function (c) { return String.fromCodePoint(c); }).join("");
+    function mapSmallCaps(ch) {
+      var c = ch.charCodeAt(0);
+      if (c >= 97 && c <= 122) return SMALL_CAPS[c - 97];
+      return ch;
+    }
+
+    function mapStrikethrough(str) {
+      var out = "";
+      for (var i = 0; i < str.length; i++) out += str[i] + "̶";
+      return out;
+    }
+
+    function mapUnderline(str) {
+      var out = "";
+      for (var i = 0; i < str.length; i++) out += str[i] + "̲";
+      return out;
+    }
+
+    var UPSIDE_MAP = {
+      a: "ɐ", b: "q", c: "ɔ", d: "p", e: "ǝ", f: "ɟ", g: "ƃ", h: "ɥ", i: "ᴉ", j: "ɾ",
+      k: "ʞ", l: "l", m: "ɯ", n: "u", o: "o", p: "d", q: "b", r: "ɹ", s: "s", t: "ʇ",
+      u: "n", v: "ʌ", w: "ʍ", x: "x", y: "ʎ", z: "z",
+      ".": "˙", "!": "¡", "?": "¿", "'": ",", ",": "'"
+    };
+    function upsideDown(str) {
+      var reversed = str.split("").reverse().join("");
+      var out = "";
+      for (var i = 0; i < reversed.length; i++) {
+        var ch = reversed[i];
+        var key = ch.toLowerCase();
+        out += UPSIDE_MAP.hasOwnProperty(key) ? UPSIDE_MAP[key] : ch;
+      }
+      return out;
+    }
+
+    function styleText(input, styleName) {
+      switch (styleName) {
+        case "bold": return mapEach(input, mapBold);
+        case "italic": return mapEach(input, mapItalic);
+        case "boldItalic": return mapEach(input, mapBoldItalic);
+        case "doubleStruck": return mapEach(input, mapDoubleStruck);
+        case "fullwidth": return mapEach(input, mapFullwidth);
+        case "circled": return mapEach(input, mapCircled);
+        case "smallCaps": return mapEach(input, mapSmallCaps);
+        case "strikethrough": return mapStrikethrough(input);
+        case "underline": return mapUnderline(input);
+        case "upsideDown": return upsideDown(input);
+        default: return input;
+      }
+    }
+
+    var STYLES = [
+      { id: "bold", label: "Bold" },
+      { id: "italic", label: "Italic" },
+      { id: "boldItalic", label: "Bold Italic" },
+      { id: "doubleStruck", label: "Double-Struck" },
+      { id: "fullwidth", label: "Fullwidth" },
+      { id: "circled", label: "Circled" },
+      { id: "smallCaps", label: "Small Caps" },
+      { id: "strikethrough", label: "Strikethrough" },
+      { id: "underline", label: "Underline" },
+      { id: "upsideDown", label: "Upside Down" }
+    ];
+
+    function render() {
+      var text = fancyInput.value || "";
+      fancyResults.innerHTML = "";
+      STYLES.forEach(function (style) {
+        var out = text ? styleText(text, style.id) : "";
+        var row = document.createElement("div");
+        row.className = "field";
+        row.style.marginTop = "14px";
+
+        var label = document.createElement("label");
+        label.textContent = style.label;
+        row.appendChild(label);
+
+        var inner = document.createElement("div");
+        inner.className = "row";
+        inner.style.alignItems = "center";
+
+        var box = document.createElement("input");
+        box.type = "text";
+        box.readOnly = true;
+        box.value = out;
+        box.id = "fancyOut-" + style.id;
+
+        var btn = document.createElement("button");
+        btn.className = "btn btn-secondary";
+        btn.style.flex = "none";
+        btn.textContent = "Copy";
+        btn.addEventListener("click", function () {
+          Fixora.copyText(box.value, copyNote);
+        });
+
+        inner.appendChild(box);
+        inner.appendChild(btn);
+        row.appendChild(inner);
+        fancyResults.appendChild(row);
+      });
+    }
+
+    fancyInput.addEventListener("input", render);
+    fancyInput.value = "Fixora";
+    render();
+  </script>
+</body>
+</html>

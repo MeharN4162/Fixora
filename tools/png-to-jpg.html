@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free PNG to JPG Converter Online | Fixora</title>
+  <meta name="description" content="Convert PNG images to JPG format online for free, right in your browser. Transparent areas are filled with white automatically. No uploads, no sign-up." />
+  <meta name="keywords" content="png to jpg, convert png to jpg online free, image converter" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/png-to-jpg.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free PNG to JPG Converter Online" />
+  <meta property="og:description" content="Convert PNG images to JPG format online for free, right in your browser." />
+  <meta property="og:url" content="https://www.fixora.com/tools/png-to-jpg.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free PNG to JPG Converter Online" />
+  <meta name="twitter:description" content="Convert PNG images to JPG format online for free." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PNG to JPG Converter",
+    "url": "https://www.fixora.com/tools/png-to-jpg.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "PNG to JPG", "item": "https://www.fixora.com/tools/png-to-jpg.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What happens to transparent areas in my PNG?",
+        "acceptedAnswer": { "@type": "Answer", "text": "JPEG has no support for transparency, so before drawing your image the tool fills the canvas with solid white first - any transparent or semi-transparent pixels in the PNG become white in the exported JPG." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the Quality slider actually control?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It sets the JPEG compression quality passed to the browser's canvas encoder, from 40% (smaller file, more visible compression artifacts) up to 100% (larger file, closer to the source). The stat row shows the exact resulting file size so you can judge the trade-off directly." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the preview update automatically when I move the slider?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The tool re-encodes the image about 120ms after you stop dragging the quality slider and swaps in the new preview and file size, so you can fine-tune quality without clicking a separate convert button each time." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will this remove any metadata from my PNG?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Because the image is redrawn onto a canvas and re-encoded as a new JPEG, any metadata the PNG might have carried is not preserved in the output file." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this tool upload my image anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Everything happens locally using the File and Canvas APIs in your browser - your PNG is never sent to a server." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>PNG to JPG</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🔄</div>
+      <h1>PNG to JPG Converter</h1>
+      <p>Convert a PNG image to JPG format instantly. Transparent areas are automatically filled with white.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload a PNG image">
+          <div class="dz-icon" aria-hidden="true">🖼️</div>
+          <strong>Click to upload or drag a PNG here</strong>
+          <small>PNG files only</small>
+          <input type="file" id="fileInput" accept="image/png" hidden />
+        </div>
+
+        <img id="previewImg" class="preview-img" style="display:none;" alt="Preview of uploaded PNG image" />
+
+        <div class="field" style="margin-top:16px;">
+          <label for="qualityRange">JPG Quality: <span id="qualityValue">90%</span></label>
+          <input type="range" id="qualityRange" min="40" max="100" value="90" style="width:100%;" />
+        </div>
+
+        <div class="stat-row" id="fileInfo" style="display:none;">
+          <div class="stat"><strong id="statOriginal">–</strong><span>PNG Size</span></div>
+          <div class="stat"><strong id="statNew">–</strong><span>JPG Size</span></div>
+          <div class="stat"><strong id="statDims">–</strong><span>Dimensions</span></div>
+        </div>
+
+        <div class="actions">
+          <a class="btn btn-primary" id="downloadBtn" style="display:none;" download="converted.jpg">Download JPG</a>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Convert a PNG to JPG</h2>
+        <ol class="howto-steps">
+          <li>Click the upload area or drag a PNG file onto it.</li>
+          <li>Drag the "JPG Quality" slider to balance file size against visual quality (default is 90%).</li>
+          <li>The preview and PNG/JPG/Dimensions stats update automatically as you move the slider — no separate convert button.</li>
+          <li>Click "Download JPG" once you're happy with the result.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What happens to transparent areas in my PNG?</summary>
+          <p>JPEG has no support for transparency, so before drawing your image the tool fills the canvas with solid white first - any transparent or semi-transparent pixels in the PNG become white in the exported JPG.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the Quality slider actually control?</summary>
+          <p>It sets the JPEG compression quality passed to the browser's canvas encoder, from 40% (smaller file, more visible compression artifacts) up to 100% (larger file, closer to the source). The stat row shows the exact resulting file size so you can judge the trade-off directly.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why does the preview update automatically when I move the slider?</summary>
+          <p>The tool re-encodes the image about 120ms after you stop dragging the quality slider and swaps in the new preview and file size, so you can fine-tune quality without clicking a separate convert button each time.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Will this remove any metadata from my PNG?</summary>
+          <p>Yes. Because the image is redrawn onto a canvas and re-encoded as a new JPEG, any metadata the PNG might have carried is not preserved in the output file.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this tool upload my image anywhere?</summary>
+          <p>No. Everything happens locally using the File and Canvas APIs in your browser - your PNG is never sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="jpg-to-png.html">
+            <span class="icon" aria-hidden="true">🔄</span>
+            <h3>JPG to PNG</h3>
+            <p>Convert the other way around.</p>
+          </a>
+          <a class="card" href="image-compressor.html">
+            <span class="icon" aria-hidden="true">🗜️</span>
+            <h3>Image Compressor</h3>
+            <p>Shrink image file size without resizing.</p>
+          </a>
+          <a class="card" href="../blog/image-format-guide.html">
+            <span class="icon" aria-hidden="true">🖼️</span>
+            <h3>Guide: JPG vs PNG vs WebP</h3>
+            <p>Understand exactly when to use each format.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var dropzone = document.getElementById("dropzone");
+    var fileInput = document.getElementById("fileInput");
+    var previewImg = document.getElementById("previewImg");
+    var downloadBtn = document.getElementById("downloadBtn");
+    var statusBox = document.getElementById("statusBox");
+    var fileInfo = document.getElementById("fileInfo");
+    var qualityRange = document.getElementById("qualityRange");
+    var qualityValue = document.getElementById("qualityValue");
+
+    var currentFile = null;
+    var currentImg = null;
+    var lastConvertedUrl = null;
+    var convertGeneration = 0;
+    var convertTimer = null;
+
+    qualityRange.addEventListener("input", function () {
+      qualityValue.textContent = qualityRange.value + "%";
+      if (currentImg) {
+        clearTimeout(convertTimer);
+        convertTimer = setTimeout(convert, 120);
+      }
+    });
+
+    function handleFiles(files) {
+      var file = files[0];
+      if (!file || file.type !== "image/png") {
+        statusBox.textContent = "Please choose a PNG image.";
+        return;
+      }
+      currentFile = file;
+      statusBox.textContent = "Converting…";
+
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var img = new Image();
+        img.onload = function () {
+          currentImg = img;
+          convert();
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function convert() {
+      var canvas = document.createElement("canvas");
+      canvas.width = currentImg.naturalWidth;
+      canvas.height = currentImg.naturalHeight;
+      var ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(currentImg, 0, 0);
+
+      var quality = parseInt(qualityRange.value, 10) / 100;
+      convertGeneration++;
+      var myGeneration = convertGeneration;
+
+      canvas.toBlob(function (blob) {
+        if (myGeneration !== convertGeneration) return;
+
+        var url = URL.createObjectURL(blob);
+        if (lastConvertedUrl) URL.revokeObjectURL(lastConvertedUrl);
+        lastConvertedUrl = url;
+
+        previewImg.src = url;
+        previewImg.style.display = "block";
+
+        downloadBtn.href = url;
+        downloadBtn.download = currentFile.name.replace(/\.png$/i, "") + ".jpg";
+        downloadBtn.style.display = "inline-flex";
+
+        fileInfo.style.display = "flex";
+        document.getElementById("statOriginal").textContent = Fixora.formatBytes(currentFile.size);
+        document.getElementById("statNew").textContent = Fixora.formatBytes(blob.size);
+        document.getElementById("statDims").textContent = canvas.width + " × " + canvas.height;
+
+        statusBox.textContent = "Done! Your JPG is ready to download.";
+      }, "image/jpeg", quality);
+    }
+
+    Fixora.setupDropzone(dropzone, fileInput, handleFiles);
+    dropzone.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") fileInput.click();
+    });
+  </script>
+</body>
+</html>

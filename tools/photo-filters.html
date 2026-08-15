@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Photo Filters Online — Brightness, Contrast, Saturation | Fixora</title>
+  <meta name="description" content="Adjust brightness, contrast, and saturation, or apply grayscale/sepia/invert filters to a photo online for free, right in your browser. No uploads, no sign-up." />
+  <meta name="keywords" content="photo filters online free, brightness contrast editor, grayscale sepia filter" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/photo-filters.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Photo Filters Online" />
+  <meta property="og:description" content="Adjust brightness, contrast, saturation, or apply grayscale/sepia/invert filters — free, in your browser." />
+  <meta property="og:url" content="https://www.fixora.com/tools/photo-filters.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Photo Filters Online" />
+  <meta name="twitter:description" content="Adjust brightness, contrast, saturation, or apply grayscale/sepia/invert filters — free, in your browser." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Photo Filters",
+    "url": "https://www.fixora.com/tools/photo-filters.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Photo Filters", "item": "https://www.fixora.com/tools/photo-filters.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I combine a preset like Sepia with the brightness/contrast sliders?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Presets and sliders aren't mutually exclusive - the tool builds a single CSS filter string combining your brightness, contrast, and saturation values with whichever preset (grayscale, sepia, or invert) is selected, then applies all of it in one pass." }
+      },
+      {
+        "@type": "Question",
+        "name": "What do the Brightness, Contrast, and Saturation percentages mean?",
+        "acceptedAnswer": { "@type": "Answer", "text": "100% is the original, unmodified image for each. Values below 100% darken, flatten, or desaturate the image, values above 100% intensify it - the range runs from 0% to 200% on all three sliders." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this tool support crop, blur, or other effects?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No - it's focused specifically on brightness, contrast, saturation, and the three one-click presets (grayscale, sepia, invert). For cropping, use Fixora's separate Image Cropper tool." }
+      },
+      {
+        "@type": "Question",
+        "name": "What format is the downloaded file?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It matches your source: JPG in, JPG out; WebP in, WebP out; anything else (including PNG) exports as PNG. JPG output gets a white background fill since JPEG can't store transparency." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the filtering done on a server?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. All adjustments are applied locally using the Canvas 2D API's built-in filter property, which runs the same brightness/contrast/saturate/grayscale/sepia/invert functions browsers use for CSS - your photo never leaves your device." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .filter-stage {
+      display: none;
+      margin-top: 20px;
+      text-align: center;
+      background: repeating-conic-gradient(#e5e7eb 0% 25%, #fff 0% 50%) 50% / 20px 20px;
+      border-radius: var(--radius-md);
+      padding: 20px;
+    }
+    .filter-stage img {
+      max-width: 100%;
+      max-height: 50vh;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Photo Filters</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🎛️</div>
+      <h1>Photo Filters</h1>
+      <p>Adjust brightness, contrast, and saturation, or apply a one-click grayscale, sepia, or invert filter.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload an image">
+          <div class="dz-icon" aria-hidden="true">🖼️</div>
+          <strong>Click to upload or drag an image here</strong>
+          <small>JPG, PNG, or WebP supported</small>
+          <input type="file" id="fileInput" accept="image/*" hidden />
+        </div>
+
+        <div class="filter-stage" id="filterStage">
+          <img id="previewImg" alt="Filtered image preview" />
+        </div>
+
+        <div class="pill-row" id="presetRow" style="margin-top:20px;display:none;">
+          <button class="pill active" data-preset="none" type="button">Normal</button>
+          <button class="pill" data-preset="grayscale" type="button">Grayscale</button>
+          <button class="pill" data-preset="sepia" type="button">Sepia</button>
+          <button class="pill" data-preset="invert" type="button">Invert</button>
+        </div>
+
+        <div id="sliderControls" style="display:none;">
+          <div class="field" style="margin-top:16px;">
+            <label for="brightnessRange">Brightness: <span id="brightnessValue">100%</span></label>
+            <input type="range" id="brightnessRange" min="0" max="200" value="100" style="width:100%;" />
+          </div>
+          <div class="field" style="margin-top:12px;">
+            <label for="contrastRange">Contrast: <span id="contrastValue">100%</span></label>
+            <input type="range" id="contrastRange" min="0" max="200" value="100" style="width:100%;" />
+          </div>
+          <div class="field" style="margin-top:12px;">
+            <label for="saturationRange">Saturation: <span id="saturationValue">100%</span></label>
+            <input type="range" id="saturationRange" min="0" max="200" value="100" style="width:100%;" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-secondary" id="resetBtn" type="button" style="display:none;">Reset</button>
+          <a class="btn btn-primary" id="downloadBtn" style="display:none;">Download Image</a>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Apply Filters to a Photo</h2>
+        <ol class="howto-steps">
+          <li>Click the upload area or drag in a JPG, PNG, or WebP image.</li>
+          <li>Drag the Brightness, Contrast, and Saturation sliders to adjust the look — the preview updates as you move them.</li>
+          <li>Optionally click a preset pill (Grayscale, Sepia, or Invert) to layer a one-click effect on top of your slider adjustments.</li>
+          <li>Click "Reset" to return to the original look at any point, or "Download Image" to save your edit.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Can I combine a preset like Sepia with the brightness/contrast sliders?</summary>
+          <p>Yes. Presets and sliders aren't mutually exclusive - the tool builds a single CSS filter string combining your brightness, contrast, and saturation values with whichever preset (grayscale, sepia, or invert) is selected, then applies all of it in one pass.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What do the Brightness, Contrast, and Saturation percentages mean?</summary>
+          <p>100% is the original, unmodified image for each. Values below 100% darken, flatten, or desaturate the image, values above 100% intensify it - the range runs from 0% to 200% on all three sliders.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this tool support crop, blur, or other effects?</summary>
+          <p>No - it's focused specifically on brightness, contrast, saturation, and the three one-click presets (grayscale, sepia, invert). For cropping, use Fixora's separate Image Cropper tool.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What format is the downloaded file?</summary>
+          <p>It matches your source: JPG in, JPG out; WebP in, WebP out; anything else (including PNG) exports as PNG. JPG output gets a white background fill since JPEG can't store transparency.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is the filtering done on a server?</summary>
+          <p>No. All adjustments are applied locally using the Canvas 2D API's built-in filter property, which runs the same brightness/contrast/saturate/grayscale/sepia/invert functions browsers use for CSS - your photo never leaves your device.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="image-compressor.html">
+            <span class="icon" aria-hidden="true">🗜️</span>
+            <h3>Image Compressor</h3>
+            <p>Shrink the file size once you're done.</p>
+          </a>
+          <a class="card" href="image-cropper.html">
+            <span class="icon" aria-hidden="true">✂️</span>
+            <h3>Image Cropper</h3>
+            <p>Crop to the exact area you want.</p>
+          </a>
+          <a class="card" href="pdf-grayscale.html">
+            <span class="icon" aria-hidden="true">⚫</span>
+            <h3>PDF to Grayscale</h3>
+            <p>Apply the same grayscale effect to a PDF.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var dropzone = document.getElementById("dropzone");
+    var fileInput = document.getElementById("fileInput");
+    var filterStage = document.getElementById("filterStage");
+    var previewImg = document.getElementById("previewImg");
+    var presetRow = document.getElementById("presetRow");
+    var sliderControls = document.getElementById("sliderControls");
+    var resetBtn = document.getElementById("resetBtn");
+    var downloadBtn = document.getElementById("downloadBtn");
+    var statusBox = document.getElementById("statusBox");
+
+    var brightnessRange = document.getElementById("brightnessRange");
+    var contrastRange = document.getElementById("contrastRange");
+    var saturationRange = document.getElementById("saturationRange");
+
+    var naturalImg = null;
+    var currentFile = null;
+    var currentPreset = "none";
+    var lastUrl = null;
+    var outputMime = "image/png";
+    var outputExt = "png";
+
+    var renderGeneration = 0;
+    var renderTimer = null;
+
+    function handleFiles(files) {
+      var file = files[0];
+      if (!file || file.type.indexOf("image/") !== 0) {
+        statusBox.textContent = "Please choose a valid image file.";
+        return;
+      }
+      currentFile = file;
+      currentPreset = "none";
+      brightnessRange.value = 100;
+      contrastRange.value = 100;
+      saturationRange.value = 100;
+      updateSliderLabels();
+      document.querySelectorAll("#presetRow [data-preset]").forEach(function (p) { p.classList.remove("active"); });
+      document.querySelector('#presetRow [data-preset="none"]').classList.add("active");
+
+      if (file.type === "image/jpeg") { outputMime = "image/jpeg"; outputExt = "jpg"; }
+      else if (file.type === "image/webp") { outputMime = "image/webp"; outputExt = "webp"; }
+      else { outputMime = "image/png"; outputExt = "png"; }
+
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var img = new Image();
+        img.onload = function () {
+          naturalImg = img;
+          filterStage.style.display = "block";
+          presetRow.style.display = "flex";
+          sliderControls.style.display = "block";
+          resetBtn.style.display = "inline-flex";
+          render();
+          statusBox.textContent = "Adjust the sliders or pick a preset, then download.";
+        };
+        img.onerror = function () {
+          statusBox.textContent = "Couldn't read that image. Please try a different file.";
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    Fixora.setupDropzone(dropzone, fileInput, handleFiles);
+    dropzone.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") fileInput.click();
+    });
+
+    function updateSliderLabels() {
+      document.getElementById("brightnessValue").textContent = brightnessRange.value + "%";
+      document.getElementById("contrastValue").textContent = contrastRange.value + "%";
+      document.getElementById("saturationValue").textContent = saturationRange.value + "%";
+    }
+
+    function buildFilterString() {
+      var parts = [
+        "brightness(" + brightnessRange.value + "%)",
+        "contrast(" + contrastRange.value + "%)",
+        "saturate(" + saturationRange.value + "%)"
+      ];
+      if (currentPreset === "grayscale") parts.push("grayscale(100%)");
+      if (currentPreset === "sepia") parts.push("sepia(100%)");
+      if (currentPreset === "invert") parts.push("invert(100%)");
+      return parts.join(" ");
+    }
+
+    function render() {
+      if (!naturalImg) return;
+
+      var canvas = document.createElement("canvas");
+      canvas.width = naturalImg.naturalWidth;
+      canvas.height = naturalImg.naturalHeight;
+      var ctx = canvas.getContext("2d");
+
+      if (outputMime === "image/jpeg") {
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+
+      ctx.filter = buildFilterString();
+      ctx.drawImage(naturalImg, 0, 0);
+
+      renderGeneration++;
+      var myGeneration = renderGeneration;
+
+      canvas.toBlob(function (blob) {
+        if (myGeneration !== renderGeneration) return;
+
+        var url = URL.createObjectURL(blob);
+        if (lastUrl) URL.revokeObjectURL(lastUrl);
+        lastUrl = url;
+
+        previewImg.src = url;
+        downloadBtn.href = url;
+        downloadBtn.download = (currentFile.name.replace(/\.[^.]+$/, "") || "filtered") + "-filtered." + outputExt;
+        downloadBtn.style.display = "inline-flex";
+      }, outputMime, 0.92);
+    }
+
+    function scheduleRender() {
+      clearTimeout(renderTimer);
+      renderTimer = setTimeout(render, 100);
+    }
+
+    [brightnessRange, contrastRange, saturationRange].forEach(function (input) {
+      input.addEventListener("input", function () {
+        updateSliderLabels();
+        scheduleRender();
+      });
+    });
+
+    document.querySelectorAll("#presetRow [data-preset]").forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        document.querySelectorAll("#presetRow [data-preset]").forEach(function (p) { p.classList.remove("active"); });
+        pill.classList.add("active");
+        currentPreset = pill.getAttribute("data-preset");
+        render();
+      });
+    });
+
+    resetBtn.addEventListener("click", function () {
+      brightnessRange.value = 100;
+      contrastRange.value = 100;
+      saturationRange.value = 100;
+      currentPreset = "none";
+      updateSliderLabels();
+      document.querySelectorAll("#presetRow [data-preset]").forEach(function (p) { p.classList.remove("active"); });
+      document.querySelector('#presetRow [data-preset="none"]').classList.add("active");
+      render();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QR Codes Explained: How They Work and When to Use Them | Fixora</title>
+  <meta name="description" content="What error correction actually does, why long links sometimes fail to fit, and practical tips for making a QR code that scans reliably every time." />
+  <meta name="keywords" content="how do qr codes work, qr code error correction, make a qr code, qr code not scanning" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/blog/qr-codes-explained-guide.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="QR Codes Explained: How They Work and When to Use Them" />
+  <meta property="og:description" content="What error correction actually does and how to make a QR code that scans reliably." />
+  <meta property="og:url" content="https://www.fixora.com/blog/qr-codes-explained-guide.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="QR Codes Explained: How They Work and When to Use Them" />
+  <meta name="twitter:description" content="What error correction actually does and how to make a QR code that scans reliably." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "QR Codes Explained: How They Work and When to Use Them",
+    "description": "What error correction actually does and how to make a QR code that scans reliably.",
+    "author": { "@type": "Organization", "name": "Fixora" },
+    "publisher": { "@type": "Organization", "name": "Fixora" },
+    "datePublished": "2026-08-13",
+    "dateModified": "2026-08-13",
+    "mainEntityOfPage": "https://www.fixora.com/blog/qr-codes-explained-guide.html"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://www.fixora.com/#guides" },
+      { "@type": "ListItem", "position": 3, "name": "QR Codes Explained", "item": "https://www.fixora.com/blog/qr-codes-explained-guide.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does error correction level actually change?",
+        "acceptedAnswer": { "@type": "Answer", "text": "QR codes embed redundant data so they can still scan correctly even if part of the code is dirty, torn, or partly covered by a logo. Low keeps the pattern as simple as possible, while High sacrifices some data density for much greater damage tolerance — Medium is a reasonable default for most links." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why did my QR code fail to generate with a long piece of text?",
+        "acceptedAnswer": { "@type": "Answer", "text": "QR codes have a fixed data capacity that depends on the error-correction level chosen. Long text can exceed that capacity, so try shortening it or switching to a lower error-correction level, which frees up more usable data space." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does increasing the Size setting let me fit more data?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — Size only changes the pixel dimensions of each module in the printed or displayed code. How much data it can hold is governed by the error-correction level and the length of your text, not the size setting." }
+      },
+      {
+        "@type": "Question",
+        "name": "What format does a generated QR code download as?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The code is drawn onto an HTML canvas and exported as a PNG image, giving you a standard raster image you can drop into documents, print, or share anywhere an image works." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides" class="active">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#guides">Guides</a><span class="sep">/</span>
+        <span>QR Codes Explained</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Developer Guides · 5 min read · Updated August 2026</p>
+      <h1>QR Codes Explained: How They Work and When to Use Them</h1>
+      <div class="article-hero-img" aria-hidden="true">▦</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#error-correction">Error Correction: The Setting Most People Skip</a></li>
+          <li><a href="#capacity">Data Capacity and Why Long Links Sometimes Fail</a></li>
+          <li><a href="#how-to">How to Make a QR Code That Scans Reliably</a></li>
+          <li><a href="#uses">Practical Uses Beyond "Scan Me"</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>A QR code looks like a random grid of black and white squares, but it's a carefully structured data format with a specific, useful property: it can still scan correctly even when part of it is damaged, dirty, or covered by a logo. That resilience comes from a setting most people never touch — error correction — and understanding it makes the difference between a code that always works and one that occasionally doesn't.</p>
+
+        <h2 id="error-correction">Error Correction: The Setting Most People Skip</h2>
+        <p>QR codes deliberately embed redundant data alongside the actual content, so a scanner can reconstruct the code even if a portion is unreadable. There are four standard levels:</p>
+        <ul>
+          <li><strong>Low</strong> — minimal redundancy, maximum data capacity</li>
+          <li><strong>Medium</strong> — a balanced default that suits most links and text</li>
+          <li><strong>Quartile</strong> and <strong>High</strong> — increasing damage tolerance at the cost of usable data space</li>
+        </ul>
+        <p>If you're printing a code somewhere it might get creased, smudged, or partially covered by a logo, a higher error-correction level is worth the trade-off. For a clean digital code displayed on a screen, Low or Medium works fine.</p>
+
+        <h2 id="capacity">Data Capacity and Why Long Links Sometimes Fail</h2>
+        <p>Every QR code has a fixed data ceiling that depends on its error-correction level — higher redundancy leaves less room for actual content. This is why a very long URL, or a large block of pasted text, can fail to generate: it simply exceeds the code's capacity at the selected error-correction level.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> If your text won't fit, the fix isn't to make the QR code bigger — Size only changes the pixel dimensions of each square, not how much data fits. Instead, shorten the text or drop to a lower error-correction level to free up capacity.
+        </div>
+
+        <h2 id="how-to">How to Make a QR Code That Scans Reliably</h2>
+        <ol>
+          <li>Open the <a href="../tools/qr-code-generator.html">QR Code Generator</a>.</li>
+          <li>Type or paste the link or text you want encoded.</li>
+          <li>Choose an error-correction level based on where the code will be used — Medium for most cases, High if it'll be printed somewhere it could get damaged.</li>
+          <li>Download the code as a PNG and test-scan it with a phone before printing or publishing it widely.</li>
+        </ol>
+
+        <h2 id="uses">Practical Uses Beyond "Scan Me"</h2>
+        <p>QR codes work for far more than sharing a website — WiFi credentials, contact details, plain text instructions, and short messages all encode the same way. Since the generator works entirely with plain text and links, anything you can type into the field can become a scannable code, as long as it fits within capacity.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>What does error correction level actually change?</strong> QR codes embed redundant data so they can still scan correctly even if part of the code is dirty, torn, or partly covered by a logo. Low keeps the pattern as simple as possible, while High sacrifices some data density for much greater damage tolerance — Medium is a reasonable default for most links.</p>
+        <p><strong>Why did my QR code fail to generate with a long piece of text?</strong> QR codes have a fixed data capacity that depends on the error-correction level chosen. Long text can exceed that capacity, so try shortening it or switching to a lower error-correction level, which frees up more usable data space.</p>
+        <p><strong>Does increasing the Size setting let me fit more data?</strong> No — Size only changes the pixel dimensions of each module in the printed or displayed code. How much data it can hold is governed by the error-correction level and the length of your text, not the size setting.</p>
+        <p><strong>What format does a generated QR code download as?</strong> The code is drawn onto an HTML canvas and exported as a PNG image, giving you a standard raster image you can drop into documents, print, or share anywhere an image works.</p>
+
+        <div class="tip-box">
+          Ready to make one? Try the <a href="../tools/qr-code-generator.html">free QR Code Generator</a> — built entirely in your browser, no sign-up required.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer.html">Image Resizer</a></li>
+            <li><a href="../tools/word-counter.html">Word Counter</a></li>
+            <li><a href="../tools/password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="image-format-guide.html">Image Formats</a></li>
+            <li><a href="strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

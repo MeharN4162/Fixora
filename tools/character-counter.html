@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Character Counter Online — Twitter, Instagram & More | Fixora</title>
+  <meta name="description" content="Count characters live and check them against Twitter/X, Instagram, YouTube, SMS, and meta description limits online for free. No sign-up." />
+  <meta name="keywords" content="character counter, twitter character counter online free, instagram caption limit" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/character-counter.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Character Counter Online" />
+  <meta property="og:description" content="Count characters live and check them against social media and SEO limits, free." />
+  <meta property="og:url" content="https://www.fixora.com/tools/character-counter.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Character Counter Online" />
+  <meta name="twitter:description" content="Count characters live and check them against social media and SEO limits." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Character Counter",
+    "url": "https://www.fixora.com/tools/character-counter.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Character Counter", "item": "https://www.fixora.com/tools/character-counter.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How is the SMS segment count calculated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Standard SMS messages are limited to 160 characters per segment for plain GSM-7 text; longer messages are split into multiple linked segments by carriers. This tool shows how many 160-character segments your text would take, which is how most carriers actually bill and send long texts." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is my count different from what Twitter/X shows me?",
+        "acceptedAnswer": { "@type": "Answer", "text": "X counts most characters as 1 but weights some non-Latin characters (like CJK characters) as 2, and it automatically shortens any URL to a fixed length regardless of how long the real link is. This tool counts raw characters, so a post with links or non-Latin text may show a different number than X's own composer." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do these limits change over time?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — platforms adjust their limits periodically. The figures here reflect commonly published limits at the time of writing; if a platform has changed its limit since, treat this as a close estimate rather than the current official number." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this tool store or send my text anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — counting happens locally in your browser as you type. Nothing you write is transmitted or saved." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .limit-list {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .limit-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+    }
+    .limit-row .limit-name { flex: 1; font-size: 0.9rem; font-weight: 600; }
+    .limit-row .limit-count { font-family: monospace; font-size: 0.88rem; color: var(--color-text-muted); }
+    .limit-row .limit-bar {
+      width: 80px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--color-border);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .limit-row .limit-bar-fill {
+      height: 100%;
+      background: var(--color-success, #16a34a);
+      transition: width 0.15s ease;
+    }
+    .limit-row.over .limit-bar-fill { background: var(--color-danger, #dc2626); }
+    .limit-row.over .limit-count { color: var(--color-danger, #dc2626); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Character Counter</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🔤</div>
+      <h1>Character Counter</h1>
+      <p>Count characters live and check them against common platform limits as you type.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="textInput">Type or paste your text</label>
+          <textarea id="textInput" placeholder="Start typing…" style="min-height:180px;"></textarea>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat"><strong id="statChars">0</strong><span>Characters</span></div>
+          <div class="stat"><strong id="statCharsNoSpace">0</strong><span>Chars (no spaces)</span></div>
+          <div class="stat"><strong id="statWords">0</strong><span>Words</span></div>
+        </div>
+
+        <div class="limit-list" id="limitList"></div>
+        <div class="limit-row" id="smsRow" style="margin-top:10px;">
+          <span class="limit-name">SMS text message</span>
+          <div class="limit-bar"><div class="limit-bar-fill" id="smsBar"></div></div>
+          <span class="limit-count" id="smsCount">0 chars — 0 segments</span>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-secondary" id="clearBtn">Clear Text</button>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Count Characters Against Platform Limits</h2>
+        <ol class="howto-steps">
+          <li>Type or paste your text into the box above.</li>
+          <li>Watch the character, word, and no-space counts update live as you type.</li>
+          <li>Check the limit bars below — each one turns red if you've gone over that platform's limit.</li>
+          <li>Trim your text until every bar you care about is back within range.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How is the SMS segment count calculated?</summary>
+          <p>Standard SMS messages are limited to 160 characters per segment for plain GSM-7 text; longer messages are split into multiple linked segments by carriers. This tool shows how many 160-character segments your text would take, which is how most carriers actually bill and send long texts.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why is my count different from what Twitter/X shows me?</summary>
+          <p>X counts most characters as 1 but weights some non-Latin characters (like CJK characters) as 2, and it automatically shortens any URL to a fixed length regardless of how long the real link is. This tool counts raw characters, so a post with links or non-Latin text may show a different number than X's own composer.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Do these limits change over time?</summary>
+          <p>Yes — platforms adjust their limits periodically. The figures here reflect commonly published limits at the time of writing; if a platform has changed its limit since, treat this as a close estimate rather than the current official number.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this tool store or send my text anywhere?</summary>
+          <p>No — counting happens locally in your browser as you type. Nothing you write is transmitted or saved.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="word-counter.html">
+            <span class="icon" aria-hidden="true">🔤</span>
+            <h3>Word Counter</h3>
+            <p>Words, sentences, paragraphs, and reading time.</p>
+          </a>
+          <a class="card" href="text-case-converter.html">
+            <span class="icon" aria-hidden="true">🔡</span>
+            <h3>Text Case Converter</h3>
+            <p>Switch between UPPERCASE, camelCase, and more.</p>
+          </a>
+          <a class="card" href="slug-generator.html">
+            <span class="icon" aria-hidden="true">🔗</span>
+            <h3>Slug Generator</h3>
+            <p>Turn a title into a clean URL slug.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var textInput = document.getElementById("textInput");
+    var limitList = document.getElementById("limitList");
+
+    var LIMITS = [
+      { name: "X / Twitter post", max: 280 },
+      { name: "Instagram caption", max: 2200 },
+      { name: "TikTok caption", max: 2200 },
+      { name: "LinkedIn post", max: 3000 },
+      { name: "YouTube title", max: 100 },
+      { name: "Meta description (SEO)", max: 160 }
+    ];
+
+    LIMITS.forEach(function (limit, i) {
+      var row = document.createElement("div");
+      row.className = "limit-row";
+      row.id = "limitRow" + i;
+      row.innerHTML =
+        '<span class="limit-name">' + limit.name + '</span>' +
+        '<div class="limit-bar"><div class="limit-bar-fill" id="limitBar' + i + '"></div></div>' +
+        '<span class="limit-count" id="limitCount' + i + '">0 / ' + limit.max + '</span>';
+      limitList.appendChild(row);
+    });
+
+    function update() {
+      var text = textInput.value;
+      var chars = text.length;
+      var charsNoSpace = text.replace(/\s/g, "").length;
+      var words = text.trim() ? text.trim().split(/\s+/).length : 0;
+
+      document.getElementById("statChars").textContent = chars;
+      document.getElementById("statCharsNoSpace").textContent = charsNoSpace;
+      document.getElementById("statWords").textContent = words;
+
+      LIMITS.forEach(function (limit, i) {
+        var pct = Math.min(100, (chars / limit.max) * 100);
+        var over = chars > limit.max;
+        document.getElementById("limitBar" + i).style.width = pct + "%";
+        document.getElementById("limitCount" + i).textContent = chars + " / " + limit.max;
+        document.getElementById("limitRow" + i).classList.toggle("over", over);
+      });
+
+      var segments = chars === 0 ? 0 : Math.ceil(chars / 160);
+      var withinLastSegment = chars === 0 ? 0 : chars - (segments - 1) * 160;
+      var smsPct = chars === 0 ? 0 : (withinLastSegment / 160) * 100;
+      document.getElementById("smsBar").style.width = smsPct + "%";
+      document.getElementById("smsCount").textContent = chars + " chars — " + segments + " segment" + (segments === 1 ? "" : "s");
+      document.getElementById("smsRow").classList.toggle("over", segments > 1);
+    }
+
+    textInput.addEventListener("input", update);
+    document.getElementById("clearBtn").addEventListener("click", function () {
+      textInput.value = "";
+      update();
+      textInput.focus();
+    });
+
+    update();
+  </script>
+</body>
+</html>

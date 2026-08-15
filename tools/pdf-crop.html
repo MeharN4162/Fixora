@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free PDF Crop Tool Online | Fixora</title>
+  <meta name="description" content="Crop a PDF online for free. Drag to select the area to keep and apply it to every page at once. No uploads, no sign-up." />
+  <meta name="keywords" content="crop pdf, pdf cropper, trim pdf margins online free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/pdf-crop.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free PDF Crop Tool Online" />
+  <meta property="og:description" content="Crop a PDF online for free and apply it to every page at once." />
+  <meta property="og:url" content="https://www.fixora.com/tools/pdf-crop.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free PDF Crop Tool Online" />
+  <meta name="twitter:description" content="Crop a PDF online for free and apply it to every page at once." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PDF Crop Tool",
+    "url": "https://www.fixora.com/tools/pdf-crop.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Crop PDF", "item": "https://www.fixora.com/tools/pdf-crop.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does the crop only apply to page 1, or every page?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Every page — you preview and position the crop box on page 1 only, but the same crop area (calculated as a proportion of the page) is applied to all pages when you click Crop PDF, so it works best when every page in your document is the same size." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does cropping actually delete the content outside the box, or just hide it?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It sets each page's crop box, a standard PDF property that tells viewers and printers which region to display — the underlying content outside that region is technically still in the file, so if you need to fully remove that data (for privacy, for example), cropping alone isn't the right tool." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if my pages are different sizes?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The crop area is stored as a fraction of the page (like \"the middle 60% horizontally\"), so it's applied proportionally to each page — but if pages vary a lot in size or aspect ratio, the same proportional crop can end up looking different relative to the content on each one." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I undo the crop after downloading?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Not within this tool, but since cropping only changes the crop box property rather than deleting page content, another PDF crop or \"reset margins\" tool may be able to restore the original view if needed." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is there no page-by-page preview before I download?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Only page 1 is rendered for the interactive crop selection, to keep the tool fast on longer documents — the crop is then applied proportionally to the rest without rendering each one, since the goal is a single consistent crop across the whole file." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .crop-stage {
+      position: relative;
+      max-width: 100%;
+      margin: 20px auto 0;
+      user-select: none;
+      touch-action: none;
+      display: none;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      background: #111;
+    }
+    .crop-stage img {
+      display: block;
+      max-width: 100%;
+      max-height: 65vh;
+      width: auto;
+      height: auto;
+      margin: 0 auto;
+    }
+    .crop-box {
+      position: absolute;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 2000px rgba(0, 0, 0, 0.5);
+      cursor: move;
+    }
+    .crop-box .crop-handle {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: #fff;
+      border: 2px solid var(--color-primary);
+      border-radius: 50%;
+    }
+    .crop-handle.nw { top: -8px; left: -8px; cursor: nwse-resize; }
+    .crop-handle.ne { top: -8px; right: -8px; cursor: nesw-resize; }
+    .crop-handle.sw { bottom: -8px; left: -8px; cursor: nesw-resize; }
+    .crop-handle.se { bottom: -8px; right: -8px; cursor: nwse-resize; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Crop PDF</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">✂️</div>
+      <h1>Crop PDF</h1>
+      <p>Drag the box on page 1 to pick the area to keep — the same crop is applied to every page.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload a PDF file">
+          <div class="dz-icon" aria-hidden="true">📤</div>
+          <strong>Click to upload or drag a PDF here</strong>
+          <small>Crop is applied proportionally to every page</small>
+          <input type="file" id="fileInput" accept="application/pdf" hidden />
+        </div>
+
+        <div class="crop-stage" id="cropStage">
+          <img id="cropImg" alt="Page 1 preview for cropping" />
+          <div class="crop-box" id="cropBox">
+            <div class="crop-handle nw"></div>
+            <div class="crop-handle ne"></div>
+            <div class="crop-handle sw"></div>
+            <div class="crop-handle se"></div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="cropBtn" disabled style="display:none;">Crop PDF</button>
+          <a class="btn btn-secondary" id="downloadBtn" style="display:none;" download="cropped.pdf">Download Cropped PDF</a>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Crop a PDF</h2>
+        <ol class="howto-steps">
+          <li>Upload your PDF — page 1 renders as a preview with a draggable crop box already positioned near its edges.</li>
+          <li>Drag the box to move it, or drag any of the four corner handles to resize it around the area you want to keep.</li>
+          <li>Click "Crop PDF" once the box covers exactly what you want.</li>
+          <li>Download the cropped PDF.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Does the crop only apply to page 1, or every page?</summary>
+          <p>Every page — you preview and position the crop box on page 1 only, but the same crop area (calculated as a proportion of the page) is applied to all pages when you click Crop PDF, so it works best when every page in your document is the same size.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does cropping actually delete the content outside the box, or just hide it?</summary>
+          <p>It sets each page's crop box, a standard PDF property that tells viewers and printers which region to display — the underlying content outside that region is technically still in the file, so if you need to fully remove that data (for privacy, for example), cropping alone isn't the right tool.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What happens if my pages are different sizes?</summary>
+          <p>The crop area is stored as a fraction of the page (like "the middle 60% horizontally"), so it's applied proportionally to each page — but if pages vary a lot in size or aspect ratio, the same proportional crop can end up looking different relative to the content on each one.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I undo the crop after downloading?</summary>
+          <p>Not within this tool, but since cropping only changes the crop box property rather than deleting page content, another PDF crop or "reset margins" tool may be able to restore the original view if needed.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why is there no page-by-page preview before I download?</summary>
+          <p>Only page 1 is rendered for the interactive crop selection, to keep the tool fast on longer documents — the crop is then applied proportionally to the rest without rendering each one, since the goal is a single consistent crop across the whole file.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="image-cropper.html">
+            <span class="icon" aria-hidden="true">✂️</span>
+            <h3>Image Cropper</h3>
+            <p>Crop a single image the same way.</p>
+          </a>
+          <a class="card" href="pdf-splitter.html">
+            <span class="icon" aria-hidden="true">📄</span>
+            <h3>PDF Splitter</h3>
+            <p>Split or remove pages from a PDF.</p>
+          </a>
+          <a class="card" href="pdf-compressor.html">
+            <span class="icon" aria-hidden="true">🗜️</span>
+            <h3>PDF Compressor</h3>
+            <p>Shrink large PDF files.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/vendor/pdf-lib.min.js"></script>
+  <script type="module">
+    import * as pdfjsLib from "../assets/js/vendor/pdf.min.mjs";
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "../assets/js/vendor/pdf.worker.min.mjs";
+
+    var dropzone = document.getElementById("dropzone");
+    var fileInput = document.getElementById("fileInput");
+    var cropStage = document.getElementById("cropStage");
+    var cropImg = document.getElementById("cropImg");
+    var cropBox = document.getElementById("cropBox");
+    var cropBtn = document.getElementById("cropBtn");
+    var downloadBtn = document.getElementById("downloadBtn");
+    var statusBox = document.getElementById("statusBox");
+
+    var currentFile = null;
+    var box = { x: 40, y: 40, w: 160, h: 160 };
+    var lastDownloadUrl = null;
+
+    function resetDownload() {
+      if (lastDownloadUrl) {
+        URL.revokeObjectURL(lastDownloadUrl);
+        lastDownloadUrl = null;
+      }
+      downloadBtn.style.display = "none";
+      downloadBtn.removeAttribute("href");
+    }
+
+    async function handleFiles(files) {
+      var file = files[0];
+      if (!file || file.type !== "application/pdf") {
+        statusBox.textContent = "Please choose a valid PDF file.";
+        return;
+      }
+
+      currentFile = file;
+      resetDownload();
+      cropBtn.disabled = true;
+      cropBtn.style.display = "none";
+      statusBox.textContent = "Rendering page 1 for preview…";
+
+      try {
+        var arrayBuffer = await file.arrayBuffer();
+        var pdf = await pdfjsLib.getDocument({ data: arrayBuffer.slice(0) }).promise;
+        var page = await pdf.getPage(1);
+        var viewport = page.getViewport({ scale: 2 });
+
+        var canvas = document.createElement("canvas");
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        var ctx = canvas.getContext("2d");
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+        cropImg.src = canvas.toDataURL("image/png");
+        cropImg.onload = function () {
+          cropStage.style.display = "block";
+          cropBtn.disabled = false;
+          cropBtn.style.display = "inline-flex";
+
+          requestAnimationFrame(function () {
+            var stageW = cropImg.clientWidth;
+            var stageH = cropImg.clientHeight;
+            box = { x: stageW * 0.1, y: stageH * 0.1, w: stageW * 0.8, h: stageH * 0.8 };
+            drawBox();
+          });
+        };
+
+        statusBox.textContent = "Drag the box to select the area to keep, then click Crop PDF.";
+      } catch (err) {
+        console.error(err);
+        statusBox.textContent = "Something went wrong reading that PDF. Please try a different file.";
+      }
+    }
+
+    Fixora.setupDropzone(dropzone, fileInput, handleFiles);
+    dropzone.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") fileInput.click();
+    });
+
+    function drawBox() {
+      cropBox.style.left = box.x + "px";
+      cropBox.style.top = box.y + "px";
+      cropBox.style.width = box.w + "px";
+      cropBox.style.height = box.h + "px";
+    }
+
+    function clampBox() {
+      var maxW = cropImg.clientWidth;
+      var maxH = cropImg.clientHeight;
+      box.w = Math.max(20, Math.min(box.w, maxW));
+      box.h = Math.max(20, Math.min(box.h, maxH));
+      box.x = Math.max(0, Math.min(box.x, maxW - box.w));
+      box.y = Math.max(0, Math.min(box.y, maxH - box.h));
+    }
+
+    var dragMode = null;
+    var dragStart = null;
+
+    function pointerPos(e) {
+      var rect = cropStage.getBoundingClientRect();
+      var point = e.touches ? e.touches[0] : e;
+      return { x: point.clientX - rect.left, y: point.clientY - rect.top };
+    }
+
+    cropBox.addEventListener("mousedown", function (e) {
+      var handle = e.target.closest(".crop-handle");
+      dragMode = handle ? handle.className.replace("crop-handle ", "") : "move";
+      dragStart = { pos: pointerPos(e), box: Object.assign({}, box) };
+      e.preventDefault();
+    });
+
+    window.addEventListener("mousemove", function (e) {
+      if (!dragMode) return;
+      var pos = pointerPos(e);
+      var dx = pos.x - dragStart.pos.x;
+      var dy = pos.y - dragStart.pos.y;
+      var b = dragStart.box;
+
+      if (dragMode === "move") {
+        box.x = b.x + dx;
+        box.y = b.y + dy;
+      } else {
+        if (dragMode.indexOf("e") !== -1) box.w = b.w + dx;
+        if (dragMode.indexOf("s") !== -1) box.h = b.h + dy;
+        if (dragMode.indexOf("w") !== -1) { box.w = b.w - dx; box.x = b.x + dx; }
+        if (dragMode.indexOf("n") !== -1) { box.h = b.h - dy; box.y = b.y + dy; }
+      }
+      clampBox();
+      drawBox();
+      resetDownload();
+    });
+
+    window.addEventListener("mouseup", function () { dragMode = null; });
+
+    cropBtn.addEventListener("click", async function () {
+      if (!currentFile) return;
+      cropBtn.disabled = true;
+      statusBox.textContent = "Cropping…";
+
+      try {
+        var fracLeft = box.x / cropImg.clientWidth;
+        var fracTop = box.y / cropImg.clientHeight;
+        var fracW = box.w / cropImg.clientWidth;
+        var fracH = box.h / cropImg.clientHeight;
+
+        var arrayBuffer = await currentFile.arrayBuffer();
+        var pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
+        var pages = pdfDoc.getPages();
+
+        pages.forEach(function (page) {
+          var size = page.getSize();
+          var cropX = fracLeft * size.width;
+          var cropW = fracW * size.width;
+          var cropH = fracH * size.height;
+          var cropY = size.height - (fracTop + fracH) * size.height;
+          page.setCropBox(cropX, cropY, cropW, cropH);
+        });
+
+        var bytes = await pdfDoc.save();
+        var blob = new Blob([bytes], { type: "application/pdf" });
+        var url = URL.createObjectURL(blob);
+        lastDownloadUrl = url;
+        downloadBtn.href = url;
+        downloadBtn.download = currentFile.name.replace(/\.pdf$/i, "") + "-cropped.pdf";
+        downloadBtn.style.display = "inline-flex";
+        statusBox.textContent = "Done! Cropped " + pages.length + " page(s). (" + Fixora.formatBytes(blob.size) + ")";
+      } catch (err) {
+        console.error(err);
+        statusBox.textContent = "Something went wrong cropping that PDF. Please try again.";
+      } finally {
+        cropBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

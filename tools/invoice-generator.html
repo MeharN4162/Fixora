@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Invoice Generator Online — Create & Download PDF | Fixora</title>
+  <meta name="description" content="Create a professional invoice online for free and download it as a PDF. Add line items, tax, and notes — no sign-up, no watermark, no software to install." />
+  <meta name="keywords" content="invoice generator, free invoice template online, create invoice pdf" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/invoice-generator.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Invoice Generator Online" />
+  <meta property="og:description" content="Create a professional invoice online for free and download it as a PDF." />
+  <meta property="og:url" content="https://www.fixora.com/tools/invoice-generator.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Invoice Generator Online" />
+  <meta name="twitter:description" content="Create a professional invoice online for free and download it as a PDF." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Invoice Generator",
+    "url": "https://www.fixora.com/tools/invoice-generator.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Invoice Generator", "item": "https://www.fixora.com/tools/invoice-generator.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is there a limit to how many line items I can add?",
+        "acceptedAnswer": { "@type": "Answer", "text": "There's no hard cap on adding line items, but the PDF layout has a simple overflow guard — if you add so many line items that they'd run past the bottom margin of the single A4 page, the extras are silently skipped when the PDF is generated rather than flowing onto a second page. Keep invoices to a reasonable number of items (roughly 15-20) to be safe." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this tool generate a multi-page PDF for long invoices?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — every invoice is laid out on a single A4 page. There's no automatic pagination, so very long descriptions or a large number of line items can run out of vertical space." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is Tax calculated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Tax is calculated as your Tax Rate percentage applied to the Subtotal (the sum of every line item's Quantity times Unit Price), and the Total is Subtotal plus Tax — all shown live in the stats row as you edit." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I change the currency symbol?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — the Currency Symbol field accepts any short symbol or code (up to 3 characters, like $, €, or Rs), and it's used as a prefix throughout the invoice, including in the line item amounts and the Subtotal/Tax/Total figures." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are the invoice number and dates set automatically?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The Invoice # defaults to \"INV-001\" and the Date/Due Date fields default to today and 14 days from today, but all four are plain editable fields, so you can change them to match your own numbering scheme or payment terms." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .invoice-items { margin-top: 10px; }
+    .invoice-item-row {
+      display: grid;
+      grid-template-columns: 1fr 80px 100px 100px 32px;
+      gap: 8px;
+      margin-bottom: 8px;
+      align-items: center;
+    }
+    .invoice-item-row input {
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--color-border);
+      font-family: var(--font-main);
+      font-size: 0.9rem;
+    }
+    .invoice-item-row .item-remove {
+      background: var(--color-bg-alt);
+      border: none;
+      border-radius: 6px;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      color: var(--color-danger);
+    }
+    .invoice-item-header {
+      display: grid;
+      grid-template-columns: 1fr 80px 100px 100px 32px;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    @media (max-width: 640px) {
+      .invoice-item-row, .invoice-item-header { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Invoice Generator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🧾</div>
+      <h1>Invoice Generator</h1>
+      <p>Fill in the details, add your line items, and download a clean, professional PDF invoice.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="row">
+          <div class="field">
+            <label for="fromName">Your Business / Name</label>
+            <input type="text" id="fromName" placeholder="Acme Studio" />
+          </div>
+          <div class="field">
+            <label for="fromDetails">Your Email / Address</label>
+            <input type="text" id="fromDetails" placeholder="hello@acmestudio.com" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="toName">Bill To</label>
+            <input type="text" id="toName" placeholder="Client Name" />
+          </div>
+          <div class="field">
+            <label for="toDetails">Client Email / Address</label>
+            <input type="text" id="toDetails" placeholder="client@example.com" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="invoiceNumber">Invoice #</label>
+            <input type="text" id="invoiceNumber" value="INV-001" />
+          </div>
+          <div class="field">
+            <label for="invoiceDate">Date</label>
+            <input type="date" id="invoiceDate" />
+          </div>
+          <div class="field">
+            <label for="dueDate">Due Date</label>
+            <input type="date" id="dueDate" />
+          </div>
+        </div>
+
+        <label style="font-weight:600;font-size:0.9rem;display:block;margin:20px 0 8px;">Line Items</label>
+        <div class="invoice-item-header">
+          <span>Description</span><span>Qty</span><span>Unit Price</span><span>Amount</span><span></span>
+        </div>
+        <div class="invoice-items" id="itemsContainer"></div>
+        <button class="btn btn-secondary" id="addItemBtn" type="button" style="margin-top:6px;">+ Add Line Item</button>
+
+        <div class="row" style="margin-top:20px;">
+          <div class="field">
+            <label for="taxRate">Tax Rate (%)</label>
+            <input type="number" id="taxRate" value="0" min="0" step="0.1" />
+          </div>
+          <div class="field">
+            <label for="currency">Currency Symbol</label>
+            <input type="text" id="currency" value="$" maxlength="3" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="notes">Notes</label>
+          <textarea id="notes" placeholder="Payment due within 14 days. Thank you for your business!" style="min-height:80px;"></textarea>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat"><strong id="statSubtotal">–</strong><span>Subtotal</span></div>
+          <div class="stat"><strong id="statTax">–</strong><span>Tax</span></div>
+          <div class="stat"><strong id="statTotal">–</strong><span>Total</span></div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="generateBtn">Generate PDF Invoice</button>
+          <a class="btn btn-secondary" id="downloadBtn" style="display:none;" download="invoice.pdf">Download Invoice</a>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Create an Invoice PDF</h2>
+        <ol class="howto-steps">
+          <li>Fill in your business details ("From") and your client's details ("Bill To"), plus the invoice number, date, and due date.</li>
+          <li>Add, edit, or remove line items — description, quantity, and unit price — using "+ Add Line Item"; the Amount column and the Subtotal/Tax/Total stats update automatically as you type.</li>
+          <li>Set a Tax Rate and Currency Symbol, and add any Notes (like payment terms).</li>
+          <li>Click "Generate PDF Invoice" and download it.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Is there a limit to how many line items I can add?</summary>
+          <p>There's no hard cap on adding line items, but the PDF layout has a simple overflow guard — if you add so many line items that they'd run past the bottom margin of the single A4 page, the extras are silently skipped when the PDF is generated rather than flowing onto a second page. Keep invoices to a reasonable number of items (roughly 15-20) to be safe.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this tool generate a multi-page PDF for long invoices?</summary>
+          <p>No — every invoice is laid out on a single A4 page. There's no automatic pagination, so very long descriptions or a large number of line items can run out of vertical space.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How is Tax calculated?</summary>
+          <p>Tax is calculated as your Tax Rate percentage applied to the Subtotal (the sum of every line item's Quantity times Unit Price), and the Total is Subtotal plus Tax — all shown live in the stats row as you edit.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I change the currency symbol?</summary>
+          <p>Yes — the Currency Symbol field accepts any short symbol or code (up to 3 characters, like $, €, or Rs), and it's used as a prefix throughout the invoice, including in the line item amounts and the Subtotal/Tax/Total figures.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Are the invoice number and dates set automatically?</summary>
+          <p>The Invoice # defaults to "INV-001" and the Date/Due Date fields default to today and 14 days from today, but all four are plain editable fields, so you can change them to match your own numbering scheme or payment terms.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="pdf-watermark.html">
+            <span class="icon" aria-hidden="true">💧</span>
+            <h3>PDF Watermark</h3>
+            <p>Stamp your invoices as PAID or DRAFT.</p>
+          </a>
+          <a class="card" href="pdf-merger.html">
+            <span class="icon" aria-hidden="true">📎</span>
+            <h3>PDF Merger</h3>
+            <p>Combine multiple invoices into one file.</p>
+          </a>
+          <a class="card" href="percentage-calculator.html">
+            <span class="icon" aria-hidden="true">💯</span>
+            <h3>Percentage Calculator</h3>
+            <p>Work out discounts or tax by hand.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/vendor/pdf-lib.min.js"></script>
+  <script>
+    var itemsContainer = document.getElementById("itemsContainer");
+    var statusBox = document.getElementById("statusBox");
+    var downloadBtn = document.getElementById("downloadBtn");
+
+    function addItemRow(desc, qty, price) {
+      var row = document.createElement("div");
+      row.className = "invoice-item-row";
+      row.innerHTML =
+        '<input type="text" class="item-desc" placeholder="Design services" value="' + (desc || "") + '" />' +
+        '<input type="number" class="item-qty" placeholder="1" value="' + (qty || 1) + '" min="0" step="0.01" />' +
+        '<input type="number" class="item-price" placeholder="0.00" value="' + (price || "") + '" min="0" step="0.01" />' +
+        '<input type="text" class="item-amount" readonly value="0.00" />' +
+        '<button type="button" class="item-remove" aria-label="Remove item">✕</button>';
+      itemsContainer.appendChild(row);
+      row.querySelectorAll("input").forEach(function (inp) { inp.addEventListener("input", updateTotals); });
+      row.querySelector(".item-remove").addEventListener("click", function () {
+        row.remove();
+        updateTotals();
+      });
+      updateTotals();
+    }
+
+    document.getElementById("addItemBtn").addEventListener("click", function () { addItemRow(); });
+
+    function currency() {
+      return document.getElementById("currency").value || "$";
+    }
+
+    function updateTotals() {
+      var subtotal = 0;
+      itemsContainer.querySelectorAll(".invoice-item-row").forEach(function (row) {
+        var qty = parseFloat(row.querySelector(".item-qty").value) || 0;
+        var price = parseFloat(row.querySelector(".item-price").value) || 0;
+        var amount = qty * price;
+        row.querySelector(".item-amount").value = amount.toFixed(2);
+        subtotal += amount;
+      });
+
+      var taxRate = parseFloat(document.getElementById("taxRate").value) || 0;
+      var tax = subtotal * (taxRate / 100);
+      var total = subtotal + tax;
+
+      document.getElementById("statSubtotal").textContent = currency() + subtotal.toFixed(2);
+      document.getElementById("statTax").textContent = currency() + tax.toFixed(2);
+      document.getElementById("statTotal").textContent = currency() + total.toFixed(2);
+
+      return { subtotal: subtotal, tax: tax, total: total, taxRate: taxRate };
+    }
+
+    document.getElementById("taxRate").addEventListener("input", updateTotals);
+    document.getElementById("currency").addEventListener("input", updateTotals);
+
+    // seed with a couple of starter rows
+    addItemRow("Design services", 1, 500);
+    addItemRow("Development hours", 10, 75);
+
+    var today = new Date().toISOString().slice(0, 10);
+    document.getElementById("invoiceDate").value = today;
+    var due = new Date();
+    due.setDate(due.getDate() + 14);
+    document.getElementById("dueDate").value = due.toISOString().slice(0, 10);
+
+    document.getElementById("generateBtn").addEventListener("click", async function () {
+      statusBox.textContent = "Generating invoice…";
+      downloadBtn.style.display = "none";
+
+      try {
+        var totals = updateTotals();
+        var doc = await PDFLib.PDFDocument.create();
+        var page = doc.addPage([595.28, 841.89]); // A4
+        var font = await doc.embedFont(PDFLib.StandardFonts.Helvetica);
+        var bold = await doc.embedFont(PDFLib.StandardFonts.HelveticaBold);
+        var { width, height } = page.getSize();
+        var cur = currency();
+
+        var y = height - 60;
+        page.drawText("INVOICE", { x: 50, y: y, size: 26, font: bold, color: PDFLib.rgb(0.15, 0.39, 0.92) });
+        page.drawText("#" + (document.getElementById("invoiceNumber").value || ""), { x: 50, y: y - 22, size: 11, font: font, color: PDFLib.rgb(0.3, 0.3, 0.3) });
+
+        page.drawText("Date: " + (document.getElementById("invoiceDate").value || ""), { x: width - 200, y: y, size: 10, font: font });
+        page.drawText("Due: " + (document.getElementById("dueDate").value || ""), { x: width - 200, y: y - 15, size: 10, font: font });
+
+        y -= 60;
+        page.drawText("From", { x: 50, y: y, size: 9, font: bold, color: PDFLib.rgb(0.5, 0.5, 0.5) });
+        page.drawText("To", { x: 320, y: y, size: 9, font: bold, color: PDFLib.rgb(0.5, 0.5, 0.5) });
+        y -= 16;
+        page.drawText(document.getElementById("fromName").value || "-", { x: 50, y: y, size: 12, font: bold });
+        page.drawText(document.getElementById("toName").value || "-", { x: 320, y: y, size: 12, font: bold });
+        y -= 15;
+        page.drawText(document.getElementById("fromDetails").value || "", { x: 50, y: y, size: 10, font: font });
+        page.drawText(document.getElementById("toDetails").value || "", { x: 320, y: y, size: 10, font: font });
+
+        y -= 40;
+        page.drawLine({ start: { x: 50, y: y }, end: { x: width - 50, y: y }, thickness: 1, color: PDFLib.rgb(0.85, 0.85, 0.85) });
+        y -= 20;
+
+        page.drawText("Description", { x: 50, y: y, size: 9, font: bold });
+        page.drawText("Qty", { x: 330, y: y, size: 9, font: bold });
+        page.drawText("Unit Price", { x: 390, y: y, size: 9, font: bold });
+        page.drawText("Amount", { x: 480, y: y, size: 9, font: bold });
+        y -= 10;
+        page.drawLine({ start: { x: 50, y: y }, end: { x: width - 50, y: y }, thickness: 1, color: PDFLib.rgb(0.85, 0.85, 0.85) });
+        y -= 20;
+
+        var rows = itemsContainer.querySelectorAll(".invoice-item-row");
+        rows.forEach(function (row) {
+          if (y < 100) return; // simple overflow guard
+          var desc = row.querySelector(".item-desc").value || "-";
+          var qty = row.querySelector(".item-qty").value || "0";
+          var price = parseFloat(row.querySelector(".item-price").value) || 0;
+          var amount = row.querySelector(".item-amount").value || "0.00";
+
+          page.drawText(desc.slice(0, 45), { x: 50, y: y, size: 10, font: font });
+          page.drawText(String(qty), { x: 330, y: y, size: 10, font: font });
+          page.drawText(cur + price.toFixed(2), { x: 390, y: y, size: 10, font: font });
+          page.drawText(cur + amount, { x: 480, y: y, size: 10, font: font });
+          y -= 22;
+        });
+
+        y -= 10;
+        page.drawLine({ start: { x: 320, y: y }, end: { x: width - 50, y: y }, thickness: 1, color: PDFLib.rgb(0.85, 0.85, 0.85) });
+        y -= 20;
+
+        page.drawText("Subtotal", { x: 390, y: y, size: 10, font: font });
+        page.drawText(cur + totals.subtotal.toFixed(2), { x: 480, y: y, size: 10, font: font });
+        y -= 18;
+        page.drawText("Tax (" + totals.taxRate + "%)", { x: 390, y: y, size: 10, font: font });
+        page.drawText(cur + totals.tax.toFixed(2), { x: 480, y: y, size: 10, font: font });
+        y -= 22;
+        page.drawText("Total", { x: 390, y: y, size: 13, font: bold });
+        page.drawText(cur + totals.total.toFixed(2), { x: 480, y: y, size: 13, font: bold, color: PDFLib.rgb(0.15, 0.39, 0.92) });
+
+        var notes = document.getElementById("notes").value;
+        if (notes) {
+          y -= 50;
+          page.drawText("Notes", { x: 50, y: y, size: 9, font: bold, color: PDFLib.rgb(0.5, 0.5, 0.5) });
+          y -= 15;
+          var lines = notes.match(/.{1,90}(\s|$)/g) || [notes];
+          lines.forEach(function (line) {
+            page.drawText(line.trim(), { x: 50, y: y, size: 10, font: font });
+            y -= 14;
+          });
+        }
+
+        var bytes = await doc.save();
+        var blob = new Blob([bytes], { type: "application/pdf" });
+        var url = URL.createObjectURL(blob);
+
+        downloadBtn.href = url;
+        downloadBtn.download = (document.getElementById("invoiceNumber").value || "invoice") + ".pdf";
+        downloadBtn.style.display = "inline-flex";
+
+        statusBox.textContent = "Done! Your invoice PDF is ready to download.";
+      } catch (err) {
+        console.error(err);
+        statusBox.textContent = "Something went wrong generating the invoice.";
+      }
+    });
+  </script>
+</body>
+</html>

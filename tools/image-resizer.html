@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Image Resizer Online — Resize Photos Instantly | Fixora</title>
+  <meta name="description" content="Resize any image online for free, right in your browser. Set exact pixel dimensions or scale by percentage while keeping aspect ratio. No uploads, no sign-up." />
+  <meta name="keywords" content="image resizer, resize image online free, resize photo dimensions" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/image-resizer.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Image Resizer Online" />
+  <meta property="og:description" content="Resize any image online for free, right in your browser." />
+  <meta property="og:url" content="https://www.fixora.com/tools/image-resizer.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Image Resizer Online" />
+  <meta name="twitter:description" content="Resize any image online for free, right in your browser." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Image Resizer",
+    "url": "https://www.fixora.com/tools/image-resizer.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Image Resizer", "item": "https://www.fixora.com/tools/image-resizer.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I make an image larger than its original size?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes - the percentage slider goes up to 200%, and you can also type pixel dimensions larger than the original in Exact Pixels mode. Keep in mind that enlarging a raster image doesn't add real detail; the browser's high-quality smoothing just interpolates between existing pixels." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if I uncheck Lock aspect ratio?",
+        "acceptedAnswer": { "@type": "Answer", "text": "You can then set width and height independently, which will stretch or squash the image if the new ratio doesn't match the original - useful for fitting a specific banner or thumbnail size, but it will distort the image's proportions." }
+      },
+      {
+        "@type": "Question",
+        "name": "What file format is the resized download?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It matches your source file's type - resizing a JPG produces a JPG, and anything else (PNG, WebP, etc.) is exported as PNG at 92% quality for lossy formats." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does resizing reduce file size the same way compression does?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Not necessarily - resizing changes the pixel dimensions, while file size mainly depends on quality/compression settings. A smaller image will usually produce a smaller file, but for precise file-size control, use Fixora's Image Compressor instead, which keeps dimensions fixed." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my image uploaded to resize it?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. The resize is performed locally with the Canvas API's drawImage() scaling - your file stays on your device throughout." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Image Resizer</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">📐</div>
+      <h1>Image Resizer</h1>
+      <p>Resize any image to exact pixel dimensions or a percentage scale — right in your browser.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload an image">
+          <div class="dz-icon" aria-hidden="true">🖼️</div>
+          <strong>Click to upload or drag an image here</strong>
+          <small>JPG, PNG, or WebP supported</small>
+          <input type="file" id="fileInput" accept="image/*" hidden />
+        </div>
+
+        <img id="previewImg" class="preview-img" style="display:none;" alt="Preview of uploaded image" />
+
+        <div class="field" style="margin-top:20px;">
+          <label>Resize Mode</label>
+          <div class="row">
+            <label class="check-row"><input type="radio" name="mode" value="pixels" checked /> Exact Pixels</label>
+            <label class="check-row"><input type="radio" name="mode" value="percent" /> Percentage Scale</label>
+          </div>
+        </div>
+
+        <div id="pixelFields">
+          <div class="row">
+            <div class="field">
+              <label for="widthInput">Width (px)</label>
+              <input type="number" id="widthInput" min="1" placeholder="e.g. 1200" />
+            </div>
+            <div class="field">
+              <label for="heightInput">Height (px)</label>
+              <input type="number" id="heightInput" min="1" placeholder="e.g. 800" />
+            </div>
+          </div>
+          <label class="check-row"><input type="checkbox" id="lockRatio" checked /> Lock aspect ratio</label>
+        </div>
+
+        <div id="percentFields" style="display:none;">
+          <div class="field">
+            <label for="percentInput">Scale: <span id="percentValue">50%</span></label>
+            <input type="range" id="percentInput" min="1" max="200" value="50" style="width:100%;" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="resizeBtn" disabled>Resize Image</button>
+          <a class="btn btn-secondary" id="downloadBtn" style="display:none;" download="resized-image.png">Download Image</a>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Resize an Image</h2>
+        <ol class="howto-steps">
+          <li>Click the upload area or drag in a JPG, PNG, or WebP image — the current pixel dimensions load automatically.</li>
+          <li>Choose "Exact Pixels" to type a specific width and height, or "Percentage Scale" to scale by a percentage (1–200%).</li>
+          <li>In Exact Pixels mode, leave "Lock aspect ratio" checked so changing width automatically recalculates height (and vice versa).</li>
+          <li>Click "Resize Image", then "Download Image" to save the result.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Can I make an image larger than its original size?</summary>
+          <p>Yes - the percentage slider goes up to 200%, and you can also type pixel dimensions larger than the original in Exact Pixels mode. Keep in mind that enlarging a raster image doesn't add real detail; the browser's high-quality smoothing just interpolates between existing pixels.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What happens if I uncheck Lock aspect ratio?</summary>
+          <p>You can then set width and height independently, which will stretch or squash the image if the new ratio doesn't match the original - useful for fitting a specific banner or thumbnail size, but it will distort the image's proportions.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What file format is the resized download?</summary>
+          <p>It matches your source file's type - resizing a JPG produces a JPG, and anything else (PNG, WebP, etc.) is exported as PNG at 92% quality for lossy formats.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does resizing reduce file size the same way compression does?</summary>
+          <p>Not necessarily - resizing changes the pixel dimensions, while file size mainly depends on quality/compression settings. A smaller image will usually produce a smaller file, but for precise file-size control, use Fixora's Image Compressor instead, which keeps dimensions fixed.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my image uploaded to resize it?</summary>
+          <p>No. The resize is performed locally with the Canvas API's drawImage() scaling - your file stays on your device throughout.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="jpg-to-png.html">
+            <span class="icon" aria-hidden="true">🔄</span>
+            <h3>JPG to PNG</h3>
+            <p>Convert JPG images to PNG format.</p>
+          </a>
+          <a class="card" href="pdf-to-jpg.html">
+            <span class="icon" aria-hidden="true">🖼️</span>
+            <h3>PDF to JPG</h3>
+            <p>Export PDF pages as JPG images.</p>
+          </a>
+          <a class="card" href="../blog/image-format-guide.html">
+            <span class="icon" aria-hidden="true">🖼️</span>
+            <h3>Guide: JPG vs PNG vs WebP</h3>
+            <p>Pick the right format for your resized image.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var dropzone = document.getElementById("dropzone");
+    var fileInput = document.getElementById("fileInput");
+    var previewImg = document.getElementById("previewImg");
+    var resizeBtn = document.getElementById("resizeBtn");
+    var downloadBtn = document.getElementById("downloadBtn");
+    var statusBox = document.getElementById("statusBox");
+
+    var widthInput = document.getElementById("widthInput");
+    var heightInput = document.getElementById("heightInput");
+    var lockRatio = document.getElementById("lockRatio");
+    var percentInput = document.getElementById("percentInput");
+    var percentValue = document.getElementById("percentValue");
+    var pixelFields = document.getElementById("pixelFields");
+    var percentFields = document.getElementById("percentFields");
+    var modeRadios = document.querySelectorAll('input[name="mode"]');
+
+    var currentImg = null;
+    var currentFile = null;
+    var naturalRatio = 1;
+
+    modeRadios.forEach(function (radio) {
+      radio.addEventListener("change", function () {
+        var isPixels = radio.value === "pixels" && radio.checked;
+        if (radio.checked) {
+          pixelFields.style.display = radio.value === "pixels" ? "block" : "none";
+          percentFields.style.display = radio.value === "percent" ? "block" : "none";
+        }
+      });
+    });
+
+    percentInput.addEventListener("input", function () {
+      percentValue.textContent = percentInput.value + "%";
+    });
+
+    widthInput.addEventListener("input", function () {
+      if (lockRatio.checked && naturalRatio) {
+        heightInput.value = Math.round(widthInput.value / naturalRatio);
+      }
+    });
+
+    heightInput.addEventListener("input", function () {
+      if (lockRatio.checked && naturalRatio) {
+        widthInput.value = Math.round(heightInput.value * naturalRatio);
+      }
+    });
+
+    function handleFiles(files) {
+      var file = files[0];
+      if (!file || file.type.indexOf("image/") !== 0) {
+        statusBox.textContent = "Please choose a valid image file.";
+        return;
+      }
+      currentFile = file;
+
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var img = new Image();
+        img.onload = function () {
+          currentImg = img;
+          naturalRatio = img.naturalWidth / img.naturalHeight;
+          widthInput.value = img.naturalWidth;
+          heightInput.value = img.naturalHeight;
+
+          previewImg.src = e.target.result;
+          previewImg.style.display = "block";
+          resizeBtn.disabled = false;
+          downloadBtn.style.display = "none";
+          statusBox.textContent = "Image loaded (" + img.naturalWidth + " × " + img.naturalHeight + "px). Set your target size and click Resize.";
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    Fixora.setupDropzone(dropzone, fileInput, handleFiles);
+    dropzone.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") fileInput.click();
+    });
+
+    resizeBtn.addEventListener("click", function () {
+      if (!currentImg) return;
+
+      var mode = document.querySelector('input[name="mode"]:checked').value;
+      var targetW, targetH;
+
+      if (mode === "pixels") {
+        targetW = parseInt(widthInput.value, 10);
+        targetH = parseInt(heightInput.value, 10);
+      } else {
+        var pct = parseInt(percentInput.value, 10) / 100;
+        targetW = Math.round(currentImg.naturalWidth * pct);
+        targetH = Math.round(currentImg.naturalHeight * pct);
+      }
+
+      if (!targetW || !targetH || targetW < 1 || targetH < 1) {
+        statusBox.textContent = "Please enter a valid width and height.";
+        return;
+      }
+
+      var canvas = document.createElement("canvas");
+      canvas.width = targetW;
+      canvas.height = targetH;
+      var ctx = canvas.getContext("2d");
+      ctx.imageSmoothingQuality = "high";
+      ctx.drawImage(currentImg, 0, 0, targetW, targetH);
+
+      var mimeType = (currentFile && currentFile.type) || "image/png";
+      canvas.toBlob(function (blob) {
+        var url = URL.createObjectURL(blob);
+        downloadBtn.href = url;
+        var ext = mimeType.indexOf("png") !== -1 ? "png" : "jpg";
+        downloadBtn.download = "resized-" + targetW + "x" + targetH + "." + ext;
+        downloadBtn.style.display = "inline-flex";
+        statusBox.textContent = "Done! Resized to " + targetW + " × " + targetH + "px (" + Fixora.formatBytes(blob.size) + ").";
+      }, mimeType, 0.92);
+    });
+  </script>
+</body>
+</html>

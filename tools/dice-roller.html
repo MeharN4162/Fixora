@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Online Dice Roller | Fixora</title>
+  <meta name="description" content="Roll virtual dice online for free — d4, d6, d8, d10, d12, d20, or roll multiple dice at once. No sign-up, no app to install." />
+  <meta name="keywords" content="dice roller online free, roll a dice online, d20 roller" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/dice-roller.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Online Dice Roller" />
+  <meta property="og:description" content="Roll virtual dice online for free — d4 through d20, or multiple at once." />
+  <meta property="og:url" content="https://www.fixora.com/tools/dice-roller.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Online Dice Roller" />
+  <meta name="twitter:description" content="Roll virtual dice online for free — d4 through d20, or multiple at once." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Dice Roller",
+    "url": "https://www.fixora.com/tools/dice-roller.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Dice Roller", "item": "https://www.fixora.com/tools/dice-roller.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does the dice roller generate its results?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It uses your browser's crypto.getRandomValues() API for cryptographically secure randomness, with rejection sampling to ensure every face of the chosen die has an exactly equal chance of coming up." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I roll dice with different numbers of sides at the same time?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the dice-count field rolls that many dice, all of the currently selected type, so if you need a mixed pool, like a d20 plus two d6s, you'll need to roll each die type separately." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the maximum number of dice I can roll at once?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Up to 12 dice per roll — entering a higher number is automatically capped at 12." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this fair enough for tabletop games like D&D?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — it's built for exactly that kind of use, using a cryptographically secure random source rather than a simpler pseudo-random function, so results aren't predictable or biased toward certain numbers." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the total shown below the dice mean?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's the sum of every individual die rolled in that batch — for a single die it just shows that die's value, and for multiple dice it also lists each individual result in parentheses." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .dice-tray {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 24px;
+      justify-content: center;
+    }
+    .die-face {
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent, #06b6d4));
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.6rem;
+      box-shadow: 0 6px 16px rgba(37,99,235,0.3);
+      animation: dieRoll 0.4s ease;
+    }
+    @keyframes dieRoll {
+      0% { transform: scale(0.6) rotate(-20deg); opacity: 0.4; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+    .dice-total {
+      text-align: center;
+      margin-top: 16px;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Dice Roller</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🎲</div>
+      <h1>Dice Roller</h1>
+      <p>Roll one or more virtual dice — d4, d6, d8, d10, d12, or d20.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="pill-row" id="sidesRow">
+          <button class="pill" data-sides="4" type="button">d4</button>
+          <button class="pill active" data-sides="6" type="button">d6</button>
+          <button class="pill" data-sides="8" type="button">d8</button>
+          <button class="pill" data-sides="10" type="button">d10</button>
+          <button class="pill" data-sides="12" type="button">d12</button>
+          <button class="pill" data-sides="20" type="button">d20</button>
+        </div>
+
+        <div class="field" style="margin-top:16px;max-width:220px;">
+          <label for="diceCount">Number of dice</label>
+          <input type="number" id="diceCount" value="2" min="1" max="12" />
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="rollBtn">🎲 Roll</button>
+        </div>
+
+        <div class="dice-tray" id="diceTray"></div>
+        <div class="dice-total" id="diceTotal"></div>
+
+        <div class="output-box" id="statusBox"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Roll Virtual Dice</h2>
+        <ol class="howto-steps">
+          <li>Choose your die type — d4, d6, d8, d10, d12, or d20 — using the pill buttons.</li>
+          <li>Set how many dice to roll at once (from 1 to 12).</li>
+          <li>Click "🎲 Roll" to roll all the dice simultaneously.</li>
+          <li>Read the total below the dice tray, along with the individual roll values shown in parentheses when rolling more than one die.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How does the dice roller generate its results?</summary>
+          <p>It uses your browser's crypto.getRandomValues() API for cryptographically secure randomness, with rejection sampling to ensure every face of the chosen die has an exactly equal chance of coming up.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I roll dice with different numbers of sides at the same time?</summary>
+          <p>No — the dice-count field rolls that many dice, all of the currently selected type, so if you need a mixed pool, like a d20 plus two d6s, you'll need to roll each die type separately.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What's the maximum number of dice I can roll at once?</summary>
+          <p>Up to 12 dice per roll — entering a higher number is automatically capped at 12.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is this fair enough for tabletop games like D&D?</summary>
+          <p>Yes — it's built for exactly that kind of use, using a cryptographically secure random source rather than a simpler pseudo-random function, so results aren't predictable or biased toward certain numbers.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the total shown below the dice mean?</summary>
+          <p>It's the sum of every individual die rolled in that batch — for a single die it just shows that die's value, and for multiple dice it also lists each individual result in parentheses.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="coin-flip.html">
+            <span class="icon" aria-hidden="true">🪙</span>
+            <h3>Coin Flip</h3>
+            <p>Flip a virtual coin online.</p>
+          </a>
+          <a class="card" href="random-number-generator.html">
+            <span class="icon" aria-hidden="true">🔢</span>
+            <h3>Random Number Generator</h3>
+            <p>Generate random numbers in any range.</p>
+          </a>
+          <a class="card" href="random-name-generator.html">
+            <span class="icon" aria-hidden="true">🎲</span>
+            <h3>Random Name Generator</h3>
+            <p>Generate random names instantly.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var sides = 6;
+    var diceCount = document.getElementById("diceCount");
+    var diceTray = document.getElementById("diceTray");
+    var diceTotal = document.getElementById("diceTotal");
+    var statusBox = document.getElementById("statusBox");
+
+    document.querySelectorAll("#sidesRow [data-sides]").forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        document.querySelectorAll("#sidesRow [data-sides]").forEach(function (p) { p.classList.remove("active"); });
+        pill.classList.add("active");
+        sides = parseInt(pill.getAttribute("data-sides"), 10);
+      });
+    });
+
+    function secureRandomInt(maxExclusive) {
+      var array = new Uint32Array(1);
+      var limit = Math.floor(0xffffffff / maxExclusive) * maxExclusive;
+      do {
+        crypto.getRandomValues(array);
+      } while (array[0] >= limit);
+      return array[0] % maxExclusive;
+    }
+
+    document.getElementById("rollBtn").addEventListener("click", function () {
+      var count = parseInt(diceCount.value, 10);
+      if (isNaN(count) || count < 1) {
+        statusBox.textContent = "Please enter at least 1 die.";
+        return;
+      }
+      count = Math.min(count, 12);
+
+      var rolls = [];
+      for (var i = 0; i < count; i++) {
+        rolls.push(secureRandomInt(sides) + 1);
+      }
+
+      diceTray.innerHTML = "";
+      rolls.forEach(function (r) {
+        var die = document.createElement("div");
+        die.className = "die-face";
+        die.textContent = r;
+        diceTray.appendChild(die);
+      });
+
+      var total = rolls.reduce(function (a, b) { return a + b; }, 0);
+      diceTotal.textContent = "Total: " + total + (rolls.length > 1 ? " (" + rolls.join(" + ") + ")" : "");
+      statusBox.textContent = "Rolled " + count + " × d" + sides + ".";
+    });
+  </script>
+</body>
+</html>

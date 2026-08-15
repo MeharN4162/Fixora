@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free HTML Entity Encoder / Decoder Online | Fixora</title>
+  <meta name="description" content="Encode special characters into HTML entities or decode entities back into plain text, including numeric and named entities. Free, instant, runs in your browser." />
+  <meta name="keywords" content="html entity encoder, html entity decoder online free, escape html characters, unescape html" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/html-entity-encoder.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free HTML Entity Encoder / Decoder" />
+  <meta property="og:description" content="Encode special characters into HTML entities or decode entities back into plain text, instantly." />
+  <meta property="og:url" content="https://www.fixora.com/tools/html-entity-encoder.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free HTML Entity Encoder / Decoder" />
+  <meta name="twitter:description" content="Encode special characters into HTML entities or decode entities back into plain text, instantly." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "HTML Entity Encoder / Decoder",
+    "url": "https://www.fixora.com/tools/html-entity-encoder.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "HTML Entity Encoder / Decoder", "item": "https://www.fixora.com/tools/html-entity-encoder.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why does the order of replacements matter when encoding?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Because the ampersand character itself has to be encoded first. If the less-than and greater-than signs were encoded before the ampersand, the ampersand inside those newly-created entities would get encoded a second time, corrupting the output into a double-escaped entity. Encoding the ampersand first avoids that bug entirely." }
+      },
+      {
+        "@type": "Question",
+        "name": "What entity formats does the decoder understand?",
+        "acceptedAnswer": { "@type": "Answer", "text": "All of them — common named entities such as ampersand, less-than, greater-than, quotation mark, and non-breaking space, decimal numeric entities, and hexadecimal numeric entities. Decoding is handled by the browser's own built-in HTML parser rather than a hand-written lookup table, so it correctly understands the full standard entity set." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it safe to decode HTML entities this way?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, in this context. The tool sets your text as the innerHTML of a hidden, detached element purely to read back the decoded textContent — the element is never inserted into the page, and your text never leaves your browser, so there's no script-execution risk here." }
+      },
+      {
+        "@type": "Question",
+        "name": "When do I actually need to encode HTML entities?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Any time you're inserting user-supplied or special text into an HTML page and want reserved characters like the less-than sign, greater-than sign, ampersand, or quote marks to display literally instead of being interpreted as markup — for example, showing a code snippet or a quoted string inside a web page." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will this handle emoji or non-English characters correctly?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — only the five reserved HTML characters (ampersand, less-than, greater-than, double quote, and single quote) are touched during encoding; everything else, including emoji, accented letters, and non-Latin scripts, passes through completely unchanged." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>HTML Entity Encoder / Decoder</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🔤</div>
+      <h1>HTML Entity Encoder / Decoder</h1>
+      <p>Escape special characters into HTML entities, or decode entities back into readable text, instantly in your browser.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="entityInput">Input</label>
+          <textarea id="entityInput" placeholder="Type or paste text or HTML here…" style="min-height:160px;"></textarea>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="encodeBtn">Encode</button>
+          <button class="btn btn-secondary" id="decodeBtn">Decode</button>
+          <button class="btn btn-secondary" id="clearBtn">Clear</button>
+        </div>
+
+        <div class="field" style="margin-top:22px;">
+          <label for="entityOutput">Output</label>
+          <textarea id="entityOutput" readonly style="min-height:160px;"></textarea>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="copyBtn">Copy Output</button>
+        </div>
+        <div class="copy-note" id="copyNote"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Encode or Decode HTML Entities</h2>
+        <ol class="howto-steps">
+          <li>Paste your text into the Input box.</li>
+          <li>Click "Encode" to escape special characters (ampersand, less-than, greater-than, and quote marks) into their HTML entity equivalents.</li>
+          <li>Or click "Decode" to convert entities — named, decimal, or hexadecimal — back into normal readable text.</li>
+          <li>The result appears instantly in the Output box.</li>
+          <li>Click "Copy Output" to copy the result to your clipboard.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Why does the order of replacements matter when encoding?</summary>
+          <p>Because the ampersand character itself has to be encoded first. If the less-than and greater-than signs were encoded before the ampersand, the ampersand inside those newly-created entities would get encoded a second time, corrupting the output into a double-escaped entity. Encoding the ampersand first avoids that bug entirely.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What entity formats does the decoder understand?</summary>
+          <p>All of them — common named entities such as ampersand, less-than, greater-than, quotation mark, and non-breaking space, decimal numeric entities, and hexadecimal numeric entities. Decoding is handled by the browser's own built-in HTML parser rather than a hand-written lookup table, so it correctly understands the full standard entity set.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is it safe to decode HTML entities this way?</summary>
+          <p>Yes, in this context. The tool sets your text as the innerHTML of a hidden, detached element purely to read back the decoded textContent — the element is never inserted into the page, and your text never leaves your browser, so there's no script-execution risk here.</p>
+        </details>
+        <details class="faq-item">
+          <summary>When do I actually need to encode HTML entities?</summary>
+          <p>Any time you're inserting user-supplied or special text into an HTML page and want reserved characters like the less-than sign, greater-than sign, ampersand, or quote marks to display literally instead of being interpreted as markup — for example, showing a code snippet or a quoted string inside a web page.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Will this handle emoji or non-English characters correctly?</summary>
+          <p>Yes — only the five reserved HTML characters (ampersand, less-than, greater-than, double quote, and single quote) are touched during encoding; everything else, including emoji, accented letters, and non-Latin scripts, passes through completely unchanged.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="base64-converter.html">
+            <span class="icon" aria-hidden="true">🔣</span>
+            <h3>Base64 Converter</h3>
+            <p>Encode or decode Base64 text.</p>
+          </a>
+          <a class="card" href="url-encoder.html">
+            <span class="icon" aria-hidden="true">🔗</span>
+            <h3>URL Encoder / Decoder</h3>
+            <p>Encode or decode URLs and query strings.</p>
+          </a>
+          <a class="card" href="json-formatter.html">
+            <span class="icon" aria-hidden="true">🧾</span>
+            <h3>JSON Formatter</h3>
+            <p>Format, validate, and beautify JSON.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var entityInput = document.getElementById("entityInput");
+    var entityOutput = document.getElementById("entityOutput");
+    var copyNote = document.getElementById("copyNote");
+
+    function encodeHtmlEntities(str) {
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function decodeHtmlEntities(str) {
+      var el = document.createElement("div");
+      el.innerHTML = str;
+      return el.textContent;
+    }
+
+    document.getElementById("encodeBtn").addEventListener("click", function () {
+      entityOutput.value = encodeHtmlEntities(entityInput.value);
+    });
+
+    document.getElementById("decodeBtn").addEventListener("click", function () {
+      entityOutput.value = decodeHtmlEntities(entityInput.value);
+    });
+
+    document.getElementById("clearBtn").addEventListener("click", function () {
+      entityInput.value = "";
+      entityOutput.value = "";
+      entityInput.focus();
+    });
+
+    document.getElementById("copyBtn").addEventListener("click", function () {
+      Fixora.copyText(entityOutput.value, copyNote);
+    });
+  </script>
+</body>
+</html>

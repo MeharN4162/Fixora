@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Text Diff Checker Online — Compare Two Texts | Fixora</title>
+  <meta name="description" content="Compare two blocks of text online for free and see exactly what changed, line by line. Right in your browser, no uploads, no sign-up." />
+  <meta name="keywords" content="text diff checker, compare two texts online free, text comparison tool" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/text-diff-checker.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Text Diff Checker Online" />
+  <meta property="og:description" content="Compare two blocks of text online for free and see exactly what changed." />
+  <meta property="og:url" content="https://www.fixora.com/tools/text-diff-checker.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Text Diff Checker Online" />
+  <meta name="twitter:description" content="Compare two blocks of text online for free." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Text Diff Checker",
+    "url": "https://www.fixora.com/tools/text-diff-checker.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Text Diff Checker", "item": "https://www.fixora.com/tools/text-diff-checker.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does the diff algorithm actually work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It runs a classic longest-common-subsequence (LCS) algorithm over the lines of both texts. The algorithm finds the longest sequence of lines that appears, in order, in both versions, then marks every other line as added or removed relative to that shared sequence." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it compare word-by-word or character-by-character?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the comparison works line by line. If a single word changes in the middle of a line, the entire line is shown as one removed line and one added line rather than highlighting just the changed word." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does \"Ignore leading/trailing whitespace per line\" actually change?",
+        "acceptedAnswer": { "@type": "Answer", "text": "When checked, each line has its leading and trailing whitespace trimmed before comparison, so re-indented lines won't show as changed. Whitespace differences in the middle of a line are still detected." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a limit on how much text I can compare?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. If the number of lines in text A multiplied by the number of lines in text B exceeds 4,000,000, the tool refuses to run the comparison and asks for shorter excerpts, since the LCS grid used for the diff grows with the product of both line counts." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my text uploaded to a server when I click Compare?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. The entire diff is computed locally in your browser's JavaScript — neither text box is sent anywhere, so you can safely compare drafts or sensitive text." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .diff-output {
+      margin-top: 20px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: auto;
+      max-height: 480px;
+      font-family: monospace;
+      font-size: 0.88rem;
+      background: #fff;
+    }
+    .diff-line {
+      display: flex;
+      padding: 3px 12px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .diff-line.added { background: #dcfce7; }
+    .diff-line.removed { background: #fee2e2; }
+    .diff-line .marker { width: 20px; flex-shrink: 0; color: var(--color-text-muted); user-select: none; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Text Diff Checker</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🔍</div>
+      <h1>Text Diff Checker</h1>
+      <p>Compare two blocks of text and instantly see what was added, removed, or unchanged.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="row">
+          <div class="field">
+            <label for="textA">Original Text</label>
+            <textarea id="textA" placeholder="Paste the original text here…" style="min-height:200px;font-family:monospace;"></textarea>
+          </div>
+          <div class="field">
+            <label for="textB">Changed Text</label>
+            <textarea id="textB" placeholder="Paste the changed text here…" style="min-height:200px;font-family:monospace;"></textarea>
+          </div>
+        </div>
+
+        <label class="check-row"><input type="checkbox" id="ignoreWhitespace" /> Ignore leading/trailing whitespace per line</label>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="compareBtn">Compare</button>
+          <button class="btn btn-secondary" id="clearBtn">Clear Both</button>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+        <div class="diff-output" id="diffOutput"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Compare Two Blocks of Text</h2>
+        <ol class="howto-steps">
+          <li>Paste your original text into the "Original Text" box and the changed version into "Changed Text".</li>
+          <li>Optionally check "Ignore leading/trailing whitespace per line" if you only care about content changes, not re-indentation.</li>
+          <li>Click Compare to run the diff.</li>
+          <li>Review the color-coded output: green lines were added, red lines were removed, and plain lines are unchanged — the status line above also totals the additions and removals.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How does the diff algorithm actually work?</summary>
+          <p>It runs a classic longest-common-subsequence (LCS) algorithm over the lines of both texts. The algorithm finds the longest sequence of lines that appears, in order, in both versions, then marks every other line as added or removed relative to that shared sequence.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does it compare word-by-word or character-by-character?</summary>
+          <p>No — the comparison works line by line. If a single word changes in the middle of a line, the entire line is shown as one removed line and one added line rather than highlighting just the changed word.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does "Ignore leading/trailing whitespace per line" actually change?</summary>
+          <p>When checked, each line has its leading and trailing whitespace trimmed before comparison, so re-indented lines won't show as changed. Whitespace differences in the middle of a line are still detected.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is there a limit on how much text I can compare?</summary>
+          <p>Yes. If the number of lines in text A multiplied by the number of lines in text B exceeds 4,000,000, the tool refuses to run the comparison and asks for shorter excerpts, since the LCS grid used for the diff grows with the product of both line counts.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my text uploaded to a server when I click Compare?</summary>
+          <p>No. The entire diff is computed locally in your browser's JavaScript — neither text box is sent anywhere, so you can safely compare drafts or sensitive text.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="word-counter.html">
+            <span class="icon" aria-hidden="true">🔤</span>
+            <h3>Word Counter</h3>
+            <p>Count words and characters instantly.</p>
+          </a>
+          <a class="card" href="json-formatter.html">
+            <span class="icon" aria-hidden="true">{ }</span>
+            <h3>JSON Formatter</h3>
+            <p>Beautify, minify, and validate JSON.</p>
+          </a>
+          <a class="card" href="text-case-converter.html">
+            <span class="icon" aria-hidden="true">🔡</span>
+            <h3>Text Case Converter</h3>
+            <p>Switch text between different cases.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var textA = document.getElementById("textA");
+    var textB = document.getElementById("textB");
+    var diffOutput = document.getElementById("diffOutput");
+    var statusBox = document.getElementById("statusBox");
+    var ignoreWhitespace = document.getElementById("ignoreWhitespace");
+
+    function computeLcsDiff(linesA, linesB) {
+      var n = linesA.length, m = linesB.length;
+      var dp = new Array(n + 1);
+      for (var i = 0; i <= n; i++) dp[i] = new Int32Array(m + 1);
+
+      for (var i = n - 1; i >= 0; i--) {
+        for (var j = m - 1; j >= 0; j--) {
+          dp[i][j] = linesA[i] === linesB[j]
+            ? dp[i + 1][j + 1] + 1
+            : Math.max(dp[i + 1][j], dp[i][j + 1]);
+        }
+      }
+
+      var result = [];
+      var i = 0, j = 0;
+      while (i < n && j < m) {
+        if (linesA[i] === linesB[j]) {
+          result.push({ type: "same", text: linesA[i] });
+          i++; j++;
+        } else if (dp[i + 1][j] >= dp[i][j + 1]) {
+          result.push({ type: "removed", text: linesA[i] });
+          i++;
+        } else {
+          result.push({ type: "added", text: linesB[j] });
+          j++;
+        }
+      }
+      while (i < n) { result.push({ type: "removed", text: linesA[i] }); i++; }
+      while (j < m) { result.push({ type: "added", text: linesB[j] }); j++; }
+
+      return result;
+    }
+
+    function escapeHtml(str) {
+      var div = document.createElement("div");
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    document.getElementById("compareBtn").addEventListener("click", function () {
+      var rawA = textA.value.replace(/\r\n/g, "\n").split("\n");
+      var rawB = textB.value.replace(/\r\n/g, "\n").split("\n");
+
+      var linesA = ignoreWhitespace.checked ? rawA.map(function (l) { return l.trim(); }) : rawA;
+      var linesB = ignoreWhitespace.checked ? rawB.map(function (l) { return l.trim(); }) : rawB;
+
+      if (linesA.length * linesB.length > 4000000) {
+        statusBox.textContent = "These texts are too large to compare in the browser. Try shorter excerpts.";
+        diffOutput.innerHTML = "";
+        return;
+      }
+
+      var diff = computeLcsDiff(linesA, linesB);
+      var added = diff.filter(function (d) { return d.type === "added"; }).length;
+      var removed = diff.filter(function (d) { return d.type === "removed"; }).length;
+
+      statusBox.textContent = diff.every(function (d) { return d.type === "same"; })
+        ? "No differences found — the two texts are identical."
+        : added + " line(s) added, " + removed + " line(s) removed.";
+
+      diffOutput.innerHTML = diff.map(function (d) {
+        var marker = d.type === "added" ? "+" : d.type === "removed" ? "−" : " ";
+        return '<div class="diff-line ' + d.type + '"><span class="marker">' + marker + '</span><span>' + (escapeHtml(d.text) || " ") + '</span></div>';
+      }).join("");
+    });
+
+    document.getElementById("clearBtn").addEventListener("click", function () {
+      textA.value = "";
+      textB.value = "";
+      diffOutput.innerHTML = "";
+      statusBox.textContent = "";
+    });
+  </script>
+</body>
+</html>

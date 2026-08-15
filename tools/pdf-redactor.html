@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free PDF Redactor Online — Black Out Sensitive Text | Fixora</title>
+  <meta name="description" content="Black out and truly remove sensitive text or areas from a PDF online for free, right in your browser, by flattening pages to images. No uploads, no sign-up." />
+  <meta name="keywords" content="pdf redactor, redact pdf online free, black out pdf text, remove sensitive info pdf" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/pdf-redactor.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free PDF Redactor Online" />
+  <meta property="og:description" content="Black out and truly remove sensitive text or areas from a PDF online for free, right in your browser." />
+  <meta property="og:url" content="https://www.fixora.com/tools/pdf-redactor.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free PDF Redactor Online" />
+  <meta name="twitter:description" content="Black out and truly remove sensitive text or areas from a PDF online for free, right in your browser." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PDF Redactor",
+    "url": "https://www.fixora.com/tools/pdf-redactor.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "PDF Redactor", "item": "https://www.fixora.com/tools/pdf-redactor.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can the redacted text still be recovered or copied?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Each page is flattened into a single raster image with your black boxes permanently painted onto it before being placed into a brand-new PDF, so there is no underlying text layer left anywhere in the output file for anyone to select, copy, or extract - the covered content is genuinely gone, not just hidden beneath a shape." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this tool guarantee my PDF meets legal redaction requirements?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. It visually and structurally removes the covered content by flattening every page to an image, which is the correct technical approach real redaction tools use, but you're responsible for reviewing the final file yourself - checking every page and box placement - before relying on it for legal, medical, or compliance purposes. This tool does not certify compliance with any regulation." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the output PDF lose selectable text?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Because flattening to an image is the only way to guarantee redacted content can't be recovered. If the original text layer were kept, someone could still select or extract the \"covered\" text even with a black box drawn on top of it - converting every page to a picture removes that risk entirely, at the cost of the whole document no longer being searchable or selectable." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I redact more than one area, or multiple pages?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes - use the page selector to move between pages, draw as many black boxes as you need on each page, and remove any box before downloading. Every page of the PDF is flattened to an image in the final output, whether or not you added redaction boxes to it." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my PDF uploaded anywhere to redact it?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Rendering, redacting, and rebuilding the PDF all happen locally in your browser tab using pdf.js and pdf-lib - your file is never sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .redactor-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-top: 20px;
+    }
+    @media (min-width: 860px) {
+      .redactor-layout { grid-template-columns: 1fr 260px; }
+    }
+    .redact-stage {
+      position: relative;
+      max-width: 100%;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: #333;
+      touch-action: none;
+      user-select: none;
+    }
+    .redact-stage canvas { display: block; max-width: 100%; height: auto; margin: 0 auto; }
+    .redact-overlay {
+      position: absolute;
+      inset: 0;
+      cursor: crosshair;
+    }
+    .redact-box-preview {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.65);
+      border: 2px dashed #fff;
+    }
+    .redact-box-existing {
+      position: absolute;
+      background: #000;
+    }
+    .region-list {
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .region-list-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      font-size: 0.88rem;
+    }
+    .region-list-item button {
+      background: var(--color-bg-alt);
+      border: none;
+      border-radius: 6px;
+      width: 26px;
+      height: 26px;
+      cursor: pointer;
+      color: var(--color-primary-dark);
+      font-size: 0.86rem;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>PDF Redactor</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">⬛</div>
+      <h1>PDF Redactor</h1>
+      <p>Black out sensitive text or areas in a PDF — pages are flattened to images so covered content can't be recovered.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload a PDF file">
+          <div class="dz-icon" aria-hidden="true">📤</div>
+          <strong>Click to upload or drag a PDF here</strong>
+          <small>We'll render each page so you can draw redaction boxes</small>
+          <input type="file" id="fileInput" accept="application/pdf" hidden />
+        </div>
+
+        <div class="redactor-layout" id="redactorLayout" style="display:none;">
+          <div>
+            <div class="field" id="pageSelectWrap" style="display:none;max-width:200px;margin-bottom:12px;">
+              <label for="pageSelect">Page</label>
+              <select id="pageSelect"></select>
+            </div>
+            <p style="font-size:0.85rem;color:var(--color-text-muted);margin-bottom:8px;">Click and drag on the page to draw a black redaction box.</p>
+            <div class="redact-stage" id="redactStage">
+              <canvas id="pageCanvas"></canvas>
+              <div class="redact-overlay" id="redactOverlay"></div>
+            </div>
+          </div>
+          <div>
+            <h3 style="font-size:0.95rem;margin-bottom:10px;">Redaction Boxes (this page)</h3>
+            <div class="region-list" id="regionList"></div>
+            <div class="actions" style="margin-top:16px;">
+              <button class="btn btn-primary" id="downloadBtn" type="button">Download Redacted PDF</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Redact a PDF</h2>
+        <ol class="howto-steps">
+          <li>Upload your PDF — every page is rendered as an image preview.</li>
+          <li>If it has multiple pages, use the page selector to pick the one you want to redact.</li>
+          <li>Click and drag directly on the page to draw a solid black box over any sensitive text or area, repeating for as many regions and pages as you need.</li>
+          <li>Remove any box you don't want from the list, then click "Download Redacted PDF".</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Can the redacted text still be recovered or copied?</summary>
+          <p>No. Each page is flattened into a single raster image with your black boxes permanently painted onto it before being placed into a brand-new PDF, so there is no underlying text layer left anywhere in the output file for anyone to select, copy, or extract - the covered content is genuinely gone, not just hidden beneath a shape.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this tool guarantee my PDF meets legal redaction requirements?</summary>
+          <p>No. It visually and structurally removes the covered content by flattening every page to an image, which is the correct technical approach real redaction tools use, but you're responsible for reviewing the final file yourself - checking every page and box placement - before relying on it for legal, medical, or compliance purposes. This tool does not certify compliance with any regulation.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why does the output PDF lose selectable text?</summary>
+          <p>Because flattening to an image is the only way to guarantee redacted content can't be recovered. If the original text layer were kept, someone could still select or extract the "covered" text even with a black box drawn on top of it - converting every page to a picture removes that risk entirely, at the cost of the whole document no longer being searchable or selectable.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I redact more than one area, or multiple pages?</summary>
+          <p>Yes - use the page selector to move between pages, draw as many black boxes as you need on each page, and remove any box before downloading. Every page of the PDF is flattened to an image in the final output, whether or not you added redaction boxes to it.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my PDF uploaded anywhere to redact it?</summary>
+          <p>No. Rendering, redacting, and rebuilding the PDF all happen locally in your browser tab using pdf.js and pdf-lib - your file is never sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="pdf-signer.html">
+            <span class="icon" aria-hidden="true">✍️</span>
+            <h3>PDF Signer</h3>
+            <p>Add a signature to a PDF.</p>
+          </a>
+          <a class="card" href="pdf-watermark.html">
+            <span class="icon" aria-hidden="true">💧</span>
+            <h3>PDF Watermark</h3>
+            <p>Stamp text across every page of a PDF.</p>
+          </a>
+          <a class="card" href="pdf-metadata.html">
+            <span class="icon" aria-hidden="true">🏷️</span>
+            <h3>PDF Metadata Editor</h3>
+            <p>View and edit a PDF's hidden metadata.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/vendor/pdf-lib.min.js"></script>
+  <script type="module">
+    import * as pdfjsLib from "../assets/js/vendor/pdf.min.mjs";
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "../assets/js/vendor/pdf.worker.min.mjs";
+
+    var dropzone = document.getElementById("dropzone");
+    var fileInput = document.getElementById("fileInput");
+    var redactorLayout = document.getElementById("redactorLayout");
+    var pageSelectWrap = document.getElementById("pageSelectWrap");
+    var pageSelect = document.getElementById("pageSelect");
+    var redactStage = document.getElementById("redactStage");
+    var pageCanvas = document.getElementById("pageCanvas");
+    var redactOverlay = document.getElementById("redactOverlay");
+    var regionListEl = document.getElementById("regionList");
+    var downloadBtn = document.getElementById("downloadBtn");
+    var statusBox = document.getElementById("statusBox");
+
+    var pageCtx = pageCanvas.getContext("2d");
+    var pdfDocPdfjs = null;
+    var totalPages = 1;
+    var currentPageNum = 1;
+    var pageCanvases = {};   // pageNum -> offscreen canvas holding the rendered page
+    var boxesPerPage = {};   // pageNum -> [{x,y,w,h} in that page's canvas pixel space]
+    var currentFile = null;
+    var lastDownloadUrl = null;
+
+    var RENDER_SCALE = 2;
+
+    async function renderAllPages() {
+      pageCanvases = {};
+      boxesPerPage = {};
+      for (var i = 1; i <= totalPages; i++) {
+        var page = await pdfDocPdfjs.getPage(i);
+        var viewport = page.getViewport({ scale: RENDER_SCALE });
+        var canvas = document.createElement("canvas");
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        var ctx = canvas.getContext("2d");
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+        pageCanvases[i] = canvas;
+        boxesPerPage[i] = [];
+      }
+    }
+
+    function showPage(pageNum) {
+      currentPageNum = pageNum;
+      var src = pageCanvases[pageNum];
+      pageCanvas.width = src.width;
+      pageCanvas.height = src.height;
+      pageCtx.drawImage(src, 0, 0);
+      renderExistingBoxOverlay();
+      renderRegionList();
+    }
+
+    function renderExistingBoxOverlay() {
+      // Remove old preview boxes (existing markers), keep nothing else in overlay
+      redactOverlay.innerHTML = "";
+      var scaleInfo = overlayScale();
+      boxesPerPage[currentPageNum].forEach(function (b) {
+        var div = document.createElement("div");
+        div.className = "redact-box-existing";
+        div.style.left = (b.x / scaleInfo.scaleX) + "px";
+        div.style.top = (b.y / scaleInfo.scaleY) + "px";
+        div.style.width = (b.w / scaleInfo.scaleX) + "px";
+        div.style.height = (b.h / scaleInfo.scaleY) + "px";
+        redactOverlay.appendChild(div);
+      });
+    }
+
+    function renderRegionList() {
+      regionListEl.innerHTML = "";
+      boxesPerPage[currentPageNum].forEach(function (b, i) {
+        var item = document.createElement("div");
+        item.className = "region-list-item";
+        item.innerHTML = "<span>Box " + (i + 1) + "</span>" +
+          '<button type="button" data-index="' + i + '" aria-label="Remove box">×</button>';
+        regionListEl.appendChild(item);
+      });
+    }
+
+    regionListEl.addEventListener("click", function (e) {
+      var btn = e.target.closest("button");
+      if (!btn) return;
+      var index = parseInt(btn.getAttribute("data-index"), 10);
+      boxesPerPage[currentPageNum].splice(index, 1);
+      renderExistingBoxOverlay();
+      renderRegionList();
+    });
+
+    function handleFiles(files) {
+      var file = files[0];
+      if (!file || file.type !== "application/pdf") {
+        statusBox.textContent = "Please choose a valid PDF file.";
+        return;
+      }
+      currentFile = file;
+      statusBox.textContent = "Loading PDF…";
+
+      file.arrayBuffer().then(function (buf) {
+        return pdfjsLib.getDocument({ data: buf }).promise;
+      }).then(async function (pdf) {
+        pdfDocPdfjs = pdf;
+        totalPages = pdf.numPages;
+
+        statusBox.textContent = "Rendering " + totalPages + " page(s)…";
+        await renderAllPages();
+
+        pageSelect.innerHTML = "";
+        for (var i = 1; i <= totalPages; i++) {
+          var opt = document.createElement("option");
+          opt.value = i;
+          opt.textContent = "Page " + i;
+          pageSelect.appendChild(opt);
+        }
+        pageSelectWrap.style.display = totalPages > 1 ? "block" : "none";
+
+        redactorLayout.style.display = "grid";
+        showPage(1);
+        statusBox.textContent = "Click and drag on the page to draw a redaction box.";
+      }).catch(function (err) {
+        console.error(err);
+        statusBox.textContent = "Couldn't read that PDF. Please try a different file.";
+      });
+    }
+
+    Fixora.setupDropzone(dropzone, fileInput, handleFiles);
+    dropzone.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") fileInput.click();
+    });
+
+    pageSelect.addEventListener("change", function () {
+      showPage(parseInt(pageSelect.value, 10));
+    });
+
+    // ---- Drag-to-draw a redaction box ----
+    var dragging = false;
+    var dragStartPt = null;
+    var previewBox = null;
+
+    function overlayScale() {
+      var rect = pageCanvas.getBoundingClientRect();
+      return { scaleX: pageCanvas.width / rect.width, scaleY: pageCanvas.height / rect.height, rect: rect };
+    }
+
+    function pointFromEvent(e) {
+      var s = overlayScale();
+      var point = e.touches ? e.touches[0] : e;
+      return { x: (point.clientX - s.rect.left) * s.scaleX, y: (point.clientY - s.rect.top) * s.scaleY };
+    }
+
+    function startDrag(e) {
+      if (!pdfDocPdfjs) return;
+      dragging = true;
+      dragStartPt = pointFromEvent(e);
+      previewBox = document.createElement("div");
+      previewBox.className = "redact-box-preview";
+      redactOverlay.appendChild(previewBox);
+      e.preventDefault();
+    }
+
+    function moveDrag(e) {
+      if (!dragging) return;
+      var pt = pointFromEvent(e);
+      var s = overlayScale();
+      var x = Math.min(pt.x, dragStartPt.x);
+      var y = Math.min(pt.y, dragStartPt.y);
+      var w = Math.abs(pt.x - dragStartPt.x);
+      var h = Math.abs(pt.y - dragStartPt.y);
+      previewBox.style.left = (x / s.scaleX) + "px";
+      previewBox.style.top = (y / s.scaleY) + "px";
+      previewBox.style.width = (w / s.scaleX) + "px";
+      previewBox.style.height = (h / s.scaleY) + "px";
+      previewBox._rect = { x: x, y: y, w: w, h: h };
+    }
+
+    function endDrag() {
+      if (!dragging) return;
+      dragging = false;
+      var rect = previewBox && previewBox._rect;
+      if (redactOverlay.contains(previewBox)) redactOverlay.removeChild(previewBox);
+      previewBox = null;
+      if (rect && rect.w > 6 && rect.h > 6) {
+        rect.x = Math.max(0, Math.min(rect.x, pageCanvas.width));
+        rect.y = Math.max(0, Math.min(rect.y, pageCanvas.height));
+        rect.w = Math.min(rect.w, pageCanvas.width - rect.x);
+        rect.h = Math.min(rect.h, pageCanvas.height - rect.y);
+        boxesPerPage[currentPageNum].push(rect);
+        renderExistingBoxOverlay();
+        renderRegionList();
+        statusBox.textContent = "Box added to page " + currentPageNum + ". Draw more, or download when ready.";
+      }
+    }
+
+    redactOverlay.addEventListener("mousedown", startDrag);
+    window.addEventListener("mousemove", moveDrag);
+    window.addEventListener("mouseup", endDrag);
+    redactOverlay.addEventListener("touchstart", startDrag, { passive: false });
+    window.addEventListener("touchmove", moveDrag, { passive: true });
+    window.addEventListener("touchend", endDrag);
+
+    downloadBtn.addEventListener("click", async function () {
+      if (!pdfDocPdfjs) return;
+      downloadBtn.disabled = true;
+      statusBox.textContent = "Flattening pages and building the redacted PDF…";
+
+      try {
+        var outDoc = await PDFLib.PDFDocument.create();
+
+        for (var i = 1; i <= totalPages; i++) {
+          var src = pageCanvases[i];
+          // Clone the page's canvas so we never permanently mutate the
+          // preview canvas — redaction boxes can still be edited/removed
+          // after a download.
+          var flat = document.createElement("canvas");
+          flat.width = src.width;
+          flat.height = src.height;
+          var fctx = flat.getContext("2d");
+          fctx.drawImage(src, 0, 0);
+
+          fctx.fillStyle = "#000000";
+          (boxesPerPage[i] || []).forEach(function (b) {
+            fctx.fillRect(b.x, b.y, b.w, b.h);
+          });
+
+          var dataUrl = flat.toDataURL("image/png");
+          var bytes = await (await fetch(dataUrl)).arrayBuffer();
+          var embedded = await outDoc.embedPng(bytes);
+          var outPage = outDoc.addPage([flat.width, flat.height]);
+          outPage.drawImage(embedded, { x: 0, y: 0, width: flat.width, height: flat.height });
+
+          statusBox.textContent = "Flattened page " + i + " of " + totalPages + "…";
+        }
+
+        var pdfBytes = await outDoc.save();
+        var blob = new Blob([pdfBytes], { type: "application/pdf" });
+        var url = URL.createObjectURL(blob);
+        if (lastDownloadUrl) URL.revokeObjectURL(lastDownloadUrl);
+        lastDownloadUrl = url;
+
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = (currentFile.name || "document").replace(/\.pdf$/i, "") + "-redacted.pdf";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        statusBox.textContent = "Done! Downloaded a redacted, flattened PDF (" + Fixora.formatBytes(blob.size) + ").";
+      } catch (err) {
+        console.error(err);
+        statusBox.textContent = "Something went wrong building the redacted PDF.";
+      } finally {
+        downloadBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

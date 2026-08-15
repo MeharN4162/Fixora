@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Emoji Picker Online — Search & Copy Emoji | Fixora</title>
+  <meta name="description" content="Search hundreds of emoji by name or keyword and copy any of them to your clipboard instantly, right in your browser. No sign-up, nothing to install." />
+  <meta name="keywords" content="emoji picker, emoji search online free, copy emoji" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/emoji-picker.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Emoji Picker Online" />
+  <meta property="og:description" content="Search and copy emoji instantly, right in your browser. No sign-up." />
+  <meta property="og:url" content="https://www.fixora.com/tools/emoji-picker.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Emoji Picker Online" />
+  <meta name="twitter:description" content="Search and copy emoji instantly, right in your browser. No sign-up." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Emoji Picker",
+    "url": "https://www.fixora.com/tools/emoji-picker.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Emoji Picker", "item": "https://www.fixora.com/tools/emoji-picker.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How many emoji are included in this picker?",
+        "acceptedAnswer": { "@type": "Answer", "text": "This picker includes a curated set of over 250 commonly used emoji across categories like smileys, animals, food, activities, travel, objects, symbols, and hearts — covering the emoji people search for and use most often." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does clicking an emoji copy it?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Clicking any emoji button copies that exact character to your clipboard using your browser's Clipboard API, so you can paste it straight into a message, document, or post." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why doesn't a particular emoji show up in my search?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Search matches against each emoji's name and a short list of keywords, so if a search term isn't covered, try a more common word for what you're looking for — the emoji itself might use a different official name than you expect." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will the emoji look the same on every device?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the underlying character is identical everywhere, but its exact appearance depends on your device and app's emoji font, so the same emoji can look a little different on, say, an iPhone versus a Windows PC." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to install anything to use this?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — everything runs directly in this page using your browser's built-in emoji rendering and Clipboard API; there's nothing to download or install." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .emoji-search {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+      color: var(--color-text);
+    }
+    .emoji-search:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+    .emoji-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+      gap: 8px;
+      margin-top: 20px;
+    }
+    .emoji-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      line-height: 1;
+      padding: 10px 4px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-bg-soft);
+      cursor: pointer;
+      transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+    }
+    .emoji-btn:hover,
+    .emoji-btn:focus-visible {
+      border-color: var(--color-primary);
+      background: var(--color-bg-alt);
+      transform: translateY(-2px);
+    }
+    .emoji-btn.copied {
+      border-color: var(--color-success);
+      background: var(--color-bg-alt);
+      transform: scale(1.12);
+    }
+    .emoji-empty {
+      margin-top: 24px;
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+    .emoji-count {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Emoji Picker</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">😀</div>
+      <h1>Emoji Picker</h1>
+      <p>Search hundreds of emoji by name or keyword and click any of them to copy it straight to your clipboard.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="emojiSearch">Search Emoji</label>
+          <input type="text" id="emojiSearch" class="emoji-search" placeholder="Search emoji…" autocomplete="off" />
+        </div>
+
+        <div class="pill-row" id="categoryPills">
+          <button type="button" class="pill active" data-cat="all">All</button>
+          <button type="button" class="pill" data-cat="smileys">Smileys</button>
+          <button type="button" class="pill" data-cat="animals">Animals</button>
+          <button type="button" class="pill" data-cat="food">Food</button>
+          <button type="button" class="pill" data-cat="activities">Activities</button>
+          <button type="button" class="pill" data-cat="travel">Travel</button>
+          <button type="button" class="pill" data-cat="objects">Objects</button>
+          <button type="button" class="pill" data-cat="symbols">Symbols</button>
+          <button type="button" class="pill" data-cat="hearts">Hearts</button>
+        </div>
+
+        <div class="emoji-count" id="emojiCount"></div>
+        <div class="emoji-grid" id="emojiGrid"></div>
+        <div class="emoji-empty" id="emojiEmpty" style="display:none;">No emoji matched your search. Try a different word.</div>
+
+        <div class="copy-note" id="copyNote"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Find and Copy an Emoji</h2>
+        <ol class="howto-steps">
+          <li>Type a word into the search box — like "dog", "heart", or "pizza" — to filter the grid by name or keyword.</li>
+          <li>Or click a category pill (Smileys, Animals, Food, and more) to browse a specific group.</li>
+          <li>Click any emoji in the grid to copy it to your clipboard.</li>
+          <li>Paste it wherever you need it — a chat, a document, a caption, anywhere.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How many emoji are included in this picker?</summary>
+          <p>This picker includes a curated set of over 250 commonly used emoji across categories like smileys, animals, food, activities, travel, objects, symbols, and hearts — covering the emoji people search for and use most often.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does clicking an emoji copy it?</summary>
+          <p>Clicking any emoji button copies that exact character to your clipboard using your browser's Clipboard API, so you can paste it straight into a message, document, or post.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why doesn't a particular emoji show up in my search?</summary>
+          <p>Search matches against each emoji's name and a short list of keywords, so if a search term isn't covered, try a more common word for what you're looking for — the emoji itself might use a different official name than you expect.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Will the emoji look the same on every device?</summary>
+          <p>No — the underlying character is identical everywhere, but its exact appearance depends on your device and app's emoji font, so the same emoji can look a little different on, say, an iPhone versus a Windows PC.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Do I need to install anything to use this?</summary>
+          <p>No — everything runs directly in this page using your browser's built-in emoji rendering and Clipboard API; there's nothing to download or install.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="text-case-converter.html">
+            <span class="icon" aria-hidden="true">🔡</span>
+            <h3>Text Case Converter</h3>
+            <p>Convert text between upper, lower, and title case.</p>
+          </a>
+          <a class="card" href="slug-generator.html">
+            <span class="icon" aria-hidden="true">🔗</span>
+            <h3>Slug Generator</h3>
+            <p>Turn any text into a clean URL slug.</p>
+          </a>
+          <a class="card" href="word-counter.html">
+            <span class="icon" aria-hidden="true">🔤</span>
+            <h3>Word Counter</h3>
+            <p>Count words and characters instantly.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var EMOJI = [
+      // Smileys & People
+      { char: "😀", name: "grinning face", cat: "smileys", kw: ["happy","smile","joy"] },
+      { char: "😃", name: "grinning face with big eyes", cat: "smileys", kw: ["happy","smile","joy","awesome"] },
+      { char: "😄", name: "grinning face with smiling eyes", cat: "smileys", kw: ["happy","smile","joy","laugh"] },
+      { char: "😁", name: "beaming face with smiling eyes", cat: "smileys", kw: ["happy","smile","grin"] },
+      { char: "😆", name: "grinning squinting face", cat: "smileys", kw: ["happy","laugh","funny"] },
+      { char: "😅", name: "grinning face with sweat", cat: "smileys", kw: ["relief","nervous","phew"] },
+      { char: "🤣", name: "rolling on the floor laughing", cat: "smileys", kw: ["lol","funny","hilarious"] },
+      { char: "😂", name: "face with tears of joy", cat: "smileys", kw: ["lol","funny","laugh","cry"] },
+      { char: "🙂", name: "slightly smiling face", cat: "smileys", kw: ["smile","content"] },
+      { char: "🙃", name: "upside-down face", cat: "smileys", kw: ["silly","sarcasm"] },
+      { char: "😉", name: "winking face", cat: "smileys", kw: ["wink","flirt"] },
+      { char: "😊", name: "smiling face with smiling eyes", cat: "smileys", kw: ["happy","blush","warm"] },
+      { char: "😇", name: "smiling face with halo", cat: "smileys", kw: ["angel","innocent"] },
+      { char: "😍", name: "smiling face with heart-eyes", cat: "smileys", kw: ["love","crush","adore"] },
+      { char: "🥰", name: "smiling face with hearts", cat: "smileys", kw: ["love","affection","adore"] },
+      { char: "😘", name: "face blowing a kiss", cat: "smileys", kw: ["kiss","love"] },
+      { char: "😋", name: "face savoring food", cat: "smileys", kw: ["yum","delicious","tasty"] },
+      { char: "😜", name: "winking face with tongue", cat: "smileys", kw: ["silly","playful","joke"] },
+      { char: "🤪", name: "zany face", cat: "smileys", kw: ["crazy","wild","silly"] },
+      { char: "😎", name: "smiling face with sunglasses", cat: "smileys", kw: ["cool","awesome"] },
+      { char: "🤩", name: "star-struck", cat: "smileys", kw: ["amazed","excited","wow"] },
+      { char: "🥳", name: "partying face", cat: "smileys", kw: ["celebrate","party","birthday"] },
+      { char: "😏", name: "smirking face", cat: "smileys", kw: ["smug","sly"] },
+      { char: "😒", name: "unamused face", cat: "smileys", kw: ["annoyed","meh","unimpressed"] },
+      { char: "😢", name: "crying face", cat: "smileys", kw: ["sad","tear","upset"] },
+      { char: "😭", name: "loudly crying face", cat: "smileys", kw: ["sad","sob","bawling"] },
+      { char: "😡", name: "pouting face", cat: "smileys", kw: ["angry","mad","rage"] },
+      { char: "🤔", name: "thinking face", cat: "smileys", kw: ["hmm","think","ponder"] },
+      { char: "🤗", name: "hugging face", cat: "smileys", kw: ["hug","warm","embrace"] },
+      { char: "😴", name: "sleeping face", cat: "smileys", kw: ["sleep","tired","zzz"] },
+      { char: "🤯", name: "exploding head", cat: "smileys", kw: ["mind blown","shocked"] },
+      { char: "🥺", name: "pleading face", cat: "smileys", kw: ["puppy eyes","please","plead"] },
+      { char: "😱", name: "face screaming in fear", cat: "smileys", kw: ["shocked","scared","omg"] },
+      { char: "🤢", name: "nauseated face", cat: "smileys", kw: ["sick","gross","ill"] },
+      { char: "🤮", name: "face vomiting", cat: "smileys", kw: ["sick","disgusted","ill"] },
+      { char: "🥵", name: "hot face", cat: "smileys", kw: ["hot","sweating","heat"] },
+      { char: "🥶", name: "cold face", cat: "smileys", kw: ["cold","freezing","chilly"] },
+      { char: "😷", name: "face with medical mask", cat: "smileys", kw: ["sick","mask","ill"] },
+      { char: "🤒", name: "face with thermometer", cat: "smileys", kw: ["sick","fever","ill"] },
+      { char: "👋", name: "waving hand", cat: "smileys", kw: ["hi","bye","hello","wave"] },
+      { char: "🤝", name: "handshake", cat: "smileys", kw: ["deal","agreement","greeting"] },
+      { char: "👍", name: "thumbs up", cat: "smileys", kw: ["like","good","yes","approve"] },
+      { char: "👎", name: "thumbs down", cat: "smileys", kw: ["dislike","bad","no"] },
+      { char: "👏", name: "clapping hands", cat: "smileys", kw: ["applause","congrats","well done"] },
+      { char: "🙌", name: "raising hands", cat: "smileys", kw: ["celebrate","hooray","praise"] },
+      { char: "🙏", name: "folded hands", cat: "smileys", kw: ["please","thanks","pray"] },
+      { char: "💪", name: "flexed biceps", cat: "smileys", kw: ["strong","muscle","workout"] },
+      { char: "🤦", name: "person facepalming", cat: "smileys", kw: ["facepalm","oops","exasperated"] },
+      { char: "🤷", name: "person shrugging", cat: "smileys", kw: ["shrug","unsure","idk"] },
+      { char: "👀", name: "eyes", cat: "smileys", kw: ["look","watch","see"] },
+      { char: "🧠", name: "brain", cat: "smileys", kw: ["smart","mind","think"] },
+
+      // Animals & Nature
+      { char: "🐶", name: "dog face", cat: "animals", kw: ["dog","puppy","pet"] },
+      { char: "🐱", name: "cat face", cat: "animals", kw: ["cat","kitten","pet"] },
+      { char: "🐭", name: "mouse face", cat: "animals", kw: ["mouse","rodent"] },
+      { char: "🐹", name: "hamster face", cat: "animals", kw: ["hamster","pet"] },
+      { char: "🐰", name: "rabbit face", cat: "animals", kw: ["rabbit","bunny"] },
+      { char: "🦊", name: "fox face", cat: "animals", kw: ["fox"] },
+      { char: "🐻", name: "bear face", cat: "animals", kw: ["bear"] },
+      { char: "🐼", name: "panda face", cat: "animals", kw: ["panda"] },
+      { char: "🐨", name: "koala", cat: "animals", kw: ["koala"] },
+      { char: "🐯", name: "tiger face", cat: "animals", kw: ["tiger"] },
+      { char: "🦁", name: "lion face", cat: "animals", kw: ["lion"] },
+      { char: "🐮", name: "cow face", cat: "animals", kw: ["cow"] },
+      { char: "🐷", name: "pig face", cat: "animals", kw: ["pig"] },
+      { char: "🐸", name: "frog face", cat: "animals", kw: ["frog"] },
+      { char: "🐵", name: "monkey face", cat: "animals", kw: ["monkey"] },
+      { char: "🐔", name: "chicken", cat: "animals", kw: ["chicken","bird"] },
+      { char: "🐧", name: "penguin", cat: "animals", kw: ["penguin","bird"] },
+      { char: "🐦", name: "bird", cat: "animals", kw: ["bird"] },
+      { char: "🦆", name: "duck", cat: "animals", kw: ["duck","bird"] },
+      { char: "🦅", name: "eagle", cat: "animals", kw: ["eagle","bird"] },
+      { char: "🦉", name: "owl", cat: "animals", kw: ["owl","bird"] },
+      { char: "🐴", name: "horse face", cat: "animals", kw: ["horse"] },
+      { char: "🦄", name: "unicorn face", cat: "animals", kw: ["unicorn","magic"] },
+      { char: "🐝", name: "honeybee", cat: "animals", kw: ["bee","honey","insect"] },
+      { char: "🐛", name: "bug", cat: "animals", kw: ["bug","insect","caterpillar"] },
+      { char: "🦋", name: "butterfly", cat: "animals", kw: ["butterfly","insect"] },
+      { char: "🐌", name: "snail", cat: "animals", kw: ["snail","slow"] },
+      { char: "🐞", name: "lady beetle", cat: "animals", kw: ["ladybug","insect"] },
+      { char: "🐢", name: "turtle", cat: "animals", kw: ["turtle","slow","tortoise"] },
+      { char: "🐍", name: "snake", cat: "animals", kw: ["snake","reptile"] },
+      { char: "🦖", name: "T-Rex", cat: "animals", kw: ["dinosaur","trex"] },
+      { char: "🐙", name: "octopus", cat: "animals", kw: ["octopus","sea"] },
+      { char: "🐠", name: "tropical fish", cat: "animals", kw: ["fish","sea"] },
+      { char: "🐬", name: "dolphin", cat: "animals", kw: ["dolphin","sea"] },
+      { char: "🐳", name: "spouting whale", cat: "animals", kw: ["whale","sea"] },
+      { char: "🦈", name: "shark", cat: "animals", kw: ["shark","sea"] },
+      { char: "🐘", name: "elephant", cat: "animals", kw: ["elephant"] },
+      { char: "🦒", name: "giraffe face", cat: "animals", kw: ["giraffe"] },
+      { char: "🐫", name: "two-hump camel", cat: "animals", kw: ["camel","desert"] },
+      { char: "🦘", name: "kangaroo", cat: "animals", kw: ["kangaroo"] },
+      { char: "🐄", name: "cow", cat: "animals", kw: ["cow","farm"] },
+      { char: "🐑", name: "ewe", cat: "animals", kw: ["sheep","farm"] },
+      { char: "🐓", name: "rooster", cat: "animals", kw: ["rooster","farm","bird"] },
+      { char: "🌵", name: "cactus", cat: "animals", kw: ["cactus","desert","plant"] },
+      { char: "🌲", name: "evergreen tree", cat: "animals", kw: ["tree","pine","nature"] },
+      { char: "🌴", name: "palm tree", cat: "animals", kw: ["tree","tropical","beach"] },
+      { char: "🌸", name: "cherry blossom", cat: "animals", kw: ["flower","spring","sakura"] },
+      { char: "🌻", name: "sunflower", cat: "animals", kw: ["flower","sun"] },
+      { char: "🌈", name: "rainbow", cat: "animals", kw: ["rainbow","colorful","weather"] },
+      { char: "⭐", name: "star", cat: "animals", kw: ["star","sky","favorite"] },
+
+      // Food & Drink
+      { char: "🍎", name: "red apple", cat: "food", kw: ["apple","fruit"] },
+      { char: "🍌", name: "banana", cat: "food", kw: ["banana","fruit"] },
+      { char: "🍇", name: "grapes", cat: "food", kw: ["grapes","fruit","wine"] },
+      { char: "🍓", name: "strawberry", cat: "food", kw: ["strawberry","fruit"] },
+      { char: "🍉", name: "watermelon", cat: "food", kw: ["watermelon","fruit","summer"] },
+      { char: "🍒", name: "cherries", cat: "food", kw: ["cherry","fruit"] },
+      { char: "🍑", name: "peach", cat: "food", kw: ["peach","fruit"] },
+      { char: "🍍", name: "pineapple", cat: "food", kw: ["pineapple","fruit"] },
+      { char: "🥭", name: "mango", cat: "food", kw: ["mango","fruit"] },
+      { char: "🥝", name: "kiwi fruit", cat: "food", kw: ["kiwi","fruit"] },
+      { char: "🍅", name: "tomato", cat: "food", kw: ["tomato","vegetable"] },
+      { char: "🥑", name: "avocado", cat: "food", kw: ["avocado","guac"] },
+      { char: "🍆", name: "eggplant", cat: "food", kw: ["eggplant","vegetable"] },
+      { char: "🌽", name: "ear of corn", cat: "food", kw: ["corn","vegetable"] },
+      { char: "🥕", name: "carrot", cat: "food", kw: ["carrot","vegetable"] },
+      { char: "🍕", name: "pizza", cat: "food", kw: ["pizza","cheese","food"] },
+      { char: "🍔", name: "hamburger", cat: "food", kw: ["burger","food"] },
+      { char: "🍟", name: "french fries", cat: "food", kw: ["fries","food"] },
+      { char: "🌭", name: "hot dog", cat: "food", kw: ["hotdog","food"] },
+      { char: "🥪", name: "sandwich", cat: "food", kw: ["sandwich","food"] },
+      { char: "🌮", name: "taco", cat: "food", kw: ["taco","mexican"] },
+      { char: "🌯", name: "burrito", cat: "food", kw: ["burrito","mexican"] },
+      { char: "🍣", name: "sushi", cat: "food", kw: ["sushi","japanese"] },
+      { char: "🍦", name: "soft ice cream", cat: "food", kw: ["ice cream","dessert"] },
+      { char: "🍩", name: "doughnut", cat: "food", kw: ["donut","dessert"] },
+      { char: "🍪", name: "cookie", cat: "food", kw: ["cookie","dessert"] },
+      { char: "🎂", name: "birthday cake", cat: "food", kw: ["cake","birthday","party"] },
+      { char: "🍰", name: "shortcake", cat: "food", kw: ["cake","dessert"] },
+      { char: "🍫", name: "chocolate bar", cat: "food", kw: ["chocolate","candy"] },
+      { char: "🍿", name: "popcorn", cat: "food", kw: ["popcorn","movie","snack"] },
+      { char: "☕", name: "hot beverage", cat: "food", kw: ["coffee","drink"] },
+      { char: "🍵", name: "teacup without handle", cat: "food", kw: ["tea","drink"] },
+      { char: "🥤", name: "cup with straw", cat: "food", kw: ["soda","drink"] },
+      { char: "🍺", name: "beer mug", cat: "food", kw: ["beer","drink"] },
+      { char: "🍷", name: "wine glass", cat: "food", kw: ["wine","drink"] },
+      { char: "🍾", name: "bottle with popping cork", cat: "food", kw: ["champagne","celebrate","drink"] },
+
+      // Activities & Sports
+      { char: "⚽", name: "soccer ball", cat: "activities", kw: ["soccer","football","sports"] },
+      { char: "🏀", name: "basketball", cat: "activities", kw: ["basketball","sports"] },
+      { char: "🏈", name: "american football", cat: "activities", kw: ["football","sports"] },
+      { char: "⚾", name: "baseball", cat: "activities", kw: ["baseball","sports"] },
+      { char: "🎾", name: "tennis", cat: "activities", kw: ["tennis","sports"] },
+      { char: "🏐", name: "volleyball", cat: "activities", kw: ["volleyball","sports"] },
+      { char: "🏉", name: "rugby football", cat: "activities", kw: ["rugby","sports"] },
+      { char: "🎱", name: "pool 8 ball", cat: "activities", kw: ["billiards","pool","sports"] },
+      { char: "🏓", name: "ping pong", cat: "activities", kw: ["table tennis","sports"] },
+      { char: "🏸", name: "badminton", cat: "activities", kw: ["badminton","sports"] },
+      { char: "🥊", name: "boxing glove", cat: "activities", kw: ["boxing","sports"] },
+      { char: "⛳", name: "flag in hole", cat: "activities", kw: ["golf","sports"] },
+      { char: "🎣", name: "fishing pole", cat: "activities", kw: ["fishing","hobby"] },
+      { char: "🎽", name: "running shirt", cat: "activities", kw: ["running","race","marathon"] },
+      { char: "🎿", name: "skis", cat: "activities", kw: ["skiing","winter sports"] },
+      { char: "🏂", name: "snowboarder", cat: "activities", kw: ["snowboarding","winter sports"] },
+      { char: "🏋️", name: "person lifting weights", cat: "activities", kw: ["gym","workout","weightlifting"] },
+      { char: "🚴", name: "person biking", cat: "activities", kw: ["cycling","bike"] },
+      { char: "🏊", name: "person swimming", cat: "activities", kw: ["swimming","pool"] },
+      { char: "🎮", name: "video game controller", cat: "activities", kw: ["gaming","controller"] },
+      { char: "🎯", name: "direct hit", cat: "activities", kw: ["dart","target","bullseye"] },
+      { char: "🎲", name: "game die", cat: "activities", kw: ["dice","game"] },
+      { char: "🎳", name: "bowling", cat: "activities", kw: ["bowling","sports"] },
+      { char: "🎸", name: "guitar", cat: "activities", kw: ["guitar","music"] },
+      { char: "🎹", name: "musical keyboard", cat: "activities", kw: ["piano","music"] },
+      { char: "🥁", name: "drum", cat: "activities", kw: ["drum","music"] },
+      { char: "🎤", name: "microphone", cat: "activities", kw: ["mic","singing","music"] },
+      { char: "🎨", name: "artist palette", cat: "activities", kw: ["art","painting"] },
+      { char: "🎬", name: "clapper board", cat: "activities", kw: ["movie","film"] },
+      { char: "🏆", name: "trophy", cat: "activities", kw: ["trophy","win","award"] },
+
+      // Travel & Places
+      { char: "🚗", name: "automobile", cat: "travel", kw: ["car","drive"] },
+      { char: "🚕", name: "taxi", cat: "travel", kw: ["taxi","cab"] },
+      { char: "🚌", name: "bus", cat: "travel", kw: ["bus","transport"] },
+      { char: "🚓", name: "police car", cat: "travel", kw: ["police","car"] },
+      { char: "🚑", name: "ambulance", cat: "travel", kw: ["ambulance","hospital"] },
+      { char: "🚒", name: "fire engine", cat: "travel", kw: ["fire truck","firefighter"] },
+      { char: "🚲", name: "bicycle", cat: "travel", kw: ["bike","cycling"] },
+      { char: "🛵", name: "motor scooter", cat: "travel", kw: ["scooter","moped"] },
+      { char: "✈️", name: "airplane", cat: "travel", kw: ["plane","flight","travel"] },
+      { char: "🚀", name: "rocket", cat: "travel", kw: ["rocket","space"] },
+      { char: "🚁", name: "helicopter", cat: "travel", kw: ["helicopter","flight"] },
+      { char: "⛵", name: "sailboat", cat: "travel", kw: ["boat","sailing"] },
+      { char: "🚢", name: "ship", cat: "travel", kw: ["ship","cruise"] },
+      { char: "🚂", name: "locomotive", cat: "travel", kw: ["train"] },
+      { char: "🚦", name: "traffic light", cat: "travel", kw: ["traffic","signal"] },
+      { char: "🗽", name: "Statue of Liberty", cat: "travel", kw: ["new york","liberty"] },
+      { char: "🗼", name: "Tokyo Tower", cat: "travel", kw: ["tokyo","tower"] },
+      { char: "🏰", name: "castle", cat: "travel", kw: ["castle","fairy tale"] },
+      { char: "🎡", name: "ferris wheel", cat: "travel", kw: ["ferris wheel","fair"] },
+      { char: "🎢", name: "roller coaster", cat: "travel", kw: ["roller coaster","amusement park"] },
+      { char: "🏖️", name: "beach with umbrella", cat: "travel", kw: ["beach","vacation"] },
+      { char: "🏝️", name: "desert island", cat: "travel", kw: ["island","vacation"] },
+      { char: "🏔️", name: "snow-capped mountain", cat: "travel", kw: ["mountain","snow"] },
+      { char: "🌋", name: "volcano", cat: "travel", kw: ["volcano"] },
+      { char: "🗻", name: "Mount Fuji", cat: "travel", kw: ["mountain","fuji"] },
+      { char: "🏕️", name: "camping", cat: "travel", kw: ["camping","tent"] },
+      { char: "🌍", name: "globe showing Europe-Africa", cat: "travel", kw: ["world","earth","globe"] },
+      { char: "🌙", name: "crescent moon", cat: "travel", kw: ["moon","night"] },
+      { char: "☀️", name: "sun", cat: "travel", kw: ["sun","sunny","weather"] },
+      { char: "⛅", name: "sun behind cloud", cat: "travel", kw: ["cloud","weather"] },
+
+      // Objects
+      { char: "📱", name: "mobile phone", cat: "objects", kw: ["phone","cell"] },
+      { char: "💻", name: "laptop", cat: "objects", kw: ["computer","laptop"] },
+      { char: "⌨️", name: "keyboard", cat: "objects", kw: ["keyboard","typing"] },
+      { char: "🖥️", name: "desktop computer", cat: "objects", kw: ["computer","desktop"] },
+      { char: "🖨️", name: "printer", cat: "objects", kw: ["printer"] },
+      { char: "📷", name: "camera", cat: "objects", kw: ["camera","photo"] },
+      { char: "🎥", name: "movie camera", cat: "objects", kw: ["film","movie"] },
+      { char: "📺", name: "television", cat: "objects", kw: ["tv","television"] },
+      { char: "📻", name: "radio", cat: "objects", kw: ["radio"] },
+      { char: "⏰", name: "alarm clock", cat: "objects", kw: ["clock","alarm","time"] },
+      { char: "⌛", name: "hourglass done", cat: "objects", kw: ["time","hourglass"] },
+      { char: "💡", name: "light bulb", cat: "objects", kw: ["idea","bulb","light"] },
+      { char: "🔦", name: "flashlight", cat: "objects", kw: ["flashlight","torch"] },
+      { char: "🕯️", name: "candle", cat: "objects", kw: ["candle","light"] },
+      { char: "📚", name: "books", cat: "objects", kw: ["books","study","library"] },
+      { char: "📖", name: "open book", cat: "objects", kw: ["book","reading"] },
+      { char: "✏️", name: "pencil", cat: "objects", kw: ["pencil","write"] },
+      { char: "🖊️", name: "pen", cat: "objects", kw: ["pen","write"] },
+      { char: "📌", name: "pushpin", cat: "objects", kw: ["pin","note"] },
+      { char: "📎", name: "paperclip", cat: "objects", kw: ["clip","attach"] },
+      { char: "✂️", name: "scissors", cat: "objects", kw: ["scissors","cut"] },
+      { char: "🔒", name: "locked", cat: "objects", kw: ["lock","secure","private"] },
+      { char: "🔑", name: "key", cat: "objects", kw: ["key","unlock"] },
+      { char: "🎁", name: "wrapped gift", cat: "objects", kw: ["gift","present"] },
+      { char: "💰", name: "money bag", cat: "objects", kw: ["money","cash"] },
+      { char: "💳", name: "credit card", cat: "objects", kw: ["card","payment"] },
+      { char: "📦", name: "package", cat: "objects", kw: ["box","delivery","package"] },
+      { char: "🧭", name: "compass", cat: "objects", kw: ["compass","direction"] },
+      { char: "🔬", name: "microscope", cat: "objects", kw: ["science","microscope"] },
+      { char: "🔭", name: "telescope", cat: "objects", kw: ["telescope","astronomy"] },
+
+      // Symbols
+      { char: "✅", name: "check mark button", cat: "symbols", kw: ["check","done","yes"] },
+      { char: "❌", name: "cross mark", cat: "symbols", kw: ["no","wrong","cancel"] },
+      { char: "❓", name: "red question mark", cat: "symbols", kw: ["question","confused"] },
+      { char: "❗", name: "red exclamation mark", cat: "symbols", kw: ["exclamation","alert"] },
+      { char: "⚠️", name: "warning", cat: "symbols", kw: ["warning","caution","alert"] },
+      { char: "🔥", name: "fire", cat: "symbols", kw: ["fire","hot","lit"] },
+      { char: "✨", name: "sparkles", cat: "symbols", kw: ["sparkle","shiny","magic"] },
+      { char: "💯", name: "hundred points", cat: "symbols", kw: ["hundred","perfect","score"] },
+      { char: "♻️", name: "recycling symbol", cat: "symbols", kw: ["recycle","eco","green"] },
+      { char: "🔞", name: "no one under eighteen", cat: "symbols", kw: ["restricted","adult"] },
+      { char: "🆗", name: "OK button", cat: "symbols", kw: ["ok","okay"] },
+      { char: "🔔", name: "bell", cat: "symbols", kw: ["bell","notification","alert"] },
+      { char: "🚫", name: "prohibited", cat: "symbols", kw: ["no","banned","forbidden"] },
+      { char: "♠️", name: "spade suit", cat: "symbols", kw: ["cards","spade","poker"] },
+      { char: "♣️", name: "club suit", cat: "symbols", kw: ["cards","club","poker"] },
+      { char: "♥️", name: "heart suit", cat: "symbols", kw: ["cards","heart","poker"] },
+      { char: "♦️", name: "diamond suit", cat: "symbols", kw: ["cards","diamond","poker"] },
+
+      // Hearts & Love
+      { char: "❤️", name: "red heart", cat: "hearts", kw: ["love","heart"] },
+      { char: "🧡", name: "orange heart", cat: "hearts", kw: ["love","heart"] },
+      { char: "💛", name: "yellow heart", cat: "hearts", kw: ["love","heart"] },
+      { char: "💚", name: "green heart", cat: "hearts", kw: ["love","heart"] },
+      { char: "💙", name: "blue heart", cat: "hearts", kw: ["love","heart"] },
+      { char: "💜", name: "purple heart", cat: "hearts", kw: ["love","heart"] },
+      { char: "🖤", name: "black heart", cat: "hearts", kw: ["love","heart"] },
+      { char: "🤍", name: "white heart", cat: "hearts", kw: ["love","heart"] },
+      { char: "🤎", name: "brown heart", cat: "hearts", kw: ["love","heart"] },
+      { char: "💔", name: "broken heart", cat: "hearts", kw: ["sad","breakup","heart"] },
+      { char: "💕", name: "two hearts", cat: "hearts", kw: ["love","cute","hearts"] },
+      { char: "💞", name: "revolving hearts", cat: "hearts", kw: ["love","hearts"] },
+      { char: "💓", name: "beating heart", cat: "hearts", kw: ["love","pulse","heart"] },
+      { char: "💗", name: "growing heart", cat: "hearts", kw: ["love","heart"] },
+      { char: "💖", name: "sparkling heart", cat: "hearts", kw: ["love","heart"] },
+      { char: "💘", name: "heart with arrow", cat: "hearts", kw: ["love","cupid","heart"] },
+      { char: "💝", name: "heart with ribbon", cat: "hearts", kw: ["love","gift","heart"] },
+      { char: "😻", name: "smiling cat with heart-eyes", cat: "hearts", kw: ["cat","love","adore"] }
+    ];
+
+    var emojiGrid = document.getElementById("emojiGrid");
+    var emojiEmpty = document.getElementById("emojiEmpty");
+    var emojiCount = document.getElementById("emojiCount");
+    var emojiSearch = document.getElementById("emojiSearch");
+    var copyNote = document.getElementById("copyNote");
+    var categoryPills = document.querySelectorAll("#categoryPills .pill");
+    var activeCat = "all";
+
+    function renderGrid() {
+      var query = emojiSearch.value.trim().toLowerCase();
+
+      var filtered = EMOJI.filter(function (e) {
+        if (activeCat !== "all" && e.cat !== activeCat) return false;
+        if (!query) return true;
+        if (e.name.toLowerCase().indexOf(query) !== -1) return true;
+        return e.kw.some(function (k) { return k.toLowerCase().indexOf(query) !== -1; });
+      });
+
+      emojiGrid.innerHTML = "";
+      filtered.forEach(function (e) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "emoji-btn";
+        btn.title = e.name;
+        btn.setAttribute("aria-label", e.name);
+        btn.textContent = e.char;
+        btn.addEventListener("click", function () {
+          Fixora.copyText(e.char, copyNote);
+          btn.classList.remove("copied");
+          void btn.offsetWidth;
+          btn.classList.add("copied");
+          setTimeout(function () { btn.classList.remove("copied"); }, 500);
+        });
+        emojiGrid.appendChild(btn);
+      });
+
+      emojiEmpty.style.display = filtered.length ? "none" : "block";
+      emojiCount.textContent = filtered.length + (filtered.length === 1 ? " emoji" : " emoji") + " shown (of " + EMOJI.length + " total)";
+    }
+
+    emojiSearch.addEventListener("input", renderGrid);
+
+    categoryPills.forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        categoryPills.forEach(function (p) { p.classList.remove("active"); });
+        pill.classList.add("active");
+        activeCat = pill.getAttribute("data-cat");
+        renderGrid();
+      });
+    });
+
+    renderGrid();
+  </script>
+</body>
+</html>

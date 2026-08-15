@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Mortgage Calculator Online — Monthly Payment Estimator | Fixora</title>
+  <meta name="description" content="Estimate your monthly mortgage payment for free — principal, interest, property tax, home insurance, and PMI, with a full cost breakdown. No sign-up." />
+  <meta name="keywords" content="mortgage calculator, mortgage calculator online free, monthly mortgage payment calculator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/mortgage-calculator.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Mortgage Calculator Online" />
+  <meta property="og:description" content="Estimate your monthly mortgage payment for free, including taxes, insurance, and PMI." />
+  <meta property="og:url" content="https://www.fixora.com/tools/mortgage-calculator.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Mortgage Calculator Online" />
+  <meta name="twitter:description" content="Estimate your monthly mortgage payment for free, including taxes, insurance, and PMI." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Mortgage Calculator",
+    "url": "https://www.fixora.com/tools/mortgage-calculator.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Mortgage Calculator", "item": "https://www.fixora.com/tools/mortgage-calculator.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does this include PMI automatically?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — PMI isn't calculated automatically since eligibility and rates vary by lender. If your down payment is under 20% of the home price, enter your lender's quoted monthly PMI amount in the PMI field and it will be added to your total monthly payment." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is property tax included in the estimate?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Only if you enter it. Property tax varies by county and assessed value, so this calculator doesn't guess a number for you — enter your annual property tax amount and it's divided by 12 and added to your monthly payment." }
+      },
+      {
+        "@type": "Question",
+        "name": "What formula does this calculator use for the monthly payment?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It uses the standard fixed-rate amortization formula for Principal & Interest: M = P × [r(1+r)^n] / [(1+r)^n − 1], where P is the loan amount (home price minus down payment), r is the monthly interest rate (annual rate ÷ 12 ÷ 100), and n is the total number of monthly payments (loan term in years × 12)." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if I enter a 0% interest rate?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The calculator switches to a simple division of the loan amount by the number of months, since the standard amortization formula involves dividing by zero when the rate is zero." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this a guaranteed loan offer?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — this tool gives a mathematical estimate based on the numbers you enter. Actual mortgage terms, fees, taxes, insurance premiums, and eligibility depend on your lender and location, so treat this as a planning estimate, not a loan offer." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Mortgage Calculator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🏠</div>
+      <h1>Mortgage Calculator</h1>
+      <p>Estimate your monthly mortgage payment — principal, interest, taxes, insurance, and PMI — with a full cost breakdown.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="row">
+          <div class="field">
+            <label for="homePrice">Home Price ($)</label>
+            <input type="number" id="homePrice" min="0" step="1000" value="400000" />
+          </div>
+          <div class="field">
+            <label for="downPayment">Down Payment ($)</label>
+            <input type="number" id="downPayment" min="0" step="1000" value="80000" />
+            <span id="downPaymentPct" style="display:block;margin-top:6px;font-size:0.8rem;color:var(--color-text-muted);">20.0% of home price</span>
+          </div>
+          <div class="field">
+            <label for="loanTerm">Loan Term (years)</label>
+            <input type="number" id="loanTerm" min="1" step="1" value="30" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="interestRate">Annual Interest Rate (%)</label>
+            <input type="number" id="interestRate" min="0" step="0.01" value="6.5" />
+          </div>
+          <div class="field">
+            <label for="propertyTax">Annual Property Tax ($, optional)</label>
+            <input type="number" id="propertyTax" min="0" step="100" value="0" />
+          </div>
+          <div class="field">
+            <label for="homeInsurance">Annual Home Insurance ($, optional)</label>
+            <input type="number" id="homeInsurance" min="0" step="50" value="0" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field" style="max-width:280px;">
+            <label for="pmi">Monthly PMI ($, optional)</label>
+            <input type="number" id="pmi" min="0" step="10" value="0" />
+          </div>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+
+        <div class="stat-row" id="resultRow" style="display:none;">
+          <div class="stat"><strong id="statPI">–</strong><span>Principal &amp; Interest</span></div>
+          <div class="stat"><strong id="statTax">–</strong><span>Monthly Tax</span></div>
+          <div class="stat"><strong id="statInsurance">–</strong><span>Monthly Insurance</span></div>
+          <div class="stat"><strong id="statPMI">–</strong><span>Monthly PMI</span></div>
+          <div class="stat"><strong id="statTotalMonthly">–</strong><span>Total Monthly Payment</span></div>
+          <div class="stat"><strong id="statTotalInterest">–</strong><span>Total Interest Paid</span></div>
+          <div class="stat"><strong id="statTotalPaid">–</strong><span>Total Paid Over Loan Term</span></div>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Estimate a Mortgage Payment</h2>
+        <ol class="howto-steps">
+          <li>Enter the home price and your planned down payment (the percent of the home price updates automatically).</li>
+          <li>Enter the loan term in years and the annual interest rate.</li>
+          <li>Optionally enter annual property tax, annual home insurance, and monthly PMI if they apply to you.</li>
+          <li>Read your full payment breakdown below — it recalculates live as you adjust any field.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Does this include PMI automatically?</summary>
+          <p>No — PMI isn't calculated automatically since eligibility and rates vary by lender. If your down payment is under 20% of the home price, enter your lender's quoted monthly PMI amount in the PMI field and it will be added to your total monthly payment.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is property tax included in the estimate?</summary>
+          <p>Only if you enter it. Property tax varies by county and assessed value, so this calculator doesn't guess a number for you — enter your annual property tax amount and it's divided by 12 and added to your monthly payment.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What formula does this calculator use for the monthly payment?</summary>
+          <p>It uses the standard fixed-rate amortization formula for Principal &amp; Interest: M = P × [r(1+r)^n] / [(1+r)^n − 1], where P is the loan amount (home price minus down payment), r is the monthly interest rate (annual rate ÷ 12 ÷ 100), and n is the total number of monthly payments (loan term in years × 12).</p>
+        </details>
+        <details class="faq-item">
+          <summary>What happens if I enter a 0% interest rate?</summary>
+          <p>The calculator switches to a simple division of the loan amount by the number of months, since the standard amortization formula involves dividing by zero when the rate is zero.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is this a guaranteed loan offer?</summary>
+          <p>No — this tool gives a mathematical estimate based on the numbers you enter. Actual mortgage terms, fees, taxes, insurance premiums, and eligibility depend on your lender and location, so treat this as a planning estimate, not a loan offer.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools &amp; Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="loan-calculator.html">
+            <span class="icon" aria-hidden="true">🏦</span>
+            <h3>Loan Calculator</h3>
+            <p>Calculate any fixed-rate loan's monthly payment.</p>
+          </a>
+          <a class="card" href="interest-calculator.html">
+            <span class="icon" aria-hidden="true">📈</span>
+            <h3>Interest Calculator</h3>
+            <p>Simple and compound interest, side by side.</p>
+          </a>
+          <a class="card" href="unit-converter.html">
+            <span class="icon" aria-hidden="true">📏</span>
+            <h3>Unit Converter</h3>
+            <p>Convert length, weight, and temperature.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var homePrice = document.getElementById("homePrice");
+    var downPayment = document.getElementById("downPayment");
+    var downPaymentPct = document.getElementById("downPaymentPct");
+    var loanTerm = document.getElementById("loanTerm");
+    var interestRate = document.getElementById("interestRate");
+    var propertyTax = document.getElementById("propertyTax");
+    var homeInsurance = document.getElementById("homeInsurance");
+    var pmi = document.getElementById("pmi");
+    var statusBox = document.getElementById("statusBox");
+    var resultRow = document.getElementById("resultRow");
+
+    function formatMoney(n) {
+      return "$" + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function calculate() {
+      var price = parseFloat(homePrice.value);
+      var down = parseFloat(downPayment.value);
+      var years = parseFloat(loanTerm.value);
+      var annualRate = parseFloat(interestRate.value);
+      var taxAnnual = parseFloat(propertyTax.value) || 0;
+      var insuranceAnnual = parseFloat(homeInsurance.value) || 0;
+      var pmiMonthly = parseFloat(pmi.value) || 0;
+
+      if (!price || price <= 0 || isNaN(down) || down < 0) {
+        downPaymentPct.textContent = "";
+      } else {
+        downPaymentPct.textContent = ((down / price) * 100).toFixed(1) + "% of home price";
+      }
+
+      if (!price || price <= 0 || isNaN(down) || down < 0 || down >= price || !years || years <= 0 || isNaN(annualRate) || annualRate < 0) {
+        resultRow.style.display = "none";
+        statusBox.textContent = "Enter a valid home price, down payment (less than the home price), loan term, and interest rate.";
+        return;
+      }
+
+      var loanAmount = price - down;
+      var n = years * 12;
+      var pi;
+
+      if (annualRate === 0) {
+        pi = loanAmount / n;
+      } else {
+        var r = annualRate / 100 / 12;
+        pi = loanAmount * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+      }
+
+      var monthlyTax = taxAnnual / 12;
+      var monthlyInsurance = insuranceAnnual / 12;
+      var totalMonthly = pi + monthlyTax + monthlyInsurance + pmiMonthly;
+      var totalPaid = pi * n;
+      var totalInterest = totalPaid - loanAmount;
+
+      resultRow.style.display = "flex";
+      document.getElementById("statPI").textContent = formatMoney(pi);
+      document.getElementById("statTax").textContent = formatMoney(monthlyTax);
+      document.getElementById("statInsurance").textContent = formatMoney(monthlyInsurance);
+      document.getElementById("statPMI").textContent = formatMoney(pmiMonthly);
+      document.getElementById("statTotalMonthly").textContent = formatMoney(totalMonthly);
+      document.getElementById("statTotalInterest").textContent = formatMoney(totalInterest);
+      document.getElementById("statTotalPaid").textContent = formatMoney(totalPaid);
+
+      statusBox.textContent = "Loan amount: " + formatMoney(loanAmount) + " over " + years + " years at " + annualRate + "% APR.";
+    }
+
+    [homePrice, downPayment, loanTerm, interestRate, propertyTax, homeInsurance, pmi].forEach(function (el) {
+      el.addEventListener("input", calculate);
+    });
+
+    calculate();
+  </script>
+</body>
+</html>

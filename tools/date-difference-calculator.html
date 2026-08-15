@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Date Difference Calculator — Days Between Dates | Fixora</title>
+  <meta name="description" content="Calculate the number of days, weeks, months, and years between two dates online for free. Also shows business days. No sign-up required." />
+  <meta name="keywords" content="date difference calculator, days between two dates, how many days until" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/date-difference-calculator.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Date Difference Calculator" />
+  <meta property="og:description" content="Calculate the number of days, weeks, months, and years between two dates online for free." />
+  <meta property="og:url" content="https://www.fixora.com/tools/date-difference-calculator.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Date Difference Calculator" />
+  <meta name="twitter:description" content="Calculate the number of days, weeks, months, and years between two dates online for free." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Date Difference Calculator",
+    "url": "https://www.fixora.com/tools/date-difference-calculator.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Date Difference Calculator", "item": "https://www.fixora.com/tools/date-difference-calculator.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What's the difference between Total Days and checking Include the end date?",
+        "acceptedAnswer": { "@type": "Answer", "text": "By default, the tool counts the days between the two dates exclusively, like counting nights between check-in and check-out; checking the box adds one extra day so both the start and end date are counted, which matters for things like counting vacation days or contract durations." }
+      },
+      {
+        "@type": "Question",
+        "name": "How are Weekdays (business days) counted?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The tool steps through every day between your start and end dates and counts only Monday through Friday, excluding Saturdays and Sundays — it doesn't exclude public holidays, since holiday calendars vary by country and region." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the Years / Months / Days figure mean versus Total Days?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Total Days is a straight day count between the two dates, while Years / Months / Days breaks that same span into calendar units, which is more intuitive for describing a long gap like someone's exact age or tenure." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if I pick an end date earlier than the start date?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The calculator automatically treats the earlier of the two dates as the start, so you get the same positive result regardless of which field you filled in first." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the calculator account for time zones?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the tool works with calendar dates only, not specific times, calculating using UTC internally so the day count isn't affected by your browser's local time zone or daylight saving changes." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Date Difference Calculator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">📅</div>
+      <h1>Date Difference Calculator</h1>
+      <p>Find exactly how many days, weeks, months, and years are between two dates.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="row">
+          <div class="field">
+            <label for="startDate">Start date</label>
+            <input type="date" id="startDate" />
+          </div>
+          <div class="field">
+            <label for="endDate">End date</label>
+            <input type="date" id="endDate" />
+          </div>
+        </div>
+
+        <div class="pill-row" style="margin-top:8px;">
+          <label style="display:flex;align-items:center;gap:8px;font-size:0.9rem;">
+            <input type="checkbox" id="includeEndDate" style="width:auto;" />
+            Include the end date in the count
+          </label>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="calcBtn">Calculate</button>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+
+        <div class="stat-row" id="resultRow" style="display:none;">
+          <div class="stat"><strong id="statTotalDays">–</strong><span>Total Days</span></div>
+          <div class="stat"><strong id="statWeeks">–</strong><span>Weeks</span></div>
+          <div class="stat"><strong id="statYMD">–</strong><span>Years / Months / Days</span></div>
+          <div class="stat"><strong id="statBusinessDays">–</strong><span>Weekdays</span></div>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Calculate the Difference Between Two Dates</h2>
+        <ol class="howto-steps">
+          <li>Pick a start date and an end date (it's fine if the end date comes before the start — the tool sorts them automatically).</li>
+          <li>Check "Include the end date in the count" if you want an inclusive count.</li>
+          <li>Click "Calculate" to see the results.</li>
+          <li>Review the total days, weeks, years/months/days breakdown, and weekday (business day) count.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What's the difference between Total Days and checking Include the end date?</summary>
+          <p>By default, the tool counts the days between the two dates exclusively, like counting nights between check-in and check-out; checking the box adds one extra day so both the start and end date are counted, which matters for things like counting vacation days or contract durations.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How are Weekdays (business days) counted?</summary>
+          <p>The tool steps through every day between your start and end dates and counts only Monday through Friday, excluding Saturdays and Sundays — it doesn't exclude public holidays, since holiday calendars vary by country and region.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the Years / Months / Days figure mean versus Total Days?</summary>
+          <p>Total Days is a straight day count between the two dates, while Years / Months / Days breaks that same span into calendar units, which is more intuitive for describing a long gap like someone's exact age or tenure.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What happens if I pick an end date earlier than the start date?</summary>
+          <p>The calculator automatically treats the earlier of the two dates as the start, so you get the same positive result regardless of which field you filled in first.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does the calculator account for time zones?</summary>
+          <p>No — the tool works with calendar dates only, not specific times, calculating using UTC internally so the day count isn't affected by your browser's local time zone or daylight saving changes.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="age-calculator.html">
+            <span class="icon" aria-hidden="true">🎂</span>
+            <h3>Age Calculator</h3>
+            <p>Find your exact age from your birth date.</p>
+          </a>
+          <a class="card" href="time-zone-converter.html">
+            <span class="icon" aria-hidden="true">🌍</span>
+            <h3>Time Zone Converter</h3>
+            <p>Convert a date and time between zones.</p>
+          </a>
+          <a class="card" href="countdown-timer.html">
+            <span class="icon" aria-hidden="true">⏱️</span>
+            <h3>Countdown Timer & Stopwatch</h3>
+            <p>Count down to a specific date live.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var startDate = document.getElementById("startDate");
+    var endDate = document.getElementById("endDate");
+    var includeEndDate = document.getElementById("includeEndDate");
+    var statusBox = document.getElementById("statusBox");
+    var resultRow = document.getElementById("resultRow");
+
+    var today = new Date();
+    endDate.value = today.toISOString().slice(0, 10);
+    var lastMonth = new Date(today);
+    lastMonth.setMonth(lastMonth.getMonth() - 1);
+    startDate.value = lastMonth.toISOString().slice(0, 10);
+
+    document.getElementById("calcBtn").addEventListener("click", function () {
+      if (!startDate.value || !endDate.value) {
+        statusBox.textContent = "Please choose both a start and end date.";
+        return;
+      }
+
+      var startParts = startDate.value.split("-").map(Number);
+      var endParts = endDate.value.split("-").map(Number);
+      var start = new Date(Date.UTC(startParts[0], startParts[1] - 1, startParts[2]));
+      var end = new Date(Date.UTC(endParts[0], endParts[1] - 1, endParts[2]));
+
+      var earlier = start <= end ? start : end;
+      var later = start <= end ? end : start;
+
+      var msPerDay = 1000 * 60 * 60 * 24;
+      var totalDays = Math.round((later - earlier) / msPerDay);
+      if (includeEndDate.checked) totalDays += 1;
+
+      var weeks = Math.floor(totalDays / 7);
+      var remainderDays = totalDays % 7;
+
+      var years = later.getUTCFullYear() - earlier.getUTCFullYear();
+      var months = later.getUTCMonth() - earlier.getUTCMonth();
+      var days = later.getUTCDate() - earlier.getUTCDate();
+      if (days < 0) {
+        months--;
+        var prevMonth = new Date(Date.UTC(later.getUTCFullYear(), later.getUTCMonth(), 0));
+        days += prevMonth.getUTCDate();
+      }
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      var businessDays = 0;
+      var cursor = new Date(earlier);
+      var limit = includeEndDate.checked ? new Date(later.getTime() + msPerDay) : later;
+      while (cursor < limit) {
+        var dow = cursor.getUTCDay();
+        if (dow !== 0 && dow !== 6) businessDays++;
+        cursor = new Date(cursor.getTime() + msPerDay);
+      }
+
+      resultRow.style.display = "flex";
+      document.getElementById("statTotalDays").textContent = totalDays;
+      document.getElementById("statWeeks").textContent = weeks + "w " + remainderDays + "d";
+      document.getElementById("statYMD").textContent = years + "y " + months + "m " + days + "d";
+      document.getElementById("statBusinessDays").textContent = businessDays;
+
+      statusBox.textContent = "There are " + totalDays + " day(s) between " + startDate.value + " and " + endDate.value + ".";
+    });
+  </script>
+</body>
+</html>

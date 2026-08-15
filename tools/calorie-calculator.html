@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Calorie Calculator (BMR & TDEE) Online | Fixora</title>
+  <meta name="description" content="Calculate your daily calorie needs (BMR and TDEE) online for free using the Mifflin-St Jeor formula. Metric or imperial units. No sign-up." />
+  <meta name="keywords" content="calorie calculator, bmr calculator, tdee calculator online free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/calorie-calculator.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Calorie Calculator (BMR & TDEE)" />
+  <meta property="og:description" content="Calculate your daily calorie needs online for free using the Mifflin-St Jeor formula." />
+  <meta property="og:url" content="https://www.fixora.com/tools/calorie-calculator.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Calorie Calculator (BMR & TDEE)" />
+  <meta name="twitter:description" content="Calculate your daily calorie needs online for free using the Mifflin-St Jeor formula." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Calorie Calculator",
+    "url": "https://www.fixora.com/tools/calorie-calculator.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Calorie Calculator", "item": "https://www.fixora.com/tools/calorie-calculator.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What formula does this calculator use, and why?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It uses the Mifflin-St Jeor equation — BMR = 10×weight(kg) + 6.25×height(cm) − 5×age + 5 for men, or −161 for women — which is widely considered one of the more accurate BMR formulas in modern nutrition research, more so than older formulas like Harris-Benedict." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between BMR and TDEE (Maintenance Calories)?",
+        "acceptedAnswer": { "@type": "Answer", "text": "BMR (Basal Metabolic Rate) is the energy your body burns at complete rest just to keep you alive; TDEE (Total Daily Energy Expenditure, shown as Maintenance Calories) multiplies BMR by an activity multiplier from 1.2 to 1.9 to estimate your total calories burned including movement and exercise." }
+      },
+      {
+        "@type": "Question",
+        "name": "How are the weight loss and weight gain numbers calculated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The tool subtracts 500 calories from your maintenance number for Mild Weight Loss and adds 500 for Mild Weight Gain — a 500-calorie daily deficit or surplus roughly corresponds to about one pound of body weight change per week, based on the commonly cited 3,500-calorie-per-pound estimate." }
+      },
+      {
+        "@type": "Question",
+        "name": "How accurate is this estimate?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's a population-level formula, so it's a solid starting estimate but individual metabolism varies based on muscle mass, genetics, hormones, and other factors — this is not medical advice, and anyone with a health condition should consult a doctor or dietitian before making major dietary changes." }
+      },
+      {
+        "@type": "Question",
+        "name": "Which activity level should I choose?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Pick the option that best matches your typical week: Sedentary means little to no exercise, Lightly or Moderately active covers 1-5 days of exercise weekly, Very active means daily or near-daily exercise, and Extremely active is for people combining a physically demanding job with regular training." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Calorie Calculator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🔥</div>
+      <h1>Calorie Calculator</h1>
+      <p>Estimate your daily calorie needs (BMR and TDEE) using the Mifflin-St Jeor formula.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="pill-row" id="unitRow">
+          <button class="pill active" data-unit="metric" type="button">Metric (cm / kg)</button>
+          <button class="pill" data-unit="imperial" type="button">Imperial (ft-in / lb)</button>
+        </div>
+
+        <div class="row" style="margin-top:16px;">
+          <div class="field">
+            <label for="ageInput">Age</label>
+            <input type="number" id="ageInput" placeholder="e.g. 30" />
+          </div>
+          <div class="field">
+            <label for="genderInput">Sex</label>
+            <select id="genderInput">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="metricFields" class="row">
+          <div class="field">
+            <label for="heightCm">Height (cm)</label>
+            <input type="number" id="heightCm" placeholder="e.g. 175" />
+          </div>
+          <div class="field">
+            <label for="weightKg">Weight (kg)</label>
+            <input type="number" id="weightKg" placeholder="e.g. 70" />
+          </div>
+        </div>
+
+        <div id="imperialFields" class="row" style="display:none;">
+          <div class="field">
+            <label for="heightFt">Height (ft)</label>
+            <input type="number" id="heightFt" placeholder="e.g. 5" />
+          </div>
+          <div class="field">
+            <label for="heightIn">Height (in)</label>
+            <input type="number" id="heightIn" placeholder="e.g. 9" />
+          </div>
+          <div class="field">
+            <label for="weightLb">Weight (lb)</label>
+            <input type="number" id="weightLb" placeholder="e.g. 154" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="activityInput">Activity level</label>
+          <select id="activityInput">
+            <option value="1.2">Sedentary (little or no exercise)</option>
+            <option value="1.375">Lightly active (1-3 days/week)</option>
+            <option value="1.55" selected>Moderately active (3-5 days/week)</option>
+            <option value="1.725">Very active (6-7 days/week)</option>
+            <option value="1.9">Extremely active (physical job + training)</option>
+          </select>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="calcBtn">Calculate</button>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+
+        <div class="stat-row" id="resultRow" style="display:none;">
+          <div class="stat"><strong id="statBmr">–</strong><span>BMR (at rest)</span></div>
+          <div class="stat"><strong id="statTdee">–</strong><span>Maintenance Calories</span></div>
+          <div class="stat"><strong id="statLose">–</strong><span>Mild Weight Loss</span></div>
+          <div class="stat"><strong id="statGain">–</strong><span>Mild Weight Gain</span></div>
+        </div>
+
+        <p style="font-size:0.85rem;color:var(--color-text-muted);margin-top:18px;">
+          This is an estimate based on the Mifflin-St Jeor formula — a well-established method, but individual metabolism varies. Not medical advice.
+        </p>
+      </div>
+
+      <div class="howto">
+        <h2>How to Estimate Your Daily Calorie Needs</h2>
+        <ol class="howto-steps">
+          <li>Choose Metric or Imperial units using the toggle pills.</li>
+          <li>Enter your age, sex, height, and weight.</li>
+          <li>Select your activity level from the dropdown, ranging from sedentary to extremely active.</li>
+          <li>Click "Calculate" to see your BMR, maintenance calories (TDEE), and calorie targets for mild weight loss or gain.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What formula does this calculator use, and why?</summary>
+          <p>It uses the Mifflin-St Jeor equation — BMR = 10×weight(kg) + 6.25×height(cm) − 5×age + 5 for men, or −161 for women — which is widely considered one of the more accurate BMR formulas in modern nutrition research, more so than older formulas like Harris-Benedict.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What's the difference between BMR and TDEE (Maintenance Calories)?</summary>
+          <p>BMR (Basal Metabolic Rate) is the energy your body burns at complete rest just to keep you alive; TDEE (Total Daily Energy Expenditure, shown as Maintenance Calories) multiplies BMR by an activity multiplier from 1.2 to 1.9 to estimate your total calories burned including movement and exercise.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How are the weight loss and weight gain numbers calculated?</summary>
+          <p>The tool subtracts 500 calories from your maintenance number for Mild Weight Loss and adds 500 for Mild Weight Gain — a 500-calorie daily deficit or surplus roughly corresponds to about one pound of body weight change per week, based on the commonly cited 3,500-calorie-per-pound estimate.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How accurate is this estimate?</summary>
+          <p>It's a population-level formula, so it's a solid starting estimate but individual metabolism varies based on muscle mass, genetics, hormones, and other factors — this is not medical advice, and anyone with a health condition should consult a doctor or dietitian before making major dietary changes.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Which activity level should I choose?</summary>
+          <p>Pick the option that best matches your typical week: Sedentary means little to no exercise, Lightly or Moderately active covers 1-5 days of exercise weekly, Very active means daily or near-daily exercise, and Extremely active is for people combining a physically demanding job with regular training.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="bmi-calculator.html">
+            <span class="icon" aria-hidden="true">⚖️</span>
+            <h3>BMI Calculator</h3>
+            <p>Calculate your Body Mass Index.</p>
+          </a>
+          <a class="card" href="unit-converter.html">
+            <span class="icon" aria-hidden="true">📏</span>
+            <h3>Unit Converter</h3>
+            <p>Convert weight and length between units.</p>
+          </a>
+          <a class="card" href="age-calculator.html">
+            <span class="icon" aria-hidden="true">🎂</span>
+            <h3>Age Calculator</h3>
+            <p>Find your exact age from your birth date.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var unitMode = "metric";
+    var metricFields = document.getElementById("metricFields");
+    var imperialFields = document.getElementById("imperialFields");
+    var statusBox = document.getElementById("statusBox");
+    var resultRow = document.getElementById("resultRow");
+
+    document.querySelectorAll("#unitRow [data-unit]").forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        document.querySelectorAll("#unitRow [data-unit]").forEach(function (p) { p.classList.remove("active"); });
+        pill.classList.add("active");
+        unitMode = pill.getAttribute("data-unit");
+        metricFields.style.display = unitMode === "metric" ? "flex" : "none";
+        imperialFields.style.display = unitMode === "imperial" ? "flex" : "none";
+      });
+    });
+
+    document.getElementById("calcBtn").addEventListener("click", function () {
+      var age = parseFloat(document.getElementById("ageInput").value);
+      var isMale = document.getElementById("genderInput").value === "male";
+      var activity = parseFloat(document.getElementById("activityInput").value);
+
+      var heightCm, weightKg;
+      if (unitMode === "metric") {
+        heightCm = parseFloat(document.getElementById("heightCm").value);
+        weightKg = parseFloat(document.getElementById("weightKg").value);
+      } else {
+        var ft = parseFloat(document.getElementById("heightFt").value) || 0;
+        var inches = parseFloat(document.getElementById("heightIn").value) || 0;
+        var lb = parseFloat(document.getElementById("weightLb").value);
+        heightCm = (ft * 12 + inches) * 2.54;
+        weightKg = lb * 0.453592;
+      }
+
+      if (isNaN(age) || age <= 0 || isNaN(heightCm) || heightCm <= 0 || isNaN(weightKg) || weightKg <= 0) {
+        statusBox.textContent = "Please fill in your age, height, and weight.";
+        return;
+      }
+
+      var bmr = 10 * weightKg + 6.25 * heightCm - 5 * age + (isMale ? 5 : -161);
+      var tdee = bmr * activity;
+
+      resultRow.style.display = "flex";
+      document.getElementById("statBmr").textContent = Math.round(bmr) + " kcal";
+      document.getElementById("statTdee").textContent = Math.round(tdee) + " kcal";
+      document.getElementById("statLose").textContent = Math.round(tdee - 500) + " kcal";
+      document.getElementById("statGain").textContent = Math.round(tdee + 500) + " kcal";
+
+      statusBox.textContent = "Your estimated maintenance calories are " + Math.round(tdee) + " kcal/day.";
+    });
+  </script>
+</body>
+</html>

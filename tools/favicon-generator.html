@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Favicon Generator Online — Create favicon.ico | Fixora</title>
+  <meta name="description" content="Generate a complete favicon set from any image online for free — favicon.ico plus every standard PNG size, with the HTML tags ready to paste. No uploads, no sign-up." />
+  <meta name="keywords" content="favicon generator, create favicon.ico online free, apple touch icon generator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/favicon-generator.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Favicon Generator Online" />
+  <meta property="og:description" content="Generate a complete favicon set from any image online for free." />
+  <meta property="og:url" content="https://www.fixora.com/tools/favicon-generator.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Favicon Generator Online" />
+  <meta name="twitter:description" content="Generate a complete favicon set from any image online for free." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Favicon Generator",
+    "url": "https://www.fixora.com/tools/favicon-generator.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Favicon Generator", "item": "https://www.fixora.com/tools/favicon-generator.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What happens if I upload a non-square image?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The tool automatically crops to a centered square before resizing - it takes the smaller of your image's width and height, then crops an equal amount off each side. For predictable results, it's best to start with a square (or near-square) source image." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the tool build an actual favicon.ico file in the browser?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It constructs the ICO binary format directly in JavaScript: it renders your image at 16, 32, and 48px onto canvases, converts each to raw PNG bytes, and assembles them into a single multi-resolution .ico file with a hand-written header - no external image-conversion library is involved." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do I need so many different favicon sizes?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Different platforms request different sizes: browser tabs typically use 16x16 or 32x32, iOS home-screen bookmarks use the 180x180 Apple Touch icon, and Android home screens use the 192x192 and 512x512 versions. Providing all of them ensures your icon looks sharp everywhere instead of being scaled up and blurry." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why did my downloads happen one at a time with a small delay?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Download All Files triggers each file's download about 350ms apart rather than all at once - this avoids browsers blocking a burst of simultaneous downloads as a possible pop-up abuse pattern." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my source image uploaded anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Every resize, crop, and the favicon.ico assembly itself happen locally in your browser using the Canvas API - nothing is sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .favicon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .favicon-item {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: #fff;
+      text-align: center;
+      padding: 14px 10px;
+    }
+    .favicon-item img {
+      max-width: 64px;
+      max-height: 64px;
+      margin: 0 auto 10px;
+      background: repeating-conic-gradient(#e2e8f0 0% 25%, #fff 0% 50%) 50% / 12px 12px;
+      border-radius: 6px;
+    }
+    .favicon-item .fi-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .snippet-box {
+      background: #0b1220;
+      color: #e2e8f0;
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Favicon Generator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">⭐</div>
+      <h1>Favicon Generator</h1>
+      <p>Upload any image and get a complete favicon set — favicon.ico plus every standard PNG size — with the HTML tags ready to paste.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload an image">
+          <div class="dz-icon" aria-hidden="true">🖼️</div>
+          <strong>Click to upload or drag a square image here</strong>
+          <small>PNG or JPG — a square image (512×512 or larger) works best</small>
+          <input type="file" id="fileInput" accept="image/png,image/jpeg" hidden />
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+
+        <div class="favicon-grid" id="faviconGrid"></div>
+
+        <div class="actions" id="downloadAllRow" style="display:none;">
+          <button class="btn btn-primary" id="downloadAllBtn">Download All Files</button>
+        </div>
+
+        <div id="snippetSection" style="display:none;">
+          <label style="font-weight:600;font-size:0.9rem;display:block;margin-top:24px;">HTML to paste in your &lt;head&gt;</label>
+          <div class="snippet-box" id="snippetBox"></div>
+          <div class="actions">
+            <button class="btn btn-secondary" id="copySnippetBtn">Copy Snippet</button>
+          </div>
+          <div class="copy-note" id="copyNote"></div>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Generate a Favicon Set</h2>
+        <ol class="howto-steps">
+          <li>Click the upload area or drag in a square PNG or JPG — at least 512×512px gives the sharpest results.</li>
+          <li>The tool automatically generates five PNG sizes (16×16, 32×32, 180×180 Apple Touch, 192×192, and 512×512 Android) plus a multi-size favicon.ico file.</li>
+          <li>Download files individually from the grid, or click "Download All Files" to save everything at once.</li>
+          <li>Copy the ready-made HTML snippet and paste it into your site's &lt;head&gt; to wire up every icon.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What happens if I upload a non-square image?</summary>
+          <p>The tool automatically crops to a centered square before resizing - it takes the smaller of your image's width and height, then crops an equal amount off each side. For predictable results, it's best to start with a square (or near-square) source image.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does the tool build an actual favicon.ico file in the browser?</summary>
+          <p>It constructs the ICO binary format directly in JavaScript: it renders your image at 16, 32, and 48px onto canvases, converts each to raw PNG bytes, and assembles them into a single multi-resolution .ico file with a hand-written header - no external image-conversion library is involved.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why do I need so many different favicon sizes?</summary>
+          <p>Different platforms request different sizes: browser tabs typically use 16x16 or 32x32, iOS home-screen bookmarks use the 180x180 Apple Touch icon, and Android home screens use the 192x192 and 512x512 versions. Providing all of them ensures your icon looks sharp everywhere instead of being scaled up and blurry.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why did my downloads happen one at a time with a small delay?</summary>
+          <p>Download All Files triggers each file's download about 350ms apart rather than all at once - this avoids browsers blocking a burst of simultaneous downloads as a possible pop-up abuse pattern.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my source image uploaded anywhere?</summary>
+          <p>No. Every resize, crop, and the favicon.ico assembly itself happen locally in your browser using the Canvas API - nothing is sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="image-resizer.html">
+            <span class="icon" aria-hidden="true">📐</span>
+            <h3>Image Resizer</h3>
+            <p>Crop your source image to square first.</p>
+          </a>
+          <a class="card" href="image-compressor.html">
+            <span class="icon" aria-hidden="true">🗜️</span>
+            <h3>Image Compressor</h3>
+            <p>Shrink image file size before uploading.</p>
+          </a>
+          <a class="card" href="../blog/image-format-guide.html">
+            <span class="icon" aria-hidden="true">🖼️</span>
+            <h3>Guide: JPG vs PNG vs WebP</h3>
+            <p>Understand image formats and transparency.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var dropzone = document.getElementById("dropzone");
+    var fileInput = document.getElementById("fileInput");
+    var statusBox = document.getElementById("statusBox");
+    var faviconGrid = document.getElementById("faviconGrid");
+    var downloadAllRow = document.getElementById("downloadAllRow");
+    var downloadAllBtn = document.getElementById("downloadAllBtn");
+    var snippetSection = document.getElementById("snippetSection");
+    var snippetBox = document.getElementById("snippetBox");
+    var copyNote = document.getElementById("copyNote");
+
+    var PNG_SIZES = [
+      { size: 16, label: "16×16", filename: "favicon-16x16.png" },
+      { size: 32, label: "32×32", filename: "favicon-32x32.png" },
+      { size: 180, label: "Apple Touch", filename: "apple-touch-icon.png" },
+      { size: 192, label: "Android 192", filename: "android-chrome-192x192.png" },
+      { size: 512, label: "Android 512", filename: "android-chrome-512x512.png" }
+    ];
+    var ICO_SIZES = [16, 32, 48];
+
+    var generatedFiles = [];
+
+    function resizeToCanvas(img, size) {
+      var canvas = document.createElement("canvas");
+      canvas.width = size;
+      canvas.height = size;
+      var ctx = canvas.getContext("2d");
+      ctx.imageSmoothingQuality = "high";
+
+      var srcSize = Math.min(img.naturalWidth, img.naturalHeight);
+      var srcX = (img.naturalWidth - srcSize) / 2;
+      var srcY = (img.naturalHeight - srcSize) / 2;
+      ctx.drawImage(img, srcX, srcY, srcSize, srcSize, 0, 0, size, size);
+      return canvas;
+    }
+
+    function canvasToPngBytes(canvas) {
+      return new Promise(function (resolve) {
+        canvas.toBlob(function (blob) {
+          blob.arrayBuffer().then(function (buf) { resolve(new Uint8Array(buf)); });
+        }, "image/png");
+      });
+    }
+
+    function buildIco(pngBuffers, sizes) {
+      var headerSize = 6 + 16 * sizes.length;
+      var totalSize = headerSize + pngBuffers.reduce(function (sum, b) { return sum + b.length; }, 0);
+      var buffer = new ArrayBuffer(totalSize);
+      var view = new DataView(buffer);
+      var bytes = new Uint8Array(buffer);
+
+      view.setUint16(0, 0, true);
+      view.setUint16(2, 1, true);
+      view.setUint16(4, sizes.length, true);
+
+      var offset = headerSize;
+      for (var i = 0; i < sizes.length; i++) {
+        var entryOffset = 6 + i * 16;
+        var size = sizes[i];
+        var pngBytes = pngBuffers[i];
+
+        bytes[entryOffset] = size >= 256 ? 0 : size;
+        bytes[entryOffset + 1] = size >= 256 ? 0 : size;
+        bytes[entryOffset + 2] = 0;
+        bytes[entryOffset + 3] = 0;
+        view.setUint16(entryOffset + 4, 1, true);
+        view.setUint16(entryOffset + 6, 32, true);
+        view.setUint32(entryOffset + 8, pngBytes.length, true);
+        view.setUint32(entryOffset + 12, offset, true);
+
+        bytes.set(pngBytes, offset);
+        offset += pngBytes.length;
+      }
+
+      return new Blob([buffer], { type: "image/x-icon" });
+    }
+
+    async function generateFavicons(img) {
+      faviconGrid.innerHTML = "";
+      generatedFiles = [];
+      statusBox.textContent = "Generating favicon set…";
+
+      for (var i = 0; i < PNG_SIZES.length; i++) {
+        var spec = PNG_SIZES[i];
+        var canvas = resizeToCanvas(img, spec.size);
+        var dataUrl = canvas.toDataURL("image/png");
+        generatedFiles.push({ filename: spec.filename, dataUrl: dataUrl });
+
+        var item = document.createElement("div");
+        item.className = "favicon-item";
+        item.innerHTML =
+          '<div class="fi-label">' + spec.label + '</div>' +
+          '<img src="' + dataUrl + '" alt="Favicon preview at ' + spec.label + '" loading="lazy" />' +
+          '<a class="btn btn-secondary" style="padding:6px 12px;font-size:0.78rem;" download="' + spec.filename + '" href="' + dataUrl + '">Download</a>';
+        faviconGrid.appendChild(item);
+      }
+
+      var icoBuffers = [];
+      for (var j = 0; j < ICO_SIZES.length; j++) {
+        var icoCanvas = resizeToCanvas(img, ICO_SIZES[j]);
+        icoBuffers.push(await canvasToPngBytes(icoCanvas));
+      }
+      var icoBlob = buildIco(icoBuffers, ICO_SIZES);
+      var icoUrl = URL.createObjectURL(icoBlob);
+      generatedFiles.unshift({ filename: "favicon.ico", dataUrl: icoUrl });
+
+      var icoItem = document.createElement("div");
+      icoItem.className = "favicon-item";
+      icoItem.innerHTML =
+        '<div class="fi-label">favicon.ico</div>' +
+        '<img src="' + generatedFiles.find(function(f){return f.filename==="favicon-32x32.png";}).dataUrl + '" alt="favicon.ico preview" loading="lazy" />' +
+        '<a class="btn btn-secondary" style="padding:6px 12px;font-size:0.78rem;" download="favicon.ico" href="' + icoUrl + '">Download</a>';
+      faviconGrid.insertBefore(icoItem, faviconGrid.firstChild);
+
+      snippetBox.textContent =
+'<link rel="icon" type="image/x-icon" href="/favicon.ico">\n' +
+'<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">\n' +
+'<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">\n' +
+'<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">\n' +
+'<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">\n' +
+'<link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">';
+
+      snippetSection.style.display = "block";
+      downloadAllRow.style.display = "flex";
+      statusBox.textContent = "Done! Your favicon set is ready — download individually or all at once.";
+    }
+
+    function handleFiles(files) {
+      var file = files[0];
+      if (!file || !/^image\/(png|jpeg)$/.test(file.type)) {
+        statusBox.textContent = "Please choose a PNG or JPG image.";
+        return;
+      }
+
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var img = new Image();
+        img.onload = function () { generateFavicons(img); };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    Fixora.setupDropzone(dropzone, fileInput, handleFiles);
+    dropzone.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") fileInput.click();
+    });
+
+    downloadAllBtn.addEventListener("click", function () {
+      generatedFiles.forEach(function (f, idx) {
+        setTimeout(function () {
+          var a = document.createElement("a");
+          a.href = f.dataUrl;
+          a.download = f.filename;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }, idx * 350);
+      });
+    });
+
+    document.getElementById("copySnippetBtn").addEventListener("click", function () {
+      Fixora.copyText(snippetBox.textContent, copyNote);
+    });
+  </script>
+</body>
+</html>

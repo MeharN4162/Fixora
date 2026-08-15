@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Body Fat Percentage Calculator (US Navy Method) | Fixora</title>
+  <meta name="description" content="Estimate your body fat percentage free online using the US Navy tape-measure method. Works in inches or centimeters, with a category breakdown." />
+  <meta name="keywords" content="body fat calculator, us navy body fat calculator, body fat percentage calculator online free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.fixora.com/tools/body-fat-calculator.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Free Body Fat Percentage Calculator" />
+  <meta property="og:description" content="Estimate your body fat percentage using the US Navy tape-measure method, for free." />
+  <meta property="og:url" content="https://www.fixora.com/tools/body-fat-calculator.html" />
+  <meta property="og:image" content="https://www.fixora.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Body Fat Percentage Calculator" />
+  <meta name="twitter:description" content="Estimate your body fat percentage using the US Navy tape-measure method, for free." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Ctext x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Body Fat Percentage Calculator",
+    "url": "https://www.fixora.com/tools/body-fat-calculator.html",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.fixora.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://www.fixora.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Body Fat Percentage Calculator", "item": "https://www.fixora.com/tools/body-fat-calculator.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How accurate is the US Navy method?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's generally accurate to within about 3-4% of body fat compared to more precise methods like hydrostatic weighing, according to the original validation research. It's a solid estimate for tracking progress over time, but it's not as precise as lab-based body composition testing." }
+      },
+      {
+        "@type": "Question",
+        "name": "What units can I use?",
+        "acceptedAnswer": { "@type": "Answer", "text": "You can enter your measurements in inches or centimeters using the unit toggle — the calculator converts everything to a consistent unit internally before applying the formula, so your result will be the same either way." }
+      },
+      {
+        "@type": "Question",
+        "name": "Where exactly should I measure my waist, neck, and hip?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Measure your neck just below the larynx (Adam's apple), your waist at the narrowest point (or at the navel for men), and — for women — your hips at the widest point, keeping the tape measure snug but not compressing the skin." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the formula ask for hip measurement only for women?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The U.S. Navy method uses two separate, sex-specific formulas because men and women tend to store body fat differently — the women's formula factors in hip circumference to better account for this, while the men's formula does not." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this a substitute for a DEXA scan or professional body composition testing?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — this is a tape-measure estimate based on a published formula. For a precise, clinical measurement of body fat and lean mass, a DEXA scan or other professional body composition test performed by a qualified provider is more accurate." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true">F</span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <span>Body Fat Percentage Calculator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">💪</div>
+      <h1>Body Fat Percentage Calculator</h1>
+      <p>Estimate your body fat percentage using the published U.S. Navy tape-measure method, in inches or centimeters.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="pill-row" id="sexRow">
+          <button class="pill active" data-sex="male" type="button">Male</button>
+          <button class="pill" data-sex="female" type="button">Female</button>
+        </div>
+
+        <div class="pill-row" id="unitRow">
+          <button class="pill active" data-unit="in" type="button">Inches</button>
+          <button class="pill" data-unit="cm" type="button">Centimeters</button>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="heightBf">Height (<span id="unitLabelHeight">in</span>)</label>
+            <input type="number" id="heightBf" min="0" step="0.1" value="70" />
+          </div>
+          <div class="field">
+            <label for="neckBf">Neck (<span id="unitLabelNeck">in</span>)</label>
+            <input type="number" id="neckBf" min="0" step="0.1" value="15" />
+          </div>
+          <div class="field">
+            <label for="waistBf">Waist (<span id="unitLabelWaist">in</span>)</label>
+            <input type="number" id="waistBf" min="0" step="0.1" value="34" />
+          </div>
+          <div class="field" id="hipField" style="display:none;">
+            <label for="hipBf">Hip (<span id="unitLabelHip">in</span>)</label>
+            <input type="number" id="hipBf" min="0" step="0.1" value="38" />
+          </div>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+
+        <div class="stat-row" id="resultRow" style="display:none;">
+          <div class="stat"><strong id="statBf">–</strong><span>Body Fat %</span></div>
+          <div class="stat"><strong id="statBfCategory">–</strong><span>Category</span></div>
+        </div>
+
+        <p style="font-size:0.85rem;color:var(--color-text-muted);margin-top:16px;">This is an estimate based on the U.S. Navy circumference method. It is not a substitute for professional body composition testing (such as a DEXA scan) or medical advice.</p>
+      </div>
+
+      <div class="howto">
+        <h2>How to Estimate Your Body Fat Percentage</h2>
+        <ol class="howto-steps">
+          <li>Select your sex — the calculator uses a different formula for men and women.</li>
+          <li>Choose your unit — inches or centimeters — using the toggle.</li>
+          <li>Enter your height, neck, and waist measurements (and hip, for women).</li>
+          <li>Your body fat percentage and category appear automatically, updating live as you adjust any field.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How accurate is the US Navy method?</summary>
+          <p>It's generally accurate to within about 3-4% of body fat compared to more precise methods like hydrostatic weighing, according to the original validation research. It's a solid estimate for tracking progress over time, but it's not as precise as lab-based body composition testing.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What units can I use?</summary>
+          <p>You can enter your measurements in inches or centimeters using the unit toggle — the calculator converts everything to a consistent unit internally before applying the formula, so your result will be the same either way.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Where exactly should I measure my waist, neck, and hip?</summary>
+          <p>Measure your neck just below the larynx (Adam's apple), your waist at the narrowest point (or at the navel for men), and — for women — your hips at the widest point, keeping the tape measure snug but not compressing the skin.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why does the formula ask for hip measurement only for women?</summary>
+          <p>The U.S. Navy method uses two separate, sex-specific formulas because men and women tend to store body fat differently — the women's formula factors in hip circumference to better account for this, while the men's formula does not.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is this a substitute for a DEXA scan or professional body composition testing?</summary>
+          <p>No — this is a tape-measure estimate based on a published formula. For a precise, clinical measurement of body fat and lean mass, a DEXA scan or other professional body composition test performed by a qualified provider is more accurate.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools &amp; Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="bmi-calculator.html">
+            <span class="icon" aria-hidden="true">⚖️</span>
+            <h3>BMI Calculator</h3>
+            <p>Calculate your Body Mass Index.</p>
+          </a>
+          <a class="card" href="calorie-calculator.html">
+            <span class="icon" aria-hidden="true">🔥</span>
+            <h3>Calorie Calculator</h3>
+            <p>Estimate your daily calorie needs.</p>
+          </a>
+          <a class="card" href="age-calculator.html">
+            <span class="icon" aria-hidden="true">🎂</span>
+            <h3>Age Calculator</h3>
+            <p>Find your exact age in years, months, and days.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="image-resizer.html">Image Resizer</a></li>
+            <li><a href="word-counter.html">Word Counter</a></li>
+            <li><a href="password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    var sex = "male";
+    var unit = "in";
+    var hipField = document.getElementById("hipField");
+    var statusBox = document.getElementById("statusBox");
+    var resultRow = document.getElementById("resultRow");
+
+    document.querySelectorAll("#sexRow [data-sex]").forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        document.querySelectorAll("#sexRow [data-sex]").forEach(function (p) { p.classList.remove("active"); });
+        pill.classList.add("active");
+        sex = pill.getAttribute("data-sex");
+        hipField.style.display = sex === "female" ? "block" : "none";
+        calculate();
+      });
+    });
+
+    document.querySelectorAll("#unitRow [data-unit]").forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        document.querySelectorAll("#unitRow [data-unit]").forEach(function (p) { p.classList.remove("active"); });
+        pill.classList.add("active");
+        unit = pill.getAttribute("data-unit");
+        ["unitLabelHeight", "unitLabelNeck", "unitLabelWaist", "unitLabelHip"].forEach(function (id) {
+          document.getElementById(id).textContent = unit;
+        });
+        calculate();
+      });
+    });
+
+    function categoryFor(bf, sexVal) {
+      if (sexVal === "male") {
+        if (bf < 6) return "Essential Fat";
+        if (bf < 14) return "Athletes";
+        if (bf < 18) return "Fitness";
+        if (bf < 25) return "Average";
+        return "Obese";
+      } else {
+        if (bf < 14) return "Essential Fat";
+        if (bf < 21) return "Athletes";
+        if (bf < 25) return "Fitness";
+        if (bf < 32) return "Average";
+        return "Obese";
+      }
+    }
+
+    function calculate() {
+      var heightRaw = parseFloat(document.getElementById("heightBf").value);
+      var neckRaw = parseFloat(document.getElementById("neckBf").value);
+      var waistRaw = parseFloat(document.getElementById("waistBf").value);
+      var hipRaw = parseFloat(document.getElementById("hipBf").value);
+
+      if (isNaN(heightRaw) || heightRaw <= 0 || isNaN(neckRaw) || neckRaw <= 0 || isNaN(waistRaw) || waistRaw <= 0) {
+        resultRow.style.display = "none";
+        statusBox.textContent = "Enter valid height, neck, and waist measurements.";
+        return;
+      }
+
+      if (sex === "female" && (isNaN(hipRaw) || hipRaw <= 0)) {
+        resultRow.style.display = "none";
+        statusBox.textContent = "Enter a valid hip measurement.";
+        return;
+      }
+
+      // The published formula's coefficients are calibrated for centimeters,
+      // so convert inches to centimeters internally for a consistent result.
+      var toCm = unit === "in" ? 2.54 : 1;
+      var heightCm = heightRaw * toCm;
+      var neckCm = neckRaw * toCm;
+      var waistCm = waistRaw * toCm;
+      var hipCm = hipRaw * toCm;
+
+      var bf;
+      if (sex === "male") {
+        if (waistCm - neckCm <= 0) {
+          resultRow.style.display = "none";
+          statusBox.textContent = "Waist measurement must be greater than neck measurement.";
+          return;
+        }
+        bf = 495 / (1.0324 - 0.19077 * Math.log10(waistCm - neckCm) + 0.15456 * Math.log10(heightCm)) - 450;
+      } else {
+        if (waistCm + hipCm - neckCm <= 0) {
+          resultRow.style.display = "none";
+          statusBox.textContent = "Enter valid waist, hip, and neck measurements.";
+          return;
+        }
+        bf = 495 / (1.29579 - 0.35004 * Math.log10(waistCm + hipCm - neckCm) + 0.22100 * Math.log10(heightCm)) - 450;
+      }
+
+      if (!isFinite(bf) || isNaN(bf)) {
+        resultRow.style.display = "none";
+        statusBox.textContent = "Please check your measurements and try again.";
+        return;
+      }
+
+      var category = categoryFor(bf, sex);
+
+      resultRow.style.display = "flex";
+      document.getElementById("statBf").textContent = bf.toFixed(1) + "%";
+      document.getElementById("statBfCategory").textContent = category;
+
+      statusBox.textContent = "Estimated body fat: " + bf.toFixed(1) + "% (" + category + ").";
+    }
+
+    document.querySelectorAll(".tool-panel input").forEach(function (el) {
+      el.addEventListener("input", calculate);
+    });
+
+    calculate();
+  </script>
+</body>
+</html>
