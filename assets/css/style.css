@@ -236,8 +236,12 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-size: 1.05rem;
+  flex-shrink: 0;
+}
+
+.nav-brand .brand-mark .brand-svg {
+  width: 60%;
+  height: 60%;
 }
 
 .nav-links {
