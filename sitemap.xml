@@ -1,615 +1,615 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.fixora.com/</loc>
+    <loc>https://fixora-site.vercel.app/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/all-tools.html</loc>
+    <loc>https://fixora-site.vercel.app/all-tools.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
 
   <url>
-    <loc>https://www.fixora.com/tools/pdf-compressor.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/pdf-compressor.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/pdf-to-jpg.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/pdf-to-jpg.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/jpg-to-png.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/jpg-to-png.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/image-resizer.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/image-resizer.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/word-counter.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/word-counter.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/password-generator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/password-generator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/text-case-converter.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/text-case-converter.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/random-name-generator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/random-name-generator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/pdf-merger.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/pdf-merger.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/pdf-splitter.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/pdf-splitter.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/image-to-pdf.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/image-to-pdf.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/png-to-jpg.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/png-to-jpg.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/image-compressor.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/image-compressor.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/favicon-generator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/favicon-generator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/unit-converter.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/unit-converter.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/bmi-calculator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/bmi-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/percentage-calculator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/percentage-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/color-converter.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/color-converter.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/json-formatter.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/json-formatter.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/qr-code-generator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/qr-code-generator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/pdf-rotator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/pdf-rotator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/pdf-watermark.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/pdf-watermark.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/base64-converter.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/base64-converter.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/url-encoder.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/url-encoder.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/text-diff-checker.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/text-diff-checker.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/timestamp-converter.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/timestamp-converter.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/hash-generator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/hash-generator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/age-calculator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/age-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/pdf-page-numbers.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/pdf-page-numbers.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/invoice-generator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/invoice-generator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/image-cropper.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/image-cropper.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/image-watermark.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/image-watermark.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/image-to-text.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/image-to-text.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/meme-generator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/meme-generator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/slug-generator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/slug-generator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/lorem-ipsum-generator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/lorem-ipsum-generator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/text-to-speech.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/text-to-speech.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/loan-calculator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/loan-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/tip-calculator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/tip-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/gpa-calculator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/gpa-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/countdown-timer.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/countdown-timer.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/csv-json-converter.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/csv-json-converter.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/pdf-to-text.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/pdf-to-text.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/pdf-reorder.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/pdf-reorder.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/pdf-compare.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/pdf-compare.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/pdf-metadata.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/pdf-metadata.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/pdf-extract-images.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/pdf-extract-images.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/pdf-to-png.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/pdf-to-png.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/pdf-crop.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/pdf-crop.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/pdf-grayscale.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/pdf-grayscale.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/word-to-pdf.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/word-to-pdf.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/text-to-pdf.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/text-to-pdf.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/jpg-to-webp.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/jpg-to-webp.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/png-to-webp.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/png-to-webp.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/webp-to-jpg.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/webp-to-jpg.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/webp-to-png.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/webp-to-png.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/image-rotator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/image-rotator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/image-flip.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/image-flip.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/image-color-picker.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/image-color-picker.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/image-to-base64.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/image-to-base64.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/photo-filters.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/photo-filters.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/image-metadata-viewer.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/image-metadata-viewer.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/random-number-generator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/random-number-generator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/dice-roller.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/dice-roller.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/coin-flip.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/coin-flip.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/time-zone-converter.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/time-zone-converter.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/date-difference-calculator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/date-difference-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/discount-calculator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/discount-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/fuel-cost-calculator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/fuel-cost-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/calorie-calculator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/calorie-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/interest-calculator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/interest-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/uuid-generator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/uuid-generator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/excel-to-pdf.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/excel-to-pdf.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/pdf-ocr.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/pdf-ocr.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/pdf-signer.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/pdf-signer.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/grade-calculator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/grade-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/regex-tester.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/regex-tester.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/character-counter.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/character-counter.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/markdown-to-html.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/markdown-to-html.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/css-gradient-generator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/css-gradient-generator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/number-base-converter.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/number-base-converter.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/remove-duplicate-lines.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/remove-duplicate-lines.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/qr-code-scanner.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/qr-code-scanner.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/password-strength-checker.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/password-strength-checker.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/emoji-picker.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/emoji-picker.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/mortgage-calculator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/mortgage-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/sales-tax-calculator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/sales-tax-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/salary-hourly-converter.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/salary-hourly-converter.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/pregnancy-due-date-calculator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/pregnancy-due-date-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/ovulation-calculator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/ovulation-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/body-fat-calculator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/body-fat-calculator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/passport-photo-maker.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/passport-photo-maker.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/photo-collage-maker.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/photo-collage-maker.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/image-splitter.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/image-splitter.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/image-blur-tool.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/image-blur-tool.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/signature-maker.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/signature-maker.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/pdf-redactor.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/pdf-redactor.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/fancy-text-generator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/fancy-text-generator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/invisible-character-generator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/invisible-character-generator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/ascii-text-art-generator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/ascii-text-art-generator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/color-palette-generator.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/color-palette-generator.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/html-entity-encoder.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/html-entity-encoder.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/tools/rot13-caesar-cipher.html</loc>
+    <loc>https://fixora-site.vercel.app/tools/rot13-caesar-cipher.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://www.fixora.com/blog/compress-pdf-guide.html</loc>
+    <loc>https://fixora-site.vercel.app/blog/compress-pdf-guide.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/blog/image-format-guide.html</loc>
+    <loc>https://fixora-site.vercel.app/blog/image-format-guide.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/blog/strong-password-guide.html</loc>
+    <loc>https://fixora-site.vercel.app/blog/strong-password-guide.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/blog/pdf-to-jpg-guide.html</loc>
+    <loc>https://fixora-site.vercel.app/blog/pdf-to-jpg-guide.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/blog/word-count-guide.html</loc>
+    <loc>https://fixora-site.vercel.app/blog/word-count-guide.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/blog/organize-pdf-pages-guide.html</loc>
+    <loc>https://fixora-site.vercel.app/blog/organize-pdf-pages-guide.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/blog/photo-metadata-privacy-guide.html</loc>
+    <loc>https://fixora-site.vercel.app/blog/photo-metadata-privacy-guide.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/blog/webp-conversion-guide.html</loc>
+    <loc>https://fixora-site.vercel.app/blog/webp-conversion-guide.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/blog/simple-vs-compound-interest-guide.html</loc>
+    <loc>https://fixora-site.vercel.app/blog/simple-vs-compound-interest-guide.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/blog/compare-text-documents-guide.html</loc>
+    <loc>https://fixora-site.vercel.app/blog/compare-text-documents-guide.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/blog/understanding-bmi-guide.html</loc>
+    <loc>https://fixora-site.vercel.app/blog/understanding-bmi-guide.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/blog/json-formatting-guide.html</loc>
+    <loc>https://fixora-site.vercel.app/blog/json-formatting-guide.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/blog/qr-codes-explained-guide.html</loc>
+    <loc>https://fixora-site.vercel.app/blog/qr-codes-explained-guide.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://www.fixora.com/about.html</loc>
+    <loc>https://fixora-site.vercel.app/about.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/contact.html</loc>
+    <loc>https://fixora-site.vercel.app/contact.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/privacy-policy.html</loc>
+    <loc>https://fixora-site.vercel.app/privacy-policy.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://www.fixora.com/terms.html</loc>
+    <loc>https://fixora-site.vercel.app/terms.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
