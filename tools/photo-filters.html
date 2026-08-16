@@ -4,22 +4,22 @@
   <meta charset="UTF-8" />
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Free Photo Filters Online — Brightness, Contrast, Saturation | Fixora</title>
-  <meta name="description" content="Adjust brightness, contrast, and saturation, or apply grayscale/sepia/invert filters to a photo online for free, right in your browser. No uploads, no sign-up." />
-  <meta name="keywords" content="photo filters online free, brightness contrast editor, grayscale sepia filter" />
+  <title>Free Photo Filters Online — Brightness, Contrast, Saturation, Hue, Blur | Fixora</title>
+  <meta name="description" content="Adjust brightness, contrast, saturation, hue, and blur, or apply one-click presets like Grayscale, Sepia, Vintage, Cool, Warm, Vivid, Noir, and more to a photo online for free, right in your browser. No uploads, no sign-up." />
+  <meta name="keywords" content="photo filters online free, brightness contrast editor, grayscale sepia filter, photo presets online" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/photo-filters.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Photo Filters Online" />
-  <meta property="og:description" content="Adjust brightness, contrast, saturation, or apply grayscale/sepia/invert filters — free, in your browser." />
+  <meta property="og:description" content="Adjust brightness, contrast, saturation, hue, and blur, or apply one-click presets like Grayscale, Sepia, Vintage, and Vivid — free, in your browser." />
   <meta property="og:url" content="https://fixora-site.vercel.app/tools/photo-filters.html" />
   <meta property="og:image" content="https://fixora-site.vercel.app/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Photo Filters Online" />
-  <meta name="twitter:description" content="Adjust brightness, contrast, saturation, or apply grayscale/sepia/invert filters — free, in your browser." />
+  <meta name="twitter:description" content="Adjust brightness, contrast, saturation, hue, and blur, or apply one-click presets like Grayscale, Sepia, Vintage, and Vivid — free, in your browser." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -57,18 +57,23 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Can I combine a preset like Sepia with the brightness/contrast sliders?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Presets and sliders aren't mutually exclusive - the tool builds a single CSS filter string combining your brightness, contrast, and saturation values with whichever preset (grayscale, sepia, or invert) is selected, then applies all of it in one pass." }
+        "name": "Can I combine a preset like Vintage with the sliders?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Presets and sliders aren't mutually exclusive - the tool builds a single CSS filter string combining your Brightness, Contrast, Saturation, Hue Rotate, and Blur values with whichever preset (Grayscale, Sepia, Invert, Vintage, Cool, Warm, Vivid, Noir, or Dramatic) is selected, then applies all of it in one pass." }
       },
       {
         "@type": "Question",
-        "name": "What do the Brightness, Contrast, and Saturation percentages mean?",
-        "acceptedAnswer": { "@type": "Answer", "text": "100% is the original, unmodified image for each. Values below 100% darken, flatten, or desaturate the image, values above 100% intensify it - the range runs from 0% to 200% on all three sliders." }
+        "name": "What are the Vintage, Cool, Warm, Vivid, Noir, and Dramatic presets?",
+        "acceptedAnswer": { "@type": "Answer", "text": "They're preset combinations of the same CSS filter functions: Vintage applies sepia(0.5) contrast(0.9) brightness(1.1) for a warm, faded look; Cool applies hue-rotate(180deg) saturate(1.2); Warm applies sepia(0.3) saturate(1.4) brightness(1.05); Vivid applies saturate(1.8) contrast(1.2); Noir applies grayscale(1) contrast(1.3) brightness(0.9); and Dramatic applies contrast(1.5) brightness(0.9) saturate(1.1)." }
       },
       {
         "@type": "Question",
-        "name": "Does this tool support crop, blur, or other effects?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No - it's focused specifically on brightness, contrast, saturation, and the three one-click presets (grayscale, sepia, invert). For cropping, use Fixora's separate Image Cropper tool." }
+        "name": "What do the Brightness, Contrast, Saturation, Hue Rotate, and Blur controls do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Brightness, Contrast, and Saturation run from 0% to 200%, with 100% as the original, unmodified image - below 100% darkens, flattens, or desaturates, above 100% intensifies. Hue Rotate shifts colors around the color wheel from 0° to 360°, and Blur softens the image from 0px (sharp) to 10px (heavily blurred)." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this tool support cropping or resizing?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No - it's focused specifically on color and light adjustments: brightness, contrast, saturation, hue rotation, blur, and nine one-click presets (Grayscale, Sepia, Invert, Vintage, Cool, Warm, Vivid, Noir, Dramatic). For cropping, use Fixora's separate Image Cropper tool." }
       },
       {
         "@type": "Question",
@@ -78,7 +83,7 @@
       {
         "@type": "Question",
         "name": "Is the filtering done on a server?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No. All adjustments are applied locally using the Canvas 2D API's built-in filter property, which runs the same brightness/contrast/saturate/grayscale/sepia/invert functions browsers use for CSS - your photo never leaves your device." }
+        "acceptedAnswer": { "@type": "Answer", "text": "No. All adjustments are applied locally using the Canvas 2D API's built-in filter property, which runs the same brightness/contrast/saturate/hue-rotate/blur/grayscale/sepia/invert functions browsers use for CSS - your photo never leaves your device." }
       }
     ]
   }
@@ -89,7 +94,7 @@
       display: none;
       margin-top: 20px;
       text-align: center;
-      background: repeating-conic-gradient(#e5e7eb 0% 25%, #fff 0% 50%) 50% / 20px 20px;
+      background: repeating-conic-gradient(var(--color-border) 0% 25%, var(--color-surface) 0% 50%) 50% / 20px 20px;
       border-radius: var(--radius-md);
       padding: 20px;
     }
@@ -97,6 +102,21 @@
       max-width: 100%;
       max-height: 50vh;
       display: inline-block;
+    }
+    .filter-slider-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 24px;
+      row-gap: 14px;
+      margin-top: 16px;
+    }
+    .filter-slider-grid .field {
+      margin: 0;
+    }
+    @media (max-width: 560px) {
+      .filter-slider-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -134,7 +154,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🎛️</div>
       <h1>Photo Filters</h1>
-      <p>Adjust brightness, contrast, and saturation, or apply a one-click grayscale, sepia, or invert filter.</p>
+      <p>Adjust brightness, contrast, saturation, hue, and blur, or apply a one-click preset like Grayscale, Sepia, Vintage, Cool, Warm, Vivid, Noir, and more.</p>
     </section>
 
     <section class="container">
@@ -155,20 +175,34 @@
           <button class="pill" data-preset="grayscale" type="button">Grayscale</button>
           <button class="pill" data-preset="sepia" type="button">Sepia</button>
           <button class="pill" data-preset="invert" type="button">Invert</button>
+          <button class="pill" data-preset="vintage" type="button">Vintage</button>
+          <button class="pill" data-preset="cool" type="button">Cool</button>
+          <button class="pill" data-preset="warm" type="button">Warm</button>
+          <button class="pill" data-preset="vivid" type="button">Vivid</button>
+          <button class="pill" data-preset="noir" type="button">Noir</button>
+          <button class="pill" data-preset="dramatic" type="button">Dramatic</button>
         </div>
 
-        <div id="sliderControls" style="display:none;">
-          <div class="field" style="margin-top:16px;">
+        <div id="sliderControls" class="filter-slider-grid" style="display:none;">
+          <div class="field">
             <label for="brightnessRange">Brightness: <span id="brightnessValue">100%</span></label>
             <input type="range" id="brightnessRange" min="0" max="200" value="100" style="width:100%;" />
           </div>
-          <div class="field" style="margin-top:12px;">
+          <div class="field">
             <label for="contrastRange">Contrast: <span id="contrastValue">100%</span></label>
             <input type="range" id="contrastRange" min="0" max="200" value="100" style="width:100%;" />
           </div>
-          <div class="field" style="margin-top:12px;">
+          <div class="field">
             <label for="saturationRange">Saturation: <span id="saturationValue">100%</span></label>
             <input type="range" id="saturationRange" min="0" max="200" value="100" style="width:100%;" />
+          </div>
+          <div class="field">
+            <label for="hueRange">Hue Rotate: <span id="hueValue">0°</span></label>
+            <input type="range" id="hueRange" min="0" max="360" value="0" style="width:100%;" />
+          </div>
+          <div class="field">
+            <label for="blurRange">Blur: <span id="blurValue">0px</span></label>
+            <input type="range" id="blurRange" min="0" max="10" value="0" style="width:100%;" />
           </div>
         </div>
 
@@ -184,8 +218,8 @@
         <h2>How to Apply Filters to a Photo</h2>
         <ol class="howto-steps">
           <li>Click the upload area or drag in a JPG, PNG, or WebP image.</li>
-          <li>Drag the Brightness, Contrast, and Saturation sliders to adjust the look — the preview updates as you move them.</li>
-          <li>Optionally click a preset pill (Grayscale, Sepia, or Invert) to layer a one-click effect on top of your slider adjustments.</li>
+          <li>Drag the Brightness, Contrast, Saturation, Hue Rotate, and Blur sliders to adjust the look — the preview updates as you move them.</li>
+          <li>Optionally click a preset pill (Grayscale, Sepia, Invert, Vintage, Cool, Warm, Vivid, Noir, or Dramatic) to layer a one-click effect on top of your slider adjustments.</li>
           <li>Click "Reset" to return to the original look at any point, or "Download Image" to save your edit.</li>
         </ol>
       </div>
@@ -193,16 +227,20 @@
       <div class="faq">
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
-          <summary>Can I combine a preset like Sepia with the brightness/contrast sliders?</summary>
-          <p>Yes. Presets and sliders aren't mutually exclusive - the tool builds a single CSS filter string combining your brightness, contrast, and saturation values with whichever preset (grayscale, sepia, or invert) is selected, then applies all of it in one pass.</p>
+          <summary>Can I combine a preset like Vintage with the sliders?</summary>
+          <p>Yes. Presets and sliders aren't mutually exclusive - the tool builds a single CSS filter string combining your Brightness, Contrast, Saturation, Hue Rotate, and Blur values with whichever preset (Grayscale, Sepia, Invert, Vintage, Cool, Warm, Vivid, Noir, or Dramatic) is selected, then applies all of it in one pass.</p>
         </details>
         <details class="faq-item">
-          <summary>What do the Brightness, Contrast, and Saturation percentages mean?</summary>
-          <p>100% is the original, unmodified image for each. Values below 100% darken, flatten, or desaturate the image, values above 100% intensify it - the range runs from 0% to 200% on all three sliders.</p>
+          <summary>What are the Vintage, Cool, Warm, Vivid, Noir, and Dramatic presets?</summary>
+          <p>They're preset combinations of the same CSS filter functions: Vintage applies sepia(0.5) contrast(0.9) brightness(1.1) for a warm, faded look; Cool applies hue-rotate(180deg) saturate(1.2); Warm applies sepia(0.3) saturate(1.4) brightness(1.05); Vivid applies saturate(1.8) contrast(1.2); Noir applies grayscale(1) contrast(1.3) brightness(0.9); and Dramatic applies contrast(1.5) brightness(0.9) saturate(1.1).</p>
         </details>
         <details class="faq-item">
-          <summary>Does this tool support crop, blur, or other effects?</summary>
-          <p>No - it's focused specifically on brightness, contrast, saturation, and the three one-click presets (grayscale, sepia, invert). For cropping, use Fixora's separate Image Cropper tool.</p>
+          <summary>What do the Brightness, Contrast, Saturation, Hue Rotate, and Blur controls do?</summary>
+          <p>Brightness, Contrast, and Saturation run from 0% to 200%, with 100% as the original, unmodified image - below 100% darkens, flattens, or desaturates, above 100% intensifies. Hue Rotate shifts colors around the color wheel from 0° to 360°, and Blur softens the image from 0px (sharp) to 10px (heavily blurred).</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this tool support cropping or resizing?</summary>
+          <p>No - it's focused specifically on color and light adjustments: brightness, contrast, saturation, hue rotation, blur, and nine one-click presets (Grayscale, Sepia, Invert, Vintage, Cool, Warm, Vivid, Noir, Dramatic). For cropping, use Fixora's separate Image Cropper tool.</p>
         </details>
         <details class="faq-item">
           <summary>What format is the downloaded file?</summary>
@@ -210,7 +248,7 @@
         </details>
         <details class="faq-item">
           <summary>Is the filtering done on a server?</summary>
-          <p>No. All adjustments are applied locally using the Canvas 2D API's built-in filter property, which runs the same brightness/contrast/saturate/grayscale/sepia/invert functions browsers use for CSS - your photo never leaves your device.</p>
+          <p>No. All adjustments are applied locally using the Canvas 2D API's built-in filter property, which runs the same brightness/contrast/saturate/hue-rotate/blur/grayscale/sepia/invert functions browsers use for CSS - your photo never leaves your device.</p>
         </details>
       </div>
 
@@ -297,6 +335,8 @@
     var brightnessRange = document.getElementById("brightnessRange");
     var contrastRange = document.getElementById("contrastRange");
     var saturationRange = document.getElementById("saturationRange");
+    var hueRange = document.getElementById("hueRange");
+    var blurRange = document.getElementById("blurRange");
 
     var naturalImg = null;
     var currentFile = null;
@@ -319,6 +359,8 @@
       brightnessRange.value = 100;
       contrastRange.value = 100;
       saturationRange.value = 100;
+      hueRange.value = 0;
+      blurRange.value = 0;
       updateSliderLabels();
       document.querySelectorAll("#presetRow [data-preset]").forEach(function (p) { p.classList.remove("active"); });
       document.querySelector('#presetRow [data-preset="none"]').classList.add("active");
@@ -334,7 +376,7 @@
           naturalImg = img;
           filterStage.style.display = "block";
           presetRow.style.display = "flex";
-          sliderControls.style.display = "block";
+          sliderControls.style.display = "grid";
           resetBtn.style.display = "inline-flex";
           render();
           statusBox.textContent = "Adjust the sliders or pick a preset, then download.";
@@ -356,17 +398,27 @@
       document.getElementById("brightnessValue").textContent = brightnessRange.value + "%";
       document.getElementById("contrastValue").textContent = contrastRange.value + "%";
       document.getElementById("saturationValue").textContent = saturationRange.value + "%";
+      document.getElementById("hueValue").textContent = hueRange.value + "°";
+      document.getElementById("blurValue").textContent = blurRange.value + "px";
     }
 
     function buildFilterString() {
       var parts = [
         "brightness(" + brightnessRange.value + "%)",
         "contrast(" + contrastRange.value + "%)",
-        "saturate(" + saturationRange.value + "%)"
+        "saturate(" + saturationRange.value + "%)",
+        "hue-rotate(" + hueRange.value + "deg)",
+        "blur(" + blurRange.value + "px)"
       ];
       if (currentPreset === "grayscale") parts.push("grayscale(100%)");
       if (currentPreset === "sepia") parts.push("sepia(100%)");
       if (currentPreset === "invert") parts.push("invert(100%)");
+      if (currentPreset === "vintage") parts.push("sepia(0.5)", "contrast(0.9)", "brightness(1.1)");
+      if (currentPreset === "cool") parts.push("hue-rotate(180deg)", "saturate(1.2)");
+      if (currentPreset === "warm") parts.push("sepia(0.3)", "saturate(1.4)", "brightness(1.05)");
+      if (currentPreset === "vivid") parts.push("saturate(1.8)", "contrast(1.2)");
+      if (currentPreset === "noir") parts.push("grayscale(1)", "contrast(1.3)", "brightness(0.9)");
+      if (currentPreset === "dramatic") parts.push("contrast(1.5)", "brightness(0.9)", "saturate(1.1)");
       return parts.join(" ");
     }
 
@@ -408,7 +460,7 @@
       renderTimer = setTimeout(render, 100);
     }
 
-    [brightnessRange, contrastRange, saturationRange].forEach(function (input) {
+    [brightnessRange, contrastRange, saturationRange, hueRange, blurRange].forEach(function (input) {
       input.addEventListener("input", function () {
         updateSliderLabels();
         scheduleRender();
@@ -428,6 +480,8 @@
       brightnessRange.value = 100;
       contrastRange.value = 100;
       saturationRange.value = 100;
+      hueRange.value = 0;
+      blurRange.value = 0;
       currentPreset = "none";
       updateSliderLabels();
       document.querySelectorAll("#presetRow [data-preset]").forEach(function (p) { p.classList.remove("active"); });

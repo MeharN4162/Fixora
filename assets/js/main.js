@@ -183,7 +183,7 @@ document.documentElement.setAttribute("data-js", "true");
       triggerBtn.type = "button";
       triggerBtn.className = "cmdk-trigger";
       triggerBtn.id = "cmdkTrigger";
-      triggerBtn.innerHTML = '🔍 Search <span class="cmdk-hint">⌘K</span>';
+      triggerBtn.innerHTML = "🔍 Search";
       li.appendChild(triggerBtn);
       navLinks.insertBefore(li, navLinks.firstChild);
     }
@@ -722,6 +722,35 @@ document.documentElement.setAttribute("data-js", "true");
         Fixora.fallbackCopy(text);
         done();
       }
+    },
+
+    /* Copies both plain text and monospace-styled HTML, so apps with rich
+       paste (Google Docs, Word, Gmail) render fixed-width ASCII/character
+       grids correctly instead of collapsing under a proportional font. */
+    copyRichText: function (plainText, htmlText, noteEl) {
+      if (!plainText) return;
+      var done = function () {
+        if (noteEl) {
+          noteEl.textContent = "Copied to clipboard!";
+          setTimeout(function () { noteEl.textContent = ""; }, 2000);
+        }
+        showToast("Copied to clipboard!");
+      };
+      if (navigator.clipboard && window.ClipboardItem) {
+        try {
+          var item = new ClipboardItem({
+            "text/plain": new Blob([plainText], { type: "text/plain" }),
+            "text/html": new Blob([htmlText], { type: "text/html" })
+          });
+          navigator.clipboard.write([item]).then(done).catch(function () {
+            Fixora.copyText(plainText, noteEl);
+          });
+          return;
+        } catch (e) {
+          // Unsupported in this browser — fall through to plain copy.
+        }
+      }
+      Fixora.copyText(plainText, noteEl);
     },
 
     fallbackCopy: function (text) {

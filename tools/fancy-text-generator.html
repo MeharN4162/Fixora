@@ -83,6 +83,49 @@
     ]
   }
   </script>
+  <style>
+    .fancy-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .fancy-row:last-child {
+      border-bottom: none;
+    }
+    .fancy-row .fancy-label {
+      width: 128px;
+      flex-shrink: 0;
+      font-weight: 600;
+      font-size: 0.84rem;
+      color: var(--color-text-muted);
+    }
+    .fancy-row input {
+      flex: 1;
+      min-width: 0;
+      padding: 7px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      color: var(--color-text);
+      font-family: var(--font-main);
+      font-size: 0.95rem;
+    }
+    .fancy-row .btn {
+      flex-shrink: 0;
+      padding: 7px 14px;
+      font-size: 0.83rem;
+    }
+    @media (max-width: 560px) {
+      .fancy-row {
+        flex-wrap: wrap;
+      }
+      .fancy-row .fancy-label {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -137,8 +180,8 @@
         <h2>How to Generate Fancy Text</h2>
         <ol class="howto-steps">
           <li>Type or paste your text into the box at the top.</li>
-          <li>All 10 styled versions below update instantly as you type.</li>
-          <li>Scroll through Bold, Italic, Bold Italic, Double-Struck, Fullwidth, Circled, Small Caps, Strikethrough, Underline, and Upside Down.</li>
+          <li>All 17 styled versions below update instantly as you type.</li>
+          <li>Browse Bold, Italic, Bold Italic, Sans-Serif, Sans-Serif Bold, Monospace, Double-Struck, Fullwidth, Circled, Circled (Filled), Squared, Squared (Filled), Small Caps, Superscript, Strikethrough, Underline, and Upside Down.</li>
           <li>Click "Copy" next to any style to copy that exact version to your clipboard.</li>
           <li>Paste it into your bio, username, caption, or wherever you like.</li>
         </ol>
@@ -314,6 +357,65 @@
       return ch;
     }
 
+    function mapSansSerif(ch) {
+      var c = ch.charCodeAt(0);
+      if (c >= 65 && c <= 90) return String.fromCodePoint(0x1D5A0 + (c - 65));
+      if (c >= 97 && c <= 122) return String.fromCodePoint(0x1D5BA + (c - 97));
+      if (c >= 48 && c <= 57) return String.fromCodePoint(0x1D7E2 + (c - 48));
+      return ch;
+    }
+
+    function mapSansSerifBold(ch) {
+      var c = ch.charCodeAt(0);
+      if (c >= 65 && c <= 90) return String.fromCodePoint(0x1D5D4 + (c - 65));
+      if (c >= 97 && c <= 122) return String.fromCodePoint(0x1D5EE + (c - 97));
+      if (c >= 48 && c <= 57) return String.fromCodePoint(0x1D7EC + (c - 48));
+      return ch;
+    }
+
+    function mapMonospace(ch) {
+      var c = ch.charCodeAt(0);
+      if (c >= 65 && c <= 90) return String.fromCodePoint(0x1D670 + (c - 65));
+      if (c >= 97 && c <= 122) return String.fromCodePoint(0x1D68A + (c - 97));
+      if (c >= 48 && c <= 57) return String.fromCodePoint(0x1D7F6 + (c - 48));
+      return ch;
+    }
+
+    var SUPERSCRIPT_DIGITS = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"];
+    var SUPERSCRIPT_LETTERS = {
+      a: "ᵃ", b: "ᵇ", c: "ᶜ", d: "ᵈ", e: "ᵉ", f: "ᶠ", g: "ᵍ",
+      h: "ʰ", i: "ⁱ", j: "ʲ", k: "ᵏ", l: "ˡ", m: "ᵐ", n: "ⁿ",
+      o: "ᵒ", p: "ᵖ", r: "ʳ", s: "ˢ", t: "ᵗ", u: "ᵘ", v: "ᵛ",
+      w: "ʷ", x: "ˣ", y: "ʸ"
+      // q and z intentionally omitted — no confidently-verified official Unicode superscript
+      // code point exists for them, so they pass through unchanged rather than risk a wrong glyph.
+    };
+    function mapSuperscript(ch) {
+      var c = ch.charCodeAt(0);
+      if (c >= 48 && c <= 57) return SUPERSCRIPT_DIGITS[c - 48];
+      var lower = ch.toLowerCase();
+      if (SUPERSCRIPT_LETTERS.hasOwnProperty(lower)) return SUPERSCRIPT_LETTERS[lower];
+      return ch;
+    }
+
+    function mapSquared(ch) {
+      var c = ch.toUpperCase().charCodeAt(0);
+      if (c >= 65 && c <= 90) return String.fromCodePoint(0x1F130 + (c - 65));
+      return ch;
+    }
+
+    function mapSquaredFilled(ch) {
+      var c = ch.toUpperCase().charCodeAt(0);
+      if (c >= 65 && c <= 90) return String.fromCodePoint(0x1F170 + (c - 65));
+      return ch;
+    }
+
+    function mapCircledFilled(ch) {
+      var c = ch.toUpperCase().charCodeAt(0);
+      if (c >= 65 && c <= 90) return String.fromCodePoint(0x1F150 + (c - 65));
+      return ch;
+    }
+
     function mapStrikethrough(str) {
       var out = "";
       for (var i = 0; i < str.length; i++) out += str[i] + "̶";
@@ -355,6 +457,13 @@
         case "strikethrough": return mapStrikethrough(input);
         case "underline": return mapUnderline(input);
         case "upsideDown": return upsideDown(input);
+        case "sansSerif": return mapEach(input, mapSansSerif);
+        case "sansSerifBold": return mapEach(input, mapSansSerifBold);
+        case "monospace": return mapEach(input, mapMonospace);
+        case "superscript": return mapEach(input, mapSuperscript);
+        case "squared": return mapEach(input, mapSquared);
+        case "squaredFilled": return mapEach(input, mapSquaredFilled);
+        case "circledFilled": return mapEach(input, mapCircledFilled);
         default: return input;
       }
     }
@@ -363,10 +472,17 @@
       { id: "bold", label: "Bold" },
       { id: "italic", label: "Italic" },
       { id: "boldItalic", label: "Bold Italic" },
+      { id: "sansSerif", label: "Sans-Serif" },
+      { id: "sansSerifBold", label: "Sans-Serif Bold" },
+      { id: "monospace", label: "Monospace" },
       { id: "doubleStruck", label: "Double-Struck" },
       { id: "fullwidth", label: "Fullwidth" },
       { id: "circled", label: "Circled" },
+      { id: "circledFilled", label: "Circled (Filled)" },
+      { id: "squared", label: "Squared" },
+      { id: "squaredFilled", label: "Squared (Filled)" },
       { id: "smallCaps", label: "Small Caps" },
+      { id: "superscript", label: "Superscript" },
       { id: "strikethrough", label: "Strikethrough" },
       { id: "underline", label: "Underline" },
       { id: "upsideDown", label: "Upside Down" }
@@ -378,16 +494,12 @@
       STYLES.forEach(function (style) {
         var out = text ? styleText(text, style.id) : "";
         var row = document.createElement("div");
-        row.className = "field";
-        row.style.marginTop = "14px";
+        row.className = "fancy-row";
 
-        var label = document.createElement("label");
+        var label = document.createElement("span");
+        label.className = "fancy-label";
         label.textContent = style.label;
         row.appendChild(label);
-
-        var inner = document.createElement("div");
-        inner.className = "row";
-        inner.style.alignItems = "center";
 
         var box = document.createElement("input");
         box.type = "text";
@@ -397,15 +509,13 @@
 
         var btn = document.createElement("button");
         btn.className = "btn btn-secondary";
-        btn.style.flex = "none";
         btn.textContent = "Copy";
         btn.addEventListener("click", function () {
           Fixora.copyText(box.value, copyNote);
         });
 
-        inner.appendChild(box);
-        inner.appendChild(btn);
-        row.appendChild(inner);
+        row.appendChild(box);
+        row.appendChild(btn);
         fancyResults.appendChild(row);
       });
     }

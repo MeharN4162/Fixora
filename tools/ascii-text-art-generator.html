@@ -314,7 +314,13 @@
     render();
 
     document.getElementById("copyBtn").addEventListener("click", function () {
-      Fixora.copyText(asciiOutput.textContent, copyNote);
+      var plain = asciiOutput.textContent;
+      // Wrapped in a monospace <pre> so apps with rich paste (Google Docs, Word,
+      // Gmail) keep the block letters aligned instead of collapsing under a
+      // proportional font — plain-text-only paste targets still get the raw text.
+      var escaped = plain.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      var html = "<pre style=\"font-family:'Courier New',Consolas,monospace;white-space:pre;\">" + escaped + "</pre>";
+      Fixora.copyRichText(plain, html, copyNote);
     });
 
     document.getElementById("clearBtn").addEventListener("click", function () {
