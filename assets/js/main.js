@@ -131,7 +131,16 @@ document.documentElement.setAttribute("data-js", "true");
     { name: "Compare Two Documents", type: "Guide", icon: "🔍", href: "blog/compare-text-documents-guide.html" },
     { name: "Understanding BMI", type: "Guide", icon: "⚖️", href: "blog/understanding-bmi-guide.html" },
     { name: "JSON Formatting Guide", type: "Guide", icon: "{ }", href: "blog/json-formatting-guide.html" },
-    { name: "QR Codes Explained", type: "Guide", icon: "▦", href: "blog/qr-codes-explained-guide.html" }
+    { name: "QR Codes Explained", type: "Guide", icon: "▦", href: "blog/qr-codes-explained-guide.html" },
+    { name: "Passport Photo at Home", type: "Guide", icon: "🛂", href: "blog/passport-photo-at-home-guide.html" },
+    { name: "Blur a Photo for Privacy", type: "Guide", icon: "🌫️", href: "blog/blur-photo-privacy-guide.html" },
+    { name: "How to Redact a PDF", type: "Guide", icon: "⬛", href: "blog/redact-pdf-guide.html" },
+    { name: "Fancy Text Fonts Guide", type: "Guide", icon: "✨", href: "blog/fancy-text-fonts-guide.html" },
+    { name: "Regex Cheat Sheet", type: "Guide", icon: "🔍", href: "blog/regex-cheat-sheet-guide.html" },
+    { name: "Password Strength Guide", type: "Guide", icon: "🛡️", href: "blog/password-strength-guide.html" },
+    { name: "Mortgage Payment Guide", type: "Guide", icon: "🏠", href: "blog/mortgage-payment-guide.html" },
+    { name: "Hourly vs Salary", type: "Guide", icon: "💵", href: "blog/hourly-vs-salary-guide.html" },
+    { name: "How to Sign a PDF", type: "Guide", icon: "✍️", href: "blog/sign-pdf-guide.html" }
   ];
 
   var CATEGORIES = {

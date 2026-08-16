@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Regex Cheat Sheet: Common Patterns Explained | Fixora</title>
+  <meta name="description" content="A practical regex cheat sheet covering email, URL, and phone patterns, character classes, anchors, groups, and flags — each with a working example you can test." />
+  <meta name="keywords" content="regex cheat sheet, regular expressions examples, regex patterns, email regex, regex tester" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixora-site.vercel.app/blog/regex-cheat-sheet-guide.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:title" content="Regex Cheat Sheet: Common Patterns Explained" />
+  <meta property="og:description" content="The most-searched regex patterns, explained with working examples." />
+  <meta property="og:url" content="https://fixora-site.vercel.app/blog/regex-cheat-sheet-guide.html" />
+  <meta property="og:image" content="https://fixora-site.vercel.app/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Regex Cheat Sheet: Common Patterns Explained" />
+  <meta name="twitter:description" content="The most-searched regex patterns, explained with working examples." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Regex Cheat Sheet: Common Patterns Explained",
+    "description": "The most-searched regex patterns, explained with working examples.",
+    "author": { "@type": "Organization", "name": "Fixora" },
+    "publisher": { "@type": "Organization", "name": "Fixora" },
+    "datePublished": "2026-08-16",
+    "dateModified": "2026-08-16",
+    "mainEntityOfPage": "https://fixora-site.vercel.app/blog/regex-cheat-sheet-guide.html"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixora-site.vercel.app/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixora-site.vercel.app/index.html#guides" },
+      { "@type": "ListItem", "position": 3, "name": "Regex Cheat Sheet", "item": "https://fixora-site.vercel.app/blog/regex-cheat-sheet-guide.html" }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index.html" class="nav-brand">
+        <span class="brand-mark" aria-hidden="true"><svg class="brand-svg" viewBox="0 0 100 100"><rect x="30" y="24" width="13" height="52" rx="6.5" fill="#fff"/><rect x="30" y="24" width="38" height="13" rx="6.5" fill="#fff"/><rect x="30" y="47" width="29" height="13" rx="6.5" fill="#fff"/></svg></span>
+        Fixora
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
+        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
+        <li><a href="../index.html#guides" class="active">Guides</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a><span class="sep">/</span>
+        <a href="../index.html#guides">Guides</a><span class="sep">/</span>
+        <span>Regex Cheat Sheet</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Developer · 5 min read · Updated August 2026</p>
+      <h1>Regex Cheat Sheet: Common Patterns Explained</h1>
+      <div class="article-hero-img" aria-hidden="true">🔍</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#basics">Reading Regex at a Glance</a></li>
+          <li><a href="#validation">Validation Patterns</a></li>
+          <li><a href="#extraction">Extraction &amp; Matching Patterns</a></li>
+          <li><a href="#classes-anchors">Character Classes &amp; Anchors</a></li>
+          <li><a href="#quantifiers">Quantifiers</a></li>
+          <li><a href="#groups">Groups: Capturing vs Non-Capturing</a></li>
+          <li><a href="#flags">Flags</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>Regex (regular expressions) is one of those tools every developer relies on constantly and nobody fully memorizes. This page is a practical reference: the patterns people search for most, each with a plain explanation and a real example that actually matches. Every pattern below was tested against its example input before publishing, so you can trust it works as described.</p>
+
+        <h2 id="basics">Reading Regex at a Glance</h2>
+        <p>A regex pattern is just a compact way of describing a shape of text. A few building blocks come up in almost every pattern:</p>
+        <ul>
+          <li><code>.</code> matches any single character (except a newline, by default)</li>
+          <li><code>\d</code> matches any digit, <code>\w</code> matches any word character (letters, digits, underscore), <code>\s</code> matches any whitespace</li>
+          <li><code>[...]</code> defines a custom character class — a set of characters to match one of</li>
+          <li><code>^</code> and <code>$</code> anchor a match to the start or end of a string</li>
+        </ul>
+        <p>Combine those with the quantifiers and groups covered further down, and you can describe almost anything.</p>
+
+        <h2 id="validation">Validation Patterns</h2>
+        <p><strong>Email address:</strong> <code>^[^\s@]+@[^\s@]+\.[^\s@]+$</code></p>
+        <p>Matches any string with characters before an @, more characters after it, a dot, then more characters — with no whitespace or extra @ signs anywhere. Example: matches <code>jane.doe@example.com</code> but not <code>not-an-email</code>. Worth being honest about: a fully RFC-5322-compliant email pattern is notoriously long and complex (email addresses technically allow far stranger formats than most people realize), so this simpler pattern isn't bulletproof — but it correctly handles the vast majority of real-world addresses, which is what most validation actually needs.</p>
+
+        <p><strong>URL:</strong> <code>https?:\/\/[^\s]+</code></p>
+        <p>Matches "http://" or "https://" (the <code>?</code> makes the "s" optional) followed by any run of non-whitespace characters. Example: matches <code>https://example.com/page?id=1</code> inside the sentence "Visit https://example.com/page?id=1 for more."</p>
+
+        <p><strong>US phone number:</strong> <code>^\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$</code></p>
+        <p>Matches an optional opening parenthesis, 3 digits, optional closing parenthesis, an optional separator (dash, dot, or space), 3 more digits, another optional separator, then 4 digits. Example: matches both <code>(555) 123-4567</code> and <code>555-123-4567</code>.</p>
+
+        <h2 id="extraction">Extraction &amp; Matching Patterns</h2>
+        <p><strong>Digits only:</strong> <code>\d+</code></p>
+        <p>Matches one or more consecutive digits — useful for pulling numbers out of a larger string. Example: run against "Order #4821, qty: 3" with the global flag and you get <code>4821</code> and <code>3</code> as two separate matches.</p>
+
+        <p><strong>Whitespace:</strong> <code>\s+</code></p>
+        <p>Matches one or more consecutive whitespace characters — spaces, tabs, or newlines. Commonly used to split text into words or collapse repeated spaces. Example: matches the gaps in <code>"a   b\tc\nd"</code> — a run of 3 spaces, a tab, and a newline are each one match.</p>
+
+        <p><strong>Word boundary:</strong> <code>\bcat\b</code></p>
+        <p><code>\b</code> matches the invisible position between a word character and a non-word character, without consuming any characters itself. This is what lets you match a whole word without accidentally matching it inside a longer word. Example: <code>\bcat\b</code> matches "cat" in "the cat sat" but does not match "cat" inside "category."</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> Forgetting word boundaries is one of the most common regex mistakes — searching for "cat" without <code>\b</code> will silently match "category," "concatenate," and "scatter" too.
+        </div>
+
+        <h2 id="classes-anchors">Character Classes &amp; Anchors</h2>
+        <p><strong>Character class:</strong> <code>[a-z]</code> matches any single lowercase letter a through z. Stack a quantifier on it, like <code>[a-z]+</code>, to match a whole run of lowercase letters — this matches all of "hello."</p>
+        <p><strong>Negated class:</strong> <code>[^0-9]</code> — the <code>^</code> right after the opening bracket flips the meaning to "anything except." <code>[^0-9]+</code> matches "abc" at the start of "abc123," stopping as soon as it hits a digit.</p>
+        <p><strong>Anchors:</strong> <code>^Hello</code> only matches if "Hello" is at the very start of the string; <code>world$</code> only matches if "world" is at the very end. Both match against "Hello world" — the first at the beginning, the second at the end.</p>
+
+        <h2 id="quantifiers">Quantifiers</h2>
+        <p>Quantifiers control how many times the thing before them can repeat:</p>
+        <ul>
+          <li><code>+</code> means "one or more." <code>go+gle</code> matches "google" and also "gooogle."</li>
+          <li><code>*</code> means "zero or more." <code>go*gle</code> matches "ggle" (zero o's) all the way up to "goooogle."</li>
+          <li><code>?</code> means "zero or one" — makes the preceding thing optional. <code>colou?r</code> matches both "color" and "colour."</li>
+        </ul>
+
+        <h2 id="groups">Groups: Capturing vs Non-Capturing</h2>
+        <p><strong>Capturing group:</strong> <code>(\d{4})-(\d{2})-(\d{2})</code> wraps parts of a pattern in parentheses so you can extract them individually afterward — this matches a date like "2026-08-16" and gives you the year, month, and day as three separate captured values.</p>
+        <p><strong>Non-capturing group:</strong> <code>(?:https?:\/\/)?(\w+\.com)</code> uses <code>(?:...)</code> when you need parentheses purely to group parts of a pattern together (here, to make the whole protocol optional) without wanting that piece returned as a captured value — only the <code>(\w+\.com)</code> part is captured. This matters when you have several groups and only care about extracting some of them.</p>
+
+        <h2 id="flags">Flags</h2>
+        <p>Flags go after the closing slash of a pattern and change how matching behaves overall:</p>
+        <ul>
+          <li><code>g</code> (global) — find every match in the string, not just the first one. <code>/cat/g</code> against "cat cat cat" returns all three matches instead of stopping after the first.</li>
+          <li><code>i</code> (case-insensitive) — ignore uppercase/lowercase differences. <code>/hello/i</code> matches "HELLO world."</li>
+          <li><code>m</code> (multiline) — makes <code>^</code> and <code>$</code> match the start/end of each line rather than only the start/end of the whole string. <code>/^line/gm</code> against a 3-line string matches "line" at the start of each of the first two lines.</li>
+        </ul>
+
+        <div class="tip-box">
+          Want to try these on your own text? Open the <a href="../tools/regex-tester.html">Regex Tester</a> — paste any pattern and any text and see every match highlighted live, with capture groups broken out.
+        </div>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>Why doesn't my email regex catch every valid address?</strong> Because a fully spec-compliant email pattern is extremely long and rarely worth the complexity — the simpler pattern on this page covers essentially every address you'll encounter in practice. For anything security-critical, pair regex validation with an actual confirmation email.</p>
+        <p><strong>What's the difference between greedy and lazy matching?</strong> By default, quantifiers like <code>+</code> and <code>*</code> are "greedy" — they match as much text as possible. Adding a <code>?</code> after them (like <code>+?</code>) makes them "lazy," matching as little as possible instead. This matters most when matching things like quoted strings or HTML tags.</p>
+        <p><strong>Do I need to escape special characters?</strong> Yes — characters like <code>.</code>, <code>*</code>, <code>+</code>, <code>?</code>, <code>(</code>, and <code>)</code> have special meaning in regex, so to match them literally you need a backslash before them, like <code>\.</code> to match an actual period.</p>
+        <p><strong>Is regex the same across JavaScript, Python, and other languages?</strong> Mostly, but not identical — the core syntax is very similar, but some features (like named groups or lookbehind support) vary by language and even by engine version. Always test your pattern in the actual environment you'll use it in.</p>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-brand">
+            <span class="brand-mark" aria-hidden="true"><svg class="brand-svg" viewBox="0 0 100 100"><rect x="30" y="24" width="13" height="52" rx="6.5" fill="#fff"/><rect x="30" y="24" width="38" height="13" rx="6.5" fill="#fff"/><rect x="30" y="47" width="29" height="13" rx="6.5" fill="#fff"/></svg></span>
+            Fixora
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor.html">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer.html">Image Resizer</a></li>
+            <li><a href="../tools/word-counter.html">Word Counter</a></li>
+            <li><a href="../tools/password-generator.html">Password Generator</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide.html">Compress a PDF</a></li>
+            <li><a href="image-format-guide.html">Image Formats</a></li>
+            <li><a href="strong-password-guide.html">Strong Passwords</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
