@@ -68,7 +68,7 @@
       {
         "@type": "Question",
         "name": "In what order will my files be merged?",
-        "acceptedAnswer": { "@type": "Answer", "text": "In the order shown in the file list, top to bottom — the order you upload them isn't final, so reorder with the up/down arrows before clicking Merge." }
+        "acceptedAnswer": { "@type": "Answer", "text": "In the order shown in the file list, top to bottom — the order you upload them isn't final, so press and hold a file's grip handle and drag it into place, or use the up/down arrows, before clicking Merge." }
       },
       {
         "@type": "Question",
@@ -83,6 +83,43 @@
     ]
   }
   </script>
+
+  <style>
+    .file-list-item {
+      position: relative;
+      transition: opacity 0.12s ease, box-shadow 0.12s ease;
+    }
+    .file-list-item .file-thumb {
+      -webkit-user-drag: none;
+      user-select: none;
+    }
+    .file-list-item .drag-handle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+      color: var(--color-text-muted);
+      cursor: grab;
+      touch-action: none;
+      user-select: none;
+    }
+    .file-list-item .drag-handle:active,
+    .file-list-item.fx-drag-source .drag-handle {
+      cursor: grabbing;
+    }
+    .file-list-item.fx-drag-source {
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-primary-light);
+    }
+    body.fx-drag-active {
+      cursor: grabbing;
+    }
+    .fx-drag-ghost {
+      border-radius: var(--radius-sm);
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -144,7 +181,7 @@
         <h2>How to Merge PDF Files</h2>
         <ol class="howto-steps">
           <li>Upload two or more PDF files (click or drag — the Merge button stays disabled until you have at least two).</li>
-          <li>Each file shows a thumbnail of its first page — use the up/down buttons to put the files in the order you want them combined.</li>
+          <li>Each file shows a thumbnail of its first page — press and hold a file's grip handle and drag it to reorder, or use the up/down buttons.</li>
           <li>Click "Merge PDFs".</li>
           <li>Download the single combined PDF.</li>
         </ol>
@@ -162,7 +199,7 @@
         </details>
         <details class="faq-item">
           <summary>In what order will my files be merged?</summary>
-          <p>In the order shown in the file list, top to bottom — the order you upload them isn't final, so reorder with the up/down arrows before clicking Merge.</p>
+          <p>In the order shown in the file list, top to bottom — the order you upload them isn't final, so press and hold a file's grip handle and drag it into place, or use the up/down arrows, before clicking Merge.</p>
         </details>
         <details class="faq-item">
           <summary>Is there a limit to how many PDFs I can merge at once?</summary>
@@ -243,6 +280,7 @@
   </footer>
 
   <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/reorder.js"></script>
   <script src="../assets/js/vendor/pdf-lib.min.js"></script>
   <script type="module">
     import * as pdfjsLib from "../assets/js/vendor/pdf.min.mjs";
@@ -261,12 +299,14 @@
       files.forEach(function (entry, index) {
         var item = document.createElement("div");
         item.className = "file-list-item";
+        item.setAttribute("data-index", String(index));
 
         var thumbHtml = entry.thumb
-          ? '<img class="file-thumb" src="' + entry.thumb + '" alt="First page of ' + entry.file.name + '" />'
+          ? '<img class="file-thumb" src="' + entry.thumb + '" alt="First page of ' + entry.file.name + '" draggable="false" />'
           : '<span class="file-thumb" aria-hidden="true"></span>';
 
         item.innerHTML =
+          '<span class="drag-handle" aria-hidden="true" title="Drag to reorder">' + FixoraReorder.gripSVG + '</span>' +
           thumbHtml +
           '<span class="file-name">' + (index + 1) + '. ' + entry.file.name + '</span>' +
           '<span class="file-meta">' + Fixora.formatBytes(entry.file.size) + '</span>' +
@@ -285,6 +325,18 @@
           ? "Add at least one more PDF to merge."
           : files.length + " PDFs ready — reorder if needed, then click Merge PDFs.";
     }
+
+    FixoraReorder.enable({
+      container: fileListEl,
+      itemSelector: ".file-list-item",
+      handleSelector: ".drag-handle",
+      onMove: function (from, to) {
+        var moved = FixoraReorder.moveItem(files, from, to);
+        if (moved) resetDownload();
+        return moved;
+      },
+      render: renderList
+    });
 
     async function generateThumb(entry) {
       try {

@@ -58,7 +58,7 @@
       {
         "@type": "Question",
         "name": "Can I drag and drop pages to reorder them?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No — reordering works through the up and down buttons on each page thumbnail, which move a page one position earlier or later per click. There's no drag-and-drop in this tool." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — press and hold any page thumbnail's grip handle and drag it to a new position; the order updates live as you move it and the position labels renumber automatically. Small up and down buttons remain on each thumbnail too, in case you'd rather not drag." }
       },
       {
         "@type": "Question",
@@ -73,7 +73,7 @@
       {
         "@type": "Question",
         "name": "Can I move a page to the very top or bottom quickly?",
-        "acceptedAnswer": { "@type": "Answer", "text": "You'll need to click the up or down button repeatedly to move a page across many positions, since each click only shifts it by one — there's no jump-to-top shortcut." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — drag a thumbnail's grip handle all the way to the start or end of the grid and drop it there in one motion. The up and down buttons still move a page only one position per click, so dragging is faster for big jumps." }
       },
       {
         "@type": "Question",
@@ -88,6 +88,36 @@
     .reorder-item .psel-badge { display: none; }
     .reorder-item {
       cursor: default;
+      transition: opacity 0.12s ease, box-shadow 0.12s ease;
+    }
+    .reorder-item .psel-thumb-stage img {
+      -webkit-user-drag: none;
+      user-select: none;
+    }
+    .reorder-item .drag-handle {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(11, 18, 32, 0.75);
+      color: #fff;
+      cursor: grab;
+      touch-action: none;
+      user-select: none;
+      z-index: 3;
+    }
+    .reorder-item .drag-handle:active,
+    .reorder-item.fx-drag-source .drag-handle {
+      cursor: grabbing;
+    }
+    .reorder-item.fx-drag-source {
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-primary-light);
     }
     .reorder-item .reorder-controls {
       position: absolute;
@@ -97,18 +127,24 @@
       gap: 4px;
     }
     .reorder-item .reorder-controls button {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       border-radius: 6px;
       border: none;
-      background: rgba(11, 18, 32, 0.75);
+      background: rgba(11, 18, 32, 0.6);
       color: #fff;
       cursor: pointer;
-      font-size: 0.8rem;
+      font-size: 0.72rem;
     }
     .reorder-item .reorder-controls button:disabled {
       opacity: 0.3;
       cursor: not-allowed;
+    }
+    body.fx-drag-active {
+      cursor: grabbing;
+    }
+    .fx-drag-ghost {
+      border-radius: var(--radius-sm);
     }
   </style>
 </head>
@@ -146,7 +182,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🔀</div>
       <h1>Reorder PDF Pages</h1>
-      <p>See every page and use the arrows to rearrange them into the order you want.</p>
+      <p>See every page, then press and hold a thumbnail to drag it into the order you want.</p>
     </section>
 
     <section class="container">
@@ -172,7 +208,7 @@
         <h2>How to Reorder PDF Pages</h2>
         <ol class="howto-steps">
           <li>Upload your PDF — every page renders as a thumbnail labeled with its position and original page number.</li>
-          <li>Use the up and down buttons on each thumbnail to move it earlier or later in the sequence.</li>
+          <li>Press and hold a thumbnail's grip handle and drag it to a new spot — or use the small up/down buttons if you'd rather not drag.</li>
           <li>Watch the "Position N (was page M)" label update as you move pages around, confirming the new order.</li>
           <li>Click "Save Reordered PDF" and download the result.</li>
         </ol>
@@ -182,7 +218,7 @@
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
           <summary>Can I drag and drop pages to reorder them?</summary>
-          <p>No — reordering works through the up and down buttons on each page thumbnail, which move a page one position earlier or later per click. There's no drag-and-drop in this tool.</p>
+          <p>Yes — press and hold any page thumbnail's grip handle and drag it to a new position; the order updates live as you move it and the position labels renumber automatically. Small up and down buttons remain on each thumbnail too, in case you'd rather not drag.</p>
         </details>
         <details class="faq-item">
           <summary>How do I know what the new page order will be before saving?</summary>
@@ -194,7 +230,7 @@
         </details>
         <details class="faq-item">
           <summary>Can I move a page to the very top or bottom quickly?</summary>
-          <p>You'll need to click the up or down button repeatedly to move a page across many positions, since each click only shifts it by one — there's no jump-to-top shortcut.</p>
+          <p>Yes — drag a thumbnail's grip handle all the way to the start or end of the grid and drop it there in one motion. The up and down buttons still move a page only one position per click, so dragging is faster for big jumps.</p>
         </details>
         <details class="faq-item">
           <summary>Is there a limit to how many pages I can reorder?</summary>
@@ -271,6 +307,7 @@
   </footer>
 
   <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/reorder.js"></script>
   <script src="../assets/js/vendor/pdf-lib.min.js"></script>
   <script type="module">
     import * as pdfjsLib from "../assets/js/vendor/pdf.min.mjs";
@@ -298,12 +335,21 @@
       pageOrder.forEach(function (origIndex, position) {
         var item = document.createElement("div");
         item.className = "page-select-item reorder-item";
+        item.setAttribute("data-index", String(position));
+
+        var handle = document.createElement("div");
+        handle.className = "drag-handle";
+        handle.setAttribute("aria-hidden", "true");
+        handle.title = "Drag to reorder";
+        handle.innerHTML = FixoraReorder.gripSVG;
+        item.appendChild(handle);
 
         var stage = document.createElement("div");
         stage.className = "psel-thumb-stage";
         var img = document.createElement("img");
         img.src = thumbDataUrls[origIndex];
         img.alt = "Page " + (origIndex + 1) + " preview";
+        img.draggable = false;
         stage.appendChild(img);
 
         var label = document.createElement("div");
@@ -347,6 +393,18 @@
         pageGrid.appendChild(item);
       });
     }
+
+    FixoraReorder.enable({
+      container: pageGrid,
+      itemSelector: ".reorder-item",
+      handleSelector: ".drag-handle",
+      onMove: function (from, to) {
+        var moved = FixoraReorder.moveItem(pageOrder, from, to);
+        if (moved) resetDownload();
+        return moved;
+      },
+      render: renderGrid
+    });
 
     async function renderThumbnails(file) {
       pageGrid.innerHTML = "";
