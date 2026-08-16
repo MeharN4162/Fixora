@@ -180,8 +180,8 @@
         <h2>How to Generate Fancy Text</h2>
         <ol class="howto-steps">
           <li>Type or paste your text into the box at the top.</li>
-          <li>All 17 styled versions below update instantly as you type.</li>
-          <li>Browse Bold, Italic, Bold Italic, Sans-Serif, Sans-Serif Bold, Monospace, Double-Struck, Fullwidth, Circled, Circled (Filled), Squared, Squared (Filled), Small Caps, Superscript, Strikethrough, Underline, and Upside Down.</li>
+          <li>All 20 styled versions below update instantly as you type.</li>
+          <li>Browse Bold, Italic, Bold Italic, Sans-Serif, Sans-Serif Bold, Monospace, Double-Struck, Fullwidth, Circled, Circled (Filled), Squared, Squared (Filled), Small Caps, Superscript, Fraktur, Fraktur Bold, Script Bold, Strikethrough, Underline, and Upside Down.</li>
           <li>Click "Copy" next to any style to copy that exact version to your clipboard.</li>
           <li>Paste it into your bio, username, caption, or wherever you like.</li>
         </ol>
@@ -416,6 +416,31 @@
       return ch;
     }
 
+    var FRAKTUR_EXCEPTIONS = { 67: 0x212D, 72: 0x210C, 73: 0x2111, 82: 0x211C, 90: 0x2128 };
+    function mapFraktur(ch) {
+      var c = ch.charCodeAt(0);
+      if (c >= 65 && c <= 90) {
+        if (FRAKTUR_EXCEPTIONS[c]) return String.fromCodePoint(FRAKTUR_EXCEPTIONS[c]);
+        return String.fromCodePoint(0x1D504 + (c - 65));
+      }
+      if (c >= 97 && c <= 122) return String.fromCodePoint(0x1D51E + (c - 97));
+      return ch;
+    }
+
+    function mapFrakturBold(ch) {
+      var c = ch.charCodeAt(0);
+      if (c >= 65 && c <= 90) return String.fromCodePoint(0x1D56C + (c - 65));
+      if (c >= 97 && c <= 122) return String.fromCodePoint(0x1D586 + (c - 97));
+      return ch;
+    }
+
+    function mapScriptBold(ch) {
+      var c = ch.charCodeAt(0);
+      if (c >= 65 && c <= 90) return String.fromCodePoint(0x1D4D0 + (c - 65));
+      if (c >= 97 && c <= 122) return String.fromCodePoint(0x1D4EA + (c - 97));
+      return ch;
+    }
+
     function mapStrikethrough(str) {
       var out = "";
       for (var i = 0; i < str.length; i++) out += str[i] + "̶";
@@ -464,6 +489,9 @@
         case "squared": return mapEach(input, mapSquared);
         case "squaredFilled": return mapEach(input, mapSquaredFilled);
         case "circledFilled": return mapEach(input, mapCircledFilled);
+        case "fraktur": return mapEach(input, mapFraktur);
+        case "frakturBold": return mapEach(input, mapFrakturBold);
+        case "scriptBold": return mapEach(input, mapScriptBold);
         default: return input;
       }
     }
@@ -483,6 +511,9 @@
       { id: "squaredFilled", label: "Squared (Filled)" },
       { id: "smallCaps", label: "Small Caps" },
       { id: "superscript", label: "Superscript" },
+      { id: "fraktur", label: "Fraktur" },
+      { id: "frakturBold", label: "Fraktur Bold" },
+      { id: "scriptBold", label: "Script Bold" },
       { id: "strikethrough", label: "Strikethrough" },
       { id: "underline", label: "Underline" },
       { id: "upsideDown", label: "Upside Down" }
