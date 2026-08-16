@@ -5,7 +5,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Favicon Generator Online — Create favicon.ico | Fixora</title>
-  <meta name="description" content="Generate a complete favicon set from any image online for free — favicon.ico plus every standard PNG size, with the HTML tags ready to paste. No uploads, no sign-up." />
+  <meta name="description" content="Generate a complete favicon set from any image online for free — favicon.ico plus six standard PNG sizes, an optional background color and padding for transparent or non-square sources, and a real-size preview in a browser tab, bookmarks bar, and home screen. No uploads, no sign-up." />
   <meta name="keywords" content="favicon generator, create favicon.ico online free, apple touch icon generator" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/favicon-generator.html" />
@@ -58,7 +58,12 @@
       {
         "@type": "Question",
         "name": "What happens if I upload a non-square image?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The tool automatically crops to a centered square before resizing - it takes the smaller of your image's width and height, then crops an equal amount off each side. For predictable results, it's best to start with a square (or near-square) source image." }
+        "acceptedAnswer": { "@type": "Answer", "text": "The tool automatically crops to a centered square before resizing - it takes the smaller of your image's width and height, then crops an equal amount off each side. If cropping would cut off too much, use the Padding option to shrink the artwork inward and add breathing room instead, combined with a Background Color (or the Transparent option) to fill the space around it." }
+      },
+      {
+        "@type": "Question",
+        "name": "What do the Background Color and Padding options do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Padding shrinks your artwork inward from 0-30% before it's placed on the square canvas, useful for logos that touch the edges or need breathing room. Background Color fills the square behind it - pick any color, or check Transparent to keep the padded area see-through (only meaningful for the PNG files and favicon.ico, since those support transparency). Both regenerate the full set instantly." }
       },
       {
         "@type": "Question",
@@ -67,8 +72,8 @@
       },
       {
         "@type": "Question",
-        "name": "Why do I need so many different favicon sizes?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Different platforms request different sizes: browser tabs typically use 16x16 or 32x32, iOS home-screen bookmarks use the 180x180 Apple Touch icon, and Android home screens use the 192x192 and 512x512 versions. Providing all of them ensures your icon looks sharp everywhere instead of being scaled up and blurry." }
+        "name": "Why do I need so many different favicon sizes, and what's the real-size preview for?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Different platforms request different sizes: browser tabs typically use 16x16 or 32x32, the taskbar/desktop-shortcut size is often 48x48, iOS home-screen bookmarks use the 180x180 Apple Touch icon, and Android home screens use the 192x192 and 512x512 versions. Providing all six PNG sizes plus favicon.ico ensures your icon looks sharp everywhere instead of being scaled up and blurry. The real-size preview shows your actual generated 16px, 32px, and 180px files mocked up in a browser tab, a bookmarks bar, and a phone home screen, so you can judge legibility before downloading rather than guessing from a large canvas view." }
       },
       {
         "@type": "Question",
@@ -78,7 +83,7 @@
       {
         "@type": "Question",
         "name": "Is my source image uploaded anywhere?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No. Every resize, crop, and the favicon.ico assembly itself happen locally in your browser using the Canvas API - nothing is sent to a server." }
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Every crop, padding, background fill, resize, and the favicon.ico assembly itself happen locally in your browser using the Canvas API - nothing is sent to a server." }
       }
     ]
   }
@@ -157,7 +162,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">⭐</div>
       <h1>Favicon Generator</h1>
-      <p>Upload any image and get a complete favicon set — favicon.ico plus every standard PNG size — with the HTML tags ready to paste.</p>
+      <p>Upload any image and get a complete favicon set — favicon.ico plus six standard PNG sizes — with an optional background color, padding, a real-size preview, and the HTML tags ready to paste.</p>
     </section>
 
     <section class="container">
@@ -201,15 +206,19 @@
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
           <summary>What happens if I upload a non-square image?</summary>
-          <p>The tool automatically crops to a centered square before resizing - it takes the smaller of your image's width and height, then crops an equal amount off each side. For predictable results, it's best to start with a square (or near-square) source image.</p>
+          <p>The tool automatically crops to a centered square before resizing - it takes the smaller of your image's width and height, then crops an equal amount off each side. If cropping would cut off too much, use the Padding option to shrink the artwork inward and add breathing room instead, combined with a Background Color (or the Transparent option) to fill the space around it.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What do the Background Color and Padding options do?</summary>
+          <p>Padding shrinks your artwork inward from 0-30% before it's placed on the square canvas, useful for logos that touch the edges or need breathing room. Background Color fills the square behind it - pick any color, or check Transparent to keep the padded area see-through (only meaningful for the PNG files and favicon.ico, since those support transparency). Both regenerate the full set instantly.</p>
         </details>
         <details class="faq-item">
           <summary>How does the tool build an actual favicon.ico file in the browser?</summary>
           <p>It constructs the ICO binary format directly in JavaScript: it renders your image at 16, 32, and 48px onto canvases, converts each to raw PNG bytes, and assembles them into a single multi-resolution .ico file with a hand-written header - no external image-conversion library is involved.</p>
         </details>
         <details class="faq-item">
-          <summary>Why do I need so many different favicon sizes?</summary>
-          <p>Different platforms request different sizes: browser tabs typically use 16x16 or 32x32, iOS home-screen bookmarks use the 180x180 Apple Touch icon, and Android home screens use the 192x192 and 512x512 versions. Providing all of them ensures your icon looks sharp everywhere instead of being scaled up and blurry.</p>
+          <summary>Why do I need so many different favicon sizes, and what's the real-size preview for?</summary>
+          <p>Different platforms request different sizes: browser tabs typically use 16x16 or 32x32, the taskbar/desktop-shortcut size is often 48x48, iOS home-screen bookmarks use the 180x180 Apple Touch icon, and Android home screens use the 192x192 and 512x512 versions. Providing all six PNG sizes plus favicon.ico ensures your icon looks sharp everywhere instead of being scaled up and blurry. The real-size preview shows your actual generated 16px, 32px, and 180px files mocked up in a browser tab, a bookmarks bar, and a phone home screen, so you can judge legibility before downloading rather than guessing from a large canvas view.</p>
         </details>
         <details class="faq-item">
           <summary>Why did my downloads happen one at a time with a small delay?</summary>
@@ -217,7 +226,7 @@
         </details>
         <details class="faq-item">
           <summary>Is my source image uploaded anywhere?</summary>
-          <p>No. Every resize, crop, and the favicon.ico assembly itself happen locally in your browser using the Canvas API - nothing is sent to a server.</p>
+          <p>No. Every crop, padding, background fill, resize, and the favicon.ico assembly itself happen locally in your browser using the Canvas API - nothing is sent to a server.</p>
         </details>
       </div>
 

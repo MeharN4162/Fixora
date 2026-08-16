@@ -5,8 +5,8 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free PDF Comparison Tool Online — Compare Two PDFs | Fixora</title>
-  <meta name="description" content="Compare two PDF files online for free and see exactly what text changed between them. Right in your browser, no uploads, no sign-up." />
-  <meta name="keywords" content="compare pdf, pdf diff checker online free, compare two pdf files" />
+  <meta name="description" content="Compare two PDF files online for free and see exactly what text changed — with word-level highlighting, a side-by-side or unified view, and an added/removed/changed summary. Right in your browser, no uploads, no sign-up." />
+  <meta name="keywords" content="compare pdf, pdf diff checker online free, compare two pdf files, side by side pdf diff" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/pdf-compare.html" />
 
@@ -79,21 +79,47 @@
         "@type": "Question",
         "name": "Does the diff show which page a change happened on?",
         "acceptedAnswer": { "@type": "Answer", "text": "Yes — each page's extracted text is preceded by a \"--- Page N ---\" marker line, so added/removed markers around that line indicate roughly where in the document the changes fall." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I see word-level changes within a modified line, not just the whole line?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — whenever a block of removed lines is immediately followed by the same number of added lines (a 1-for-1 edit rather than a pure insertion or deletion), the tool runs a second word-level comparison on each matched pair and highlights only the words that actually changed, instead of marking the entire line. If the counts don't match, it falls back to whole-line highlighting since there's no reliable way to pair the lines up." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between Unified and Side-by-side view?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Unified view shows one running list of lines with +/− markers, interleaving removed and added lines in document order. Side-by-side view splits the same diff into two aligned columns — the original on the left, the changed version on the right — which can be easier to scan when a lot of text moved around." }
       }
     ]
   }
   </script>
 
   <style>
+    .diff-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .diff-view-toggle {
+      display: flex;
+      gap: 8px;
+    }
+    .diff-view-toggle .pill {
+      padding: 6px 14px;
+      font-size: 0.82rem;
+    }
     .diff-output {
-      margin-top: 20px;
+      margin-top: 14px;
       border: 1px solid var(--color-border);
       border-radius: var(--radius-md);
       overflow: auto;
       max-height: 480px;
       font-family: monospace;
       font-size: 0.88rem;
-      background: #fff;
+      background: var(--color-surface);
     }
     .diff-line {
       display: flex;
@@ -103,7 +129,31 @@
     }
     .diff-line.added { background: #dcfce7; }
     .diff-line.removed { background: #fee2e2; }
+    .diff-line.blank { background: var(--color-bg-alt); }
     .diff-line .marker { width: 20px; flex-shrink: 0; color: var(--color-text-muted); user-select: none; }
+    .diff-line mark.worddiff {
+      background: rgba(0, 0, 0, 0.18);
+      border-radius: 3px;
+      padding: 0 1px;
+    }
+    .diff-side-by-side {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .diff-side-by-side .diff-line {
+      border-bottom: 1px solid var(--color-border);
+    }
+    .diff-side-by-side .diff-line:nth-child(odd) {
+      border-right: 1px solid var(--color-border);
+    }
+    @media (max-width: 640px) {
+      .diff-side-by-side {
+        grid-template-columns: 1fr;
+      }
+      .diff-side-by-side .diff-line:nth-child(odd) {
+        border-right: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -140,7 +190,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🔍</div>
       <h1>Compare PDFs</h1>
-      <p>Upload two PDFs and instantly see exactly which lines of text were added, removed, or unchanged.</p>
+      <p>Upload two PDFs and instantly see exactly which lines of text were added, removed, or unchanged — with word-level highlighting and a choice of unified or side-by-side view.</p>
     </section>
 
     <section class="container">
@@ -169,6 +219,21 @@
         </div>
 
         <div class="output-box" id="statusBox"></div>
+
+        <div class="stat-row" id="diffStats" style="display:none;">
+          <div class="stat"><strong id="statAdded">0</strong><span>Lines Added</span></div>
+          <div class="stat"><strong id="statRemoved">0</strong><span>Lines Removed</span></div>
+          <div class="stat"><strong id="statChanged">0</strong><span>Lines Changed</span></div>
+          <div class="stat"><strong id="statUnchanged">0</strong><span>Unchanged</span></div>
+        </div>
+
+        <div class="diff-toolbar" id="diffToolbar" style="display:none;">
+          <div class="diff-view-toggle" role="group" aria-label="Diff view mode">
+            <button class="pill active" id="viewUnifiedBtn" type="button" data-view="unified">Unified</button>
+            <button class="pill" id="viewSideBtn" type="button" data-view="side">Side-by-side</button>
+          </div>
+        </div>
+
         <div class="diff-output" id="diffOutput"></div>
       </div>
 
@@ -177,8 +242,9 @@
         <ol class="howto-steps">
           <li>Upload the original PDF into the first box, and the changed/updated version into the second box.</li>
           <li>Click "Compare PDFs" once both files are loaded.</li>
-          <li>Review the line-by-line diff — green lines were added in the second file, red lines were removed from the first, and everything else is unchanged.</li>
-          <li>Check the status line for a quick added/removed count summary.</li>
+          <li>Review the line-by-line diff — green lines were added in the second file, red lines were removed from the first, and everything else is unchanged. When a line was edited rather than fully added or removed, only the changed words inside it are highlighted.</li>
+          <li>Switch between "Unified" (one interleaved list) and "Side-by-side" (two aligned columns) using the view toggle.</li>
+          <li>Check the stats row for a quick added/removed/changed/unchanged line count.</li>
         </ol>
       </div>
 
@@ -203,6 +269,14 @@
         <details class="faq-item">
           <summary>Does the diff show which page a change happened on?</summary>
           <p>Yes — each page's extracted text is preceded by a "--- Page N ---" marker line, so added/removed markers around that line indicate roughly where in the document the changes fall.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I see word-level changes within a modified line, not just the whole line?</summary>
+          <p>Yes — whenever a block of removed lines is immediately followed by the same number of added lines (a 1-for-1 edit rather than a pure insertion or deletion), the tool runs a second word-level comparison on each matched pair and highlights only the words that actually changed, instead of marking the entire line. If the counts don't match, it falls back to whole-line highlighting since there's no reliable way to pair the lines up.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What's the difference between Unified and Side-by-side view?</summary>
+          <p>Unified view shows one running list of lines with +/− markers, interleaving removed and added lines in document order. Side-by-side view splits the same diff into two aligned columns — the original on the left, the changed version on the right — which can be easier to scan when a lot of text moved around.</p>
         </details>
       </div>
 
@@ -282,8 +356,14 @@
     var statusBox = document.getElementById("statusBox");
     var diffOutput = document.getElementById("diffOutput");
     var compareBtn = document.getElementById("compareBtn");
+    var diffToolbar = document.getElementById("diffToolbar");
+    var diffStats = document.getElementById("diffStats");
+    var viewUnifiedBtn = document.getElementById("viewUnifiedBtn");
+    var viewSideBtn = document.getElementById("viewSideBtn");
 
     var fileA = null, fileB = null;
+    var lastDiff = null;
+    var currentView = "unified";
 
     function wireDropzone(dzId, inputId, labelId, onSet) {
       var dz = document.getElementById(dzId);
@@ -321,14 +401,17 @@
       return lines;
     }
 
-    function computeLcsDiff(linesA, linesB) {
-      var n = linesA.length, m = linesB.length;
+    // Generic LCS-based diff over two arrays of strings — used both for
+    // whole lines (page text) and, on matched line pairs, for individual
+    // words, so the same well-tested algorithm powers both granularities.
+    function diffArrays(a, b) {
+      var n = a.length, m = b.length;
       var dp = new Array(n + 1);
       for (var i = 0; i <= n; i++) dp[i] = new Int32Array(m + 1);
 
       for (var i = n - 1; i >= 0; i--) {
         for (var j = m - 1; j >= 0; j--) {
-          dp[i][j] = linesA[i] === linesB[j]
+          dp[i][j] = a[i] === b[j]
             ? dp[i + 1][j + 1] + 1
             : Math.max(dp[i + 1][j], dp[i][j + 1]);
         }
@@ -337,19 +420,19 @@
       var result = [];
       var i = 0, j = 0;
       while (i < n && j < m) {
-        if (linesA[i] === linesB[j]) {
-          result.push({ type: "same", text: linesA[i] });
+        if (a[i] === b[j]) {
+          result.push({ type: "same", text: a[i] });
           i++; j++;
         } else if (dp[i + 1][j] >= dp[i][j + 1]) {
-          result.push({ type: "removed", text: linesA[i] });
+          result.push({ type: "removed", text: a[i] });
           i++;
         } else {
-          result.push({ type: "added", text: linesB[j] });
+          result.push({ type: "added", text: b[j] });
           j++;
         }
       }
-      while (i < n) { result.push({ type: "removed", text: linesA[i] }); i++; }
-      while (j < m) { result.push({ type: "added", text: linesB[j] }); j++; }
+      while (i < n) { result.push({ type: "removed", text: a[i] }); i++; }
+      while (j < m) { result.push({ type: "added", text: b[j] }); j++; }
 
       return result;
     }
@@ -360,10 +443,143 @@
       return div.innerHTML;
     }
 
+    // Word-level diff between two matched lines. Returns per-side token
+    // lists marked changed/unchanged so the caller can highlight only the
+    // words that actually differ instead of the whole line.
+    function wordDiff(lineA, lineB) {
+      var wa = lineA.split(" ");
+      var wb = lineB.split(" ");
+      var wdiff = diffArrays(wa, wb);
+      var aTokens = [], bTokens = [];
+      wdiff.forEach(function (d) {
+        if (d.type === "same") {
+          aTokens.push({ text: d.text, changed: false });
+          bTokens.push({ text: d.text, changed: false });
+        } else if (d.type === "removed") {
+          aTokens.push({ text: d.text, changed: true });
+        } else {
+          bTokens.push({ text: d.text, changed: true });
+        }
+      });
+      return { aTokens: aTokens, bTokens: bTokens };
+    }
+
+    function tokensToHtml(tokens) {
+      return tokens.map(function (t) {
+        var escaped = escapeHtml(t.text) || " ";
+        return t.changed ? '<mark class="worddiff">' + escaped + "</mark>" : escaped;
+      }).join(" ");
+    }
+
+    // Walks the line-level diff and, whenever a block of removed lines is
+    // immediately followed by an equal-length block of added lines (a
+    // 1-for-1 edit), pairs them up and runs a word-level diff on each pair
+    // so only the changed words get highlighted rather than the whole line.
+    function buildUnifiedRows(diff) {
+      var rows = [];
+      var i = 0;
+      while (i < diff.length) {
+        if (diff[i].type === "removed") {
+          var remStart = i;
+          while (i < diff.length && diff[i].type === "removed") i++;
+          var remLines = diff.slice(remStart, i);
+          var addStart = i;
+          while (i < diff.length && diff[i].type === "added") i++;
+          var addLines = diff.slice(addStart, i);
+
+          if (remLines.length === addLines.length) {
+            for (var k = 0; k < remLines.length; k++) {
+              var wd = wordDiff(remLines[k].text, addLines[k].text);
+              rows.push({ type: "removed", text: remLines[k].text, tokens: wd.aTokens });
+              rows.push({ type: "added", text: addLines[k].text, tokens: wd.bTokens });
+            }
+          } else {
+            remLines.forEach(function (l) { rows.push({ type: "removed", text: l.text }); });
+            addLines.forEach(function (l) { rows.push({ type: "added", text: l.text }); });
+          }
+        } else {
+          rows.push({ type: diff[i].type, text: diff[i].text });
+          i++;
+        }
+      }
+      return rows;
+    }
+
+    // Same grouping logic as buildUnifiedRows, but emits paired left/right
+    // rows (padding the shorter side with a blank placeholder) so the two
+    // columns of the side-by-side view stay roughly aligned per hunk.
+    function buildSideBySideRows(diff) {
+      var rows = [];
+      var i = 0;
+      while (i < diff.length) {
+        if (diff[i].type === "same") {
+          rows.push({ leftType: "same", leftText: diff[i].text, rightType: "same", rightText: diff[i].text });
+          i++;
+        } else {
+          var remStart = i;
+          while (i < diff.length && diff[i].type === "removed") i++;
+          var remLines = diff.slice(remStart, i);
+          var addStart = i;
+          while (i < diff.length && diff[i].type === "added") i++;
+          var addLines = diff.slice(addStart, i);
+          var max = Math.max(remLines.length, addLines.length);
+          for (var k = 0; k < max; k++) {
+            rows.push({
+              leftType: k < remLines.length ? "removed" : "blank",
+              leftText: k < remLines.length ? remLines[k].text : "",
+              rightType: k < addLines.length ? "added" : "blank",
+              rightText: k < addLines.length ? addLines[k].text : ""
+            });
+          }
+        }
+      }
+      return rows;
+    }
+
+    function renderUnified(diff) {
+      diffOutput.className = "diff-output";
+      var rows = buildUnifiedRows(diff);
+      diffOutput.innerHTML = rows.map(function (r) {
+        var marker = r.type === "added" ? "+" : r.type === "removed" ? "−" : " ";
+        var body = r.tokens ? tokensToHtml(r.tokens) : (escapeHtml(r.text) || " ");
+        return '<div class="diff-line ' + r.type + '"><span class="marker">' + marker + '</span><span>' + body + '</span></div>';
+      }).join("");
+    }
+
+    function renderSideBySide(diff) {
+      diffOutput.className = "diff-output diff-side-by-side";
+      var rows = buildSideBySideRows(diff);
+      var html = "";
+      rows.forEach(function (r) {
+        var lm = r.leftType === "removed" ? "−" : " ";
+        var rm = r.rightType === "added" ? "+" : " ";
+        html += '<div class="diff-line ' + r.leftType + '"><span class="marker">' + lm + '</span><span>' + (escapeHtml(r.leftText) || " ") + '</span></div>';
+        html += '<div class="diff-line ' + r.rightType + '"><span class="marker">' + rm + '</span><span>' + (escapeHtml(r.rightText) || " ") + '</span></div>';
+      });
+      diffOutput.innerHTML = html;
+    }
+
+    function renderDiff() {
+      if (!lastDiff) return;
+      if (currentView === "side") renderSideBySide(lastDiff);
+      else renderUnified(lastDiff);
+    }
+
+    [viewUnifiedBtn, viewSideBtn].forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        currentView = btn.getAttribute("data-view");
+        viewUnifiedBtn.classList.toggle("active", currentView === "unified");
+        viewSideBtn.classList.toggle("active", currentView === "side");
+        renderDiff();
+      });
+    });
+
     compareBtn.addEventListener("click", async function () {
       if (!fileA || !fileB) return;
       compareBtn.disabled = true;
       diffOutput.innerHTML = "";
+      diffToolbar.style.display = "none";
+      diffStats.style.display = "none";
       statusBox.textContent = "Reading both PDFs…";
 
       try {
@@ -376,18 +592,41 @@
         }
 
         statusBox.textContent = "Comparing…";
-        var diff = computeLcsDiff(linesA, linesB);
+        var diff = diffArrays(linesA, linesB);
+        lastDiff = diff;
+
         var added = diff.filter(function (d) { return d.type === "added"; }).length;
         var removed = diff.filter(function (d) { return d.type === "removed"; }).length;
+        var unchanged = diff.filter(function (d) { return d.type === "same"; }).length;
+        // "Changed" = 1-for-1 edited lines (same count paired in buildUnifiedRows),
+        // approximated here as the smaller of added/removed within each hunk.
+        var changed = 0, i = 0;
+        while (i < diff.length) {
+          if (diff[i].type === "removed") {
+            var remStart = i;
+            while (i < diff.length && diff[i].type === "removed") i++;
+            var remCount = i - remStart;
+            var addStart = i;
+            while (i < diff.length && diff[i].type === "added") i++;
+            var addCount = i - addStart;
+            if (remCount === addCount) changed += remCount;
+          } else {
+            i++;
+          }
+        }
+
+        document.getElementById("statAdded").textContent = added;
+        document.getElementById("statRemoved").textContent = removed;
+        document.getElementById("statChanged").textContent = changed;
+        document.getElementById("statUnchanged").textContent = unchanged;
+        diffStats.style.display = "flex";
 
         statusBox.textContent = diff.every(function (d) { return d.type === "same"; })
           ? "No text differences found — these PDFs have identical text content."
-          : added + " line(s) added, " + removed + " line(s) removed.";
+          : added + " line(s) added, " + removed + " line(s) removed" + (changed ? " (" + changed + " as edited-line pairs)" : "") + ".";
 
-        diffOutput.innerHTML = diff.map(function (d) {
-          var marker = d.type === "added" ? "+" : d.type === "removed" ? "−" : " ";
-          return '<div class="diff-line ' + d.type + '"><span class="marker">' + marker + '</span><span>' + (escapeHtml(d.text) || " ") + '</span></div>';
-        }).join("");
+        diffToolbar.style.display = "flex";
+        renderDiff();
       } catch (err) {
         console.error(err);
         statusBox.textContent = "Something went wrong comparing those PDFs.";
