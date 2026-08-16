@@ -5,21 +5,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Online Dice Roller | Fixora</title>
-  <meta name="description" content="Roll virtual dice online for free — d4, d6, d8, d10, d12, d20, or roll multiple dice at once. No sign-up, no app to install." />
-  <meta name="keywords" content="dice roller online free, roll a dice online, d20 roller" />
+  <meta name="description" content="Roll virtual dice online for free — d4, d6, d8, d10, d12, d20, with an optional +/- modifier, running total, and roll history log. No sign-up, no app to install." />
+  <meta name="keywords" content="dice roller online free, roll a dice online, d20 roller, dice roller with modifier" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/dice-roller.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Online Dice Roller" />
-  <meta property="og:description" content="Roll virtual dice online for free — d4 through d20, or multiple at once." />
+  <meta property="og:description" content="Roll virtual dice online for free — d4 through d20, with a +/- modifier and roll history log." />
   <meta property="og:url" content="https://fixora-site.vercel.app/tools/dice-roller.html" />
   <meta property="og:image" content="https://fixora-site.vercel.app/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Online Dice Roller" />
-  <meta name="twitter:description" content="Roll virtual dice online for free — d4 through d20, or multiple at once." />
+  <meta name="twitter:description" content="Roll virtual dice online for free — d4 through d20, with a +/- modifier and roll history log." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -78,7 +78,17 @@
       {
         "@type": "Question",
         "name": "What does the total shown below the dice mean?",
-        "acceptedAnswer": { "@type": "Answer", "text": "It's the sum of every individual die rolled in that batch — for a single die it just shows that die's value, and for multiple dice it also lists each individual result in parentheses." }
+        "acceptedAnswer": { "@type": "Answer", "text": "It's the sum of every individual die rolled in that batch, plus your modifier if you set one — for a single die with no modifier it just shows that die's value, and otherwise it also lists each individual result and the modifier in parentheses." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the Modifier field do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It adds (or subtracts, if negative) a flat number to the sum of your dice roll — useful for tabletop games where you roll a die plus a bonus, like a d20 attack roll with a +3 modifier. It's applied once to the total, not to each individual die." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Roll History for?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It keeps a running log of your last 20 rolls in this browser tab — die type, dice count, modifier, and total — so you can scroll back through recent results without re-rolling. It only exists in memory for the current page session and clears if you reload the page or click \"Clear\"." }
       }
     ]
   }
@@ -118,6 +128,55 @@
       font-size: 1.3rem;
       font-weight: 600;
     }
+    .roll-history {
+      margin-top: 22px;
+      border-top: 1px solid var(--color-border);
+      padding-top: 14px;
+    }
+    .roll-history-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .roll-history-head h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+    .roll-history-head button {
+      background: none;
+      border: none;
+      color: var(--color-text-muted);
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .roll-history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+    .roll-history-list .empty {
+      color: var(--color-text-muted);
+      font-size: 0.85rem;
+    }
+    .roll-entry {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.85rem;
+      padding: 7px 10px;
+      background: var(--color-bg-soft);
+      border-radius: var(--radius-sm);
+    }
+    .roll-entry .roll-entry-detail {
+      color: var(--color-text-muted);
+    }
   </style>
 </head>
 <body>
@@ -154,7 +213,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🎲</div>
       <h1>Dice Roller</h1>
-      <p>Roll one or more virtual dice — d4, d6, d8, d10, d12, or d20.</p>
+      <p>Roll one or more virtual dice — d4, d6, d8, d10, d12, or d20 — with an optional modifier and a running roll history.</p>
     </section>
 
     <section class="container">
@@ -168,9 +227,15 @@
           <button class="pill" data-sides="20" type="button">d20</button>
         </div>
 
-        <div class="field" style="margin-top:16px;max-width:220px;">
-          <label for="diceCount">Number of dice</label>
-          <input type="number" id="diceCount" value="2" min="1" max="12" />
+        <div class="row" style="margin-top:16px;">
+          <div class="field" style="max-width:220px;">
+            <label for="diceCount">Number of dice</label>
+            <input type="number" id="diceCount" value="2" min="1" max="12" />
+          </div>
+          <div class="field" style="max-width:220px;">
+            <label for="modifier">Modifier (+/-, optional)</label>
+            <input type="number" id="modifier" value="0" step="1" placeholder="e.g. 3 or -2" />
+          </div>
         </div>
 
         <div class="actions">
@@ -181,15 +246,24 @@
         <div class="dice-total" id="diceTotal"></div>
 
         <div class="output-box" id="statusBox"></div>
+
+        <div class="roll-history">
+          <div class="roll-history-head">
+            <h3>Roll History</h3>
+            <button type="button" id="clearHistoryBtn">Clear</button>
+          </div>
+          <div class="roll-history-list" id="rollHistoryList"><span class="empty">No rolls yet.</span></div>
+        </div>
       </div>
 
       <div class="howto">
         <h2>How to Roll Virtual Dice</h2>
         <ol class="howto-steps">
           <li>Choose your die type — d4, d6, d8, d10, d12, or d20 — using the pill buttons.</li>
-          <li>Set how many dice to roll at once (from 1 to 12).</li>
+          <li>Set how many dice to roll at once (from 1 to 12), and optionally add a +/- modifier for things like attack rolls.</li>
           <li>Click "🎲 Roll" to roll all the dice simultaneously.</li>
           <li>Read the total below the dice tray, along with the individual roll values shown in parentheses when rolling more than one die.</li>
+          <li>Every roll is logged in the Roll History list below, so you can scroll back through past results — click "Clear" to reset it.</li>
         </ol>
       </div>
 
@@ -213,7 +287,15 @@
         </details>
         <details class="faq-item">
           <summary>What does the total shown below the dice mean?</summary>
-          <p>It's the sum of every individual die rolled in that batch — for a single die it just shows that die's value, and for multiple dice it also lists each individual result in parentheses.</p>
+          <p>It's the sum of every individual die rolled in that batch, plus your modifier if you set one — for a single die with no modifier it just shows that die's value, and otherwise it also lists each individual result and the modifier in parentheses.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the Modifier field do?</summary>
+          <p>It adds (or subtracts, if negative) a flat number to the sum of your dice roll — useful for tabletop games where you roll a die plus a bonus, like a d20 attack roll with a +3 modifier. It's applied once to the total, not to each individual die.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is the Roll History for?</summary>
+          <p>It keeps a running log of your last 20 rolls in this browser tab — die type, dice count, modifier, and total — so you can scroll back through recent results without re-rolling. It only exists in memory for the current page session and clears if you reload the page or click "Clear".</p>
         </details>
       </div>
 
@@ -289,9 +371,13 @@
   <script>
     var sides = 6;
     var diceCount = document.getElementById("diceCount");
+    var modifierInput = document.getElementById("modifier");
     var diceTray = document.getElementById("diceTray");
     var diceTotal = document.getElementById("diceTotal");
     var statusBox = document.getElementById("statusBox");
+    var rollHistoryList = document.getElementById("rollHistoryList");
+    var rollHistory = [];
+    var MAX_HISTORY = 20;
 
     document.querySelectorAll("#sidesRow [data-sides]").forEach(function (pill) {
       pill.addEventListener("click", function () {
@@ -310,6 +396,31 @@
       return array[0] % maxExclusive;
     }
 
+    function renderHistory() {
+      if (rollHistory.length === 0) {
+        rollHistoryList.innerHTML = '<span class="empty">No rolls yet.</span>';
+        return;
+      }
+      rollHistoryList.innerHTML = "";
+      rollHistory.forEach(function (entry) {
+        var row = document.createElement("div");
+        row.className = "roll-entry";
+        var label = document.createElement("span");
+        label.textContent = entry.count + "×d" + entry.sides + (entry.modifier ? (entry.modifier > 0 ? " +" + entry.modifier : " " + entry.modifier) : "");
+        var detail = document.createElement("span");
+        detail.className = "roll-entry-detail";
+        detail.textContent = "= " + entry.total + (entry.rolls.length > 1 ? "  (" + entry.rolls.join(", ") + ")" : "");
+        row.appendChild(label);
+        row.appendChild(detail);
+        rollHistoryList.appendChild(row);
+      });
+    }
+
+    document.getElementById("clearHistoryBtn").addEventListener("click", function () {
+      rollHistory = [];
+      renderHistory();
+    });
+
     document.getElementById("rollBtn").addEventListener("click", function () {
       var count = parseInt(diceCount.value, 10);
       if (isNaN(count) || count < 1) {
@@ -317,6 +428,9 @@
         return;
       }
       count = Math.min(count, 12);
+
+      var modifier = parseInt(modifierInput.value, 10);
+      if (isNaN(modifier)) modifier = 0;
 
       var rolls = [];
       for (var i = 0; i < count; i++) {
@@ -331,9 +445,15 @@
         diceTray.appendChild(die);
       });
 
-      var total = rolls.reduce(function (a, b) { return a + b; }, 0);
-      diceTotal.textContent = "Total: " + total + (rolls.length > 1 ? " (" + rolls.join(" + ") + ")" : "");
-      statusBox.textContent = "Rolled " + count + " × d" + sides + ".";
+      var rollSum = rolls.reduce(function (a, b) { return a + b; }, 0);
+      var total = rollSum + modifier;
+      var modifierText = modifier ? (modifier > 0 ? " + " + modifier : " − " + Math.abs(modifier)) : "";
+      diceTotal.textContent = "Total: " + total + (rolls.length > 1 || modifier ? " (" + rolls.join(" + ") + modifierText + ")" : "");
+      statusBox.textContent = "Rolled " + count + " × d" + sides + (modifier ? (modifier > 0 ? " with a +" + modifier + " modifier" : " with a " + modifier + " modifier") : "") + ".";
+
+      rollHistory.unshift({ sides: sides, count: count, modifier: modifier, rolls: rolls, total: total });
+      if (rollHistory.length > MAX_HISTORY) rollHistory.length = MAX_HISTORY;
+      renderHistory();
     });
   </script>
 </body>

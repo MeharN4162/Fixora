@@ -5,21 +5,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Grade Calculator Online — Weighted Grades & Final Exam Needed | Fixora</title>
-  <meta name="description" content="Calculate your weighted course grade from assignment scores, and find out what score you need on your final exam. Free, no sign-up." />
-  <meta name="keywords" content="grade calculator, weighted grade calculator, what grade do i need on my final" />
+  <meta name="description" content="Calculate your weighted course grade from assignment scores with an optional 'drop the lowest score' rule, see your letter grade, and find out what score you need on your final exam. Free, no sign-up." />
+  <meta name="keywords" content="grade calculator, weighted grade calculator, what grade do i need on my final, drop lowest grade calculator" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/grade-calculator.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Grade Calculator Online" />
-  <meta property="og:description" content="Calculate your weighted course grade and what you need on your final exam." />
+  <meta property="og:description" content="Calculate your weighted course grade, drop your lowest scores, see your letter grade, and find what you need on your final." />
   <meta property="og:url" content="https://fixora-site.vercel.app/tools/grade-calculator.html" />
   <meta property="og:image" content="https://fixora-site.vercel.app/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Grade Calculator Online" />
-  <meta name="twitter:description" content="Calculate your weighted course grade and what you need on your final exam." />
+  <meta name="twitter:description" content="Calculate your weighted course grade, drop your lowest scores, see your letter grade, and find what you need on your final." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -74,6 +74,16 @@
         "@type": "Question",
         "name": "Do the assignment weights need to add up to 100%?",
         "acceptedAnswer": { "@type": "Answer", "text": "No — the calculator normalizes by dividing by however much total weight you've entered, so partial course weightings (e.g. only the assignments graded so far) still produce an accurate weighted average for what's been entered." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does \"Drop lowest score(s)\" work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Set it to a number greater than 0 and the calculator finds that many assignments with the lowest scores, removes them entirely (both their score and weight), and recalculates the weighted average from whatever's left — matching how a real drop-the-lowest grading policy works. It won't let you drop every assignment; at least one has to remain." }
+      },
+      {
+        "@type": "Question",
+        "name": "What letter grade scale does this tool use?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It uses a common default 10-point scale with plus/minus grades (97+ = A+, 93–96.99 = A, 90–92.99 = A-, and so on down to below 60 = F). This is a widely used convention, not a universal standard — actual grading scales vary by school and even by individual course, so check your syllabus for the scale that actually applies to you." }
       }
     ]
   }
@@ -130,7 +140,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">📝</div>
       <h1>Grade Calculator</h1>
-      <p>Calculate your weighted course grade, and find out what you need on your final exam.</p>
+      <p>Calculate your weighted course grade with an optional drop-lowest rule and letter grade, and find out what you need on your final exam.</p>
     </section>
 
     <section class="container">
@@ -144,9 +154,15 @@
           <button class="btn btn-secondary" id="addRowBtn" type="button">+ Add Assignment</button>
         </div>
 
+        <div class="field" style="max-width:260px;margin-top:14px;">
+          <label for="dropLowest">Drop lowest score(s) — optional</label>
+          <input type="number" id="dropLowest" value="0" min="0" step="1" />
+        </div>
+
         <div class="stat-row" id="weightedResult" style="display:none;">
           <div class="stat"><strong id="statWeightedGrade">–</strong><span>Weighted Grade</span></div>
-          <div class="stat"><strong id="statTotalWeight">–</strong><span>Total Weight Entered</span></div>
+          <div class="stat"><strong id="statLetterGrade">–</strong><span>Letter Grade</span></div>
+          <div class="stat"><strong id="statTotalWeight">–</strong><span>Total Weight Used</span></div>
         </div>
       </div>
 
@@ -178,7 +194,8 @@
       <div class="howto">
         <h2>How to Calculate Your Grade</h2>
         <ol class="howto-steps">
-          <li>Add each assignment with its score and weight in the top section to see your current weighted grade.</li>
+          <li>Add each assignment with its score and weight in the top section to see your current weighted grade, its letter-grade equivalent, and the total weight used.</li>
+          <li>Optionally set "Drop lowest score(s)" to a number greater than 0 to exclude your lowest-scoring assignment(s) from the weighted average — useful for classes with a drop-the-lowest policy.</li>
           <li>Enter your current grade, your final exam's weight, and the overall grade you're aiming for in the second section.</li>
           <li>Click Calculate to see exactly what score you need on the final.</li>
         </ol>
@@ -201,6 +218,14 @@
         <details class="faq-item">
           <summary>Do the assignment weights need to add up to 100%?</summary>
           <p>No — the calculator normalizes by dividing by however much total weight you've entered, so partial course weightings (e.g. only the assignments graded so far) still produce an accurate weighted average for what's been entered.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does "Drop lowest score(s)" work?</summary>
+          <p>Set it to a number greater than 0 and the calculator finds that many assignments with the lowest scores, removes them entirely (both their score and weight), and recalculates the weighted average from whatever's left — matching how a real drop-the-lowest grading policy works. It won't let you drop every assignment; at least one has to remain.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What letter grade scale does this tool use?</summary>
+          <p>It uses a common default 10-point scale with plus/minus grades (97+ = A+, 93–96.99 = A, 90–92.99 = A-, and so on down to below 60 = F). This is a widely used convention, not a universal standard — actual grading scales vary by school and even by individual course, so check your syllabus for the scale that actually applies to you.</p>
         </details>
       </div>
 
@@ -276,6 +301,21 @@
   <script>
     var gradeRows = document.getElementById("gradeRows");
     var weightedResult = document.getElementById("weightedResult");
+    var dropLowestInput = document.getElementById("dropLowest");
+
+    var LETTER_SCALE = [
+      { min: 97, letter: "A+" }, { min: 93, letter: "A" }, { min: 90, letter: "A-" },
+      { min: 87, letter: "B+" }, { min: 83, letter: "B" }, { min: 80, letter: "B-" },
+      { min: 77, letter: "C+" }, { min: 73, letter: "C" }, { min: 70, letter: "C-" },
+      { min: 67, letter: "D+" }, { min: 63, letter: "D" }, { min: 60, letter: "D-" },
+      { min: -Infinity, letter: "F" }
+    ];
+    function toLetterGrade(pct) {
+      for (var i = 0; i < LETTER_SCALE.length; i++) {
+        if (pct >= LETTER_SCALE[i].min) return LETTER_SCALE[i].letter;
+      }
+      return "F";
+    }
 
     function addRow(name, score, weight) {
       var row = document.createElement("div");
@@ -298,21 +338,43 @@
 
     function calcWeighted() {
       var rows = gradeRows.querySelectorAll(".grade-row");
-      var totalWeighted = 0;
-      var totalWeight = 0;
-      var anyValid = false;
+      var entries = [];
 
       rows.forEach(function (row) {
         var score = parseFloat(row.querySelector(".score-input").value);
         var weight = parseFloat(row.querySelector(".weight-input").value);
         if (!isNaN(score) && !isNaN(weight) && weight > 0) {
-          totalWeighted += score * weight;
-          totalWeight += weight;
-          anyValid = true;
+          entries.push({ score: score, weight: weight });
         }
       });
 
-      if (!anyValid || totalWeight === 0) {
+      if (entries.length === 0) {
+        weightedResult.style.display = "none";
+        return;
+      }
+
+      var dropCount = parseInt(dropLowestInput.value, 10);
+      if (isNaN(dropCount) || dropCount < 0) dropCount = 0;
+
+      var used = entries;
+      if (dropCount > 0) {
+        if (dropCount >= entries.length) {
+          weightedResult.style.display = "none";
+          return;
+        }
+        var sorted = entries.slice().sort(function (a, b) { return a.score - b.score; });
+        var dropped = sorted.slice(0, dropCount); // same object references as in `entries`
+        used = entries.filter(function (e) { return dropped.indexOf(e) === -1; });
+      }
+
+      var totalWeighted = 0;
+      var totalWeight = 0;
+      used.forEach(function (e) {
+        totalWeighted += e.score * e.weight;
+        totalWeight += e.weight;
+      });
+
+      if (totalWeight === 0) {
         weightedResult.style.display = "none";
         return;
       }
@@ -320,12 +382,15 @@
       var weightedGrade = totalWeighted / totalWeight;
       weightedResult.style.display = "flex";
       document.getElementById("statWeightedGrade").textContent = weightedGrade.toFixed(2) + "%";
+      document.getElementById("statLetterGrade").textContent = toLetterGrade(weightedGrade);
       document.getElementById("statTotalWeight").textContent = totalWeight.toFixed(1) + "%";
     }
 
     document.getElementById("addRowBtn").addEventListener("click", function () {
       addRow();
     });
+
+    dropLowestInput.addEventListener("input", calcWeighted);
 
     addRow("Assignment 1", "", "");
     addRow("Assignment 2", "", "");

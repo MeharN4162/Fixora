@@ -5,21 +5,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free GPA Calculator Online | Fixora</title>
-  <meta name="description" content="Calculate your GPA online for free using a standard 4.0 scale. Add as many courses as you need with credit hours and letter grades. No sign-up required." />
-  <meta name="keywords" content="gpa calculator, calculate gpa online free, grade point average calculator" />
+  <meta name="description" content="Calculate your GPA online for free using a standard 4.0 scale, with optional Honors/AP weighting per course, plus a cumulative GPA tracker across multiple semesters. No sign-up required." />
+  <meta name="keywords" content="gpa calculator, calculate gpa online free, grade point average calculator, weighted gpa calculator, cumulative gpa calculator" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/gpa-calculator.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free GPA Calculator Online" />
-  <meta property="og:description" content="Calculate your GPA online for free using a standard 4.0 scale." />
+  <meta property="og:description" content="Calculate your GPA on a 4.0 scale with optional Honors/AP weighting, plus a cumulative multi-semester tracker." />
   <meta property="og:url" content="https://fixora-site.vercel.app/tools/gpa-calculator.html" />
   <meta property="og:image" content="https://fixora-site.vercel.app/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free GPA Calculator Online" />
-  <meta name="twitter:description" content="Calculate your GPA online for free using a standard 4.0 scale." />
+  <meta name="twitter:description" content="Calculate your GPA on a 4.0 scale with optional Honors/AP weighting, plus a cumulative multi-semester tracker." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -73,12 +73,22 @@
       {
         "@type": "Question",
         "name": "Can I calculate GPA for just one term or my whole college career?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Either — just add every course you want included. To see a single term's GPA, only add that term's courses; to see your cumulative GPA, add every course you've taken." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Either — just add every course you want included. To see a single term's GPA, only add that term's courses; to see your cumulative GPA, add every course you've taken, or use the separate Cumulative GPA Tracker to combine already-finalized semester GPAs instead of re-entering every past course." }
       },
       {
         "@type": "Question",
         "name": "What happens if I enter 0 credit hours for a course?",
         "acceptedAnswer": { "@type": "Answer", "text": "A course with 0 credits contributes 0 grade points and 0 credit hours to the total, so it has no effect on your calculated GPA either way." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the Level column (Honors/AP weighting) work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Setting a course to Honors adds 0.5 bonus grade points and AP/IB/College adds 1.0 bonus grade point to that course's grade before multiplying by credit hours — a common convention many US high schools use for weighted GPA. This only affects the Weighted GPA stat; Unweighted GPA always uses the plain 4.0-scale points with no bonus, since bonus amounts and whether weighting is used at all vary by school." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the Cumulative GPA Tracker work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Each semester you add contributes its GPA multiplied by its credit hours; those are summed across every semester you've saved and divided by your total credit hours across all of them — the same weighted-average logic as a single GPA calculation, just applied one semester at a time instead of one course at a time. Click \"Use Calculation Above\" to pull in the current course section's weighted GPA and credits automatically." }
       }
     ]
   }
@@ -87,7 +97,7 @@
   <style>
     .gpa-row {
       display: grid;
-      grid-template-columns: 1fr 90px 100px 32px;
+      grid-template-columns: 1fr 70px 90px 120px 32px;
       gap: 8px;
       margin-bottom: 8px;
       align-items: center;
@@ -110,7 +120,7 @@
     }
     .gpa-header {
       display: grid;
-      grid-template-columns: 1fr 90px 100px 32px;
+      grid-template-columns: 1fr 70px 90px 120px 32px;
       gap: 8px;
       font-size: 0.75rem;
       font-weight: 600;
@@ -118,8 +128,32 @@
       text-transform: uppercase;
       margin-bottom: 8px;
     }
-    @media (max-width: 560px) {
+    @media (max-width: 640px) {
       .gpa-row, .gpa-header { grid-template-columns: 1fr; }
+    }
+    .semester-row {
+      display: grid;
+      grid-template-columns: 1fr 90px 90px 32px;
+      gap: 8px;
+      margin-bottom: 8px;
+      align-items: center;
+      background: var(--color-bg-soft);
+      border-radius: 8px;
+      padding: 6px 8px;
+    }
+    .semester-row span.sem-label { font-weight: 600; font-size: 0.9rem; }
+    .semester-row span.sem-value { font-size: 0.85rem; color: var(--color-text-muted); text-align: center; }
+    .semester-row .sem-remove {
+      background: var(--color-bg-alt);
+      border: none;
+      border-radius: 6px;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      color: var(--color-danger);
+    }
+    @media (max-width: 560px) {
+      .semester-row { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -157,32 +191,68 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🎓</div>
       <h1>GPA Calculator</h1>
-      <p>Add your courses with credit hours and letter grades to calculate your GPA on a standard 4.0 scale.</p>
+      <p>Add your courses with credit hours, letter grades, and optional Honors/AP weighting to calculate your GPA — plus track it cumulatively across semesters.</p>
     </section>
 
     <section class="container">
       <div class="tool-panel">
         <div class="gpa-header">
-          <span>Course</span><span>Credits</span><span>Grade</span><span></span>
+          <span>Course</span><span>Credits</span><span>Grade</span><span>Level</span><span></span>
         </div>
         <div id="coursesContainer"></div>
         <button class="btn btn-secondary" id="addCourseBtn" type="button" style="margin-top:6px;">+ Add Course</button>
 
         <div class="stat-row">
-          <div class="stat"><strong id="statGpa">–</strong><span>GPA</span></div>
+          <div class="stat"><strong id="statGpa">–</strong><span>Unweighted GPA</span></div>
+          <div class="stat"><strong id="statWeightedGpa">–</strong><span>Weighted GPA</span></div>
           <div class="stat"><strong id="statCredits">–</strong><span>Total Credits</span></div>
         </div>
 
         <div class="output-box" id="statusBox"></div>
       </div>
 
+      <div class="tool-panel" style="margin-top:24px;">
+        <h2 style="font-size:1.1rem;margin-bottom:4px;">Cumulative GPA Tracker</h2>
+        <p style="font-size:0.88rem;color:var(--color-text-muted);margin-bottom:8px;">Save each semester's GPA and credit hours to see your cumulative GPA across all of them.</p>
+
+        <div class="row">
+          <div class="field">
+            <label for="semLabel">Semester label</label>
+            <input type="text" id="semLabel" placeholder="e.g. Fall 2025" />
+          </div>
+          <div class="field">
+            <label for="semGpa">Semester GPA</label>
+            <input type="number" id="semGpa" placeholder="e.g. 3.75" step="0.01" min="0" />
+          </div>
+          <div class="field">
+            <label for="semCredits">Semester credits</label>
+            <input type="number" id="semCredits" placeholder="e.g. 15" step="0.5" min="0" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-secondary" id="useCurrentBtn" type="button">Use Calculation Above</button>
+          <button class="btn btn-primary" id="addSemesterBtn" type="button">+ Add Semester</button>
+        </div>
+
+        <div id="semesterList" style="margin-top:16px;"></div>
+
+        <div class="stat-row" id="cumulativeResult" style="display:none;">
+          <div class="stat"><strong id="statCumulativeGpa">–</strong><span>Cumulative GPA</span></div>
+          <div class="stat"><strong id="statCumulativeCredits">–</strong><span>Total Credits</span></div>
+        </div>
+
+        <div class="output-box" id="cumulativeStatusBox"></div>
+      </div>
+
       <div class="howto">
         <h2>How to Calculate Your GPA</h2>
         <ol class="howto-steps">
           <li>Click "+ Add Course" for each class you want to include, or edit the two rows already provided.</li>
-          <li>Type the course name (optional), enter its credit hours, and choose a letter grade from the dropdown.</li>
+          <li>Type the course name (optional), enter its credit hours, choose a letter grade, and pick a Level — Regular, Honors (+0.5), or AP/IB/College (+1.0) — if the course carries weighted bonus points at your school.</li>
           <li>Remove a course anytime using the "✕" button on its row.</li>
-          <li>Your GPA and total credit hours recalculate automatically every time you add, remove, or edit a course — no calculate button needed.</li>
+          <li>Both your Unweighted GPA (no bonus points) and Weighted GPA (with Honors/AP bonus points included) recalculate automatically, along with total credit hours — no calculate button needed.</li>
+          <li>To track multiple semesters, click "Use Calculation Above" to pull in the current weighted GPA and credits, name the semester, and click "+ Add Semester" — the Cumulative GPA Tracker combines every semester you've added into one running GPA.</li>
         </ol>
       </div>
 
@@ -202,11 +272,19 @@
         </details>
         <details class="faq-item">
           <summary>Can I calculate GPA for just one term or my whole college career?</summary>
-          <p>Either — just add every course you want included. To see a single term's GPA, only add that term's courses; to see your cumulative GPA, add every course you've taken.</p>
+          <p>Either — just add every course you want included. To see a single term's GPA, only add that term's courses; to see your cumulative GPA, add every course you've taken, or use the separate Cumulative GPA Tracker to combine already-finalized semester GPAs instead of re-entering every past course.</p>
         </details>
         <details class="faq-item">
           <summary>What happens if I enter 0 credit hours for a course?</summary>
           <p>A course with 0 credits contributes 0 grade points and 0 credit hours to the total, so it has no effect on your calculated GPA either way.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does the Level column (Honors/AP weighting) work?</summary>
+          <p>Setting a course to Honors adds 0.5 bonus grade points and AP/IB/College adds 1.0 bonus grade point to that course's grade before multiplying by credit hours — a common convention many US high schools use for weighted GPA. This only affects the Weighted GPA stat; Unweighted GPA always uses the plain 4.0-scale points with no bonus, since bonus amounts and whether weighting is used at all vary by school.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does the Cumulative GPA Tracker work?</summary>
+          <p>Each semester you add contributes its GPA multiplied by its credit hours; those are summed across every semester you've saved and divided by your total credit hours across all of them — the same weighted-average logic as a single GPA calculation, just applied one semester at a time instead of one course at a time. Click "Use Calculation Above" to pull in the current course section's weighted GPA and credits automatically.</p>
         </details>
       </div>
 
@@ -291,19 +369,32 @@
       "F": 0.0
     };
 
+    var LEVEL_BONUS = { "regular": 0, "honors": 0.5, "ap": 1.0 };
+    var LEVEL_LABELS = { "regular": "Regular", "honors": "Honors (+0.5)", "ap": "AP/IB/College (+1.0)" };
+
+    var lastWeightedGpa = 0;
+    var lastTotalCredits = 0;
+
     function gradeOptions(selected) {
       return Object.keys(GRADE_POINTS).map(function (g) {
         return '<option value="' + g + '"' + (g === selected ? " selected" : "") + '>' + g + '</option>';
       }).join("");
     }
 
-    function addCourseRow(name, credits, grade) {
+    function levelOptions(selected) {
+      return Object.keys(LEVEL_LABELS).map(function (lvl) {
+        return '<option value="' + lvl + '"' + (lvl === (selected || "regular") ? " selected" : "") + '>' + LEVEL_LABELS[lvl] + '</option>';
+      }).join("");
+    }
+
+    function addCourseRow(name, credits, grade, level) {
       var row = document.createElement("div");
       row.className = "gpa-row";
       row.innerHTML =
         '<input type="text" class="course-name" placeholder="e.g. Biology 101" value="' + (name || "") + '" />' +
         '<input type="number" class="course-credits" placeholder="3" value="' + (credits || 3) + '" min="0" step="0.5" />' +
         '<select class="course-grade">' + gradeOptions(grade || "A") + '</select>' +
+        '<select class="course-level">' + levelOptions(level) + '</select>' +
         '<button type="button" class="gpa-remove" aria-label="Remove course">✕</button>';
       coursesContainer.appendChild(row);
 
@@ -319,31 +410,122 @@
 
     function calculate() {
       var totalPoints = 0;
+      var totalWeightedPoints = 0;
       var totalCredits = 0;
 
       coursesContainer.querySelectorAll(".gpa-row").forEach(function (row) {
         var credits = parseFloat(row.querySelector(".course-credits").value) || 0;
         var grade = row.querySelector(".course-grade").value;
+        var level = row.querySelector(".course-level").value;
         var points = GRADE_POINTS[grade] || 0;
+        var bonus = LEVEL_BONUS[level] || 0;
         totalPoints += credits * points;
+        totalWeightedPoints += credits * (points + bonus);
         totalCredits += credits;
       });
 
       if (totalCredits === 0) {
         document.getElementById("statGpa").textContent = "–";
+        document.getElementById("statWeightedGpa").textContent = "–";
         document.getElementById("statCredits").textContent = "–";
         statusBox.textContent = "Add at least one course to calculate your GPA.";
+        lastWeightedGpa = 0;
+        lastTotalCredits = 0;
         return;
       }
 
       var gpa = totalPoints / totalCredits;
+      var weightedGpa = totalWeightedPoints / totalCredits;
       document.getElementById("statGpa").textContent = gpa.toFixed(2);
+      document.getElementById("statWeightedGpa").textContent = weightedGpa.toFixed(2);
       document.getElementById("statCredits").textContent = totalCredits;
-      statusBox.textContent = "Your GPA across " + totalCredits + " credit hour(s) is " + gpa.toFixed(2) + ".";
+      statusBox.textContent = "Your unweighted GPA across " + totalCredits + " credit hour(s) is " + gpa.toFixed(2) +
+        (weightedGpa !== gpa ? ", or " + weightedGpa.toFixed(2) + " weighted with Honors/AP bonus points." : ".");
+
+      lastWeightedGpa = weightedGpa;
+      lastTotalCredits = totalCredits;
     }
 
     addCourseRow("", 3, "A");
     addCourseRow("", 4, "B+");
+
+    // ---- Cumulative GPA Tracker ----
+    var semesterList = document.getElementById("semesterList");
+    var cumulativeResult = document.getElementById("cumulativeResult");
+    var cumulativeStatusBox = document.getElementById("cumulativeStatusBox");
+    var semesters = [];
+
+    document.getElementById("useCurrentBtn").addEventListener("click", function () {
+      if (lastTotalCredits === 0) {
+        cumulativeStatusBox.textContent = "Add at least one course above first so there's a GPA to pull in.";
+        return;
+      }
+      document.getElementById("semGpa").value = lastWeightedGpa.toFixed(2);
+      document.getElementById("semCredits").value = lastTotalCredits;
+      cumulativeStatusBox.textContent = "Pulled in this semester's weighted GPA and credits — give it a label and click \"+ Add Semester\".";
+    });
+
+    function renderSemesters() {
+      semesterList.innerHTML = "";
+      semesters.forEach(function (sem, idx) {
+        var row = document.createElement("div");
+        row.className = "semester-row";
+        row.innerHTML =
+          '<span class="sem-label"></span>' +
+          '<span class="sem-value"></span>' +
+          '<span class="sem-value"></span>' +
+          '<button type="button" class="sem-remove" aria-label="Remove semester">✕</button>';
+        row.querySelector(".sem-label").textContent = sem.label;
+        row.querySelectorAll(".sem-value")[0].textContent = "GPA " + sem.gpa.toFixed(2);
+        row.querySelectorAll(".sem-value")[1].textContent = sem.credits + " cr";
+        row.querySelector(".sem-remove").addEventListener("click", function () {
+          semesters.splice(idx, 1);
+          renderSemesters();
+          calculateCumulative();
+        });
+        semesterList.appendChild(row);
+      });
+    }
+
+    function calculateCumulative() {
+      if (semesters.length === 0) {
+        cumulativeResult.style.display = "none";
+        return;
+      }
+      var totalPoints = 0;
+      var totalCredits = 0;
+      semesters.forEach(function (sem) {
+        totalPoints += sem.gpa * sem.credits;
+        totalCredits += sem.credits;
+      });
+      var cumulativeGpa = totalCredits > 0 ? totalPoints / totalCredits : 0;
+      cumulativeResult.style.display = "flex";
+      document.getElementById("statCumulativeGpa").textContent = cumulativeGpa.toFixed(2);
+      document.getElementById("statCumulativeCredits").textContent = totalCredits;
+    }
+
+    document.getElementById("addSemesterBtn").addEventListener("click", function () {
+      var label = document.getElementById("semLabel").value.trim() || ("Semester " + (semesters.length + 1));
+      var gpa = parseFloat(document.getElementById("semGpa").value);
+      var credits = parseFloat(document.getElementById("semCredits").value);
+
+      if (isNaN(gpa) || gpa < 0) {
+        cumulativeStatusBox.textContent = "Please enter a valid semester GPA.";
+        return;
+      }
+      if (isNaN(credits) || credits <= 0) {
+        cumulativeStatusBox.textContent = "Please enter valid semester credits (greater than 0).";
+        return;
+      }
+
+      semesters.push({ label: label, gpa: gpa, credits: credits });
+      document.getElementById("semLabel").value = "";
+      document.getElementById("semGpa").value = "";
+      document.getElementById("semCredits").value = "";
+      renderSemesters();
+      calculateCumulative();
+      cumulativeStatusBox.textContent = "Added " + label + ". Cumulative GPA now reflects " + semesters.length + " semester(s).";
+    });
   </script>
 </body>
 </html>

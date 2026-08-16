@@ -79,6 +79,16 @@
         "@type": "Question",
         "name": "Does the calculator account for time zones?",
         "acceptedAnswer": { "@type": "Answer", "text": "No — the tool works with calendar dates only, not specific times, calculating using UTC internally so the day count isn't affected by your browser's local time zone or daylight saving changes." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is Total Hours calculated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's simply Total Days multiplied by 24, since each full calendar day contains 24 hours — it's a straight conversion of the same day count shown elsewhere on the page, not a separate time-of-day calculation." }
+      },
+      {
+        "@type": "Question",
+        "name": "What do the quick preset buttons do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Each preset sets the start date to today and the end date to a common target — 1 week, 1 month, or 1 year from today, or the next upcoming New Year's Day or Christmas — then calculates automatically, which is handy for quick countdown questions like \"how many days until Christmas\" without picking exact dates yourself." }
       }
     ]
   }
@@ -118,12 +128,20 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">📅</div>
       <h1>Date Difference Calculator</h1>
-      <p>Find exactly how many days, weeks, months, and years are between two dates.</p>
+      <p>Find exactly how many days, weeks, months, years, and hours are between two dates — plus business days and quick countdown presets.</p>
     </section>
 
     <section class="container">
       <div class="tool-panel">
-        <div class="row">
+        <div class="pill-row" id="presetRow">
+          <button class="pill" data-preset="week" type="button">1 Week From Today</button>
+          <button class="pill" data-preset="month" type="button">1 Month From Today</button>
+          <button class="pill" data-preset="year" type="button">1 Year From Today</button>
+          <button class="pill" data-preset="newyear" type="button">Days Until New Year's Day</button>
+          <button class="pill" data-preset="christmas" type="button">Days Until Christmas</button>
+        </div>
+
+        <div class="row" style="margin-top:16px;">
           <div class="field">
             <label for="startDate">Start date</label>
             <input type="date" id="startDate" />
@@ -152,16 +170,17 @@
           <div class="stat"><strong id="statWeeks">–</strong><span>Weeks</span></div>
           <div class="stat"><strong id="statYMD">–</strong><span>Years / Months / Days</span></div>
           <div class="stat"><strong id="statBusinessDays">–</strong><span>Weekdays</span></div>
+          <div class="stat"><strong id="statTotalHours">–</strong><span>Total Hours</span></div>
         </div>
       </div>
 
       <div class="howto">
         <h2>How to Calculate the Difference Between Two Dates</h2>
         <ol class="howto-steps">
-          <li>Pick a start date and an end date (it's fine if the end date comes before the start — the tool sorts them automatically).</li>
+          <li>Pick a start date and an end date (it's fine if the end date comes before the start — the tool sorts them automatically), or click a quick preset like "Days Until Christmas" to jump straight to a common countdown.</li>
           <li>Check "Include the end date in the count" if you want an inclusive count.</li>
           <li>Click "Calculate" to see the results.</li>
-          <li>Review the total days, weeks, years/months/days breakdown, and weekday (business day) count.</li>
+          <li>Review the total days, weeks, years/months/days breakdown, weekday (business day) count, and total hours.</li>
         </ol>
       </div>
 
@@ -186,6 +205,14 @@
         <details class="faq-item">
           <summary>Does the calculator account for time zones?</summary>
           <p>No — the tool works with calendar dates only, not specific times, calculating using UTC internally so the day count isn't affected by your browser's local time zone or daylight saving changes.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How is Total Hours calculated?</summary>
+          <p>It's simply Total Days multiplied by 24, since each full calendar day contains 24 hours — it's a straight conversion of the same day count shown elsewhere on the page, not a separate time-of-day calculation.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What do the quick preset buttons do?</summary>
+          <p>Each preset sets the start date to today and the end date to a common target — 1 week, 1 month, or 1 year from today, or the next upcoming New Year's Day or Christmas — then calculates automatically, which is handy for quick countdown questions like "how many days until Christmas" without picking exact dates yourself.</p>
         </details>
       </div>
 
@@ -271,6 +298,46 @@
     lastMonth.setMonth(lastMonth.getMonth() - 1);
     startDate.value = lastMonth.toISOString().slice(0, 10);
 
+    function pad2(n) { return n < 10 ? "0" + n : "" + n; }
+    function localISO(d) { return d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate()); }
+
+    // Finds the next occurrence (this year or next) of a given month/day, on or after "now".
+    function nextAnnualOccurrence(month, day, now) {
+      var y = now.getFullYear();
+      var candidate = new Date(y, month - 1, day);
+      var todayOnly = new Date(y, now.getMonth(), now.getDate());
+      if (candidate < todayOnly) candidate = new Date(y + 1, month - 1, day);
+      return candidate;
+    }
+
+    document.querySelectorAll("#presetRow [data-preset]").forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        var now = new Date();
+        var target;
+        switch (pill.getAttribute("data-preset")) {
+          case "week":
+            target = new Date(now); target.setDate(target.getDate() + 7);
+            break;
+          case "month":
+            target = new Date(now); target.setMonth(target.getMonth() + 1);
+            break;
+          case "year":
+            target = new Date(now); target.setFullYear(target.getFullYear() + 1);
+            break;
+          case "newyear":
+            target = nextAnnualOccurrence(1, 1, now);
+            break;
+          case "christmas":
+            target = nextAnnualOccurrence(12, 25, now);
+            break;
+        }
+        startDate.value = localISO(now);
+        endDate.value = localISO(target);
+        includeEndDate.checked = false;
+        document.getElementById("calcBtn").click();
+      });
+    });
+
     document.getElementById("calcBtn").addEventListener("click", function () {
       if (!startDate.value || !endDate.value) {
         statusBox.textContent = "Please choose both a start and end date.";
@@ -319,6 +386,7 @@
       document.getElementById("statWeeks").textContent = weeks + "w " + remainderDays + "d";
       document.getElementById("statYMD").textContent = years + "y " + months + "m " + days + "d";
       document.getElementById("statBusinessDays").textContent = businessDays;
+      document.getElementById("statTotalHours").textContent = (totalDays * 24).toLocaleString();
 
       statusBox.textContent = "There are " + totalDays + " day(s) between " + startDate.value + " and " + endDate.value + ".";
     });

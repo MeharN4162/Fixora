@@ -5,21 +5,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Discount & Sale Price Calculator Online | Fixora</title>
-  <meta name="description" content="Calculate the final sale price after a discount, plus how much you save, online for free. Optional sales tax included. No sign-up." />
-  <meta name="keywords" content="discount calculator, sale price calculator online free, percent off calculator" />
+  <meta name="description" content="Calculate the final sale price after a discount, stack a second discount on top, or work backward from a sale price to find the original price — plus optional sales tax. Free, no sign-up." />
+  <meta name="keywords" content="discount calculator, sale price calculator online free, percent off calculator, stacked discount calculator, reverse discount calculator" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/discount-calculator.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Discount & Sale Price Calculator" />
-  <meta property="og:description" content="Calculate the final sale price after a discount, plus how much you save." />
+  <meta property="og:description" content="Calculate a final sale price with stacked discounts, or reverse it to find the original price." />
   <meta property="og:url" content="https://fixora-site.vercel.app/tools/discount-calculator.html" />
   <meta property="og:image" content="https://fixora-site.vercel.app/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Discount & Sale Price Calculator" />
-  <meta name="twitter:description" content="Calculate the final sale price after a discount, plus how much you save." />
+  <meta name="twitter:description" content="Calculate a final sale price with stacked discounts, or reverse it to find the original price." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -79,6 +79,16 @@
         "@type": "Question",
         "name": "Is the sales tax rate accurate for my location?",
         "acceptedAnswer": { "@type": "Answer", "text": "No — you need to enter your own local sales tax rate; the calculator doesn't know your location and applies whatever percentage you type in, so check your local rate if you're not sure of it." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the Additional Discount (stacked discount) field work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It applies sequentially, not additively — a 20% discount followed by an additional 10% off doesn't equal 30% off. Instead, the second discount is taken off the already-discounted price: $100 at 20% off becomes $80, then 10% off $80 is $72, for a combined effective discount of 28%, not 30%." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Find Original Price (reverse mode) work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Enter the final price you actually paid and the discount percentage(s) that were applied, and the calculator divides backward through the same combined discount math used in Find Sale Price mode to reconstruct the original pre-discount price — useful for figuring out what something cost before a sale." }
       }
     ]
   }
@@ -118,21 +128,30 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🏷️</div>
       <h1>Discount & Sale Price Calculator</h1>
-      <p>Find the final price after a discount, plus exactly how much you're saving.</p>
+      <p>Find the final price after one or two stacked discounts, or work backward from a sale price to the original.</p>
     </section>
 
     <section class="container">
       <div class="tool-panel">
-        <div class="row">
+        <div class="pill-row" id="modeRow">
+          <button class="pill active" data-mode="forward" type="button">Find Sale Price</button>
+          <button class="pill" data-mode="reverse" type="button">Find Original Price</button>
+        </div>
+
+        <div class="row" style="margin-top:16px;">
           <div class="field">
-            <label for="originalPrice">Original price</label>
+            <label for="originalPrice" id="priceLabel">Original price</label>
             <input type="number" id="originalPrice" placeholder="e.g. 79.99" step="0.01" />
           </div>
           <div class="field">
-            <label for="discountPct">Discount (%)</label>
+            <label for="discountPct" id="discountLabel">Discount (%)</label>
             <input type="number" id="discountPct" placeholder="e.g. 25" step="0.1" />
           </div>
           <div class="field">
+            <label for="discount2Pct" id="discount2Label">Additional discount (%) — optional</label>
+            <input type="number" id="discount2Pct" placeholder="e.g. 10" step="0.1" />
+          </div>
+          <div class="field" id="taxField">
             <label for="taxPct">Sales tax (%) — optional</label>
             <input type="number" id="taxPct" placeholder="e.g. 8.25" step="0.01" />
           </div>
@@ -145,19 +164,19 @@
         <div class="output-box" id="statusBox"></div>
 
         <div class="stat-row" id="resultRow" style="display:none;">
-          <div class="stat"><strong id="statSaved">–</strong><span>You Save</span></div>
-          <div class="stat"><strong id="statAfterDiscount">–</strong><span>Price After Discount</span></div>
-          <div class="stat"><strong id="statFinal">–</strong><span>Final Price (with tax)</span></div>
+          <div class="stat"><strong id="statSaved">–</strong><span id="statSavedLabel">You Save</span></div>
+          <div class="stat"><strong id="statAfterDiscount">–</strong><span id="statAfterDiscountLabel">Price After Discount(s)</span></div>
+          <div class="stat"><strong id="statFinal">–</strong><span id="statFinalLabel">Final Price (with tax)</span></div>
         </div>
       </div>
 
       <div class="howto">
         <h2>How to Calculate a Discounted Price</h2>
         <ol class="howto-steps">
-          <li>Enter the item's original price.</li>
-          <li>Enter the discount percentage being applied.</li>
-          <li>Optionally enter your local sales tax percentage if you want the final price to include tax.</li>
-          <li>Click "Calculate" to see how much you save, the price after the discount, and the final price with tax applied.</li>
+          <li>Choose "Find Sale Price" to work forward from an original price, or "Find Original Price" to work backward from what you paid.</li>
+          <li>In Find Sale Price mode, enter the item's original price and its discount percentage — add a second "Additional discount" if two discounts stack (like an extra 10% off an already-marked-down item), and optionally a sales tax rate.</li>
+          <li>In Find Original Price mode, enter the final price you paid and the discount(s) that were applied to work out what the item cost before any discount.</li>
+          <li>Click "Calculate" to see the results.</li>
         </ol>
       </div>
 
@@ -182,6 +201,14 @@
         <details class="faq-item">
           <summary>Is the sales tax rate accurate for my location?</summary>
           <p>No — you need to enter your own local sales tax rate; the calculator doesn't know your location and applies whatever percentage you type in, so check your local rate if you're not sure of it.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does the Additional Discount (stacked discount) field work?</summary>
+          <p>It applies sequentially, not additively — a 20% discount followed by an additional 10% off doesn't equal 30% off. Instead, the second discount is taken off the already-discounted price: $100 at 20% off becomes $80, then 10% off $80 is $72, for a combined effective discount of 28%, not 30%.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does Find Original Price (reverse mode) work?</summary>
+          <p>Enter the final price you actually paid and the discount percentage(s) that were applied, and the calculator divides backward through the same combined discount math used in Find Sale Price mode to reconstruct the original pre-discount price — useful for figuring out what something cost before a sale.</p>
         </details>
       </div>
 
@@ -257,38 +284,92 @@
   <script>
     var originalPrice = document.getElementById("originalPrice");
     var discountPct = document.getElementById("discountPct");
+    var discount2Pct = document.getElementById("discount2Pct");
     var taxPct = document.getElementById("taxPct");
+    var taxField = document.getElementById("taxField");
     var statusBox = document.getElementById("statusBox");
     var resultRow = document.getElementById("resultRow");
+    var priceLabel = document.getElementById("priceLabel");
+    var mode = "forward";
 
     function formatMoney(n) {
       return "$" + n.toFixed(2);
     }
 
+    document.querySelectorAll("#modeRow [data-mode]").forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        document.querySelectorAll("#modeRow [data-mode]").forEach(function (p) { p.classList.remove("active"); });
+        pill.classList.add("active");
+        mode = pill.getAttribute("data-mode");
+        resultRow.style.display = "none";
+        statusBox.textContent = "";
+        if (mode === "forward") {
+          priceLabel.textContent = "Original price";
+          originalPrice.placeholder = "e.g. 79.99";
+          taxField.style.display = "";
+        } else {
+          priceLabel.textContent = "Final price you paid";
+          originalPrice.placeholder = "e.g. 59.99";
+          taxField.style.display = "none";
+        }
+      });
+    });
+
     document.getElementById("calcBtn").addEventListener("click", function () {
       var price = parseFloat(originalPrice.value);
       var discount = parseFloat(discountPct.value);
+      var discount2 = parseFloat(discount2Pct.value) || 0;
       var tax = parseFloat(taxPct.value) || 0;
 
       if (isNaN(price) || price < 0) {
-        statusBox.textContent = "Please enter a valid original price.";
+        statusBox.textContent = mode === "forward" ? "Please enter a valid original price." : "Please enter a valid final price.";
         return;
       }
       if (isNaN(discount) || discount < 0 || discount > 100) {
         statusBox.textContent = "Please enter a discount percentage between 0 and 100.";
         return;
       }
+      if (discount2 < 0 || discount2 > 100) {
+        statusBox.textContent = "Please enter an additional discount percentage between 0 and 100.";
+        return;
+      }
 
-      var savedAmount = price * (discount / 100);
-      var afterDiscount = price - savedAmount;
-      var finalPrice = afterDiscount * (1 + tax / 100);
+      var combinedMultiplier = (1 - discount / 100) * (1 - discount2 / 100);
+      var combinedDiscountPct = (1 - combinedMultiplier) * 100;
+
+      if (combinedMultiplier <= 0) {
+        statusBox.textContent = "A combined discount of 100% or more isn't a valid sale price.";
+        return;
+      }
 
       resultRow.style.display = "flex";
-      document.getElementById("statSaved").textContent = formatMoney(savedAmount);
-      document.getElementById("statAfterDiscount").textContent = formatMoney(afterDiscount);
-      document.getElementById("statFinal").textContent = formatMoney(finalPrice);
 
-      statusBox.textContent = "You save " + formatMoney(savedAmount) + " (" + discount + "% off).";
+      if (mode === "forward") {
+        var afterDiscount = price * combinedMultiplier;
+        var savedAmount = price - afterDiscount;
+        var finalPrice = afterDiscount * (1 + tax / 100);
+
+        document.getElementById("statSavedLabel").textContent = "You Save";
+        document.getElementById("statAfterDiscountLabel").textContent = "Price After Discount(s)";
+        document.getElementById("statFinalLabel").textContent = "Final Price (with tax)";
+        document.getElementById("statSaved").textContent = formatMoney(savedAmount);
+        document.getElementById("statAfterDiscount").textContent = formatMoney(afterDiscount);
+        document.getElementById("statFinal").textContent = formatMoney(finalPrice);
+
+        statusBox.textContent = "You save " + formatMoney(savedAmount) + " (" + combinedDiscountPct.toFixed(2) + "% combined off).";
+      } else {
+        var original = price / combinedMultiplier;
+        var savedFromOriginal = original - price;
+
+        document.getElementById("statSavedLabel").textContent = "You Saved";
+        document.getElementById("statAfterDiscountLabel").textContent = "Original Price";
+        document.getElementById("statFinalLabel").textContent = "Combined Discount";
+        document.getElementById("statSaved").textContent = formatMoney(savedFromOriginal);
+        document.getElementById("statAfterDiscount").textContent = formatMoney(original);
+        document.getElementById("statFinal").textContent = combinedDiscountPct.toFixed(2) + "%";
+
+        statusBox.textContent = "The original price was about " + formatMoney(original) + " before a " + combinedDiscountPct.toFixed(2) + "% combined discount.";
+      }
     });
   </script>
 </body>

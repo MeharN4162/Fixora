@@ -5,21 +5,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Fuel Cost / Trip Cost Calculator Online | Fixora</title>
-  <meta name="description" content="Calculate how much a road trip will cost in fuel online for free. Enter distance, fuel efficiency, and price per gallon or liter. No sign-up." />
-  <meta name="keywords" content="fuel cost calculator, gas cost calculator online free, trip cost calculator" />
+  <meta name="description" content="Calculate how much a road trip will cost in fuel online for free. Enter distance, fuel efficiency, and price per gallon or liter, toggle round-trip, and compare the cost against a second vehicle's efficiency. No sign-up." />
+  <meta name="keywords" content="fuel cost calculator, gas cost calculator online free, trip cost calculator, round trip fuel cost, compare car mpg cost" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/fuel-cost-calculator.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Fuel Cost Calculator" />
-  <meta property="og:description" content="Calculate how much a road trip will cost in fuel, online for free." />
+  <meta property="og:description" content="Calculate road trip fuel cost, one-way or round trip, and compare it against a second vehicle's efficiency." />
   <meta property="og:url" content="https://fixora-site.vercel.app/tools/fuel-cost-calculator.html" />
   <meta property="og:image" content="https://fixora-site.vercel.app/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Fuel Cost Calculator" />
-  <meta name="twitter:description" content="Calculate how much a road trip will cost in fuel, online for free." />
+  <meta name="twitter:description" content="Calculate road trip fuel cost, one-way or round trip, and compare it against a second vehicle's efficiency." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -79,6 +79,16 @@
         "@type": "Question",
         "name": "Can I use this for costs other than gasoline, like diesel or electric charging?",
         "acceptedAnswer": { "@type": "Answer", "text": "Yes, as long as you enter the correct price per unit and your vehicle's efficiency in the matching unit — the math itself doesn't care what fuel type it represents, it's simply distance, efficiency, and price." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the Round Trip checkbox work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It simply doubles whatever distance you entered before running the calculation — so if you typed in the one-way mileage, checking it gives you the fuel needed and cost for the full there-and-back trip instead of just one leg." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does comparing a second vehicle work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Enter a second fuel efficiency figure in the same unit (MPG or L/100km) as your main vehicle, and the calculator runs the exact same distance and fuel price through that efficiency to show Vehicle B's total cost and how much more or less it would cost for the identical trip — useful for comparing two cars before a purchase or road trip." }
       }
     ]
   }
@@ -118,7 +128,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">⛽</div>
       <h1>Fuel Cost Calculator</h1>
-      <p>Work out how much a trip will cost in fuel, in miles or kilometers.</p>
+      <p>Work out how much a trip will cost in fuel, one-way or round trip, in miles or kilometers — and optionally compare it against a second vehicle.</p>
     </section>
 
     <section class="container">
@@ -143,6 +153,18 @@
           </div>
         </div>
 
+        <div class="check-row">
+          <input type="checkbox" id="roundTrip" />
+          <label for="roundTrip">Round trip (doubles the distance entered above)</label>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="efficiencyB" id="efficiencyBLabel">Compare a 2nd vehicle's efficiency (MPG) — optional</label>
+            <input type="number" id="efficiencyB" placeholder="e.g. 35" step="0.1" />
+          </div>
+        </div>
+
         <div class="actions">
           <button class="btn btn-primary" id="calcBtn">Calculate</button>
         </div>
@@ -154,6 +176,10 @@
           <div class="stat"><strong id="statTotalCost">–</strong><span>Total Fuel Cost</span></div>
           <div class="stat"><strong id="statCostPerMile">–</strong><span id="statCostPerMileLabel">Cost per Mile</span></div>
         </div>
+        <div class="stat-row" id="compareRow" style="display:none;">
+          <div class="stat"><strong id="statCompareCost">–</strong><span id="statCompareCostLabel">Vehicle B Total Cost</span></div>
+          <div class="stat"><strong id="statCompareDiff">–</strong><span>Savings with Vehicle B</span></div>
+        </div>
       </div>
 
       <div class="howto">
@@ -161,8 +187,9 @@
         <ol class="howto-steps">
           <li>Choose your preferred units — Miles/Gallon or Liters/100km — using the toggle pills.</li>
           <li>Enter your trip distance, your vehicle's fuel efficiency, and the price per gallon (or liter).</li>
-          <li>Click "Calculate" to see the results.</li>
-          <li>Read the fuel needed for the trip, the total fuel cost, and the cost per mile or kilometer.</li>
+          <li>Check "Round trip" if the distance you entered is one-way and you want the cost for the full there-and-back trip.</li>
+          <li>Optionally enter a second vehicle's fuel efficiency to compare its cost for the exact same trip.</li>
+          <li>Click "Calculate" to see the fuel needed, total fuel cost, cost per mile or kilometer, and — if you filled it in — how much a second vehicle would cost and save.</li>
         </ol>
       </div>
 
@@ -187,6 +214,14 @@
         <details class="faq-item">
           <summary>Can I use this for costs other than gasoline, like diesel or electric charging?</summary>
           <p>Yes, as long as you enter the correct price per unit and your vehicle's efficiency in the matching unit — the math itself doesn't care what fuel type it represents, it's simply distance, efficiency, and price.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does the Round Trip checkbox work?</summary>
+          <p>It simply doubles whatever distance you entered before running the calculation — so if you typed in the one-way mileage, checking it gives you the fuel needed and cost for the full there-and-back trip instead of just one leg.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does comparing a second vehicle work?</summary>
+          <p>Enter a second fuel efficiency figure in the same unit (MPG or L/100km) as your main vehicle, and the calculator runs the exact same distance and fuel price through that efficiency to show Vehicle B's total cost and how much more or less it would cost for the identical trip — useful for comparing two cars before a purchase or road trip.</p>
         </details>
       </div>
 
@@ -264,8 +299,12 @@
     var distance = document.getElementById("distance");
     var efficiency = document.getElementById("efficiency");
     var fuelPrice = document.getElementById("fuelPrice");
+    var roundTrip = document.getElementById("roundTrip");
+    var efficiencyB = document.getElementById("efficiencyB");
+    var efficiencyBLabel = document.getElementById("efficiencyBLabel");
     var statusBox = document.getElementById("statusBox");
     var resultRow = document.getElementById("resultRow");
+    var compareRow = document.getElementById("compareRow");
 
     document.querySelectorAll("#unitRow [data-unit]").forEach(function (pill) {
       pill.addEventListener("click", function () {
@@ -278,15 +317,26 @@
           document.getElementById("efficiencyLabel").textContent = "Fuel efficiency (MPG)";
           document.getElementById("fuelPriceLabel").textContent = "Price per gallon";
           efficiency.placeholder = "e.g. 28";
+          efficiencyBLabel.textContent = "Compare a 2nd vehicle's efficiency (MPG) — optional";
+          efficiencyB.placeholder = "e.g. 35";
         } else {
           document.getElementById("distanceLabel").textContent = "Trip distance (km)";
           document.getElementById("efficiencyLabel").textContent = "Fuel efficiency (L/100km)";
           document.getElementById("fuelPriceLabel").textContent = "Price per liter";
           efficiency.placeholder = "e.g. 8.5";
+          efficiencyBLabel.textContent = "Compare a 2nd vehicle's efficiency (L/100km) — optional";
+          efficiencyB.placeholder = "e.g. 6.2";
         }
         resultRow.style.display = "none";
+        compareRow.style.display = "none";
       });
     });
+
+    function fuelAndCost(d, e, p) {
+      var fuelNeeded = unitMode === "mpg" ? d / e : (d / 100) * e;
+      var totalCost = fuelNeeded * p;
+      return { fuelNeeded: fuelNeeded, totalCost: totalCost };
+    }
 
     document.getElementById("calcBtn").addEventListener("click", function () {
       var d = parseFloat(distance.value);
@@ -298,30 +348,36 @@
         return;
       }
 
-      var fuelNeeded, totalCost, costPerDistance, fuelUnitLabel, distanceUnitLabel;
+      var actualDistance = roundTrip.checked ? d * 2 : d;
+      var fuelUnitLabel = unitMode === "mpg" ? "Gallons Needed" : "Liters Needed";
+      var distanceUnitLabel = unitMode === "mpg" ? "Cost per Mile" : "Cost per Km";
 
-      if (unitMode === "mpg") {
-        fuelNeeded = d / e;
-        totalCost = fuelNeeded * p;
-        costPerDistance = totalCost / d;
-        fuelUnitLabel = "Gallons Needed";
-        distanceUnitLabel = "Cost per Mile";
-      } else {
-        fuelNeeded = (d / 100) * e;
-        totalCost = fuelNeeded * p;
-        costPerDistance = totalCost / d;
-        fuelUnitLabel = "Liters Needed";
-        distanceUnitLabel = "Cost per Km";
-      }
+      var resultA = fuelAndCost(actualDistance, e, p);
+      var costPerDistance = resultA.totalCost / actualDistance;
 
       resultRow.style.display = "flex";
-      document.getElementById("statFuelNeeded").textContent = fuelNeeded.toFixed(2);
+      document.getElementById("statFuelNeeded").textContent = resultA.fuelNeeded.toFixed(2);
       document.getElementById("statFuelNeededLabel").textContent = fuelUnitLabel;
-      document.getElementById("statTotalCost").textContent = "$" + totalCost.toFixed(2);
+      document.getElementById("statTotalCost").textContent = "$" + resultA.totalCost.toFixed(2);
       document.getElementById("statCostPerMile").textContent = "$" + costPerDistance.toFixed(3);
       document.getElementById("statCostPerMileLabel").textContent = distanceUnitLabel;
 
-      statusBox.textContent = "This trip will cost about $" + totalCost.toFixed(2) + " in fuel.";
+      var tripDescription = (roundTrip.checked ? "This round trip (" + actualDistance.toFixed(1) + (unitMode === "mpg" ? " mi" : " km") + ")" : "This trip") + " will cost about $" + resultA.totalCost.toFixed(2) + " in fuel.";
+
+      var eB = parseFloat(efficiencyB.value);
+      if (!isNaN(eB) && eB > 0) {
+        var resultB = fuelAndCost(actualDistance, eB, p);
+        var diff = resultA.totalCost - resultB.totalCost;
+        compareRow.style.display = "flex";
+        document.getElementById("statCompareCostLabel").textContent = "Vehicle B Total Cost";
+        document.getElementById("statCompareCost").textContent = "$" + resultB.totalCost.toFixed(2);
+        document.getElementById("statCompareDiff").textContent = (diff >= 0 ? "$" + diff.toFixed(2) + " less" : "$" + Math.abs(diff).toFixed(2) + " more");
+        tripDescription += " Vehicle B would cost $" + resultB.totalCost.toFixed(2) + " for the same trip, " + (diff >= 0 ? "saving $" + diff.toFixed(2) : "costing $" + Math.abs(diff).toFixed(2) + " more") + ".";
+      } else {
+        compareRow.style.display = "none";
+      }
+
+      statusBox.textContent = tripDescription;
     });
   </script>
 </body>
