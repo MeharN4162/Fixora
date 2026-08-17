@@ -1407,7 +1407,7 @@ p {
 .article-body {
   max-width: 720px;
   font-size: 1.05rem;
-  color: #1e293b;
+  color: var(--color-text);
 }
 
 .article-body h2 {
