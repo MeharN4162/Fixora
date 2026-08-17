@@ -6,21 +6,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Slug Generator Online — Text to URL Slug | Fixora</title>
-  <meta name="description" content="Convert any text into a clean, URL-friendly slug online for free. Perfect for blog post URLs, file names, and IDs. No sign-up required." />
-  <meta name="keywords" content="slug generator, url slug converter online free, slugify text" />
+  <meta name="description" content="Convert any text into a clean, URL-friendly slug online for free. Pick a hyphen, underscore, or no separator, keep or force lowercase, strip accents, cap the length without cutting mid-word, or batch-convert multiple lines at once. No sign-up required." />
+  <meta name="keywords" content="slug generator, url slug converter online free, slugify text, batch slug generator" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/slug-generator.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Slug Generator Online" />
-  <meta property="og:description" content="Convert any text into a clean, URL-friendly slug online for free." />
+  <meta property="og:description" content="Convert any text into a clean, URL-friendly slug online for free, with separator, case, length, and batch options." />
   <meta property="og:url" content="https://fixoona.com/tools/slug-generator.html" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Slug Generator Online" />
-  <meta name="twitter:description" content="Convert any text into a clean, URL-friendly slug online for free." />
+  <meta name="twitter:description" content="Convert any text into a clean, URL-friendly slug online for free, with separator, case, length, and batch options." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -73,13 +73,28 @@
       },
       {
         "@type": "Question",
-        "name": "Should I use a hyphen or an underscore as the separator?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Hyphen is selected by default because most search engines, including Google, treat a hyphen as a word boundary but read an underscore-joined phrase as one solid string. Underscores are still offered here for cases like filenames or code identifiers where they're the convention." }
+        "name": "Should I use a hyphen, an underscore, or no separator at all?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Hyphen is selected by default because most search engines, including Google, treat a hyphen as a word boundary but read an underscore-joined phrase as one solid string. Underscores are still offered here for cases like filenames or code identifiers where they're the convention, and a \"None\" option is available if you want the words joined directly with no separator character at all." }
       },
       {
         "@type": "Question",
         "name": "Can the resulting slug end up empty?",
         "acceptedAnswer": { "@type": "Answer", "text": "Yes — if your input is made up entirely of symbols or characters that get stripped out (with no letters or numbers left), the slug field can come back blank. Leading and trailing separators are also automatically trimmed from the result." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I keep the original capitalization instead of forcing lowercase?",
+        "acceptedAnswer": { "@type": "Answer", "text": "By default the generator forces every letter to lowercase, which is the URL convention almost every site follows. Unchecking \"Force lowercase\" preserves your original capitalization instead, so \"Café Münchën\" becomes \"Cafe-Munchen\" rather than \"cafe-munchen\"." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I limit how long the slug is?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Enter a number in the Max Length field (leave it at 0 for no limit) and the generator drops whole words from the end until the slug fits within that limit, so it never cuts off in the middle of a word. If a single word is still longer than the limit on its own, that word is hard-cut to fit." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I generate slugs for multiple titles at once?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — turn on Batch Mode and paste multiple titles or lines into the text box, one per line. The output box returns one slug per line, in the same order, with every line converted independently using your chosen separator, case, and length settings." }
       }
     ]
   }
@@ -119,29 +134,48 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🔗</div>
       <h1>Slug Generator</h1>
-      <p>Turn any title or phrase into a clean, lowercase, URL-friendly slug — updated live as you type.</p>
+      <p>Turn any title or phrase into a clean, URL-friendly slug — updated live as you type, with separator, case, length, and batch options.</p>
     </section>
 
     <section class="container">
       <div class="tool-panel">
-        <div class="field">
+        <label class="check-row"><input type="checkbox" id="batchMode" /> Batch mode — convert multiple lines at once</label>
+
+        <div class="field" id="singleInputField">
           <label for="inputText">Your Text</label>
           <input type="text" id="inputText" placeholder="e.g. 10 Best Tips for a Faster Laptop!" />
         </div>
 
-        <div class="field">
-          <label for="separatorSelect">Separator</label>
-          <select id="separatorSelect">
-            <option value="-" selected>Hyphen (-)</option>
-            <option value="_">Underscore (_)</option>
-          </select>
+        <div class="field" id="batchInputField" style="display:none;">
+          <label for="inputBatch">Your Text (one title per line)</label>
+          <textarea id="inputBatch" placeholder="10 Best Tips for a Faster Laptop!&#10;Café Münchën &amp; Naïve Ideas!&#10;How to Fix a Slow Wi-Fi Connection"></textarea>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="separatorSelect">Separator</label>
+            <select id="separatorSelect">
+              <option value="-" selected>Hyphen (-)</option>
+              <option value="_">Underscore (_)</option>
+              <option value="">None</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="maxLengthInput">Max Length (0 = no limit)</label>
+            <input type="number" id="maxLengthInput" min="0" max="200" value="0" />
+          </div>
         </div>
 
         <label class="check-row"><input type="checkbox" id="lowercaseOnly" checked /> Force lowercase</label>
 
-        <div class="field" style="margin-top:16px;">
+        <div class="field" id="singleOutputField" style="margin-top:16px;">
           <label for="outputText">Slug</label>
           <input type="text" id="outputText" readonly style="font-family:monospace;" />
+        </div>
+
+        <div class="field" id="batchOutputField" style="display:none; margin-top:16px;">
+          <label for="outputBatch">Slugs (one per line)</label>
+          <textarea id="outputBatch" readonly style="font-family:monospace;"></textarea>
         </div>
 
         <div class="actions">
@@ -153,9 +187,11 @@
       <div class="howto">
         <h2>How to Turn Text Into a URL Slug</h2>
         <ol class="howto-steps">
-          <li>Type or paste your title or phrase into the text field — a sample title is pre-filled so you can see it working right away.</li>
-          <li>Choose your separator: hyphen (-) or underscore (_).</li>
+          <li>Type or paste your title or phrase into the text field — a sample title is pre-filled so you can see it working right away. Accented letters like é, ñ, and ü are automatically transliterated to their plain-letter equivalents.</li>
+          <li>Choose your separator: hyphen (-), underscore (_), or None to join words with no separator at all.</li>
           <li>Toggle "Force lowercase" depending on whether you want an all-lowercase slug or one that preserves your original letter casing.</li>
+          <li>Set a Max Length if you need to cap the slug's size — the generator drops whole words from the end so it never cuts off mid-word.</li>
+          <li>Need to convert several titles at once? Turn on Batch Mode, paste one title per line, and get one slug per line back in the same order.</li>
           <li>The Slug field updates instantly as you type; click Copy Slug when you're happy with the result.</li>
         </ol>
       </div>
@@ -175,12 +211,24 @@
           <p>Anything that isn't a letter, number, space, hyphen, or underscore is removed outright before the separator is applied, so "Faster Laptop!" simply drops the exclamation point rather than converting it to a word.</p>
         </details>
         <details class="faq-item">
-          <summary>Should I use a hyphen or an underscore as the separator?</summary>
-          <p>Hyphen is selected by default because most search engines, including Google, treat a hyphen as a word boundary but read an underscore-joined phrase as one solid string. Underscores are still offered here for cases like filenames or code identifiers where they're the convention.</p>
+          <summary>Should I use a hyphen, an underscore, or no separator at all?</summary>
+          <p>Hyphen is selected by default because most search engines, including Google, treat a hyphen as a word boundary but read an underscore-joined phrase as one solid string. Underscores are still offered here for cases like filenames or code identifiers where they're the convention, and a "None" option is available if you want the words joined directly with no separator character at all.</p>
         </details>
         <details class="faq-item">
           <summary>Can the resulting slug end up empty?</summary>
           <p>Yes — if your input is made up entirely of symbols or characters that get stripped out (with no letters or numbers left), the slug field can come back blank. Leading and trailing separators are also automatically trimmed from the result.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I keep the original capitalization instead of forcing lowercase?</summary>
+          <p>By default the generator forces every letter to lowercase, which is the URL convention almost every site follows. Unchecking "Force lowercase" preserves your original capitalization instead, so "Café Münchën" becomes "Cafe-Munchen" rather than "cafe-munchen".</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I limit how long the slug is?</summary>
+          <p>Enter a number in the Max Length field (leave it at 0 for no limit) and the generator drops whole words from the end until the slug fits within that limit, so it never cuts off in the middle of a word. If a single word is still longer than the limit on its own, that word is hard-cut to fit.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I generate slugs for multiple titles at once?</summary>
+          <p>Yes — turn on Batch Mode and paste multiple titles or lines into the text box, one per line. The output box returns one slug per line, in the same order, with every line converted independently using your chosen separator, case, and length settings.</p>
         </details>
       </div>
 
@@ -256,37 +304,90 @@
   <script>
     var inputText = document.getElementById("inputText");
     var outputText = document.getElementById("outputText");
+    var inputBatch = document.getElementById("inputBatch");
+    var outputBatch = document.getElementById("outputBatch");
+    var singleInputField = document.getElementById("singleInputField");
+    var batchInputField = document.getElementById("batchInputField");
+    var singleOutputField = document.getElementById("singleOutputField");
+    var batchOutputField = document.getElementById("batchOutputField");
     var separatorSelect = document.getElementById("separatorSelect");
     var lowercaseOnly = document.getElementById("lowercaseOnly");
+    var maxLengthInput = document.getElementById("maxLengthInput");
+    var batchMode = document.getElementById("batchMode");
     var copyNote = document.getElementById("copyNote");
 
-    function slugify() {
-      var text = inputText.value;
-      var sep = separatorSelect.value;
+    // Converts a single line of text into a slug. Diacritics are stripped via
+    // real Unicode NFKD decomposition (base letter + combining marks), then the
+    // combining marks are removed \u2014 not a hardcoded accented-character lookup.
+    function slugifyLine(text, sep, forceLowercase, maxLength) {
+      var normalized = text.normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
+      var cleaned = normalized.replace(/[^a-zA-Z0-9]+/g, " ").trim();
+      if (!cleaned) return "";
 
-      var slug = text
-        .normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
-        .trim()
-        .replace(/[^a-zA-Z0-9\s-_]/g, "")
-        .replace(/[\s_-]+/g, sep);
+      var words = cleaned.split(/\s+/);
+      if (forceLowercase) {
+        words = words.map(function (w) { return w.toLowerCase(); });
+      }
 
-      if (lowercaseOnly.checked) slug = slug.toLowerCase();
-      slug = slug.replace(new RegExp("^\\" + sep + "+|\\" + sep + "+$", "g"), "");
+      var slug = words.join(sep);
 
-      outputText.value = slug;
+      if (maxLength > 0 && slug.length > maxLength) {
+        // Smart truncation: drop whole words from the end instead of cutting
+        // mid-word, then fall back to a hard cut only if one word alone
+        // still exceeds the limit.
+        var truncated = words.slice();
+        while (truncated.length > 1 && truncated.join(sep).length > maxLength) {
+          truncated.pop();
+        }
+        slug = truncated.join(sep);
+        if (slug.length > maxLength) slug = slug.slice(0, maxLength);
+      }
+
+      return slug;
     }
 
-    [inputText, separatorSelect, lowercaseOnly].forEach(function (el) {
-      el.addEventListener("input", slugify);
-      el.addEventListener("change", slugify);
+    function updateModeVisibility() {
+      var isBatch = batchMode.checked;
+      singleInputField.style.display = isBatch ? "none" : "";
+      batchInputField.style.display = isBatch ? "" : "none";
+      singleOutputField.style.display = isBatch ? "none" : "";
+      batchOutputField.style.display = isBatch ? "" : "none";
+    }
+
+    function slugify() {
+      var sep = separatorSelect.value;
+      var forceLowercase = lowercaseOnly.checked;
+      var maxLength = parseInt(maxLengthInput.value, 10) || 0;
+
+      if (batchMode.checked) {
+        var lines = inputBatch.value.split("\n");
+        var results = lines.map(function (line) {
+          return slugifyLine(line, sep, forceLowercase, maxLength);
+        });
+        outputBatch.value = results.join("\n");
+      } else {
+        outputText.value = slugifyLine(inputText.value, sep, forceLowercase, maxLength);
+      }
+    }
+
+    function refresh() {
+      updateModeVisibility();
+      slugify();
+    }
+
+    [inputText, inputBatch, separatorSelect, lowercaseOnly, maxLengthInput, batchMode].forEach(function (el) {
+      el.addEventListener("input", refresh);
+      el.addEventListener("change", refresh);
     });
 
     document.getElementById("copyBtn").addEventListener("click", function () {
-      Fixora.copyText(outputText.value, copyNote);
+      var value = batchMode.checked ? outputBatch.value : outputText.value;
+      Fixora.copyText(value, copyNote);
     });
 
     inputText.value = "10 Best Tips for a Faster Laptop!";
-    slugify();
+    inputBatch.value = "10 Best Tips for a Faster Laptop!\nCaf\u00e9 M\u00fcnch\u00ebn & Na\u00efve Ideas!\nHow to Fix a Slow Wi-Fi Connection";
+    refresh();
   </script>
 </body>
 </html>
