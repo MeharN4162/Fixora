@@ -6,7 +6,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Tip Calculator Online — Split the Bill | Fixora</title>
-  <meta name="description" content="Calculate a tip and split the bill between any number of people online for free. Instant results, no sign-up required." />
+  <meta name="description" content="Calculate a tip and split the bill between any number of people. Choose to tip on the pre-tax or post-tax amount, round each person's share up to the nearest $1 or $5, and see instant results — free, no sign-up required." />
   <meta name="keywords" content="tip calculator, bill splitter online free, calculate tip" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/tip-calculator.html" />
@@ -59,7 +59,7 @@
       {
         "@type": "Question",
         "name": "How is the per-person amount calculated?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The tool adds the tip to the bill to get the total, then divides that total evenly by the number of people you entered — it doesn't split the tip and bill separately, so everyone pays an equal share of the combined amount." }
+        "acceptedAnswer": { "@type": "Answer", "text": "The tool adds any tax and the tip to the bill to get the total, then divides that total evenly by the number of people you entered — it doesn't split the tip and bill separately, so everyone pays an equal share of the combined amount (or the rounded-up share, if you've turned on rounding)." }
       },
       {
         "@type": "Question",
@@ -78,8 +78,18 @@
       },
       {
         "@type": "Question",
+        "name": "Should I tip on the pre-tax or post-tax amount?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Both are common in practice — some people tip on the subtotal before tax, others tip on the full total after tax, which produces a larger tip since it includes the tax in the base. Use the 'Tip Calculated On' toggle to switch between the two; the tip amount and total recalculate instantly so you can compare both." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the round-up option do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Turning on 'Round to $1' or 'Round to $5' rounds each person's payment up to the nearest whole dollar or nearest $5, which is handy when splitting cash. The extra amount from rounding is added on top of the calculated tip, and the calculator shows both the exact and rounded per-person amounts." }
+      },
+      {
+        "@type": "Question",
         "name": "Why does the total change if I edit the number of people?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Changing the number-of-people field doesn't change the total bill or tip amount, only how the per-person figure is divided — the total bill and tip stay based on your bill amount and tip percentage alone." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Changing the number-of-people field doesn't change the tip or the total bill and tax, only how the per-person figure is divided — unless you've turned on rounding, in which case the total actually collected can go up slightly, since every person's share gets rounded up individually." }
       }
     ]
   }
@@ -124,9 +134,15 @@
 
     <section class="container">
       <div class="tool-panel">
-        <div class="field">
-          <label for="billAmount">Bill Amount</label>
-          <input type="number" id="billAmount" placeholder="e.g. 84.50" step="0.01" />
+        <div class="row">
+          <div class="field">
+            <label for="billAmount">Bill Amount (pre-tax subtotal)</label>
+            <input type="number" id="billAmount" placeholder="e.g. 84.50" step="0.01" />
+          </div>
+          <div class="field">
+            <label for="taxRate">Tax Rate % (optional)</label>
+            <input type="number" id="taxRate" placeholder="e.g. 8" step="0.01" min="0" />
+          </div>
         </div>
 
         <div class="field">
@@ -142,12 +158,30 @@
         </div>
 
         <div class="field">
+          <label>Tip Calculated On</label>
+          <div class="pill-row" id="tipBasePills">
+            <button class="pill active" data-tipbase="pretax" type="button">Pre-tax Subtotal</button>
+            <button class="pill" data-tipbase="posttax" type="button">Total (incl. tax)</button>
+          </div>
+        </div>
+
+        <div class="field">
           <label for="peopleCount">Split Between (people)</label>
           <input type="number" id="peopleCount" value="1" min="1" step="1" />
         </div>
 
+        <div class="field">
+          <label>Round Up Per-Person Amount</label>
+          <div class="pill-row" id="roundPills">
+            <button class="pill active" data-round="0" type="button">No Rounding</button>
+            <button class="pill" data-round="1" type="button">Nearest $1</button>
+            <button class="pill" data-round="5" type="button">Nearest $5</button>
+          </div>
+        </div>
+
         <div class="stat-row">
           <div class="stat"><strong id="statTip">–</strong><span>Tip Amount</span></div>
+          <div class="stat"><strong id="statTax">–</strong><span>Tax Amount</span></div>
           <div class="stat"><strong id="statTotal">–</strong><span>Total Bill</span></div>
           <div class="stat"><strong id="statPerPerson">–</strong><span>Per Person</span></div>
         </div>
@@ -169,7 +203,7 @@
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
           <summary>How is the per-person amount calculated?</summary>
-          <p>The tool adds the tip to the bill to get the total, then divides that total evenly by the number of people you entered — it doesn't split the tip and bill separately, so everyone pays an equal share of the combined amount.</p>
+          <p>The tool adds any tax and the tip to the bill to get the total, then divides that total evenly by the number of people you entered — it doesn't split the tip and bill separately, so everyone pays an equal share of the combined amount (or the rounded-up share, if you've turned on rounding).</p>
         </details>
         <details class="faq-item">
           <summary>What tip percentage should I choose?</summary>
@@ -184,8 +218,16 @@
           <p>The tool defaults to an 18% tip and 1 person, so you'll immediately see the tip and total for one person at 18% — just adjust the slider or people count from there.</p>
         </details>
         <details class="faq-item">
+          <summary>Should I tip on the pre-tax or post-tax amount?</summary>
+          <p>Both are common in practice — some people tip on the subtotal before tax, others tip on the full total after tax, which produces a larger tip since it includes the tax in the base. Use the 'Tip Calculated On' toggle to switch between the two; the tip amount and total recalculate instantly so you can compare both.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the round-up option do?</summary>
+          <p>Turning on 'Round to $1' or 'Round to $5' rounds each person's payment up to the nearest whole dollar or nearest $5, which is handy when splitting cash. The extra amount from rounding is added on top of the calculated tip, and the calculator shows both the exact and rounded per-person amounts.</p>
+        </details>
+        <details class="faq-item">
           <summary>Why does the total change if I edit the number of people?</summary>
-          <p>Changing the number-of-people field doesn't change the total bill or tip amount, only how the per-person figure is divided — the total bill and tip stay based on your bill amount and tip percentage alone.</p>
+          <p>Changing the number-of-people field doesn't change the tip or the total bill and tax, only how the per-person figure is divided — unless you've turned on rounding, in which case the total actually collected can go up slightly, since every person's share gets rounded up individually.</p>
         </details>
       </div>
 
@@ -260,40 +302,66 @@
   <script src="../assets/js/main.js"></script>
   <script>
     var billAmount = document.getElementById("billAmount");
+    var taxRateInput = document.getElementById("taxRate");
     var tipRange = document.getElementById("tipRange");
     var tipValue = document.getElementById("tipValue");
     var peopleCount = document.getElementById("peopleCount");
     var statusBox = document.getElementById("statusBox");
+    var tipBasePills = document.getElementById("tipBasePills");
+    var roundPills = document.getElementById("roundPills");
 
     function formatMoney(n) {
       return "$" + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
 
+    function activeValue(container, attr) {
+      var active = container.querySelector(".pill.active");
+      return active ? active.getAttribute(attr) : null;
+    }
+
     function calculate() {
       var bill = parseFloat(billAmount.value);
+      var taxPct = parseFloat(taxRateInput.value) || 0;
       var tipPct = parseFloat(tipRange.value);
       var people = Math.max(1, parseInt(peopleCount.value, 10) || 1);
+      var tipBase = activeValue(tipBasePills, "data-tipbase") || "pretax";
+      var roundTo = parseFloat(activeValue(roundPills, "data-round")) || 0;
 
       tipValue.textContent = tipPct;
 
       if (!bill || bill <= 0) {
         document.getElementById("statTip").textContent = "–";
+        document.getElementById("statTax").textContent = "–";
         document.getElementById("statTotal").textContent = "–";
         document.getElementById("statPerPerson").textContent = "–";
         statusBox.textContent = "Enter a bill amount to get started.";
         return;
       }
 
-      var tip = bill * (tipPct / 100);
-      var total = bill + tip;
-      var perPerson = total / people;
+      var tax = bill * (taxPct / 100);
+      var tip = tipBase === "posttax" ? (bill + tax) * (tipPct / 100) : bill * (tipPct / 100);
+      var exactTotal = bill + tax + tip;
+      var exactPerPerson = exactTotal / people;
+
+      var perPerson = exactPerPerson;
+      var actualTotal = exactTotal;
+      if (roundTo > 0) {
+        perPerson = Math.ceil(exactPerPerson / roundTo) * roundTo;
+        actualTotal = perPerson * people;
+      }
 
       document.getElementById("statTip").textContent = formatMoney(tip);
-      document.getElementById("statTotal").textContent = formatMoney(total);
+      document.getElementById("statTax").textContent = taxPct > 0 ? formatMoney(tax) : "–";
+      document.getElementById("statTotal").textContent = formatMoney(actualTotal);
       document.getElementById("statPerPerson").textContent = formatMoney(perPerson);
-      statusBox.textContent = people > 1
+
+      var msg = people > 1
         ? "Split " + people + " ways: each person pays " + formatMoney(perPerson) + "."
-        : "Total with tip: " + formatMoney(total) + ".";
+        : "Total with tip: " + formatMoney(actualTotal) + ".";
+      if (roundTo > 0 && Math.abs(perPerson - exactPerPerson) > 0.001) {
+        msg += " (Exact share before rounding: " + formatMoney(exactPerPerson) + ".)";
+      }
+      statusBox.textContent = msg;
     }
 
     document.querySelectorAll("[data-tip]").forEach(function (pill) {
@@ -305,7 +373,23 @@
       });
     });
 
-    [billAmount, tipRange, peopleCount].forEach(function (el) {
+    document.querySelectorAll("#tipBasePills .pill").forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        document.querySelectorAll("#tipBasePills .pill").forEach(function (p) { p.classList.remove("active"); });
+        pill.classList.add("active");
+        calculate();
+      });
+    });
+
+    document.querySelectorAll("#roundPills .pill").forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        document.querySelectorAll("#roundPills .pill").forEach(function (p) { p.classList.remove("active"); });
+        pill.classList.add("active");
+        calculate();
+      });
+    });
+
+    [billAmount, taxRateInput, tipRange, peopleCount].forEach(function (el) {
       el.addEventListener("input", calculate);
     });
 
