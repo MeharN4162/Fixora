@@ -6,21 +6,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Countdown Timer & Stopwatch Online | Fixora</title>
-  <meta name="description" content="Free online countdown timer and stopwatch. Set a timer for any duration or track elapsed time with lap splits. No sign-up, works right in your browser." />
-  <meta name="keywords" content="countdown timer online free, online stopwatch, timer with alarm" />
+  <meta name="description" content="Free online countdown timer and stopwatch. Count down to a specific date and time or a set duration, with a sound alert, live tab-title countdown, and full-screen display, or track elapsed time with lap splits. No sign-up, works right in your browser." />
+  <meta name="keywords" content="countdown timer online free, countdown to date and time, online stopwatch, timer with alarm sound, full screen countdown timer" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/countdown-timer.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Countdown Timer & Stopwatch Online" />
-  <meta property="og:description" content="Free online countdown timer and stopwatch with lap splits." />
+  <meta property="og:description" content="Free online countdown timer and stopwatch with a date-and-time countdown, sound alert, and full-screen display." />
   <meta property="og:url" content="https://fixoona.com/tools/countdown-timer.html" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Countdown Timer & Stopwatch Online" />
-  <meta name="twitter:description" content="Free online countdown timer and stopwatch." />
+  <meta name="twitter:description" content="Free online countdown timer and stopwatch with a sound alert and full-screen display." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -80,6 +80,31 @@
         "@type": "Question",
         "name": "What happens if I click Start on the countdown timer without setting a duration?",
         "acceptedAnswer": { "@type": "Answer", "text": "If the total duration is zero, the tool shows a message asking you to set a duration greater than zero instead of starting." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I count down to a specific date and time instead of just a duration?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — switch the countdown timer to Specific Date & Time mode, pick any future date and time with the date-time picker, and the timer counts down to that exact moment using the same clock-based math as duration mode, so it never drifts." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the countdown timer make a sound when it finishes?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — with the Play a sound when the countdown finishes option checked, the timer generates a short chime using the Web Audio API the instant it reaches zero, so there's no audio file to download. Uncheck the option to finish silently." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I check the remaining time without switching back to this tab?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — while the countdown is running, the browser tab's title updates every quarter second to show the time remaining, so you can glance at the tab bar to check progress without switching back to the page." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a big, full-screen display mode for the countdown timer?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — click Full-Screen Display to enlarge the timer to fill your screen, which is useful for presentations, classrooms, or viewing from across a room. Click Exit Full-Screen or press Esc to return to the normal view." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if I pick a date and time that's already in the past?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The display shows 00:00:00, and clicking Start shows a message asking you to pick a date and time in the future instead of starting a countdown that has already finished." }
       }
     ]
   }
@@ -103,6 +128,56 @@
       border-bottom: 1px solid var(--color-border);
       font-family: monospace;
       font-size: 0.9rem;
+    }
+    .mode-row {
+      margin-bottom: 20px;
+    }
+    .mode-row .pill {
+      font-size: 0.82rem;
+    }
+    .field input[type="datetime-local"] {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      font-family: var(--font-main);
+      font-size: 0.98rem;
+      background: var(--color-surface);
+      color: var(--color-text);
+      color-scheme: light dark;
+    }
+    .field input[type="datetime-local"]:focus {
+      outline: 2px solid var(--color-primary-light);
+      outline-offset: 1px;
+    }
+    #timerFullscreenBtn {
+      white-space: nowrap;
+    }
+    #timerPanel.fs-active {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-bg);
+      padding: 24px;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    #timerPanel.fs-active #modeRow,
+    #timerPanel.fs-active #durationFields,
+    #timerPanel.fs-active #datetimeFields,
+    #timerPanel.fs-active .sound-row {
+      display: none !important;
+    }
+    #timerPanel.fs-active .timer-display {
+      font-size: clamp(4rem, 20vw, 16rem);
+      margin: 0 0 24px;
+    }
+    #timerPanel.fs-active .actions {
+      flex-wrap: wrap;
     }
   </style>
 </head>
@@ -140,7 +215,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">⏱️</div>
       <h1>Countdown Timer & Stopwatch</h1>
-      <p>Set a countdown for any duration, or track elapsed time with a stopwatch and lap splits.</p>
+      <p>Count down to a specific date and time or a set duration — with a sound alert, live tab-title countdown, and full-screen display — or track elapsed time with a stopwatch and lap splits.</p>
     </section>
 
     <section class="container">
@@ -151,27 +226,44 @@
         </div>
 
         <div id="timerPanel">
-          <div class="row">
-            <div class="field">
-              <label for="hoursInput">Hours</label>
-              <input type="number" id="hoursInput" value="0" min="0" />
+          <div class="pill-row mode-row" id="modeRow">
+            <button class="pill active" data-mode="duration" type="button">Duration</button>
+            <button class="pill" data-mode="datetime" type="button">Specific Date & Time</button>
+          </div>
+
+          <div id="durationFields">
+            <div class="row">
+              <div class="field">
+                <label for="hoursInput">Hours</label>
+                <input type="number" id="hoursInput" value="0" min="0" />
+              </div>
+              <div class="field">
+                <label for="minutesInput">Minutes</label>
+                <input type="number" id="minutesInput" value="5" min="0" max="59" />
+              </div>
+              <div class="field">
+                <label for="secondsInput">Seconds</label>
+                <input type="number" id="secondsInput" value="0" min="0" max="59" />
+              </div>
             </div>
+          </div>
+
+          <div id="datetimeFields" style="display:none;">
             <div class="field">
-              <label for="minutesInput">Minutes</label>
-              <input type="number" id="minutesInput" value="5" min="0" max="59" />
-            </div>
-            <div class="field">
-              <label for="secondsInput">Seconds</label>
-              <input type="number" id="secondsInput" value="0" min="0" max="59" />
+              <label for="targetDateTimeInput">Target date &amp; time</label>
+              <input type="datetime-local" id="targetDateTimeInput" />
             </div>
           </div>
 
           <div class="timer-display" id="timerDisplay">00:05:00</div>
 
+          <label class="check-row sound-row"><input type="checkbox" id="soundToggle" checked /> Play a sound when the countdown finishes</label>
+
           <div class="actions" style="justify-content:center;">
             <button class="btn btn-primary" id="timerStartBtn">Start</button>
             <button class="btn btn-secondary" id="timerPauseBtn" disabled>Pause</button>
             <button class="btn btn-secondary" id="timerResetBtn">Reset</button>
+            <button class="btn btn-secondary" id="timerFullscreenBtn" type="button">Full-Screen Display</button>
           </div>
 
           <div class="output-box" id="timerStatus"></div>
@@ -194,9 +286,11 @@
         <h2>How to Use the Countdown Timer & Stopwatch</h2>
         <ol class="howto-steps">
           <li>Choose "Countdown Timer" or "Stopwatch" from the pill toggle at the top.</li>
-          <li>For the countdown timer, set hours, minutes, and seconds, then click "Start" — use "Pause" and "Reset" to control it.</li>
+          <li>For the countdown timer, pick "Duration" or "Specific Date & Time", then set the hours/minutes/seconds or the target date and time.</li>
+          <li>Click "Start" — use "Pause"/"Resume" and "Reset" to control it, and leave "Play a sound when the countdown finishes" checked to hear a chime at zero.</li>
+          <li>Click "Full-Screen Display" for a large, distance-friendly view, and check the browser tab title for a live countdown even while you're on another tab.</li>
           <li>For the stopwatch, click "Start" to begin timing, "Lap" to record a split without stopping, and "Reset" to clear.</li>
-          <li>Watch the large display update live; the countdown timer alerts "Time's up!" when it reaches zero.</li>
+          <li>Watch the large display update live; the countdown timer alerts "Time's up!" and plays a chime (if enabled) when it reaches zero.</li>
         </ol>
       </div>
 
@@ -221,6 +315,26 @@
         <details class="faq-item">
           <summary>What happens if I click Start on the countdown timer without setting a duration?</summary>
           <p>If the total duration is zero, the tool shows a message asking you to set a duration greater than zero instead of starting.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I count down to a specific date and time instead of just a duration?</summary>
+          <p>Yes — switch the countdown timer to Specific Date & Time mode, pick any future date and time with the date-time picker, and the timer counts down to that exact moment using the same clock-based math as duration mode, so it never drifts.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does the countdown timer make a sound when it finishes?</summary>
+          <p>Yes — with the Play a sound when the countdown finishes option checked, the timer generates a short chime using the Web Audio API the instant it reaches zero, so there's no audio file to download. Uncheck the option to finish silently.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I check the remaining time without switching back to this tab?</summary>
+          <p>Yes — while the countdown is running, the browser tab's title updates every quarter second to show the time remaining, so you can glance at the tab bar to check progress without switching back to the page.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is there a big, full-screen display mode for the countdown timer?</summary>
+          <p>Yes — click Full-Screen Display to enlarge the timer to fill your screen, which is useful for presentations, classrooms, or viewing from across a room. Click Exit Full-Screen or press Esc to return to the normal view.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What happens if I pick a date and time that's already in the past?</summary>
+          <p>The display shows 00:00:00, and clicking Start shows a message asking you to pick a date and time in the future instead of starting a countdown that has already finished.</p>
         </details>
       </div>
 
@@ -313,22 +427,36 @@
     var timerStartBtn = document.getElementById("timerStartBtn");
     var timerPauseBtn = document.getElementById("timerPauseBtn");
     var timerResetBtn = document.getElementById("timerResetBtn");
+    var timerFullscreenBtn = document.getElementById("timerFullscreenBtn");
     var hoursInput = document.getElementById("hoursInput");
     var minutesInput = document.getElementById("minutesInput");
     var secondsInput = document.getElementById("secondsInput");
+    var targetDateTimeInput = document.getElementById("targetDateTimeInput");
+    var soundToggle = document.getElementById("soundToggle");
+    var modeRow = document.getElementById("modeRow");
+    var modeButtons = modeRow.querySelectorAll("[data-mode]");
+    var durationFields = document.getElementById("durationFields");
+    var datetimeFields = document.getElementById("datetimeFields");
 
     var timerInterval = null;
     var remainingMs = 0;
     var timerEndAt = null;
+    var timerMode = "duration";
+    var originalTitle = document.title;
+    var audioCtx = null;
 
     function pad(n) { return String(n).padStart(2, "0"); }
 
-    function renderTimer(ms) {
+    function formatDuration(ms) {
       var totalSec = Math.max(0, Math.ceil(ms / 1000));
       var h = Math.floor(totalSec / 3600);
       var m = Math.floor((totalSec % 3600) / 60);
       var s = totalSec % 60;
-      timerDisplay.textContent = pad(h) + ":" + pad(m) + ":" + pad(s);
+      return pad(h) + ":" + pad(m) + ":" + pad(s);
+    }
+
+    function renderTimer(ms) {
+      timerDisplay.textContent = formatDuration(ms);
     }
 
     function getInputMs() {
@@ -338,45 +466,151 @@
       return (h * 3600 + m * 60 + s) * 1000;
     }
 
-    [hoursInput, minutesInput, secondsInput].forEach(function (el) {
-      el.addEventListener("input", function () {
-        if (!timerInterval) renderTimer(getInputMs());
+    // Returns the target's distance from now in ms, or null if no valid target is set.
+    function getModeMs() {
+      if (timerMode === "datetime") {
+        var val = targetDateTimeInput.value;
+        if (!val) return null;
+        var target = new Date(val);
+        if (isNaN(target.getTime())) return null;
+        return target.getTime() - Date.now();
+      }
+      return getInputMs();
+    }
+
+    function setModeButtonsDisabled(disabled) {
+      modeButtons.forEach(function (b) { b.disabled = disabled; });
+    }
+
+    function pad2(n) { return String(n).padStart(2, "0"); }
+    function toLocalInputValue(date) {
+      return date.getFullYear() + "-" + pad2(date.getMonth() + 1) + "-" + pad2(date.getDate()) +
+        "T" + pad2(date.getHours()) + ":" + pad2(date.getMinutes());
+    }
+    // Default the date-time picker to five minutes from now.
+    targetDateTimeInput.value = toLocalInputValue(new Date(Date.now() + 5 * 60000));
+
+    modeButtons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        modeButtons.forEach(function (b) { b.classList.remove("active"); });
+        btn.classList.add("active");
+        timerMode = btn.getAttribute("data-mode");
+        durationFields.style.display = timerMode === "duration" ? "block" : "none";
+        datetimeFields.style.display = timerMode === "datetime" ? "block" : "none";
+        remainingMs = 0;
+        timerStatus.textContent = "";
+        var ms = getModeMs();
+        renderTimer(ms === null ? 0 : Math.max(0, ms));
       });
     });
 
-    timerStartBtn.addEventListener("click", function () {
-      if (remainingMs <= 0) remainingMs = getInputMs();
-      if (remainingMs <= 0) {
-        timerStatus.textContent = "Set a duration greater than zero.";
+    [hoursInput, minutesInput, secondsInput].forEach(function (el) {
+      el.addEventListener("input", function () {
+        if (!timerInterval && timerMode === "duration") renderTimer(getInputMs());
+      });
+    });
+
+    targetDateTimeInput.addEventListener("input", function () {
+      if (!timerInterval && timerMode === "datetime") {
+        var ms = getModeMs();
+        renderTimer(ms === null ? 0 : Math.max(0, ms));
+      }
+    });
+
+    // ---- Web Audio API chime (no external audio file) ----
+    function initAudio() {
+      if (audioCtx) {
+        if (audioCtx.state === "suspended") audioCtx.resume();
         return;
+      }
+      try {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      } catch (e) {
+        audioCtx = null;
+      }
+    }
+
+    function playChime() {
+      if (!soundToggle.checked || !audioCtx) return;
+      try {
+        var now = audioCtx.currentTime;
+        [0, 0.32, 0.64].forEach(function (offset) {
+          var osc = audioCtx.createOscillator();
+          var gain = audioCtx.createGain();
+          osc.type = "sine";
+          osc.frequency.value = 880;
+          gain.gain.setValueAtTime(0.0001, now + offset);
+          gain.gain.exponentialRampToValueAtTime(0.35, now + offset + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + offset + 0.28);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + offset);
+          osc.stop(now + offset + 0.3);
+        });
+      } catch (e) {}
+    }
+
+    // Recomputes remaining time from the absolute end timestamp on every tick,
+    // so the display never drifts even if the interval is throttled in a background tab.
+    function tick() {
+      remainingMs = timerEndAt - Date.now();
+      if (remainingMs <= 0) {
+        remainingMs = 0;
+        renderTimer(0);
+        clearInterval(timerInterval);
+        timerInterval = null;
+        timerStartBtn.disabled = false;
+        timerStartBtn.textContent = "Start";
+        timerPauseBtn.disabled = true;
+        setModeButtonsDisabled(false);
+        timerStatus.textContent = "⏰ Time's up!";
+        document.title = "⏰ Time's up! – " + originalTitle;
+        playChime();
+        return;
+      }
+      renderTimer(remainingMs);
+      document.title = formatDuration(remainingMs) + " left – " + originalTitle;
+    }
+
+    timerStartBtn.addEventListener("click", function () {
+      initAudio();
+      if (remainingMs <= 0) {
+        var ms = getModeMs();
+        if (ms === null) {
+          timerStatus.textContent = "Pick a target date and time first.";
+          return;
+        }
+        if (ms <= 0) {
+          timerStatus.textContent = timerMode === "datetime"
+            ? "That date and time is already in the past — pick one in the future."
+            : "Set a duration greater than zero.";
+          renderTimer(0);
+          return;
+        }
+        remainingMs = ms;
       }
       timerEndAt = Date.now() + remainingMs;
       timerStartBtn.disabled = true;
       timerPauseBtn.disabled = false;
       timerStatus.textContent = "Timer running…";
+      setModeButtonsDisabled(true);
 
-      timerInterval = setInterval(function () {
-        remainingMs = timerEndAt - Date.now();
-        if (remainingMs <= 0) {
-          remainingMs = 0;
-          renderTimer(0);
-          clearInterval(timerInterval);
-          timerInterval = null;
-          timerStartBtn.disabled = false;
-          timerPauseBtn.disabled = true;
-          timerStatus.textContent = "⏰ Time's up!";
-          return;
-        }
-        renderTimer(remainingMs);
-      }, 250);
+      clearInterval(timerInterval);
+      tick();
+      if (timerInterval === null && remainingMs > 0) {
+        timerInterval = setInterval(tick, 250);
+      }
     });
 
     timerPauseBtn.addEventListener("click", function () {
       clearInterval(timerInterval);
       timerInterval = null;
       timerStartBtn.disabled = false;
+      timerStartBtn.textContent = "Resume";
       timerPauseBtn.disabled = true;
       timerStatus.textContent = "Paused.";
+      document.title = originalTitle;
+      setModeButtonsDisabled(false);
     });
 
     timerResetBtn.addEventListener("click", function () {
@@ -384,9 +618,43 @@
       timerInterval = null;
       remainingMs = 0;
       timerStartBtn.disabled = false;
+      timerStartBtn.textContent = "Start";
       timerPauseBtn.disabled = true;
       timerStatus.textContent = "";
-      renderTimer(getInputMs());
+      document.title = originalTitle;
+      setModeButtonsDisabled(false);
+      var ms = getModeMs();
+      renderTimer(ms === null ? 0 : Math.max(0, ms));
+    });
+
+    // ---- Full-screen / large-display mode ----
+    function setBigDisplay(on) {
+      timerPanel.classList.toggle("fs-active", on);
+      timerFullscreenBtn.textContent = on ? "Exit Full-Screen" : "Full-Screen Display";
+    }
+
+    timerFullscreenBtn.addEventListener("click", function () {
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+        return;
+      }
+      if (timerPanel.requestFullscreen) {
+        timerPanel.requestFullscreen().catch(function () {
+          setBigDisplay(!timerPanel.classList.contains("fs-active"));
+        });
+      } else {
+        setBigDisplay(!timerPanel.classList.contains("fs-active"));
+      }
+    });
+
+    document.addEventListener("fullscreenchange", function () {
+      setBigDisplay(document.fullscreenElement === timerPanel);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !document.fullscreenElement && timerPanel.classList.contains("fs-active")) {
+        setBigDisplay(false);
+      }
     });
 
     renderTimer(getInputMs());
