@@ -6,7 +6,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Calorie Calculator (BMR & TDEE) Online | Fixora</title>
-  <meta name="description" content="Calculate your daily calorie needs (BMR and TDEE) online for free using the Mifflin-St Jeor formula. Metric or imperial units. No sign-up." />
+  <meta name="description" content="Calculate your daily calorie needs (BMR and TDEE) online for free using the Mifflin-St Jeor formula, plus a personalized goal-based calorie target with a protein, carb, and fat macro breakdown. Metric or imperial units. No sign-up." />
   <meta name="keywords" content="calorie calculator, bmr calculator, tdee calculator online free" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/calorie-calculator.html" />
@@ -14,13 +14,13 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Calorie Calculator (BMR & TDEE)" />
-  <meta property="og:description" content="Calculate your daily calorie needs online for free using the Mifflin-St Jeor formula." />
+  <meta property="og:description" content="Calculate your daily calorie needs online for free using the Mifflin-St Jeor formula, plus a goal-based calorie target and macro breakdown." />
   <meta property="og:url" content="https://fixoona.com/tools/calorie-calculator.html" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Calorie Calculator (BMR & TDEE)" />
-  <meta name="twitter:description" content="Calculate your daily calorie needs online for free using the Mifflin-St Jeor formula." />
+  <meta name="twitter:description" content="Calculate your daily calorie needs online for free using the Mifflin-St Jeor formula, plus a goal-based calorie target and macro breakdown." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -80,10 +80,74 @@
         "@type": "Question",
         "name": "Which activity level should I choose?",
         "acceptedAnswer": { "@type": "Answer", "text": "Pick the option that best matches your typical week: Sedentary means little to no exercise, Lightly or Moderately active covers 1-5 days of exercise weekly, Very active means daily or near-daily exercise, and Extremely active is for people combining a physically demanding job with regular training." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I get a personalized calorie target for my goal?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Choose a goal from the dropdown — fast, moderate, or mild weight loss, maintenance, or mild or moderate weight gain — and the calculator applies a daily calorie adjustment (from -1000 to +500 kcal) to your maintenance calories, then shows the exact resulting weekly rate of weight change in both kilograms and pounds, calculated from the standard estimate of 3,500 kcal per pound (about 7,700 kcal per kilogram) of body weight." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is the protein, carb, and fat breakdown calculated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Pick a diet style — Balanced, Higher Protein, Lower Carb, or Higher Carb — and the calculator splits your target calories into percentages for each macronutrient, then converts those calories to grams using the standard Atwater factors: 4 calories per gram of protein, 4 calories per gram of carbohydrate, and 9 calories per gram of fat." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the calculator warn me about very low calorie targets?",
+        "acceptedAnswer": { "@type": "Answer", "text": "If your goal calories fall below commonly cited safe minimums — about 1,500 kcal/day for men and 1,200 kcal/day for women — the calculator shows a warning, since very low-calorie diets can risk nutrient deficiencies and muscle loss and should only be done under medical supervision." }
       }
     ]
   }
   </script>
+  <style>
+    .goal-box-title {
+      margin: 22px 0 0;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+    }
+    .macro-table-wrap {
+      margin-top: 14px;
+      overflow-x: auto;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+    }
+    .macro-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      min-width: 380px;
+    }
+    .macro-table th,
+    .macro-table td {
+      padding: 10px 14px;
+      text-align: right;
+      border-bottom: 1px solid var(--color-border);
+      white-space: nowrap;
+    }
+    .macro-table th:first-child,
+    .macro-table td:first-child {
+      text-align: left;
+    }
+    .macro-table thead th {
+      background: var(--color-bg-soft);
+      color: var(--color-text-muted);
+      font-weight: 600;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .macro-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .goal-warning {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border: 1px solid var(--color-danger);
+      border-radius: var(--radius-sm);
+      color: var(--color-danger);
+      font-size: 0.88rem;
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -119,7 +183,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🔥</div>
       <h1>Calorie Calculator</h1>
-      <p>Estimate your daily calorie needs (BMR and TDEE) using the Mifflin-St Jeor formula.</p>
+      <p>Estimate your daily calorie needs (BMR and TDEE) using the Mifflin-St Jeor formula, then get a personalized goal-based calorie target and a protein/carb/fat macro breakdown.</p>
     </section>
 
     <section class="container">
@@ -180,6 +244,29 @@
           </select>
         </div>
 
+        <div class="row">
+          <div class="field">
+            <label for="goalInput">Goal</label>
+            <select id="goalInput">
+              <option value="-1000">Lose weight – fast (−1000 kcal/day)</option>
+              <option value="-500">Lose weight – moderate (−500 kcal/day)</option>
+              <option value="-250">Lose weight – mild (−250 kcal/day)</option>
+              <option value="0" selected>Maintain weight</option>
+              <option value="250">Gain weight – mild (+250 kcal/day)</option>
+              <option value="500">Gain weight – moderate (+500 kcal/day)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="dietInput">Diet style (for macros)</label>
+            <select id="dietInput">
+              <option value="balanced" selected>Balanced (30% protein / 40% carb / 30% fat)</option>
+              <option value="highprotein">Higher Protein (40% protein / 30% carb / 30% fat)</option>
+              <option value="lowcarb">Lower Carb (40% protein / 20% carb / 40% fat)</option>
+              <option value="highcarb">Higher Carb (20% protein / 55% carb / 25% fat)</option>
+            </select>
+          </div>
+        </div>
+
         <div class="actions">
           <button class="btn btn-primary" id="calcBtn">Calculate</button>
         </div>
@@ -193,6 +280,42 @@
           <div class="stat"><strong id="statGain">–</strong><span>Mild Weight Gain</span></div>
         </div>
 
+        <div id="goalBox" style="display:none;">
+          <h3 class="goal-box-title">Your Goal-Based Target</h3>
+          <div class="stat-row">
+            <div class="stat"><strong id="statGoalCals">–</strong><span>Target Calories</span></div>
+            <div class="stat"><strong id="statGoalRate">–</strong><span>Est. Weekly Rate</span></div>
+          </div>
+          <div class="macro-table-wrap">
+            <table class="macro-table">
+              <thead>
+                <tr><th>Macro</th><th>Grams</th><th>Calories</th><th>% of Target</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Protein</td>
+                  <td id="macroProteinG">–</td>
+                  <td id="macroProteinKcal">–</td>
+                  <td id="macroProteinPct">–</td>
+                </tr>
+                <tr>
+                  <td>Carbs</td>
+                  <td id="macroCarbG">–</td>
+                  <td id="macroCarbKcal">–</td>
+                  <td id="macroCarbPct">–</td>
+                </tr>
+                <tr>
+                  <td>Fat</td>
+                  <td id="macroFatG">–</td>
+                  <td id="macroFatKcal">–</td>
+                  <td id="macroFatPct">–</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="goal-warning" id="goalWarning" style="display:none;"></p>
+        </div>
+
         <p style="font-size:0.85rem;color:var(--color-text-muted);margin-top:18px;">
           This is an estimate based on the Mifflin-St Jeor formula — a well-established method, but individual metabolism varies. Not medical advice.
         </p>
@@ -204,7 +327,8 @@
           <li>Choose Metric or Imperial units using the toggle pills.</li>
           <li>Enter your age, sex, height, and weight.</li>
           <li>Select your activity level from the dropdown, ranging from sedentary to extremely active.</li>
-          <li>Click "Calculate" to see your BMR, maintenance calories (TDEE), and calorie targets for mild weight loss or gain.</li>
+          <li>Pick a Goal (lose, maintain, or gain weight) and a Diet style for your macro split.</li>
+          <li>Click "Calculate" to see your BMR, maintenance calories (TDEE), calorie targets for mild weight loss or gain, and — below that — your personalized goal calories, estimated weekly rate of change, and a protein/carb/fat gram breakdown.</li>
         </ol>
       </div>
 
@@ -229,6 +353,18 @@
         <details class="faq-item">
           <summary>Which activity level should I choose?</summary>
           <p>Pick the option that best matches your typical week: Sedentary means little to no exercise, Lightly or Moderately active covers 1-5 days of exercise weekly, Very active means daily or near-daily exercise, and Extremely active is for people combining a physically demanding job with regular training.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How do I get a personalized calorie target for my goal?</summary>
+          <p>Choose a goal from the dropdown — fast, moderate, or mild weight loss, maintenance, or mild or moderate weight gain — and the calculator applies a daily calorie adjustment (from -1000 to +500 kcal) to your maintenance calories, then shows the exact resulting weekly rate of weight change in both kilograms and pounds, calculated from the standard estimate of 3,500 kcal per pound (about 7,700 kcal per kilogram) of body weight.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How is the protein, carb, and fat breakdown calculated?</summary>
+          <p>Pick a diet style — Balanced, Higher Protein, Lower Carb, or Higher Carb — and the calculator splits your target calories into percentages for each macronutrient, then converts those calories to grams using the standard Atwater factors: 4 calories per gram of protein, 4 calories per gram of carbohydrate, and 9 calories per gram of fat.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why does the calculator warn me about very low calorie targets?</summary>
+          <p>If your goal calories fall below commonly cited safe minimums — about 1,500 kcal/day for men and 1,200 kcal/day for women — the calculator shows a warning, since very low-calorie diets can risk nutrient deficiencies and muscle loss and should only be done under medical supervision.</p>
         </details>
       </div>
 
@@ -350,6 +486,63 @@
       document.getElementById("statGain").textContent = Math.round(tdee + 500) + " kcal";
 
       statusBox.textContent = "Your estimated maintenance calories are " + Math.round(tdee) + " kcal/day.";
+
+      // --- Goal-based target + macro breakdown ---
+      var goalAdj = parseFloat(document.getElementById("goalInput").value);
+      var dietStyle = document.getElementById("dietInput").value;
+      var macroPcts = {
+        balanced: { protein: 30, carb: 40, fat: 30 },
+        highprotein: { protein: 40, carb: 30, fat: 30 },
+        lowcarb: { protein: 40, carb: 20, fat: 40 },
+        highcarb: { protein: 20, carb: 55, fat: 25 }
+      };
+      var pct = macroPcts[dietStyle] || macroPcts.balanced;
+
+      var goalCals = tdee + goalAdj;
+      if (goalCals < 0) goalCals = 0;
+
+      var weeklyKg = (goalAdj * 7) / 7700;
+      var weeklyLb = (goalAdj * 7) / 3500;
+      var rateText;
+      if (goalAdj === 0) {
+        rateText = "No change (maintenance)";
+      } else {
+        var sign = goalAdj > 0 ? "+" : "";
+        rateText = sign + weeklyKg.toFixed(2) + " kg/wk (" + sign + weeklyLb.toFixed(1) + " lb/wk)";
+      }
+
+      var proteinKcal = goalCals * (pct.protein / 100);
+      var carbKcal = goalCals * (pct.carb / 100);
+      var fatKcal = goalCals * (pct.fat / 100);
+      var proteinG = proteinKcal / 4;
+      var carbG = carbKcal / 4;
+      var fatG = fatKcal / 9;
+
+      document.getElementById("goalBox").style.display = "block";
+      document.getElementById("statGoalCals").textContent = Math.round(goalCals) + " kcal";
+      document.getElementById("statGoalRate").textContent = rateText;
+
+      document.getElementById("macroProteinG").textContent = Math.round(proteinG) + " g";
+      document.getElementById("macroProteinKcal").textContent = Math.round(proteinKcal) + " kcal";
+      document.getElementById("macroProteinPct").textContent = pct.protein + "%";
+
+      document.getElementById("macroCarbG").textContent = Math.round(carbG) + " g";
+      document.getElementById("macroCarbKcal").textContent = Math.round(carbKcal) + " kcal";
+      document.getElementById("macroCarbPct").textContent = pct.carb + "%";
+
+      document.getElementById("macroFatG").textContent = Math.round(fatG) + " g";
+      document.getElementById("macroFatKcal").textContent = Math.round(fatKcal) + " kcal";
+      document.getElementById("macroFatPct").textContent = pct.fat + "%";
+
+      var goalWarning = document.getElementById("goalWarning");
+      var safeMin = isMale ? 1500 : 1200;
+      if (goalCals < safeMin) {
+        goalWarning.style.display = "block";
+        goalWarning.textContent = "Warning: " + Math.round(goalCals) + " kcal/day is below the commonly cited safe minimum of " + safeMin + " kcal/day for " + (isMale ? "men" : "women") + ". Very low-calorie diets should only be followed under medical supervision.";
+      } else {
+        goalWarning.style.display = "none";
+        goalWarning.textContent = "";
+      }
     });
   </script>
 </body>
