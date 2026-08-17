@@ -6,21 +6,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Online Coin Flip | Fixora</title>
-  <meta name="description" content="Flip a virtual coin online for free — heads or tails, instantly. Flip multiple times and see your history. No sign-up." />
-  <meta name="keywords" content="coin flip online free, flip a coin, heads or tails online" />
+  <meta name="description" content="Flip a virtual coin online for free — heads or tails, instantly. Flip a batch of up to 100 coins at once, track heads/tails streaks, and try a biased-coin mode for probability experiments. No sign-up." />
+  <meta name="keywords" content="coin flip online free, flip a coin, heads or tails online, flip multiple coins, coin flip streak, biased coin flip" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/coin-flip.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Online Coin Flip" />
-  <meta property="og:description" content="Flip a virtual coin online for free — heads or tails, instantly." />
+  <meta property="og:description" content="Flip a virtual coin online for free — heads or tails, instantly. Flip batches of coins, track streaks, and try a biased-coin probability mode." />
   <meta property="og:url" content="https://fixoona.com/tools/coin-flip.html" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Online Coin Flip" />
-  <meta name="twitter:description" content="Flip a virtual coin online for free — heads or tails, instantly." />
+  <meta name="twitter:description" content="Flip a virtual coin online for free — heads or tails, instantly. Flip batches of coins, track streaks, and try a biased-coin probability mode." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -64,7 +64,7 @@
       {
         "@type": "Question",
         "name": "How many past flips does the history show?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The flip history keeps your 20 most recent results as chips, with the newest flip added to the front; older flips beyond 20 drop from the display, though the Heads, Tails, and Total counters keep counting every flip since the last reset." }
+        "acceptedAnswer": { "@type": "Answer", "text": "The flip history keeps your 20 most recent individual coin results as chips, including every coin from a batch flip, with the newest flip added to the front; older flips beyond 20 drop from the display, though the Heads, Tails, Total, Current Streak, and Longest Streak stats keep counting every flip since the last reset." }
       },
       {
         "@type": "Question",
@@ -74,12 +74,27 @@
       {
         "@type": "Question",
         "name": "Does Clear History affect anything besides the display?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Clearing resets the coin face back to its default icon, empties the flip history chips, and zeroes out the Heads, Tails, and Total counters — it's a full reset with no saved data left behind." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Clearing resets the coin face back to its default icon, empties the flip history chips and any batch result, and zeroes out the Heads, Tails, Total, Current Streak, and Longest Streak stats — it's a full reset with no saved data left behind. Your chosen batch size and biased-mode settings stay as they are, since those are settings rather than history." }
       },
       {
         "@type": "Question",
         "name": "Can I use this to make a real decision, like settling a bet?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes — since each flip is generated with a cryptographically secure random source, it's as fair as a physical coin flip for casual decision-making." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, as long as Biased coin mode is turned off — with the default fair coin, each flip is generated from a cryptographically secure random source, so it's as fair as a physical coin flip for casual decision-making. If Biased coin mode is on, the odds are intentionally skewed, so switch it off first for a genuinely fair 50/50 call." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I flip more than one coin at once?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — enter a number from 1 to 100 in the Number of coins to flip field before clicking Flip Coin. Each coin is flipped independently with the same crypto.getRandomValues() source, and you'll see every individual result in a batch grid plus a tally of how many came up Heads versus Tails in that batch, alongside the running session totals." }
+      },
+      {
+        "@type": "Question",
+        "name": "What do Current Streak and Longest Streak mean?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Current Streak is how many flips in a row, ending with your most recent flip, landed on the same side — it resets to 1 the moment a different result comes up. Longest Streak is the highest that count has reached since your last reset, even after the current streak breaks. Both count individual coins one at a time, including every coin inside a batch flip, in the order they were flipped." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Biased coin mode, and is it still random?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Biased coin mode is an educational feature for exploring probability: turn it on and a slider lets you set the chance of heads anywhere from 1% to 99%, instead of the default fair 50/50. It's still genuinely random — each flip still comes from crypto.getRandomValues() — but the odds are intentionally uneven, so don't use it for anything you want to be fair." }
       }
     ]
   }
@@ -124,6 +139,22 @@
       background: var(--color-bg-soft, #f3f4f6);
       border: 1px solid var(--color-border);
     }
+    .flip-chip.biased-chip {
+      border-style: dashed;
+    }
+    .history-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--color-text-muted);
+      margin: 0 0 8px;
+      text-align: center;
+    }
+    .batch-tally {
+      text-align: center;
+      font-weight: 600;
+      margin: 0 0 8px;
+    }
   </style>
 </head>
 <body>
@@ -160,12 +191,25 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🪙</div>
       <h1>Coin Flip</h1>
-      <p>Heads or tails — flip a truly random virtual coin.</p>
+      <p>Heads or tails — flip a truly random virtual coin, one at a time or in batches, with streak tracking and an optional biased-coin mode.</p>
     </section>
 
     <section class="container">
       <div class="tool-panel" style="text-align:center;">
         <div class="coin" id="coin">?</div>
+
+        <div class="field" style="max-width:220px;margin:20px auto 18px;text-align:left;">
+          <label for="flipCount">Number of coins to flip</label>
+          <input type="number" id="flipCount" value="1" min="1" max="100" />
+        </div>
+
+        <div class="field" style="max-width:420px;margin:0 auto 0;text-align:left;">
+          <label class="check-row" style="margin-bottom:0;"><input type="checkbox" id="biasedMode" /> Biased coin mode (educational — set a custom heads probability)</label>
+        </div>
+        <div class="field" id="biasField" style="display:none;max-width:420px;margin:12px auto 0;text-align:left;">
+          <label for="biasRange">Heads probability: <span id="biasValue">50%</span></label>
+          <input type="range" id="biasRange" min="1" max="99" value="50" style="width:100%;" />
+        </div>
 
         <div class="actions" style="justify-content:center;">
           <button class="btn btn-primary" id="flipBtn">Flip Coin</button>
@@ -174,22 +218,34 @@
 
         <div class="output-box" id="statusBox"></div>
 
-        <div class="stat-row" id="statRow" style="display:none;justify-content:center;">
-          <div class="stat"><strong id="statHeads">0</strong><span>Heads</span></div>
-          <div class="stat"><strong id="statTails">0</strong><span>Tails</span></div>
-          <div class="stat"><strong id="statTotal">0</strong><span>Total Flips</span></div>
+        <div id="batchResult" style="display:none;margin-top:16px;">
+          <p class="batch-tally" id="batchTally"></p>
+          <div class="flip-history" id="batchGrid"></div>
         </div>
 
-        <div class="flip-history" id="flipHistory"></div>
+        <div class="stat-row" id="statRow" style="display:none;justify-content:center;">
+          <div class="stat"><strong id="statHeads">0</strong><span id="statHeadsLabel">Heads (0%)</span></div>
+          <div class="stat"><strong id="statTails">0</strong><span id="statTailsLabel">Tails (0%)</span></div>
+          <div class="stat"><strong id="statTotal">0</strong><span>Total Flips</span></div>
+          <div class="stat"><strong id="statCurrentStreak">—</strong><span>Current Streak</span></div>
+          <div class="stat"><strong id="statLongestStreak">—</strong><span>Longest Streak</span></div>
+        </div>
+
+        <div style="margin-top:22px;">
+          <h3 class="history-label">Recent Flips (last 20)</h3>
+          <div class="flip-history" id="flipHistory"></div>
+        </div>
       </div>
 
       <div class="howto">
         <h2>How to Flip a Virtual Coin</h2>
         <ol class="howto-steps">
-          <li>Click "Flip Coin" to flip a virtual coin — the coin animates and lands on heads or tails.</li>
-          <li>Check the result message and the growing history of chips below the coin.</li>
-          <li>Watch the Heads, Tails, and Total Flips counters update after every flip.</li>
-          <li>Click "Clear History" to reset the coin, counters, and flip log back to zero.</li>
+          <li>Set the "Number of coins to flip" — leave it at 1 for a single flip, or raise it (up to 100) to flip a batch at once.</li>
+          <li>Optionally turn on "Biased coin mode" and drag the slider to set a custom heads probability, instead of the default fair 50/50 coin.</li>
+          <li>Click "Flip Coin" — the coin animates and lands on heads or tails; a batch flip also shows every individual coin plus a Heads/Tails tally for that batch.</li>
+          <li>Check the result message, the Current Streak and Longest Streak stats, and the growing history of chips below the coin.</li>
+          <li>Watch the Heads, Tails, and Total Flips counters — with live percentages — update after every flip.</li>
+          <li>Click "Clear History" to reset the coin, counters, streaks, and flip log back to zero.</li>
         </ol>
       </div>
 
@@ -201,7 +257,7 @@
         </details>
         <details class="faq-item">
           <summary>How many past flips does the history show?</summary>
-          <p>The flip history keeps your 20 most recent results as chips, with the newest flip added to the front; older flips beyond 20 drop from the display, though the Heads, Tails, and Total counters keep counting every flip since the last reset.</p>
+          <p>The flip history keeps your 20 most recent individual coin results as chips, including every coin from a batch flip, with the newest flip added to the front; older flips beyond 20 drop from the display, though the Heads, Tails, Total, Current Streak, and Longest Streak stats keep counting every flip since the last reset.</p>
         </details>
         <details class="faq-item">
           <summary>Why did I get heads or tails several times in a row?</summary>
@@ -209,11 +265,23 @@
         </details>
         <details class="faq-item">
           <summary>Does Clear History affect anything besides the display?</summary>
-          <p>Clearing resets the coin face back to its default icon, empties the flip history chips, and zeroes out the Heads, Tails, and Total counters — it's a full reset with no saved data left behind.</p>
+          <p>Clearing resets the coin face back to its default icon, empties the flip history chips and any batch result, and zeroes out the Heads, Tails, Total, Current Streak, and Longest Streak stats — it's a full reset with no saved data left behind. Your chosen batch size and biased-mode settings stay as they are, since those are settings rather than history.</p>
         </details>
         <details class="faq-item">
           <summary>Can I use this to make a real decision, like settling a bet?</summary>
-          <p>Yes — since each flip is generated with a cryptographically secure random source, it's as fair as a physical coin flip for casual decision-making.</p>
+          <p>Yes, as long as Biased coin mode is turned off — with the default fair coin, each flip is generated from a cryptographically secure random source, so it's as fair as a physical coin flip for casual decision-making. If Biased coin mode is on, the odds are intentionally skewed, so switch it off first for a genuinely fair 50/50 call.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I flip more than one coin at once?</summary>
+          <p>Yes — enter a number from 1 to 100 in the Number of coins to flip field before clicking Flip Coin. Each coin is flipped independently with the same crypto.getRandomValues() source, and you'll see every individual result in a batch grid plus a tally of how many came up Heads versus Tails in that batch, alongside the running session totals.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What do Current Streak and Longest Streak mean?</summary>
+          <p>Current Streak is how many flips in a row, ending with your most recent flip, landed on the same side — it resets to 1 the moment a different result comes up. Longest Streak is the highest that count has reached since your last reset, even after the current streak breaks. Both count individual coins one at a time, including every coin inside a batch flip, in the order they were flipped.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is Biased coin mode, and is it still random?</summary>
+          <p>Biased coin mode is an educational feature for exploring probability: turn it on and a slider lets you set the chance of heads anywhere from 1% to 99%, instead of the default fair 50/50. It's still genuinely random — each flip still comes from crypto.getRandomValues() — but the odds are intentionally uneven, so don't use it for anything you want to be fair.</p>
         </details>
       </div>
 
@@ -291,57 +359,172 @@
     var statusBox = document.getElementById("statusBox");
     var statRow = document.getElementById("statRow");
     var flipHistory = document.getElementById("flipHistory");
+    var flipCountInput = document.getElementById("flipCount");
+    var biasedModeCheckbox = document.getElementById("biasedMode");
+    var biasField = document.getElementById("biasField");
+    var biasRange = document.getElementById("biasRange");
+    var biasValue = document.getElementById("biasValue");
+    var batchResult = document.getElementById("batchResult");
+    var batchTally = document.getElementById("batchTally");
+    var batchGrid = document.getElementById("batchGrid");
+
+    var MAX_HISTORY = 20;
+    var MAX_BATCH = 100;
 
     var heads = 0;
     var tails = 0;
-    var flipLog = [];
+    var flipLog = []; // newest-first, entries: { result: "Heads"|"Tails", biased: bool }
 
+    var currentStreakResult = null;
+    var currentStreakCount = 0;
+    var longestStreakResult = null;
+    var longestStreakCount = 0;
+
+    // Fair 50/50: a random uint32 is even exactly half the time (4294967296 values, evenly split).
     function secureRandomBool() {
       var array = new Uint32Array(1);
       crypto.getRandomValues(array);
       return array[0] % 2 === 0;
     }
 
+    // Uniform float in [0, 1) from a cryptographically secure random uint32.
+    function secureRandomFloat() {
+      var array = new Uint32Array(1);
+      crypto.getRandomValues(array);
+      return array[0] / 4294967296; // 2^32
+    }
+
+    function flipOnce(biased, headsProbability) {
+      if (biased) {
+        return secureRandomFloat() < headsProbability;
+      }
+      return secureRandomBool();
+    }
+
+    // Updates the current-streak / longest-streak trackers for one flip result,
+    // in the order the flip actually happened.
+    function updateStreak(result) {
+      if (result === currentStreakResult) {
+        currentStreakCount++;
+      } else {
+        currentStreakResult = result;
+        currentStreakCount = 1;
+      }
+      if (currentStreakCount > longestStreakCount) {
+        longestStreakCount = currentStreakCount;
+        longestStreakResult = currentStreakResult;
+      }
+    }
+
+    biasedModeCheckbox.addEventListener("change", function () {
+      biasField.style.display = biasedModeCheckbox.checked ? "block" : "none";
+    });
+
+    biasRange.addEventListener("input", function () {
+      biasValue.textContent = biasRange.value + "%";
+    });
+
+    function renderFlipHistory() {
+      flipHistory.innerHTML = "";
+      flipLog.forEach(function (entry) {
+        var chip = document.createElement("span");
+        chip.className = "flip-chip" + (entry.biased ? " biased-chip" : "");
+        chip.textContent = entry.result;
+        if (entry.biased) chip.title = "Flipped in biased coin mode";
+        flipHistory.appendChild(chip);
+      });
+    }
+
     document.getElementById("flipBtn").addEventListener("click", function () {
+      var count = parseInt(flipCountInput.value, 10);
+      if (isNaN(count) || count < 1) count = 1;
+      count = Math.min(count, MAX_BATCH);
+      flipCountInput.value = count;
+
+      var biased = biasedModeCheckbox.checked;
+      var headsProbability = parseInt(biasRange.value, 10) / 100;
+      if (isNaN(headsProbability)) headsProbability = 0.5;
+
+      var batch = [];
+      for (var i = 0; i < count; i++) {
+        var isHeads = flipOnce(biased, headsProbability);
+        var result = isHeads ? "Heads" : "Tails";
+        if (isHeads) heads++; else tails++;
+        updateStreak(result);
+        batch.push({ result: result, biased: biased });
+      }
+
+      // Add to the session log newest-first: unshift in chronological order so
+      // the flip that happened last ends up at the front.
+      for (var j = 0; j < batch.length; j++) {
+        flipLog.unshift(batch[j]);
+      }
+      if (flipLog.length > MAX_HISTORY) flipLog.length = MAX_HISTORY;
+
+      var last = batch[batch.length - 1];
       coin.classList.remove("flipping");
       void coin.offsetWidth;
       coin.classList.add("flipping");
-
-      var isHeads = secureRandomBool();
-      var result = isHeads ? "Heads" : "Tails";
-
       setTimeout(function () {
-        coin.textContent = isHeads ? "H" : "T";
+        coin.textContent = last.result === "Heads" ? "H" : "T";
       }, 250);
 
-      if (isHeads) heads++; else tails++;
-      flipLog.unshift(result);
-      if (flipLog.length > 20) flipLog.pop();
+      var total = heads + tails;
+      var headsPct = total ? Math.round((heads / total) * 100) : 0;
+      var tailsPct = total ? Math.round((tails / total) * 100) : 0;
 
       statRow.style.display = "flex";
       document.getElementById("statHeads").textContent = heads;
       document.getElementById("statTails").textContent = tails;
-      document.getElementById("statTotal").textContent = heads + tails;
+      document.getElementById("statHeadsLabel").textContent = "Heads (" + headsPct + "%)";
+      document.getElementById("statTailsLabel").textContent = "Tails (" + tailsPct + "%)";
+      document.getElementById("statTotal").textContent = total;
+      document.getElementById("statCurrentStreak").textContent = currentStreakCount + "× " + currentStreakResult;
+      document.getElementById("statLongestStreak").textContent = longestStreakCount + "× " + longestStreakResult;
 
-      flipHistory.innerHTML = "";
-      flipLog.forEach(function (r) {
-        var chip = document.createElement("span");
-        chip.className = "flip-chip";
-        chip.textContent = r;
-        flipHistory.appendChild(chip);
-      });
+      renderFlipHistory();
 
-      statusBox.textContent = "Result: " + result + "!";
+      var biasedNote = biased ? " (biased coin, " + Math.round(headsProbability * 100) + "% heads)" : "";
+
+      if (count > 1) {
+        var batchHeads = batch.filter(function (b) { return b.result === "Heads"; }).length;
+        var batchTails = count - batchHeads;
+
+        batchTally.textContent = "This batch (" + count + " coins): " + batchHeads + " Heads, " + batchTails + " Tails" + biasedNote;
+        batchGrid.innerHTML = "";
+        batch.forEach(function (entry) {
+          var chip = document.createElement("span");
+          chip.className = "flip-chip" + (entry.biased ? " biased-chip" : "");
+          chip.textContent = entry.result;
+          if (entry.biased) chip.title = "Flipped in biased coin mode";
+          batchGrid.appendChild(chip);
+        });
+        batchResult.style.display = "block";
+
+        statusBox.textContent = "Flipped " + count + " coins: " + batchHeads + " Heads, " + batchTails + " Tails" + biasedNote + ".";
+      } else {
+        batchResult.style.display = "none";
+        batchGrid.innerHTML = "";
+        statusBox.textContent = "Result: " + last.result + "!" + biasedNote;
+      }
     });
 
     document.getElementById("clearBtn").addEventListener("click", function () {
       heads = 0;
       tails = 0;
       flipLog = [];
+      currentStreakResult = null;
+      currentStreakCount = 0;
+      longestStreakResult = null;
+      longestStreakCount = 0;
+
       coin.textContent = "?";
       coin.classList.remove("flipping");
       statRow.style.display = "none";
       flipHistory.innerHTML = "";
+      batchResult.style.display = "none";
+      batchGrid.innerHTML = "";
+      batchTally.textContent = "";
       statusBox.textContent = "";
     });
   </script>
