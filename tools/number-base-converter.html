@@ -5,22 +5,22 @@
   <meta charset="UTF-8" />
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Free Number Base Converter Online — Binary, Hex, Octal, Decimal | Fixora</title>
-  <meta name="description" content="Convert numbers between decimal, binary, octal, and hexadecimal instantly. Type in any field and watch the other three update live, right in your browser." />
-  <meta name="keywords" content="number base converter, decimal to binary, binary to hex, hex to decimal, octal converter" />
+  <title>Free Number Base Converter Online — Binary, Hex, Octal, Decimal, Custom Base & Two's Complement | Fixora</title>
+  <meta name="description" content="Convert numbers between decimal, binary, octal, hexadecimal, and any custom base from 2 to 36 instantly. Also includes a signed two's complement converter for 8-, 16-, and 32-bit values. Type in any field and watch the rest update live, right in your browser." />
+  <meta name="keywords" content="number base converter, decimal to binary, binary to hex, hex to decimal, octal converter, custom base converter, base 36 converter, two's complement calculator, signed binary converter" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/number-base-converter.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Number Base Converter Online" />
-  <meta property="og:description" content="Convert numbers between decimal, binary, octal, and hexadecimal instantly, live in your browser." />
+  <meta property="og:description" content="Convert numbers between decimal, binary, octal, hexadecimal, and any custom base from 2 to 36 instantly — plus a signed two's complement converter." />
   <meta property="og:url" content="https://fixoona.com/tools/number-base-converter.html" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Number Base Converter Online" />
-  <meta name="twitter:description" content="Convert numbers between decimal, binary, octal, and hexadecimal instantly." />
+  <meta name="twitter:description" content="Convert numbers between decimal, binary, octal, hexadecimal, and any custom base from 2 to 36 instantly, live in your browser." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -59,17 +59,17 @@
       {
         "@type": "Question",
         "name": "Does this support negative numbers?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No — this tool only supports non-negative integers (0 and up). Binary, octal, and hexadecimal representations of negative numbers depend on a chosen bit width and encoding (like two's complement), which varies by system, so supporting negatives correctly would require assumptions this tool can't make on your behalf. Stick to whole numbers of zero or greater." }
+        "acceptedAnswer": { "@type": "Answer", "text": "The main decimal/binary/octal/hexadecimal/custom-base converter above only supports non-negative integers (0 and up) — arbitrary-precision binary, octal, and hexadecimal representations of negative numbers depend on a bit width and encoding this tool can't assume on your behalf. If you need signed values, use the separate Two's Complement Converter section below, where you pick an 8-, 16-, or 32-bit width and enter a negative or positive number directly." }
       },
       {
         "@type": "Question",
         "name": "What happens if I type an invalid character?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Each field filters out characters that aren't valid in its base as you type — for example, the binary field only accepts 0 and 1, and the octal field only accepts 0-7 — so you can't enter something that field's base can't represent. If a field ends up empty or unparseable, the other three fields are simply cleared instead of showing an error." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Each field filters out characters that aren't valid in its base as you type — for example, the binary field only accepts 0 and 1, the octal field only accepts 0-7, and the custom base field only accepts the digits valid for whichever base (2-36) is currently selected — so you can't enter something that field's base can't represent. If a field ends up empty or unparseable, the other fields in that section are simply cleared instead of showing an error." }
       },
       {
         "@type": "Question",
-        "name": "Why does the hexadecimal output use uppercase letters?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Uppercase hex digits (A-F) are simply this tool's display convention and are the most common style in documentation and programming references. The hex input field itself accepts both uppercase and lowercase letters." }
+        "name": "Why does the hexadecimal (and custom base) output use uppercase letters?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Uppercase letters (A-F for hex, or A-Z for higher custom bases) are simply this tool's display convention and are the most common style in documentation and programming references. The hex and custom base input fields themselves accept both uppercase and lowercase letters." }
       },
       {
         "@type": "Question",
@@ -79,7 +79,17 @@
       {
         "@type": "Question",
         "name": "Do I need to click a button to convert?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No — conversion happens instantly as you type in any of the four fields. There's no convert button because the whole point of this tool is live, no-click conversion." }
+        "acceptedAnswer": { "@type": "Answer", "text": "No — conversion happens instantly as you type in any of the five fields in the main converter (decimal, binary, octal, hexadecimal, or custom base), and the same is true for the three fields in the Two's Complement Converter. There's no convert button because the whole point of this tool is live, no-click conversion." }
+      },
+      {
+        "@type": "Question",
+        "name": "What bases can the custom base field convert?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Any base from 2 to 36. It uses the standard positional numeral system with digits 0-9 followed by letters A-Z, so base 16 behaves like hexadecimal, base 36 uses every digit and letter, and anything in between (like base 20 or base 32) works the same way. Change the base number and the field instantly redisplays the current value in that base." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is two's complement and how does the bit-width selector work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Two's complement is the standard way computers represent signed (positive and negative) integers in binary. Choosing a bit width sets the valid range: 8-bit spans -128 to 127, 16-bit spans -32,768 to 32,767, and 32-bit spans -2,147,483,648 to 2,147,483,647. Type a signed decimal number, its two's complement binary pattern, or its hexadecimal equivalent into any of the three fields and the other two update instantly for the selected bit width." }
       }
     ]
   }
@@ -119,7 +129,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🔢</div>
       <h1>Number Base Converter</h1>
-      <p>Convert numbers between decimal, binary, octal, and hexadecimal — type in any field and the other three update live.</p>
+      <p>Convert numbers between decimal, binary, octal, hexadecimal, and any custom base from 2 to 36 — type in any field and the rest update live. Plus a signed two's complement converter for 8-, 16-, and 32-bit values.</p>
     </section>
 
     <section class="container">
@@ -141,6 +151,19 @@
           <input type="text" id="hexField" autocomplete="off" spellcheck="false" style="font-family:monospace;font-size:1.05rem;" />
         </div>
 
+        <hr style="border:none;border-top:1px solid var(--color-border);margin:24px 0;" />
+
+        <div class="row">
+          <div class="field" style="flex:0 0 140px;min-width:120px;">
+            <label for="customBaseSelect">Custom Base (2–36)</label>
+            <input type="number" id="customBaseSelect" min="2" max="36" step="1" value="36" inputmode="numeric" autocomplete="off" />
+          </div>
+          <div class="field">
+            <label for="customBaseField">Value in Base <span id="customBaseLabelNum">36</span></label>
+            <input type="text" id="customBaseField" autocomplete="off" spellcheck="false" style="font-family:monospace;font-size:1.05rem;" />
+          </div>
+        </div>
+
         <div class="actions">
           <button class="btn btn-secondary" id="resetBtn" type="button">Reset to Example</button>
         </div>
@@ -148,13 +171,49 @@
         <div class="output-box" id="statusBox">Supports non-negative whole numbers only. Values update live as you type.</div>
       </div>
 
+      <div class="tool-panel" style="margin-top:24px;">
+        <h2 style="font-size:1.1rem;margin-bottom:4px;">Two's Complement Converter</h2>
+        <p style="font-size:0.88rem;color:var(--color-text-muted);margin-bottom:14px;">Convert signed integers to and from two's complement binary and hex at a chosen bit width.</p>
+
+        <div class="field" style="max-width:220px;">
+          <label for="twosBitsSelect">Bit Width</label>
+          <select id="twosBitsSelect">
+            <option value="8">8-bit (-128 to 127)</option>
+            <option value="16">16-bit (-32,768 to 32,767)</option>
+            <option value="32">32-bit (-2,147,483,648 to 2,147,483,647)</option>
+          </select>
+        </div>
+
+        <div class="row" style="margin-top:14px;">
+          <div class="field">
+            <label for="twosDecimalField">Signed Decimal</label>
+            <input type="text" id="twosDecimalField" inputmode="numeric" autocomplete="off" spellcheck="false" style="font-family:monospace;font-size:1.05rem;" />
+          </div>
+          <div class="field">
+            <label for="twosBinaryField">Two's Complement Binary</label>
+            <input type="text" id="twosBinaryField" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="8" style="font-family:monospace;font-size:1.05rem;" />
+          </div>
+          <div class="field">
+            <label for="twosHexField">Two's Complement Hex</label>
+            <input type="text" id="twosHexField" autocomplete="off" spellcheck="false" maxlength="2" style="font-family:monospace;font-size:1.05rem;" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-secondary" id="twosResetBtn" type="button">Reset to Example</button>
+        </div>
+
+        <div class="output-box" id="twosStatusBox">Enter a signed integer, or a two's complement binary/hex pattern, for the selected bit width.</div>
+      </div>
+
       <div class="howto">
         <h2>How to Convert Between Number Bases</h2>
         <ol class="howto-steps">
-          <li>Type a number into any one of the four fields: Decimal, Binary, Octal, or Hexadecimal.</li>
-          <li>The other three fields update instantly with the equivalent value in their base.</li>
-          <li>Each field only accepts valid characters for its base, so typos are filtered out automatically.</li>
-          <li>Clear a field to reset all four fields, then start fresh.</li>
+          <li>Type a number into any one of the five fields: Decimal, Binary, Octal, Hexadecimal, or a Custom Base of your choice (2-36).</li>
+          <li>The other fields update instantly with the equivalent value in their base.</li>
+          <li>Each field only accepts valid characters for its base, so typos are filtered out automatically. Change the Custom Base number at any time to redisplay the same value in a different base.</li>
+          <li>Clear a field to reset the whole group, then start fresh.</li>
+          <li>For signed values, use the separate Two's Complement Converter: pick a bit width (8, 16, or 32), then type a signed decimal number, or its two's complement binary or hex pattern, into any of its three fields.</li>
         </ol>
       </div>
 
@@ -162,15 +221,15 @@
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
           <summary>Does this support negative numbers?</summary>
-          <p>No — this tool only supports non-negative integers (0 and up). Binary, octal, and hexadecimal representations of negative numbers depend on a chosen bit width and encoding (like two's complement), which varies by system, so supporting negatives correctly would require assumptions this tool can't make on your behalf. Stick to whole numbers of zero or greater.</p>
+          <p>The main decimal/binary/octal/hexadecimal/custom-base converter above only supports non-negative integers (0 and up) — arbitrary-precision binary, octal, and hexadecimal representations of negative numbers depend on a bit width and encoding this tool can't assume on your behalf. If you need signed values, use the separate Two's Complement Converter section below, where you pick an 8-, 16-, or 32-bit width and enter a negative or positive number directly.</p>
         </details>
         <details class="faq-item">
           <summary>What happens if I type an invalid character?</summary>
-          <p>Each field filters out characters that aren't valid in its base as you type — for example, the binary field only accepts 0 and 1, and the octal field only accepts 0-7 — so you can't enter something that field's base can't represent. If a field ends up empty or unparseable, the other three fields are simply cleared instead of showing an error.</p>
+          <p>Each field filters out characters that aren't valid in its base as you type — for example, the binary field only accepts 0 and 1, the octal field only accepts 0-7, and the custom base field only accepts the digits valid for whichever base (2-36) is currently selected — so you can't enter something that field's base can't represent. If a field ends up empty or unparseable, the other fields in that section are simply cleared instead of showing an error.</p>
         </details>
         <details class="faq-item">
-          <summary>Why does the hexadecimal output use uppercase letters?</summary>
-          <p>Uppercase hex digits (A-F) are simply this tool's display convention and are the most common style in documentation and programming references. The hex input field itself accepts both uppercase and lowercase letters.</p>
+          <summary>Why does the hexadecimal (and custom base) output use uppercase letters?</summary>
+          <p>Uppercase letters (A-F for hex, or A-Z for higher custom bases) are simply this tool's display convention and are the most common style in documentation and programming references. The hex and custom base input fields themselves accept both uppercase and lowercase letters.</p>
         </details>
         <details class="faq-item">
           <summary>Is there a limit to how large a number I can convert?</summary>
@@ -178,7 +237,15 @@
         </details>
         <details class="faq-item">
           <summary>Do I need to click a button to convert?</summary>
-          <p>No — conversion happens instantly as you type in any of the four fields. There's no convert button because the whole point of this tool is live, no-click conversion.</p>
+          <p>No — conversion happens instantly as you type in any of the five fields in the main converter (decimal, binary, octal, hexadecimal, or custom base), and the same is true for the three fields in the Two's Complement Converter. There's no convert button because the whole point of this tool is live, no-click conversion.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What bases can the custom base field convert?</summary>
+          <p>Any base from 2 to 36. It uses the standard positional numeral system with digits 0-9 followed by letters A-Z, so base 16 behaves like hexadecimal, base 36 uses every digit and letter, and anything in between (like base 20 or base 32) works the same way. Change the base number and the field instantly redisplays the current value in that base.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is two's complement and how does the bit-width selector work?</summary>
+          <p>Two's complement is the standard way computers represent signed (positive and negative) integers in binary. Choosing a bit width sets the valid range: 8-bit spans -128 to 127, 16-bit spans -32,768 to 32,767, and 32-bit spans -2,147,483,648 to 2,147,483,647. Type a signed decimal number, its two's complement binary pattern, or its hexadecimal equivalent into any of the three fields and the other two update instantly for the selected bit width.</p>
         </details>
       </div>
 
@@ -256,9 +323,13 @@
     var binaryField = document.getElementById("binaryField");
     var octalField = document.getElementById("octalField");
     var hexField = document.getElementById("hexField");
+    var customBaseField = document.getElementById("customBaseField");
+    var customBaseSelect = document.getElementById("customBaseSelect");
+    var customBaseLabelNum = document.getElementById("customBaseLabelNum");
     var statusBox = document.getElementById("statusBox");
 
     var DEFAULT_MSG = "Supports non-negative whole numbers only. Values update live as you type.";
+    var BASE36_CHARS = "0123456789abcdefghijklmnopqrstuvwxyz";
 
     function sanitize(value, allowedPattern) {
       var out = "";
@@ -268,11 +339,30 @@
       return out;
     }
 
+    function getCustomBase() {
+      var b = parseInt(customBaseSelect.value, 10);
+      if (isNaN(b) || b < 2) b = 2;
+      if (b > 36) b = 36;
+      return b;
+    }
+
+    function getFieldRadixPairs() {
+      return [
+        { field: decimalField, radix: 10 },
+        { field: binaryField, radix: 2 },
+        { field: octalField, radix: 8 },
+        { field: hexField, radix: 16 },
+        { field: customBaseField, radix: getCustomBase() }
+      ];
+    }
+
     function updateFrom(sourceField, radix) {
       var raw = sourceField.value;
+      var pairs = getFieldRadixPairs();
+
       if (raw === "") {
-        [decimalField, binaryField, octalField, hexField].forEach(function (f) {
-          if (f !== sourceField) f.value = "";
+        pairs.forEach(function (p) {
+          if (p.field !== sourceField) p.field.value = "";
         });
         statusBox.textContent = DEFAULT_MSG;
         return;
@@ -280,17 +370,17 @@
 
       var num = parseInt(raw, radix);
       if (isNaN(num) || num < 0) {
-        [decimalField, binaryField, octalField, hexField].forEach(function (f) {
-          if (f !== sourceField) f.value = "";
+        pairs.forEach(function (p) {
+          if (p.field !== sourceField) p.field.value = "";
         });
         statusBox.textContent = "Waiting for a valid number…";
         return;
       }
 
-      if (sourceField !== decimalField) decimalField.value = num.toString(10);
-      if (sourceField !== binaryField) binaryField.value = num.toString(2);
-      if (sourceField !== octalField) octalField.value = num.toString(8);
-      if (sourceField !== hexField) hexField.value = num.toString(16).toUpperCase();
+      pairs.forEach(function (p) {
+        if (p.field === sourceField) return;
+        p.field.value = num.toString(p.radix).toUpperCase();
+      });
       statusBox.textContent = "Converted successfully.";
     }
 
@@ -310,6 +400,43 @@
       hexField.value = sanitize(hexField.value, /[0-9a-fA-F]/);
       updateFrom(hexField, 16);
     });
+    customBaseField.addEventListener("input", function () {
+      var b = getCustomBase();
+      var validChars = BASE36_CHARS.slice(0, b);
+      var pattern = new RegExp("[" + validChars + "]", "i");
+      customBaseField.value = sanitize(customBaseField.value, pattern);
+      updateFrom(customBaseField, b);
+    });
+
+    function refreshCustomBaseDisplay() {
+      var b = getCustomBase();
+      customBaseLabelNum.textContent = b;
+      if (decimalField.value === "") {
+        customBaseField.value = "";
+        return;
+      }
+      var num = parseInt(decimalField.value, 10);
+      if (isNaN(num) || num < 0) {
+        customBaseField.value = "";
+        return;
+      }
+      customBaseField.value = num.toString(b).toUpperCase();
+    }
+
+    customBaseSelect.addEventListener("input", function () {
+      // Deliberately do NOT rewrite customBaseSelect.value here — clamping
+      // it mid-keystroke (e.g. while typing "20") corrupts multi-digit
+      // entry by resetting the field as each digit is typed. getCustomBase()
+      // already clamps internally for calculation purposes, so it's safe to
+      // just recompute the display from the current (possibly still
+      // mid-edit) value without touching the field itself.
+      refreshCustomBaseDisplay();
+    });
+    customBaseSelect.addEventListener("change", function () {
+      var b = getCustomBase();
+      customBaseSelect.value = b;
+      refreshCustomBaseDisplay();
+    });
 
     function loadExample() {
       decimalField.value = "255";
@@ -319,6 +446,154 @@
     document.getElementById("resetBtn").addEventListener("click", loadExample);
 
     loadExample();
+
+    // ---- Two's Complement Converter ----
+    var twosBitsSelect = document.getElementById("twosBitsSelect");
+    var twosDecimalField = document.getElementById("twosDecimalField");
+    var twosBinaryField = document.getElementById("twosBinaryField");
+    var twosHexField = document.getElementById("twosHexField");
+    var twosStatusBox = document.getElementById("twosStatusBox");
+
+    var TWOS_DEFAULT_MSG = "Enter a signed integer, or a two's complement binary/hex pattern, for the selected bit width.";
+
+    function getBits() {
+      return parseInt(twosBitsSelect.value, 10);
+    }
+
+    function getRange(bits) {
+      var half = Math.pow(2, bits - 1);
+      return { min: -half, max: half - 1, mod: half * 2 };
+    }
+
+    function sanitizeSignedInt(value) {
+      var out = "";
+      for (var i = 0; i < value.length; i++) {
+        var ch = value[i];
+        if (/[0-9]/.test(ch)) {
+          out += ch;
+        } else if (ch === "-" && out === "") {
+          out += ch;
+        }
+      }
+      return out;
+    }
+
+    function clearTwos(exceptField) {
+      [twosDecimalField, twosBinaryField, twosHexField].forEach(function (f) {
+        if (f !== exceptField) f.value = "";
+      });
+    }
+
+    function updateTwosFromDecimal() {
+      var raw = twosDecimalField.value;
+      if (raw === "" || raw === "-") {
+        clearTwos(twosDecimalField);
+        twosStatusBox.textContent = TWOS_DEFAULT_MSG;
+        return;
+      }
+      var num = parseInt(raw, 10);
+      if (isNaN(num)) {
+        clearTwos(twosDecimalField);
+        twosStatusBox.textContent = "Waiting for a valid number…";
+        return;
+      }
+      var bits = getBits();
+      var r = getRange(bits);
+      if (num < r.min || num > r.max) {
+        twosBinaryField.value = "";
+        twosHexField.value = "";
+        twosStatusBox.textContent = "Out of range for " + bits + "-bit two's complement: must be between " + r.min + " and " + r.max + ".";
+        return;
+      }
+      var u = ((num % r.mod) + r.mod) % r.mod;
+      var hexDigits = bits / 4;
+      twosBinaryField.value = u.toString(2).padStart(bits, "0");
+      twosHexField.value = u.toString(16).toUpperCase().padStart(hexDigits, "0");
+      twosStatusBox.textContent = "Converted successfully.";
+    }
+
+    function updateTwosFromBinary() {
+      var raw = twosBinaryField.value;
+      if (raw === "") {
+        clearTwos(twosBinaryField);
+        twosStatusBox.textContent = TWOS_DEFAULT_MSG;
+        return;
+      }
+      var bits = getBits();
+      var r = getRange(bits);
+      var u = parseInt(raw, 2);
+      if (isNaN(u)) {
+        clearTwos(twosBinaryField);
+        twosStatusBox.textContent = "Waiting for a valid binary pattern…";
+        return;
+      }
+      var signed = u >= r.mod / 2 ? u - r.mod : u;
+      var hexDigits = bits / 4;
+      twosDecimalField.value = signed.toString(10);
+      twosHexField.value = u.toString(16).toUpperCase().padStart(hexDigits, "0");
+      twosStatusBox.textContent = "Converted successfully.";
+    }
+
+    function updateTwosFromHex() {
+      var raw = twosHexField.value;
+      if (raw === "") {
+        clearTwos(twosHexField);
+        twosStatusBox.textContent = TWOS_DEFAULT_MSG;
+        return;
+      }
+      var bits = getBits();
+      var r = getRange(bits);
+      var u = parseInt(raw, 16);
+      if (isNaN(u)) {
+        clearTwos(twosHexField);
+        twosStatusBox.textContent = "Waiting for a valid hex pattern…";
+        return;
+      }
+      var signed = u >= r.mod / 2 ? u - r.mod : u;
+      twosDecimalField.value = signed.toString(10);
+      twosBinaryField.value = u.toString(2).padStart(bits, "0");
+      twosStatusBox.textContent = "Converted successfully.";
+    }
+
+    twosDecimalField.addEventListener("input", function () {
+      twosDecimalField.value = sanitizeSignedInt(twosDecimalField.value);
+      updateTwosFromDecimal();
+    });
+    twosBinaryField.addEventListener("input", function () {
+      twosBinaryField.value = sanitize(twosBinaryField.value, /[01]/);
+      updateTwosFromBinary();
+    });
+    twosHexField.addEventListener("input", function () {
+      twosHexField.value = sanitize(twosHexField.value, /[0-9a-fA-F]/);
+      updateTwosFromHex();
+    });
+
+    twosBitsSelect.addEventListener("change", function () {
+      var bits = getBits();
+      twosBinaryField.maxLength = bits;
+      twosHexField.maxLength = bits / 4;
+      if (twosDecimalField.value !== "" && twosDecimalField.value !== "-") {
+        updateTwosFromDecimal();
+      } else if (twosBinaryField.value !== "") {
+        updateTwosFromBinary();
+      } else if (twosHexField.value !== "") {
+        updateTwosFromHex();
+      } else {
+        twosStatusBox.textContent = TWOS_DEFAULT_MSG;
+      }
+    });
+
+    function loadTwosExample() {
+      twosBitsSelect.value = "8";
+      twosBinaryField.maxLength = 8;
+      twosHexField.maxLength = 2;
+      twosDecimalField.value = "-1";
+      updateTwosFromDecimal();
+    }
+
+    document.getElementById("twosResetBtn").addEventListener("click", loadTwosExample);
+
+    loadTwosExample();
   </script>
 </body>
 </html>
