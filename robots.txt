@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 
-Sitemap: https://fixora-site.vercel.app/sitemap.xml
+Sitemap: https://fixoona.com/sitemap.xml
