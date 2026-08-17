@@ -6,21 +6,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Word Counter Online — Count Words & Characters | Fixora</title>
-  <meta name="description" content="Count words, characters, sentences, paragraphs, and estimated reading time instantly. Free online word counter with no sign-up required." />
-  <meta name="keywords" content="word counter, character count, count words online free, reading time calculator" />
+  <meta name="description" content="Count words, characters, sentences, and paragraphs, then check reading time, speaking time, a Flesch readability score, and a keyword density table — instantly and free, no sign-up required." />
+  <meta name="keywords" content="word counter, character count, count words online free, reading time calculator, speaking time calculator, keyword density checker, flesch reading ease, readability score" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/word-counter.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Word Counter Online" />
-  <meta property="og:description" content="Count words, characters, sentences, and reading time instantly." />
+  <meta property="og:description" content="Count words, characters, sentences, reading/speaking time, readability, and keyword density instantly." />
   <meta property="og:url" content="https://fixoona.com/tools/word-counter.html" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Word Counter Online" />
-  <meta name="twitter:description" content="Count words, characters, sentences, and reading time instantly." />
+  <meta name="twitter:description" content="Count words, characters, sentences, reading/speaking time, readability, and keyword density instantly." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -80,10 +80,147 @@
         "@type": "Question",
         "name": "Does this tool upload or store my text anywhere?",
         "acceptedAnswer": { "@type": "Answer", "text": "No. All counting happens instantly in your browser's JavaScript as you type — nothing is sent to a server, so your text never leaves your device." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between Reading Time and Speaking Time?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Reading Time estimates how long it takes to read the text silently, based on 200 words per minute. Speaking Time estimates how long it would take to read the text aloud, based on 130 words per minute — a commonly used average speaking pace — which is why Speaking Time is usually longer than Reading Time for the same text." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is the readability score calculated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The Flesch Reading Ease score is calculated from your average sentence length and average syllables per word, using the formula 206.835 − 1.015 × (words ÷ sentences) − 84.6 × (syllables ÷ words). Syllables are estimated by counting vowel groups in each word, so the result is a close estimate rather than a dictionary-exact count. Scores are capped between 0 (very confusing) and 100 (very easy). The Flesch-Kincaid Grade Level uses the same inputs in a different formula to estimate the U.S. school grade needed to understand the text." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is the keyword density table calculated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The tool strips punctuation, lowercases every word, and counts how many times each one appears in your text. The top 10 most frequent words are listed with their count and their percentage share of the words counted. Turn on \"Exclude common words\" to remove filler words like \"the,\" \"a,\" and \"is\" from the table, which is useful for spotting the meaningful keywords you're repeating." }
       }
     ]
   }
   </script>
+  <style>
+    .wc-panel {
+      margin-top: 26px;
+      padding-top: 22px;
+      border-top: 1px solid var(--color-border);
+    }
+    .wc-panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .wc-panel-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      margin: 0;
+    }
+    .wc-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      cursor: pointer;
+    }
+    .wc-readability-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      align-items: flex-start;
+    }
+    .wc-readability-score {
+      min-width: 200px;
+      flex: 1 1 200px;
+    }
+    .wc-score-value {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      line-height: 1.1;
+    }
+    .wc-score-label {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      margin-top: 2px;
+    }
+    .readability-meter {
+      height: 8px;
+      border-radius: 999px;
+      background: var(--color-border);
+      overflow: hidden;
+      margin-top: 12px;
+    }
+    .readability-meter span {
+      display: block;
+      height: 100%;
+      width: 0;
+      transition: width 0.2s ease, background 0.2s ease;
+    }
+    .wc-readability-details {
+      flex: 1 1 220px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .wc-detail-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.88rem;
+      padding: 8px 12px;
+      background: var(--color-bg-soft);
+      border-radius: var(--radius-sm);
+    }
+    .wc-detail-row span { color: var(--color-text-muted); }
+    .wc-detail-row strong { color: var(--color-text); }
+    .keyword-table-wrap {
+      max-height: 360px;
+      overflow-y: auto;
+      overflow-x: auto;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+    }
+    .keyword-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+      min-width: 360px;
+    }
+    .keyword-table th,
+    .keyword-table td {
+      padding: 8px 12px;
+      text-align: right;
+      border-bottom: 1px solid var(--color-border);
+      white-space: nowrap;
+    }
+    .keyword-table th:nth-child(2),
+    .keyword-table td:nth-child(2) {
+      text-align: left;
+    }
+    .keyword-table thead th {
+      position: sticky;
+      top: 0;
+      background: var(--color-bg-soft);
+      color: var(--color-text-muted);
+      font-weight: 600;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .keyword-table tbody tr:last-child td { border-bottom: none; }
+    .keyword-table tbody tr:hover { background: var(--color-bg-soft); }
+    .wc-empty-note {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      margin-top: 12px;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -119,7 +256,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🔤</div>
       <h1>Word Counter</h1>
-      <p>Count words, characters, sentences, and paragraphs — updated live as you type.</p>
+      <p>Count words, characters, sentences, and paragraphs, then check reading/speaking time, readability, and keyword density — updated live as you type.</p>
     </section>
 
     <section class="container">
@@ -136,6 +273,7 @@
           <div class="stat"><strong id="statSentences">0</strong><span>Sentences</span></div>
           <div class="stat"><strong id="statParagraphs">0</strong><span>Paragraphs</span></div>
           <div class="stat"><strong id="statReadTime">0 min</strong><span>Reading Time</span></div>
+          <div class="stat"><strong id="statSpeakTime">0 min</strong><span>Speaking Time</span></div>
         </div>
 
         <div class="actions">
@@ -143,6 +281,41 @@
           <button class="btn btn-secondary" id="copyBtn">Copy Text</button>
         </div>
         <div class="copy-note" id="copyNote"></div>
+
+        <div class="wc-panel" id="readabilityPanel">
+          <div class="wc-panel-head">
+            <h2 class="wc-panel-title">Readability</h2>
+          </div>
+          <div class="wc-readability-grid">
+            <div class="wc-readability-score">
+              <div class="wc-score-value" id="fleschScore">–</div>
+              <div class="wc-score-label" id="fleschLabel">Start typing to see a score</div>
+              <div class="readability-meter"><span id="fleschBar"></span></div>
+            </div>
+            <div class="wc-readability-details">
+              <div class="wc-detail-row"><span>Flesch-Kincaid Grade Level</span><strong id="fkGrade">–</strong></div>
+              <div class="wc-detail-row"><span>Avg. words per sentence</span><strong id="avgWordsSentence">–</strong></div>
+              <div class="wc-detail-row"><span>Avg. syllables per word</span><strong id="avgSyllablesWord">–</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wc-panel" id="keywordPanel">
+          <div class="wc-panel-head">
+            <h2 class="wc-panel-title">Keyword Density</h2>
+            <label class="wc-toggle">
+              <input type="checkbox" id="excludeStopwords" checked style="width:auto;" />
+              Exclude common words (the, a, is…)
+            </label>
+          </div>
+          <div class="keyword-table-wrap">
+            <table class="keyword-table">
+              <thead><tr><th>#</th><th>Word</th><th>Count</th><th>% of words</th></tr></thead>
+              <tbody id="keywordTableBody"></tbody>
+            </table>
+          </div>
+          <p class="wc-empty-note" id="keywordEmptyNote">Start typing to see your most frequent words.</p>
+        </div>
       </div>
 
       <div class="howto">
@@ -150,7 +323,9 @@
         <ol class="howto-steps">
           <li>Paste or type your text into the box above — the counters update live as you type, with no button to click.</li>
           <li>Check the Words, Characters, Chars (no spaces), Sentences, and Paragraphs stats in the row below the text box.</li>
-          <li>Look at the Reading Time figure to see roughly how long the text takes to read aloud or silently.</li>
+          <li>Look at Reading Time and Speaking Time to see roughly how long the text takes to read silently versus read aloud.</li>
+          <li>Scroll to the Readability panel for a Flesch Reading Ease score and Flesch-Kincaid Grade Level, plus the average words per sentence and syllables per word behind them.</li>
+          <li>Scroll to the Keyword Density table to see your top 10 most-used words with their count and percentage — toggle "Exclude common words" to filter out filler words like "the" and "is".</li>
           <li>Use Copy Text to grab your text for elsewhere, or Clear Text to start over with a blank box.</li>
         </ol>
       </div>
@@ -176,6 +351,18 @@
         <details class="faq-item">
           <summary>Does this tool upload or store my text anywhere?</summary>
           <p>No. All counting happens instantly in your browser's JavaScript as you type — nothing is sent to a server, so your text never leaves your device.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What's the difference between Reading Time and Speaking Time?</summary>
+          <p>Reading Time estimates how long it takes to read the text silently, based on 200 words per minute. Speaking Time estimates how long it would take to read the text aloud, based on 130 words per minute — a commonly used average speaking pace — which is why Speaking Time is usually longer than Reading Time for the same text.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How is the readability score calculated?</summary>
+          <p>The Flesch Reading Ease score is calculated from your average sentence length and average syllables per word, using the formula 206.835 − 1.015 × (words ÷ sentences) − 84.6 × (syllables ÷ words). Syllables are estimated by counting vowel groups in each word, so the result is a close estimate rather than a dictionary-exact count. Scores are capped between 0 (very confusing) and 100 (very easy). The Flesch-Kincaid Grade Level uses the same inputs in a different formula to estimate the U.S. school grade needed to understand the text.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How is the keyword density table calculated?</summary>
+          <p>The tool strips punctuation, lowercases every word, and counts how many times each one appears in your text. The top 10 most frequent words are listed with their count and their percentage share of the words counted. Turn on "Exclude common words" to remove filler words like "the," "a," and "is" from the table, which is useful for spotting the meaningful keywords you're repeating.</p>
         </details>
       </div>
 
@@ -251,6 +438,152 @@
   <script>
     var textInput = document.getElementById("textInput");
     var copyNote = document.getElementById("copyNote");
+    var excludeStopwords = document.getElementById("excludeStopwords");
+
+    // Common English "filler" words excluded from keyword density when the toggle is on.
+    var STOPWORDS = {};
+    [
+      "a", "an", "the", "and", "or", "but", "if", "of", "in", "on", "at", "to", "for", "with",
+      "is", "are", "was", "were", "be", "been", "being", "it", "its", "this", "that", "these", "those",
+      "i", "you", "he", "she", "we", "they", "them", "his", "her", "their", "our", "your", "my", "me", "him",
+      "as", "by", "from", "not", "no", "nor", "so", "do", "does", "did", "doing", "have", "has", "had", "having",
+      "will", "would", "can", "could", "should", "shall", "may", "might", "must", "just", "than", "then", "there",
+      "here", "what", "which", "who", "whom", "when", "where", "why", "how", "all", "any", "each", "other", "into",
+      "up", "down", "out", "about", "again", "further", "over", "under", "more", "most", "some", "such", "only",
+      "own", "same", "too", "very", "now", "also", "because", "while", "after", "before", "above", "below",
+      "between", "through", "s", "t", "don", "re", "ve", "ll", "m", "d"
+    ].forEach(function (w) { STOPWORDS[w] = true; });
+
+    // Extracts lowercase word tokens (letters/digits, with internal apostrophes like "don't" kept whole).
+    function extractWords(text) {
+      var m = text.toLowerCase().match(/[a-z0-9]+(?:'[a-z]+)?/g);
+      return m || [];
+    }
+
+    // Estimates syllable count for a single word by counting vowel-sound groups.
+    // Verified against known counts: cat=1, banana=3, beautiful=3, table=2, hoped=1, reading=2.
+    function countSyllables(word) {
+      var w = word.toLowerCase().replace(/[^a-z]/g, "");
+      if (!w) return 0;
+      if (w.length <= 3) return 1;
+      w = w.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, "");
+      w = w.replace(/^y/, "");
+      var m = w.match(/[aeiouy]+/g);
+      return m ? m.length : 1;
+    }
+
+    function fleschLabelFor(score) {
+      if (score >= 90) return "Very Easy";
+      if (score >= 80) return "Easy";
+      if (score >= 70) return "Fairly Easy";
+      if (score >= 60) return "Standard";
+      if (score >= 50) return "Fairly Difficult";
+      if (score >= 30) return "Difficult";
+      return "Very Confusing";
+    }
+
+    function updateReadability(text, sentenceCount) {
+      var scoreEl = document.getElementById("fleschScore");
+      var labelEl = document.getElementById("fleschLabel");
+      var barEl = document.getElementById("fleschBar");
+      var gradeEl = document.getElementById("fkGrade");
+      var wpsEl = document.getElementById("avgWordsSentence");
+      var spwEl = document.getElementById("avgSyllablesWord");
+
+      var words = text.match(/[A-Za-z]+(?:'[A-Za-z]+)?/g) || [];
+      var wordCount = words.length;
+
+      if (wordCount === 0) {
+        scoreEl.textContent = "–";
+        labelEl.textContent = "Start typing to see a score";
+        barEl.style.width = "0%";
+        barEl.style.background = "var(--color-border)";
+        gradeEl.textContent = "–";
+        wpsEl.textContent = "–";
+        spwEl.textContent = "–";
+        return;
+      }
+
+      var totalSyllables = 0;
+      for (var i = 0; i < words.length; i++) {
+        totalSyllables += countSyllables(words[i]);
+      }
+
+      var sentences = Math.max(1, sentenceCount);
+      var wordsPerSentence = wordCount / sentences;
+      var syllablesPerWord = totalSyllables / wordCount;
+
+      var fre = 206.835 - 1.015 * wordsPerSentence - 84.6 * syllablesPerWord;
+      var fk = 0.39 * wordsPerSentence + 11.8 * syllablesPerWord - 15.59;
+      var freClamped = Math.max(0, Math.min(100, fre));
+
+      scoreEl.textContent = Math.round(freClamped);
+      labelEl.textContent = fleschLabelFor(freClamped);
+      barEl.style.width = freClamped + "%";
+      barEl.style.background = freClamped >= 70 ? "var(--color-success)" : (freClamped >= 50 ? "#f59e0b" : "var(--color-danger)");
+      gradeEl.textContent = Math.max(0, fk).toFixed(1);
+      wpsEl.textContent = wordsPerSentence.toFixed(1);
+      spwEl.textContent = syllablesPerWord.toFixed(2);
+    }
+
+    function renderKeywords(text) {
+      var tbody = document.getElementById("keywordTableBody");
+      var emptyNote = document.getElementById("keywordEmptyNote");
+      var wrap = document.querySelector(".keyword-table-wrap");
+      var words = extractWords(text);
+      var exclude = excludeStopwords.checked;
+      var counts = {};
+      var order = [];
+      var total = 0;
+
+      for (var i = 0; i < words.length; i++) {
+        var w = words[i];
+        if (exclude && STOPWORDS[w]) continue;
+        if (!(w in counts)) {
+          counts[w] = 0;
+          order.push(w);
+        }
+        counts[w]++;
+        total++;
+      }
+
+      order.sort(function (a, b) { return counts[b] - counts[a]; });
+      var top = order.slice(0, 10);
+
+      tbody.innerHTML = "";
+
+      if (top.length === 0) {
+        wrap.style.display = "none";
+        emptyNote.style.display = "block";
+        emptyNote.textContent = text.trim() === ""
+          ? "Start typing to see your most frequent words."
+          : "No words left to rank — try turning off \"Exclude common words.\"";
+        return;
+      }
+
+      wrap.style.display = "block";
+      emptyNote.style.display = "none";
+
+      top.forEach(function (w, idx) {
+        var pct = ((counts[w] / total) * 100).toFixed(1);
+        var tr = document.createElement("tr");
+
+        var tdRank = document.createElement("td");
+        tdRank.textContent = idx + 1;
+        var tdWord = document.createElement("td");
+        tdWord.textContent = w;
+        var tdCount = document.createElement("td");
+        tdCount.textContent = counts[w];
+        var tdPct = document.createElement("td");
+        tdPct.textContent = pct + "%";
+
+        tr.appendChild(tdRank);
+        tr.appendChild(tdWord);
+        tr.appendChild(tdCount);
+        tr.appendChild(tdPct);
+        tbody.appendChild(tr);
+      });
+    }
 
     function update() {
       var text = textInput.value;
@@ -262,6 +595,7 @@
       var sentences = trimmed === "" ? 0 : (trimmed.match(/[^.!?]+[.!?]+/g) || (trimmed ? [trimmed] : [])).length;
       var paragraphs = trimmed === "" ? 0 : trimmed.split(/\n+/).filter(function (p) { return p.trim() !== ""; }).length;
       var readTime = Math.max(1, Math.ceil(words / 200));
+      var speakTime = Math.max(1, Math.ceil(words / 130));
 
       document.getElementById("statWords").textContent = words;
       document.getElementById("statChars").textContent = chars;
@@ -269,9 +603,14 @@
       document.getElementById("statSentences").textContent = sentences;
       document.getElementById("statParagraphs").textContent = paragraphs;
       document.getElementById("statReadTime").textContent = (words === 0 ? 0 : readTime) + " min";
+      document.getElementById("statSpeakTime").textContent = (words === 0 ? 0 : speakTime) + " min";
+
+      updateReadability(text, sentences);
+      renderKeywords(text);
     }
 
     textInput.addEventListener("input", update);
+    excludeStopwords.addEventListener("change", update);
 
     document.getElementById("clearBtn").addEventListener("click", function () {
       textInput.value = "";
