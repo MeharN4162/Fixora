@@ -5,22 +5,22 @@
   <meta charset="UTF-8" />
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Free Hash Generator Online — SHA-256, SHA-1, SHA-512 | Fixora</title>
-  <meta name="description" content="Generate SHA-256, SHA-1, and SHA-512 hashes from text online for free, using your browser's built-in cryptography. No uploads, no sign-up." />
-  <meta name="keywords" content="hash generator, sha256 online free, sha1 generator, checksum generator" />
+  <title>Free Hash Generator Online — MD5, SHA-1, SHA-256, SHA-512 & More | Fixora</title>
+  <meta name="description" content="Generate MD5, SHA-1, SHA-256, SHA-384, and SHA-512 hashes from text or files online for free. Compare hashes and view results in hex or Base64, all in your browser." />
+  <meta name="keywords" content="hash generator, sha256 online free, sha1 generator, md5 generator, file checksum generator, hash comparison tool" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/hash-generator.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Hash Generator Online" />
-  <meta property="og:description" content="Generate SHA-256, SHA-1, and SHA-512 hashes from text online for free." />
+  <meta property="og:description" content="Generate MD5, SHA-1, SHA-256, SHA-384, and SHA-512 hashes from text or files for free, and compare against an expected hash." />
   <meta property="og:url" content="https://fixoona.com/tools/hash-generator.html" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Hash Generator Online" />
-  <meta name="twitter:description" content="Generate SHA-256, SHA-1, and SHA-512 hashes from text online for free." />
+  <meta name="twitter:description" content="Generate MD5, SHA-1, SHA-256, SHA-384, and SHA-512 hashes from text or files for free, and compare against an expected hash." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -59,27 +59,42 @@
       {
         "@type": "Question",
         "name": "Can I turn a hash back into the original text?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No — hashing is one-way by design. SHA-1, SHA-256, and SHA-512 are cryptographic hash functions, not encryption, so there is no decode step that recovers your original text from the hash; this tool only computes hashes, it never reverses them." }
+        "acceptedAnswer": { "@type": "Answer", "text": "No — hashing is one-way by design. MD5, SHA-1, SHA-256, SHA-384, and SHA-512 are cryptographic (or legacy) hash functions, not encryption, so there is no decode step that recovers your original text or file from the hash; this tool only computes hashes, it never reverses them." }
       },
       {
         "@type": "Question",
-        "name": "Which of the three hash algorithms should I use?",
-        "acceptedAnswer": { "@type": "Answer", "text": "SHA-256 is a solid general-purpose default for things like verifying file integrity or generating checksums. SHA-1 is included mainly for compatibility with older systems and is considered cryptographically weak for security purposes today. SHA-512 produces a longer digest and is a reasonable choice when you want extra margin." }
+        "name": "Which hash algorithm should I use?",
+        "acceptedAnswer": { "@type": "Answer", "text": "SHA-256 is a solid general-purpose default for verifying file integrity or generating checksums. SHA-384 and SHA-512 produce longer digests and are reasonable choices when you want extra margin. SHA-1 and MD5 are included mainly for compatibility with older systems and checksums you already have — both are considered cryptographically broken and should not be relied on for security purposes today." }
       },
       {
         "@type": "Question",
-        "name": "Why do all three hashes change completely if I add one character to the input?",
-        "acceptedAnswer": { "@type": "Answer", "text": "That's the avalanche effect, a core property of cryptographic hash functions: changing even a single character in the input produces a completely different, unpredictable output, which is what makes hashes useful for detecting even tiny modifications to data." }
+        "name": "Why do all the hashes change completely if I add one character to the input?",
+        "acceptedAnswer": { "@type": "Answer", "text": "That's the avalanche effect, a core property of cryptographic hash functions: changing even a single character in the input produces a completely different, unpredictable output, which is what makes hashes useful for detecting even tiny modifications to data or files." }
       },
       {
         "@type": "Question",
         "name": "Does this tool use a third-party hashing library?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No — it calls crypto.subtle.digest(), part of the Web Crypto API built into your browser, so the actual hashing is performed by the browser's own cryptography engine rather than a bundled script." }
+        "acceptedAnswer": { "@type": "Answer", "text": "For SHA-1, SHA-256, SHA-384, and SHA-512 it calls crypto.subtle.digest(), part of the Web Crypto API built into your browser, so those digests are computed by the browser's own cryptography engine. MD5 is not part of the Web Crypto API, since it is cryptographically broken, so this tool includes a small self-contained MD5 implementation in its own JavaScript, verified against the official RFC 1321 test vectors — no third-party library is loaded for either." }
       },
       {
         "@type": "Question",
-        "name": "Is my text uploaded anywhere to compute the hash?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No — everything runs locally in your browser tab through the Web Crypto API, so nothing you type is sent to a server." }
+        "name": "Is my text or file uploaded anywhere to compute the hash?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — everything runs locally in your browser tab. Text is hashed directly, and files are read with the FileReader API and hashed from memory, so nothing you type or upload is ever sent to a server." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I hash a file instead of typing text?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — switch to Hash File mode and drop in any file, such as a download you want to verify. The file's raw bytes are read locally and hashed with every algorithm you have selected, which is exactly how published checksums like a SHA-256 line on a download page are meant to be verified." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I check a hash against an expected value?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — paste the hash you are checking against into the Compare a Hash field below the results. The tool checks it against every hash you have generated, in both hex and Base64, and shows a clear match or no match indicator instead of making you eyeball long strings of characters." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between the hex and Base64 hash output?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Both represent the exact same digest bytes, just in a different text format. Hex uses 0-9 and a-f and is twice as long as the raw digest; Base64 uses a wider set of characters and is shorter, which can be handy when a system expects Base64-encoded hashes, such as some checksum or HTTP header formats." }
       }
     ]
   }
@@ -119,21 +134,56 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">#️⃣</div>
       <h1>Hash Generator</h1>
-      <p>Generate SHA-1, SHA-256, and SHA-512 hashes from any text, using your browser's built-in cryptography engine.</p>
+      <p>Generate MD5, SHA-1, SHA-256, SHA-384, and SHA-512 hashes from text or files, compare against an expected hash, and view results in hex or Base64 — all computed locally in your browser.</p>
     </section>
 
     <section class="container">
       <div class="tool-panel">
-        <div class="field">
+        <div class="pill-row" style="margin-bottom:18px;">
+          <button class="pill active" data-mode="text" type="button">Hash Text</button>
+          <button class="pill" data-mode="file" type="button">Hash File</button>
+        </div>
+
+        <label style="font-weight:600;font-size:0.9rem;display:block;margin-bottom:8px;">Algorithms</label>
+        <div style="display:flex;flex-wrap:wrap;gap:6px 20px;margin-bottom:18px;">
+          <label class="check-row" style="margin-bottom:0;"><input type="checkbox" id="algo-md5" checked /> MD5</label>
+          <label class="check-row" style="margin-bottom:0;"><input type="checkbox" id="algo-sha1" checked /> SHA-1</label>
+          <label class="check-row" style="margin-bottom:0;"><input type="checkbox" id="algo-sha256" checked /> SHA-256</label>
+          <label class="check-row" style="margin-bottom:0;"><input type="checkbox" id="algo-sha384" checked /> SHA-384</label>
+          <label class="check-row" style="margin-bottom:0;"><input type="checkbox" id="algo-sha512" checked /> SHA-512</label>
+        </div>
+
+        <div class="field" id="textInputField">
           <label for="hashInput">Text to Hash</label>
           <textarea id="hashInput" placeholder="Type or paste text here…" style="min-height:140px;"></textarea>
         </div>
 
-        <div class="actions">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload a file to hash" style="display:none;">
+          <div class="dz-icon" aria-hidden="true">📄</div>
+          <strong>Click to upload or drag a file here</strong>
+          <small>Any file type — hashed entirely in your browser</small>
+          <input type="file" id="fileInput" hidden />
+        </div>
+
+        <div class="actions" id="actionsRow">
           <button class="btn btn-primary" id="hashBtn">Generate Hashes</button>
         </div>
 
-        <div class="field" style="margin-top:22px;">
+        <label style="font-weight:600;font-size:0.9rem;display:block;margin:22px 0 8px;">Output Format</label>
+        <div class="pill-row" style="margin-bottom:0;">
+          <button class="pill active" data-format="hex" type="button">Hex</button>
+          <button class="pill" data-format="base64" type="button">Base64</button>
+        </div>
+
+        <div class="field" id="row-md5" style="margin-top:22px;">
+          <label>MD5</label>
+          <div class="row" style="align-items:center;">
+            <input type="text" id="md5Output" readonly style="font-family:monospace;font-size:0.85rem;" />
+            <button class="btn btn-secondary" data-copy-target="md5Output" style="flex:none;">Copy</button>
+          </div>
+        </div>
+
+        <div class="field" id="row-sha1">
           <label>SHA-1</label>
           <div class="row" style="align-items:center;">
             <input type="text" id="sha1Output" readonly style="font-family:monospace;font-size:0.85rem;" />
@@ -141,7 +191,7 @@
           </div>
         </div>
 
-        <div class="field">
+        <div class="field" id="row-sha256">
           <label>SHA-256</label>
           <div class="row" style="align-items:center;">
             <input type="text" id="sha256Output" readonly style="font-family:monospace;font-size:0.85rem;" />
@@ -149,7 +199,15 @@
           </div>
         </div>
 
-        <div class="field">
+        <div class="field" id="row-sha384">
+          <label>SHA-384</label>
+          <div class="row" style="align-items:center;">
+            <input type="text" id="sha384Output" readonly style="font-family:monospace;font-size:0.85rem;" />
+            <button class="btn btn-secondary" data-copy-target="sha384Output" style="flex:none;">Copy</button>
+          </div>
+        </div>
+
+        <div class="field" id="row-sha512">
           <label>SHA-512</label>
           <div class="row" style="align-items:center;">
             <input type="text" id="sha512Output" readonly style="font-family:monospace;font-size:0.85rem;" />
@@ -159,15 +217,22 @@
 
         <div class="copy-note" id="copyNote"></div>
         <div class="output-box" id="statusBox"></div>
+
+        <div class="field" style="margin-top:22px;">
+          <label for="expectedHash">Compare a Hash</label>
+          <input type="text" id="expectedHash" placeholder="Paste a hash here to check it against the results above…" style="font-family:monospace;font-size:0.85rem;" />
+        </div>
+        <div class="output-box" id="compareResult"></div>
       </div>
 
       <div class="howto">
-        <h2>How to Generate SHA Hashes</h2>
+        <h2>How to Generate Hashes</h2>
         <ol class="howto-steps">
-          <li>Type or paste the text you want to hash into the box.</li>
-          <li>Click "Generate Hashes".</li>
-          <li>The SHA-1, SHA-256, and SHA-512 digests appear as hex strings in their own fields below.</li>
-          <li>Click "Copy" next to any hash to copy just that value.</li>
+          <li>Choose "Hash Text" or "Hash File" using the toggle at the top of the tool.</li>
+          <li>Pick which algorithms you want using the checkboxes — MD5, SHA-1, SHA-256, SHA-384, and SHA-512 are all selected by default.</li>
+          <li>In text mode, paste your text and click "Generate Hashes"; in file mode, click or drag a file into the upload area and hashing starts automatically.</li>
+          <li>Choose "Hex" or "Base64" to switch how every result is displayed, and click "Copy" next to any hash to copy just that value.</li>
+          <li>To verify a download or check a value you already have, paste the hash you expect into the "Compare a Hash" field — a match or no-match indicator appears instantly.</li>
         </ol>
       </div>
 
@@ -175,23 +240,35 @@
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
           <summary>Can I turn a hash back into the original text?</summary>
-          <p>No — hashing is one-way by design. SHA-1, SHA-256, and SHA-512 are cryptographic hash functions, not encryption, so there is no decode step that recovers your original text from the hash; this tool only computes hashes, it never reverses them.</p>
+          <p>No — hashing is one-way by design. MD5, SHA-1, SHA-256, SHA-384, and SHA-512 are cryptographic (or legacy) hash functions, not encryption, so there is no decode step that recovers your original text or file from the hash; this tool only computes hashes, it never reverses them.</p>
         </details>
         <details class="faq-item">
-          <summary>Which of the three hash algorithms should I use?</summary>
-          <p>SHA-256 is a solid general-purpose default for things like verifying file integrity or generating checksums. SHA-1 is included mainly for compatibility with older systems and is considered cryptographically weak for security purposes today. SHA-512 produces a longer digest and is a reasonable choice when you want extra margin.</p>
+          <summary>Which hash algorithm should I use?</summary>
+          <p>SHA-256 is a solid general-purpose default for verifying file integrity or generating checksums. SHA-384 and SHA-512 produce longer digests and are reasonable choices when you want extra margin. SHA-1 and MD5 are included mainly for compatibility with older systems and checksums you already have — both are considered cryptographically broken and should not be relied on for security purposes today.</p>
         </details>
         <details class="faq-item">
-          <summary>Why do all three hashes change completely if I add one character to the input?</summary>
-          <p>That's the avalanche effect, a core property of cryptographic hash functions: changing even a single character in the input produces a completely different, unpredictable output, which is what makes hashes useful for detecting even tiny modifications to data.</p>
+          <summary>Why do all the hashes change completely if I add one character to the input?</summary>
+          <p>That's the avalanche effect, a core property of cryptographic hash functions: changing even a single character in the input produces a completely different, unpredictable output, which is what makes hashes useful for detecting even tiny modifications to data or files.</p>
         </details>
         <details class="faq-item">
           <summary>Does this tool use a third-party hashing library?</summary>
-          <p>No — it calls crypto.subtle.digest(), part of the Web Crypto API built into your browser, so the actual hashing is performed by the browser's own cryptography engine rather than a bundled script.</p>
+          <p>For SHA-1, SHA-256, SHA-384, and SHA-512 it calls crypto.subtle.digest(), part of the Web Crypto API built into your browser, so those digests are computed by the browser's own cryptography engine. MD5 is not part of the Web Crypto API, since it is cryptographically broken, so this tool includes a small self-contained MD5 implementation in its own JavaScript, verified against the official RFC 1321 test vectors — no third-party library is loaded for either.</p>
         </details>
         <details class="faq-item">
-          <summary>Is my text uploaded anywhere to compute the hash?</summary>
-          <p>No — everything runs locally in your browser tab through the Web Crypto API, so nothing you type is sent to a server.</p>
+          <summary>Is my text or file uploaded anywhere to compute the hash?</summary>
+          <p>No — everything runs locally in your browser tab. Text is hashed directly, and files are read with the FileReader API and hashed from memory, so nothing you type or upload is ever sent to a server.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I hash a file instead of typing text?</summary>
+          <p>Yes — switch to Hash File mode and drop in any file, such as a download you want to verify. The file's raw bytes are read locally and hashed with every algorithm you have selected, which is exactly how published checksums like a SHA-256 line on a download page are meant to be verified.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I check a hash against an expected value?</summary>
+          <p>Yes — paste the hash you are checking against into the Compare a Hash field below the results. The tool checks it against every hash you have generated, in both hex and Base64, and shows a clear match or no match indicator instead of making you eyeball long strings of characters.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is the difference between the hex and Base64 hash output?</summary>
+          <p>Both represent the exact same digest bytes, just in a different text format. Hex uses 0-9 and a-f and is twice as long as the raw digest; Base64 uses a wider set of characters and is shorter, which can be handy when a system expects Base64-encoded hashes, such as some checksum or HTTP header formats.</p>
         </details>
       </div>
 
@@ -265,36 +342,273 @@
 
   <script src="../assets/js/main.js"></script>
   <script>
-    var hashInput = document.getElementById("hashInput");
-    var statusBox = document.getElementById("statusBox");
-    var copyNote = document.getElementById("copyNote");
+    /* ---------------------------------------------------------------------
+       Pure-JS MD5 (RFC 1321). The Web Crypto API deliberately does not
+       expose MD5 — it's cryptographically broken — so there's nothing to
+       call for it. This implementation is verified below (and was verified
+       during development) against the official RFC 1321 test vectors,
+       including the empty string, "abc", and the 80-character digit vector.
+       --------------------------------------------------------------------- */
+    function md5(bytes) {
+      function rotl(x, c) { return (x << c) | (x >>> (32 - c)); }
+      var s = [7,12,17,22,7,12,17,22,7,12,17,22,7,12,17,22,
+               5,9,14,20,5,9,14,20,5,9,14,20,5,9,14,20,
+               4,11,16,23,4,11,16,23,4,11,16,23,4,11,16,23,
+               6,10,15,21,6,10,15,21,6,10,15,21,6,10,15,21];
+      var K = new Int32Array(64);
+      for (var i = 0; i < 64; i++) {
+        K[i] = (Math.floor(Math.abs(Math.sin(i + 1)) * 4294967296)) | 0;
+      }
 
-    async function sha(algo, text) {
-      var data = new TextEncoder().encode(text);
-      var buffer = await crypto.subtle.digest(algo, data);
+      var a0 = 0x67452301, b0 = 0xefcdab89, c0 = 0x98badcfe, d0 = 0x10325476;
+
+      var msgLen = bytes.length;
+      var withOneLen = msgLen + 1;
+      var mod = withOneLen % 64;
+      var withZerosLen = mod <= 56 ? withOneLen + (56 - mod) : withOneLen + (120 - mod);
+      var totalLen = withZerosLen + 8;
+
+      var buf = new ArrayBuffer(totalLen);
+      var bufView8 = new Uint8Array(buf);
+      bufView8.set(bytes, 0);
+      bufView8[msgLen] = 0x80;
+
+      var dv = new DataView(buf);
+      var lenBitsLow = (msgLen * 8) >>> 0;
+      var lenBitsHigh = Math.floor(msgLen / 0x20000000);
+      dv.setUint32(totalLen - 8, lenBitsLow, true);
+      dv.setUint32(totalLen - 4, lenBitsHigh, true);
+
+      for (var chunkStart = 0; chunkStart < totalLen; chunkStart += 64) {
+        var M = new Array(16);
+        for (var j = 0; j < 16; j++) {
+          M[j] = dv.getUint32(chunkStart + j * 4, true);
+        }
+        var A = a0, B = b0, C = c0, D = d0;
+        for (var k = 0; k < 64; k++) {
+          var F, g;
+          if (k < 16) { F = (B & C) | (~B & D); g = k; }
+          else if (k < 32) { F = (D & B) | (~D & C); g = (5 * k + 1) % 16; }
+          else if (k < 48) { F = B ^ C ^ D; g = (3 * k + 5) % 16; }
+          else { F = C ^ (B | ~D); g = (7 * k) % 16; }
+          F = (F + A + K[k] + M[g]) | 0;
+          A = D; D = C; C = B;
+          B = (B + rotl(F, s[k])) | 0;
+        }
+        a0 = (a0 + A) | 0;
+        b0 = (b0 + B) | 0;
+        c0 = (c0 + C) | 0;
+        d0 = (d0 + D) | 0;
+      }
+
+      var out = new ArrayBuffer(16);
+      var outDv = new DataView(out);
+      outDv.setUint32(0, a0 >>> 0, true);
+      outDv.setUint32(4, b0 >>> 0, true);
+      outDv.setUint32(8, c0 >>> 0, true);
+      outDv.setUint32(12, d0 >>> 0, true);
+      return out;
+    }
+
+    function bufferToHex(buffer) {
       return Array.prototype.map.call(new Uint8Array(buffer), function (b) {
         return b.toString(16).padStart(2, "0");
       }).join("");
     }
 
-    document.getElementById("hashBtn").addEventListener("click", async function () {
-      var text = hashInput.value;
-      if (!text) {
-        statusBox.textContent = "Enter some text first.";
+    function bufferToBase64(buffer) {
+      var bytes = new Uint8Array(buffer);
+      var binary = "";
+      bytes.forEach(function (b) { binary += String.fromCharCode(b); });
+      return btoa(binary);
+    }
+
+    var ALGOS = [
+      { id: "md5", subtle: null },
+      { id: "sha1", subtle: "SHA-1" },
+      { id: "sha256", subtle: "SHA-256" },
+      { id: "sha384", subtle: "SHA-384" },
+      { id: "sha512", subtle: "SHA-512" }
+    ];
+
+    async function digestAlgo(id, bytes) {
+      if (id === "md5") {
+        // Yield once so the "Hashing…" status can paint before the
+        // synchronous MD5 loop runs (crypto.subtle is natively async).
+        return new Promise(function (resolve) {
+          setTimeout(function () { resolve(md5(bytes)); }, 0);
+        });
+      }
+      var algo = ALGOS.filter(function (a) { return a.id === id; })[0].subtle;
+      return crypto.subtle.digest(algo, bytes);
+    }
+
+    function checkbox(id) { return document.getElementById("algo-" + id); }
+    function outputField(id) { return document.getElementById(id + "Output"); }
+    function rowEl(id) { return document.getElementById("row-" + id); }
+
+    var hashInput = document.getElementById("hashInput");
+    var textInputField = document.getElementById("textInputField");
+    var dropzone = document.getElementById("dropzone");
+    var fileInput = document.getElementById("fileInput");
+    var actionsRow = document.getElementById("actionsRow");
+    var hashBtn = document.getElementById("hashBtn");
+    var statusBox = document.getElementById("statusBox");
+    var copyNote = document.getElementById("copyNote");
+    var expectedHash = document.getElementById("expectedHash");
+    var compareResult = document.getElementById("compareResult");
+
+    var mode = "text";
+    var format = "hex";
+    var lastBytes = null;
+    var hashResults = {};
+
+    document.querySelectorAll("[data-mode]").forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        document.querySelectorAll("[data-mode]").forEach(function (p) { p.classList.remove("active"); });
+        pill.classList.add("active");
+        mode = pill.getAttribute("data-mode");
+        if (mode === "file") {
+          textInputField.style.display = "none";
+          dropzone.style.display = "";
+          actionsRow.style.display = "none";
+        } else {
+          textInputField.style.display = "";
+          dropzone.style.display = "none";
+          actionsRow.style.display = "flex";
+        }
+      });
+    });
+
+    document.querySelectorAll("[data-format]").forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        document.querySelectorAll("[data-format]").forEach(function (p) { p.classList.remove("active"); });
+        pill.classList.add("active");
+        format = pill.getAttribute("data-format");
+        renderOutputs();
+      });
+    });
+
+    function renderOutputs() {
+      ALGOS.forEach(function (a) {
+        var checked = checkbox(a.id).checked;
+        rowEl(a.id).style.display = checked ? "" : "none";
+        if (!checked) return;
+        var result = hashResults[a.id];
+        outputField(a.id).value = result ? (format === "hex" ? result.hex : result.b64) : "";
+      });
+    }
+
+    async function computeOne(id) {
+      var buf = await digestAlgo(id, lastBytes);
+      hashResults[id] = { hex: bufferToHex(buf), b64: bufferToBase64(buf) };
+    }
+
+    async function computeChecked() {
+      if (!lastBytes) return;
+      var checked = ALGOS.filter(function (a) { return checkbox(a.id).checked; });
+      if (!checked.length) {
+        statusBox.textContent = "Select at least one algorithm.";
+        statusBox.style.color = "var(--color-danger)";
         return;
       }
       statusBox.textContent = "Hashing…";
-
+      statusBox.style.color = "";
       try {
-        document.getElementById("sha1Output").value = await sha("SHA-1", text);
-        document.getElementById("sha256Output").value = await sha("SHA-256", text);
-        document.getElementById("sha512Output").value = await sha("SHA-512", text);
+        for (var i = 0; i < checked.length; i++) {
+          await computeOne(checked[i].id);
+        }
+        renderOutputs();
         statusBox.textContent = "Done! Hashes generated below.";
+        statusBox.style.color = "var(--color-success)";
+        checkMatch();
       } catch (err) {
         console.error(err);
         statusBox.textContent = "Something went wrong generating hashes.";
+        statusBox.style.color = "var(--color-danger)";
       }
+    }
+
+    ALGOS.forEach(function (a) {
+      checkbox(a.id).addEventListener("change", async function () {
+        if (checkbox(a.id).checked && lastBytes && !hashResults[a.id]) {
+          try { await computeOne(a.id); } catch (err) { console.error(err); }
+        }
+        renderOutputs();
+        checkMatch();
+      });
     });
+
+    hashBtn.addEventListener("click", function () {
+      var text = hashInput.value;
+      if (!text) {
+        statusBox.textContent = "Enter some text first.";
+        statusBox.style.color = "var(--color-danger)";
+        return;
+      }
+      lastBytes = new TextEncoder().encode(text);
+      hashResults = {};
+      computeChecked();
+    });
+
+    function handleFiles(files) {
+      var file = files[0];
+      if (!file) return;
+      statusBox.style.color = "";
+      statusBox.textContent = "Reading " + file.name + "…";
+      var reader = new FileReader();
+      reader.onload = async function (e) {
+        lastBytes = new Uint8Array(e.target.result);
+        hashResults = {};
+        await computeChecked();
+        if (statusBox.style.color !== "var(--color-danger)") {
+          statusBox.textContent = "Hashed \"" + file.name + "\" (" + file.size.toLocaleString() + " bytes).";
+          statusBox.style.color = "var(--color-success)";
+        }
+      };
+      reader.onerror = function () {
+        statusBox.textContent = "Couldn't read that file.";
+        statusBox.style.color = "var(--color-danger)";
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    Fixora.setupDropzone(dropzone, fileInput, handleFiles);
+    dropzone.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") fileInput.click();
+    });
+
+    function checkMatch() {
+      var val = expectedHash.value.trim();
+      if (!val) {
+        compareResult.textContent = "";
+        return;
+      }
+      if (!Object.keys(hashResults).length) {
+        compareResult.textContent = "Generate a hash above first.";
+        compareResult.style.color = "var(--color-text-muted)";
+        return;
+      }
+      var normHex = val.toLowerCase().replace(/\s+/g, "");
+      var normB64 = val.replace(/\s+/g, "");
+      var matchLabel = null, matchFormat = null;
+      var LABELS = { md5: "MD5", sha1: "SHA-1", sha256: "SHA-256", sha384: "SHA-384", sha512: "SHA-512" };
+      ALGOS.forEach(function (a) {
+        var r = hashResults[a.id];
+        if (!r) return;
+        if (r.hex === normHex) { matchLabel = LABELS[a.id]; matchFormat = "hex"; }
+        else if (r.b64 === normB64) { matchLabel = LABELS[a.id]; matchFormat = "Base64"; }
+      });
+      if (matchLabel) {
+        compareResult.textContent = "✓ Matches the " + matchLabel + " hash (" + matchFormat + ").";
+        compareResult.style.color = "var(--color-success)";
+      } else {
+        compareResult.textContent = "✗ No match found among the computed hashes.";
+        compareResult.style.color = "var(--color-danger)";
+      }
+    }
+
+    expectedHash.addEventListener("input", checkMatch);
 
     document.querySelectorAll("[data-copy-target]").forEach(function (btn) {
       btn.addEventListener("click", function () {
