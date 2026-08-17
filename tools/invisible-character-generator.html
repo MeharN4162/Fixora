@@ -6,7 +6,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Invisible Character Generator — Copy Blank Text | Fixora</title>
-  <meta name="description" content="Generate zero-width spaces, Word Joiner, Hangul Filler, and other blank Unicode characters to copy and paste. Free invisible text generator, no sign-up." />
+  <meta name="description" content="Generate zero-width spaces, Word Joiner, BOM, Non-Breaking Space, Hangul Filler, and other blank Unicode characters to copy and paste — with a visual preview so you can see exactly what you're copying. Free invisible text generator, no sign-up." />
   <meta name="keywords" content="invisible character generator, zero width space copy paste, blank text generator, invisible text" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/invisible-character-generator.html" />
@@ -14,13 +14,13 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Invisible Character Generator" />
-  <meta property="og:description" content="Generate zero-width spaces and other blank Unicode characters to copy and paste, free and instant." />
+  <meta property="og:description" content="Generate zero-width spaces and other blank Unicode characters to copy and paste, with a visual preview, free and instant." />
   <meta property="og:url" content="https://fixoona.com/tools/invisible-character-generator.html" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Invisible Character Generator" />
-  <meta name="twitter:description" content="Generate zero-width spaces and other blank Unicode characters to copy and paste, free and instant." />
+  <meta name="twitter:description" content="Generate zero-width spaces and other blank Unicode characters to copy and paste, with a visual preview, free and instant." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -80,6 +80,16 @@
         "@type": "Question",
         "name": "Is this guaranteed to work for blank usernames on every app?",
         "acceptedAnswer": { "@type": "Answer", "text": "No guarantee — platforms change their filtering rules over time, and what works today may be blocked tomorrow. Treat this as a starting point to experiment with, not a guaranteed trick." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the tool show a \"Visual Preview\" with labels like ZWSP instead of just the character?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Because these characters render as literally nothing (or as a blank-looking glyph) in a plain text field, you can't otherwise confirm what you copied. The Visual Preview wraps each character in a labeled box (like ZWSP or NBSP) purely for your own screen — that label is never part of the text you actually copy or paste." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between Word Joiner, the BOM character, and Non-Breaking Space?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Word Joiner (U+2060) is a modern, purely zero-width character with no line-break point. Zero Width No-Break Space (U+FEFF) does the same job but doubles as the Byte Order Mark when it appears at the very start of a file, which can confuse some parsers if it shows up mid-text — Word Joiner is the safer modern choice. Non-Breaking Space (U+00A0) is different again: it's not zero-width, it takes up the same space as a regular space bar press, but stops a line break at that point, which is what the &nbsp; HTML entity produces." }
       }
     ]
   }
@@ -119,7 +129,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">⬜</div>
       <h1>Invisible Character Generator</h1>
-      <p>Generate real zero-width and blank Unicode characters to copy and paste anywhere you need invisible text.</p>
+      <p>Generate real zero-width and blank Unicode characters — with a visual preview so you can see exactly what you're copying, since you can't see it in a plain text field.</p>
     </section>
 
     <section class="container">
@@ -131,15 +141,18 @@
             <option value="200C">Zero Width Non-Joiner (U+200C)</option>
             <option value="200D">Zero Width Joiner (U+200D)</option>
             <option value="2060">Word Joiner (U+2060)</option>
+            <option value="FEFF">Zero Width No-Break Space / BOM (U+FEFF)</option>
+            <option value="00A0">Non-Breaking Space (U+00A0) — visible-width blank</option>
             <option value="3164">Hangul Filler (U+3164) — visible-width blank</option>
             <option value="2800">Braille Pattern Blank (U+2800) — visible-width blank</option>
           </select>
+          <p id="charInfo" style="font-size:0.85rem;color:var(--color-text-muted);margin-top:10px;line-height:1.55;"></p>
         </div>
 
         <div class="row">
           <div class="field">
-            <label for="charCount">How Many Copies</label>
-            <input type="number" id="charCount" min="1" max="50" value="1" />
+            <label for="charCount">Repeat Count <small style="font-weight:400;color:var(--color-text-muted);">(1–500, for padding)</small></label>
+            <input type="number" id="charCount" min="1" max="500" value="1" />
           </div>
         </div>
 
@@ -153,14 +166,21 @@
 
         <div class="copy-note" id="copyNote"></div>
         <div class="output-box" id="statusBox"></div>
+
+        <div class="field" style="margin-top:22px;">
+          <label for="visualPreview">Visual Preview <small style="font-weight:400;color:var(--color-text-muted);">(what's really in the box above, made visible)</small></label>
+          <div class="output-box" id="visualPreview" aria-live="polite"></div>
+        </div>
       </div>
 
       <div class="howto">
         <h2>How to Generate Invisible Characters</h2>
         <ol class="howto-steps">
-          <li>Choose which invisible character you want from the dropdown (Zero Width Space, ZWNJ, ZWJ, Word Joiner, Hangul Filler, or Braille Pattern Blank).</li>
-          <li>Set how many copies you need with the number field (1–50).</li>
+          <li>Choose which invisible character you want from the dropdown (Zero Width Space, ZWNJ, ZWJ, Word Joiner, Zero Width No-Break Space/BOM, Non-Breaking Space, Hangul Filler, or Braille Pattern Blank).</li>
+          <li>Read the description below the dropdown to see what that character actually does and where it's commonly used or misused.</li>
+          <li>Set how many copies you need with the Repeat Count field (1–500) — higher counts are useful for padding.</li>
           <li>The output field updates instantly with your generated string.</li>
+          <li>Check the Visual Preview to confirm exactly what you're about to copy, since the character itself is invisible or blank.</li>
           <li>Click "Copy" to copy it to your clipboard.</li>
           <li>Paste it wherever you need blank-looking space.</li>
         </ol>
@@ -187,6 +207,14 @@
         <details class="faq-item">
           <summary>Is this guaranteed to work for blank usernames on every app?</summary>
           <p>No guarantee — platforms change their filtering rules over time, and what works today may be blocked tomorrow. Treat this as a starting point to experiment with, not a guaranteed trick.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why does the tool show a "Visual Preview" with labels like ZWSP instead of just the character?</summary>
+          <p>Because these characters render as literally nothing (or as a blank-looking glyph) in a plain text field, you can't otherwise confirm what you copied. The Visual Preview wraps each character in a labeled box (like ZWSP or NBSP) purely for your own screen — that label is never part of the text you actually copy or paste.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What's the difference between Word Joiner, the BOM character, and Non-Breaking Space?</summary>
+          <p>Word Joiner (U+2060) is a modern, purely zero-width character with no line-break point. Zero Width No-Break Space (U+FEFF) does the same job but doubles as the Byte Order Mark when it appears at the very start of a file, which can confuse some parsers if it shows up mid-text — Word Joiner is the safer modern choice. Non-Breaking Space (U+00A0) is different again: it's not zero-width, it takes up the same space as a regular space bar press, but stops a line break at that point, which is what the &amp;nbsp; HTML entity produces.</p>
         </details>
       </div>
 
@@ -265,16 +293,97 @@
     var charOutput = document.getElementById("charOutput");
     var copyNote = document.getElementById("copyNote");
     var statusBox = document.getElementById("statusBox");
+    var charInfo = document.getElementById("charInfo");
+    var visualPreview = document.getElementById("visualPreview");
+
+    // Verified against the Unicode Character Database: each key is the
+    // official code point, "name" is the exact Unicode character name.
+    var CHAR_DATA = {
+      "200B": {
+        name: "Zero Width Space",
+        abbr: "ZWSP",
+        info: "A truly zero-width character with no visible glyph at all. Commonly used to let long words or URLs wrap in narrow layouts, or to create a “blank” display name. It still counts as a real character toward length limits, and many trim/whitespace-collapsing functions do NOT treat it as whitespace — so it can survive filters that strip normal spaces."
+      },
+      "200C": {
+        name: "Zero Width Non-Joiner",
+        abbr: "ZWNJ",
+        info: "Used in scripts like Arabic, Persian, and Devanagari to stop two adjacent letters from joining into a ligature. Outside that typographic role, it's often (mis)used as a generic invisible filler character."
+      },
+      "200D": {
+        name: "Zero Width Joiner",
+        abbr: "ZWJ",
+        info: "Best known for gluing separate emoji into one combined emoji — family, profession, and flag sequences all rely on it. Also used in some scripts to force letters to join. Removing a ZWJ from an emoji sequence breaks it back into separate emoji."
+      },
+      "2060": {
+        name: "Word Joiner",
+        abbr: "WJ",
+        info: "The modern, recommended way to join text with zero width and no possible line break at that point. It does the same job that U+FEFF used to be used for inline, without the Byte-Order-Mark side effects."
+      },
+      "FEFF": {
+        name: "Zero Width No-Break Space (BOM)",
+        abbr: "BOM",
+        info: "Historically doubled as the UTF-8/UTF-16 Byte Order Mark when placed at the very start of a file. Inline, Unicode now recommends Word Joiner instead — some text editors, CSV/JSON parsers, and source files can misbehave if this character ends up at the start of content unexpectedly."
+      },
+      "00A0": {
+        name: "Non-Breaking Space",
+        abbr: "NBSP",
+        info: "Not zero-width — it takes up the same width as a normal space, but keeps the words on either side from splitting across a line break, and HTML won't collapse it the way it collapses regular spaces. It's the character behind the &nbsp; entity."
+      },
+      "3164": {
+        name: "Hangul Filler",
+        abbr: "HANGUL",
+        info: "Renders as a small blank glyph with real width rather than nothing at all. Because it isn't classified as whitespace by many form validators, it's widely used as a workaround for “blank” usernames or nicknames on platforms that reject an empty or whitespace-only field."
+      },
+      "2800": {
+        name: "Braille Pattern Blank",
+        abbr: "BRAILLE",
+        info: "The Braille pattern with all dots off, so it renders as a blank cell with real width. Used the same way as Hangul Filler for “blank” display names — often as a fallback on platforms that specifically detect and block Hangul Filler."
+      }
+    };
 
     function render() {
-      var codePoint = parseInt(charSelect.value, 16);
+      var key = charSelect.value;
+      var data = CHAR_DATA[key];
+      var codePoint = parseInt(key, 16);
       var ch = String.fromCodePoint(codePoint);
       var count = parseInt(charCount.value, 10);
       if (!count || count < 1) count = 1;
-      if (count > 50) count = 50;
+      if (count > 500) count = 500;
+      charCount.value = count;
       var out = ch.repeat(count);
       charOutput.value = out;
-      statusBox.textContent = "Generated " + count + " character" + (count === 1 ? "" : "s") + " (U+" + charSelect.value + ").";
+      statusBox.textContent = "Generated " + count + " character" + (count === 1 ? "" : "s") + " — " + data.name + " (U+" + key + ").";
+      charInfo.textContent = data.name + " (U+" + key + "): " + data.info;
+      renderVisual(data, key, count);
+    }
+
+    function renderVisual(data, key, count) {
+      visualPreview.innerHTML = "";
+      var displayCount = Math.min(count, 40);
+      for (var i = 0; i < displayCount; i++) {
+        var chip = document.createElement("span");
+        chip.textContent = data.abbr;
+        chip.title = data.name + " (U+" + key + ")";
+        chip.style.display = "inline-block";
+        chip.style.border = "1px solid var(--color-border)";
+        chip.style.borderRadius = "6px";
+        chip.style.padding = "2px 6px";
+        chip.style.margin = "2px";
+        chip.style.fontFamily = "monospace";
+        chip.style.fontSize = "0.72rem";
+        chip.style.fontWeight = "600";
+        chip.style.background = "var(--color-bg-soft)";
+        chip.style.color = "var(--color-primary-dark)";
+        visualPreview.appendChild(chip);
+      }
+      if (count > displayCount) {
+        var more = document.createElement("span");
+        more.textContent = "+" + (count - displayCount) + " more identical character" + (count - displayCount === 1 ? "" : "s");
+        more.style.color = "var(--color-text-muted)";
+        more.style.fontSize = "0.82rem";
+        more.style.marginLeft = "6px";
+        visualPreview.appendChild(more);
+      }
     }
 
     charSelect.addEventListener("change", render);
