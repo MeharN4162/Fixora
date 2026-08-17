@@ -191,6 +191,10 @@
             <label for="years">Loan Term (years)</label>
             <input type="number" id="years" placeholder="e.g. 30" value="30" />
           </div>
+          <div class="field">
+            <label for="extraPayment">Extra Monthly Payment (optional)</label>
+            <input type="number" id="extraPayment" placeholder="e.g. 200" value="0" min="0" />
+          </div>
         </div>
 
         <div class="stat-row">
@@ -199,7 +203,23 @@
           <div class="stat"><strong id="statTotalCost">–</strong><span>Total Cost</span></div>
         </div>
 
+        <div class="stat-row" id="extraStatRow" style="display:none;">
+          <div class="stat"><strong id="statPayoffTime">–</strong><span>Payoff Time (with extra)</span></div>
+          <div class="stat"><strong id="statTimeSaved">–</strong><span>Time Saved</span></div>
+          <div class="stat"><strong id="statInterestSaved">–</strong><span>Interest Saved</span></div>
+        </div>
+
         <div class="output-box" id="statusBox"></div>
+
+        <button type="button" class="btn btn-secondary" id="toggleScheduleBtn" style="margin-top:14px;">Show Amortization Schedule</button>
+        <div class="amort-table-wrap" id="amortTableWrap">
+          <table class="amort-table">
+            <thead>
+              <tr><th>Month</th><th>Payment</th><th>Principal</th><th>Interest</th><th>Balance</th></tr>
+            </thead>
+            <tbody id="amortTableBody"></tbody>
+          </table>
+        </div>
       </div>
 
       <div class="howto">
@@ -229,6 +249,14 @@
         <details class="faq-item">
           <summary>Is Total Interest the same as what I'd pay with a variable-rate loan?</summary>
           <p>No — this calculator assumes a fixed interest rate for the entire term. A variable or adjustable-rate loan's total interest would differ because the rate itself can change over time.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does an extra monthly payment shorten the loan?</summary>
+          <p>Every dollar of extra payment goes entirely toward reducing your principal balance instead of being split between principal and interest, so future interest charges (which are calculated on the remaining balance) shrink for every month that follows. The calculator re-runs the full amortization month by month with your extra payment applied, and compares the resulting payoff time and total interest against the standard schedule.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the amortization schedule table show?</summary>
+          <p>Every payment from month 1 to the final payoff month, broken into how much of that payment goes to interest versus principal, and the remaining balance afterward. Early payments are mostly interest since the balance is largest then; later payments are mostly principal as the balance shrinks — that's normal amortization, not an error.</p>
         </details>
         <details class="faq-item">
           <summary>Is this financial advice?</summary>
@@ -309,35 +337,86 @@
     var principal = document.getElementById("principal");
     var rate = document.getElementById("rate");
     var years = document.getElementById("years");
+    var extraPayment = document.getElementById("extraPayment");
     var statusBox = document.getElementById("statusBox");
+    var extraStatRow = document.getElementById("extraStatRow");
+    var amortTableWrap = document.getElementById("amortTableWrap");
+    var amortTableBody = document.getElementById("amortTableBody");
+    var toggleScheduleBtn = document.getElementById("toggleScheduleBtn");
 
     function formatMoney(n) {
       return "$" + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function formatYearsMonths(months) {
+      if (months <= 0) return "0 months";
+      var yrs = Math.floor(months / 12);
+      var rem = months % 12;
+      var parts = [];
+      if (yrs > 0) parts.push(yrs + (yrs === 1 ? " yr" : " yrs"));
+      if (rem > 0) parts.push(rem + (rem === 1 ? " mo" : " mos"));
+      return parts.join(" ");
+    }
+
+    function buildSchedule(p, annualRate, n, extraPay) {
+      var r = annualRate / 100 / 12;
+      var baseMonthly = annualRate === 0
+        ? p / n
+        : p * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+
+      var schedule = [];
+      var balance = p;
+      var month = 0;
+      var safetyCap = n + 1200;
+
+      while (balance > 0.005 && month < safetyCap) {
+        month++;
+        var interestPortion = annualRate === 0 ? 0 : balance * r;
+        var principalPortion = baseMonthly - interestPortion + extraPay;
+        if (principalPortion > balance) principalPortion = balance;
+        var payment = principalPortion + interestPortion;
+        balance -= principalPortion;
+        schedule.push({
+          month: month,
+          payment: payment,
+          principal: principalPortion,
+          interest: interestPortion,
+          balance: balance < 0 ? 0 : balance
+        });
+      }
+
+      return { schedule: schedule, monthly: baseMonthly };
+    }
+
+    function renderSchedule(schedule) {
+      var rows = schedule.map(function (row) {
+        return "<tr><td>" + row.month + "</td><td>" + formatMoney(row.payment) + "</td><td>" +
+          formatMoney(row.principal) + "</td><td>" + formatMoney(row.interest) + "</td><td>" +
+          formatMoney(row.balance) + "</td></tr>";
+      });
+      amortTableBody.innerHTML = rows.join("");
     }
 
     function calculate() {
       var p = parseFloat(principal.value);
       var annualRate = parseFloat(rate.value);
       var termYears = parseFloat(years.value);
+      var extra = parseFloat(extraPayment.value) || 0;
+      if (extra < 0) extra = 0;
 
       if (!p || p <= 0 || !termYears || termYears <= 0 || isNaN(annualRate) || annualRate < 0) {
         document.getElementById("statMonthly").textContent = "–";
         document.getElementById("statTotalInterest").textContent = "–";
         document.getElementById("statTotalCost").textContent = "–";
         statusBox.textContent = "Enter a valid loan amount, rate, and term.";
+        extraStatRow.style.display = "none";
+        amortTableBody.innerHTML = "";
         return;
       }
 
       var n = termYears * 12;
-      var monthly;
-
-      if (annualRate === 0) {
-        monthly = p / n;
-      } else {
-        var r = annualRate / 100 / 12;
-        monthly = p * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-      }
-
+      var standard = buildSchedule(p, annualRate, n, 0);
+      var monthly = standard.monthly;
       var totalCost = monthly * n;
       var totalInterest = totalCost - p;
 
@@ -345,9 +424,35 @@
       document.getElementById("statTotalInterest").textContent = formatMoney(totalInterest);
       document.getElementById("statTotalCost").textContent = formatMoney(totalCost);
       statusBox.textContent = "Based on a " + termYears + "-year loan of " + formatMoney(p) + " at " + annualRate + "% APR, fixed rate.";
+
+      var activeSchedule = standard.schedule;
+
+      if (extra > 0) {
+        var withExtra = buildSchedule(p, annualRate, n, extra);
+        var payoffMonths = withExtra.schedule.length;
+        var totalInterestWithExtra = withExtra.schedule.reduce(function (sum, row) { return sum + row.interest; }, 0);
+        var monthsSaved = n - payoffMonths;
+        var interestSaved = totalInterest - totalInterestWithExtra;
+
+        document.getElementById("statPayoffTime").textContent = formatYearsMonths(payoffMonths);
+        document.getElementById("statTimeSaved").textContent = formatYearsMonths(monthsSaved);
+        document.getElementById("statInterestSaved").textContent = formatMoney(interestSaved > 0 ? interestSaved : 0);
+        extraStatRow.style.display = "flex";
+        activeSchedule = withExtra.schedule;
+      } else {
+        extraStatRow.style.display = "none";
+      }
+
+      renderSchedule(activeSchedule);
     }
 
-    [principal, rate, years].forEach(function (el) {
+    toggleScheduleBtn.addEventListener("click", function () {
+      var isOpen = amortTableWrap.style.display === "block";
+      amortTableWrap.style.display = isOpen ? "none" : "block";
+      toggleScheduleBtn.textContent = isOpen ? "Show Amortization Schedule" : "Hide Amortization Schedule";
+    });
+
+    [principal, rate, years, extraPayment].forEach(function (el) {
       el.addEventListener("input", calculate);
     });
 

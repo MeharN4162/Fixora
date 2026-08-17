@@ -234,6 +234,15 @@ function hello() {
 [A link](https://example.com)</textarea>
         </div>
 
+        <div class="row" style="align-items:center;gap:20px;margin-top:14px;">
+          <label style="display:flex;align-items:center;gap:6px;font-weight:500;font-size:0.9rem;">
+            <input type="checkbox" id="gfmToggle" checked /> GFM Extensions
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;font-weight:500;font-size:0.9rem;">
+            <input type="checkbox" id="lineBreaksToggle" /> Line Breaks
+          </label>
+        </div>
+
         <div class="row">
           <div class="field">
             <label for="mdPreview">Live Preview</label>
@@ -247,6 +256,7 @@ function hello() {
 
         <div class="actions">
           <button class="btn btn-primary" id="copyHtmlBtn">Copy HTML</button>
+          <button class="btn btn-secondary" id="copyRichBtn">Copy Rich Text</button>
         </div>
         <div class="copy-note" id="copyNote"></div>
       </div>
@@ -282,6 +292,14 @@ function hello() {
         <details class="faq-item">
           <summary>Which Markdown features are supported?</summary>
           <p>Headings, bold and italic text, links, ordered and unordered lists, inline code, fenced code blocks, blockquotes, and horizontal rules all render correctly, along with GitHub-Flavored Markdown extras like tables and strikethrough.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What do the GFM Extensions and Line Breaks toggles do?</summary>
+          <p>GFM Extensions turns GitHub-Flavored Markdown parsing on or off in marked.js — with it unchecked, pipe tables, ~~strikethrough~~, and bare autolinks are treated as plain text instead of being parsed. Line Breaks turns on marked.js's "breaks" mode, which converts every single line break in your input into a &lt;br&gt; tag, matching how line breaks behave in chat apps and comment boxes rather than standard Markdown, where a lone line break is ignored and you need a blank line for a new paragraph.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What's the difference between Copy HTML and Copy Rich Text?</summary>
+          <p>Copy HTML copies the raw HTML markup as plain text, ready to paste into a code editor, a CMS's HTML source view, or a static site file. Copy Rich Text copies the actual rendered, formatted content — bold stays bold, links stay clickable, tables stay tables — using the browser's clipboard API so it pastes correctly into apps like Google Docs, Gmail, or Word, the same way copying from a normal web page would.</p>
         </details>
       </div>
 
@@ -360,17 +378,26 @@ function hello() {
     var mdPreview = document.getElementById("mdPreview");
     var htmlOutput = document.getElementById("htmlOutput");
     var copyNote = document.getElementById("copyNote");
+    var gfmToggle = document.getElementById("gfmToggle");
+    var lineBreaksToggle = document.getElementById("lineBreaksToggle");
 
     function render() {
+      window.marked.setOptions({ gfm: gfmToggle.checked, breaks: lineBreaksToggle.checked });
       var html = window.marked.parse(mdInput.value);
       mdPreview.innerHTML = html;
       htmlOutput.value = html;
     }
 
     mdInput.addEventListener("input", render);
+    gfmToggle.addEventListener("change", render);
+    lineBreaksToggle.addEventListener("change", render);
 
     document.getElementById("copyHtmlBtn").addEventListener("click", function () {
       Fixora.copyText(htmlOutput.value, copyNote);
+    });
+
+    document.getElementById("copyRichBtn").addEventListener("click", function () {
+      Fixora.copyRichText(mdPreview.textContent, mdPreview.innerHTML, copyNote);
     });
 
     render();
