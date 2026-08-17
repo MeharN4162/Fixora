@@ -6,7 +6,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Percentage Calculator Online | Fixora</title>
-  <meta name="description" content="Calculate percentages online for free — find what X% of Y is, what percent one number is of another, and percentage increase or decrease. No sign-up required." />
+  <meta name="description" content="Free percentage calculator covering every common case: X% of Y, X is what % of Y, percentage increase/decrease, a value increased or decreased by a percent, reverse percentage (find the original value), and percentage difference between two numbers. No sign-up required." />
   <meta name="keywords" content="percentage calculator, percent increase decrease calculator online free" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/percentage-calculator.html" />
@@ -14,7 +14,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Percentage Calculator Online" />
-  <meta property="og:description" content="Calculate percentages online for free — three common calculations in one tool." />
+  <meta property="og:description" content="Calculate percentages online for free — six common calculations in one tool, including reverse percentage and percentage difference." />
   <meta property="og:url" content="https://fixoona.com/tools/percentage-calculator.html" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
@@ -58,8 +58,8 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "What's the difference between the three calculators on this page?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The first finds a portion of a number (e.g., 20% of 150), the second finds what percentage one number represents of another (e.g., 30 is what % of 150), and the third finds the percent change between two values (e.g., going from 80 to 100)." }
+        "name": "What's the difference between the six calculators on this page?",
+        "acceptedAnswer": { "@type": "Answer", "text": "They cover the six most common percentage questions: finding a portion of a number (20% of 150), finding what percent one number is of another (30 is what % of 150), finding the percent change between two values (going from 80 to 100), applying a percent increase or decrease to a value (100 decreased by 20%), reversing a percent change to find the original value (a value that is 80 after a 20% decrease), and finding the percentage difference between two values with no starting point (80 versus 100)." }
       },
       {
         "@type": "Question",
@@ -69,7 +69,7 @@
       {
         "@type": "Question",
         "name": "Why is my result blank?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Each calculator only shows a result once both required fields contain valid numbers; if you leave a field empty or the Y or From value is zero, the result box stays empty since that math is undefined." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Each calculator only shows a result once its required fields contain valid numbers; if you leave a field empty, or a required divisor like Y, From, an average of two values, or (1 plus/minus percent/100) works out to zero, the result box stays empty since that math is undefined." }
       },
       {
         "@type": "Question",
@@ -80,6 +80,21 @@
         "@type": "Question",
         "name": "Can this tool calculate percentage change for a value that goes down?",
         "acceptedAnswer": { "@type": "Answer", "text": "Yes — if To is smaller than From, the tool automatically labels the result a decrease and shows the percentage drop, rather than a negative increase." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I calculate the result after a percentage increase or decrease?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Use the 'Value increased/decreased by a percentage' calculator: enter the starting value, the percent, and choose increase or decrease. Increasing multiplies the value by (1 + percent/100), and decreasing multiplies it by (1 - percent/100) — for example, 100 decreased by 20% equals 80." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the reverse percentage calculator do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It works backward from a result to find the original value before a percentage change was applied. If a final value came from an increase, the tool divides by (1 + percent/100); if it came from a decrease, it divides by (1 - percent/100) — for example, a value that is 80 after a 20% decrease had an original value of 100." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between percentage difference and percentage change?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Percentage change compares a starting value to an ending value and is directional, using (new minus old) divided by old — going from 80 to 100 is a 25% increase, but going from 100 to 80 is a 20% decrease. Percentage difference compares two values with no starting point, using the absolute difference divided by their average, so it gives the same result regardless of order — the percentage difference between 80 and 100 is about 22.22%." }
       }
     ]
   }
@@ -119,7 +134,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">💯</div>
       <h1>Percentage Calculator</h1>
-      <p>Three common percentage calculations in one place — updated live as you type.</p>
+      <p>Six common percentage calculations in one place — updated live as you type.</p>
     </section>
 
     <section class="container">
@@ -150,7 +165,7 @@
         </div>
         <div class="output-box" id="result2"></div>
 
-        <h3 style="margin:28px 0 14px;">Percentage increase / decrease</h3>
+        <h3 style="margin:28px 0 14px;">Percentage increase / decrease (From &rarr; To)</h3>
         <div class="row">
           <div class="field">
             <label for="p3from">From</label>
@@ -162,6 +177,60 @@
           </div>
         </div>
         <div class="output-box" id="result3"></div>
+
+        <h3 style="margin:28px 0 14px;">Value increased/decreased by a percentage</h3>
+        <div class="row">
+          <div class="field">
+            <label for="p4x">Starting value</label>
+            <input type="number" id="p4x" placeholder="e.g. 100" />
+          </div>
+          <div class="field">
+            <label for="p4n">Percent (%)</label>
+            <input type="number" id="p4n" placeholder="e.g. 20" />
+          </div>
+          <div class="field">
+            <label for="p4dir">Direction</label>
+            <select id="p4dir">
+              <option value="increase">Increased by</option>
+              <option value="decrease" selected>Decreased by</option>
+            </select>
+          </div>
+        </div>
+        <div class="output-box" id="result4"></div>
+
+        <h3 style="margin:28px 0 14px;">Reverse percentage (find the original value)</h3>
+        <div class="row">
+          <div class="field">
+            <label for="p5v">Final value</label>
+            <input type="number" id="p5v" placeholder="e.g. 80" />
+          </div>
+          <div class="field">
+            <label for="p5n">Percent change (%)</label>
+            <input type="number" id="p5n" placeholder="e.g. 20" />
+          </div>
+          <div class="field">
+            <label for="p5dir">This final value was...</label>
+            <select id="p5dir">
+              <option value="increase">The result of an increase</option>
+              <option value="decrease" selected>The result of a decrease</option>
+            </select>
+          </div>
+        </div>
+        <div class="output-box" id="result5"></div>
+
+        <h3 style="margin:28px 0 14px;">Percentage difference between two numbers</h3>
+        <div class="row">
+          <div class="field">
+            <label for="p6a">Value A</label>
+            <input type="number" id="p6a" placeholder="e.g. 80" />
+          </div>
+          <div class="field">
+            <label for="p6b">Value B</label>
+            <input type="number" id="p6b" placeholder="e.g. 100" />
+          </div>
+        </div>
+        <div class="output-box" id="result6"></div>
+        <p style="font-size:0.85rem;color:var(--color-text-muted);margin-top:12px;">Percentage difference is symmetric and has no "starting" value — it divides the gap between A and B by their average, so it's the right formula for comparing two measurements rather than tracking a change over time. That's different from percentage change above, which is directional: going from 80 to 100 is a +25% change, but going from 100 to 80 is a -20% change, even though the percentage difference between 80 and 100 is the same either way (about 22.22%).</p>
       </div>
 
       <div class="howto">
@@ -170,6 +239,9 @@
           <li>To find a percentage of a number, enter the percent and the base number in the "What is X% of Y?" section — the result updates as you type.</li>
           <li>To find what percent one number is of another, enter both numbers in the "X is what percent of Y?" section.</li>
           <li>To measure a percentage change, enter the starting ("From") and ending ("To") values in the third section.</li>
+          <li>To apply a percent increase or decrease to a value, use the "Value increased/decreased by a percentage" section and pick a direction.</li>
+          <li>To work backward and find the original value before a percent change was applied, use the "Reverse percentage" section.</li>
+          <li>To compare two values without treating either one as the "starting point," use the "Percentage difference" section instead of the increase/decrease calculator.</li>
           <li>Read the result directly below each section — no button click needed, everything is live.</li>
         </ol>
       </div>
@@ -177,8 +249,8 @@
       <div class="faq">
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
-          <summary>What's the difference between the three calculators on this page?</summary>
-          <p>The first finds a portion of a number (e.g., 20% of 150), the second finds what percentage one number represents of another (e.g., 30 is what % of 150), and the third finds the percent change between two values (e.g., going from 80 to 100).</p>
+          <summary>What's the difference between the six calculators on this page?</summary>
+          <p>They cover the six most common percentage questions: finding a portion of a number (20% of 150), finding what percent one number is of another (30 is what % of 150), finding the percent change between two values (going from 80 to 100), applying a percent increase or decrease to a value (100 decreased by 20%), reversing a percent change to find the original value (a value that is 80 after a 20% decrease), and finding the percentage difference between two values with no starting point (80 versus 100).</p>
         </details>
         <details class="faq-item">
           <summary>Why does the percentage increase/decrease calculator use the absolute value of From?</summary>
@@ -186,7 +258,7 @@
         </details>
         <details class="faq-item">
           <summary>Why is my result blank?</summary>
-          <p>Each calculator only shows a result once both required fields contain valid numbers; if you leave a field empty or the Y or From value is zero, the result box stays empty since that math is undefined.</p>
+          <p>Each calculator only shows a result once its required fields contain valid numbers; if you leave a field empty, or a required divisor like Y, From, an average of two values, or (1 plus/minus percent/100) works out to zero, the result box stays empty since that math is undefined.</p>
         </details>
         <details class="faq-item">
           <summary>How many decimal places does the calculator show?</summary>
@@ -195,6 +267,18 @@
         <details class="faq-item">
           <summary>Can this tool calculate percentage change for a value that goes down?</summary>
           <p>Yes — if To is smaller than From, the tool automatically labels the result a decrease and shows the percentage drop, rather than a negative increase.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How do I calculate the result after a percentage increase or decrease?</summary>
+          <p>Use the 'Value increased/decreased by a percentage' calculator: enter the starting value, the percent, and choose increase or decrease. Increasing multiplies the value by (1 + percent/100), and decreasing multiplies it by (1 - percent/100) — for example, 100 decreased by 20% equals 80.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the reverse percentage calculator do?</summary>
+          <p>It works backward from a result to find the original value before a percentage change was applied. If a final value came from an increase, the tool divides by (1 + percent/100); if it came from a decrease, it divides by (1 - percent/100) — for example, a value that is 80 after a 20% decrease had an original value of 100.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What's the difference between percentage difference and percentage change?</summary>
+          <p>Percentage change compares a starting value to an ending value and is directional, using (new minus old) divided by old — going from 80 to 100 is a 25% increase, but going from 100 to 80 is a 20% decrease. Percentage difference compares two values with no starting point, using the absolute difference divided by their average, so it gives the same result regardless of order — the percentage difference between 80 and 100 is about 22.22%.</p>
         </details>
       </div>
 
@@ -270,7 +354,9 @@
   <script>
     function bind(ids, fn) {
       ids.forEach(function (id) {
-        document.getElementById(id).addEventListener("input", fn);
+        var el = document.getElementById(id);
+        el.addEventListener("input", fn);
+        el.addEventListener("change", fn);
       });
     }
 
@@ -298,6 +384,43 @@
       var change = (to - from) / Math.abs(from) * 100;
       var direction = change >= 0 ? "increase" : "decrease";
       box.textContent = "That's a " + Math.abs(change).toLocaleString(undefined, { maximumFractionDigits: 4 }) + "% " + direction + " from " + from + " to " + to + ".";
+    });
+
+    // Value increased/decreased by a percentage: result = x * (1 +/- n/100)
+    bind(["p4x", "p4n", "p4dir"], function () {
+      var x = parseFloat(document.getElementById("p4x").value);
+      var n = parseFloat(document.getElementById("p4n").value);
+      var dir = document.getElementById("p4dir").value;
+      var box = document.getElementById("result4");
+      if (isNaN(x) || isNaN(n)) { box.textContent = ""; return; }
+      var factor = dir === "increase" ? (1 + n / 100) : (1 - n / 100);
+      var result = x * factor;
+      var verb = dir === "increase" ? "increased" : "decreased";
+      box.textContent = x + " " + verb + " by " + n + "% is " + result.toLocaleString(undefined, { maximumFractionDigits: 4 }) + ".";
+    });
+
+    // Reverse percentage: original = final / (1 +/- n/100)
+    bind(["p5v", "p5n", "p5dir"], function () {
+      var v = parseFloat(document.getElementById("p5v").value);
+      var n = parseFloat(document.getElementById("p5n").value);
+      var dir = document.getElementById("p5dir").value;
+      var box = document.getElementById("result5");
+      if (isNaN(v) || isNaN(n)) { box.textContent = ""; return; }
+      var factor = dir === "increase" ? (1 + n / 100) : (1 - n / 100);
+      if (factor === 0) { box.textContent = ""; return; }
+      var original = v / factor;
+      var verb = dir === "increase" ? "an increase" : "a decrease";
+      box.textContent = "A value that is " + v + " after " + verb + " of " + n + "% had an original value of " + original.toLocaleString(undefined, { maximumFractionDigits: 4 }) + ".";
+    });
+
+    // Percentage difference (symmetric): |A - B| / ((A + B) / 2) * 100
+    bind(["p6a", "p6b"], function () {
+      var a = parseFloat(document.getElementById("p6a").value);
+      var b = parseFloat(document.getElementById("p6b").value);
+      var box = document.getElementById("result6");
+      if (isNaN(a) || isNaN(b) || (a + b) === 0) { box.textContent = ""; return; }
+      var diff = Math.abs(a - b) / ((a + b) / 2) * 100;
+      box.textContent = "The percentage difference between " + a + " and " + b + " is " + diff.toLocaleString(undefined, { maximumFractionDigits: 4 }) + "%.";
     });
   </script>
 </body>
