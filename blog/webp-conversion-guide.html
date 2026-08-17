@@ -169,10 +169,10 @@
         <p>Nearly every current browser can <em>display</em> WebP images without issue. <em>Creating</em> them is a different story — not every browser's image-encoding engine supports generating WebP output, particularly some older versions of Firefox and Safari. Fixora's WebP converters check for this automatically when the page loads and will show a clear message if your specific browser can't produce a WebP file, rather than silently failing.</p>
 
         <h2 id="faq">FAQ</h2>
-        <p><strong>Is WebP always better than JPG or PNG?</strong> For file size, usually — but compatibility is the trade-off, since a handful of older browsers and some upload forms still don't accept it.</p>
-        <p><strong>Why can't I export WebP in some browsers?</strong> Encoding support varies by browser; Fixora's converters detect this and tell you if yours can't produce a WebP file.</p>
-        <p><strong>Does converting to WebP lose quality?</strong> It depends on the quality setting you choose — high settings preserve quality well, though any repeated re-compression causes some cumulative loss, in any format.</p>
-        <p><strong>Does WebP support transparency like PNG?</strong> Yes, WebP has an alpha channel just like PNG.</p>
+        <p><strong>Is WebP always better than JPG or PNG?</strong> For file size, usually yes — WebP typically produces smaller files at comparable visual quality. But compatibility is the trade-off: a handful of older browsers, some desktop image viewers, and certain upload forms still don't accept it.</p>
+        <p><strong>Why can't I export WebP in some browsers?</strong> WebP encoding support varies by browser. Chrome and Edge support it reliably; some versions of Firefox and Safari have more limited support for creating (not just viewing) WebP files. Fixora's converters detect this automatically and will tell you if your browser can't export WebP.</p>
+        <p><strong>Does converting to WebP lose quality?</strong> WebP supports both lossy and lossless compression. Converting from a JPG (already lossy) to WebP at high quality settings preserves visual quality well, though re-compressing any image more than once causes some cumulative quality loss — this is true of any format.</p>
+        <p><strong>Does WebP support transparency like PNG?</strong> Yes — WebP supports an alpha channel just like PNG, so converting a transparent PNG to WebP keeps the transparent areas intact.</p>
 
         <div class="tip-box">
           Ready to convert? Try <a href="../tools/jpg-to-webp.html">JPG to WebP</a> or <a href="../tools/webp-to-jpg.html">WebP to JPG</a> — free, no sign-up required.

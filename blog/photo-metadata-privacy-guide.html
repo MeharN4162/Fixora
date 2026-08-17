@@ -172,10 +172,10 @@
         <p>The most reliable way to strip metadata is to re-generate the image file rather than send the original. Running a photo through an <a href="../tools/image-compressor.html">Image Compressor</a> or <a href="../tools/image-resizer.html">Image Resizer</a> creates a brand-new file from the pixel data alone, which doesn't carry over the original EXIF block — you get a clean copy with no camera info or GPS data attached.</p>
 
         <h2 id="faq">FAQ</h2>
-        <p><strong>Do all photos have GPS data in them?</strong> No — only if location services were enabled for the camera app at the time the photo was taken.</p>
-        <p><strong>Does posting a photo to social media leak my GPS location?</strong> Usually not, since most major platforms strip EXIF data automatically on upload. The risk is mainly with direct file transfers like email or messaging apps.</p>
-        <p><strong>How can I check what's in one of my own photos?</strong> Upload it to the Image Metadata Viewer — it reads the file in your browser and shows exactly what's embedded.</p>
-        <p><strong>What's the easiest way to strip metadata before sharing a photo?</strong> Run it through a resizer or compressor first — the freshly generated file won't carry over the original EXIF data.</p>
+        <p><strong>Do all photos have GPS data in them?</strong> No. GPS data is only embedded if the device that took the photo had location services enabled for the camera app at the time. Photos from cameras without GPS, or with location access denied, won't have it.</p>
+        <p><strong>Does posting a photo to social media leak my GPS location?</strong> Usually not — most major platforms (Instagram, Facebook, X, etc.) strip EXIF metadata automatically when you upload, specifically for this reason. The risk is mainly with direct file transfers: email attachments, messaging apps that don't compress images, cloud drive links, and files sent as-is.</p>
+        <p><strong>How can I check what's in one of my own photos?</strong> Upload it to Fixora's Image Metadata Viewer — it reads the file entirely in your browser (nothing is uploaded anywhere) and shows you exactly what's embedded, including GPS coordinates if present.</p>
+        <p><strong>What's the easiest way to strip metadata before sharing a photo?</strong> Re-saving or re-compressing an image typically discards its original EXIF data, since the new file is generated fresh. Running a photo through a resizer or compressor tool before sending it is a simple, reliable way to remove metadata along the way.</p>
 
         <div class="tip-box">
           Curious what's hiding in your own photos? Try the <a href="../tools/image-metadata-viewer.html">free Image Metadata Viewer</a> — no upload to a server, no sign-up required.
