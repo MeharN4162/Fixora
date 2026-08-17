@@ -5,8 +5,8 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free ROT13 & Caesar Cipher Encoder/Decoder Online | Fixora</title>
-  <meta name="description" content="Encode or decode text with ROT13 or any Caesar cipher shift from 1 to 25. Free, instant, runs entirely in your browser — great for puzzles and spoiler text." />
-  <meta name="keywords" content="rot13 online, caesar cipher encoder decoder, rot13 converter, caesar cipher generator" />
+  <meta name="description" content="Encode or decode text with ROT13 or any Caesar cipher shift from 1 to 25 — or reveal all 25 shifts at once to crack an unknown cipher by brute force. Free, instant, runs entirely in your browser." />
+  <meta name="keywords" content="rot13 online, caesar cipher encoder decoder, rot13 converter, caesar cipher generator, caesar cipher brute force, crack caesar cipher" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/rot13-caesar-cipher.html" />
 
@@ -79,10 +79,68 @@
         "@type": "Question",
         "name": "Can I use a shift amount other than 13?",
         "acceptedAnswer": { "@type": "Answer", "text": "Yes — the shift amount is adjustable from 1 to 25, so this tool works as a general Caesar cipher, not just classic ROT13." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does \"Show All 25 Shifts\" do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It computes and displays every one of the 25 possible Caesar shifts of your input text at once, each in its own row with a Copy button. Since a Caesar cipher only has 25 possible shift values, this lets you crack ciphertext with an unknown shift just by scanning the list for the row that reads as real words — no guessing required." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does \"Strip non-letter characters\" do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "When checked, the tool removes everything except letters — numbers, punctuation, and spaces — from your text before shifting, so the Result and the brute-force list show only the shifted letters run together. Leave it unchecked (the default) to preserve your original spacing and punctuation exactly." }
       }
     ]
   }
   </script>
+  <style>
+    .brute-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .brute-row:last-child { border-bottom: none; }
+    .brute-row .brute-label {
+      width: 64px;
+      flex-shrink: 0;
+      font-weight: 600;
+      font-size: 0.8rem;
+      font-family: monospace;
+      color: var(--color-text-muted);
+    }
+    .brute-row input {
+      flex: 1;
+      min-width: 0;
+      padding: 6px 9px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      color: var(--color-text);
+      font-family: monospace;
+      font-size: 0.85rem;
+    }
+    .brute-row .btn {
+      flex-shrink: 0;
+      padding: 6px 12px;
+      font-size: 0.78rem;
+    }
+    #bruteForcePanel {
+      display: none;
+      margin-top: 18px;
+      border-top: 1px solid var(--color-border);
+      padding-top: 14px;
+    }
+    #bruteForcePanel h3 {
+      font-size: 0.95rem;
+      margin: 0 0 8px;
+    }
+    @media (max-width: 560px) {
+      .brute-row { flex-wrap: wrap; }
+      .brute-row .brute-label { width: 100%; }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -118,7 +176,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🔐</div>
       <h1>ROT13 & Caesar Cipher Encoder/Decoder</h1>
-      <p>Shift letters forward or backward through the alphabet to encode or decode text — defaults to classic ROT13.</p>
+      <p>Shift letters forward or backward through the alphabet to encode or decode text — defaults to classic ROT13, with a brute-force mode that reveals all 25 possible shifts at once.</p>
     </section>
 
     <section class="container">
@@ -139,9 +197,12 @@
           </div>
         </div>
 
+        <label class="check-row"><input type="checkbox" id="stripNonLetters" /> Strip non-letter characters (numbers, punctuation, spaces) before shifting</label>
+
         <div class="actions">
           <button class="btn btn-primary" id="encodeBtn">Encode</button>
           <button class="btn btn-secondary" id="decodeBtn">Decode</button>
+          <button class="btn btn-secondary" id="bruteToggleBtn" type="button" aria-expanded="false">Show All 25 Shifts</button>
         </div>
 
         <div class="field" style="margin-top:22px;">
@@ -153,6 +214,12 @@
           <button class="btn btn-primary" id="copyBtn">Copy Result</button>
         </div>
         <div class="copy-note" id="copyNote"></div>
+
+        <div id="bruteForcePanel">
+          <h3>All 25 Shifts (Brute Force)</h3>
+          <p style="color:var(--color-text-muted);font-size:0.88rem;margin:0 0 10px;">Every possible Caesar shift of your input text, computed live — useful for cracking a cipher when you don't know the shift amount.</p>
+          <div id="bruteForceRows"></div>
+        </div>
       </div>
 
       <div class="howto">
@@ -160,9 +227,10 @@
         <ol class="howto-steps">
           <li>Paste or type your text into the input box.</li>
           <li>Set the shift amount (1–25) — it defaults to 13 for classic ROT13.</li>
+          <li>Optionally check "Strip non-letter characters" to remove numbers, punctuation, and spaces before shifting.</li>
           <li>Click "Encode" to shift the text forward, or "Decode" to reverse it.</li>
-          <li>The result updates in the Result box.</li>
-          <li>Click "Copy Result" to copy it to your clipboard.</li>
+          <li>The result updates in the Result box — click "Copy Result" to copy it to your clipboard.</li>
+          <li>Don't know the shift amount? Click "Show All 25 Shifts" to see every possible Caesar shift of your text at once and spot the one that reads correctly.</li>
         </ol>
       </div>
 
@@ -187,6 +255,14 @@
         <details class="faq-item">
           <summary>Can I use a shift amount other than 13?</summary>
           <p>Yes — the shift amount is adjustable from 1 to 25, so this tool works as a general Caesar cipher, not just classic ROT13.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does "Show All 25 Shifts" do?</summary>
+          <p>It computes and displays every one of the 25 possible Caesar shifts of your input text at once, each in its own row with a Copy button. Since a Caesar cipher only has 25 possible shift values, this lets you crack ciphertext with an unknown shift just by scanning the list for the row that reads as real words — no guessing required.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does "Strip non-letter characters" do?</summary>
+          <p>When checked, the tool removes everything except letters — numbers, punctuation, and spaces — from your text before shifting, so the Result and the brute-force list show only the shifted letters run together. Leave it unchecked (the default) to preserve your original spacing and punctuation exactly.</p>
         </details>
       </div>
 
@@ -265,7 +341,12 @@
     var shiftAmount = document.getElementById("shiftAmount");
     var shiftRange = document.getElementById("shiftRange");
     var copyNote = document.getElementById("copyNote");
+    var stripNonLetters = document.getElementById("stripNonLetters");
+    var bruteToggleBtn = document.getElementById("bruteToggleBtn");
+    var bruteForcePanel = document.getElementById("bruteForcePanel");
+    var bruteForceRows = document.getElementById("bruteForceRows");
     var mode = "encode";
+    var bruteVisible = false;
 
     function caesarShift(str, shift) {
       shift = ((shift % 26) + 26) % 26;
@@ -282,10 +363,50 @@
       return n;
     }
 
+    function sourceText() {
+      var text = cipherInput.value;
+      if (stripNonLetters.checked) text = text.replace(/[^a-zA-Z]/g, "");
+      return text;
+    }
+
     function render() {
       var n = getShift();
       var shift = mode === "encode" ? n : (26 - n);
-      cipherOutput.value = caesarShift(cipherInput.value, shift);
+      cipherOutput.value = caesarShift(sourceText(), shift);
+      renderBruteForce();
+    }
+
+    function renderBruteForce() {
+      if (!bruteVisible) return;
+      var text = sourceText();
+      bruteForceRows.innerHTML = "";
+      for (var n = 1; n <= 25; n++) {
+        var out = caesarShift(text, n);
+        var row = document.createElement("div");
+        row.className = "brute-row";
+
+        var label = document.createElement("span");
+        label.className = "brute-label";
+        label.textContent = "Shift " + n;
+        row.appendChild(label);
+
+        var box = document.createElement("input");
+        box.type = "text";
+        box.readOnly = true;
+        box.value = out;
+
+        var btn = document.createElement("button");
+        btn.className = "btn btn-secondary";
+        btn.type = "button";
+        btn.textContent = "Copy";
+        btn.addEventListener("click", function () {
+          Fixora.copyText(this.previousElementSibling.value, copyNote);
+        });
+
+        row.appendChild(box);
+        row.appendChild(btn);
+        bruteForceRows.appendChild(row);
+      }
     }
 
     shiftAmount.addEventListener("input", function () {
@@ -298,6 +419,7 @@
       render();
     });
     cipherInput.addEventListener("input", render);
+    stripNonLetters.addEventListener("change", render);
 
     document.getElementById("encodeBtn").addEventListener("click", function () {
       mode = "encode";
@@ -306,6 +428,14 @@
     document.getElementById("decodeBtn").addEventListener("click", function () {
       mode = "decode";
       render();
+    });
+
+    bruteToggleBtn.addEventListener("click", function () {
+      bruteVisible = !bruteVisible;
+      bruteForcePanel.style.display = bruteVisible ? "block" : "none";
+      bruteToggleBtn.setAttribute("aria-expanded", String(bruteVisible));
+      bruteToggleBtn.textContent = bruteVisible ? "Hide All 25 Shifts" : "Show All 25 Shifts";
+      renderBruteForce();
     });
 
     document.getElementById("copyBtn").addEventListener("click", function () {

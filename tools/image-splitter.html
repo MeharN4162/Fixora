@@ -5,21 +5,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Image Splitter Online — Split Photos into a Grid | Fixora</title>
-  <meta name="description" content="Split one photo into a grid of equal pieces online for free, right in your browser — perfect for Instagram grid posts. No uploads, no sign-up." />
-  <meta name="keywords" content="image splitter, split image into grid, instagram grid maker, photo grid splitter online free" />
+  <meta name="description" content="Split one photo into a grid of equal pieces online for free, right in your browser. One-click presets for 2×2, 3×3, and 1×3 Instagram carousels, or set any custom row/column count up to 5×5. No uploads, no sign-up." />
+  <meta name="keywords" content="image splitter, split image into grid, instagram grid maker, instagram carousel splitter, photo grid splitter online free" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/image-splitter.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Image Splitter Online" />
-  <meta property="og:description" content="Split one photo into a grid of equal pieces online for free, right in your browser." />
+  <meta property="og:description" content="Split one photo into a grid of equal pieces with one-click 2×2, 3×3, and Instagram carousel presets, or a custom row/column count — free, right in your browser." />
   <meta property="og:url" content="https://fixora-site.vercel.app/tools/image-splitter.html" />
   <meta property="og:image" content="https://fixora-site.vercel.app/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Image Splitter Online" />
-  <meta name="twitter:description" content="Split one photo into a grid of equal pieces online for free, right in your browser." />
+  <meta name="twitter:description" content="Split one photo into a grid with one-click presets or a custom row/column count — free, right in your browser." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -68,7 +68,12 @@
       {
         "@type": "Question",
         "name": "How many rows and columns can I split into?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Between 1 and 5 for each, so up to a 5×5 grid (25 pieces). The preview overlays grid lines on your uploaded photo so you can see exactly where each cut will fall before splitting." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Between 1 and 5 for each, so up to a 5×5 grid (25 pieces). Click a preset button — 2×2, 3×3, 1×3 Instagram Carousel, or 1×2 Split in Half — for the common layouts, or type any custom combination into the Rows and Columns fields. The preview overlays grid lines on your uploaded photo so you can see exactly where each cut will fall before splitting." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the 1×3 Instagram Carousel preset for?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It sets 1 row and 3 columns, slicing a single wide photo into three equal panels side by side. Posted to Instagram in order as a multi-image carousel post (or as three consecutive grid tiles), they line up back into one continuous image across your profile." }
       },
       {
         "@type": "Question",
@@ -144,6 +149,15 @@
       font-weight: 600;
     }
     .piece-item button:hover { background: #dfe8ff; }
+    .grid-presets-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .grid-presets-row .pill {
+      font-size: 0.85rem;
+    }
   </style>
 </head>
 <body>
@@ -180,7 +194,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">✂️</div>
       <h1>Image Splitter</h1>
-      <p>Split one photo into an equal grid of pieces — great for Instagram grid posts.</p>
+      <p>Split one photo into an equal grid of pieces — pick a one-click preset like 2×2, 3×3, or the 1×3 Instagram Carousel, or set a custom row/column count.</p>
     </section>
 
     <section class="container">
@@ -197,7 +211,14 @@
           <div class="split-grid-overlay" id="gridOverlay"></div>
         </div>
 
-        <div class="row" id="rowsColsField" style="display:none;margin-top:18px;">
+        <div class="grid-presets-row" id="gridPresetsRow" style="display:none;">
+          <button class="pill" data-rows="2" data-cols="2" type="button">2×2</button>
+          <button class="pill" data-rows="3" data-cols="3" type="button">3×3</button>
+          <button class="pill" data-rows="1" data-cols="3" type="button">1×3 Instagram Carousel</button>
+          <button class="pill" data-rows="1" data-cols="2" type="button">1×2 Split in Half</button>
+        </div>
+
+        <div class="row" id="rowsColsField" style="display:none;margin-top:14px;">
           <div class="field">
             <label for="rowsInput">Rows</label>
             <input type="number" id="rowsInput" min="1" max="5" value="3" />
@@ -222,7 +243,7 @@
         <h2>How to Split an Image into a Grid</h2>
         <ol class="howto-steps">
           <li>Click the upload area or drag in a JPG, PNG, or WebP image.</li>
-          <li>Set the number of rows and columns (1–5 each) — grid lines on the preview show exactly where the cuts will be.</li>
+          <li>Click a preset — 2×2, 3×3, 1×3 Instagram Carousel, or 1×2 Split in Half — or set a custom row/column count (1–5 each). Grid lines on the preview update live to show exactly where the cuts will be.</li>
           <li>Click "Split Image" to generate every piece as its own thumbnail.</li>
           <li>Download pieces one at a time, or click "Download All Pieces" to save them all with numbered filenames.</li>
         </ol>
@@ -240,7 +261,11 @@
         </details>
         <details class="faq-item">
           <summary>How many rows and columns can I split into?</summary>
-          <p>Between 1 and 5 for each, so up to a 5×5 grid (25 pieces). The preview overlays grid lines on your uploaded photo so you can see exactly where each cut will fall before splitting.</p>
+          <p>Between 1 and 5 for each, so up to a 5×5 grid (25 pieces). Click a preset button — 2×2, 3×3, 1×3 Instagram Carousel, or 1×2 Split in Half — for the common layouts, or type any custom combination into the Rows and Columns fields. The preview overlays grid lines on your uploaded photo so you can see exactly where each cut will fall before splitting.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What's the 1×3 Instagram Carousel preset for?</summary>
+          <p>It sets 1 row and 3 columns, slicing a single wide photo into three equal panels side by side. Posted to Instagram in order as a multi-image carousel post (or as three consecutive grid tiles), they line up back into one continuous image across your profile.</p>
         </details>
         <details class="faq-item">
           <summary>Does splitting the image lose any quality?</summary>
@@ -327,6 +352,7 @@
     var splitStage = document.getElementById("splitStage");
     var splitImg = document.getElementById("splitImg");
     var gridOverlay = document.getElementById("gridOverlay");
+    var gridPresetsRow = document.getElementById("gridPresetsRow");
     var rowsColsField = document.getElementById("rowsColsField");
     var rowsInput = document.getElementById("rowsInput");
     var colsInput = document.getElementById("colsInput");
@@ -346,8 +372,16 @@
       return { rows: r, cols: c };
     }
 
+    function syncPresetActive() {
+      var r = rowsInput.value, c = colsInput.value;
+      document.querySelectorAll("#gridPresetsRow [data-rows]").forEach(function (p) {
+        p.classList.toggle("active", p.getAttribute("data-rows") === r && p.getAttribute("data-cols") === c);
+      });
+    }
+
     function drawGridOverlay() {
       var rc = clampRC();
+      syncPresetActive();
       gridOverlay.innerHTML = "";
       for (var c = 1; c < rc.cols; c++) {
         var v = document.createElement("div");
@@ -376,6 +410,7 @@
           naturalImg = img;
           splitImg.src = e.target.result;
           splitStage.style.display = "block";
+          gridPresetsRow.style.display = "flex";
           rowsColsField.style.display = "flex";
           splitBtn.disabled = false;
           downloadAllBtn.style.display = "none";
@@ -397,6 +432,14 @@
     rowsInput.addEventListener("input", drawGridOverlay);
     colsInput.addEventListener("input", drawGridOverlay);
     window.addEventListener("resize", function () { if (naturalImg) drawGridOverlay(); });
+
+    document.querySelectorAll("#gridPresetsRow [data-rows]").forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        rowsInput.value = pill.getAttribute("data-rows");
+        colsInput.value = pill.getAttribute("data-cols");
+        drawGridOverlay();
+      });
+    });
 
     function splitImage() {
       if (!naturalImg) return;

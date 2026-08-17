@@ -4,22 +4,22 @@
   <meta charset="UTF-8" />
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Free Image Color Picker Online | Fixora</title>
-  <meta name="description" content="Pick a color from any image online for free. Click a pixel to get its exact HEX and RGB code, right in your browser. No uploads, no sign-up." />
-  <meta name="keywords" content="image color picker, eyedropper tool online, get color from image" />
+  <title>Free Image Color Picker Online — Eyedropper with Zoom & Palette | Fixora</title>
+  <meta name="description" content="Pick colors from any image online for free with a magnified zoom eyedropper. Click multiple spots to build a palette, then copy each color as HEX, RGB, or HSL. No uploads, no sign-up." />
+  <meta name="keywords" content="image color picker, eyedropper tool online, get color from image, image palette generator" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/image-color-picker.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Image Color Picker Online" />
-  <meta property="og:description" content="Pick a color from any image online for free — click a pixel to get its HEX and RGB code." />
+  <meta property="og:description" content="Pick colors from any image with a zoomed-in eyedropper, build a palette, and copy each as HEX, RGB, or HSL." />
   <meta property="og:url" content="https://fixora-site.vercel.app/tools/image-color-picker.html" />
   <meta property="og:image" content="https://fixora-site.vercel.app/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Image Color Picker Online" />
-  <meta name="twitter:description" content="Pick a color from any image online for free — click a pixel to get its HEX and RGB code." />
+  <meta name="twitter:description" content="Pick colors from any image with a zoomed-in eyedropper, build a palette, and copy each as HEX, RGB, or HSL." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -72,8 +72,18 @@
       },
       {
         "@type": "Question",
-        "name": "Why does the HEX code look like a string of letters and numbers instead of a color name?",
-        "acceptedAnswer": { "@type": "Answer", "text": "HEX and RGB are exact, unambiguous representations of a color that most design and code tools accept directly, unlike common color names which only cover a small fraction of possible colors - that's why the tool reports both directly copyable formats." }
+        "name": "Why does the tool show HEX, RGB, and HSL instead of just one format?",
+        "acceptedAnswer": { "@type": "Answer", "text": "HEX and RGB are exact, unambiguous representations of a color that most design and code tools accept directly, and HSL (hue, saturation, lightness) is often more intuitive for adjusting a color by eye - since different tools and codebases prefer different formats, showing all three directly copyable saves you from converting by hand." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the palette for, and how many colors can it hold?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Every pixel you click gets added as a small swatch to the palette strip below the picker, so you can sample several colors from the same image without losing earlier picks. It holds up to 20 swatches - click any one to copy its HEX code instantly, or click \"Clear Palette\" to start over." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the magnifier show when I hover over the image?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A zoomed-in circular preview of the pixels directly under your cursor, magnified several times over with a crosshair on the exact pixel that will be picked - this makes it much easier to land on a precise pixel, especially in small or detailed areas of an image." }
       },
       {
         "@type": "Question",
@@ -87,6 +97,7 @@
   <style>
     .picker-stage {
       display: none;
+      position: relative;
       margin-top: 20px;
       text-align: center;
       border-radius: var(--radius-md);
@@ -98,6 +109,38 @@
       max-height: 60vh;
       cursor: crosshair;
       display: inline-block;
+    }
+    .magnifier {
+      position: absolute;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+      pointer-events: none;
+      overflow: hidden;
+      display: none;
+      z-index: 5;
+      background: #111;
+    }
+    .magnifier canvas {
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      max-height: none;
+      image-rendering: pixelated;
+    }
+    .magnifier::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 9px;
+      height: 9px;
+      transform: translate(-50%, -50%);
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6);
+      border-radius: 2px;
     }
     .picked-row {
       display: flex;
@@ -128,6 +171,39 @@
     .picked-values input {
       font-family: monospace;
       font-size: 0.95rem;
+    }
+    .palette-section {
+      margin-top: 22px;
+      display: none;
+    }
+    .palette-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .palette-head label {
+      font-weight: 600;
+      font-size: 0.84rem;
+      color: var(--color-text-muted);
+    }
+    .palette-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .palette-swatch {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      cursor: pointer;
+      padding: 0;
+      transition: transform 0.1s ease;
+    }
+    .palette-swatch:hover {
+      transform: scale(1.12);
     }
   </style>
 </head>
@@ -165,7 +241,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🎨</div>
       <h1>Image Color Picker</h1>
-      <p>Upload an image and click anywhere on it to grab that exact color's HEX and RGB code.</p>
+      <p>Upload an image and click anywhere on it — with a magnified zoom for precision — to grab that exact color's HEX, RGB, and HSL code, and build a palette as you go.</p>
     </section>
 
     <section class="container">
@@ -179,6 +255,7 @@
 
         <div class="picker-stage" id="pickerStage">
           <canvas id="imgCanvas"></canvas>
+          <div class="magnifier" id="magnifier"><canvas id="magCanvas" width="110" height="110"></canvas></div>
         </div>
 
         <div class="picked-row" id="pickedRow" style="display:none;">
@@ -192,7 +269,19 @@
               <input type="text" id="rgbValue" readonly />
               <button class="btn btn-secondary" id="copyRgbBtn" type="button">Copy</button>
             </div>
+            <div class="field-inline">
+              <input type="text" id="hslValue" readonly />
+              <button class="btn btn-secondary" id="copyHslBtn" type="button">Copy</button>
+            </div>
           </div>
+        </div>
+
+        <div class="palette-section" id="paletteSection">
+          <div class="palette-head">
+            <label>Palette (<span id="paletteCount">0</span>/20) — click a swatch to copy its HEX</label>
+            <button class="btn btn-secondary" id="clearPaletteBtn" type="button">Clear Palette</button>
+          </div>
+          <div class="palette-strip" id="paletteStrip"></div>
         </div>
 
         <div class="output-box" id="statusBox"></div>
@@ -202,9 +291,9 @@
         <h2>How to Pick a Color from an Image</h2>
         <ol class="howto-steps">
           <li>Click the upload area or drag in a JPG, PNG, or WebP image.</li>
-          <li>Move your cursor over the image (the cursor turns into a crosshair) and click the exact pixel you want to sample.</li>
-          <li>The picked color's swatch, HEX code, and RGB values appear below the image.</li>
-          <li>Click "Copy" next to either value to copy it to your clipboard.</li>
+          <li>Move your cursor over the image — a magnified zoom circle follows your cursor so you can land on the exact pixel you want.</li>
+          <li>Click to sample that pixel. Its swatch, HEX, RGB, and HSL values appear below the image, and it's added to the palette strip.</li>
+          <li>Click "Copy" next to any value format to copy it, or click a palette swatch to copy its HEX code.</li>
         </ol>
       </div>
 
@@ -223,8 +312,16 @@
           <p>Any of JPG, PNG, or WebP works - the tool draws whatever you upload onto an internal canvas and reads pixel data from it, regardless of the original file format.</p>
         </details>
         <details class="faq-item">
-          <summary>Why does the HEX code look like a string of letters and numbers instead of a color name?</summary>
-          <p>HEX and RGB are exact, unambiguous representations of a color that most design and code tools accept directly, unlike common color names which only cover a small fraction of possible colors - that's why the tool reports both directly copyable formats.</p>
+          <summary>Why does the tool show HEX, RGB, and HSL instead of just one format?</summary>
+          <p>HEX and RGB are exact, unambiguous representations of a color that most design and code tools accept directly, and HSL (hue, saturation, lightness) is often more intuitive for adjusting a color by eye - since different tools and codebases prefer different formats, showing all three directly copyable saves you from converting by hand.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is the palette for, and how many colors can it hold?</summary>
+          <p>Every pixel you click gets added as a small swatch to the palette strip below the picker, so you can sample several colors from the same image without losing earlier picks. It holds up to 20 swatches - click any one to copy its HEX code instantly, or click "Clear Palette" to start over.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the magnifier show when I hover over the image?</summary>
+          <p>A zoomed-in circular preview of the pixels directly under your cursor, magnified several times over with a crosshair on the exact pixel that will be picked - this makes it much easier to land on a precise pixel, especially in small or detailed areas of an image.</p>
         </details>
         <details class="faq-item">
           <summary>Is my image uploaded anywhere to sample colors?</summary>
@@ -306,18 +403,80 @@
     var fileInput = document.getElementById("fileInput");
     var pickerStage = document.getElementById("pickerStage");
     var imgCanvas = document.getElementById("imgCanvas");
+    var magnifier = document.getElementById("magnifier");
+    var magCanvas = document.getElementById("magCanvas");
     var pickedRow = document.getElementById("pickedRow");
     var pickedSwatch = document.getElementById("pickedSwatch");
     var hexValue = document.getElementById("hexValue");
     var rgbValue = document.getElementById("rgbValue");
+    var hslValue = document.getElementById("hslValue");
     var statusBox = document.getElementById("statusBox");
+    var paletteSection = document.getElementById("paletteSection");
+    var paletteStrip = document.getElementById("paletteStrip");
+    var paletteCount = document.getElementById("paletteCount");
+    var clearPaletteBtn = document.getElementById("clearPaletteBtn");
 
     var ctx = imgCanvas.getContext("2d", { willReadFrequently: true });
+    var magCtx = magCanvas.getContext("2d");
+    magCtx.imageSmoothingEnabled = false;
+
+    var palette = [];
+    var MAX_PALETTE = 20;
+    var ZOOM_FACTOR = 8;
+    var MAG_SAMPLE = Math.round(110 / ZOOM_FACTOR); // native px captured to fill the 110px magnifier
 
     function componentToHex(c) {
       var hex = c.toString(16);
       return hex.length === 1 ? "0" + hex : hex;
     }
+
+    function rgbToHsl(r, g, b) {
+      r /= 255; g /= 255; b /= 255;
+      var max = Math.max(r, g, b), min = Math.min(r, g, b);
+      var h, s, l = (max + min) / 2;
+      if (max === min) {
+        h = s = 0;
+      } else {
+        var d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+          case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+          case g: h = (b - r) / d + 2; break;
+          default: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+      }
+      return "hsl(" + Math.round(h * 360) + ", " + Math.round(s * 100) + "%, " + Math.round(l * 100) + "%)";
+    }
+
+    function addToPalette(hex) {
+      palette.unshift(hex);
+      if (palette.length > MAX_PALETTE) palette.length = MAX_PALETTE;
+      renderPalette();
+    }
+
+    function renderPalette() {
+      paletteStrip.innerHTML = "";
+      palette.forEach(function (hex) {
+        var sw = document.createElement("button");
+        sw.type = "button";
+        sw.className = "palette-swatch";
+        sw.style.background = hex;
+        sw.title = hex;
+        sw.setAttribute("aria-label", "Copy " + hex);
+        sw.addEventListener("click", function () {
+          Fixora.copyText(hex, statusBox);
+        });
+        paletteStrip.appendChild(sw);
+      });
+      paletteCount.textContent = palette.length;
+      paletteSection.style.display = palette.length ? "block" : "none";
+    }
+
+    clearPaletteBtn.addEventListener("click", function () {
+      palette = [];
+      renderPalette();
+    });
 
     function handleFiles(files) {
       var file = files[0];
@@ -335,7 +494,9 @@
           ctx.drawImage(img, 0, 0);
           pickerStage.style.display = "block";
           pickedRow.style.display = "none";
-          statusBox.textContent = "Click anywhere on the image to pick that color.";
+          palette = [];
+          renderPalette();
+          statusBox.textContent = "Move your cursor over the image and click to pick a color.";
         };
         img.onerror = function () {
           statusBox.textContent = "Couldn't read that image. Please try a different file.";
@@ -350,7 +511,7 @@
       if (e.key === "Enter" || e.key === " ") fileInput.click();
     });
 
-    imgCanvas.addEventListener("click", function (e) {
+    function canvasPixelFromEvent(e) {
       var rect = imgCanvas.getBoundingClientRect();
       var scaleX = imgCanvas.width / rect.width;
       var scaleY = imgCanvas.height / rect.height;
@@ -358,24 +519,55 @@
       var y = Math.floor((e.clientY - rect.top) * scaleY);
       x = Math.max(0, Math.min(imgCanvas.width - 1, x));
       y = Math.max(0, Math.min(imgCanvas.height - 1, y));
+      return { x: x, y: y, cssX: e.clientX - rect.left, cssY: e.clientY - rect.top };
+    }
+
+    function updateMagnifier(pos) {
+      var half = Math.floor(MAG_SAMPLE / 2);
+      var sx = Math.max(0, Math.min(imgCanvas.width - MAG_SAMPLE, pos.x - half));
+      var sy = Math.max(0, Math.min(imgCanvas.height - MAG_SAMPLE, pos.y - half));
+      magCtx.clearRect(0, 0, magCanvas.width, magCanvas.height);
+      magCtx.drawImage(imgCanvas, sx, sy, MAG_SAMPLE, MAG_SAMPLE, 0, 0, magCanvas.width, magCanvas.height);
+
+      magnifier.style.display = "block";
+      magnifier.style.left = (pos.cssX - 55) + "px";
+      magnifier.style.top = (pos.cssY - 55) + "px";
+    }
+
+    imgCanvas.addEventListener("mousemove", function (e) {
+      updateMagnifier(canvasPixelFromEvent(e));
+    });
+    imgCanvas.addEventListener("mouseleave", function () {
+      magnifier.style.display = "none";
+    });
+
+    imgCanvas.addEventListener("click", function (e) {
+      var pos = canvasPixelFromEvent(e);
+      var x = pos.x, y = pos.y;
 
       var pixel = ctx.getImageData(x, y, 1, 1).data;
       var r = pixel[0], g = pixel[1], b = pixel[2];
       var hex = "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
       var rgb = "rgb(" + r + ", " + g + ", " + b + ")";
+      var hsl = rgbToHsl(r, g, b);
 
       pickedSwatch.style.background = hex;
       hexValue.value = hex;
       rgbValue.value = rgb;
+      hslValue.value = hsl;
       pickedRow.style.display = "flex";
-      statusBox.textContent = "Picked pixel at (" + x + ", " + y + ").";
+      addToPalette(hex);
+      statusBox.textContent = "Picked pixel at (" + x + ", " + y + ") — added to palette.";
     });
 
     document.getElementById("copyHexBtn").addEventListener("click", function () {
-      Fixora.copyText(hexValue.value);
+      Fixora.copyText(hexValue.value, statusBox);
     });
     document.getElementById("copyRgbBtn").addEventListener("click", function () {
-      Fixora.copyText(rgbValue.value);
+      Fixora.copyText(rgbValue.value, statusBox);
+    });
+    document.getElementById("copyHslBtn").addEventListener("click", function () {
+      Fixora.copyText(hslValue.value, statusBox);
     });
   </script>
 </body>

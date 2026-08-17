@@ -5,7 +5,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free BMI Calculator Online — Body Mass Index | Fixora</title>
-  <meta name="description" content="Calculate your Body Mass Index (BMI) online for free using metric or imperial units. Instant results with category breakdown. No sign-up required." />
+  <meta name="description" content="Calculate your Body Mass Index (BMI) online for free using metric or imperial units. Instant results with a category breakdown, visual gauge, and your healthy weight range for your exact height. No sign-up required." />
   <meta name="keywords" content="bmi calculator, body mass index calculator online free" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/bmi-calculator.html" />
@@ -79,10 +79,54 @@
         "@type": "Question",
         "name": "Why does the tool ask for feet and inches separately in Imperial mode?",
         "acceptedAnswer": { "@type": "Answer", "text": "Height in the US is usually expressed as feet and inches together, so the calculator adds both fields (converted to inches, then to meters) rather than requiring you to convert your height to a single number yourself." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is the Healthy Weight Range calculated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The tool takes your entered height and works the BMI formula backwards using the Normal-category boundaries of 18.5 and 24.9: multiplying each boundary by your height in meters squared gives the minimum and maximum weight that would keep you in the Normal BMI range at that exact height." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the gauge bar show?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's a visual scale from a BMI of 15 to 40, shaded into the same four categories as the result (Underweight, Normal, Overweight, Obese), with a marker placed at your exact BMI so you can see at a glance how close you are to the next category boundary." }
       }
     ]
   }
   </script>
+  <style>
+    .bmi-gauge-wrap { margin-top: 22px; }
+    .bmi-gauge {
+      position: relative;
+      height: 12px;
+      border-radius: 999px;
+      display: flex;
+      overflow: visible;
+    }
+    .bmi-gauge .seg:first-child { border-radius: 999px 0 0 999px; }
+    .bmi-gauge .seg:last-child { border-radius: 0 999px 999px 0; }
+    .bmi-gauge .seg-under { background: #f59e0b; flex: 14; }
+    .bmi-gauge .seg-normal { background: var(--color-success); flex: 26; }
+    .bmi-gauge .seg-over { background: #f59e0b; flex: 20; }
+    .bmi-gauge .seg-obese { background: var(--color-danger); flex: 40; }
+    .bmi-gauge-marker {
+      position: absolute;
+      top: -5px;
+      width: 4px;
+      height: 22px;
+      background: var(--color-text);
+      border-radius: 2px;
+      transform: translateX(-50%);
+      left: 0%;
+      transition: left 0.25s ease;
+    }
+    .bmi-gauge-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.74rem;
+      color: var(--color-text-muted);
+      margin-top: 8px;
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -118,7 +162,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">⚖️</div>
       <h1>BMI Calculator</h1>
-      <p>Calculate your Body Mass Index using metric or imperial units, with an instant category breakdown.</p>
+      <p>Calculate your Body Mass Index using metric or imperial units, with an instant category breakdown, a visual gauge, and your healthy weight range.</p>
     </section>
 
     <section class="container">
@@ -167,6 +211,20 @@
         <div class="stat-row" id="resultRow" style="display:none;">
           <div class="stat"><strong id="statBmi">–</strong><span>BMI</span></div>
           <div class="stat"><strong id="statCategory">–</strong><span>Category</span></div>
+          <div class="stat"><strong id="statHealthyRange">–</strong><span>Healthy Weight Range</span></div>
+        </div>
+
+        <div class="bmi-gauge-wrap" id="gaugeWrap" style="display:none;">
+          <div class="bmi-gauge">
+            <span class="seg seg-under"></span>
+            <span class="seg seg-normal"></span>
+            <span class="seg seg-over"></span>
+            <span class="seg seg-obese"></span>
+            <div class="bmi-gauge-marker" id="gaugeMarker"></div>
+          </div>
+          <div class="bmi-gauge-labels">
+            <span>15</span><span>18.5</span><span>25</span><span>30</span><span>40+</span>
+          </div>
         </div>
       </div>
 
@@ -175,7 +233,8 @@
         <ol class="howto-steps">
           <li>Choose Metric (cm / kg) or Imperial (ft-in / lb) using the toggle pills.</li>
           <li>Enter your height and weight in the fields shown for your chosen unit system.</li>
-          <li>Click "Calculate BMI" to see your BMI score and weight category.</li>
+          <li>Click "Calculate BMI" to see your BMI score, weight category, and the healthy weight range for your exact height.</li>
+          <li>Check the gauge bar to see exactly where your BMI falls between Underweight and Obese.</li>
           <li>Switch unit systems any time — your inputs reset in the newly-shown fields.</li>
         </ol>
       </div>
@@ -201,6 +260,14 @@
         <details class="faq-item">
           <summary>Why does the tool ask for feet and inches separately in Imperial mode?</summary>
           <p>Height in the US is usually expressed as feet and inches together, so the calculator adds both fields (converted to inches, then to meters) rather than requiring you to convert your height to a single number yourself.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How is the Healthy Weight Range calculated?</summary>
+          <p>The tool takes your entered height and works the BMI formula backwards using the Normal-category boundaries of 18.5 and 24.9: multiplying each boundary by your height in meters squared gives the minimum and maximum weight that would keep you in the Normal BMI range at that exact height.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the gauge bar show?</summary>
+          <p>It's a visual scale from a BMI of 15 to 40, shaded into the same four categories as the result (Underweight, Normal, Overweight, Obese), with a marker placed at your exact BMI so you can see at a glance how close you are to the next category boundary.</p>
         </details>
       </div>
 
@@ -297,6 +364,8 @@
       return { label: "Obese", color: "var(--color-danger)" };
     }
 
+    var KG_TO_LB = 2.2046226218;
+
     document.getElementById("calcBtn").addEventListener("click", function () {
       var heightM, weightKg;
 
@@ -315,19 +384,38 @@
       if (!heightM || !weightKg || heightM <= 0 || weightKg <= 0) {
         statusBox.textContent = "Please enter a valid height and weight.";
         resultRow.style.display = "none";
+        document.getElementById("gaugeWrap").style.display = "none";
         return;
       }
 
       var bmi = weightKg / (heightM * heightM);
       var cat = categoryFor(bmi);
 
+      // Healthy weight range: solve BMI = weight / height^2 for weight at the
+      // Normal category's lower (18.5) and upper (24.9) BMI boundaries.
+      var minHealthyKg = 18.5 * heightM * heightM;
+      var maxHealthyKg = 24.9 * heightM * heightM;
+      var rangeText;
+      if (unitMode === "metric") {
+        rangeText = minHealthyKg.toFixed(1) + "–" + maxHealthyKg.toFixed(1) + " kg";
+      } else {
+        rangeText = (minHealthyKg * KG_TO_LB).toFixed(1) + "–" + (maxHealthyKg * KG_TO_LB).toFixed(1) + " lb";
+      }
+
       document.getElementById("statBmi").textContent = bmi.toFixed(1);
       var catEl = document.getElementById("statCategory");
       catEl.textContent = cat.label;
       catEl.style.color = cat.color;
+      document.getElementById("statHealthyRange").textContent = rangeText;
+
+      var gaugeWrap = document.getElementById("gaugeWrap");
+      gaugeWrap.style.display = "block";
+      var clampedBmi = Math.max(15, Math.min(40, bmi));
+      var markerPct = ((clampedBmi - 15) / 25) * 100;
+      document.getElementById("gaugeMarker").style.left = markerPct + "%";
 
       resultRow.style.display = "flex";
-      statusBox.textContent = "Your BMI is " + bmi.toFixed(1) + " (" + cat.label + "). BMI is a general screening tool, not a diagnosis — talk to a healthcare provider for personalized advice.";
+      statusBox.textContent = "Your BMI is " + bmi.toFixed(1) + " (" + cat.label + "). A healthy weight range for your height is about " + rangeText + ". BMI is a general screening tool, not a diagnosis — talk to a healthcare provider for personalized advice.";
     });
   </script>
 </body>

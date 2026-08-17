@@ -5,7 +5,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Simple & Compound Interest Calculator Online | Fixora</title>
-  <meta name="description" content="Calculate simple or compound interest online for free. See total interest earned and final balance over time. No sign-up." />
+  <meta name="description" content="Calculate simple or compound interest online for free. Choose a compounding frequency, add regular contributions, and see a year-by-year growth breakdown alongside total interest and final balance. No sign-up." />
   <meta name="keywords" content="interest calculator, compound interest calculator online free, simple interest calculator" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/interest-calculator.html" />
@@ -77,12 +77,70 @@
       },
       {
         "@type": "Question",
+        "name": "How does the optional regular contribution get added?",
+        "acceptedAnswer": { "@type": "Answer", "text": "If you enter an amount in the contribution field, that amount is added to your balance at the end of every compounding period — monthly for Monthly compounding, daily for Daily compounding, and so on — using the standard ordinary-annuity formula. A contribution starts earning interest the period after it's added, not the moment it's deposited." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the year-by-year growth table show?",
+        "acceptedAnswer": { "@type": "Answer", "text": "For Compound Interest, it breaks down your balance at the end of each year: how much you've contributed so far, how much interest you've earned so far, and your running total balance — so you can see how much of your growth comes from compounding versus your own deposits." }
+      },
+      {
+        "@type": "Question",
         "name": "Is this financial or investment advice?",
         "acceptedAnswer": { "@type": "Answer", "text": "No — this tool performs a mathematical projection based on a fixed rate you provide; real interest rates on savings, investments, and loans can change over time, so treat the result as an estimate rather than a guarantee or professional recommendation." }
       }
     ]
   }
   </script>
+  <style>
+    .growth-table-wrap {
+      margin-top: 20px;
+      max-height: 360px;
+      overflow-y: auto;
+      overflow-x: auto;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+    }
+    .growth-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+      min-width: 460px;
+    }
+    .growth-table th,
+    .growth-table td {
+      padding: 8px 12px;
+      text-align: right;
+      border-bottom: 1px solid var(--color-border);
+      white-space: nowrap;
+    }
+    .growth-table th:first-child,
+    .growth-table td:first-child {
+      text-align: left;
+    }
+    .growth-table thead th {
+      position: sticky;
+      top: 0;
+      background: var(--color-bg-soft);
+      color: var(--color-text-muted);
+      font-weight: 600;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .growth-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .growth-table tbody tr:hover {
+      background: var(--color-bg-soft);
+    }
+    .growth-table-title {
+      margin-top: 22px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -118,7 +176,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">📈</div>
       <h1>Simple & Compound Interest Calculator</h1>
-      <p>See how much interest your money earns over time — simple or compound.</p>
+      <p>See how much interest your money earns over time — simple or compound, with an optional regular contribution and a year-by-year growth breakdown.</p>
     </section>
 
     <section class="container">
@@ -143,15 +201,22 @@
           </div>
         </div>
 
-        <div class="field" id="compoundFrequencyField" style="max-width:280px;">
-          <label for="compoundFrequency">Compounded</label>
-          <select id="compoundFrequency">
-            <option value="1">Annually</option>
-            <option value="2">Semi-annually</option>
-            <option value="4">Quarterly</option>
-            <option value="12" selected>Monthly</option>
-            <option value="365">Daily</option>
-          </select>
+        <div class="row" id="compoundExtraRow">
+          <div class="field" id="compoundFrequencyField" style="max-width:280px;">
+            <label for="compoundFrequency">Compounded</label>
+            <select id="compoundFrequency">
+              <option value="1">Annually</option>
+              <option value="2">Semi-annually</option>
+              <option value="4">Quarterly</option>
+              <option value="12" selected>Monthly</option>
+              <option value="365">Daily</option>
+            </select>
+          </div>
+          <div class="field" id="contributionField">
+            <label for="contribution">Contribution per period ($, optional)</label>
+            <input type="number" id="contribution" placeholder="e.g. 100" step="0.01" min="0" />
+            <span id="contributionHint" style="display:block;margin-top:6px;font-size:0.8rem;color:var(--color-text-muted);">Added at the end of each compounding period.</span>
+          </div>
         </div>
 
         <div class="actions">
@@ -161,8 +226,21 @@
         <div class="output-box" id="statusBox"></div>
 
         <div class="stat-row" id="resultRow" style="display:none;">
+          <div class="stat"><strong id="statContributed">–</strong><span>Total Contributed</span></div>
           <div class="stat"><strong id="statInterest">–</strong><span>Total Interest Earned</span></div>
           <div class="stat"><strong id="statFinal">–</strong><span>Final Balance</span></div>
+        </div>
+
+        <div id="growthTableWrap" style="display:none;">
+          <div class="growth-table-title">Year-by-Year Growth Breakdown</div>
+          <div class="growth-table-wrap">
+            <table class="growth-table">
+              <thead>
+                <tr><th>Year</th><th>Contributed to Date</th><th>Interest to Date</th><th>Balance</th></tr>
+              </thead>
+              <tbody id="growthTableBody"></tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -171,8 +249,8 @@
         <ol class="howto-steps">
           <li>Choose Simple Interest or Compound Interest using the toggle pills.</li>
           <li>Enter your starting amount (principal), annual interest rate, and number of years.</li>
-          <li>If using Compound Interest, also choose how often it compounds — annually, semi-annually, quarterly, monthly, or daily.</li>
-          <li>Click "Calculate" to see your total interest earned and final balance.</li>
+          <li>If using Compound Interest, also choose how often it compounds — annually, semi-annually, quarterly, monthly, or daily — and optionally enter a contribution amount to add at the end of every compounding period.</li>
+          <li>Click "Calculate" to see your total interest earned, total contributed, and final balance, plus a year-by-year growth table for Compound Interest.</li>
         </ol>
       </div>
 
@@ -193,6 +271,14 @@
         <details class="faq-item">
           <summary>Does this calculator account for taxes or fees on interest earned?</summary>
           <p>No — it shows the raw interest calculation based on the rate, principal, and time you enter, without deducting any taxes, account fees, or withdrawal penalties that might apply to a real account.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does the optional regular contribution get added?</summary>
+          <p>If you enter an amount in the contribution field, that amount is added to your balance at the end of every compounding period — monthly for Monthly compounding, daily for Daily compounding, and so on — using the standard ordinary-annuity formula. A contribution starts earning interest the period after it's added, not the moment it's deposited.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the year-by-year growth table show?</summary>
+          <p>For Compound Interest, it breaks down your balance at the end of each year: how much you've contributed so far, how much interest you've earned so far, and your running total balance — so you can see how much of your growth comes from compounding versus your own deposits.</p>
         </details>
         <details class="faq-item">
           <summary>Is this financial or investment advice?</summary>
@@ -271,16 +357,29 @@
   <script src="../assets/js/main.js"></script>
   <script>
     var mode = "compound";
-    var compoundFrequencyField = document.getElementById("compoundFrequencyField");
+    var compoundExtraRow = document.getElementById("compoundExtraRow");
     var statusBox = document.getElementById("statusBox");
     var resultRow = document.getElementById("resultRow");
+    var growthTableWrap = document.getElementById("growthTableWrap");
+    var growthTableBody = document.getElementById("growthTableBody");
+    var compoundFrequency = document.getElementById("compoundFrequency");
+    var contributionHint = document.getElementById("contributionHint");
+
+    var FREQUENCY_LABELS = { "1": "year", "2": "half-year period", "4": "quarter", "12": "month", "365": "day" };
+
+    function updateContributionHint() {
+      var label = FREQUENCY_LABELS[compoundFrequency.value] || "period";
+      contributionHint.textContent = "Added at the end of each compounding period (every " + label + ").";
+    }
+    compoundFrequency.addEventListener("change", updateContributionHint);
+    updateContributionHint();
 
     document.querySelectorAll("#modeRow [data-mode]").forEach(function (pill) {
       pill.addEventListener("click", function () {
         document.querySelectorAll("#modeRow [data-mode]").forEach(function (p) { p.classList.remove("active"); });
         pill.classList.add("active");
         mode = pill.getAttribute("data-mode");
-        compoundFrequencyField.style.display = mode === "compound" ? "block" : "none";
+        compoundExtraRow.style.display = mode === "compound" ? "flex" : "none";
       });
     });
 
@@ -288,33 +387,73 @@
       return "$" + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
 
+    // Future value of a principal plus a per-period contribution added at the
+    // end of each of `periods` compounding periods (ordinary annuity), at a
+    // per-period rate of `i`.
+    function futureValue(principal, i, periods, contribution) {
+      if (i === 0) return principal + contribution * periods;
+      var growth = Math.pow(1 + i, periods);
+      return principal * growth + contribution * ((growth - 1) / i);
+    }
+
     document.getElementById("calcBtn").addEventListener("click", function () {
       var principal = parseFloat(document.getElementById("principal").value);
       var ratePct = parseFloat(document.getElementById("rate").value);
       var years = parseFloat(document.getElementById("years").value);
+      var contribution = parseFloat(document.getElementById("contribution").value);
+      if (isNaN(contribution) || contribution < 0) contribution = 0;
 
       if (isNaN(principal) || principal <= 0 || isNaN(ratePct) || ratePct < 0 || isNaN(years) || years <= 0) {
         statusBox.textContent = "Please fill in the starting amount, rate, and years with valid numbers.";
+        resultRow.style.display = "none";
+        growthTableWrap.style.display = "none";
         return;
       }
 
       var rate = ratePct / 100;
-      var finalAmount;
+      var finalAmount, totalContributed = 0;
 
       if (mode === "simple") {
         finalAmount = principal * (1 + rate * years);
+        growthTableWrap.style.display = "none";
       } else {
-        var n = parseFloat(document.getElementById("compoundFrequency").value);
-        finalAmount = principal * Math.pow(1 + rate / n, n * years);
+        var n = parseFloat(compoundFrequency.value);
+        var i = rate / n;
+        var totalPeriods = Math.round(n * years);
+        finalAmount = futureValue(principal, i, totalPeriods, contribution);
+        totalContributed = contribution * totalPeriods;
+
+        // Year-by-year breakdown table.
+        growthTableBody.innerHTML = "";
+        var wholeYears = Math.floor(years);
+        var yearMarks = [];
+        for (var y = 1; y <= wholeYears; y++) yearMarks.push(y);
+        if (years > wholeYears) yearMarks.push(years);
+
+        yearMarks.forEach(function (y) {
+          var periodsAtY = Math.round(n * y);
+          var balanceAtY = futureValue(principal, i, periodsAtY, contribution);
+          var contributedAtY = contribution * periodsAtY;
+          var interestAtY = balanceAtY - principal - contributedAtY;
+          var tr = document.createElement("tr");
+          tr.innerHTML =
+            "<td>" + (Number.isInteger(y) ? "Year " + y : "Year " + y.toFixed(2)) + "</td>" +
+            "<td>" + formatMoney(contributedAtY) + "</td>" +
+            "<td>" + formatMoney(interestAtY) + "</td>" +
+            "<td>" + formatMoney(balanceAtY) + "</td>";
+          growthTableBody.appendChild(tr);
+        });
+        growthTableWrap.style.display = "block";
       }
 
-      var totalInterest = finalAmount - principal;
+      var totalInterest = finalAmount - principal - totalContributed;
 
       resultRow.style.display = "flex";
+      document.getElementById("statContributed").textContent = formatMoney(totalContributed);
       document.getElementById("statInterest").textContent = formatMoney(totalInterest);
       document.getElementById("statFinal").textContent = formatMoney(finalAmount);
 
-      statusBox.textContent = "After " + years + " year(s), you'll have earned " + formatMoney(totalInterest) + " in interest.";
+      statusBox.textContent = "After " + years + " year(s), you'll have earned " + formatMoney(totalInterest) + " in interest" + (totalContributed > 0 ? " on top of " + formatMoney(totalContributed) + " contributed." : ".");
     });
   </script>
 </body>

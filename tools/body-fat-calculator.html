@@ -79,10 +79,50 @@
         "@type": "Question",
         "name": "Is this a substitute for a DEXA scan or professional body composition testing?",
         "acceptedAnswer": { "@type": "Answer", "text": "No — this is a tape-measure estimate based on a published formula. For a precise, clinical measurement of body fat and lean mass, a DEXA scan or other professional body composition test performed by a qualified provider is more accurate." }
+      },
+      {
+        "@type": "Question",
+        "name": "How are Fat Mass and Lean Mass calculated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "If you enter your total body weight, the tool multiplies it by your body fat percentage to get Fat Mass, then subtracts that from your total weight to get Lean Mass — the weight left over from muscle, bone, organs, and water. Body weight is optional; without it, only the percentage and category are shown." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the category comparison chart show?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's a visual scale spanning the same Essential Fat, Athletes, Fitness, Average, and Obese categories used in the result, sized and colored to match, with a marker placed at your exact body fat percentage so you can see how close you are to the next category." }
       }
     ]
   }
   </script>
+  <style>
+    .bf-gauge-wrap { margin-top: 24px; }
+    .bf-gauge {
+      position: relative;
+      height: 12px;
+      border-radius: 999px;
+      display: flex;
+      overflow: visible;
+    }
+    .bf-gauge .seg:first-child { border-radius: 999px 0 0 999px; }
+    .bf-gauge .seg:last-child { border-radius: 0 999px 999px 0; }
+    .bf-gauge-marker {
+      position: absolute;
+      top: -5px;
+      width: 4px;
+      height: 22px;
+      background: var(--color-text);
+      border-radius: 2px;
+      transform: translateX(-50%);
+      left: 0%;
+      transition: left 0.25s ease;
+    }
+    .bf-gauge-labels {
+      display: flex;
+      font-size: 0.7rem;
+      color: var(--color-text-muted);
+      margin-top: 8px;
+    }
+    .bf-gauge-labels span { text-align: center; }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -150,6 +190,10 @@
             <label for="hipBf">Hip (<span id="unitLabelHip">in</span>)</label>
             <input type="number" id="hipBf" min="0" step="0.1" value="38" />
           </div>
+          <div class="field">
+            <label for="weightBf">Body Weight (<span id="unitLabelWeight">lb</span>) — optional</label>
+            <input type="number" id="weightBf" min="0" step="0.1" placeholder="e.g. 180" />
+          </div>
         </div>
 
         <div class="output-box" id="statusBox"></div>
@@ -157,6 +201,13 @@
         <div class="stat-row" id="resultRow" style="display:none;">
           <div class="stat"><strong id="statBf">–</strong><span>Body Fat %</span></div>
           <div class="stat"><strong id="statBfCategory">–</strong><span>Category</span></div>
+          <div class="stat" id="fatMassStat" style="display:none;"><strong id="statFatMass">–</strong><span>Fat Mass</span></div>
+          <div class="stat" id="leanMassStat" style="display:none;"><strong id="statLeanMass">–</strong><span>Lean Mass</span></div>
+        </div>
+
+        <div class="bf-gauge-wrap" id="bfGaugeWrap" style="display:none;">
+          <div class="bf-gauge" id="bfGauge"></div>
+          <div class="bf-gauge-labels" id="bfGaugeLabels"></div>
         </div>
 
         <p style="font-size:0.85rem;color:var(--color-text-muted);margin-top:16px;">This is an estimate based on the U.S. Navy circumference method. It is not a substitute for professional body composition testing (such as a DEXA scan) or medical advice.</p>

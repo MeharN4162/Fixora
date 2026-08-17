@@ -5,7 +5,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Loan & Mortgage Calculator Online | Fixora</title>
-  <meta name="description" content="Calculate your monthly loan or mortgage payment online for free. See total interest, total cost, and a full amortization breakdown. No sign-up required." />
+  <meta name="description" content="Calculate your monthly loan or mortgage payment online for free. See total interest, total cost, a full month-by-month amortization schedule, and how much an extra monthly payment saves. No sign-up required." />
   <meta name="keywords" content="loan calculator, mortgage calculator online free, monthly payment calculator" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/loan-calculator.html" />
@@ -77,12 +77,66 @@
       },
       {
         "@type": "Question",
+        "name": "How does an extra monthly payment shorten the loan?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Every dollar of extra payment goes entirely toward reducing your principal balance instead of being split between principal and interest, so future interest charges (which are calculated on the remaining balance) shrink for every month that follows. The calculator re-runs the full amortization month by month with your extra payment applied, and compares the resulting payoff time and total interest against the standard schedule." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the amortization schedule table show?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Every payment from month 1 to the final payoff month, broken into how much of that payment goes to interest versus principal, and the remaining balance afterward. Early payments are mostly interest since the balance is largest then; later payments are mostly principal as the balance shrinks — that's normal amortization, not an error." }
+      },
+      {
+        "@type": "Question",
         "name": "Is this financial advice?",
         "acceptedAnswer": { "@type": "Answer", "text": "No — this tool gives a mathematical estimate based on the numbers you enter. Actual loan terms, fees, and eligibility depend on your lender, so treat the result as a planning estimate rather than a loan offer." }
       }
     ]
   }
   </script>
+  <style>
+    .amort-table-wrap {
+      margin-top: 14px;
+      max-height: 400px;
+      overflow-y: auto;
+      overflow-x: auto;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      display: none;
+    }
+    .amort-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      min-width: 520px;
+    }
+    .amort-table th,
+    .amort-table td {
+      padding: 8px 12px;
+      text-align: right;
+      border-bottom: 1px solid var(--color-border);
+      white-space: nowrap;
+    }
+    .amort-table th:first-child,
+    .amort-table td:first-child {
+      text-align: left;
+    }
+    .amort-table thead th {
+      position: sticky;
+      top: 0;
+      background: var(--color-bg-soft);
+      color: var(--color-text-muted);
+      font-weight: 600;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .amort-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .amort-table tbody tr:hover {
+      background: var(--color-bg-soft);
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -118,7 +172,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🏦</div>
       <h1>Loan & Mortgage Calculator</h1>
-      <p>Estimate your monthly payment, total interest, and total cost for any fixed-rate loan.</p>
+      <p>Estimate your monthly payment, total interest, and total cost for any fixed-rate loan — plus a full amortization schedule and how much an extra payment could save you.</p>
     </section>
 
     <section class="container">

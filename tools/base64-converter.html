@@ -5,21 +5,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Base64 Encoder & Decoder Online | Fixora</title>
-  <meta name="description" content="Encode text to Base64 or decode Base64 back to text online for free, right in your browser. No uploads, no sign-up required." />
-  <meta name="keywords" content="base64 encoder, base64 decoder, base64 online free" />
+  <meta name="description" content="Encode text or files to Base64, decode Base64 back to text, and switch to URL-safe Base64 (- and _ instead of + and /) online for free, right in your browser. No uploads, no sign-up required." />
+  <meta name="keywords" content="base64 encoder, base64 decoder, base64 online free, base64 file to text, url safe base64" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/base64-converter.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Base64 Encoder & Decoder Online" />
-  <meta property="og:description" content="Encode text to Base64 or decode Base64 back to text online for free." />
+  <meta property="og:description" content="Encode text or files to Base64, decode Base64 back to text, and generate URL-safe Base64 online for free." />
   <meta property="og:url" content="https://fixora-site.vercel.app/tools/base64-converter.html" />
   <meta property="og:image" content="https://fixora-site.vercel.app/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Base64 Encoder & Decoder Online" />
-  <meta name="twitter:description" content="Encode text to Base64 or decode Base64 back to text online for free." />
+  <meta name="twitter:description" content="Encode text or files to Base64, decode Base64 back to text, and generate URL-safe Base64 online for free." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -78,7 +78,12 @@
       {
         "@type": "Question",
         "name": "Can I convert files, not just text?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No — this tool only accepts pasted text; it doesn't read file uploads, so it's meant for encoding or decoding strings like API tokens or small JSON blobs rather than binary files." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — switch to the \"Encode File\" mode and drop in any file. It's read with the browser's FileReader API and converted to a Base64 string entirely on your device; nothing is uploaded anywhere, and there's no practical file-type restriction since Base64 just encodes raw bytes." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is URL-safe Base64 and when do I need it?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Standard Base64 uses + and / characters, which have special meaning inside URLs and filenames and must be percent-encoded there. URL-safe Base64 (also called base64url) simply swaps + for - and / for _, so the result can be dropped directly into a URL, query string, or filename without extra escaping. Check the \"URL-safe\" box when encoding to get this variant; decoding automatically accepts either form." }
       }
     ]
   }
@@ -118,22 +123,32 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🔣</div>
       <h1>Base64 Encoder & Decoder</h1>
-      <p>Convert text to Base64 or decode Base64 back to readable text — instantly, in your browser.</p>
+      <p>Convert text or files to Base64, decode Base64 back to readable text, and optionally generate the URL-safe variant — instantly, in your browser.</p>
     </section>
 
     <section class="container">
       <div class="tool-panel">
         <div class="pill-row">
-          <button class="pill active" data-mode="encode" type="button">Encode</button>
-          <button class="pill" data-mode="decode" type="button">Decode</button>
+          <button class="pill active" data-mode="encode" type="button">Encode Text</button>
+          <button class="pill" data-mode="decode" type="button">Decode Text</button>
+          <button class="pill" data-mode="file" type="button">Encode File</button>
         </div>
 
-        <div class="field">
+        <label class="check-row" id="urlSafeOption"><input type="checkbox" id="urlSafe" /> URL-safe output (<code>-</code> and <code>_</code> instead of <code>+</code> and <code>/</code>)</label>
+
+        <div class="field" id="textInputField">
           <label for="inputText" id="inputLabel">Text to Encode</label>
           <textarea id="inputText" placeholder="Type or paste text here…" style="min-height:160px;"></textarea>
         </div>
 
-        <div class="actions">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload a file to encode" style="display:none;">
+          <div class="dz-icon" aria-hidden="true">📄</div>
+          <strong>Click to upload or drag a file here</strong>
+          <small>Any file type — converted entirely in your browser</small>
+          <input type="file" id="fileInput" hidden />
+        </div>
+
+        <div class="actions" id="actionsRow">
           <button class="btn btn-primary" id="convertBtn">Encode to Base64</button>
           <button class="btn btn-secondary" id="copyBtn">Copy Result</button>
           <button class="btn btn-secondary" id="clearBtn">Clear</button>
@@ -151,10 +166,11 @@
       <div class="howto">
         <h2>How to Encode or Decode Base64</h2>
         <ol class="howto-steps">
-          <li>Choose "Encode" or "Decode" using the pill toggle at the top of the tool.</li>
-          <li>Paste your text (to encode) or your Base64 string (to decode) into the input box.</li>
-          <li>Click the action button — it reads "Encode to Base64" or "Decode from Base64" depending on the mode selected.</li>
-          <li>Click "Copy Result" to copy the output, or "Clear" to reset both fields.</li>
+          <li>Choose "Encode Text", "Decode Text", or "Encode File" using the pill toggle at the top of the tool.</li>
+          <li>In text modes, paste your text (to encode) or your Base64 string (to decode) into the input box; in file mode, click or drag a file into the upload area.</li>
+          <li>Optionally check "URL-safe output" to swap + and / for - and _ in the encoded result — handy for putting Base64 inside a URL or filename.</li>
+          <li>Text modes need the action button clicked; file mode encodes automatically the moment you drop or pick a file.</li>
+          <li>Click "Copy Result" to copy the output, or "Clear" to reset the tool.</li>
         </ol>
       </div>
 
@@ -178,7 +194,11 @@
         </details>
         <details class="faq-item">
           <summary>Can I convert files, not just text?</summary>
-          <p>No — this tool only accepts pasted text; it doesn't read file uploads, so it's meant for encoding or decoding strings like API tokens or small JSON blobs rather than binary files.</p>
+          <p>Yes — switch to the "Encode File" mode and drop in any file. It's read with the browser's FileReader API and converted to a Base64 string entirely on your device; nothing is uploaded anywhere, and there's no practical file-type restriction since Base64 just encodes raw bytes.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is URL-safe Base64 and when do I need it?</summary>
+          <p>Standard Base64 uses + and / characters, which have special meaning inside URLs and filenames and must be percent-encoded there. URL-safe Base64 (also called base64url) simply swaps + for - and / for _, so the result can be dropped directly into a URL, query string, or filename without extra escaping. Check the "URL-safe" box when encoding to get this variant; decoding automatically accepts either form.</p>
         </details>
       </div>
 
@@ -258,18 +278,52 @@
     var convertBtn = document.getElementById("convertBtn");
     var statusBox = document.getElementById("statusBox");
     var copyNote = document.getElementById("copyNote");
+    var urlSafe = document.getElementById("urlSafe");
+    var urlSafeOption = document.getElementById("urlSafeOption");
+    var textInputField = document.getElementById("textInputField");
+    var dropzone = document.getElementById("dropzone");
+    var fileInput = document.getElementById("fileInput");
+    var actionsRow = document.getElementById("actionsRow");
     var mode = "encode";
+
+    function toUrlSafe(b64) {
+      return b64.replace(/\+/g, "-").replace(/\//g, "_");
+    }
+
+    function normalizeBase64Input(str) {
+      var b64 = str.trim().replace(/-/g, "+").replace(/_/g, "/");
+      while (b64.length % 4 !== 0) b64 += "=";
+      return b64;
+    }
+
+    function bytesToBase64(bytes) {
+      var binary = "";
+      bytes.forEach(function (b) { binary += String.fromCharCode(b); });
+      return btoa(binary);
+    }
 
     document.querySelectorAll("[data-mode]").forEach(function (pill) {
       pill.addEventListener("click", function () {
         document.querySelectorAll("[data-mode]").forEach(function (p) { p.classList.remove("active"); });
         pill.classList.add("active");
         mode = pill.getAttribute("data-mode");
-        inputLabel.textContent = mode === "encode" ? "Text to Encode" : "Base64 to Decode";
-        convertBtn.textContent = mode === "encode" ? "Encode to Base64" : "Decode from Base64";
-        inputText.placeholder = mode === "encode" ? "Type or paste text here…" : "Paste Base64 string here…";
         outputText.value = "";
         statusBox.textContent = "";
+
+        if (mode === "file") {
+          textInputField.style.display = "none";
+          dropzone.style.display = "";
+          actionsRow.style.display = "none";
+          urlSafeOption.style.display = "flex";
+        } else {
+          textInputField.style.display = "";
+          dropzone.style.display = "none";
+          actionsRow.style.display = "flex";
+          urlSafeOption.style.display = mode === "encode" ? "flex" : "none";
+          inputLabel.textContent = mode === "encode" ? "Text to Encode" : "Base64 to Decode";
+          convertBtn.textContent = mode === "encode" ? "Encode to Base64" : "Decode from Base64";
+          inputText.placeholder = mode === "encode" ? "Type or paste text here…" : "Paste Base64 string here…";
+        }
       });
     });
 
@@ -277,12 +331,11 @@
       try {
         if (mode === "encode") {
           var bytes = new TextEncoder().encode(inputText.value);
-          var binary = "";
-          bytes.forEach(function (b) { binary += String.fromCharCode(b); });
-          outputText.value = btoa(binary);
+          var b64 = bytesToBase64(bytes);
+          outputText.value = urlSafe.checked ? toUrlSafe(b64) : b64;
           statusBox.textContent = "Encoded successfully.";
         } else {
-          var binaryStr = atob(inputText.value.trim());
+          var binaryStr = atob(normalizeBase64Input(inputText.value));
           var byteArray = new Uint8Array(binaryStr.length);
           for (var i = 0; i < binaryStr.length; i++) byteArray[i] = binaryStr.charCodeAt(i);
           outputText.value = new TextDecoder().decode(byteArray);
@@ -296,6 +349,36 @@
       }
     });
 
+    function handleFiles(files) {
+      var file = files[0];
+      if (!file) return;
+      statusBox.style.color = "";
+      statusBox.textContent = "Reading " + file.name + "…";
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var dataUrl = e.target.result;
+        var b64 = dataUrl.substring(dataUrl.indexOf(",") + 1);
+        outputText.value = urlSafe.checked ? toUrlSafe(b64) : b64;
+        statusBox.textContent = "Encoded \"" + file.name + "\" (" + file.size.toLocaleString() + " bytes) to " + outputText.value.length.toLocaleString() + " Base64 characters.";
+        statusBox.style.color = "var(--color-success)";
+      };
+      reader.onerror = function () {
+        outputText.value = "";
+        statusBox.textContent = "Couldn't read that file.";
+        statusBox.style.color = "var(--color-danger)";
+      };
+      reader.readAsDataURL(file);
+    }
+
+    Fixora.setupDropzone(dropzone, fileInput, handleFiles);
+    dropzone.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") fileInput.click();
+    });
+
+    urlSafe.addEventListener("change", function () {
+      if (mode === "encode" && outputText.value) convertBtn.click();
+    });
+
     document.getElementById("copyBtn").addEventListener("click", function () {
       Fixora.copyText(outputText.value, copyNote);
     });
@@ -304,8 +387,11 @@
       inputText.value = "";
       outputText.value = "";
       statusBox.textContent = "";
+      fileInput.value = "";
       inputText.focus();
     });
+
+    urlSafeOption.style.display = "flex";
   </script>
 </body>
 </html>

@@ -5,7 +5,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free PDF Compressor Online — Reduce PDF File Size | Fixora</title>
-  <meta name="description" content="Compress PDF files online for free, right in your browser. Reduce PDF file size for scanned documents and image-heavy PDFs with no uploads, no watermarks, no sign-up." />
+  <meta name="description" content="Compress PDF files online for free, right in your browser. Choose High/Balanced/Low presets or dial in a custom resolution and JPEG quality, with a visual before/after size comparison. No uploads, no watermarks, no sign-up." />
   <meta name="keywords" content="pdf compressor, compress pdf, reduce pdf size, shrink pdf online free" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/pdf-compressor.html" />
@@ -67,8 +67,8 @@
       },
       {
         "@type": "Question",
-        "name": "What's the difference between High, Balanced, and Low compression?",
-        "acceptedAnswer": { "@type": "Answer", "text": "High compression renders pages at the lowest resolution and JPEG quality for the smallest possible file; Balanced is a middle ground recommended for most documents; Low compression renders at higher resolution and quality, keeping the file closer to the original size but sharper." }
+        "name": "What's the difference between High, Balanced, Low, and Custom compression?",
+        "acceptedAnswer": { "@type": "Answer", "text": "High compression renders pages at the lowest resolution and JPEG quality for the smallest possible file; Balanced is a middle ground recommended for most documents; Low compression renders at higher resolution and quality, keeping the file closer to the original size but sharper. Custom unlocks two sliders — Resolution Scale and JPEG Quality — so you can dial in an exact setting between or beyond those three presets." }
       },
       {
         "@type": "Question",
@@ -79,10 +79,65 @@
         "@type": "Question",
         "name": "Does the compressor upload my file anywhere?",
         "acceptedAnswer": { "@type": "Answer", "text": "No. Everything — reading the PDF, rendering pages, re-encoding, and rebuilding the file — happens locally in your browser using pdf.js and pdf-lib; your document never leaves your device." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the size comparison bar show?",
+        "acceptedAnswer": { "@type": "Answer", "text": "After compressing, two bars appear side by side scaled to the same pixel width per byte — one for the Original Size and one for the Compressed Size — so you can see the size reduction at a glance in addition to the exact numbers and percentage saved above them." }
       }
     ]
   }
   </script>
+  <style>
+    .size-compare {
+      margin-top: 18px;
+      display: none;
+    }
+    .size-compare-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+    }
+    .size-compare-row .sc-label {
+      width: 88px;
+      flex-shrink: 0;
+      font-weight: 600;
+    }
+    .size-compare-track {
+      flex: 1;
+      background: var(--color-bg-alt);
+      border-radius: 999px;
+      height: 14px;
+      overflow: hidden;
+    }
+    .size-compare-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.4s ease;
+    }
+    .size-compare-fill.original { background: var(--color-text-muted); }
+    .size-compare-fill.compressed { background: var(--gradient-primary); }
+    .size-compare-row .sc-bytes {
+      width: 78px;
+      flex-shrink: 0;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    .custom-slider-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 24px;
+      row-gap: 14px;
+      margin-top: 14px;
+    }
+    .custom-slider-grid .field { margin: 0; }
+    @media (max-width: 560px) {
+      .custom-slider-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -118,7 +173,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">📄</div>
       <h1>PDF Compressor</h1>
-      <p>Reduce the file size of scanned or image-heavy PDFs — entirely in your browser. Nothing is uploaded to a server.</p>
+      <p>Reduce the file size of scanned or image-heavy PDFs — pick a preset or dial in a custom resolution and quality — entirely in your browser. Nothing is uploaded to a server.</p>
     </section>
 
     <section class="container">
@@ -143,12 +198,37 @@
             <option value="high">High compression (smallest file, lower image quality)</option>
             <option value="balanced" selected>Balanced (recommended)</option>
             <option value="low">Low compression (best quality, larger file)</option>
+            <option value="custom">Custom (set your own resolution & quality)</option>
           </select>
+        </div>
+
+        <div class="custom-slider-grid" id="customSliders" style="display:none;">
+          <div class="field">
+            <label for="customScale">Resolution Scale: <span id="customScaleValue">1.4</span>x</label>
+            <input type="range" id="customScale" min="0.5" max="2.5" step="0.1" value="1.4" style="width:100%;" />
+          </div>
+          <div class="field">
+            <label for="customQuality">JPEG Quality: <span id="customQualityValue">65</span>%</label>
+            <input type="range" id="customQuality" min="10" max="95" step="5" value="65" style="width:100%;" />
+          </div>
         </div>
 
         <div class="actions">
           <button class="btn btn-primary" id="compressBtn" disabled>Compress PDF</button>
           <a class="btn btn-secondary" id="downloadBtn" style="display:none;" download="compressed.pdf">Download Compressed PDF</a>
+        </div>
+
+        <div class="size-compare" id="sizeCompare">
+          <div class="size-compare-row">
+            <span class="sc-label">Original</span>
+            <div class="size-compare-track"><div class="size-compare-fill original" id="scOriginalFill" style="width:100%;"></div></div>
+            <span class="sc-bytes" id="scOriginalBytes">–</span>
+          </div>
+          <div class="size-compare-row">
+            <span class="sc-label">Compressed</span>
+            <div class="size-compare-track"><div class="size-compare-fill compressed" id="scCompressedFill" style="width:0%;"></div></div>
+            <span class="sc-bytes" id="scCompressedBytes">–</span>
+          </div>
         </div>
 
         <div class="output-box" id="statusBox"></div>
@@ -162,9 +242,9 @@
         <h2>How to Compress a PDF</h2>
         <ol class="howto-steps">
           <li>Click the upload area and choose (or drag) the PDF you want to shrink.</li>
-          <li>Pick a compression level — High compression for the smallest file, Balanced for a good mix of size and quality, or Low compression to keep quality closer to the original.</li>
+          <li>Pick a compression level — High compression for the smallest file, Balanced for a good mix of size and quality, Low compression to keep quality closer to the original, or Custom to set your own Resolution Scale and JPEG Quality sliders.</li>
           <li>Click "Compress PDF" and watch the status message as it works through each page.</li>
-          <li>Review the Original Size, Compressed Size, and Saved percentage in the stats, then click "Download Compressed PDF".</li>
+          <li>Review the Original Size, Compressed Size, and Saved percentage in the stats, check the visual size comparison bars, then click "Download Compressed PDF".</li>
         </ol>
       </div>
 
@@ -179,8 +259,8 @@
           <p>No. Compression flattens every page into a JPEG image and rebuilds the PDF from those images, so any selectable text becomes part of a picture and can no longer be copied or searched. If you need to keep searchable text, skip compression or extract the text first with the PDF to Text tool.</p>
         </details>
         <details class="faq-item">
-          <summary>What's the difference between High, Balanced, and Low compression?</summary>
-          <p>High compression renders pages at the lowest resolution and JPEG quality for the smallest possible file; Balanced is a middle ground recommended for most documents; Low compression renders at higher resolution and quality, keeping the file closer to the original size but sharper.</p>
+          <summary>What's the difference between High, Balanced, Low, and Custom compression?</summary>
+          <p>High compression renders pages at the lowest resolution and JPEG quality for the smallest possible file; Balanced is a middle ground recommended for most documents; Low compression renders at higher resolution and quality, keeping the file closer to the original size but sharper. Custom unlocks two sliders — Resolution Scale and JPEG Quality — so you can dial in an exact setting between or beyond those three presets.</p>
         </details>
         <details class="faq-item">
           <summary>Is there a file size limit?</summary>
@@ -189,6 +269,10 @@
         <details class="faq-item">
           <summary>Does the compressor upload my file anywhere?</summary>
           <p>No. Everything — reading the PDF, rendering pages, re-encoding, and rebuilding the file — happens locally in your browser using pdf.js and pdf-lib; your document never leaves your device.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the size comparison bar show?</summary>
+          <p>After compressing, two bars appear side by side scaled to the same pixel width per byte — one for the Original Size and one for the Compressed Size — so you can see the size reduction at a glance in addition to the exact numbers and percentage saved above them.</p>
         </details>
       </div>
 
@@ -273,6 +357,10 @@
     var statusBox = document.getElementById("statusBox");
     var fileInfo = document.getElementById("fileInfo");
     var compressionLevel = document.getElementById("compressionLevel");
+    var customSliders = document.getElementById("customSliders");
+    var customScale = document.getElementById("customScale");
+    var customQuality = document.getElementById("customQuality");
+    var sizeCompare = document.getElementById("sizeCompare");
 
     var currentFile = null;
 
@@ -281,6 +369,23 @@
       balanced: { scale: 1.4, quality: 0.65 },
       low:      { scale: 1.8, quality: 0.82 }
     };
+
+    function currentSettings() {
+      if (compressionLevel.value === "custom") {
+        return { scale: parseFloat(customScale.value), quality: parseInt(customQuality.value, 10) / 100 };
+      }
+      return LEVELS[compressionLevel.value];
+    }
+
+    compressionLevel.addEventListener("change", function () {
+      customSliders.style.display = compressionLevel.value === "custom" ? "grid" : "none";
+    });
+    customScale.addEventListener("input", function () {
+      document.getElementById("customScaleValue").textContent = customScale.value;
+    });
+    customQuality.addEventListener("input", function () {
+      document.getElementById("customQualityValue").textContent = customQuality.value;
+    });
 
     function handleFiles(files) {
       var file = files[0];
@@ -291,6 +396,7 @@
       currentFile = file;
       compressBtn.disabled = false;
       downloadBtn.style.display = "none";
+      sizeCompare.style.display = "none";
       fileInfo.style.display = "flex";
       document.getElementById("statOriginal").textContent = Fixora.formatBytes(file.size);
       document.getElementById("statPages").textContent = "–";
@@ -312,7 +418,7 @@
 
       try {
         var arrayBuffer = await currentFile.arrayBuffer();
-        var settings = LEVELS[compressionLevel.value];
+        var settings = currentSettings();
 
         var loadingTask = pdfjsLib.getDocument({ data: arrayBuffer.slice(0) });
         var pdf = await loadingTask.promise;
@@ -353,6 +459,13 @@
 
         document.getElementById("statNew").textContent = Fixora.formatBytes(newSize);
         document.getElementById("statSaved").textContent = savedPct + "%";
+
+        var maxSize = Math.max(originalSize, newSize, 1);
+        document.getElementById("scOriginalFill").style.width = (originalSize / maxSize * 100) + "%";
+        document.getElementById("scCompressedFill").style.width = (newSize / maxSize * 100) + "%";
+        document.getElementById("scOriginalBytes").textContent = Fixora.formatBytes(originalSize);
+        document.getElementById("scCompressedBytes").textContent = Fixora.formatBytes(newSize);
+        sizeCompare.style.display = "block";
 
         var url = URL.createObjectURL(blob);
         downloadBtn.href = url;

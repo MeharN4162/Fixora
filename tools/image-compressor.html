@@ -4,22 +4,22 @@
   <meta charset="UTF-8" />
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Free Image Compressor Online — Reduce Photo File Size | Fixora</title>
-  <meta name="description" content="Compress JPG or PNG images online for free without changing dimensions. Reduce photo file size right in your browser. No uploads, no sign-up." />
-  <meta name="keywords" content="image compressor, compress jpg online free, reduce photo size, compress png" />
+  <title>Free Image Compressor Online — Reduce Photo File Size to a Target KB | Fixora</title>
+  <meta name="description" content="Compress JPG or PNG images online for free, output as JPG or WebP, and either set a manual quality level or a target file size in KB. No uploads, no sign-up." />
+  <meta name="keywords" content="image compressor, compress jpg online free, reduce photo size, compress png, compress image to target size" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/image-compressor.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Image Compressor Online" />
-  <meta property="og:description" content="Compress JPG or PNG images online for free without changing dimensions." />
+  <meta property="og:description" content="Compress JPG or PNG images online for free — pick a manual quality or a target file size, and export as JPG or WebP." />
   <meta property="og:url" content="https://fixora-site.vercel.app/tools/image-compressor.html" />
   <meta property="og:image" content="https://fixora-site.vercel.app/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Image Compressor Online" />
-  <meta name="twitter:description" content="Compress JPG or PNG images online for free without changing dimensions." />
+  <meta name="twitter:description" content="Compress JPG or PNG images online for free — pick a manual quality or a target file size, and export as JPG or WebP." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -57,32 +57,59 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Why does my PNG turn into a JPG after compressing?",
-        "acceptedAnswer": { "@type": "Answer", "text": "This tool always re-encodes the output as JPEG, regardless of whether you uploaded a JPG or PNG - that's how it achieves significant size reduction. Any transparent areas in a source PNG are filled with white, since JPEG doesn't support transparency." }
+        "name": "What output formats can I compress to, and does that change transparency?",
+        "acceptedAnswer": { "@type": "Answer", "text": "You can choose JPG or WebP as the output format regardless of what you uploaded. JPG always fills transparent areas with white since it can't store transparency; WebP supports transparency, so a transparent PNG compressed to WebP keeps its transparent areas intact." }
       },
       {
         "@type": "Question",
         "name": "What does the Compression percentage actually control?",
-        "acceptedAnswer": { "@type": "Answer", "text": "It's the JPEG quality value passed to the browser's canvas encoder - lower numbers mean more aggressive compression (smaller file, more visible artifacts) and higher numbers stay closer to the original image quality." }
+        "acceptedAnswer": { "@type": "Answer", "text": "It's the JPEG or WebP quality value passed to the browser's canvas encoder - lower numbers mean more aggressive compression (smaller file, more visible artifacts) and higher numbers stay closer to the original image quality." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Target File Size mode work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Instead of you picking a quality percentage, you type a target size in KB and the tool runs a binary search: it repeatedly re-encodes your image at different quality levels in your browser until it finds the highest quality that still fits under your target, then uses that result. If even the lowest quality still exceeds your target, it uses the smallest file it could produce and tells you so." }
       },
       {
         "@type": "Question",
         "name": "My image barely got smaller - why?",
-        "acceptedAnswer": { "@type": "Answer", "text": "If the tool reports minimal size reduction, your image was likely already well-optimized or the content doesn't compress much further at the chosen quality (flat colors and simple graphics compress differently than complex photos). Try lowering the Compression slider for a bigger reduction." }
+        "acceptedAnswer": { "@type": "Answer", "text": "If the tool reports minimal size reduction, your image was likely already well-optimized or the content doesn't compress much further at the chosen quality (flat colors and simple graphics compress differently than complex photos). Try lowering the Compression slider, or switching to Target File Size mode, for a bigger reduction." }
       },
       {
         "@type": "Question",
         "name": "Does this tool resize my image to make it smaller?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No - dimensions stay exactly the same; only the JPEG compression level changes. If you also want to change pixel dimensions, use Fixora's Image Resizer instead." }
+        "acceptedAnswer": { "@type": "Answer", "text": "No - dimensions stay exactly the same; only the compression level changes. If you also want to change pixel dimensions, use Fixora's Image Resizer instead." }
       },
       {
         "@type": "Question",
         "name": "Is my file uploaded to a server to be compressed?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No. Compression happens locally using the Canvas API's toBlob() method with a JPEG quality parameter - your image is never sent anywhere." }
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Compression happens locally using the Canvas API's encoder with a quality parameter, including all the target-size binary search attempts - your image is never sent anywhere." }
       }
     ]
   }
   </script>
+
+  <style>
+    .compressor-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 24px;
+      row-gap: 14px;
+      margin-top: 16px;
+      align-items: end;
+    }
+    .compressor-grid .field {
+      margin: 0;
+    }
+    .compressor-grid .field.full {
+      grid-column: 1 / -1;
+    }
+    @media (max-width: 560px) {
+      .compressor-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -118,7 +145,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🗜️</div>
       <h1>Image Compressor</h1>
-      <p>Shrink a JPG or PNG's file size without changing its dimensions — ideal for uploads with strict size limits.</p>
+      <p>Shrink a JPG or PNG's file size without changing its dimensions — dial in a manual quality or hit an exact target size in KB, and export as JPG or WebP.</p>
     </section>
 
     <section class="container">
@@ -133,8 +160,29 @@
         <img id="previewImg" class="preview-img" style="display:none;" alt="Preview of compressed image" />
 
         <div class="field" style="margin-top:16px;">
-          <label for="qualityRange">Compression: <span id="qualityValue">70%</span> quality</label>
-          <input type="range" id="qualityRange" min="10" max="95" value="70" style="width:100%;" />
+          <label>Compression Mode</label>
+          <div class="row">
+            <label class="check-row"><input type="radio" name="compressMode" value="quality" checked /> Manual Quality</label>
+            <label class="check-row"><input type="radio" name="compressMode" value="target" /> Target File Size</label>
+          </div>
+        </div>
+
+        <div class="compressor-grid">
+          <div class="field" id="qualityField">
+            <label for="qualityRange">Compression: <span id="qualityValue">70%</span> quality</label>
+            <input type="range" id="qualityRange" min="10" max="95" value="70" style="width:100%;" />
+          </div>
+          <div class="field" id="targetField" style="display:none;">
+            <label for="targetKbInput">Target size (KB)</label>
+            <input type="number" id="targetKbInput" min="1" placeholder="e.g. 200" />
+          </div>
+          <div class="field">
+            <label for="formatSelect">Output Format</label>
+            <select id="formatSelect">
+              <option value="image/jpeg">JPG</option>
+              <option value="image/webp">WebP</option>
+            </select>
+          </div>
         </div>
 
         <div class="stat-row" id="fileInfo" style="display:none;">
@@ -149,8 +197,8 @@
 
         <div class="output-box" id="statusBox"></div>
 
-        <p style="font-size:0.85rem;color:var(--color-text-muted);margin-top:18px;">
-          <strong>Note:</strong> compression is applied by re-encoding the image as JPG, which does not support transparency — transparent areas in PNGs will be filled with white.
+        <p style="font-size:0.85rem;color:var(--color-text-muted);margin-top:18px;" id="formatNote">
+          <strong>Note:</strong> JPG output does not support transparency — transparent areas will be filled with white. Switch Output Format to WebP to keep transparency.
         </p>
       </div>
 
@@ -158,33 +206,37 @@
         <h2>How to Compress an Image</h2>
         <ol class="howto-steps">
           <li>Click the upload area or drag in a JPG or PNG file.</li>
-          <li>Drag the "Compression" slider (10–95%, default 70%) — the preview and file size update automatically as you adjust it.</li>
-          <li>Check the Original Size, Compressed Size, and Saved percentage stats to see the impact.</li>
-          <li>Click "Download Compressed Image" once you're happy with the trade-off.</li>
+          <li>Choose "Manual Quality" and drag the slider (10–95%), or choose "Target File Size" and type a KB target — the tool searches for the highest quality that still fits.</li>
+          <li>Pick an Output Format: JPG or WebP.</li>
+          <li>Check the Original Size, Compressed Size, and Saved percentage stats, then click "Download Compressed Image".</li>
         </ol>
       </div>
 
       <div class="faq">
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
-          <summary>Why does my PNG turn into a JPG after compressing?</summary>
-          <p>This tool always re-encodes the output as JPEG, regardless of whether you uploaded a JPG or PNG - that's how it achieves significant size reduction. Any transparent areas in a source PNG are filled with white, since JPEG doesn't support transparency.</p>
+          <summary>What output formats can I compress to, and does that change transparency?</summary>
+          <p>You can choose JPG or WebP as the output format regardless of what you uploaded. JPG always fills transparent areas with white since it can't store transparency; WebP supports transparency, so a transparent PNG compressed to WebP keeps its transparent areas intact.</p>
         </details>
         <details class="faq-item">
           <summary>What does the Compression percentage actually control?</summary>
-          <p>It's the JPEG quality value passed to the browser's canvas encoder - lower numbers mean more aggressive compression (smaller file, more visible artifacts) and higher numbers stay closer to the original image quality.</p>
+          <p>It's the JPEG or WebP quality value passed to the browser's canvas encoder - lower numbers mean more aggressive compression (smaller file, more visible artifacts) and higher numbers stay closer to the original image quality.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does Target File Size mode work?</summary>
+          <p>Instead of you picking a quality percentage, you type a target size in KB and the tool runs a binary search: it repeatedly re-encodes your image at different quality levels in your browser until it finds the highest quality that still fits under your target, then uses that result. If even the lowest quality still exceeds your target, it uses the smallest file it could produce and tells you so.</p>
         </details>
         <details class="faq-item">
           <summary>My image barely got smaller - why?</summary>
-          <p>If the tool reports minimal size reduction, your image was likely already well-optimized or the content doesn't compress much further at the chosen quality (flat colors and simple graphics compress differently than complex photos). Try lowering the Compression slider for a bigger reduction.</p>
+          <p>If the tool reports minimal size reduction, your image was likely already well-optimized or the content doesn't compress much further at the chosen quality (flat colors and simple graphics compress differently than complex photos). Try lowering the Compression slider, or switching to Target File Size mode, for a bigger reduction.</p>
         </details>
         <details class="faq-item">
           <summary>Does this tool resize my image to make it smaller?</summary>
-          <p>No - dimensions stay exactly the same; only the JPEG compression level changes. If you also want to change pixel dimensions, use Fixora's Image Resizer instead.</p>
+          <p>No - dimensions stay exactly the same; only the compression level changes. If you also want to change pixel dimensions, use Fixora's Image Resizer instead.</p>
         </details>
         <details class="faq-item">
           <summary>Is my file uploaded to a server to be compressed?</summary>
-          <p>No. Compression happens locally using the Canvas API's toBlob() method with a JPEG quality parameter - your image is never sent anywhere.</p>
+          <p>No. Compression happens locally using the Canvas API's encoder with a quality parameter, including all the target-size binary search attempts - your image is never sent anywhere.</p>
         </details>
       </div>
 
@@ -266,6 +318,12 @@
     var fileInfo = document.getElementById("fileInfo");
     var qualityRange = document.getElementById("qualityRange");
     var qualityValue = document.getElementById("qualityValue");
+    var qualityField = document.getElementById("qualityField");
+    var targetField = document.getElementById("targetField");
+    var targetKbInput = document.getElementById("targetKbInput");
+    var formatSelect = document.getElementById("formatSelect");
+    var formatNote = document.getElementById("formatNote");
+    var modeRadios = document.querySelectorAll('input[name="compressMode"]');
 
     var currentFile = null;
     var currentImg = null;
@@ -273,8 +331,42 @@
     var compressGeneration = 0;
     var compressTimer = null;
 
+    function currentMode() {
+      return document.querySelector('input[name="compressMode"]:checked').value;
+    }
+
+    modeRadios.forEach(function (radio) {
+      radio.addEventListener("change", function () {
+        if (!radio.checked) return;
+        qualityField.style.display = radio.value === "quality" ? "block" : "none";
+        targetField.style.display = radio.value === "target" ? "block" : "none";
+        if (currentImg) {
+          clearTimeout(compressTimer);
+          compressTimer = setTimeout(compress, 120);
+        }
+      });
+    });
+
     qualityRange.addEventListener("input", function () {
       qualityValue.textContent = qualityRange.value + "%";
+      if (currentImg) {
+        clearTimeout(compressTimer);
+        compressTimer = setTimeout(compress, 120);
+      }
+    });
+
+    targetKbInput.addEventListener("input", function () {
+      if (currentImg) {
+        clearTimeout(compressTimer);
+        compressTimer = setTimeout(compress, 250);
+      }
+    });
+
+    formatSelect.addEventListener("change", function () {
+      var isJpeg = formatSelect.value === "image/jpeg";
+      formatNote.innerHTML = isJpeg
+        ? "<strong>Note:</strong> JPG output does not support transparency — transparent areas will be filled with white. Switch Output Format to WebP to keep transparency."
+        : "<strong>Note:</strong> WebP output keeps transparency from a source PNG intact, and typically compresses smaller than JPG at the same visual quality.";
       if (currentImg) {
         clearTimeout(compressTimer);
         compressTimer = setTimeout(compress, 120);
@@ -295,6 +387,9 @@
         var img = new Image();
         img.onload = function () {
           currentImg = img;
+          if (!targetKbInput.value) {
+            targetKbInput.value = Math.max(1, Math.round(file.size / 1024 / 2));
+          }
           compress();
         };
         img.src = e.target.result;
@@ -302,47 +397,105 @@
       reader.readAsDataURL(file);
     }
 
+    function dataUrlToBlob(dataUrl) {
+      var commaIdx = dataUrl.indexOf(",");
+      var meta = dataUrl.slice(0, commaIdx);
+      var mimeMatch = meta.match(/:(.*?);/);
+      var mime = mimeMatch ? mimeMatch[1] : "image/jpeg";
+      var binary = atob(dataUrl.slice(commaIdx + 1));
+      var bytes = new Uint8Array(binary.length);
+      for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+      return new Blob([bytes], { type: mime });
+    }
+
+    // Binary-searches the quality parameter to find the highest quality whose
+    // encoded size still fits within targetBytes. toDataURL is synchronous,
+    // which makes this iterative search practical entirely on the main thread.
+    function findQualityForTarget(canvas, mime, targetBytes) {
+      var low = 0.02, high = 1.0;
+      var bestUrl = null, bestQuality = null;
+      for (var i = 0; i < 9; i++) {
+        var mid = (low + high) / 2;
+        var url = canvas.toDataURL(mime, mid);
+        var approxBytes = Math.round((url.length - (url.indexOf(",") + 1)) * 0.75);
+        if (approxBytes <= targetBytes) {
+          bestUrl = url;
+          bestQuality = mid;
+          low = mid;
+        } else {
+          high = mid;
+        }
+      }
+      if (!bestUrl) {
+        bestUrl = canvas.toDataURL(mime, low);
+        bestQuality = low;
+      }
+      return { url: bestUrl, quality: bestQuality };
+    }
+
+    function extFor(mime) {
+      return mime === "image/webp" ? "webp" : "jpg";
+    }
+
     function compress() {
       var canvas = document.createElement("canvas");
       canvas.width = currentImg.naturalWidth;
       canvas.height = currentImg.naturalHeight;
       var ctx = canvas.getContext("2d");
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      var mime = formatSelect.value;
+      if (mime === "image/jpeg") {
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
       ctx.drawImage(currentImg, 0, 0);
 
-      var quality = parseInt(qualityRange.value, 10) / 100;
       compressGeneration++;
       var myGeneration = compressGeneration;
 
-      canvas.toBlob(function (blob) {
-        // Discard if a newer compression (e.g. slider moved again) has since started.
-        if (myGeneration !== compressGeneration) return;
+      var mode = currentMode();
+      var blob, hitTarget = true, targetBytes = 0;
 
-        var url = URL.createObjectURL(blob);
-        if (lastCompressedUrl) URL.revokeObjectURL(lastCompressedUrl);
-        lastCompressedUrl = url;
+      if (mode === "target") {
+        targetBytes = Math.max(1, parseInt(targetKbInput.value, 10) || 0) * 1024;
+        var result = findQualityForTarget(canvas, mime, targetBytes);
+        blob = dataUrlToBlob(result.url);
+        qualityValue.textContent = Math.round(result.quality * 100) + "%";
+        hitTarget = blob.size <= targetBytes;
+      } else {
+        var quality = parseInt(qualityRange.value, 10) / 100;
+        blob = dataUrlToBlob(canvas.toDataURL(mime, quality));
+      }
 
-        previewImg.src = url;
-        previewImg.style.display = "block";
+      if (myGeneration !== compressGeneration) return;
 
-        downloadBtn.href = url;
-        downloadBtn.download = currentFile.name.replace(/\.(jpe?g|png)$/i, "") + "-compressed.jpg";
-        downloadBtn.style.display = "inline-flex";
+      var url = URL.createObjectURL(blob);
+      if (lastCompressedUrl) URL.revokeObjectURL(lastCompressedUrl);
+      lastCompressedUrl = url;
 
-        fileInfo.style.display = "flex";
-        var originalSize = currentFile.size;
-        var newSize = blob.size;
-        var savedPct = Math.max(0, Math.round((1 - newSize / originalSize) * 100));
+      previewImg.src = url;
+      previewImg.style.display = "block";
 
-        document.getElementById("statOriginal").textContent = Fixora.formatBytes(originalSize);
-        document.getElementById("statNew").textContent = Fixora.formatBytes(newSize);
-        document.getElementById("statSaved").textContent = savedPct + "%";
+      var ext = extFor(mime);
+      downloadBtn.href = url;
+      downloadBtn.download = currentFile.name.replace(/\.(jpe?g|png)$/i, "") + "-compressed." + ext;
+      downloadBtn.style.display = "inline-flex";
 
+      fileInfo.style.display = "flex";
+      var originalSize = currentFile.size;
+      var newSize = blob.size;
+      var savedPct = Math.max(0, Math.round((1 - newSize / originalSize) * 100));
+
+      document.getElementById("statOriginal").textContent = Fixora.formatBytes(originalSize);
+      document.getElementById("statNew").textContent = Fixora.formatBytes(newSize);
+      document.getElementById("statSaved").textContent = savedPct + "%";
+
+      if (mode === "target" && !hitTarget) {
+        statusBox.textContent = "Couldn't fully reach " + Fixora.formatBytes(targetBytes) + " without excessive quality loss — used the smallest size achievable (" + Fixora.formatBytes(newSize) + ").";
+      } else {
         statusBox.textContent = savedPct > 0
           ? "Done! Reduced file size by " + savedPct + "%."
           : "Done! This image was already well optimized, so size reduction was minimal.";
-      }, "image/jpeg", quality);
+      }
     }
 
     Fixora.setupDropzone(dropzone, fileInput, handleFiles);

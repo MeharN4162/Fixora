@@ -5,7 +5,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Duplicate Line Remover & Text Sorter Online | Fixora</title>
-  <meta name="description" content="Remove duplicate lines, strip blank lines, trim whitespace, and sort text alphabetically online for free. Paste a list and clean it up instantly in your browser." />
+  <meta name="description" content="Remove duplicate lines (keeping the first or last occurrence), strip blank lines, trim and normalize whitespace, sort alphabetically, and optionally number the output — free, instant, in your browser." />
   <meta name="keywords" content="remove duplicate lines, duplicate line remover, unique lines tool, text sorter online" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/remove-duplicate-lines.html" />
@@ -83,6 +83,19 @@
     ]
   }
   </script>
+  <style>
+    .dupline-options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 20px;
+      row-gap: 4px;
+      margin-top: 14px;
+    }
+    .dupline-options-grid .check-row { margin: 0; }
+    @media (max-width: 640px) {
+      .dupline-options-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>

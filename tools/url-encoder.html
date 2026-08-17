@@ -5,8 +5,8 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free URL Encoder & Decoder Online | Fixora</title>
-  <meta name="description" content="Encode or decode URLs and URL components online for free, right in your browser. Handle special characters and query strings instantly. No sign-up." />
-  <meta name="keywords" content="url encoder, url decoder, percent encoding online free" />
+  <meta name="description" content="Encode or decode URLs and URL components online for free, right in your browser. See both encodeURIComponent and encodeURI results at once, live, with a clear explanation of when to use each. No sign-up." />
+  <meta name="keywords" content="url encoder, url decoder, percent encoding online free, encodeuricomponent vs encodeuri" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/url-encoder.html" />
 
@@ -27,6 +27,61 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    .url-result-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .url-result-row:last-child { border-bottom: none; }
+    .url-result-row .url-result-head {
+      width: 200px;
+      flex-shrink: 0;
+    }
+    .url-result-row .url-result-head strong {
+      display: block;
+      font-size: 0.86rem;
+      color: var(--color-text);
+    }
+    .url-result-row .url-result-head small {
+      display: block;
+      font-family: monospace;
+      font-size: 0.76rem;
+      color: var(--color-text-muted);
+      margin-top: 2px;
+    }
+    .url-result-row .url-result-body {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .url-result-row textarea {
+      flex: 1;
+      min-width: 0;
+      min-height: 44px;
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      color: var(--color-text);
+      font-family: monospace;
+      font-size: 0.85rem;
+      resize: vertical;
+    }
+    .url-result-row .btn {
+      flex-shrink: 0;
+      padding: 8px 14px;
+      font-size: 0.8rem;
+    }
+    @media (max-width: 640px) {
+      .url-result-row { flex-wrap: wrap; }
+      .url-result-row .url-result-head { width: 100%; }
+    }
+  </style>
 
   <script type="application/ld+json">
   {

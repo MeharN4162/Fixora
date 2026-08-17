@@ -5,7 +5,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Excel to PDF Converter Online | Fixora</title>
-  <meta name="description" content="Convert an Excel spreadsheet (.xlsx/.xls) to PDF online for free, right in your browser. No uploads, no sign-up." />
+  <meta name="description" content="Convert an Excel spreadsheet (.xlsx/.xls) to PDF online for free, right in your browser. Choose portrait or landscape, fit wide tables to the page width, and combine multiple sheets into one PDF. No uploads, no sign-up." />
   <meta name="keywords" content="excel to pdf, convert xlsx to pdf online free, spreadsheet to pdf" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/excel-to-pdf.html" />
@@ -13,13 +13,13 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Excel to PDF Converter Online" />
-  <meta property="og:description" content="Convert an Excel spreadsheet to PDF online for free, right in your browser." />
+  <meta property="og:description" content="Convert an Excel spreadsheet to PDF online for free — portrait/landscape, fit-to-width, and multi-sheet support." />
   <meta property="og:url" content="https://fixora-site.vercel.app/tools/excel-to-pdf.html" />
   <meta property="og:image" content="https://fixora-site.vercel.app/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Excel to PDF Converter Online" />
-  <meta name="twitter:description" content="Convert an Excel spreadsheet to PDF online for free, right in your browser." />
+  <meta name="twitter:description" content="Convert an Excel spreadsheet to PDF online for free — portrait/landscape, fit-to-width, and multi-sheet support." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -62,8 +62,8 @@
       },
       {
         "@type": "Question",
-        "name": "My workbook has multiple sheets — which one gets converted?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Use the sheet selector that appears after uploading to choose which sheet to preview and convert. Only one sheet is converted at a time; to get a PDF for another sheet, select it and click Save as PDF again." }
+        "name": "My workbook has multiple sheets — which ones get converted?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Use the sheet checklist that appears after uploading to choose which sheet or sheets to include — only the first sheet is checked by default. Check more than one and they're combined into a single PDF, each sheet starting on its own printed page." }
       },
       {
         "@type": "Question",
@@ -74,6 +74,11 @@
         "@type": "Question",
         "name": "Does it support the older .xls format, or only .xlsx?",
         "acceptedAnswer": { "@type": "Answer", "text": "Both — the underlying parser reads the modern .xlsx format as well as the legacy .xls format, so you don't need to convert older files first." }
+      },
+      {
+        "@type": "Question",
+        "name": "What do the Page Orientation and \"Fit table to page width\" options do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Page Orientation sets the printed page to Portrait or Landscape by writing an @page CSS rule the browser's print engine respects — pick Landscape for wide tables with many columns. \"Fit table to page width\" shrinks the font size and forces the table to a fixed layout at 100% width so it doesn't get cut off at the page's right edge instead of overflowing onto extra printed pages." }
       }
     ]
   }
@@ -92,6 +97,46 @@
     }
     .sheet-preview table { border-collapse: collapse; font-size: 0.85rem; }
     .sheet-preview table td { border: 1px solid #ccc; padding: 5px 10px; white-space: nowrap; }
+    .sheet-preview.fit-width table {
+      width: 100%;
+      table-layout: fixed;
+      font-size: 0.7rem;
+    }
+    .sheet-preview.fit-width table td {
+      white-space: normal;
+      word-break: break-word;
+    }
+    .sheet-section-heading {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin: 0 0 10px;
+      color: #1e293b;
+    }
+    .sheet-section + .sheet-section {
+      margin-top: 28px;
+    }
+    .sheet-check-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .sheet-check-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-surface);
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .sheet-check-item input {
+      width: 15px;
+      height: 15px;
+      cursor: pointer;
+    }
 
     @media print {
       .no-print { display: none !important; }
@@ -102,6 +147,10 @@
         border: none !important;
         padding: 0 !important;
         margin: 0 !important;
+      }
+      .sheet-section + .sheet-section {
+        page-break-before: always;
+        margin-top: 0;
       }
     }
   </style>
@@ -140,7 +189,7 @@
     <section class="tool-page-head container no-print">
       <div class="icon-lg" aria-hidden="true">📄</div>
       <h1>Excel to PDF Converter</h1>
-      <p>Convert an .xlsx or .xls spreadsheet to PDF using your browser's own print engine.</p>
+      <p>Convert an .xlsx or .xls spreadsheet to PDF using your browser's own print engine — choose portrait or landscape, fit wide tables to the page, and combine multiple sheets into one file.</p>
     </section>
 
     <section class="container">
@@ -152,9 +201,26 @@
           <input type="file" id="fileInput" accept=".xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" hidden />
         </div>
 
-        <div class="field no-print" id="sheetSelectWrap" style="display:none;max-width:320px;margin-top:16px;">
-          <label for="sheetSelect">Sheet</label>
-          <select id="sheetSelect"></select>
+        <div class="row no-print" id="optionsRow" style="display:none;margin-top:16px;">
+          <div class="field">
+            <label for="orientationSelect">Page Orientation</label>
+            <select id="orientationSelect">
+              <option value="portrait" selected>Portrait</option>
+              <option value="landscape">Landscape</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="fitWidthCheck" style="margin-bottom:8px;">Wide Tables</label>
+            <div class="check-row" style="margin-top:2px;">
+              <input type="checkbox" id="fitWidthCheck" />
+              <label for="fitWidthCheck" style="margin-bottom:0;font-weight:400;">Fit table to page width</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="field no-print" id="sheetSelectWrap" style="display:none;margin-top:8px;">
+          <label>Sheets to Include</label>
+          <div class="sheet-check-list" id="sheetChecklist"></div>
         </div>
 
         <div class="actions no-print">
@@ -174,7 +240,8 @@
         <h2>How to Convert Excel to PDF</h2>
         <ol class="howto-steps">
           <li>Click the upload area and choose your .xlsx or .xls file, or drag it in.</li>
-          <li>If the workbook has more than one sheet, pick which one to convert from the sheet selector.</li>
+          <li>If the workbook has more than one sheet, check which one(s) to include in the Sheets to Include checklist — checking more than one combines them into a single PDF, each starting on its own page.</li>
+          <li>Set Page Orientation to Portrait or Landscape, and turn on "Fit table to page width" if a wide table is running off the edge.</li>
           <li>Review the table preview to make sure it looks right.</li>
           <li>Click Save as PDF and choose "Save as PDF" as the destination in the print dialog.</li>
         </ol>
@@ -187,8 +254,8 @@
           <p>Formula results are shown (the calculated values stored in the file), not the formulas themselves, and basic table structure is preserved — but complex formatting like cell colors, merged cells, or charts may not carry over exactly, since the sheet is converted to a plain HTML table before printing.</p>
         </details>
         <details class="faq-item">
-          <summary>My workbook has multiple sheets — which one gets converted?</summary>
-          <p>Use the sheet selector that appears after uploading to choose which sheet to preview and convert. Only one sheet is converted at a time; to get a PDF for another sheet, select it and click Save as PDF again.</p>
+          <summary>My workbook has multiple sheets — which ones get converted?</summary>
+          <p>Use the sheet checklist that appears after uploading to choose which sheet or sheets to include — only the first sheet is checked by default. Check more than one and they're combined into a single PDF, each sheet starting on its own printed page.</p>
         </details>
         <details class="faq-item">
           <summary>Why does clicking Save as PDF open my browser's print dialog?</summary>
@@ -197,6 +264,10 @@
         <details class="faq-item">
           <summary>Does it support the older .xls format, or only .xlsx?</summary>
           <p>Both — the underlying parser reads the modern .xlsx format as well as the legacy .xls format, so you don't need to convert older files first.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What do the Page Orientation and "Fit table to page width" options do?</summary>
+          <p>Page Orientation sets the printed page to Portrait or Landscape by writing an @page CSS rule the browser's print engine respects — pick Landscape for wide tables with many columns. "Fit table to page width" shrinks the font size and forces the table to a fixed layout at 100% width so it doesn't get cut off at the page's right edge instead of overflowing onto extra printed pages.</p>
         </details>
       </div>
 
@@ -274,19 +345,51 @@
     var dropzone = document.getElementById("dropzone");
     var fileInput = document.getElementById("fileInput");
     var sheetSelectWrap = document.getElementById("sheetSelectWrap");
-    var sheetSelect = document.getElementById("sheetSelect");
+    var sheetChecklist = document.getElementById("sheetChecklist");
+    var optionsRow = document.getElementById("optionsRow");
+    var orientationSelect = document.getElementById("orientationSelect");
+    var fitWidthCheck = document.getElementById("fitWidthCheck");
     var downloadBtn = document.getElementById("downloadBtn");
     var statusBox = document.getElementById("statusBox");
     var printArea = document.getElementById("printArea");
 
     var workbook = null;
+    var pageStyleEl = document.createElement("style");
+    document.head.appendChild(pageStyleEl);
 
-    function renderSheet(sheetName) {
-      var ws = workbook.Sheets[sheetName];
-      var html = XLSX.utils.sheet_to_html(ws, { header: "", footer: "" });
-      printArea.innerHTML = html;
+    function updatePageStyle() {
+      pageStyleEl.textContent = "@page { size: A4 " + orientationSelect.value + "; margin: 12mm; }";
+    }
+
+    function selectedSheetNames() {
+      var names = [];
+      sheetChecklist.querySelectorAll('input[type="checkbox"]:checked').forEach(function (cb) {
+        names.push(cb.value);
+      });
+      return names;
+    }
+
+    function renderSelectedSheets() {
+      var names = selectedSheetNames();
+      printArea.classList.toggle("fit-width", fitWidthCheck.checked);
+
+      if (names.length === 0) {
+        printArea.innerHTML = "";
+        printArea.style.display = "none";
+        downloadBtn.style.display = "none";
+        statusBox.textContent = "Check at least one sheet to include.";
+        return;
+      }
+
+      printArea.innerHTML = names.map(function (name) {
+        var ws = workbook.Sheets[name];
+        var html = XLSX.utils.sheet_to_html(ws, { header: "", footer: "" });
+        var heading = names.length > 1 ? '<h3 class="sheet-section-heading">' + name + '</h3>' : "";
+        return '<div class="sheet-section">' + heading + html + '</div>';
+      }).join("");
       printArea.style.display = "block";
       downloadBtn.style.display = "inline-flex";
+      statusBox.textContent = "Loaded! Preview below, then click Save as PDF.";
     }
 
     function handleFiles(files) {
@@ -300,6 +403,7 @@
       downloadBtn.style.display = "none";
       printArea.style.display = "none";
       sheetSelectWrap.style.display = "none";
+      optionsRow.style.display = "none";
       statusBox.textContent = "Reading " + file.name + "…";
 
       var reader = new FileReader();
@@ -312,20 +416,23 @@
           return;
         }
 
-        sheetSelect.innerHTML = "";
-        workbook.SheetNames.forEach(function (name) {
-          var opt = document.createElement("option");
-          opt.value = name;
-          opt.textContent = name;
-          sheetSelect.appendChild(opt);
+        sheetChecklist.innerHTML = "";
+        workbook.SheetNames.forEach(function (name, idx) {
+          var label = document.createElement("label");
+          label.className = "sheet-check-item";
+          var cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.value = name;
+          cb.checked = idx === 0; // only the first sheet is included by default
+          cb.addEventListener("change", renderSelectedSheets);
+          label.appendChild(cb);
+          label.appendChild(document.createTextNode(name));
+          sheetChecklist.appendChild(label);
         });
 
-        if (workbook.SheetNames.length > 1) {
-          sheetSelectWrap.style.display = "block";
-        }
-
-        renderSheet(workbook.SheetNames[0]);
-        statusBox.textContent = "Loaded! Preview below, then click Save as PDF.";
+        sheetSelectWrap.style.display = "block";
+        optionsRow.style.display = "flex";
+        renderSelectedSheets();
       };
       reader.onerror = function () {
         statusBox.textContent = "Couldn't read that file. Please try again.";
@@ -338,9 +445,9 @@
       if (e.key === "Enter" || e.key === " ") fileInput.click();
     });
 
-    sheetSelect.addEventListener("change", function () {
-      renderSheet(sheetSelect.value);
-    });
+    orientationSelect.addEventListener("change", updatePageStyle);
+    fitWidthCheck.addEventListener("change", renderSelectedSheets);
+    updatePageStyle();
 
     downloadBtn.addEventListener("click", function () {
       window.print();

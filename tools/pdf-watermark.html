@@ -5,21 +5,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free PDF Watermark Tool Online | Fixora</title>
-  <meta name="description" content="Add a custom text watermark to every page of a PDF online for free, right in your browser. Adjust text, opacity, size, and angle. No uploads, no sign-up." />
-  <meta name="keywords" content="pdf watermark, add watermark to pdf online free, stamp pdf" />
+  <meta name="description" content="Add a custom text or image watermark to every page of a PDF online for free, right in your browser. Choose the position (center or any corner), opacity, size, and rotation angle. No uploads, no sign-up." />
+  <meta name="keywords" content="pdf watermark, add watermark to pdf online free, stamp pdf, image watermark pdf, logo watermark pdf" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/pdf-watermark.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free PDF Watermark Tool Online" />
-  <meta property="og:description" content="Add a custom text watermark to every page of a PDF online for free." />
+  <meta property="og:description" content="Add a custom text or image watermark to every page of a PDF online for free, with control over position, size, opacity, and angle." />
   <meta property="og:url" content="https://fixora-site.vercel.app/tools/pdf-watermark.html" />
   <meta property="og:image" content="https://fixora-site.vercel.app/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free PDF Watermark Tool Online" />
-  <meta name="twitter:description" content="Add a custom text watermark to every page of a PDF online for free." />
+  <meta name="twitter:description" content="Add a custom text or image watermark to every page of a PDF online for free, with control over position, size, opacity, and angle." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -57,28 +57,33 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Where is the watermark placed on the page?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Dead center of every page, rotated to the angle you chose. The tool calculates the text's true visual center (not just its baseline) so the watermark stays centered even when tilted at an angle like the default 45°." }
+        "name": "Can I use an image or logo as the watermark instead of text?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — switch to \"Image Watermark\" and upload a PNG or JPG. PNG is recommended if your logo has transparent areas, since JPG images are always fully opaque rectangles. The image is scaled to a percentage of the page width you choose, and the same Position, Opacity, and Angle controls apply to it as they do to text." }
       },
       {
         "@type": "Question",
         "name": "Can I put the watermark in a corner instead of the center?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Not currently — this tool always centers the watermark on each page. If you need a specific position like a bottom-right stamp, the PDF Page Numbers tool supports six fixed positions, though it's designed for numbers rather than arbitrary text." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — use the Position dropdown to choose Center or one of four corners (Top Left, Top Right, Bottom Left, Bottom Right). Corner placements are inset from the page edges so they stay fully on the page even when the Angle slider tilts them." }
+      },
+      {
+        "@type": "Question",
+        "name": "Where exactly does the watermark land on the page?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Wherever the Position dropdown says, rotated to the angle you chose. The tool calculates the watermark's true visual bounding box (not just its anchor point) so it lands in the right spot even when tilted at an angle like the default 45°." }
       },
       {
         "@type": "Question",
         "name": "Will the watermark cover up my document's content?",
-        "acceptedAnswer": { "@type": "Answer", "text": "It can, depending on your opacity setting — the default is a light 30% opacity so text underneath stays readable, but you can push it up to 100% for a bold, fully opaque stamp if that's what you want." }
+        "acceptedAnswer": { "@type": "Answer", "text": "It can, depending on your opacity setting — the default is a light 30% opacity so content underneath stays visible, but you can push it up to 100% for a bold, fully opaque stamp if that's what you want." }
       },
       {
         "@type": "Question",
         "name": "Is the watermark applied to every page, including a title page?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes, every single page in the document gets the same watermark text, size, opacity, angle, and color — there's no way to skip specific pages in this tool." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, every single page in the document gets the same watermark (text or image), position, size, opacity, and angle — there's no way to skip specific pages in this tool." }
       },
       {
         "@type": "Question",
         "name": "Can someone remove the watermark from the PDF I create?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The watermark is drawn as real text directly onto each page's content, similar to what most watermarking tools do, so it isn't cryptographically locked — a determined person with PDF editing software could still remove it. Treat it as a visible deterrent rather than a security measure." }
+        "acceptedAnswer": { "@type": "Answer", "text": "The watermark is drawn as real text or a real embedded image directly onto each page's content, similar to what most watermarking tools do, so it isn't cryptographically locked — a determined person with PDF editing software could still remove it. Treat it as a visible deterrent rather than a security measure." }
       }
     ]
   }
@@ -118,7 +123,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">💧</div>
       <h1>PDF Watermark</h1>
-      <p>Stamp a custom text watermark across every page of a PDF — perfect for marking drafts or protecting shared copies.</p>
+      <p>Stamp a custom text or image watermark across every page of a PDF — choose the position, size, opacity, and angle. Perfect for marking drafts, adding a logo, or protecting shared copies.</p>
     </section>
 
     <section class="container">
@@ -130,15 +135,51 @@
           <input type="file" id="fileInput" accept="application/pdf" hidden />
         </div>
 
-        <div class="field" style="margin-top:20px;">
-          <label for="watermarkText">Watermark Text</label>
-          <input type="text" id="watermarkText" placeholder="e.g. DRAFT, CONFIDENTIAL" value="DRAFT" />
+        <div class="pill-row" style="margin-top:20px;">
+          <button class="pill active" data-wmtype="text" type="button">Text Watermark</button>
+          <button class="pill" data-wmtype="image" type="button">Image Watermark</button>
         </div>
 
-        <div class="row">
+        <div id="textWmPanel">
+          <div class="field" style="margin-top:16px;">
+            <label for="watermarkText">Watermark Text</label>
+            <input type="text" id="watermarkText" placeholder="e.g. DRAFT, CONFIDENTIAL" value="DRAFT" />
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="fontSizeRange">Text Size: <span id="fontSizeValue">48</span>pt</label>
+              <input type="range" id="fontSizeRange" min="12" max="120" value="48" style="width:100%;" />
+            </div>
+            <div class="field">
+              <label for="colorPicker">Color</label>
+              <input type="color" id="colorPicker" value="#2563eb" style="width:100%;height:40px;border:1px solid var(--color-border);border-radius:8px;cursor:pointer;" />
+            </div>
+          </div>
+        </div>
+
+        <div id="imageWmPanel" style="display:none;">
+          <div class="dropzone" id="imgDropzone" tabindex="0" role="button" aria-label="Upload a watermark image" style="margin-top:16px;">
+            <div class="dz-icon" aria-hidden="true">🖼️</div>
+            <strong>Click to upload or drag a PNG/JPG watermark image</strong>
+            <small id="imgDzStatus">Transparent PNGs work best for logos</small>
+            <input type="file" id="imgFileInput" accept="image/png,image/jpeg" hidden />
+          </div>
+          <div class="field" style="margin-top:16px;">
+            <label for="imgScaleRange">Image Size: <span id="imgScaleValue">30</span>% of page width</label>
+            <input type="range" id="imgScaleRange" min="5" max="80" value="30" style="width:100%;" />
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:16px;">
           <div class="field">
-            <label for="fontSizeRange">Size: <span id="fontSizeValue">48</span>pt</label>
-            <input type="range" id="fontSizeRange" min="12" max="120" value="48" style="width:100%;" />
+            <label for="positionSelect">Position</label>
+            <select id="positionSelect">
+              <option value="center" selected>Center</option>
+              <option value="top-left">Top Left</option>
+              <option value="top-right">Top Right</option>
+              <option value="bottom-left">Bottom Left</option>
+              <option value="bottom-right">Bottom Right</option>
+            </select>
           </div>
           <div class="field">
             <label for="opacityRange">Opacity: <span id="opacityValue">30</span>%</label>
@@ -148,11 +189,6 @@
             <label for="angleRange">Angle: <span id="angleValue">45</span>°</label>
             <input type="range" id="angleRange" min="0" max="90" value="45" style="width:100%;" />
           </div>
-        </div>
-
-        <div class="field">
-          <label for="colorPicker">Color</label>
-          <input type="color" id="colorPicker" value="#2563eb" style="width:100%;height:44px;border:1px solid var(--color-border);border-radius:8px;cursor:pointer;" />
         </div>
 
         <div class="actions">
@@ -167,8 +203,8 @@
         <h2>How to Add a Watermark to a PDF</h2>
         <ol class="howto-steps">
           <li>Upload your PDF.</li>
-          <li>Type your watermark text (defaults to "DRAFT" — try "CONFIDENTIAL" or your company name).</li>
-          <li>Adjust Size, Opacity, and Angle with the sliders, and pick a color with the color picker — the values update live next to each label.</li>
+          <li>Choose "Text Watermark" (type your text, defaults to "DRAFT") or "Image Watermark" (upload a PNG or JPG logo).</li>
+          <li>Pick a Position (Center or any of the four corners), then adjust Opacity and Angle with the sliders — for text, also set Size and Color.</li>
           <li>Click "Add Watermark" and download the watermarked PDF.</li>
         </ol>
       </div>
@@ -176,24 +212,28 @@
       <div class="faq">
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
-          <summary>Where is the watermark placed on the page?</summary>
-          <p>Dead center of every page, rotated to the angle you chose. The tool calculates the text's true visual center (not just its baseline) so the watermark stays centered even when tilted at an angle like the default 45°.</p>
+          <summary>Can I use an image or logo as the watermark instead of text?</summary>
+          <p>Yes — switch to "Image Watermark" and upload a PNG or JPG. PNG is recommended if your logo has transparent areas, since JPG images are always fully opaque rectangles. The image is scaled to a percentage of the page width you choose, and the same Position, Opacity, and Angle controls apply to it as they do to text.</p>
         </details>
         <details class="faq-item">
           <summary>Can I put the watermark in a corner instead of the center?</summary>
-          <p>Not currently — this tool always centers the watermark on each page. If you need a specific position like a bottom-right stamp, the PDF Page Numbers tool supports six fixed positions, though it's designed for numbers rather than arbitrary text.</p>
+          <p>Yes — use the Position dropdown to choose Center or one of four corners (Top Left, Top Right, Bottom Left, Bottom Right). Corner placements are inset from the page edges so they stay fully on the page even when the Angle slider tilts them.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Where exactly does the watermark land on the page?</summary>
+          <p>Wherever the Position dropdown says, rotated to the angle you chose. The tool calculates the watermark's true visual bounding box (not just its anchor point) so it lands in the right spot even when tilted at an angle like the default 45°.</p>
         </details>
         <details class="faq-item">
           <summary>Will the watermark cover up my document's content?</summary>
-          <p>It can, depending on your opacity setting — the default is a light 30% opacity so text underneath stays readable, but you can push it up to 100% for a bold, fully opaque stamp if that's what you want.</p>
+          <p>It can, depending on your opacity setting — the default is a light 30% opacity so content underneath stays visible, but you can push it up to 100% for a bold, fully opaque stamp if that's what you want.</p>
         </details>
         <details class="faq-item">
           <summary>Is the watermark applied to every page, including a title page?</summary>
-          <p>Yes, every single page in the document gets the same watermark text, size, opacity, angle, and color — there's no way to skip specific pages in this tool.</p>
+          <p>Yes, every single page in the document gets the same watermark (text or image), position, size, opacity, and angle — there's no way to skip specific pages in this tool.</p>
         </details>
         <details class="faq-item">
           <summary>Can someone remove the watermark from the PDF I create?</summary>
-          <p>The watermark is drawn as real text directly onto each page's content, similar to what most watermarking tools do, so it isn't cryptographically locked — a determined person with PDF editing software could still remove it. Treat it as a visible deterrent rather than a security measure.</p>
+          <p>The watermark is drawn as real text or a real embedded image directly onto each page's content, similar to what most watermarking tools do, so it isn't cryptographically locked — a determined person with PDF editing software could still remove it. Treat it as a visible deterrent rather than a security measure.</p>
         </details>
       </div>
 
@@ -277,8 +317,18 @@
     var fontSizeRange = document.getElementById("fontSizeRange");
     var opacityRange = document.getElementById("opacityRange");
     var angleRange = document.getElementById("angleRange");
+    var imgScaleRange = document.getElementById("imgScaleRange");
+    var positionSelect = document.getElementById("positionSelect");
+
+    var textWmPanel = document.getElementById("textWmPanel");
+    var imageWmPanel = document.getElementById("imageWmPanel");
+    var imgDropzone = document.getElementById("imgDropzone");
+    var imgFileInput = document.getElementById("imgFileInput");
+    var imgDzStatus = document.getElementById("imgDzStatus");
 
     var currentFile = null;
+    var currentImageFile = null;
+    var wmType = "text";
 
     fontSizeRange.addEventListener("input", function () {
       document.getElementById("fontSizeValue").textContent = fontSizeRange.value;
@@ -288,6 +338,19 @@
     });
     angleRange.addEventListener("input", function () {
       document.getElementById("angleValue").textContent = angleRange.value;
+    });
+    imgScaleRange.addEventListener("input", function () {
+      document.getElementById("imgScaleValue").textContent = imgScaleRange.value;
+    });
+
+    document.querySelectorAll("[data-wmtype]").forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        document.querySelectorAll("[data-wmtype]").forEach(function (p) { p.classList.remove("active"); });
+        pill.classList.add("active");
+        wmType = pill.getAttribute("data-wmtype");
+        textWmPanel.style.display = wmType === "text" ? "block" : "none";
+        imageWmPanel.style.display = wmType === "image" ? "block" : "none";
+      });
     });
 
     function handleFiles(files) {
@@ -307,6 +370,21 @@
       if (e.key === "Enter" || e.key === " ") fileInput.click();
     });
 
+    function handleImageFiles(files) {
+      var file = files[0];
+      if (!file || (file.type !== "image/png" && file.type !== "image/jpeg")) {
+        imgDzStatus.textContent = "Please choose a PNG or JPG image.";
+        return;
+      }
+      currentImageFile = file;
+      imgDzStatus.textContent = file.name + " ready.";
+    }
+
+    Fixora.setupDropzone(imgDropzone, imgFileInput, handleImageFiles);
+    imgDropzone.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") imgFileInput.click();
+    });
+
     function hexToRgb01(hex) {
       hex = hex.replace("#", "");
       return {
@@ -316,12 +394,46 @@
       };
     }
 
+    // PDF-lib rotates text and images around the (x, y) anchor point passed to
+    // drawText/drawImage — not the visual center of the box — so the offset
+    // from that anchor to the true center has to be rotated by the same angle
+    // before we can solve for where to place the anchor at a given target point.
+    function anchorForTarget(targetX, targetY, halfWidth, halfHeight, angleDeg) {
+      var rad = (angleDeg * Math.PI) / 180;
+      var rdx = halfWidth * Math.cos(rad) - halfHeight * Math.sin(rad);
+      var rdy = halfWidth * Math.sin(rad) + halfHeight * Math.cos(rad);
+      return { x: targetX - rdx, y: targetY - rdy };
+    }
+
+    // Resolves the Position dropdown to a target center point for the
+    // watermark's unrotated bounding box, inset from the page edges so
+    // corner placements never get clipped by the page boundary.
+    function targetCenterForPosition(position, pageWidth, pageHeight, halfWidth, halfHeight) {
+      var margin = 44;
+      switch (position) {
+        case "top-left": return { x: margin + halfWidth, y: pageHeight - margin - halfHeight };
+        case "top-right": return { x: pageWidth - margin - halfWidth, y: pageHeight - margin - halfHeight };
+        case "bottom-left": return { x: margin + halfWidth, y: margin + halfHeight };
+        case "bottom-right": return { x: pageWidth - margin - halfWidth, y: margin + halfHeight };
+        default: return { x: pageWidth / 2, y: pageHeight / 2 };
+      }
+    }
+
     watermarkBtn.addEventListener("click", async function () {
       if (!currentFile) return;
 
-      var text = document.getElementById("watermarkText").value.trim();
-      if (!text) {
-        statusBox.textContent = "Please enter watermark text.";
+      var opacity = parseInt(opacityRange.value, 10) / 100;
+      var angle = parseInt(angleRange.value, 10);
+      var position = positionSelect.value;
+
+      if (wmType === "text") {
+        var text = document.getElementById("watermarkText").value.trim();
+        if (!text) {
+          statusBox.textContent = "Please enter watermark text.";
+          return;
+        }
+      } else if (!currentImageFile) {
+        statusBox.textContent = "Please upload a watermark image first.";
         return;
       }
 
@@ -331,36 +443,56 @@
       try {
         var bytes = await currentFile.arrayBuffer();
         var doc = await PDFLib.PDFDocument.load(bytes);
-        var font = await doc.embedFont(PDFLib.StandardFonts.HelveticaBold);
-        var fontSize = parseInt(fontSizeRange.value, 10);
-        var opacity = parseInt(opacityRange.value, 10) / 100;
-        var angle = parseInt(angleRange.value, 10);
-        var color = hexToRgb01(document.getElementById("colorPicker").value);
-        var textWidth = font.widthOfTextAtSize(text, fontSize);
-        var textHeight = font.heightAtSize(fontSize, { descender: false });
-
-        // PDF-lib rotates text around its baseline-start point, not its visual
-        // center, so the offset from that anchor to the true center has to be
-        // rotated too before we can solve for where to place the anchor.
-        var dx = textWidth / 2;
-        var dy = textHeight / 2;
-        var rad = (angle * Math.PI) / 180;
-        var rdx = dx * Math.cos(rad) - dy * Math.sin(rad);
-        var rdy = dx * Math.sin(rad) + dy * Math.cos(rad);
-
         var pages = doc.getPages();
-        pages.forEach(function (page) {
-          var { width, height } = page.getSize();
-          page.drawText(text, {
-            x: width / 2 - rdx,
-            y: height / 2 - rdy,
-            size: fontSize,
-            font: font,
-            color: PDFLib.rgb(color.r, color.g, color.b),
-            opacity: opacity,
-            rotate: PDFLib.degrees(angle)
+
+        if (wmType === "text") {
+          var font = await doc.embedFont(PDFLib.StandardFonts.HelveticaBold);
+          var fontSize = parseInt(fontSizeRange.value, 10);
+          var color = hexToRgb01(document.getElementById("colorPicker").value);
+          var textWidth = font.widthOfTextAtSize(text, fontSize);
+          var textHeight = font.heightAtSize(fontSize, { descender: false });
+          var halfW = textWidth / 2;
+          var halfH = textHeight / 2;
+
+          pages.forEach(function (page) {
+            var { width, height } = page.getSize();
+            var target = targetCenterForPosition(position, width, height, halfW, halfH);
+            var anchor = anchorForTarget(target.x, target.y, halfW, halfH, angle);
+            page.drawText(text, {
+              x: anchor.x,
+              y: anchor.y,
+              size: fontSize,
+              font: font,
+              color: PDFLib.rgb(color.r, color.g, color.b),
+              opacity: opacity,
+              rotate: PDFLib.degrees(angle)
+            });
           });
-        });
+        } else {
+          var imgBytes = await currentImageFile.arrayBuffer();
+          var embeddedImage = currentImageFile.type === "image/png"
+            ? await doc.embedPng(imgBytes)
+            : await doc.embedJpg(imgBytes);
+          var scalePct = parseInt(imgScaleRange.value, 10) / 100;
+
+          pages.forEach(function (page) {
+            var { width, height } = page.getSize();
+            var drawWidth = width * scalePct;
+            var drawHeight = drawWidth * (embeddedImage.height / embeddedImage.width);
+            var halfW = drawWidth / 2;
+            var halfH = drawHeight / 2;
+            var target = targetCenterForPosition(position, width, height, halfW, halfH);
+            var anchor = anchorForTarget(target.x, target.y, halfW, halfH, angle);
+            page.drawImage(embeddedImage, {
+              x: anchor.x,
+              y: anchor.y,
+              width: drawWidth,
+              height: drawHeight,
+              opacity: opacity,
+              rotate: PDFLib.degrees(angle)
+            });
+          });
+        }
 
         var newBytes = await doc.save();
         var blob = new Blob([newBytes], { type: "application/pdf" });

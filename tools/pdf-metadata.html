@@ -5,7 +5,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free PDF Metadata Editor Online — View & Strip Metadata | Fixora</title>
-  <meta name="description" content="View, edit, or strip a PDF's metadata online for free — title, author, subject, keywords, and more. Right in your browser, no uploads, no sign-up." />
+  <meta name="description" content="View, edit, or strip a PDF's metadata online for free — title, author, subject, keywords, creator, producer, language, and creation/modification dates. Right in your browser, no uploads, no sign-up." />
   <meta name="keywords" content="pdf metadata editor, remove pdf metadata online free, pdf properties editor" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/pdf-metadata.html" />
@@ -58,12 +58,12 @@
       {
         "@type": "Question",
         "name": "What's the difference between \"Save Changes\" and \"Strip All Metadata\"?",
-        "acceptedAnswer": { "@type": "Answer", "text": "\"Save Changes\" writes whatever is currently in the Title/Author/Subject/Keywords/Creator/Producer fields — including any edits you made. \"Strip All Metadata\" first clears all six fields to blank, then saves, removing that identifying information from the PDF entirely." }
+        "acceptedAnswer": { "@type": "Answer", "text": "\"Save Changes\" writes whatever is currently in the Title/Author/Subject/Keywords/Creator/Producer/Language fields — including any edits you made — plus any Created or Modified date you've changed. \"Strip All Metadata\" clears the Title, Author, Subject, Keywords, Creator, Producer, and Language fields to blank and saves, removing that identifying information from the PDF entirely; it leaves the Created/Modified dates untouched since a blank date isn't meaningfully more private and most PDF readers expect a valid one." }
       },
       {
         "@type": "Question",
         "name": "Can I edit the Created and Modified dates?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No, those are shown as read-only stats, along with the page count — only the Title, Author, Subject, Keywords, Creator, and Producer text fields can be changed." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — both load as editable date/time fields pre-filled from the PDF, alongside the page count which stays read-only. Change either one and click \"Save Changes\" to apply it, or use \"Set Both to Now\" to stamp the current date and time on both fields at once." }
       },
       {
         "@type": "Question",
@@ -79,6 +79,11 @@
         "@type": "Question",
         "name": "Does editing metadata change the PDF's actual page content?",
         "acceptedAnswer": { "@type": "Answer", "text": "No — only the document-level metadata fields are touched. The pages, text, and images inside the PDF are saved exactly as they were." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I set the PDF's language metadata?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — enter a language code such as en, en-US, fr, or de in the Language field and click Save Changes. This tool can only write that field, not read an existing one back out, so it always starts blank; leaving it blank and saving keeps whatever language (if any) the PDF already had, since a blank value is never written unless you touch the field." }
       }
     ]
   }
@@ -118,7 +123,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🏷️</div>
       <h1>PDF Metadata Editor</h1>
-      <p>View, edit, or completely strip a PDF's hidden metadata — useful for privacy before sharing a file.</p>
+      <p>View, edit, or completely strip a PDF's hidden metadata — including its language and creation/modification dates — useful for privacy before sharing a file.</p>
     </section>
 
     <section class="container">
@@ -155,15 +160,28 @@
             <label for="metaProducer">Producer</label>
             <input type="text" id="metaProducer" />
           </div>
+          <div class="field">
+            <label for="metaLanguage">Language (e.g. en, en-US, fr)</label>
+            <input type="text" id="metaLanguage" maxlength="20" placeholder="Leave blank to keep existing" />
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="metaCreated">Created</label>
+              <input type="datetime-local" id="metaCreated" />
+            </div>
+            <div class="field">
+              <label for="metaModified">Modified</label>
+              <input type="datetime-local" id="metaModified" />
+            </div>
+          </div>
           <div class="stat-row">
-            <div class="stat"><strong id="statCreated">–</strong><span>Created</span></div>
-            <div class="stat"><strong id="statModified">–</strong><span>Modified</span></div>
             <div class="stat"><strong id="statPages">–</strong><span>Pages</span></div>
           </div>
 
           <div class="actions">
             <button class="btn btn-primary" id="applyBtn">Save Changes</button>
             <button class="btn btn-secondary" id="stripBtn">Strip All Metadata</button>
+            <button class="btn btn-secondary" id="setNowBtn" type="button">Set Both Dates to Now</button>
             <a class="btn btn-secondary" id="downloadBtn" style="display:none;" download="edited.pdf">Download PDF</a>
           </div>
         </div>
@@ -174,9 +192,9 @@
       <div class="howto">
         <h2>How to Edit or Strip PDF Metadata</h2>
         <ol class="howto-steps">
-          <li>Upload your PDF — its current Title, Author, Subject, Keywords, Creator, and Producer fields load automatically, along with read-only Created/Modified dates and page count.</li>
-          <li>Edit any of the text fields you want to change.</li>
-          <li>Click "Save Changes" to apply your edits, or "Strip All Metadata" to clear every field at once.</li>
+          <li>Upload your PDF — its current Title, Author, Subject, Keywords, Creator, Producer, and Created/Modified dates load automatically, along with a read-only page count. The Language field starts blank since it can only be written, not read back.</li>
+          <li>Edit any of the text fields, set a Language code, or adjust the Created/Modified dates — use "Set Both Dates to Now" for a quick timestamp.</li>
+          <li>Click "Save Changes" to apply your edits, or "Strip All Metadata" to clear the Title/Author/Subject/Keywords/Creator/Producer/Language fields at once.</li>
           <li>Download the updated PDF.</li>
         </ol>
       </div>
@@ -185,11 +203,11 @@
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
           <summary>What's the difference between "Save Changes" and "Strip All Metadata"?</summary>
-          <p>"Save Changes" writes whatever is currently in the Title/Author/Subject/Keywords/Creator/Producer fields — including any edits you made. "Strip All Metadata" first clears all six fields to blank, then saves, removing that identifying information from the PDF entirely.</p>
+          <p>"Save Changes" writes whatever is currently in the Title/Author/Subject/Keywords/Creator/Producer/Language fields — including any edits you made — plus any Created or Modified date you've changed. "Strip All Metadata" clears the Title, Author, Subject, Keywords, Creator, Producer, and Language fields to blank and saves, removing that identifying information from the PDF entirely; it leaves the Created/Modified dates untouched since a blank date isn't meaningfully more private and most PDF readers expect a valid one.</p>
         </details>
         <details class="faq-item">
           <summary>Can I edit the Created and Modified dates?</summary>
-          <p>No, those are shown as read-only stats, along with the page count — only the Title, Author, Subject, Keywords, Creator, and Producer text fields can be changed.</p>
+          <p>Yes — both load as editable date/time fields pre-filled from the PDF, alongside the page count which stays read-only. Change either one and click "Save Changes" to apply it, or use "Set Both to Now" to stamp the current date and time on both fields at once.</p>
         </details>
         <details class="faq-item">
           <summary>Why would I want to strip a PDF's metadata?</summary>
@@ -202,6 +220,10 @@
         <details class="faq-item">
           <summary>Does editing metadata change the PDF's actual page content?</summary>
           <p>No — only the document-level metadata fields are touched. The pages, text, and images inside the PDF are saved exactly as they were.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I set the PDF's language metadata?</summary>
+          <p>Yes — enter a language code such as en, en-US, fr, or de in the Language field and click Save Changes. This tool can only write that field, not read an existing one back out, so it always starts blank; leaving it blank and saving keeps whatever language (if any) the PDF already had, since a blank value is never written unless you touch the field.</p>
         </details>
       </div>
 

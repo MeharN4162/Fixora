@@ -5,21 +5,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free CSS Gradient Generator Online | Fixora</title>
-  <meta name="description" content="Create linear or radial CSS gradients online for free with a live preview and ready-to-paste CSS code. Add up to four color stops. No uploads, no sign-up." />
-  <meta name="keywords" content="css gradient generator, css gradient maker online free, linear gradient generator, radial gradient generator" />
+  <meta name="description" content="Create linear, radial, or conic CSS gradients online for free with a live preview, curated one-click preset palettes, and ready-to-paste CSS code. Add up to four color stops. No uploads, no sign-up." />
+  <meta name="keywords" content="css gradient generator, css gradient maker online free, linear gradient generator, radial gradient generator, conic gradient generator, gradient presets" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/css-gradient-generator.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free CSS Gradient Generator Online" />
-  <meta property="og:description" content="Create linear or radial CSS gradients online for free with a live preview and ready-to-paste CSS code." />
+  <meta property="og:description" content="Create linear, radial, or conic CSS gradients online for free with a live preview, one-click presets, and ready-to-paste CSS code." />
   <meta property="og:url" content="https://fixora-site.vercel.app/tools/css-gradient-generator.html" />
   <meta property="og:image" content="https://fixora-site.vercel.app/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free CSS Gradient Generator Online" />
-  <meta name="twitter:description" content="Create linear or radial CSS gradients online for free with a live preview and ready-to-paste CSS code." />
+  <meta name="twitter:description" content="Create linear, radial, or conic CSS gradients online for free with a live preview, one-click presets, and ready-to-paste CSS code." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -63,12 +63,12 @@
       {
         "@type": "Question",
         "name": "Does this work in older browsers?",
-        "acceptedAnswer": { "@type": "Answer", "text": "CSS gradients created here use the standard linear-gradient() and radial-gradient() syntax, which has been supported by all major browsers (Chrome, Firefox, Safari, Edge) for many years, so the generated CSS should work virtually anywhere without vendor prefixes." }
+        "acceptedAnswer": { "@type": "Answer", "text": "The linear-gradient() and radial-gradient() functions have been supported by all major browsers (Chrome, Firefox, Safari, Edge) for many years. conic-gradient() is newer but has also shipped in every major browser since 2020, so the generated CSS should work virtually anywhere without vendor prefixes." }
       },
       {
         "@type": "Question",
-        "name": "Can I generate a radial gradient, not just linear?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes — switch the \"Gradient Type\" dropdown to \"Radial\" and the preview and CSS output switch to a radial-gradient() immediately; the angle control is hidden in this mode since radial gradients don't use a directional angle the same way linear gradients do." }
+        "name": "Can I generate a radial or conic gradient, not just linear?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — switch the \"Gradient Type\" dropdown to \"Radial\" or \"Conic\" and the preview and CSS output switch to a real radial-gradient() or conic-gradient() immediately. The angle slider becomes a starting angle for Conic gradients, and it's hidden entirely for Radial since radial gradients don't use a directional angle." }
       },
       {
         "@type": "Question",
@@ -79,6 +79,11 @@
         "@type": "Question",
         "name": "What do the position percentages next to each color mean?",
         "acceptedAnswer": { "@type": "Answer", "text": "Each percentage sets where along the gradient that color reaches full strength — 0% is the start of the gradient and 100% is the end, so spacing stops unevenly lets you control exactly how much of the gradient each color dominates." }
+      },
+      {
+        "@type": "Question",
+        "name": "What do the preset palettes do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Clicking a preset like Sunset or Ocean instantly loads a curated set of colors and positions into the color stops below, so you get a good-looking starting point immediately. Presets don't lock anything in — you can still drag positions, change any color, add or remove stops, and switch gradient type afterward exactly as if you'd built it manually." }
       }
     ]
   }
@@ -132,6 +137,20 @@
       opacity: 0.4;
       cursor: not-allowed;
     }
+    .preset-swatch {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px 6px 6px;
+      font-size: 0.83rem;
+    }
+    .preset-swatch .preset-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      flex: none;
+      border: 1px solid var(--color-border);
+    }
   </style>
 </head>
 <body>
@@ -168,7 +187,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🎨</div>
       <h1>CSS Gradient Generator</h1>
-      <p>Build a linear or radial CSS gradient with a live preview, then copy the ready-to-paste CSS code.</p>
+      <p>Build a linear, radial, or conic CSS gradient with a live preview, start from a curated preset palette, then copy the ready-to-paste CSS code.</p>
     </section>
 
     <section class="container">
@@ -179,12 +198,18 @@
             <select id="gradientType">
               <option value="linear" selected>Linear</option>
               <option value="radial">Radial</option>
+              <option value="conic">Conic</option>
             </select>
           </div>
           <div class="field" id="angleField">
-            <label for="angleInput">Angle: <span id="angleValue">135</span>°</label>
+            <label for="angleInput" id="angleLabel">Angle: <span id="angleValue">135</span>°</label>
             <input type="range" id="angleInput" min="0" max="360" value="135" />
           </div>
+        </div>
+
+        <div class="field">
+          <label>Preset Palettes</label>
+          <div class="pill-row" id="presetRow"></div>
         </div>
 
         <div class="field">
@@ -212,8 +237,9 @@
       <div class="howto">
         <h2>How to Create a CSS Gradient</h2>
         <ol class="howto-steps">
-          <li>Choose Linear or Radial from the "Gradient Type" dropdown.</li>
-          <li>For linear gradients, drag the angle slider to set the direction.</li>
+          <li>Choose Linear, Radial, or Conic from the "Gradient Type" dropdown.</li>
+          <li>Optionally click a preset palette to instantly load a ready-made set of colors — you can still edit anything afterward.</li>
+          <li>For linear and conic gradients, drag the angle slider to set the direction or starting angle.</li>
           <li>Pick a color and position for each stop, and add up to four stops with "+ Add Color Stop".</li>
           <li>Watch the preview box update instantly with your real generated gradient.</li>
           <li>Click "Copy CSS" to copy the ready-to-paste background CSS.</li>
@@ -228,11 +254,11 @@
         </details>
         <details class="faq-item">
           <summary>Does this work in older browsers?</summary>
-          <p>CSS gradients created here use the standard linear-gradient() and radial-gradient() syntax, which has been supported by all major browsers (Chrome, Firefox, Safari, Edge) for many years, so the generated CSS should work virtually anywhere without vendor prefixes.</p>
+          <p>The linear-gradient() and radial-gradient() functions have been supported by all major browsers (Chrome, Firefox, Safari, Edge) for many years. conic-gradient() is newer but has also shipped in every major browser since 2020, so the generated CSS should work virtually anywhere without vendor prefixes.</p>
         </details>
         <details class="faq-item">
-          <summary>Can I generate a radial gradient, not just linear?</summary>
-          <p>Yes — switch the "Gradient Type" dropdown to "Radial" and the preview and CSS output switch to a radial-gradient() immediately; the angle control is hidden in this mode since radial gradients don't use a directional angle the same way linear gradients do.</p>
+          <summary>Can I generate a radial or conic gradient, not just linear?</summary>
+          <p>Yes — switch the "Gradient Type" dropdown to "Radial" or "Conic" and the preview and CSS output switch to a real radial-gradient() or conic-gradient() immediately. The angle slider becomes a starting angle for Conic gradients, and it's hidden entirely for Radial since radial gradients don't use a directional angle.</p>
         </details>
         <details class="faq-item">
           <summary>Is my color data sent anywhere?</summary>
@@ -241,6 +267,10 @@
         <details class="faq-item">
           <summary>What do the position percentages next to each color mean?</summary>
           <p>Each percentage sets where along the gradient that color reaches full strength — 0% is the start of the gradient and 100% is the end, so spacing stops unevenly lets you control exactly how much of the gradient each color dominates.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What do the preset palettes do?</summary>
+          <p>Clicking a preset like Sunset or Ocean instantly loads a curated set of colors and positions into the color stops below, so you get a good-looking starting point immediately. Presets don't lock anything in — you can still drag positions, change any color, add or remove stops, and switch gradient type afterward exactly as if you'd built it manually.</p>
         </details>
       </div>
 
@@ -316,6 +346,7 @@
   <script>
     var gradientTypeSelect = document.getElementById("gradientType");
     var angleField = document.getElementById("angleField");
+    var angleLabel = document.getElementById("angleLabel");
     var angleInput = document.getElementById("angleInput");
     var angleValue = document.getElementById("angleValue");
     var stopsList = document.getElementById("stopsList");
@@ -323,6 +354,7 @@
     var gradientPreview = document.getElementById("gradientPreview");
     var cssOutput = document.getElementById("cssOutput");
     var copyNote = document.getElementById("copyNote");
+    var presetRow = document.getElementById("presetRow");
 
     var stops = [
       { color: "#2563eb", pos: 0 },
@@ -331,6 +363,17 @@
 
     var defaultNewColors = ["#a855f7", "#f97316"];
 
+    var PRESETS = [
+      { name: "Sunset", colors: ["#ff512f", "#f09819"] },
+      { name: "Ocean", colors: ["#2193b0", "#6dd5ed"] },
+      { name: "Purple Haze", colors: ["#8e2de2", "#4a00e0"] },
+      { name: "Mint", colors: ["#00b09b", "#96c93d"] },
+      { name: "Candy", colors: ["#ee9ca7", "#ffdde1"] },
+      { name: "Midnight", colors: ["#0f2027", "#203a43", "#2c5364"] },
+      { name: "Peach", colors: ["#ffecd2", "#fcb69f"] },
+      { name: "Lush", colors: ["#56ab2f", "#a8e063"] }
+    ];
+
     function buildGradientString() {
       var type = gradientTypeSelect.value;
       var stopsStr = stops.map(function (s) {
@@ -338,6 +381,9 @@
       }).join(", ");
       if (type === "linear") {
         return "linear-gradient(" + angleInput.value + "deg, " + stopsStr + ")";
+      }
+      if (type === "conic") {
+        return "conic-gradient(from " + angleInput.value + "deg, " + stopsStr + ")";
       }
       return "radial-gradient(circle, " + stopsStr + ")";
     }
@@ -397,7 +443,9 @@
     });
 
     gradientTypeSelect.addEventListener("change", function () {
-      angleField.style.display = gradientTypeSelect.value === "linear" ? "" : "none";
+      var type = gradientTypeSelect.value;
+      angleField.style.display = type === "radial" ? "none" : "";
+      angleLabel.childNodes[0].textContent = type === "conic" ? "Starting Angle: " : "Angle: ";
       render();
     });
 
@@ -410,6 +458,27 @@
       Fixora.copyText(cssOutput.value, copyNote);
     });
 
+    function renderPresets() {
+      presetRow.innerHTML = "";
+      PRESETS.forEach(function (preset) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "pill preset-swatch";
+        var previewGradient = "linear-gradient(90deg, " + preset.colors.join(", ") + ")";
+        btn.innerHTML = '<span class="preset-dot" style="background:' + previewGradient + ';"></span>' + preset.name;
+        btn.addEventListener("click", function () {
+          var n = preset.colors.length;
+          stops = preset.colors.map(function (color, i) {
+            return { color: color, pos: n === 1 ? 0 : Math.round((i / (n - 1)) * 100) };
+          });
+          renderStops();
+          render();
+        });
+        presetRow.appendChild(btn);
+      });
+    }
+
+    renderPresets();
     renderStops();
     render();
   </script>

@@ -5,7 +5,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Salary to Hourly Wage Calculator (and Back) | Fixora</title>
-  <meta name="description" content="Convert hourly pay to yearly salary, or salary to an hourly rate, for free. Adjust hours per week and weeks per year for an accurate result." />
+  <meta name="description" content="Convert hourly pay to yearly salary, or salary to an hourly rate, for free. See a weekly, biweekly, semimonthly, and monthly paycheck breakdown, plus an optional time-and-a-half overtime estimate. Adjust hours per week and weeks per year for an accurate result." />
   <meta name="keywords" content="salary to hourly calculator, hourly to salary calculator, wage converter online free" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/salary-hourly-converter.html" />
@@ -68,7 +68,7 @@
       {
         "@type": "Question",
         "name": "Does this account for overtime pay?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No — this calculator assumes every hour is paid at the same flat rate. It doesn't apply overtime multipliers (like time-and-a-half), so if you regularly work overtime, your actual take-home pay may differ from the estimate." }
+        "acceptedAnswer": { "@type": "Answer", "text": "The core figures assume every hour is paid at the same flat rate. However, if you enter more than 40 hours a week in the Hourly Rate → Salary section, a separate box also shows a standard time-and-a-half overtime estimate for comparison — treat it as a ballpark, since overtime rules vary by country, state, and job classification (exempt vs. non-exempt)." }
       },
       {
         "@type": "Question",
@@ -79,6 +79,11 @@
         "@type": "Question",
         "name": "Can I use this for part-time hours?",
         "acceptedAnswer": { "@type": "Answer", "text": "Yes — just enter your actual hours per week instead of 40, and the calculator will adjust the weekly, monthly, and annual figures accordingly." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the paycheck-frequency breakdown?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It divides your annual figure by the number of pay periods in each common schedule: Weekly (÷52), Biweekly (÷26), Semimonthly (÷24, since semimonthly means 24 paychecks a year — twice a month), and Monthly (÷12). It's the same annual amount, just shown as what would actually land in each paycheck." }
       }
     ]
   }
@@ -118,7 +123,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">💵</div>
       <h1>Salary ⇄ Hourly Wage Converter</h1>
-      <p>Convert an hourly rate into a full salary, or an annual salary into an hourly rate — both directions, live.</p>
+      <p>Convert an hourly rate into a full salary, or an annual salary into an hourly rate — both directions, live, with a weekly/biweekly/semimonthly/monthly paycheck breakdown and an optional overtime estimate.</p>
     </section>
 
     <section class="container">
@@ -140,9 +145,12 @@
         </div>
         <div class="stat-row">
           <div class="stat"><strong id="statWeekly">–</strong><span>Weekly</span></div>
+          <div class="stat"><strong id="statBiweeklyA">–</strong><span>Biweekly</span></div>
+          <div class="stat"><strong id="statSemimonthlyA">–</strong><span>Semimonthly</span></div>
           <div class="stat"><strong id="statMonthly">–</strong><span>Monthly</span></div>
           <div class="stat"><strong id="statAnnual">–</strong><span>Annual</span></div>
         </div>
+        <div class="output-box" id="overtimeNoteA" style="display:none;"></div>
 
         <hr style="border:none;border-top:1px solid var(--color-border);margin:28px 0;" />
 
@@ -164,6 +172,13 @@
         <div class="stat-row">
           <div class="stat"><strong id="statHourlyBack">–</strong><span>Hourly Rate</span></div>
         </div>
+        <p style="font-size:0.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em;color:var(--color-text-muted);margin:18px 0 8px;">Paycheck Breakdown</p>
+        <div class="stat-row">
+          <div class="stat"><strong id="statWeeklyB">–</strong><span>Weekly</span></div>
+          <div class="stat"><strong id="statBiweeklyB">–</strong><span>Biweekly</span></div>
+          <div class="stat"><strong id="statSemimonthlyB">–</strong><span>Semimonthly</span></div>
+          <div class="stat"><strong id="statMonthlyB">–</strong><span>Monthly</span></div>
+        </div>
 
         <div class="output-box" id="statusBox"></div>
       </div>
@@ -174,6 +189,8 @@
           <li>To go from hourly to salary, enter your hourly rate, hours per week, and weeks per year in the top section.</li>
           <li>To go from salary to hourly, enter your annual salary, hours per week, and weeks per year in the bottom section.</li>
           <li>Adjust "Weeks per Year" below 52 if you take unpaid time off — 50 is a common choice for two unpaid weeks.</li>
+          <li>Each section also shows a paycheck breakdown (weekly, biweekly, semimonthly, monthly) computed from the annual figure.</li>
+          <li>If you enter more than 40 hours a week in the top section, a time-and-a-half overtime estimate appears automatically for comparison.</li>
           <li>Results update live in both sections as you type — no button needed.</li>
         </ol>
       </div>
@@ -190,7 +207,7 @@
         </details>
         <details class="faq-item">
           <summary>Does this account for overtime pay?</summary>
-          <p>No — this calculator assumes every hour is paid at the same flat rate. It doesn't apply overtime multipliers (like time-and-a-half), so if you regularly work overtime, your actual take-home pay may differ from the estimate.</p>
+          <p>The core figures assume every hour is paid at the same flat rate. However, if you enter more than 40 hours a week in the Hourly Rate → Salary section, a separate box also shows a standard time-and-a-half overtime estimate for comparison — treat it as a ballpark, since overtime rules vary by country, state, and job classification (exempt vs. non-exempt).</p>
         </details>
         <details class="faq-item">
           <summary>Does the salary figure include taxes or deductions?</summary>
@@ -199,6 +216,10 @@
         <details class="faq-item">
           <summary>Can I use this for part-time hours?</summary>
           <p>Yes — just enter your actual hours per week instead of 40, and the calculator will adjust the weekly, monthly, and annual figures accordingly.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is the paycheck-frequency breakdown?</summary>
+          <p>It divides your annual figure by the number of pay periods in each common schedule: Weekly (÷52), Biweekly (÷26), Semimonthly (÷24, since semimonthly means 24 paychecks a year — twice a month), and Monthly (÷12). It's the same annual amount, just shown as what would actually land in each paycheck.</p>
         </details>
       </div>
 
@@ -287,21 +308,39 @@
       var hourly = parseFloat(document.getElementById("hourlyRate").value);
       var hoursPerWeek = parseFloat(document.getElementById("hoursPerWeekA").value);
       var weeksPerYear = parseFloat(document.getElementById("weeksPerYearA").value);
+      var overtimeNoteA = document.getElementById("overtimeNoteA");
 
       if (isNaN(hourly) || hourly < 0 || isNaN(hoursPerWeek) || hoursPerWeek < 0 || isNaN(weeksPerYear) || weeksPerYear <= 0) {
         document.getElementById("statWeekly").textContent = "–";
+        document.getElementById("statBiweeklyA").textContent = "–";
+        document.getElementById("statSemimonthlyA").textContent = "–";
         document.getElementById("statMonthly").textContent = "–";
         document.getElementById("statAnnual").textContent = "–";
+        overtimeNoteA.style.display = "none";
         return;
       }
 
       var weekly = hourly * hoursPerWeek;
       var annual = weekly * weeksPerYear;
       var monthly = annual / 12;
+      var biweekly = annual / 26;
+      var semimonthly = annual / 24;
 
       document.getElementById("statWeekly").textContent = formatMoney(weekly);
+      document.getElementById("statBiweeklyA").textContent = formatMoney(biweekly);
+      document.getElementById("statSemimonthlyA").textContent = formatMoney(semimonthly);
       document.getElementById("statMonthly").textContent = formatMoney(monthly);
       document.getElementById("statAnnual").textContent = formatMoney(annual);
+
+      if (hoursPerWeek > 40) {
+        var otHours = hoursPerWeek - 40;
+        var otWeekly = 40 * hourly + otHours * hourly * 1.5;
+        var otAnnual = otWeekly * weeksPerYear;
+        overtimeNoteA.style.display = "block";
+        overtimeNoteA.innerHTML = "Overtime estimate: at " + hoursPerWeek + " hours/week (" + otHours + " over 40), if the extra hours are paid at 1.5× instead of the flat rate, that's roughly <strong>" + formatMoney(otWeekly) + "/week</strong> or <strong>" + formatMoney(otAnnual) + "/year</strong> — versus " + formatMoney(weekly) + "/week and " + formatMoney(annual) + "/year at a flat rate. Overtime rules vary by country, state, and job classification (exempt vs. non-exempt), so treat this as a ballpark, not a guarantee.";
+      } else {
+        overtimeNoteA.style.display = "none";
+      }
     }
 
     function calcSalaryToHourly() {
@@ -311,11 +350,20 @@
 
       if (isNaN(annualSalary) || annualSalary < 0 || isNaN(hoursPerWeek) || hoursPerWeek <= 0 || isNaN(weeksPerYear) || weeksPerYear <= 0) {
         document.getElementById("statHourlyBack").textContent = "–";
+        document.getElementById("statWeeklyB").textContent = "–";
+        document.getElementById("statBiweeklyB").textContent = "–";
+        document.getElementById("statSemimonthlyB").textContent = "–";
+        document.getElementById("statMonthlyB").textContent = "–";
         return;
       }
 
       var hourlyBack = annualSalary / (hoursPerWeek * weeksPerYear);
       document.getElementById("statHourlyBack").textContent = formatMoney(hourlyBack);
+
+      document.getElementById("statWeeklyB").textContent = formatMoney(annualSalary / 52);
+      document.getElementById("statBiweeklyB").textContent = formatMoney(annualSalary / 26);
+      document.getElementById("statSemimonthlyB").textContent = formatMoney(annualSalary / 24);
+      document.getElementById("statMonthlyB").textContent = formatMoney(annualSalary / 12);
     }
 
     function calculate() {

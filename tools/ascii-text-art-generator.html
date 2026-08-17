@@ -5,7 +5,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free ASCII Text Art Generator — Big Block Letters | Fixora</title>
-  <meta name="description" content="Turn any word into big block-letter ASCII art banner text, instantly, in your browser. Great for code comments, terminals, and forum posts. Free, no sign-up." />
+  <meta name="description" content="Turn any word into big block-letter ASCII art banner text, with real uppercase and lowercase glyphs plus !, ., and ? punctuation, instantly, in your browser. Great for code comments, terminals, and forum posts. Free, no sign-up." />
   <meta name="keywords" content="ascii text art generator, ascii banner generator, block letter text generator, text to ascii art" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/ascii-text-art-generator.html" />
@@ -58,7 +58,7 @@
       {
         "@type": "Question",
         "name": "What characters are supported?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Uppercase and lowercase letters A–Z (lowercase is automatically converted to uppercase), digits 0–9, and spaces. Punctuation and other symbols aren't part of the block font and are simply skipped in the output." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Uppercase letters A–Z, lowercase letters a–z (each case has its own distinct glyph design, so case is preserved rather than forced to uppercase), digits 0–9, spaces, and the punctuation marks !, ., and ?. Other symbols aren't part of the block font and are simply skipped in the output." }
       },
       {
         "@type": "Question",
@@ -118,7 +118,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🔠</div>
       <h1>ASCII Text Art Generator</h1>
-      <p>Turn any word into big block-letter banner text made of plain # characters, ready to paste anywhere monospace.</p>
+      <p>Turn any word into big block-letter banner text made of plain # characters, with distinct uppercase and lowercase glyphs plus !, ., and ? punctuation, ready to paste anywhere monospace.</p>
     </section>
 
     <section class="container">
@@ -143,8 +143,8 @@
       <div class="howto">
         <h2>How to Generate ASCII Text Art</h2>
         <ol class="howto-steps">
-          <li>Type your text (letters, numbers, and spaces) into the input box.</li>
-          <li>The block-letter ASCII art renders instantly below in monospace text.</li>
+          <li>Type your text into the input box — uppercase letters, lowercase letters, numbers, spaces, and !, ., or ? are all supported with their own distinct glyphs.</li>
+          <li>The block-letter ASCII art renders instantly below in monospace text, keeping the case you typed.</li>
           <li>Click "Copy ASCII Art" to copy the full multi-line art to your clipboard.</li>
           <li>Paste it into a code comment, terminal, forum post, or anywhere that keeps a monospace font.</li>
         </ol>
@@ -154,7 +154,7 @@
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
           <summary>What characters are supported?</summary>
-          <p>Uppercase and lowercase letters A–Z (lowercase is automatically converted to uppercase), digits 0–9, and spaces. Punctuation and other symbols aren't part of the block font and are simply skipped in the output.</p>
+          <p>Uppercase letters A–Z, lowercase letters a–z (each case has its own distinct glyph design, so case is preserved rather than forced to uppercase), digits 0–9, spaces, and the punctuation marks !, ., and ?. Other symbols aren't part of the block font and are simply skipped in the output.</p>
         </details>
         <details class="faq-item">
           <summary>Why does every letter use the same number of rows?</summary>
@@ -281,16 +281,45 @@
       "7": ["#####", "    #", "   # ", "  #  ", "  #  "],
       "8": [" ### ", "#   #", " ### ", "#   #", " ### "],
       "9": [" ### ", "#   #", " ####", "    #", " ### "],
-      " ": ["   ", "   ", "   ", "   ", "   "]
+      " ": ["   ", "   ", "   ", "   ", "   "],
+      "a": ["     ", " ### ", "    #", " ####", "#   #"],
+      "b": ["#    ", "#    ", "#### ", "#   #", "#### "],
+      "c": ["     ", " ####", "#    ", "#    ", " ####"],
+      "d": ["    #", "    #", " ####", "#   #", " ####"],
+      "e": ["     ", " ### ", "#####", "#    ", " ####"],
+      "f": ["  ###", "  #  ", " ### ", "  #  ", "  #  "],
+      "g": ["     ", " ### ", "#   #", " ####", "  ## "],
+      "h": ["#    ", "#    ", "#### ", "#   #", "#   #"],
+      "i": ["  #  ", "     ", "  #  ", "  #  ", "  #  "],
+      "j": ["    #", "     ", "    #", "    #", " ##  "],
+      "k": ["#    ", "#  # ", "###  ", "#  # ", "#   #"],
+      "l": ["  #  ", "  #  ", "  #  ", "  #  ", "  ## "],
+      "m": ["     ", "## ##", "# # #", "# # #", "# # #"],
+      "n": ["     ", " ### ", "#   #", "#   #", "#   #"],
+      "o": ["     ", " ### ", "#   #", "#   #", " ### "],
+      "p": ["     ", "#### ", "#   #", "#### ", "#    "],
+      "q": ["     ", " ####", "#   #", " ####", "    #"],
+      "r": ["     ", " ####", "#    ", "#    ", "#    "],
+      "s": ["     ", " ####", " ### ", "    #", "#### "],
+      "t": ["  #  ", "#####", "  #  ", "  #  ", "   ##"],
+      "u": ["     ", "#   #", "#   #", "#   #", " ####"],
+      "v": ["     ", "#   #", "#   #", " # # ", "  #  "],
+      "w": ["     ", "#   #", "#   #", "# # #", " # # "],
+      "x": ["     ", "#   #", " # # ", " # # ", "#   #"],
+      "y": ["     ", "#   #", " # # ", "  #  ", " #   "],
+      "z": ["     ", "#####", "  #  ", " #   ", "#####"],
+      "!": ["  #  ", "  #  ", "  #  ", "     ", "  #  "],
+      ".": ["     ", "     ", "     ", "     ", "  #  "],
+      "?": [" ### ", "#   #", "  ## ", "     ", "  #  "]
     };
     var FONT_ROWS = 5;
 
     function textToAsciiArt(input) {
-      var chars = input.toUpperCase().split("");
+      var chars = input.split("");
       var rows = ["", "", "", "", ""];
       var any = false;
       chars.forEach(function (ch) {
-        var glyph = FONT[ch];
+        var glyph = FONT[ch] || FONT[ch.toUpperCase()];
         if (!glyph) return;
         any = true;
         for (var r = 0; r < FONT_ROWS; r++) {
@@ -310,7 +339,7 @@
     }
 
     asciiInput.addEventListener("input", render);
-    asciiInput.value = "HI";
+    asciiInput.value = "Fixora!";
     render();
 
     document.getElementById("copyBtn").addEventListener("click", function () {

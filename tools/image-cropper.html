@@ -4,22 +4,22 @@
   <meta charset="UTF-8" />
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Free Image Cropper Online | Fixora</title>
-  <meta name="description" content="Crop an image online for free, right in your browser. Drag to select the area you want, with preset aspect ratios. No uploads, no sign-up." />
-  <meta name="keywords" content="image cropper, crop image online free, photo cropper" />
+  <title>Free Image Cropper Online — Aspect Ratio Presets & Rotate | Fixora</title>
+  <meta name="description" content="Crop an image online for free, right in your browser. Drag to select the area, snap to 1:1, 4:3, 3:2, 16:9, 9:16, or 4:5 presets, and rotate before cropping. No uploads, no sign-up." />
+  <meta name="keywords" content="image cropper, crop image online free, photo cropper, instagram story crop, crop image aspect ratio" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/image-cropper.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Image Cropper Online" />
-  <meta property="og:description" content="Crop an image online for free, right in your browser." />
+  <meta property="og:description" content="Crop an image online for free with aspect ratio presets and rotate-before-crop, right in your browser." />
   <meta property="og:url" content="https://fixora-site.vercel.app/tools/image-cropper.html" />
   <meta property="og:image" content="https://fixora-site.vercel.app/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Image Cropper Online" />
-  <meta name="twitter:description" content="Crop an image online for free, right in your browser." />
+  <meta name="twitter:description" content="Crop an image online for free with aspect ratio presets and rotate-before-crop, right in your browser." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -63,12 +63,17 @@
       {
         "@type": "Question",
         "name": "Can I crop to a precise pixel size?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Not by typing numbers directly - you resize the crop box visually by dragging its corner handles, optionally locked to a 1:1, 4:3, or 16:9 ratio. The tool scales your on-screen selection back to the image's real resolution when you click Crop Image, so the exported crop matches full source resolution even though the preview is scaled down to fit the screen." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Not by typing numbers directly - you resize the crop box visually by dragging its corner handles, optionally locked to a 1:1, 4:3, 3:2, 16:9, 9:16, or 4:5 ratio. The tool scales your on-screen selection back to the image's real resolution when you click Crop Image, so the exported crop matches full source resolution even though the preview is scaled down to fit the screen." }
       },
       {
         "@type": "Question",
         "name": "Does switching aspect ratio presets keep my crop box in the same place?",
         "acceptedAnswer": { "@type": "Answer", "text": "It keeps the box's width and top-left position, then recalculates height to match the new ratio (or vice versa) - so you may need to reposition slightly after switching presets, but you won't lose your general selection area." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I rotate the image before cropping?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes - click Rotate Left or Rotate Right to turn the image in 90° steps before you position your crop box. The rotation is baked into the image used for cropping, so what you see is exactly what gets exported, and you can rotate as many times as you like before cropping." }
       },
       {
         "@type": "Question",
@@ -158,7 +163,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">✂️</div>
       <h1>Image Cropper</h1>
-      <p>Drag the box to select the area you want, then download just that part of the image.</p>
+      <p>Drag the box to select the area you want, snap to a common aspect ratio, rotate if needed, then download just that part of the image.</p>
     </section>
 
     <section class="container">
@@ -180,11 +185,19 @@
           </div>
         </div>
 
-        <div class="pill-row" id="ratioRow" style="display:none;margin-top:16px;">
+        <div class="pill-row" id="rotateRow" style="display:none;margin-top:16px;">
+          <button class="pill" id="rotateLeftBtn" type="button">⟲ Rotate Left</button>
+          <button class="pill" id="rotateRightBtn" type="button">⟳ Rotate Right</button>
+        </div>
+
+        <div class="pill-row" id="ratioRow" style="display:none;margin-top:10px;">
           <button class="pill active" data-ratio="free" type="button">Free</button>
-          <button class="pill" data-ratio="1:1" type="button">1:1</button>
+          <button class="pill" data-ratio="1:1" type="button">1:1 Square</button>
           <button class="pill" data-ratio="4:3" type="button">4:3</button>
+          <button class="pill" data-ratio="3:2" type="button">3:2</button>
           <button class="pill" data-ratio="16:9" type="button">16:9</button>
+          <button class="pill" data-ratio="9:16" type="button">9:16 Story</button>
+          <button class="pill" data-ratio="4:5" type="button">4:5 Portrait</button>
         </div>
 
         <div class="actions">
@@ -199,8 +212,9 @@
         <h2>How to Crop an Image</h2>
         <ol class="howto-steps">
           <li>Click the upload area or drag in a JPG, PNG, or WebP image.</li>
+          <li>Optionally click "Rotate Left" or "Rotate Right" first if the image needs turning before you crop it.</li>
           <li>Drag inside the crop box to move it, or drag one of the four corner handles to resize it.</li>
-          <li>Optionally click a ratio pill — Free, 1:1, 4:3, or 16:9 — to constrain the box's proportions as you resize.</li>
+          <li>Optionally click a ratio pill — Free, 1:1 Square, 4:3, 3:2, 16:9, 9:16 Story, or 4:5 Portrait — to constrain the box's proportions as you resize.</li>
           <li>Click "Crop Image", then "Download Cropped Image" to save just the selected area.</li>
         </ol>
       </div>

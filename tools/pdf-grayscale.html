@@ -5,21 +5,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free PDF to Grayscale Converter Online | Fixora</title>
-  <meta name="description" content="Convert a PDF to black and white / grayscale online for free, right in your browser. Great for printing. No uploads, no sign-up." />
-  <meta name="keywords" content="pdf to grayscale, pdf to black and white, convert pdf grayscale online free" />
+  <meta name="description" content="Convert a PDF to grayscale or true high-contrast black &amp; white online for free, right in your browser. Adjust the threshold, convert just a page range, and choose an output quality. Great for printing. No uploads, no sign-up." />
+  <meta name="keywords" content="pdf to grayscale, pdf to black and white, convert pdf grayscale online free, pdf threshold black and white" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/pdf-grayscale.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free PDF to Grayscale Converter Online" />
-  <meta property="og:description" content="Convert a PDF to black and white online for free, right in your browser." />
+  <meta property="og:description" content="Convert a PDF to grayscale or high-contrast black & white online for free, with page-range and threshold control." />
   <meta property="og:url" content="https://fixora-site.vercel.app/tools/pdf-grayscale.html" />
   <meta property="og:image" content="https://fixora-site.vercel.app/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free PDF to Grayscale Converter Online" />
-  <meta name="twitter:description" content="Convert a PDF to black and white online for free, right in your browser." />
+  <meta name="twitter:description" content="Convert a PDF to grayscale or high-contrast black & white online for free, with page-range and threshold control." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -58,7 +58,7 @@
       {
         "@type": "Question",
         "name": "Will my PDF's text still be selectable after converting to grayscale?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No. Like the PDF Compressor, this tool re-renders every page as an image, desaturates the pixels, and re-encodes it as a JPEG before rebuilding the PDF — so any selectable text becomes part of a flattened image and can no longer be copied or searched." }
+        "acceptedAnswer": { "@type": "Answer", "text": "No for pages you choose to convert — like the PDF Compressor, this tool re-renders those pages as an image, desaturates (or thresholds) the pixels, and re-encodes as a JPEG before rebuilding the PDF, so their selectable text becomes part of a flattened image. Pages outside your chosen page range, if you set one, are copied over completely untouched, keeping their original selectable text intact." }
       },
       {
         "@type": "Question",
@@ -72,8 +72,13 @@
       },
       {
         "@type": "Question",
-        "name": "Is this the same as making a PDF black-and-white / 1-bit?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No — this produces true grayscale, with a full range of gray tones (like a black-and-white photo), not a pure black-and-white (1-bit) result where every pixel is either fully black or fully white." }
+        "name": "What's the difference between Grayscale mode and Black & White (High Contrast) mode?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Grayscale mode keeps a full range of gray tones using the luminance formula above, like a black-and-white photo. Black & White (High Contrast) mode goes further: after computing that same luminance value, each pixel is compared against your Threshold slider (0-255) and snapped to pure black or pure white with no gray in between, similar to a scanned fax or high-contrast photocopy." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I convert only some pages instead of the whole document?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — enter a page range like \"1-3, 5\" in the Pages field. Pages inside that range are rendered and desaturated (or thresholded); every other page is copied over from your original file completely untouched, keeping its original text and quality. Leave the field blank to convert every page, as before." }
       },
       {
         "@type": "Question",
@@ -118,7 +123,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">⚫</div>
       <h1>PDF to Grayscale</h1>
-      <p>Convert a color PDF to black and white — ideal for cheaper, cleaner printing.</p>
+      <p>Convert a color PDF to grayscale or true high-contrast black &amp; white — pick a page range and threshold for cheaper, cleaner printing.</p>
     </section>
 
     <section class="container">
@@ -136,13 +141,33 @@
           <div class="stat"><strong id="statNew">–</strong><span>New Size</span></div>
         </div>
 
-        <div class="field" style="margin-top:20px;">
-          <label for="qualityLevel">Output Quality</label>
-          <select id="qualityLevel">
-            <option value="high">High quality (larger file)</option>
-            <option value="balanced" selected>Balanced (recommended)</option>
-            <option value="small">Smaller file (lower resolution)</option>
-          </select>
+        <div class="row" style="margin-top:20px;">
+          <div class="field">
+            <label for="modeSelect">Mode</label>
+            <select id="modeSelect">
+              <option value="grayscale" selected>Grayscale (full gray range)</option>
+              <option value="bw">Black &amp; White (high contrast)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="qualityLevel">Output Quality</label>
+            <select id="qualityLevel">
+              <option value="high">High quality (larger file)</option>
+              <option value="balanced" selected>Balanced (recommended)</option>
+              <option value="small">Smaller file (lower resolution)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field" id="thresholdField" style="display:none;">
+            <label for="thresholdRange">Threshold: <span id="thresholdValue">128</span></label>
+            <input type="range" id="thresholdRange" min="0" max="255" value="128" style="width:100%;" />
+          </div>
+          <div class="field">
+            <label for="pageRangeInput">Pages <span style="font-weight:400;color:var(--color-text-muted);">(optional)</span></label>
+            <input type="text" id="pageRangeInput" placeholder="e.g. 1-3, 5 (blank = all pages)" />
+          </div>
         </div>
 
         <div class="actions">
@@ -153,7 +178,7 @@
         <div class="output-box" id="statusBox"></div>
 
         <p style="font-size:0.85rem;color:var(--color-text-muted);margin-top:18px;">
-          <strong>How it works:</strong> each page is re-rendered and desaturated, then rebuilt into a new PDF. Note: text in the output is no longer selectable, since pages are flattened to images.
+          <strong>How it works:</strong> each page in your chosen range is re-rendered, desaturated (or thresholded in Black &amp; White mode), and rebuilt into a new PDF. Pages outside the range are copied over untouched. Note: converted pages are no longer selectable, since they're flattened to images.
         </p>
       </div>
 
@@ -161,9 +186,9 @@
         <h2>How to Convert a PDF to Grayscale</h2>
         <ol class="howto-steps">
           <li>Upload your PDF.</li>
-          <li>Choose an Output Quality level: High quality for the sharpest result, Balanced for a good middle ground, or Smaller file for the most compact output.</li>
-          <li>Click "Convert to Grayscale".</li>
-          <li>Check the Original Size / New Size stats, then download the grayscale PDF.</li>
+          <li>Choose a Mode: Grayscale for a full range of gray tones, or Black &amp; White (High Contrast) for a stark, threshold-based look — the Threshold slider appears once you pick it.</li>
+          <li>Choose an Output Quality level, and optionally enter a Pages range (e.g. "1-3, 5") to convert only part of the document — leave it blank to convert every page.</li>
+          <li>Click "Convert to Grayscale", check the Original Size / New Size stats, then download the result.</li>
         </ol>
       </div>
 
@@ -171,7 +196,7 @@
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
           <summary>Will my PDF's text still be selectable after converting to grayscale?</summary>
-          <p>No. Like the PDF Compressor, this tool re-renders every page as an image, desaturates the pixels, and re-encodes it as a JPEG before rebuilding the PDF — so any selectable text becomes part of a flattened image and can no longer be copied or searched.</p>
+          <p>No for pages you choose to convert — like the PDF Compressor, this tool re-renders those pages as an image, desaturates (or thresholds) the pixels, and re-encodes as a JPEG before rebuilding the PDF, so their selectable text becomes part of a flattened image. Pages outside your chosen page range, if you set one, are copied over completely untouched, keeping their original selectable text intact.</p>
         </details>
         <details class="faq-item">
           <summary>How is the grayscale conversion calculated?</summary>
@@ -182,8 +207,12 @@
           <p>The size change comes from the same re-rendering and JPEG re-encoding process used for compression, not from the grayscale conversion itself — that's also why there's a quality-level selector, since it controls the same scale/quality tradeoff as the PDF Compressor.</p>
         </details>
         <details class="faq-item">
-          <summary>Is this the same as making a PDF black-and-white / 1-bit?</summary>
-          <p>No — this produces true grayscale, with a full range of gray tones (like a black-and-white photo), not a pure black-and-white (1-bit) result where every pixel is either fully black or fully white.</p>
+          <summary>What's the difference between Grayscale mode and Black &amp; White (High Contrast) mode?</summary>
+          <p>Grayscale mode keeps a full range of gray tones using the luminance formula above, like a black-and-white photo. Black &amp; White (High Contrast) mode goes further: after computing that same luminance value, each pixel is compared against your Threshold slider (0-255) and snapped to pure black or pure white with no gray in between, similar to a scanned fax or high-contrast photocopy.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I convert only some pages instead of the whole document?</summary>
+          <p>Yes — enter a page range like "1-3, 5" in the Pages field. Pages inside that range are rendered and desaturated (or thresholded); every other page is copied over from your original file completely untouched, keeping its original text and quality. Leave the field blank to convert every page, as before.</p>
         </details>
         <details class="faq-item">
           <summary>Does this help with printing costs?</summary>
@@ -273,6 +302,12 @@
     var fileInfo = document.getElementById("fileInfo");
     var qualityLevel = document.getElementById("qualityLevel");
 
+    var modeSelect = document.getElementById("modeSelect");
+    var thresholdField = document.getElementById("thresholdField");
+    var thresholdRange = document.getElementById("thresholdRange");
+    var thresholdValue = document.getElementById("thresholdValue");
+    var pageRangeInput = document.getElementById("pageRangeInput");
+
     var currentFile = null;
     var lastDownloadUrl = null;
 
@@ -281,6 +316,38 @@
       balanced: { scale: 1.5, quality: 0.8 },
       small:    { scale: 1.1, quality: 0.65 }
     };
+
+    modeSelect.addEventListener("change", function () {
+      thresholdField.style.display = modeSelect.value === "bw" ? "block" : "none";
+    });
+    thresholdRange.addEventListener("input", function () {
+      thresholdValue.textContent = thresholdRange.value;
+    });
+
+    // Parses strings like "1-3, 5, 8" into a Set of 1-indexed page numbers.
+    // Returns null when the input is blank, meaning "every page".
+    function parsePageRange(str, maxPages) {
+      str = (str || "").trim();
+      if (!str) return null;
+      var pages = new Set();
+      str.split(",").forEach(function (part) {
+        part = part.trim();
+        if (!part) return;
+        var m = part.match(/^(\d+)\s*-\s*(\d+)$/);
+        if (m) {
+          var start = Math.min(parseInt(m[1], 10), parseInt(m[2], 10));
+          var end = Math.max(parseInt(m[1], 10), parseInt(m[2], 10));
+          for (var p = start; p <= end; p++) { if (p >= 1 && p <= maxPages) pages.add(p); }
+        } else if (/^\d+$/.test(part)) {
+          var n = parseInt(part, 10);
+          if (n >= 1 && n <= maxPages) pages.add(n);
+        } else {
+          throw new Error('Couldn\'t understand the page range "' + part + '". Use formats like 1-3, 5.');
+        }
+      });
+      if (!pages.size) throw new Error("No valid pages found in that range.");
+      return pages;
+    }
 
     function resetDownload() {
       if (lastDownloadUrl) {
@@ -321,14 +388,27 @@
       try {
         var arrayBuffer = await currentFile.arrayBuffer();
         var settings = LEVELS[qualityLevel.value];
+        var isBW = modeSelect.value === "bw";
+        var threshold = parseInt(thresholdRange.value, 10);
 
         var pdf = await pdfjsLib.getDocument({ data: arrayBuffer.slice(0) }).promise;
         var numPages = pdf.numPages;
         document.getElementById("statPages").textContent = numPages;
 
+        var selectedPages = parsePageRange(pageRangeInput.value, numPages);
+        var srcDoc = await PDFLib.PDFDocument.load(arrayBuffer.slice(0));
         var newPdf = await PDFLib.PDFDocument.create();
 
         for (var i = 1; i <= numPages; i++) {
+          var convertThisPage = !selectedPages || selectedPages.has(i);
+
+          if (!convertThisPage) {
+            statusBox.textContent = "Copying page " + i + " of " + numPages + " (outside range)…";
+            var copiedPages = await newPdf.copyPages(srcDoc, [i - 1]);
+            newPdf.addPage(copiedPages[0]);
+            continue;
+          }
+
           statusBox.textContent = "Converting page " + i + " of " + numPages + "…";
           var page = await pdf.getPage(i);
           var viewport = page.getViewport({ scale: settings.scale });
@@ -345,6 +425,7 @@
           var d = imgData.data;
           for (var p = 0; p < d.length; p += 4) {
             var gray = 0.299 * d[p] + 0.587 * d[p + 1] + 0.114 * d[p + 2];
+            if (isBW) gray = gray < threshold ? 0 : 255;
             d[p] = d[p + 1] = d[p + 2] = gray;
           }
           ctx.putImageData(imgData, 0, 0);

@@ -5,7 +5,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Character Counter Online — Twitter, Instagram & More | Fixora</title>
-  <meta name="description" content="Count characters live and check them against Twitter/X, Instagram, YouTube, SMS, and meta description limits online for free. No sign-up." />
+  <meta name="description" content="Count characters live and check them against Twitter/X, Instagram, TikTok, LinkedIn, Facebook, Pinterest, YouTube, SMS, and meta description limits online for free, plus a live reading-time estimate. No sign-up." />
   <meta name="keywords" content="character counter, twitter character counter online free, instagram caption limit" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/character-counter.html" />
@@ -74,6 +74,11 @@
         "@type": "Question",
         "name": "Does this tool store or send my text anywhere?",
         "acceptedAnswer": { "@type": "Answer", "text": "No — counting happens locally in your browser as you type. Nothing you write is transmitted or saved." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is the reading time estimated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's based on your live word count divided by 200 words per minute, a commonly used average adult silent-reading speed. Results under a minute are shown in seconds; longer text is shown in minutes and seconds. Actual reading speed varies by person and content, so treat it as a useful estimate rather than an exact figure." }
       }
     ]
   }
@@ -82,9 +87,12 @@
   <style>
     .limit-list {
       margin-top: 20px;
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
+    }
+    @media (max-width: 640px) {
+      .limit-list { grid-template-columns: 1fr; }
     }
     .limit-row {
       display: flex;
@@ -147,7 +155,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🔤</div>
       <h1>Character Counter</h1>
-      <p>Count characters live and check them against common platform limits as you type.</p>
+      <p>Count characters live, check them against common platform limits, and see an estimated reading time as you type.</p>
     </section>
 
     <section class="container">
@@ -161,6 +169,7 @@
           <div class="stat"><strong id="statChars">0</strong><span>Characters</span></div>
           <div class="stat"><strong id="statCharsNoSpace">0</strong><span>Chars (no spaces)</span></div>
           <div class="stat"><strong id="statWords">0</strong><span>Words</span></div>
+          <div class="stat"><strong id="statReadTime">0 sec</strong><span>Reading time</span></div>
         </div>
 
         <div class="limit-list" id="limitList"></div>
@@ -179,8 +188,8 @@
         <h2>How to Count Characters Against Platform Limits</h2>
         <ol class="howto-steps">
           <li>Type or paste your text into the box above.</li>
-          <li>Watch the character, word, and no-space counts update live as you type.</li>
-          <li>Check the limit bars below — each one turns red if you've gone over that platform's limit.</li>
+          <li>Watch the character, word, no-space, and reading-time stats update live as you type.</li>
+          <li>Check the limit bars below — each one turns red if you've gone over that platform's limit, covering X/Twitter, Instagram, TikTok, LinkedIn, Facebook, Pinterest, YouTube titles and descriptions, meta descriptions, and SMS segments.</li>
           <li>Trim your text until every bar you care about is back within range.</li>
         </ol>
       </div>
@@ -202,6 +211,10 @@
         <details class="faq-item">
           <summary>Does this tool store or send my text anywhere?</summary>
           <p>No — counting happens locally in your browser as you type. Nothing you write is transmitted or saved.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How is the reading time estimated?</summary>
+          <p>It's based on your live word count divided by 200 words per minute, a commonly used average adult silent-reading speed. Results under a minute are shown in seconds; longer text is shown in minutes and seconds. Actual reading speed varies by person and content, so treat it as a useful estimate rather than an exact figure.</p>
         </details>
       </div>
 
@@ -283,7 +296,10 @@
       { name: "Instagram caption", max: 2200 },
       { name: "TikTok caption", max: 2200 },
       { name: "LinkedIn post", max: 3000 },
+      { name: "Facebook post", max: 63206 },
+      { name: "Pinterest description", max: 500 },
       { name: "YouTube title", max: 100 },
+      { name: "YouTube description", max: 5000 },
       { name: "Meta description (SEO)", max: 160 }
     ];
 
@@ -298,6 +314,16 @@
       limitList.appendChild(row);
     });
 
+    function formatReadingTime(words) {
+      var wordsPerMinute = 200;
+      if (words === 0) return "0 sec";
+      var totalSeconds = Math.round((words / wordsPerMinute) * 60);
+      if (totalSeconds < 60) return totalSeconds + " sec";
+      var minutes = Math.floor(totalSeconds / 60);
+      var seconds = totalSeconds % 60;
+      return minutes + " min" + (seconds > 0 ? " " + seconds + " sec" : "");
+    }
+
     function update() {
       var text = textInput.value;
       var chars = text.length;
@@ -307,6 +333,7 @@
       document.getElementById("statChars").textContent = chars;
       document.getElementById("statCharsNoSpace").textContent = charsNoSpace;
       document.getElementById("statWords").textContent = words;
+      document.getElementById("statReadTime").textContent = formatReadingTime(words);
 
       LIMITS.forEach(function (limit, i) {
         var pct = Math.min(100, (chars / limit.max) * 100);

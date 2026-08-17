@@ -5,7 +5,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free PDF Crop Tool Online | Fixora</title>
-  <meta name="description" content="Crop a PDF online for free. Drag to select the area to keep and apply it to every page at once. No uploads, no sign-up." />
+  <meta name="description" content="Crop a PDF online for free. Drag to select the area to keep, snap to a 0.25in/0.5in/1in margin preset, lock the aspect ratio, and apply it to every page or just a page range. No uploads, no sign-up." />
   <meta name="keywords" content="crop pdf, pdf cropper, trim pdf margins online free" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/pdf-crop.html" />
@@ -13,13 +13,13 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free PDF Crop Tool Online" />
-  <meta property="og:description" content="Crop a PDF online for free and apply it to every page at once." />
+  <meta property="og:description" content="Crop a PDF online for free — margin presets, aspect ratio lock, and page-range control, applied to every page at once." />
   <meta property="og:url" content="https://fixora-site.vercel.app/tools/pdf-crop.html" />
   <meta property="og:image" content="https://fixora-site.vercel.app/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free PDF Crop Tool Online" />
-  <meta name="twitter:description" content="Crop a PDF online for free and apply it to every page at once." />
+  <meta name="twitter:description" content="Crop a PDF online for free — margin presets, aspect ratio lock, and page-range control." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -58,7 +58,7 @@
       {
         "@type": "Question",
         "name": "Does the crop only apply to page 1, or every page?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Every page — you preview and position the crop box on page 1 only, but the same crop area (calculated as a proportion of the page) is applied to all pages when you click Crop PDF, so it works best when every page in your document is the same size." }
+        "acceptedAnswer": { "@type": "Answer", "text": "By default, every page — you preview and position the crop box on page 1 only, but the same crop area (calculated as a proportion of the page) is applied to all pages when you click Crop PDF. Use the \"Apply Crop To Pages\" field to limit it to a specific range instead (like \"1-5, 8\"), and it works best when the pages you're cropping share the same size." }
       },
       {
         "@type": "Question",
@@ -79,6 +79,16 @@
         "@type": "Question",
         "name": "Why is there no page-by-page preview before I download?",
         "acceptedAnswer": { "@type": "Answer", "text": "Only page 1 is rendered for the interactive crop selection, to keep the tool fast on longer documents — the crop is then applied proportionally to the rest without rendering each one, since the goal is a single consistent crop across the whole file." }
+      },
+      {
+        "@type": "Question",
+        "name": "What do the margin presets and aspect ratio lock do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The Quick Margin Preset dropdown instantly repositions the crop box to remove an exact 0.25\", 0.5\", or 1\" margin from every side of page 1, calculated from that page's real point dimensions rather than a rough visual guess. Lock Aspect Ratio constrains the box to a fixed width-to-height ratio (Square, 4:3, 3:4, 16:9, or A4 Portrait) while you drag its corner handles, so you can't accidentally distort the shape." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I crop only some pages instead of the whole document?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — leave \"Apply Crop To Pages\" blank to crop every page (the default), or enter a range like \"1-5, 8, 10-12\" to crop only those pages; any page outside the range is left completely untouched at its original size." }
       }
     ]
   }
@@ -158,7 +168,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">✂️</div>
       <h1>Crop PDF</h1>
-      <p>Drag the box on page 1 to pick the area to keep — the same crop is applied to every page.</p>
+      <p>Drag the box on page 1 to pick the area to keep — snap to a margin preset, lock the aspect ratio, and apply it to every page or just the ones you choose.</p>
     </section>
 
     <section class="container">
@@ -180,6 +190,33 @@
           </div>
         </div>
 
+        <div class="row" id="cropOptionsRow" style="display:none;margin-top:18px;">
+          <div class="field">
+            <label for="marginPreset">Quick Margin Preset</label>
+            <select id="marginPreset">
+              <option value="">Custom (drag manually)</option>
+              <option value="0.25">Remove 0.25&quot; margin</option>
+              <option value="0.5">Remove 0.5&quot; margin</option>
+              <option value="1">Remove 1&quot; margin</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="aspectLock">Lock Aspect Ratio</label>
+            <select id="aspectLock">
+              <option value="">Free</option>
+              <option value="1">Square (1:1)</option>
+              <option value="1.333333">Landscape (4:3)</option>
+              <option value="0.75">Portrait (3:4)</option>
+              <option value="1.777778">Widescreen (16:9)</option>
+              <option value="0.707107">A4 Portrait</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="pageRangeInput">Apply Crop To Pages</label>
+            <input type="text" id="pageRangeInput" placeholder="e.g. 1-5, 8 (blank = all)" />
+          </div>
+        </div>
+
         <div class="actions">
           <button class="btn btn-primary" id="cropBtn" disabled style="display:none;">Crop PDF</button>
           <a class="btn btn-secondary" id="downloadBtn" style="display:none;" download="cropped.pdf">Download Cropped PDF</a>
@@ -192,7 +229,8 @@
         <h2>How to Crop a PDF</h2>
         <ol class="howto-steps">
           <li>Upload your PDF — page 1 renders as a preview with a draggable crop box already positioned near its edges.</li>
-          <li>Drag the box to move it, or drag any of the four corner handles to resize it around the area you want to keep.</li>
+          <li>Drag the box to move it, or drag any of the four corner handles to resize it around the area you want to keep — or pick a Quick Margin Preset to snap it to an exact 0.25", 0.5", or 1" margin instantly.</li>
+          <li>Optionally set Lock Aspect Ratio to keep the box a fixed shape (Square, 4:3, 3:4, 16:9, or A4) while resizing, and enter a page range in "Apply Crop To Pages" if you only want to crop specific pages.</li>
           <li>Click "Crop PDF" once the box covers exactly what you want.</li>
           <li>Download the cropped PDF.</li>
         </ol>
@@ -202,7 +240,7 @@
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
           <summary>Does the crop only apply to page 1, or every page?</summary>
-          <p>Every page — you preview and position the crop box on page 1 only, but the same crop area (calculated as a proportion of the page) is applied to all pages when you click Crop PDF, so it works best when every page in your document is the same size.</p>
+          <p>By default, every page — you preview and position the crop box on page 1 only, but the same crop area (calculated as a proportion of the page) is applied to all pages when you click Crop PDF. Use the "Apply Crop To Pages" field to limit it to a specific range instead (like "1-5, 8"), and it works best when the pages you're cropping share the same size.</p>
         </details>
         <details class="faq-item">
           <summary>Does cropping actually delete the content outside the box, or just hide it?</summary>
@@ -219,6 +257,14 @@
         <details class="faq-item">
           <summary>Why is there no page-by-page preview before I download?</summary>
           <p>Only page 1 is rendered for the interactive crop selection, to keep the tool fast on longer documents — the crop is then applied proportionally to the rest without rendering each one, since the goal is a single consistent crop across the whole file.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What do the margin presets and aspect ratio lock do?</summary>
+          <p>The Quick Margin Preset dropdown instantly repositions the crop box to remove an exact 0.25", 0.5", or 1" margin from every side of page 1, calculated from that page's real point dimensions rather than a rough visual guess. Lock Aspect Ratio constrains the box to a fixed width-to-height ratio (Square, 4:3, 3:4, 16:9, or A4 Portrait) while you drag its corner handles, so you can't accidentally distort the shape.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I crop only some pages instead of the whole document?</summary>
+          <p>Yes — leave "Apply Crop To Pages" blank to crop every page (the default), or enter a range like "1-5, 8, 10-12" to crop only those pages; any page outside the range is left completely untouched at its original size.</p>
         </details>
       </div>
 
@@ -304,10 +350,37 @@
     var cropBtn = document.getElementById("cropBtn");
     var downloadBtn = document.getElementById("downloadBtn");
     var statusBox = document.getElementById("statusBox");
+    var cropOptionsRow = document.getElementById("cropOptionsRow");
+    var marginPresetSelect = document.getElementById("marginPreset");
+    var aspectLockSelect = document.getElementById("aspectLock");
+    var pageRangeInput = document.getElementById("pageRangeInput");
 
     var currentFile = null;
     var box = { x: 40, y: 40, w: 160, h: 160 };
     var lastDownloadUrl = null;
+    var pageSizePt = null; // { w, h } of page 1 in real PDF points
+
+    function parsePageRange(str, maxPages) {
+      str = (str || "").trim();
+      if (!str) return null; // null = all pages
+      var pages = {};
+      var any = false;
+      str.split(",").forEach(function (part) {
+        part = part.trim();
+        if (!part) return;
+        var m = part.match(/^(\d+)\s*-\s*(\d+)$/);
+        if (m) {
+          var start = parseInt(m[1], 10), end = parseInt(m[2], 10);
+          for (var p = Math.min(start, end); p <= Math.max(start, end); p++) {
+            if (p >= 1 && p <= maxPages) { pages[p] = true; any = true; }
+          }
+        } else {
+          var n = parseInt(part, 10);
+          if (!isNaN(n) && n >= 1 && n <= maxPages) { pages[n] = true; any = true; }
+        }
+      });
+      return any ? pages : null;
+    }
 
     function resetDownload() {
       if (lastDownloadUrl) {
@@ -329,12 +402,18 @@
       resetDownload();
       cropBtn.disabled = true;
       cropBtn.style.display = "none";
+      cropOptionsRow.style.display = "none";
+      marginPresetSelect.value = "";
+      aspectLockSelect.value = "";
+      pageRangeInput.value = "";
       statusBox.textContent = "Rendering page 1 for preview…";
 
       try {
         var arrayBuffer = await file.arrayBuffer();
         var pdf = await pdfjsLib.getDocument({ data: arrayBuffer.slice(0) }).promise;
         var page = await pdf.getPage(1);
+        var viewport1x = page.getViewport({ scale: 1 });
+        pageSizePt = { w: viewport1x.width, h: viewport1x.height };
         var viewport = page.getViewport({ scale: 2 });
 
         var canvas = document.createElement("canvas");
@@ -350,6 +429,7 @@
           cropStage.style.display = "block";
           cropBtn.disabled = false;
           cropBtn.style.display = "inline-flex";
+          cropOptionsRow.style.display = "flex";
 
           requestAnimationFrame(function () {
             var stageW = cropImg.clientWidth;
@@ -418,6 +498,14 @@
         if (dragMode.indexOf("s") !== -1) box.h = b.h + dy;
         if (dragMode.indexOf("w") !== -1) { box.w = b.w - dx; box.x = b.x + dx; }
         if (dragMode.indexOf("n") !== -1) { box.h = b.h - dy; box.y = b.y + dy; }
+
+        var lockRatio = parseFloat(aspectLockSelect.value);
+        if (lockRatio) {
+          box.h = box.w / lockRatio;
+          if (dragMode.indexOf("n") !== -1) {
+            box.y = (b.y + b.h) - box.h;
+          }
+        }
       }
       clampBox();
       drawBox();
@@ -425,6 +513,28 @@
     });
 
     window.addEventListener("mouseup", function () { dragMode = null; });
+
+    marginPresetSelect.addEventListener("change", function () {
+      var inches = parseFloat(marginPresetSelect.value);
+      if (!inches || !pageSizePt) return;
+      var marginPt = inches * 72;
+      var fracX = Math.min(0.45, marginPt / pageSizePt.w);
+      var fracY = Math.min(0.45, marginPt / pageSizePt.h);
+      var stageW = cropImg.clientWidth;
+      var stageH = cropImg.clientHeight;
+      box = {
+        x: fracX * stageW,
+        y: fracY * stageH,
+        w: stageW * (1 - 2 * fracX),
+        h: stageH * (1 - 2 * fracY)
+      };
+      clampBox();
+      drawBox();
+      resetDownload();
+    });
+
+    aspectLockSelect.addEventListener("change", resetDownload);
+    pageRangeInput.addEventListener("input", resetDownload);
 
     cropBtn.addEventListener("click", async function () {
       if (!currentFile) return;
@@ -440,14 +550,19 @@
         var arrayBuffer = await currentFile.arrayBuffer();
         var pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
         var pages = pdfDoc.getPages();
+        var selectedPages = parsePageRange(pageRangeInput.value, pages.length);
+        var croppedCount = 0;
 
-        pages.forEach(function (page) {
+        pages.forEach(function (page, idx) {
+          var pageNum = idx + 1;
+          if (selectedPages && !selectedPages[pageNum]) return;
           var size = page.getSize();
           var cropX = fracLeft * size.width;
           var cropW = fracW * size.width;
           var cropH = fracH * size.height;
           var cropY = size.height - (fracTop + fracH) * size.height;
           page.setCropBox(cropX, cropY, cropW, cropH);
+          croppedCount++;
         });
 
         var bytes = await pdfDoc.save();
@@ -457,7 +572,7 @@
         downloadBtn.href = url;
         downloadBtn.download = currentFile.name.replace(/\.pdf$/i, "") + "-cropped.pdf";
         downloadBtn.style.display = "inline-flex";
-        statusBox.textContent = "Done! Cropped " + pages.length + " page(s). (" + Fixora.formatBytes(blob.size) + ")";
+        statusBox.textContent = "Done! Cropped " + croppedCount + " of " + pages.length + " page(s). (" + Fixora.formatBytes(blob.size) + ")";
       } catch (err) {
         console.error(err);
         statusBox.textContent = "Something went wrong cropping that PDF. Please try again.";

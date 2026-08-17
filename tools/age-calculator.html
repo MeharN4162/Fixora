@@ -5,7 +5,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Age Calculator Online | Fixora</title>
-  <meta name="description" content="Calculate your exact age in years, months, and days from your birth date online for free. Also shows days until your next birthday. No sign-up required." />
+  <meta name="description" content="Calculate your exact age in years, months, and days from your birth date online for free. See total days and weeks lived, the day of the week you were born, and a countdown to your next birthday. No sign-up required." />
   <meta name="keywords" content="age calculator, calculate age online free, how old am i" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/age-calculator.html" />
@@ -79,6 +79,16 @@
         "@type": "Question",
         "name": "Does Total Days Lived account for leap years?",
         "acceptedAnswer": { "@type": "Answer", "text": "Yes — it's calculated directly from the millisecond difference between the two dates, so every leap year's extra day is automatically included without any special-case logic." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is Total Weeks Lived calculated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's Total Days Lived divided by 7, rounded down to a whole number, so it always reflects only fully completed weeks rather than a fractional week." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the \"Turning\" stat mean?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It shows the age you will become on your next birthday. If today happens to be your birthday, it shows the age you just turned instead, matching \"Days to Next Birthday\" showing 0." }
       }
     ]
   }
@@ -118,7 +128,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🎂</div>
       <h1>Age Calculator</h1>
-      <p>Find your exact age in years, months, and days — plus how long until your next birthday.</p>
+      <p>Find your exact age in years, months, and days — plus total days and weeks lived, the weekday you were born, and how long until your next birthday.</p>
     </section>
 
     <section class="container">
@@ -145,7 +155,9 @@
           <div class="stat"><strong id="statMonths">–</strong><span>Months</span></div>
           <div class="stat"><strong id="statDays">–</strong><span>Days</span></div>
           <div class="stat"><strong id="statTotalDays">–</strong><span>Total Days Lived</span></div>
+          <div class="stat"><strong id="statTotalWeeks">–</strong><span>Total Weeks Lived</span></div>
           <div class="stat"><strong id="statNextBday">–</strong><span>Days to Next Birthday</span></div>
+          <div class="stat"><strong id="statTurning">–</strong><span>Turning</span></div>
         </div>
       </div>
 
@@ -155,7 +167,8 @@
           <li>Enter your date of birth in the "Date of Birth" field.</li>
           <li>The "As Of" field defaults to today's date — change it if you want your age calculated as of a different date.</li>
           <li>Click "Calculate Age" to see your age broken into years, months, and days.</li>
-          <li>Check the stats row for your total number of days lived and how many days remain until your next birthday.</li>
+          <li>Check the stats row for your total days and weeks lived, how many days remain until your next birthday, and the age you'll turn.</li>
+          <li>The summary text below the button also names the day of the week you were born on.</li>
         </ol>
       </div>
 
@@ -180,6 +193,14 @@
         <details class="faq-item">
           <summary>Does Total Days Lived account for leap years?</summary>
           <p>Yes — it's calculated directly from the millisecond difference between the two dates, so every leap year's extra day is automatically included without any special-case logic.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How is Total Weeks Lived calculated?</summary>
+          <p>It's Total Days Lived divided by 7, rounded down to a whole number, so it always reflects only fully completed weeks rather than a fractional week.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the "Turning" stat mean?</summary>
+          <p>It shows the age you will become on your next birthday. If today happens to be your birthday, it shows the age you just turned instead, matching "Days to Next Birthday" showing 0.</p>
         </details>
       </div>
 
@@ -292,21 +313,26 @@
       }
 
       var totalDays = Math.floor((asOf - birth) / (1000 * 60 * 60 * 24));
+      var totalWeeks = Math.floor(totalDays / 7);
 
       var nextBday = new Date(asOf.getFullYear(), birth.getMonth(), birth.getDate());
-      if (nextBday < asOf || (nextBday.getTime() === asOf.getTime() && false)) {
+      if (nextBday < asOf) {
         nextBday.setFullYear(asOf.getFullYear() + 1);
       }
       var daysToNext = Math.ceil((nextBday - asOf) / (1000 * 60 * 60 * 24));
+      var turningAge = daysToNext === 0 ? years : years + 1;
+      var bornWeekday = birth.toLocaleDateString("en-US", { weekday: "long" });
 
       document.getElementById("statYears").textContent = years;
       document.getElementById("statMonths").textContent = months;
       document.getElementById("statDays").textContent = days;
       document.getElementById("statTotalDays").textContent = totalDays.toLocaleString();
+      document.getElementById("statTotalWeeks").textContent = totalWeeks.toLocaleString();
       document.getElementById("statNextBday").textContent = daysToNext === 0 ? "🎉 Today!" : daysToNext;
+      document.getElementById("statTurning").textContent = turningAge;
 
       resultRow.style.display = "flex";
-      statusBox.textContent = "You are " + years + " years, " + months + " months, and " + days + " days old.";
+      statusBox.textContent = "You are " + years + " years, " + months + " months, and " + days + " days old — born on a " + bornWeekday + ".";
     });
   </script>
 </body>

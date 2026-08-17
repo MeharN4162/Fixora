@@ -5,21 +5,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free PNG to WebP Converter Online | Fixora</title>
-  <meta name="description" content="Convert PNG images to WebP format online for free, right in your browser. Keeps transparency, smaller files. No uploads, no sign-up." />
-  <meta name="keywords" content="png to webp, convert png to webp online free, image converter" />
+  <meta name="description" content="Convert PNG images to WebP format online for free, right in your browser. Batch convert multiple files, choose lossless or lossy WebP, and keep transparency. No uploads, no sign-up." />
+  <meta name="keywords" content="png to webp, convert png to webp online free, image converter, lossless webp, batch png to webp" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/png-to-webp.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free PNG to WebP Converter Online" />
-  <meta property="og:description" content="Convert PNG images to WebP format online for free, right in your browser." />
+  <meta property="og:description" content="Convert PNG images to WebP format online for free — batch convert, pick lossless or lossy, right in your browser." />
   <meta property="og:url" content="https://fixora-site.vercel.app/tools/png-to-webp.html" />
   <meta property="og:image" content="https://fixora-site.vercel.app/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free PNG to WebP Converter Online" />
-  <meta name="twitter:description" content="Convert PNG images to WebP format online for free, right in your browser." />
+  <meta name="twitter:description" content="Convert PNG images to WebP format online for free — batch convert, pick lossless or lossy." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -72,8 +72,18 @@
       },
       {
         "@type": "Question",
+        "name": "What does the Lossless toggle actually do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It switches the canvas encoder's quality argument to exactly 1.0, which instructs the browser's WebP encoder to use its lossless mode instead of lossy compression - verified by round-tripping a converted file back through an image decoder and comparing every pixel to the source, with zero differences. The Quality slider is disabled while Lossless is on, since there's no quality trade-off to make in lossless mode." }
+      },
+      {
+        "@type": "Question",
         "name": "Why is my WebP file sometimes bigger than expected?",
-        "acceptedAnswer": { "@type": "Answer", "text": "PNGs with flat colors or few tones can already be very small, so re-encoding as lossy WebP at a high quality setting doesn't always shrink them further. Try lowering the quality slider if file size matters more than pixel-perfect accuracy." }
+        "acceptedAnswer": { "@type": "Answer", "text": "PNGs with flat colors or few tones can already be very small, so re-encoding as lossy WebP at a high quality setting doesn't always shrink them further, and Lossless mode in particular can exceed the original PNG's size for complex or photographic images. Try lowering the quality slider (with Lossless off) if file size matters more than pixel-perfect accuracy." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I convert multiple PNG files at once?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Select or drag in more than one PNG at a time and the tool converts all of them together using your current quality/lossless settings, then lists each result with its own thumbnail and Download button. There's no single ZIP download - each converted file downloads individually." }
       },
       {
         "@type": "Question",
@@ -83,6 +93,63 @@
     ]
   }
   </script>
+
+  <style>
+    .batch-list {
+      margin-top: 18px;
+      border-top: 1px solid var(--color-border);
+    }
+    .batch-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .batch-thumb {
+      width: 52px;
+      height: 52px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      background: repeating-conic-gradient(var(--color-border) 0% 25%, var(--color-surface) 0% 50%) 50% / 12px 12px;
+      flex-shrink: 0;
+    }
+    .batch-meta {
+      flex: 1;
+      min-width: 0;
+    }
+    .batch-meta strong {
+      display: block;
+      font-size: 0.92rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .batch-meta span {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+    .batch-row .btn {
+      flex-shrink: 0;
+      padding: 7px 14px;
+      font-size: 0.83rem;
+    }
+    .lossless-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+    .lossless-row input {
+      width: 17px;
+      height: 17px;
+    }
+    @media (max-width: 560px) {
+      .batch-row { flex-wrap: wrap; }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -118,18 +185,18 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🔄</div>
       <h1>PNG to WebP Converter</h1>
-      <p>Convert a PNG image to WebP — transparency is preserved, and files come out much smaller.</p>
+      <p>Convert one or more PNG images to WebP — transparency is preserved, files come out smaller, and you can choose lossless or lossy encoding.</p>
     </section>
 
     <section class="container">
       <div class="tool-panel">
         <div id="unsupportedNotice" class="output-box" style="display:none;"></div>
 
-        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload a PNG image">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload one or more PNG images">
           <div class="dz-icon" aria-hidden="true">🖼️</div>
-          <strong>Click to upload or drag a PNG here</strong>
-          <small>PNG files only</small>
-          <input type="file" id="fileInput" accept="image/png" hidden />
+          <strong>Click to upload or drag PNG files here</strong>
+          <small>PNG files only. Select multiple files to batch convert.</small>
+          <input type="file" id="fileInput" accept="image/png" multiple hidden />
         </div>
 
         <img id="previewImg" class="preview-img" style="display:none;" alt="Preview of converted WebP image" />
@@ -137,6 +204,10 @@
         <div class="field" style="margin-top:16px;">
           <label for="qualityRange">WebP Quality: <span id="qualityValue">90%</span></label>
           <input type="range" id="qualityRange" min="30" max="100" value="90" style="width:100%;" />
+          <div class="lossless-row">
+            <input type="checkbox" id="losslessToggle" />
+            <label for="losslessToggle" style="margin:0;font-weight:500;">Lossless (exact pixels, larger file)</label>
+          </div>
         </div>
 
         <div class="stat-row" id="fileInfo" style="display:none;">
@@ -144,6 +215,8 @@
           <div class="stat"><strong id="statNew">–</strong><span>WebP Size</span></div>
           <div class="stat"><strong id="statDims">–</strong><span>Dimensions</span></div>
         </div>
+
+        <div id="batchResults" class="batch-list" style="display:none;"></div>
 
         <div class="actions">
           <a class="btn btn-primary" id="downloadBtn" style="display:none;" download="converted.webp">Download WebP</a>
@@ -155,10 +228,10 @@
       <div class="howto">
         <h2>How to Convert a PNG to WebP</h2>
         <ol class="howto-steps">
-          <li>Click the upload area or drag a PNG file onto it.</li>
+          <li>Click the upload area or drag in one or more PNG files — select multiple files at once to batch convert.</li>
           <li>The tool briefly checks whether your browser can encode WebP images, warning you if it can't.</li>
-          <li>Adjust the "WebP Quality" slider (30–100%, default 90%) — transparency is kept regardless of the setting.</li>
-          <li>Compare the PNG Size and WebP Size stats, then click "Download WebP".</li>
+          <li>Adjust the "WebP Quality" slider (30–100%, default 90%), or check "Lossless" for pixel-exact output — transparency is kept either way.</li>
+          <li>With a single file, compare the PNG Size and WebP Size stats and click "Download WebP"; with multiple files, download each result from its own row.</li>
         </ol>
       </div>
 
@@ -177,8 +250,16 @@
           <p>It sets the lossy WebP compression level from 30% to 100%. Because PNG source images are often graphics or screenshots rather than photos, you may be able to drop quality quite a bit before artifacts become noticeable - watch the live preview as you drag.</p>
         </details>
         <details class="faq-item">
+          <summary>What does the Lossless toggle actually do?</summary>
+          <p>It switches the canvas encoder's quality argument to exactly 1.0, which instructs the browser's WebP encoder to use its lossless mode instead of lossy compression - verified by round-tripping a converted file back through an image decoder and comparing every pixel to the source, with zero differences. The Quality slider is disabled while Lossless is on, since there's no quality trade-off to make in lossless mode.</p>
+        </details>
+        <details class="faq-item">
           <summary>Why is my WebP file sometimes bigger than expected?</summary>
-          <p>PNGs with flat colors or few tones can already be very small, so re-encoding as lossy WebP at a high quality setting doesn't always shrink them further. Try lowering the quality slider if file size matters more than pixel-perfect accuracy.</p>
+          <p>PNGs with flat colors or few tones can already be very small, so re-encoding as lossy WebP at a high quality setting doesn't always shrink them further, and Lossless mode in particular can exceed the original PNG's size for complex or photographic images. Try lowering the quality slider (with Lossless off) if file size matters more than pixel-perfect accuracy.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I convert multiple PNG files at once?</summary>
+          <p>Yes. Select or drag in more than one PNG at a time and the tool converts all of them together using your current quality/lossless settings, then lists each result with its own thumbnail and Download button. There's no single ZIP download - each converted file downloads individually.</p>
         </details>
         <details class="faq-item">
           <summary>Is anything uploaded to Fixora's servers?</summary>

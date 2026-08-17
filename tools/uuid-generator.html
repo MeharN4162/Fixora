@@ -5,8 +5,8 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free UUID / GUID Generator Online | Fixora</title>
-  <meta name="description" content="Generate random UUID v4 / GUID values online for free, right in your browser. Generate one or many at once. No sign-up." />
-  <meta name="keywords" content="uuid generator, guid generator online free, random uuid v4" />
+  <meta name="description" content="Generate random UUID v4 / GUID values online for free, right in your browser. Generate 1 to 100 at once, with lowercase/UPPERCASE, hyphens, no-hyphens, or braces {} formats. No sign-up." />
+  <meta name="keywords" content="uuid generator, guid generator online free, random uuid v4, bulk uuid generator" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixora-site.vercel.app/tools/uuid-generator.html" />
 
@@ -68,7 +68,7 @@
       {
         "@type": "Question",
         "name": "What do the letter case and format options change?",
-        "acceptedAnswer": { "@type": "Answer", "text": "They only affect how the UUID is displayed — uppercase versus lowercase letters, and whether hyphens are included between the groups. The underlying 128-bit random value and its uniqueness are identical either way." }
+        "acceptedAnswer": { "@type": "Answer", "text": "They only affect how the UUID is displayed — uppercase versus lowercase letters, and whether it's shown with hyphens, without hyphens, or wrapped in curly braces like {xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}, the format Windows uses for GUIDs in the registry and COM code. The underlying 128-bit random value and its uniqueness are identical in every format." }
       },
       {
         "@type": "Question",
@@ -139,7 +139,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🆔</div>
       <h1>UUID / GUID Generator</h1>
-      <p>Generate random version-4 UUIDs, using your browser's cryptographically secure random generator.</p>
+      <p>Generate 1 to 100 random version-4 UUIDs at once, using your browser's cryptographically secure random generator — with lowercase/UPPERCASE, hyphens, no-hyphens, or braces {…} formats.</p>
     </section>
 
     <section class="container">
@@ -161,6 +161,7 @@
             <select id="hyphensSelect">
               <option value="hyphens">With hyphens</option>
               <option value="nohyphens">No hyphens</option>
+              <option value="braces">Braces {…} (Windows GUID)</option>
             </select>
           </div>
         </div>
@@ -179,7 +180,7 @@
         <h2>How to Generate UUIDs</h2>
         <ol class="howto-steps">
           <li>Enter how many UUIDs you want (1 to 100) in the "How many?" field.</li>
-          <li>Choose lowercase or UPPERCASE letters, and whether to include hyphens, from the two dropdowns.</li>
+          <li>Choose lowercase or UPPERCASE letters, and a format (with hyphens, no hyphens, or wrapped in braces for Windows-style GUIDs), from the two dropdowns.</li>
           <li>Click "Generate" to produce the list.</li>
           <li>Copy one UUID with its row's "Copy" button, or click "Copy All" to copy the whole list at once, one per line.</li>
         </ol>
@@ -197,7 +198,7 @@
         </details>
         <details class="faq-item">
           <summary>What do the letter case and format options change?</summary>
-          <p>They only affect how the UUID is displayed — uppercase versus lowercase letters, and whether hyphens are included between the groups. The underlying 128-bit random value and its uniqueness are identical either way.</p>
+          <p>They only affect how the UUID is displayed — uppercase versus lowercase letters, and whether it's shown with hyphens, without hyphens, or wrapped in curly braces like {xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}, the format Windows uses for GUIDs in the registry and COM code. The underlying 128-bit random value and its uniqueness are identical in every format.</p>
         </details>
         <details class="faq-item">
           <summary>Can two generated UUIDs collide?</summary>
@@ -316,6 +317,7 @@
       for (var i = 0; i < count; i++) {
         var uuid = generateUuidV4();
         if (hyphensSelect.value === "nohyphens") uuid = uuid.replace(/-/g, "");
+        else if (hyphensSelect.value === "braces") uuid = "{" + uuid + "}";
         if (caseSelect.value === "upper") uuid = uuid.toUpperCase();
         results.push(uuid);
       }
