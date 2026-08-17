@@ -6,8 +6,8 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Random Number Generator Online | Fixora</title>
-  <meta name="description" content="Generate random numbers online for free, right in your browser. Set a min/max range, generate multiple numbers, allow or block duplicates. No sign-up." />
-  <meta name="keywords" content="random number generator, random number picker online free" />
+  <meta name="description" content="Generate random numbers online for free, right in your browser. Set a min/max range, generate a batch of numbers, allow or block duplicates, switch to decimal mode with custom decimal places, and sort the results. No sign-up." />
+  <meta name="keywords" content="random number generator, random number picker online free, random decimal number generator" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/random-number-generator.html" />
 
@@ -80,6 +80,16 @@
         "@type": "Question",
         "name": "Does clicking Generate again produce a different set of numbers?",
         "acceptedAnswer": { "@type": "Answer", "text": "Yes, every click runs a fresh secure random draw, so results will typically differ from the previous generation, unless the range is small enough that repeats are likely." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I generate random decimal numbers instead of whole numbers?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — switch Number type to Decimal and choose how many decimal places you want (0-9). The tool generates numbers with exactly that many decimal places, uniformly distributed across your min/max range using the same crypto.getRandomValues() rejection sampling as integer mode." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I sort the generated numbers?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — use the Sort results dropdown to arrange your output in ascending or descending numeric order, or leave it on No sorting to see the numbers in the order they were drawn." }
       }
     ]
   }
@@ -146,15 +156,37 @@
         <div class="row">
           <div class="field">
             <label for="minInput">Minimum</label>
-            <input type="number" id="minInput" value="1" />
+            <input type="number" id="minInput" value="1" step="any" />
           </div>
           <div class="field">
             <label for="maxInput">Maximum</label>
-            <input type="number" id="maxInput" value="100" />
+            <input type="number" id="maxInput" value="100" step="any" />
           </div>
           <div class="field">
             <label for="countInput">How many?</label>
-            <input type="number" id="countInput" value="1" min="1" max="100" />
+            <input type="number" id="countInput" value="1" min="1" max="1000" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="numberTypeSelect">Number type</label>
+            <select id="numberTypeSelect">
+              <option value="integer" selected>Integer</option>
+              <option value="decimal">Decimal</option>
+            </select>
+          </div>
+          <div class="field" id="decimalsField" style="display:none;">
+            <label for="decimalsInput">Decimal places</label>
+            <input type="number" id="decimalsInput" value="2" min="0" max="9" />
+          </div>
+          <div class="field">
+            <label for="sortSelect">Sort results</label>
+            <select id="sortSelect">
+              <option value="none" selected>No sorting</option>
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
           </div>
         </div>
 
@@ -173,14 +205,18 @@
         <div class="output-box" id="statusBox"></div>
 
         <div class="number-chips" id="numberChips"></div>
+
+        <div class="output-box" id="statsBox" style="display:none;"></div>
       </div>
 
       <div class="howto">
         <h2>How to Generate Random Numbers</h2>
         <ol class="howto-steps">
           <li>Enter a minimum and maximum value to define your range.</li>
-          <li>Enter how many numbers you want generated (up to 100 at once).</li>
-          <li>Check or uncheck "Allow duplicate numbers" depending on whether repeats are okay.</li>
+          <li>Enter how many numbers you want generated (a batch, e.g. 10).</li>
+          <li>Choose Integer or Decimal as the number type. In Decimal mode, set how many decimal places you want.</li>
+          <li>Check or uncheck "Allow duplicate numbers" depending on whether repeats are okay — useful for lottery-style draws where every number must be unique.</li>
+          <li>Optionally choose a sort order for the results.</li>
           <li>Click "Generate" to produce your numbers, then "Copy Results" to copy them as a comma-separated list.</li>
         </ol>
       </div>
@@ -206,6 +242,14 @@
         <details class="faq-item">
           <summary>Does clicking Generate again produce a different set of numbers?</summary>
           <p>Yes, every click runs a fresh secure random draw, so results will typically differ from the previous generation, unless the range is small enough that repeats are likely.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I generate random decimal numbers instead of whole numbers?</summary>
+          <p>Yes — switch Number type to Decimal and choose how many decimal places you want (0-9). The tool generates numbers with exactly that many decimal places, uniformly distributed across your min/max range using the same crypto.getRandomValues() rejection sampling as integer mode.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I sort the generated numbers?</summary>
+          <p>Yes — use the Sort results dropdown to arrange your output in ascending or descending numeric order, or leave it on No sorting to see the numbers in the order they were drawn.</p>
         </details>
       </div>
 
@@ -283,25 +327,75 @@
     var maxInput = document.getElementById("maxInput");
     var countInput = document.getElementById("countInput");
     var allowDupes = document.getElementById("allowDupes");
+    var numberTypeSelect = document.getElementById("numberTypeSelect");
+    var decimalsField = document.getElementById("decimalsField");
+    var decimalsInput = document.getElementById("decimalsInput");
+    var sortSelect = document.getElementById("sortSelect");
     var statusBox = document.getElementById("statusBox");
     var numberChips = document.getElementById("numberChips");
+    var statsBox = document.getElementById("statsBox");
 
     var lastResults = [];
 
-    function secureRandomInt(maxExclusive) {
-      var array = new Uint32Array(1);
-      var limit = Math.floor(0xffffffff / maxExclusive) * maxExclusive;
+    numberTypeSelect.addEventListener("change", function () {
+      decimalsField.style.display = numberTypeSelect.value === "decimal" ? "" : "none";
+    });
+
+    // Returns a cryptographically secure, uniformly distributed BigInt in [0, range)
+    // using rejection sampling, so there is zero modulo bias regardless of how large
+    // range is (works for tiny integer ranges and huge scaled-decimal ranges alike).
+    function secureRandomBigInt(range) {
+      if (range <= 0n) throw new RangeError("range must be positive");
+      if (range === 1n) return 0n;
+      var bitLength = range.toString(2).length;
+      var byteLength = Math.ceil(bitLength / 8);
+      var maxValue = 1n << BigInt(byteLength * 8);
+      // Largest multiple of `range` that fits in maxValue. Any drawn value >= limit
+      // is discarded and re-drawn so every accepted value maps to range with equal
+      // probability — this is what makes the result unbiased.
+      var limit = (maxValue / range) * range;
+      var bytes = new Uint8Array(byteLength);
+      var value;
       do {
-        crypto.getRandomValues(array);
-      } while (array[0] >= limit);
-      return array[0] % maxExclusive;
+        crypto.getRandomValues(bytes);
+        value = 0n;
+        for (var i = 0; i < bytes.length; i++) {
+          value = (value << 8n) | BigInt(bytes[i]);
+        }
+      } while (value >= limit);
+      return value % range;
+    }
+
+    // Draws `count` unique random BigInt indices from [0, rangeSize) without ever
+    // materializing an array of the full range — a virtual Fisher-Yates shuffle
+    // backed by a sparse map, so it stays fast and memory-light even when rangeSize
+    // is enormous (e.g. a wide decimal range) while count stays small.
+    function sampleIndicesWithoutReplacement(rangeSize, count) {
+      var swapped = new Map();
+      var picked = [];
+      var n = rangeSize;
+      for (var i = 0; i < count; i++) {
+        var r = secureRandomBigInt(n);
+        var key = r.toString();
+        var val = swapped.has(key) ? swapped.get(key) : r;
+        var last = n - 1n;
+        var lastKey = last.toString();
+        var lastVal = swapped.has(lastKey) ? swapped.get(lastKey) : last;
+        swapped.set(key, lastVal);
+        swapped.delete(lastKey);
+        picked.push(val);
+        n = last;
+      }
+      return picked;
     }
 
     document.getElementById("generateBtn").addEventListener("click", function () {
-      var min = parseInt(minInput.value, 10);
-      var max = parseInt(maxInput.value, 10);
+      var min = parseFloat(minInput.value);
+      var max = parseFloat(maxInput.value);
       var count = parseInt(countInput.value, 10);
       var dupesOk = allowDupes.checked;
+      var isDecimal = numberTypeSelect.value === "decimal";
+      var decimals = 0;
 
       if (isNaN(min) || isNaN(max) || isNaN(count)) {
         statusBox.textContent = "Please fill in all fields with valid numbers.";
@@ -315,38 +409,91 @@
         statusBox.textContent = "Please generate at least 1 number.";
         return;
       }
-
-      var range = max - min + 1;
-      if (!dupesOk && count > range) {
-        statusBox.textContent = "Can't generate " + count + " unique numbers from a range of only " + range + " possible values. Increase the range, reduce the count, or allow duplicates.";
+      if (count > 100000) {
+        statusBox.textContent = "Please request 100,000 numbers or fewer at a time.";
         return;
       }
 
-      var results = [];
-      if (dupesOk) {
-        for (var i = 0; i < count; i++) {
-          results.push(min + secureRandomInt(range));
-        }
-      } else {
-        var pool = [];
-        for (var v = min; v <= max; v++) pool.push(v);
-        for (var j = 0; j < count; j++) {
-          var idx = secureRandomInt(pool.length);
-          results.push(pool[idx]);
-          pool.splice(idx, 1);
+      if (isDecimal) {
+        decimals = parseInt(decimalsInput.value, 10);
+        if (isNaN(decimals) || decimals < 0 || decimals > 9) {
+          statusBox.textContent = "Decimal places must be a whole number between 0 and 9.";
+          return;
         }
       }
 
-      lastResults = results;
+      var scale = Math.pow(10, decimals);
+      var minScaled = Math.round(min * scale);
+      var maxScaled = Math.round(max * scale);
+      if (minScaled > maxScaled) {
+        statusBox.textContent = "Minimum must be less than or equal to maximum.";
+        return;
+      }
+
+      var minScaledBig = BigInt(minScaled);
+      var rangeCountBig = BigInt(maxScaled) - minScaledBig + 1n;
+
+      if (!dupesOk && BigInt(count) > rangeCountBig) {
+        var rangeDesc = rangeCountBig.toString();
+        statusBox.textContent = "Can't generate " + count + " unique numbers from a range of only " + rangeDesc + " possible value(s) at " + decimals + " decimal place(s). Increase the range, reduce the count, add more decimal places, or allow duplicates.";
+        return;
+      }
+
+      var scaledResults = [];
+      if (dupesOk) {
+        for (var i = 0; i < count; i++) {
+          scaledResults.push(minScaledBig + secureRandomBigInt(rangeCountBig));
+        }
+      } else {
+        var indices = sampleIndicesWithoutReplacement(rangeCountBig, count);
+        for (var j = 0; j < indices.length; j++) {
+          scaledResults.push(minScaledBig + indices[j]);
+        }
+      }
+
+      // Convert scaled integers to display numbers, keeping an exact BigInt sum
+      // (rather than summing floats) so totals stay precise for decimal batches.
+      var sumScaledBig = 0n;
+      var numericValues = [];
+      var displayStrings = [];
+      for (var k = 0; k < scaledResults.length; k++) {
+        sumScaledBig += scaledResults[k];
+        var numeric = Number(scaledResults[k]) / scale;
+        numericValues.push(numeric);
+        displayStrings.push(numeric.toFixed(decimals));
+      }
+
+      if (sortSelect.value === "asc") {
+        var order = displayStrings.map(function (s, idx) { return idx; });
+        order.sort(function (a, b) { return numericValues[a] - numericValues[b]; });
+        displayStrings = order.map(function (idx) { return displayStrings[idx]; });
+      } else if (sortSelect.value === "desc") {
+        var orderD = displayStrings.map(function (s, idx) { return idx; });
+        orderD.sort(function (a, b) { return numericValues[b] - numericValues[a]; });
+        displayStrings = orderD.map(function (idx) { return displayStrings[idx]; });
+      }
+
+      lastResults = displayStrings;
       numberChips.innerHTML = "";
-      results.forEach(function (n) {
+      displayStrings.forEach(function (n) {
         var chip = document.createElement("span");
         chip.className = "number-chip";
         chip.textContent = n;
         numberChips.appendChild(chip);
       });
 
-      statusBox.textContent = "Generated " + results.length + " number(s) between " + min + " and " + max + ".";
+      statusBox.textContent = "Generated " + displayStrings.length + " number(s) between " + min + " and " + max + (isDecimal ? " (" + decimals + " decimal place" + (decimals === 1 ? "" : "s") + ")" : "") + ".";
+
+      if (displayStrings.length > 1) {
+        var sumScaled = sumScaledBig;
+        var sum = Number(sumScaled) / scale;
+        var average = sum / displayStrings.length;
+        statsBox.style.display = "";
+        statsBox.textContent = "Sum: " + sum.toFixed(decimals) + "  |  Average: " + average.toFixed(Math.max(decimals, 2));
+      } else {
+        statsBox.style.display = "none";
+        statsBox.textContent = "";
+      }
     });
 
     document.getElementById("copyBtn").addEventListener("click", function () {
