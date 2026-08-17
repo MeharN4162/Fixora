@@ -5,22 +5,22 @@
   <meta charset="UTF-8" />
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Free Color Converter Online — HEX, RGB, HSL | Fixora</title>
-  <meta name="description" content="Convert colors between HEX, RGB, and HSL instantly online for free. Live preview swatch, no sign-up required." />
-  <meta name="keywords" content="color converter, hex to rgb, rgb to hsl, color code converter online free" />
+  <title>Free Color Converter Online — HEX, RGB, HSL, HSV, CMYK | Fixora</title>
+  <meta name="description" content="Convert colors between HEX, RGB, HSL, HSV/HSB, and CMYK online for free — with alpha support, drag-to-adjust sliders, a nearest CSS named color match, and a WCAG contrast checker." />
+  <meta name="keywords" content="color converter, hex to rgb, rgb to hsl, hsv color picker, cmyk converter, wcag contrast checker, color code converter online free" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/color-converter.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Color Converter Online" />
-  <meta property="og:description" content="Convert colors between HEX, RGB, and HSL instantly online for free." />
+  <meta property="og:description" content="Convert colors between HEX, RGB, HSL, HSV, and CMYK instantly, with alpha support, drag sliders, a nearest named color match, and a WCAG contrast checker." />
   <meta property="og:url" content="https://fixoona.com/tools/color-converter.html" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Color Converter Online" />
-  <meta name="twitter:description" content="Convert colors between HEX, RGB, and HSL instantly." />
+  <meta name="twitter:description" content="Convert colors between HEX, RGB, HSL, HSV, and CMYK, with alpha support, drag sliders, and a WCAG contrast checker." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -59,7 +59,7 @@
       {
         "@type": "Question",
         "name": "What color formats does this tool support?",
-        "acceptedAnswer": { "@type": "Answer", "text": "HEX (e.g., #2563eb), RGB (red/green/blue values 0-255), and HSL (hue 0-360°, saturation and lightness as percentages) — you can enter a value in any one of the three and the others recalculate instantly." }
+        "acceptedAnswer": { "@type": "Answer", "text": "HEX (3, 6, or 8-digit with alpha), RGB, HSL, HSV/HSB, and CMYK — edit a value in any one of these formats and the rest recalculate instantly using exact color-space math." }
       },
       {
         "@type": "Question",
@@ -73,17 +73,147 @@
       },
       {
         "@type": "Question",
+        "name": "Does the HEX field support transparency with an alpha channel?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — enter an 8-digit HEX code (e.g., #2563ebff) to set both color and alpha at once, or drag the Alpha slider separately. The swatch preview shows transparency against a checkerboard background, and the HEX field automatically switches to 8 digits whenever alpha is below 100%." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I adjust colors by dragging sliders instead of typing numbers?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — every RGB, HSL, HSV/HSB, and CMYK value has a drag-to-adjust slider next to its number field, so you can fine-tune a color visually while watching the live swatch update in real time." }
+      },
+      {
+        "@type": "Question",
         "name": "Can I use the copied rgb() and hsl() values directly in CSS?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes — the Copy rgb() and Copy hsl() buttons generate valid CSS color function syntax, like rgb(37, 99, 235), that you can paste straight into a stylesheet." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — the Copy HEX, Copy RGB, Copy HSL, and Copy RGBA buttons all generate valid CSS color syntax, like rgb(37, 99, 235) or rgba(37, 99, 235, 0.5), that you can paste straight into a stylesheet." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the CMYK output valid CSS syntax?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — CSS doesn't have broad support for a cmyk() color function, so the CMYK values here are provided for print and graphic design workflows, not for pasting into a stylesheet. Use the HEX, RGB, or HSL/RGBA values for CSS." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the \"Nearest CSS Named Color\" match show?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It compares your current color's RGB values against all 140+ standard CSS named colors (like royalblue or tomato) and shows the closest one by Euclidean distance, along with whether it's an exact match — useful for finding a readable keyword name for a color you picked visually." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is the WCAG contrast ratio calculated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Using the official WCAG relative luminance formula, which linearizes and weights the red, green, and blue channels before comparing your color's luminance against pure white and pure black. The tool shows both ratios and flags whether they meet the WCAG AA (4.5:1 normal text, 3:1 large text) and AAA (7:1 normal text, 4.5:1 large text) thresholds." }
       },
       {
         "@type": "Question",
         "name": "What happens if I type an invalid HEX code?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Invalid HEX input — anything that isn't 3 or 6 valid hexadecimal characters — is ignored, and the other fields won't update until you enter a valid code." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Invalid HEX input — anything that isn't 3, 6, or 8 valid hexadecimal characters — is ignored, and the other fields won't update until you enter a valid code." }
       }
     ]
   }
   </script>
+  <style>
+    .swatch-checker,
+    .swatch-color {
+      position: absolute;
+      inset: 0;
+    }
+    .swatch-checker {
+      background-image:
+        linear-gradient(45deg, #ccc 25%, transparent 25%),
+        linear-gradient(-45deg, #ccc 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #ccc 75%),
+        linear-gradient(-45deg, transparent 75%, #ccc 75%);
+      background-size: 16px 16px;
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+      background-color: #fff;
+    }
+    .field input[type="range"] {
+      width: 100%;
+      margin-top: 8px;
+      accent-color: var(--color-primary);
+      cursor: pointer;
+    }
+    .section-label {
+      font-weight: 700;
+      font-size: 1rem;
+      margin: 28px 0 14px;
+    }
+    .named-color-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--color-bg-soft);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+    }
+    .named-color-dot {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border);
+      flex: none;
+    }
+    .named-color-text strong {
+      display: block;
+      font-size: 0.98rem;
+    }
+    .named-color-text span {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+    }
+    .contrast-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .contrast-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--color-bg-soft);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+    }
+    .contrast-preview {
+      width: 54px;
+      height: 54px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      flex: none;
+    }
+    .contrast-info strong {
+      display: block;
+      font-family: var(--font-display, monospace);
+      font-size: 1.05rem;
+    }
+    .contrast-info .badges {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+    }
+    .badge.pass {
+      color: var(--color-success);
+      border-color: var(--color-success);
+    }
+    .badge.fail {
+      color: var(--color-danger);
+      border-color: var(--color-danger);
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -119,12 +249,15 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🎨</div>
       <h1>Color Converter</h1>
-      <p>Convert colors between HEX, RGB, and HSL — edit any field and the others update instantly.</p>
+      <p>Convert colors between HEX, RGB, HSL, HSV/HSB, and CMYK — drag a slider, pick a swatch, or type a value in any format and the rest update instantly.</p>
     </section>
 
     <section class="container">
       <div class="tool-panel">
-        <div class="color-swatch" id="swatch"></div>
+        <div class="color-swatch" id="swatchWrap" style="position:relative;overflow:hidden;">
+          <div class="swatch-checker" aria-hidden="true"></div>
+          <div class="swatch-color" id="swatch"></div>
+        </div>
 
         <div class="field" style="margin-top:20px;">
           <label for="colorPicker">Pick a Color</label>
@@ -132,54 +265,144 @@
         </div>
 
         <div class="field">
-          <label for="hexInput">HEX</label>
+          <label for="hexInput">HEX <small style="font-weight:400;color:var(--color-text-muted);">(3, 6, or 8-digit)</small></label>
           <input type="text" id="hexInput" value="#2563eb" />
         </div>
 
+        <div class="field">
+          <label for="alphaInput">Alpha %</label>
+          <input type="number" id="alphaInput" min="0" max="100" value="100" />
+          <input type="range" id="alphaRange" min="0" max="100" value="100" aria-label="Alpha slider" />
+        </div>
+
+        <p class="section-label">RGB</p>
         <div class="row">
           <div class="field">
             <label for="rInput">R</label>
             <input type="number" id="rInput" min="0" max="255" />
+            <input type="range" id="rRange" min="0" max="255" aria-label="Red slider" />
           </div>
           <div class="field">
             <label for="gInput">G</label>
             <input type="number" id="gInput" min="0" max="255" />
+            <input type="range" id="gRange" min="0" max="255" aria-label="Green slider" />
           </div>
           <div class="field">
             <label for="bInput">B</label>
             <input type="number" id="bInput" min="0" max="255" />
+            <input type="range" id="bRange" min="0" max="255" aria-label="Blue slider" />
           </div>
         </div>
 
+        <p class="section-label">HSL</p>
         <div class="row">
           <div class="field">
             <label for="hInput">H</label>
             <input type="number" id="hInput" min="0" max="360" />
+            <input type="range" id="hRange" min="0" max="360" aria-label="Hue slider" />
           </div>
           <div class="field">
             <label for="sInput">S %</label>
             <input type="number" id="sInput" min="0" max="100" />
+            <input type="range" id="sRange" min="0" max="100" aria-label="Saturation slider" />
           </div>
           <div class="field">
             <label for="lInput">L %</label>
             <input type="number" id="lInput" min="0" max="100" />
+            <input type="range" id="lRange" min="0" max="100" aria-label="Lightness slider" />
+          </div>
+        </div>
+
+        <p class="section-label">HSV / HSB</p>
+        <div class="row">
+          <div class="field">
+            <label for="hsvHInput">H</label>
+            <input type="number" id="hsvHInput" min="0" max="360" />
+            <input type="range" id="hsvHRange" min="0" max="360" aria-label="HSV hue slider" />
+          </div>
+          <div class="field">
+            <label for="hsvSInput">S %</label>
+            <input type="number" id="hsvSInput" min="0" max="100" />
+            <input type="range" id="hsvSRange" min="0" max="100" aria-label="HSV saturation slider" />
+          </div>
+          <div class="field">
+            <label for="hsvVInput">V %</label>
+            <input type="number" id="hsvVInput" min="0" max="100" />
+            <input type="range" id="hsvVRange" min="0" max="100" aria-label="HSV value/brightness slider" />
+          </div>
+        </div>
+
+        <p class="section-label">CMYK</p>
+        <div class="row">
+          <div class="field">
+            <label for="cInput">C %</label>
+            <input type="number" id="cInput" min="0" max="100" />
+            <input type="range" id="cRange" min="0" max="100" aria-label="Cyan slider" />
+          </div>
+          <div class="field">
+            <label for="mInput">M %</label>
+            <input type="number" id="mInput" min="0" max="100" />
+            <input type="range" id="mRange" min="0" max="100" aria-label="Magenta slider" />
+          </div>
+          <div class="field">
+            <label for="yInput">Y %</label>
+            <input type="number" id="yInput" min="0" max="100" />
+            <input type="range" id="yRange" min="0" max="100" aria-label="Yellow slider" />
+          </div>
+          <div class="field">
+            <label for="kInput">K %</label>
+            <input type="number" id="kInput" min="0" max="100" />
+            <input type="range" id="kRange" min="0" max="100" aria-label="Key/black slider" />
           </div>
         </div>
 
         <div class="actions">
+          <button class="btn btn-secondary" id="copyHexBtn">Copy HEX</button>
           <button class="btn btn-secondary" id="copyRgbBtn">Copy rgb()</button>
           <button class="btn btn-secondary" id="copyHslBtn">Copy hsl()</button>
+          <button class="btn btn-secondary" id="copyRgbaBtn">Copy rgba()</button>
+          <button class="btn btn-secondary" id="copyCmykBtn">Copy CMYK</button>
         </div>
         <div class="copy-note" id="copyNote"></div>
+
+        <p class="section-label">Nearest CSS Named Color</p>
+        <div class="named-color-row">
+          <span class="named-color-dot" id="namedColorDot"></span>
+          <span class="named-color-text">
+            <strong id="namedColorName">—</strong>
+            <span id="namedColorMeta"></span>
+          </span>
+        </div>
+
+        <p class="section-label">WCAG Contrast Checker</p>
+        <div class="contrast-grid">
+          <div class="contrast-card">
+            <div class="contrast-preview" id="contrastPreviewWhite" style="background:#fff;color:#000;">Aa</div>
+            <div class="contrast-info">
+              <strong id="contrastWhiteRatio">—</strong>
+              <span>vs. white</span>
+              <div class="badges" id="contrastWhiteBadges"></div>
+            </div>
+          </div>
+          <div class="contrast-card">
+            <div class="contrast-preview" id="contrastPreviewBlack" style="background:#000;color:#fff;">Aa</div>
+            <div class="contrast-info">
+              <strong id="contrastBlackRatio">—</strong>
+              <span>vs. black</span>
+              <div class="badges" id="contrastBlackBadges"></div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="howto">
         <h2>How to Convert a Color</h2>
         <ol class="howto-steps">
-          <li>Pick a color using the color swatch/picker, or type a value directly into the HEX, RGB, or HSL fields.</li>
-          <li>Watch the other two formats update automatically — all three stay in sync no matter which one you edit.</li>
-          <li>Use the live swatch above the fields to preview the exact color as you adjust it.</li>
-          <li>Click "Copy rgb()" or "Copy hsl()" to copy a ready-to-use CSS color string to your clipboard.</li>
+          <li>Pick a color using the color swatch/picker, drag any RGB, HSL, HSV, or CMYK slider, or type a value directly into a field.</li>
+          <li>Watch every other format update automatically — HEX, RGB, HSL, HSV/HSB, and CMYK all stay in sync no matter which one you edit.</li>
+          <li>Adjust the Alpha slider or type an 8-digit HEX code to add transparency — the checkerboard swatch shows exactly how see-through the color is.</li>
+          <li>Check the Nearest CSS Named Color match and the WCAG Contrast Checker to see the closest named keyword and whether the color is readable on white or black.</li>
+          <li>Click "Copy HEX," "Copy rgb()," "Copy hsl()," "Copy rgba()," or "Copy CMYK" to copy a ready-to-use color string to your clipboard.</li>
         </ol>
       </div>
 
@@ -187,7 +410,7 @@
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
           <summary>What color formats does this tool support?</summary>
-          <p>HEX (e.g., #2563eb), RGB (red/green/blue values 0-255), and HSL (hue 0-360°, saturation and lightness as percentages) — you can enter a value in any one of the three and the others recalculate instantly.</p>
+          <p>HEX (3, 6, or 8-digit with alpha), RGB, HSL, HSV/HSB, and CMYK — edit a value in any one of these formats and the rest recalculate instantly using exact color-space math.</p>
         </details>
         <details class="faq-item">
           <summary>Why do my RGB and HSL values sometimes look slightly different after converting?</summary>
@@ -198,12 +421,32 @@
           <p>Yes, shorthand HEX codes like #06c are automatically expanded to their full 6-character form (#0066cc) before conversion.</p>
         </details>
         <details class="faq-item">
+          <summary>Does the HEX field support transparency with an alpha channel?</summary>
+          <p>Yes — enter an 8-digit HEX code (e.g., #2563ebff) to set both color and alpha at once, or drag the Alpha slider separately. The swatch preview shows transparency against a checkerboard background, and the HEX field automatically switches to 8 digits whenever alpha is below 100%.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I adjust colors by dragging sliders instead of typing numbers?</summary>
+          <p>Yes — every RGB, HSL, HSV/HSB, and CMYK value has a drag-to-adjust slider next to its number field, so you can fine-tune a color visually while watching the live swatch update in real time.</p>
+        </details>
+        <details class="faq-item">
           <summary>Can I use the copied rgb() and hsl() values directly in CSS?</summary>
-          <p>Yes — the Copy rgb() and Copy hsl() buttons generate valid CSS color function syntax, like rgb(37, 99, 235), that you can paste straight into a stylesheet.</p>
+          <p>Yes — the Copy HEX, Copy RGB, Copy HSL, and Copy RGBA buttons all generate valid CSS color syntax, like rgb(37, 99, 235) or rgba(37, 99, 235, 0.5), that you can paste straight into a stylesheet.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is the CMYK output valid CSS syntax?</summary>
+          <p>No — CSS doesn't have broad support for a cmyk() color function, so the CMYK values here are provided for print and graphic design workflows, not for pasting into a stylesheet. Use the HEX, RGB, or HSL/RGBA values for CSS.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the "Nearest CSS Named Color" match show?</summary>
+          <p>It compares your current color's RGB values against all 140+ standard CSS named colors (like royalblue or tomato) and shows the closest one by Euclidean distance, along with whether it's an exact match — useful for finding a readable keyword name for a color you picked visually.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How is the WCAG contrast ratio calculated?</summary>
+          <p>Using the official WCAG relative luminance formula, which linearizes and weights the red, green, and blue channels before comparing your color's luminance against pure white and pure black. The tool shows both ratios and flags whether they meet the WCAG AA (4.5:1 normal text, 3:1 large text) and AAA (7:1 normal text, 4.5:1 large text) thresholds.</p>
         </details>
         <details class="faq-item">
           <summary>What happens if I type an invalid HEX code?</summary>
-          <p>Invalid HEX input — anything that isn't 3 or 6 valid hexadecimal characters — is ignored, and the other fields won't update until you enter a valid code.</p>
+          <p>Invalid HEX input — anything that isn't 3, 6, or 8 valid hexadecimal characters — is ignored, and the other fields won't update until you enter a valid code.</p>
         </details>
       </div>
 
@@ -226,6 +469,11 @@
             <span class="icon" aria-hidden="true">🖼️</span>
             <h3>Guide: JPG vs PNG vs WebP</h3>
             <p>Understand image formats and color.</p>
+          </a>
+          <a class="card" href="../blog/color-codes-guide.html">
+            <span class="icon" aria-hidden="true">🎨</span>
+            <h3>Guide: Hex, RGB & HSL Explained</h3>
+            <p>Learn how each color code format works.</p>
           </a>
         </div>
       </div>
@@ -277,29 +525,86 @@
 
   <script src="../assets/js/main.js"></script>
   <script>
+    // Standard CSS Level 4 named colors (name -> hex), used for the nearest-color lookup.
+    var NAMED_COLORS = {
+      aliceblue: "#f0f8ff", antiquewhite: "#faebd7", aqua: "#00ffff", aquamarine: "#7fffd4", azure: "#f0ffff",
+      beige: "#f5f5dc", bisque: "#ffe4c4", black: "#000000", blanchedalmond: "#ffebcd", blue: "#0000ff",
+      blueviolet: "#8a2be2", brown: "#a52a2a", burlywood: "#deb887", cadetblue: "#5f9ea0", chartreuse: "#7fff00",
+      chocolate: "#d2691e", coral: "#ff7f50", cornflowerblue: "#6495ed", cornsilk: "#fff8dc", crimson: "#dc143c",
+      cyan: "#00ffff", darkblue: "#00008b", darkcyan: "#008b8b", darkgoldenrod: "#b8860b", darkgray: "#a9a9a9",
+      darkgreen: "#006400", darkgrey: "#a9a9a9", darkkhaki: "#bdb76b", darkmagenta: "#8b008b", darkolivegreen: "#556b2f",
+      darkorange: "#ff8c00", darkorchid: "#9932cc", darkred: "#8b0000", darksalmon: "#e9967a", darkseagreen: "#8fbc8f",
+      darkslateblue: "#483d8b", darkslategray: "#2f4f4f", darkslategrey: "#2f4f4f", darkturquoise: "#00ced1", darkviolet: "#9400d3",
+      deeppink: "#ff1493", deepskyblue: "#00bfff", dimgray: "#696969", dimgrey: "#696969", dodgerblue: "#1e90ff",
+      firebrick: "#b22222", floralwhite: "#fffaf0", forestgreen: "#228b22", fuchsia: "#ff00ff", gainsboro: "#dcdcdc",
+      ghostwhite: "#f8f8ff", gold: "#ffd700", goldenrod: "#daa520", gray: "#808080", grey: "#808080",
+      green: "#008000", greenyellow: "#adff2f", honeydew: "#f0fff0", hotpink: "#ff69b4", indianred: "#cd5c5c",
+      indigo: "#4b0082", ivory: "#fffff0", khaki: "#f0e68c", lavender: "#e6e6fa", lavenderblush: "#fff0f5",
+      lawngreen: "#7cfc00", lemonchiffon: "#fffacd", lightblue: "#add8e6", lightcoral: "#f08080", lightcyan: "#e0ffff",
+      lightgoldenrodyellow: "#fafad2", lightgray: "#d3d3d3", lightgreen: "#90ee90", lightgrey: "#d3d3d3", lightpink: "#ffb6c1",
+      lightsalmon: "#ffa07a", lightseagreen: "#20b2aa", lightskyblue: "#87cefa", lightslategray: "#778899", lightslategrey: "#778899",
+      lightsteelblue: "#b0c4de", lightyellow: "#ffffe0", lime: "#00ff00", limegreen: "#32cd32", linen: "#faf0e6",
+      magenta: "#ff00ff", maroon: "#800000", mediumaquamarine: "#66cdaa", mediumblue: "#0000cd", mediumorchid: "#ba55d3",
+      mediumpurple: "#9370db", mediumseagreen: "#3cb371", mediumslateblue: "#7b68ee", mediumspringgreen: "#00fa9a", mediumturquoise: "#48d1cc",
+      mediumvioletred: "#c71585", midnightblue: "#191970", mintcream: "#f5fffa", mistyrose: "#ffe4e1", moccasin: "#ffe4b5",
+      navajowhite: "#ffdead", navy: "#000080", oldlace: "#fdf5e6", olive: "#808000", olivedrab: "#6b8e23",
+      orange: "#ffa500", orangered: "#ff4500", orchid: "#da70d6", palegoldenrod: "#eee8aa", palegreen: "#98fb98",
+      paleturquoise: "#afeeee", palevioletred: "#db7093", papayawhip: "#ffefd5", peachpuff: "#ffdab9", peru: "#cd853f",
+      pink: "#ffc0cb", plum: "#dda0dd", powderblue: "#b0e0e6", purple: "#800080", rebeccapurple: "#663399",
+      red: "#ff0000", rosybrown: "#bc8f8f", royalblue: "#4169e1", saddlebrown: "#8b4513", salmon: "#fa8072",
+      sandybrown: "#f4a460", seagreen: "#2e8b57", seashell: "#fff5ee", sienna: "#a0522d", silver: "#c0c0c0",
+      skyblue: "#87ceeb", slateblue: "#6a5acd", slategray: "#708090", slategrey: "#708090", snow: "#fffafa",
+      springgreen: "#00ff7f", steelblue: "#4682b4", tan: "#d2b48c", teal: "#008080", thistle: "#d8bfd8",
+      tomato: "#ff6347", turquoise: "#40e0d0", violet: "#ee82ee", wheat: "#f5deb3", white: "#ffffff",
+      whitesmoke: "#f5f5f5", yellow: "#ffff00", yellowgreen: "#9acd32"
+    };
+
     var swatch = document.getElementById("swatch");
     var colorPicker = document.getElementById("colorPicker");
     var hexInput = document.getElementById("hexInput");
+    var alphaInput = document.getElementById("alphaInput"), alphaRange = document.getElementById("alphaRange");
     var rInput = document.getElementById("rInput"), gInput = document.getElementById("gInput"), bInput = document.getElementById("bInput");
+    var rRange = document.getElementById("rRange"), gRange = document.getElementById("gRange"), bRange = document.getElementById("bRange");
     var hInput = document.getElementById("hInput"), sInput = document.getElementById("sInput"), lInput = document.getElementById("lInput");
+    var hRange = document.getElementById("hRange"), sRange = document.getElementById("sRange"), lRange = document.getElementById("lRange");
+    var hsvHInput = document.getElementById("hsvHInput"), hsvSInput = document.getElementById("hsvSInput"), hsvVInput = document.getElementById("hsvVInput");
+    var hsvHRange = document.getElementById("hsvHRange"), hsvSRange = document.getElementById("hsvSRange"), hsvVRange = document.getElementById("hsvVRange");
+    var cInput = document.getElementById("cInput"), mInput = document.getElementById("mInput"), yInput = document.getElementById("yInput"), kInput = document.getElementById("kInput");
+    var cRange = document.getElementById("cRange"), mRange = document.getElementById("mRange"), yRange = document.getElementById("yRange"), kRange = document.getElementById("kRange");
     var copyNote = document.getElementById("copyNote");
-    var updating = false;
+    var namedColorDot = document.getElementById("namedColorDot"), namedColorName = document.getElementById("namedColorName"), namedColorMeta = document.getElementById("namedColorMeta");
+    var contrastWhiteRatio = document.getElementById("contrastWhiteRatio"), contrastBlackRatio = document.getElementById("contrastBlackRatio");
+    var contrastWhiteBadges = document.getElementById("contrastWhiteBadges"), contrastBlackBadges = document.getElementById("contrastBlackBadges");
+    var contrastPreviewWhite = document.getElementById("contrastPreviewWhite"), contrastPreviewBlack = document.getElementById("contrastPreviewBlack");
 
-    function hexToRgb(hex) {
-      hex = hex.replace("#", "");
-      if (hex.length === 3) hex = hex.split("").map(function (c) { return c + c; }).join("");
-      if (!/^[0-9a-fA-F]{6}$/.test(hex)) return null;
-      return {
-        r: parseInt(hex.substring(0, 2), 16),
-        g: parseInt(hex.substring(2, 4), 16),
-        b: parseInt(hex.substring(4, 6), 16)
-      };
+    var updating = false;
+    var currentR = 37, currentG = 99, currentB = 235, currentAlpha = 100;
+
+    // ---- Format conversions (all exact, standard formulas) ----
+
+    function hexToRgba(input) {
+      var hex = String(input).trim().replace(/^#/, "");
+      if (/^[0-9a-fA-F]{3}$/.test(hex)) hex = hex.split("").map(function (c) { return c + c; }).join("");
+      if (/^[0-9a-fA-F]{6}$/.test(hex)) {
+        return { r: parseInt(hex.substr(0, 2), 16), g: parseInt(hex.substr(2, 2), 16), b: parseInt(hex.substr(4, 2), 16), a: null };
+      }
+      if (/^[0-9a-fA-F]{8}$/.test(hex)) {
+        return {
+          r: parseInt(hex.substr(0, 2), 16), g: parseInt(hex.substr(2, 2), 16), b: parseInt(hex.substr(4, 2), 16),
+          a: Math.round(parseInt(hex.substr(6, 2), 16) / 255 * 100)
+        };
+      }
+      return null;
     }
 
     function rgbToHex(r, g, b) {
       return "#" + [r, g, b].map(function (v) {
         return Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, "0");
       }).join("");
+    }
+
+    function alphaToHexByte(aPercent) {
+      return Math.max(0, Math.min(255, Math.round(aPercent / 100 * 255))).toString(16).padStart(2, "0");
     }
 
     function rgbToHsl(r, g, b) {
@@ -346,59 +651,252 @@
       return { r: Math.round(r * 255), g: Math.round(g * 255), b: Math.round(b * 255) };
     }
 
-    function applyColor(r, g, b, source) {
+    function rgbToHsv(r, g, b) {
+      r /= 255; g /= 255; b /= 255;
+      var max = Math.max(r, g, b), min = Math.min(r, g, b), d = max - min;
+      var h, s = max === 0 ? 0 : d / max, v = max;
+      if (d === 0) {
+        h = 0;
+      } else {
+        switch (max) {
+          case r: h = ((g - b) / d) % 6; break;
+          case g: h = (b - r) / d + 2; break;
+          case b: h = (r - g) / d + 4; break;
+        }
+        h *= 60;
+        if (h < 0) h += 360;
+      }
+      return { h: Math.round(h), s: Math.round(s * 100), v: Math.round(v * 100) };
+    }
+
+    function hsvToRgb(h, s, v) {
+      h = ((h % 360) + 360) % 360; s /= 100; v /= 100;
+      var c = v * s, x = c * (1 - Math.abs((h / 60) % 2 - 1)), m = v - c, r1, g1, b1;
+      if (h < 60) { r1 = c; g1 = x; b1 = 0; }
+      else if (h < 120) { r1 = x; g1 = c; b1 = 0; }
+      else if (h < 180) { r1 = 0; g1 = c; b1 = x; }
+      else if (h < 240) { r1 = 0; g1 = x; b1 = c; }
+      else if (h < 300) { r1 = x; g1 = 0; b1 = c; }
+      else { r1 = c; g1 = 0; b1 = x; }
+      return { r: Math.round((r1 + m) * 255), g: Math.round((g1 + m) * 255), b: Math.round((b1 + m) * 255) };
+    }
+
+    function rgbToCmyk(r, g, b) {
+      r /= 255; g /= 255; b /= 255;
+      var k = 1 - Math.max(r, g, b), c, m, y;
+      if (k >= 1) { c = 0; m = 0; y = 0; }
+      else {
+        c = (1 - r - k) / (1 - k);
+        m = (1 - g - k) / (1 - k);
+        y = (1 - b - k) / (1 - k);
+      }
+      return { c: Math.round(c * 100), m: Math.round(m * 100), y: Math.round(y * 100), k: Math.round(k * 100) };
+    }
+
+    function cmykToRgb(c, m, y, k) {
+      c /= 100; m /= 100; y /= 100; k /= 100;
+      return {
+        r: Math.round(255 * (1 - c) * (1 - k)),
+        g: Math.round(255 * (1 - m) * (1 - k)),
+        b: Math.round(255 * (1 - y) * (1 - k))
+      };
+    }
+
+    // WCAG relative luminance / contrast ratio (Web Content Accessibility Guidelines 2.x formula)
+    function relLuminance(r, g, b) {
+      function chan(c) { c /= 255; return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }
+      return 0.2126 * chan(r) + 0.7152 * chan(g) + 0.0722 * chan(b);
+    }
+    function contrastRatio(r1, g1, b1, r2, g2, b2) {
+      var l1 = relLuminance(r1, g1, b1), l2 = relLuminance(r2, g2, b2);
+      var lighter = Math.max(l1, l2), darker = Math.min(l1, l2);
+      return (lighter + 0.05) / (darker + 0.05);
+    }
+
+    function nearestNamedColor(r, g, b) {
+      var bestName = null, bestHex = null, bestDist = Infinity;
+      for (var name in NAMED_COLORS) {
+        var hex = NAMED_COLORS[name];
+        var nr = parseInt(hex.substr(1, 2), 16), ng = parseInt(hex.substr(3, 2), 16), nb = parseInt(hex.substr(5, 2), 16);
+        var dist = (r - nr) * (r - nr) + (g - ng) * (g - ng) + (b - nb) * (b - nb);
+        if (dist < bestDist) { bestDist = dist; bestName = name; bestHex = hex; }
+      }
+      return { name: bestName, hex: bestHex, exact: bestDist === 0 };
+    }
+
+    function contrastBadgesHtml(ratio) {
+      var checks = [
+        ["AA", ratio >= 4.5], ["AA Large", ratio >= 3], ["AAA", ratio >= 7], ["AAA Large", ratio >= 4.5]
+      ];
+      return checks.map(function (c) {
+        return '<span class="badge ' + (c[1] ? "pass" : "fail") + '">' + c[0] + " " + (c[1] ? "✓" : "✗") + "</span>";
+      }).join("");
+    }
+
+    function updateNamedColor(r, g, b) {
+      var nearest = nearestNamedColor(r, g, b);
+      namedColorDot.style.background = nearest.hex;
+      namedColorName.textContent = nearest.name;
+      namedColorMeta.textContent = nearest.hex.toUpperCase() + (nearest.exact ? " — exact match" : " — closest match");
+    }
+
+    function updateContrast(r, g, b) {
+      var ratioWhite = contrastRatio(r, g, b, 255, 255, 255);
+      var ratioBlack = contrastRatio(r, g, b, 0, 0, 0);
+      var rgbStr = "rgb(" + r + ", " + g + ", " + b + ")";
+      contrastWhiteRatio.textContent = ratioWhite.toFixed(2) + ":1";
+      contrastBlackRatio.textContent = ratioBlack.toFixed(2) + ":1";
+      contrastWhiteBadges.innerHTML = contrastBadgesHtml(ratioWhite);
+      contrastBlackBadges.innerHTML = contrastBadgesHtml(ratioBlack);
+      contrastPreviewWhite.style.color = rgbStr;
+      contrastPreviewBlack.style.color = rgbStr;
+    }
+
+    // ---- Central state update: every field derives from (r, g, b, a) ----
+    function setColor(r, g, b, a, source) {
       if (updating) return;
       updating = true;
 
-      var hex = rgbToHex(r, g, b);
-      var hsl = rgbToHsl(r, g, b);
+      r = Math.max(0, Math.min(255, Math.round(r)));
+      g = Math.max(0, Math.min(255, Math.round(g)));
+      b = Math.max(0, Math.min(255, Math.round(b)));
+      a = Math.max(0, Math.min(100, Math.round(a)));
+      currentR = r; currentG = g; currentB = b; currentAlpha = a;
 
-      swatch.style.background = hex;
-      colorPicker.value = hex;
-      if (source !== "hex") hexInput.value = hex;
-      if (source !== "rgb") { rInput.value = r; gInput.value = g; bInput.value = b; }
-      if (source !== "hsl") { hInput.value = hsl.h; sInput.value = hsl.s; lInput.value = hsl.l; }
+      var hex6 = rgbToHex(r, g, b);
+      var hexDisplay = a < 100 ? hex6 + alphaToHexByte(a) : hex6;
+      var hsl = rgbToHsl(r, g, b);
+      var hsv = rgbToHsv(r, g, b);
+      var cmyk = rgbToCmyk(r, g, b);
+
+      swatch.style.background = "rgba(" + r + ", " + g + ", " + b + ", " + (a / 100) + ")";
+      colorPicker.value = hex6;
+
+      if (source !== "hex") hexInput.value = hexDisplay;
+      if (source !== "alpha") { alphaInput.value = a; alphaRange.value = a; }
+      if (source !== "rgb") {
+        rInput.value = r; rRange.value = r;
+        gInput.value = g; gRange.value = g;
+        bInput.value = b; bRange.value = b;
+      }
+      if (source !== "hsl") {
+        hInput.value = hsl.h; hRange.value = hsl.h;
+        sInput.value = hsl.s; sRange.value = hsl.s;
+        lInput.value = hsl.l; lRange.value = hsl.l;
+      }
+      if (source !== "hsv") {
+        hsvHInput.value = hsv.h; hsvHRange.value = hsv.h;
+        hsvSInput.value = hsv.s; hsvSRange.value = hsv.s;
+        hsvVInput.value = hsv.v; hsvVRange.value = hsv.v;
+      }
+      if (source !== "cmyk") {
+        cInput.value = cmyk.c; cRange.value = cmyk.c;
+        mInput.value = cmyk.m; mRange.value = cmyk.m;
+        yInput.value = cmyk.y; yRange.value = cmyk.y;
+        kInput.value = cmyk.k; kRange.value = cmyk.k;
+      }
+
+      updateNamedColor(r, g, b);
+      updateContrast(r, g, b);
 
       updating = false;
     }
 
+    // ---- Event wiring ----
+
     colorPicker.addEventListener("input", function () {
-      var rgb = hexToRgb(colorPicker.value);
-      if (rgb) applyColor(rgb.r, rgb.g, rgb.b, "picker");
+      var rgb = hexToRgba(colorPicker.value);
+      if (rgb) setColor(rgb.r, rgb.g, rgb.b, currentAlpha, "picker");
     });
 
     hexInput.addEventListener("input", function () {
-      var rgb = hexToRgb(hexInput.value);
-      if (rgb) applyColor(rgb.r, rgb.g, rgb.b, "hex");
+      var parsed = hexToRgba(hexInput.value);
+      if (parsed) setColor(parsed.r, parsed.g, parsed.b, parsed.a === null ? currentAlpha : parsed.a, "hex");
     });
 
-    [rInput, gInput, bInput].forEach(function (el) {
-      el.addEventListener("input", function () {
-        var r = parseInt(rInput.value, 10) || 0;
-        var g = parseInt(gInput.value, 10) || 0;
-        var b = parseInt(bInput.value, 10) || 0;
-        applyColor(r, g, b, "rgb");
-      });
-    });
+    function handleAlphaChange() {
+      var a = parseInt(alphaInput.value, 10);
+      if (isNaN(a)) a = 0;
+      setColor(currentR, currentG, currentB, a, "alpha");
+    }
+    alphaInput.addEventListener("input", function () { alphaRange.value = alphaInput.value; handleAlphaChange(); });
+    alphaRange.addEventListener("input", function () { alphaInput.value = alphaRange.value; handleAlphaChange(); });
 
-    [hInput, sInput, lInput].forEach(function (el) {
-      el.addEventListener("input", function () {
-        var h = parseInt(hInput.value, 10) || 0;
-        var s = parseInt(sInput.value, 10) || 0;
-        var l = parseInt(lInput.value, 10) || 0;
-        var rgb = hslToRgb(h, s, l);
-        applyColor(rgb.r, rgb.g, rgb.b, "hsl");
-      });
-    });
+    function handleRgbChange() {
+      var r = parseInt(rInput.value, 10); if (isNaN(r)) r = 0;
+      var g = parseInt(gInput.value, 10); if (isNaN(g)) g = 0;
+      var b = parseInt(bInput.value, 10); if (isNaN(b)) b = 0;
+      setColor(r, g, b, currentAlpha, "rgb");
+    }
+    rInput.addEventListener("input", function () { rRange.value = rInput.value; handleRgbChange(); });
+    rRange.addEventListener("input", function () { rInput.value = rRange.value; handleRgbChange(); });
+    gInput.addEventListener("input", function () { gRange.value = gInput.value; handleRgbChange(); });
+    gRange.addEventListener("input", function () { gInput.value = gRange.value; handleRgbChange(); });
+    bInput.addEventListener("input", function () { bRange.value = bInput.value; handleRgbChange(); });
+    bRange.addEventListener("input", function () { bInput.value = bRange.value; handleRgbChange(); });
 
+    function handleHslChange() {
+      var h = parseInt(hInput.value, 10); if (isNaN(h)) h = 0;
+      var s = parseInt(sInput.value, 10); if (isNaN(s)) s = 0;
+      var l = parseInt(lInput.value, 10); if (isNaN(l)) l = 0;
+      var rgb = hslToRgb(h, s, l);
+      setColor(rgb.r, rgb.g, rgb.b, currentAlpha, "hsl");
+    }
+    hInput.addEventListener("input", function () { hRange.value = hInput.value; handleHslChange(); });
+    hRange.addEventListener("input", function () { hInput.value = hRange.value; handleHslChange(); });
+    sInput.addEventListener("input", function () { sRange.value = sInput.value; handleHslChange(); });
+    sRange.addEventListener("input", function () { sInput.value = sRange.value; handleHslChange(); });
+    lInput.addEventListener("input", function () { lRange.value = lInput.value; handleHslChange(); });
+    lRange.addEventListener("input", function () { lInput.value = lRange.value; handleHslChange(); });
+
+    function handleHsvChange() {
+      var h = parseInt(hsvHInput.value, 10); if (isNaN(h)) h = 0;
+      var s = parseInt(hsvSInput.value, 10); if (isNaN(s)) s = 0;
+      var v = parseInt(hsvVInput.value, 10); if (isNaN(v)) v = 0;
+      var rgb = hsvToRgb(h, s, v);
+      setColor(rgb.r, rgb.g, rgb.b, currentAlpha, "hsv");
+    }
+    hsvHInput.addEventListener("input", function () { hsvHRange.value = hsvHInput.value; handleHsvChange(); });
+    hsvHRange.addEventListener("input", function () { hsvHInput.value = hsvHRange.value; handleHsvChange(); });
+    hsvSInput.addEventListener("input", function () { hsvSRange.value = hsvSInput.value; handleHsvChange(); });
+    hsvSRange.addEventListener("input", function () { hsvSInput.value = hsvSRange.value; handleHsvChange(); });
+    hsvVInput.addEventListener("input", function () { hsvVRange.value = hsvVInput.value; handleHsvChange(); });
+    hsvVRange.addEventListener("input", function () { hsvVInput.value = hsvVRange.value; handleHsvChange(); });
+
+    function handleCmykChange() {
+      var c = parseInt(cInput.value, 10); if (isNaN(c)) c = 0;
+      var m = parseInt(mInput.value, 10); if (isNaN(m)) m = 0;
+      var y = parseInt(yInput.value, 10); if (isNaN(y)) y = 0;
+      var k = parseInt(kInput.value, 10); if (isNaN(k)) k = 0;
+      var rgb = cmykToRgb(c, m, y, k);
+      setColor(rgb.r, rgb.g, rgb.b, currentAlpha, "cmyk");
+    }
+    cInput.addEventListener("input", function () { cRange.value = cInput.value; handleCmykChange(); });
+    cRange.addEventListener("input", function () { cInput.value = cRange.value; handleCmykChange(); });
+    mInput.addEventListener("input", function () { mRange.value = mInput.value; handleCmykChange(); });
+    mRange.addEventListener("input", function () { mInput.value = mRange.value; handleCmykChange(); });
+    yInput.addEventListener("input", function () { yRange.value = yInput.value; handleCmykChange(); });
+    yRange.addEventListener("input", function () { yInput.value = yRange.value; handleCmykChange(); });
+    kInput.addEventListener("input", function () { kRange.value = kInput.value; handleCmykChange(); });
+    kRange.addEventListener("input", function () { kInput.value = kRange.value; handleCmykChange(); });
+
+    document.getElementById("copyHexBtn").addEventListener("click", function () {
+      Fixora.copyText(hexInput.value, copyNote);
+    });
     document.getElementById("copyRgbBtn").addEventListener("click", function () {
       Fixora.copyText("rgb(" + rInput.value + ", " + gInput.value + ", " + bInput.value + ")", copyNote);
     });
     document.getElementById("copyHslBtn").addEventListener("click", function () {
       Fixora.copyText("hsl(" + hInput.value + ", " + sInput.value + "%, " + lInput.value + "%)", copyNote);
     });
+    document.getElementById("copyRgbaBtn").addEventListener("click", function () {
+      Fixora.copyText("rgba(" + rInput.value + ", " + gInput.value + ", " + bInput.value + ", " + (currentAlpha / 100) + ")", copyNote);
+    });
+    document.getElementById("copyCmykBtn").addEventListener("click", function () {
+      Fixora.copyText("cmyk(" + cInput.value + "%, " + mInput.value + "%, " + yInput.value + "%, " + kInput.value + "%)", copyNote);
+    });
 
-    applyColor(37, 99, 235, "init");
+    setColor(37, 99, 235, 100, "init");
   </script>
 </body>
 </html>
