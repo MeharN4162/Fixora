@@ -6,21 +6,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free HTML Entity Encoder / Decoder Online | Fixora</title>
-  <meta name="description" content="Encode special characters into HTML entities or decode entities back into plain text, including numeric and named entities. Free, instant, runs in your browser." />
-  <meta name="keywords" content="html entity encoder, html entity decoder online free, escape html characters, unescape html" />
+  <meta name="description" content="Encode special characters into named, decimal, or hexadecimal HTML entities, decode entities back into plain text, and optionally escape all non-ASCII characters too. Free, instant, runs entirely in your browser." />
+  <meta name="keywords" content="html entity encoder, html entity decoder online free, escape html characters, unescape html, named vs numeric html entities, hex entity encoder, decimal entity encoder" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/html-entity-encoder.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free HTML Entity Encoder / Decoder" />
-  <meta property="og:description" content="Encode special characters into HTML entities or decode entities back into plain text, instantly." />
+  <meta property="og:description" content="Encode special characters into named, decimal, or hexadecimal HTML entities, or decode entities back into plain text, instantly." />
   <meta property="og:url" content="https://fixoona.com/tools/html-entity-encoder.html" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free HTML Entity Encoder / Decoder" />
-  <meta name="twitter:description" content="Encode special characters into HTML entities or decode entities back into plain text, instantly." />
+  <meta name="twitter:description" content="Encode special characters into named, decimal, or hexadecimal HTML entities, or decode entities back into plain text, instantly." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -58,8 +58,8 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Why does the order of replacements matter when encoding?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Because the ampersand character itself has to be encoded first. If the less-than and greater-than signs were encoded before the ampersand, the ampersand inside those newly-created entities would get encoded a second time, corrupting the output into a double-escaped entity. Encoding the ampersand first avoids that bug entirely." }
+        "name": "Why doesn't encoding accidentally double-escape the ampersands inside newly created entities?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Because the tool scans your original input exactly once and converts each character independently into its entity form — it never re-scans its own output. A naive approach that does sequential find-and-replace passes (encoding the less-than sign before the ampersand, for example) can accidentally re-encode the ampersand inside an entity it just created, corrupting the result into a double-escaped entity. Encoding in a single pass over the source text avoids that bug entirely." }
       },
       {
         "@type": "Question",
@@ -79,7 +79,12 @@
       {
         "@type": "Question",
         "name": "Will this handle emoji or non-English characters correctly?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes — only the five reserved HTML characters (ampersand, less-than, greater-than, double quote, and single quote) are touched during encoding; everything else, including emoji, accented letters, and non-Latin scripts, passes through completely unchanged." }
+        "acceptedAnswer": { "@type": "Answer", "text": "By default, yes — only the five reserved HTML characters (ampersand, less-than, greater-than, double quote, and single quote) are touched during encoding, so emoji, accented letters, and non-Latin scripts pass through completely unchanged. Turning on the \"Also encode all non-ASCII characters\" option changes that: every character outside the basic ASCII range, including emoji and accented letters, gets converted into an entity too, which is useful when you need output that's restricted to plain ASCII." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between the Named, Decimal, and Hex entity formats?",
+        "acceptedAnswer": { "@type": "Answer", "text": "They're three ways of writing the same entity. Named entities use a short mnemonic word, like &amp; for an ampersand or &eacute; for é. Decimal numeric entities use the character's Unicode code point in base 10, like &#38; or &#233;. Hexadecimal numeric entities use the same code point in base 16, like &#x26; or &#xE9;. All three decode back to the exact same character — the format only changes how the entity looks in your markup. Named entities are only defined for a limited set of characters (the five reserved HTML characters plus the Latin-1 accented letters and common symbols); any other Unicode character selected for encoding automatically falls back to a decimal numeric entity, since HTML has no named entity for it." }
       }
     ]
   }
@@ -119,7 +124,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🔤</div>
       <h1>HTML Entity Encoder / Decoder</h1>
-      <p>Escape special characters into HTML entities, or decode entities back into readable text, instantly in your browser.</p>
+      <p>Escape special characters into named, decimal, or hexadecimal HTML entities — or decode entities back into readable text — instantly in your browser.</p>
     </section>
 
     <section class="container">
@@ -128,6 +133,18 @@
           <label for="entityInput">Input</label>
           <textarea id="entityInput" placeholder="Type or paste text or HTML here…" style="min-height:160px;"></textarea>
         </div>
+
+        <div class="field">
+          <label>Entity format (used when encoding)</label>
+          <div class="pill-row" id="formatRow">
+            <button class="pill active" data-format="named" type="button">Named</button>
+            <button class="pill" data-format="decimal" type="button">Decimal</button>
+            <button class="pill" data-format="hex" type="button">Hex</button>
+          </div>
+          <p style="font-size:0.85rem;color:var(--color-text-muted);margin-top:8px;">Named uses letters like &amp;amp;, Decimal uses &amp;#38;, Hex uses &amp;#x26;. Decoding automatically understands all three, regardless of which one is selected here.</p>
+        </div>
+
+        <label class="check-row"><input type="checkbox" id="allNonAsciiMode" /> Also encode all non-ASCII characters (accented letters, symbols, emoji, non-Latin scripts), not just the HTML-special ones</label>
 
         <div class="actions">
           <button class="btn btn-primary" id="encodeBtn">Encode</button>
@@ -150,7 +167,9 @@
         <h2>How to Encode or Decode HTML Entities</h2>
         <ol class="howto-steps">
           <li>Paste your text into the Input box.</li>
-          <li>Click "Encode" to escape special characters (ampersand, less-than, greater-than, and quote marks) into their HTML entity equivalents.</li>
+          <li>Pick an entity format — Named, Decimal, or Hex — for how encoded characters should be written.</li>
+          <li>Optionally turn on "Also encode all non-ASCII characters" if you want accented letters, symbols, and emoji escaped too, not just the HTML-special ones.</li>
+          <li>Click "Encode" to escape special characters (ampersand, less-than, greater-than, and quote marks — plus non-ASCII characters if that option is on) into HTML entities in your chosen format.</li>
           <li>Or click "Decode" to convert entities — named, decimal, or hexadecimal — back into normal readable text.</li>
           <li>The result appears instantly in the Output box.</li>
           <li>Click "Copy Output" to copy the result to your clipboard.</li>
@@ -160,8 +179,8 @@
       <div class="faq">
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
-          <summary>Why does the order of replacements matter when encoding?</summary>
-          <p>Because the ampersand character itself has to be encoded first. If the less-than and greater-than signs were encoded before the ampersand, the ampersand inside those newly-created entities would get encoded a second time, corrupting the output into a double-escaped entity. Encoding the ampersand first avoids that bug entirely.</p>
+          <summary>Why doesn't encoding accidentally double-escape the ampersands inside newly created entities?</summary>
+          <p>Because the tool scans your original input exactly once and converts each character independently into its entity form — it never re-scans its own output. A naive approach that does sequential find-and-replace passes (encoding the less-than sign before the ampersand, for example) can accidentally re-encode the ampersand inside an entity it just created, corrupting the result into a double-escaped entity. Encoding in a single pass over the source text avoids that bug entirely.</p>
         </details>
         <details class="faq-item">
           <summary>What entity formats does the decoder understand?</summary>
@@ -177,7 +196,11 @@
         </details>
         <details class="faq-item">
           <summary>Will this handle emoji or non-English characters correctly?</summary>
-          <p>Yes — only the five reserved HTML characters (ampersand, less-than, greater-than, double quote, and single quote) are touched during encoding; everything else, including emoji, accented letters, and non-Latin scripts, passes through completely unchanged.</p>
+          <p>By default, yes — only the five reserved HTML characters (ampersand, less-than, greater-than, double quote, and single quote) are touched during encoding, so emoji, accented letters, and non-Latin scripts pass through completely unchanged. Turning on the "Also encode all non-ASCII characters" option changes that: every character outside the basic ASCII range, including emoji and accented letters, gets converted into an entity too, which is useful when you need output that's restricted to plain ASCII.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What's the difference between the Named, Decimal, and Hex entity formats?</summary>
+          <p>They're three ways of writing the same entity. Named entities use a short mnemonic word, like &amp;amp; for an ampersand or &amp;eacute; for é. Decimal numeric entities use the character's Unicode code point in base 10, like &amp;#38; or &amp;#233;. Hexadecimal numeric entities use the same code point in base 16, like &amp;#x26; or &amp;#xE9;. All three decode back to the exact same character — the format only changes how the entity looks in your markup. Named entities are only defined for a limited set of characters (the five reserved HTML characters plus the Latin-1 accented letters and common symbols); any other Unicode character selected for encoding automatically falls back to a decimal numeric entity, since HTML has no named entity for it.</p>
         </details>
       </div>
 
@@ -254,14 +277,54 @@
     var entityInput = document.getElementById("entityInput");
     var entityOutput = document.getElementById("entityOutput");
     var copyNote = document.getElementById("copyNote");
+    var allNonAsciiCheckbox = document.getElementById("allNonAsciiMode");
+    var currentFormat = "named";
 
-    function encodeHtmlEntities(str) {
-      return str
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
+    // Standard HTML4 named entities for the Latin-1 Supplement block (U+00A0–U+00FF),
+    // indexed by (codePoint - 0xA0). Verified against Python's html.entities.codepoint2name.
+    var LATIN1_NAMES = [
+      "nbsp","iexcl","cent","pound","curren","yen","brvbar","sect","uml","copy","ordf","laquo","not","shy","reg","macr",
+      "deg","plusmn","sup2","sup3","acute","micro","para","middot","cedil","sup1","ordm","raquo","frac14","frac12","frac34","iquest",
+      "Agrave","Aacute","Acirc","Atilde","Auml","Aring","AElig","Ccedil","Egrave","Eacute","Ecirc","Euml","Igrave","Iacute","Icirc","Iuml",
+      "ETH","Ntilde","Ograve","Oacute","Ocirc","Otilde","Ouml","times","Oslash","Ugrave","Uacute","Ucirc","Uuml","Yacute","THORN","szlig",
+      "agrave","aacute","acirc","atilde","auml","aring","aelig","ccedil","egrave","eacute","ecirc","euml","igrave","iacute","icirc","iuml",
+      "eth","ntilde","ograve","oacute","ocirc","otilde","ouml","divide","oslash","ugrave","uacute","ucirc","uuml","yacute","thorn","yuml"
+    ];
+
+    // The five characters that are structurally significant in HTML markup.
+    var NAMED_UNSAFE = { "&": "amp", "<": "lt", ">": "gt", "\"": "quot", "'": "apos" };
+
+    function namedEntityFor(ch, codePoint) {
+      if (NAMED_UNSAFE[ch]) return "&" + NAMED_UNSAFE[ch] + ";";
+      if (codePoint >= 160 && codePoint <= 255) return "&" + LATIN1_NAMES[codePoint - 160] + ";";
+      return null; // no standard named entity for this character
+    }
+
+    function formatEntity(ch, codePoint, format) {
+      if (format === "named") {
+        var named = namedEntityFor(ch, codePoint);
+        // Fall back to a decimal numeric entity when no named entity exists.
+        return named || ("&#" + codePoint + ";");
+      }
+      if (format === "hex") return "&#x" + codePoint.toString(16).toUpperCase() + ";";
+      return "&#" + codePoint + ";"; // decimal
+    }
+
+    function encodeHtmlEntities(str, format, encodeAllNonAscii) {
+      var chars = Array.from(str); // splits on Unicode code points, not UTF-16 code units
+      var out = "";
+      for (var i = 0; i < chars.length; i++) {
+        var ch = chars[i];
+        var codePoint = ch.codePointAt(0);
+        var isUnsafe = !!NAMED_UNSAFE[ch];
+        var isNonAscii = codePoint > 127;
+        if (isUnsafe || (encodeAllNonAscii && isNonAscii)) {
+          out += formatEntity(ch, codePoint, format);
+        } else {
+          out += ch;
+        }
+      }
+      return out;
     }
 
     function decodeHtmlEntities(str) {
@@ -270,8 +333,18 @@
       return el.textContent;
     }
 
+    document.getElementById("formatRow").addEventListener("click", function (e) {
+      var btn = e.target.closest(".pill");
+      if (!btn) return;
+      document.querySelectorAll("#formatRow .pill").forEach(function (p) {
+        p.classList.remove("active");
+      });
+      btn.classList.add("active");
+      currentFormat = btn.getAttribute("data-format");
+    });
+
     document.getElementById("encodeBtn").addEventListener("click", function () {
-      entityOutput.value = encodeHtmlEntities(entityInput.value);
+      entityOutput.value = encodeHtmlEntities(entityInput.value, currentFormat, allNonAsciiCheckbox.checked);
     });
 
     document.getElementById("decodeBtn").addEventListener("click", function () {
