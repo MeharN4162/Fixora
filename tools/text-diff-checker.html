@@ -5,22 +5,22 @@
   <meta charset="UTF-8" />
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Free Text Diff Checker Online — Compare Two Texts | Fixora</title>
-  <meta name="description" content="Compare two blocks of text online for free and see exactly what changed, line by line. Right in your browser, no uploads, no sign-up." />
-  <meta name="keywords" content="text diff checker, compare two texts online free, text comparison tool" />
+  <title>Free Text Diff Checker Online — Line, Word & Character Diff | Fixora</title>
+  <meta name="description" content="Compare two blocks of text online for free with line-level, word-level, or character-level diff, inline or side-by-side, plus ignore-whitespace and ignore-case options. Runs entirely in your browser, no uploads, no sign-up." />
+  <meta name="keywords" content="text diff checker, compare two texts online free, word diff checker, character diff, side by side text comparison, text comparison tool" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/text-diff-checker.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Text Diff Checker Online" />
-  <meta property="og:description" content="Compare two blocks of text online for free and see exactly what changed." />
+  <meta property="og:description" content="Compare two blocks of text online for free with line, word, or character-level diff and a side-by-side view." />
   <meta property="og:url" content="https://fixoona.com/tools/text-diff-checker.html" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Text Diff Checker Online" />
-  <meta name="twitter:description" content="Compare two blocks of text online for free." />
+  <meta name="twitter:description" content="Compare two texts online for free with line, word, or character-level diff." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -59,22 +59,32 @@
       {
         "@type": "Question",
         "name": "How does the diff algorithm actually work?",
-        "acceptedAnswer": { "@type": "Answer", "text": "It runs a classic longest-common-subsequence (LCS) algorithm over the lines of both texts. The algorithm finds the longest sequence of lines that appears, in order, in both versions, then marks every other line as added or removed relative to that shared sequence." }
+        "acceptedAnswer": { "@type": "Answer", "text": "It runs a classic longest-common-subsequence (LCS) algorithm over the comparison units of both texts — lines, words, or characters, depending on the granularity you choose. The algorithm finds the longest sequence of units that appears, in order, in both versions, then marks every other unit as added or removed relative to that shared sequence." }
       },
       {
         "@type": "Question",
-        "name": "Does it compare word-by-word or character-by-character?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No — the comparison works line by line. If a single word changes in the middle of a line, the entire line is shown as one removed line and one added line rather than highlighting just the changed word." }
+        "name": "What's the difference between line-level, word-level, and character-level comparison?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Line-level treats each line as one unit, so a single changed word still marks the whole line as one removed line and one added line. Word-level splits both texts into words and the whitespace between them and diffs those individually, so a single changed word — like \"brown\" becoming \"red\" — shows up as just that one word removed and one word added. Character-level diffs individual characters, which is the most precise option and best for spotting single-character typos." }
       },
       {
         "@type": "Question",
-        "name": "What does \"Ignore leading/trailing whitespace per line\" actually change?",
-        "acceptedAnswer": { "@type": "Answer", "text": "When checked, each line has its leading and trailing whitespace trimmed before comparison, so re-indented lines won't show as changed. Whitespace differences in the middle of a line are still detected." }
+        "name": "What does \"Ignore whitespace\" do, and does it work in every mode?",
+        "acceptedAnswer": { "@type": "Answer", "text": "In line-level mode, it trims leading and trailing whitespace from each line before comparing, so re-indented lines won't show as changed. In word-level mode, it removes whitespace-run tokens from the comparison entirely, so text that was reflowed or re-spaced no longer shows as different — only the words themselves are compared, and the output re-joins them with a single space. It has no effect in character-level mode, where the checkbox is disabled." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does \"Ignore case\" do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "When checked, comparison units are matched case-insensitively at whichever granularity you've selected, so \"Apple\" and \"apple\" count as unchanged instead of as a difference. The output still displays the original text's casing for anything marked unchanged." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between Inline and Side-by-side view?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Inline (unified) view shows one combined stream of text with removed units struck through in red and added units highlighted in green. Side-by-side view splits the same diff into two panels — the original text on the left with removed units highlighted, and the changed text on the right with added units highlighted — so you can read each version on its own." }
       },
       {
         "@type": "Question",
         "name": "Is there a limit on how much text I can compare?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. If the number of lines in text A multiplied by the number of lines in text B exceeds 4,000,000, the tool refuses to run the comparison and asks for shorter excerpts, since the LCS grid used for the diff grows with the product of both line counts." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. The comparison is skipped if the number of comparison units in text A multiplied by the number of units in text B exceeds 4,000,000 — a unit is a line in line-level mode, a word or whitespace run in word-level mode, and a single character in character-level mode. Because character-level comparison produces far more units than line-level for the same text, this limit can be reached with much shorter text when character-level mode is selected." }
       },
       {
         "@type": "Question",
@@ -94,7 +104,7 @@
       max-height: 480px;
       font-family: monospace;
       font-size: 0.88rem;
-      background: #fff;
+      background: var(--color-surface);
     }
     .diff-line {
       display: flex;
@@ -102,9 +112,51 @@
       white-space: pre-wrap;
       word-break: break-word;
     }
-    .diff-line.added { background: #dcfce7; }
-    .diff-line.removed { background: #fee2e2; }
+    .diff-line.added { background: color-mix(in srgb, var(--color-success) 16%, transparent); }
+    .diff-line.removed { background: color-mix(in srgb, var(--color-danger) 14%, transparent); }
     .diff-line .marker { width: 20px; flex-shrink: 0; color: var(--color-text-muted); user-select: none; }
+
+    .diff-tokens {
+      padding: 12px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .diff-tok { border-radius: 3px; padding: 0 1px; }
+    ins.diff-tok.added { text-decoration: none; background: color-mix(in srgb, var(--color-success) 22%, transparent); }
+    del.diff-tok.removed { text-decoration: line-through; background: color-mix(in srgb, var(--color-danger) 20%, transparent); }
+
+    .diff-side-by-side {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .diff-side-col {
+      flex: 1;
+      min-width: 240px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: auto;
+      max-height: 480px;
+      font-family: monospace;
+      font-size: 0.88rem;
+      background: var(--color-surface);
+    }
+    .diff-side-label {
+      position: sticky;
+      top: 0;
+      background: var(--color-surface-2);
+      padding: 6px 12px;
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--color-text-muted);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .hint-text { font-size: 0.78rem; color: var(--color-text-muted); font-weight: 400; }
+    .check-row input:disabled { opacity: 0.5; }
+    .check-row:has(input:disabled) { opacity: 0.65; }
   </style>
 </head>
 <body>
@@ -141,7 +193,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🔍</div>
       <h1>Text Diff Checker</h1>
-      <p>Compare two blocks of text and instantly see what was added, removed, or unchanged.</p>
+      <p>Compare two blocks of text and instantly see what was added, removed, or unchanged — line by line, word by word, or character by character.</p>
     </section>
 
     <section class="container">
@@ -157,7 +209,27 @@
           </div>
         </div>
 
-        <label class="check-row"><input type="checkbox" id="ignoreWhitespace" /> Ignore leading/trailing whitespace per line</label>
+        <div class="field">
+          <label>Comparison Granularity</label>
+          <div class="row">
+            <label class="check-row"><input type="radio" name="granularity" value="line" checked /> Line-level</label>
+            <label class="check-row"><input type="radio" name="granularity" value="word" /> Word-level</label>
+            <label class="check-row"><input type="radio" name="granularity" value="char" /> Character-level</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Output View</label>
+          <div class="row">
+            <label class="check-row"><input type="radio" name="viewMode" value="inline" checked /> Inline (unified)</label>
+            <label class="check-row"><input type="radio" name="viewMode" value="side" /> Side-by-side</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="check-row"><input type="checkbox" id="ignoreWhitespace" /> Ignore whitespace <span id="ignoreWsHint" class="hint-text"></span></label>
+          <label class="check-row"><input type="checkbox" id="ignoreCase" /> Ignore case</label>
+        </div>
 
         <div class="actions">
           <button class="btn btn-primary" id="compareBtn">Compare</button>
@@ -165,16 +237,18 @@
         </div>
 
         <div class="output-box" id="statusBox"></div>
-        <div class="diff-output" id="diffOutput"></div>
+        <div id="diffOutput"></div>
       </div>
 
       <div class="howto">
         <h2>How to Compare Two Blocks of Text</h2>
         <ol class="howto-steps">
           <li>Paste your original text into the "Original Text" box and the changed version into "Changed Text".</li>
-          <li>Optionally check "Ignore leading/trailing whitespace per line" if you only care about content changes, not re-indentation.</li>
+          <li>Choose a comparison granularity: Line-level for whole-line changes, Word-level to see exactly which word changed inside a line, or Character-level for the most precise, letter-by-letter diff.</li>
+          <li>Pick Inline to see one combined stream of changes, or Side-by-side to see the original and changed text in two aligned panels.</li>
+          <li>Optionally check "Ignore whitespace" to skip re-indentation/re-spacing differences, or "Ignore case" to treat differently-cased text as unchanged.</li>
           <li>Click Compare to run the diff.</li>
-          <li>Review the color-coded output: green lines were added, red lines were removed, and plain lines are unchanged — the status line above also totals the additions and removals.</li>
+          <li>Review the color-coded output: green marks additions and red marks removals — the status line above totals how many units were added, removed, and left unchanged.</li>
         </ol>
       </div>
 
@@ -182,19 +256,27 @@
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
           <summary>How does the diff algorithm actually work?</summary>
-          <p>It runs a classic longest-common-subsequence (LCS) algorithm over the lines of both texts. The algorithm finds the longest sequence of lines that appears, in order, in both versions, then marks every other line as added or removed relative to that shared sequence.</p>
+          <p>It runs a classic longest-common-subsequence (LCS) algorithm over the comparison units of both texts — lines, words, or characters, depending on the granularity you choose. The algorithm finds the longest sequence of units that appears, in order, in both versions, then marks every other unit as added or removed relative to that shared sequence.</p>
         </details>
         <details class="faq-item">
-          <summary>Does it compare word-by-word or character-by-character?</summary>
-          <p>No — the comparison works line by line. If a single word changes in the middle of a line, the entire line is shown as one removed line and one added line rather than highlighting just the changed word.</p>
+          <summary>What's the difference between line-level, word-level, and character-level comparison?</summary>
+          <p>Line-level treats each line as one unit, so a single changed word still marks the whole line as one removed line and one added line. Word-level splits both texts into words and the whitespace between them and diffs those individually, so a single changed word — like "brown" becoming "red" — shows up as just that one word removed and one word added. Character-level diffs individual characters, which is the most precise option and best for spotting single-character typos.</p>
         </details>
         <details class="faq-item">
-          <summary>What does "Ignore leading/trailing whitespace per line" actually change?</summary>
-          <p>When checked, each line has its leading and trailing whitespace trimmed before comparison, so re-indented lines won't show as changed. Whitespace differences in the middle of a line are still detected.</p>
+          <summary>What does "Ignore whitespace" do, and does it work in every mode?</summary>
+          <p>In line-level mode, it trims leading and trailing whitespace from each line before comparing, so re-indented lines won't show as changed. In word-level mode, it removes whitespace-run tokens from the comparison entirely, so text that was reflowed or re-spaced no longer shows as different — only the words themselves are compared, and the output re-joins them with a single space. It has no effect in character-level mode, where the checkbox is disabled.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does "Ignore case" do?</summary>
+          <p>When checked, comparison units are matched case-insensitively at whichever granularity you've selected, so "Apple" and "apple" count as unchanged instead of as a difference. The output still displays the original text's casing for anything marked unchanged.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What's the difference between Inline and Side-by-side view?</summary>
+          <p>Inline (unified) view shows one combined stream of text with removed units struck through in red and added units highlighted in green. Side-by-side view splits the same diff into two panels — the original text on the left with removed units highlighted, and the changed text on the right with added units highlighted — so you can read each version on its own.</p>
         </details>
         <details class="faq-item">
           <summary>Is there a limit on how much text I can compare?</summary>
-          <p>Yes. If the number of lines in text A multiplied by the number of lines in text B exceeds 4,000,000, the tool refuses to run the comparison and asks for shorter excerpts, since the LCS grid used for the diff grows with the product of both line counts.</p>
+          <p>Yes. The comparison is skipped if the number of comparison units in text A multiplied by the number of units in text B exceeds 4,000,000 — a unit is a line in line-level mode, a word or whitespace run in word-level mode, and a single character in character-level mode. Because character-level comparison produces far more units than line-level for the same text, this limit can be reached with much shorter text when character-level mode is selected.</p>
         </details>
         <details class="faq-item">
           <summary>Is my text uploaded to a server when I click Compare?</summary>
@@ -277,15 +359,45 @@
     var diffOutput = document.getElementById("diffOutput");
     var statusBox = document.getElementById("statusBox");
     var ignoreWhitespace = document.getElementById("ignoreWhitespace");
+    var ignoreCase = document.getElementById("ignoreCase");
+    var ignoreWsHint = document.getElementById("ignoreWsHint");
 
-    function computeLcsDiff(linesA, linesB) {
-      var n = linesA.length, m = linesB.length;
+    function getGranularity() {
+      var el = document.querySelector('input[name="granularity"]:checked');
+      return el ? el.value : "line";
+    }
+
+    function getViewMode() {
+      var el = document.querySelector('input[name="viewMode"]:checked');
+      return el ? el.value : "inline";
+    }
+
+    // "Ignore whitespace" only has a well-defined meaning for line-level
+    // (trim each line) and word-level (drop whitespace-run tokens) modes.
+    // Disable it in character-level mode instead of silently ignoring it.
+    function updateIgnoreWsAvailability() {
+      var isChar = getGranularity() === "char";
+      ignoreWhitespace.disabled = isChar;
+      ignoreWsHint.textContent = isChar ? "(line & word modes only)" : "";
+    }
+
+    Array.prototype.slice.call(document.querySelectorAll('input[name="granularity"]')).forEach(function (r) {
+      r.addEventListener("change", updateIgnoreWsAvailability);
+    });
+    updateIgnoreWsAvailability();
+
+    // Generic LCS diff: dispA/dispB are the values shown in the output,
+    // keyA/keyB (same length, same order) are the values compared for
+    // equality — letting ignore-case / ignore-whitespace change what
+    // counts as "equal" without altering what gets displayed.
+    function computeLcsDiff(dispA, dispB, keyA, keyB) {
+      var n = dispA.length, m = dispB.length;
       var dp = new Array(n + 1);
       for (var i = 0; i <= n; i++) dp[i] = new Int32Array(m + 1);
 
       for (var i = n - 1; i >= 0; i--) {
         for (var j = m - 1; j >= 0; j--) {
-          dp[i][j] = linesA[i] === linesB[j]
+          dp[i][j] = keyA[i] === keyB[j]
             ? dp[i + 1][j + 1] + 1
             : Math.max(dp[i + 1][j], dp[i][j + 1]);
         }
@@ -294,19 +406,19 @@
       var result = [];
       var i = 0, j = 0;
       while (i < n && j < m) {
-        if (linesA[i] === linesB[j]) {
-          result.push({ type: "same", text: linesA[i] });
+        if (keyA[i] === keyB[j]) {
+          result.push({ type: "same", text: dispA[i] });
           i++; j++;
         } else if (dp[i + 1][j] >= dp[i][j + 1]) {
-          result.push({ type: "removed", text: linesA[i] });
+          result.push({ type: "removed", text: dispA[i] });
           i++;
         } else {
-          result.push({ type: "added", text: linesB[j] });
+          result.push({ type: "added", text: dispB[j] });
           j++;
         }
       }
-      while (i < n) { result.push({ type: "removed", text: linesA[i] }); i++; }
-      while (j < m) { result.push({ type: "added", text: linesB[j] }); j++; }
+      while (i < n) { result.push({ type: "removed", text: dispA[i] }); i++; }
+      while (j < m) { result.push({ type: "added", text: dispB[j] }); j++; }
 
       return result;
     }
@@ -317,31 +429,126 @@
       return div.innerHTML;
     }
 
+    // Splits text into comparison units for the chosen granularity.
+    // Word-level splits on runs of non-whitespace vs. runs of whitespace,
+    // so whitespace itself is a token (needed to detect spacing changes
+    // and to faithfully reconstruct the text when NOT ignoring whitespace).
+    function tokenize(text, granularity, stripWhitespaceTokens) {
+      var normalized = text.replace(/\r\n/g, "\n");
+      if (granularity === "line") return normalized.split("\n");
+      if (granularity === "word") {
+        var tokens = normalized.match(/\S+|\s+/g) || [];
+        if (stripWhitespaceTokens) {
+          tokens = tokens.filter(function (t) { return !/^\s+$/.test(t); });
+        }
+        return tokens;
+      }
+      return Array.from(normalized); // character-level, Unicode-aware
+    }
+
+    function buildKeys(tokens, granularity, opts) {
+      return tokens.map(function (t) {
+        var k = t;
+        if (granularity === "line" && opts.ignoreWhitespace) k = k.trim();
+        if (opts.ignoreCase) k = k.toLowerCase();
+        return k;
+      });
+    }
+
+    function unitLabel(granularity) {
+      return granularity === "line" ? "line" : granularity === "word" ? "word" : "character";
+    }
+
+    function plural(n, word) {
+      return n + " " + word + (n === 1 ? "" : "s");
+    }
+
+    function lineRow(type, text, marker) {
+      return '<div class="diff-line ' + type + '"><span class="marker">' + marker + '</span><span>' + (escapeHtml(text) || " ") + '</span></div>';
+    }
+
+    function renderLineInline(diff) {
+      return '<div class="diff-output">' + diff.map(function (d) {
+        var marker = d.type === "added" ? "+" : d.type === "removed" ? "−" : " ";
+        return lineRow(d.type, d.text, marker);
+      }).join("") + '</div>';
+    }
+
+    function renderLineSide(diff) {
+      var left = diff.filter(function (d) { return d.type !== "added"; })
+        .map(function (d) { return lineRow(d.type === "removed" ? "removed" : "same", d.text, d.type === "removed" ? "−" : " "); })
+        .join("");
+      var right = diff.filter(function (d) { return d.type !== "removed"; })
+        .map(function (d) { return lineRow(d.type === "added" ? "added" : "same", d.text, d.type === "added" ? "+" : " "); })
+        .join("");
+      return '<div class="diff-side-by-side">' +
+        '<div class="diff-side-col"><div class="diff-side-label">Original</div>' + left + '</div>' +
+        '<div class="diff-side-col"><div class="diff-side-label">Changed</div>' + right + '</div>' +
+        '</div>';
+    }
+
+    function tokenSpan(type, text) {
+      var safe = escapeHtml(text);
+      if (type === "added") return '<ins class="diff-tok added">' + safe + '</ins>';
+      if (type === "removed") return '<del class="diff-tok removed">' + safe + '</del>';
+      return '<span>' + safe + '</span>';
+    }
+
+    function renderTokenInline(diff, sep) {
+      var html = diff.map(function (d) { return tokenSpan(d.type, d.text); }).join(sep);
+      return '<div class="diff-output"><div class="diff-tokens">' + html + '</div></div>';
+    }
+
+    function renderTokenSide(diff, sep) {
+      var left = diff.filter(function (d) { return d.type !== "added"; })
+        .map(function (d) { return tokenSpan(d.type === "removed" ? "removed" : "same", d.text); })
+        .join(sep);
+      var right = diff.filter(function (d) { return d.type !== "removed"; })
+        .map(function (d) { return tokenSpan(d.type === "added" ? "added" : "same", d.text); })
+        .join(sep);
+      return '<div class="diff-side-by-side">' +
+        '<div class="diff-side-col"><div class="diff-side-label">Original</div><div class="diff-tokens">' + left + '</div></div>' +
+        '<div class="diff-side-col"><div class="diff-side-label">Changed</div><div class="diff-tokens">' + right + '</div></div>' +
+        '</div>';
+    }
+
     document.getElementById("compareBtn").addEventListener("click", function () {
-      var rawA = textA.value.replace(/\r\n/g, "\n").split("\n");
-      var rawB = textB.value.replace(/\r\n/g, "\n").split("\n");
+      var granularity = getGranularity();
+      var viewMode = getViewMode();
+      var opts = {
+        ignoreWhitespace: ignoreWhitespace.checked && !ignoreWhitespace.disabled,
+        ignoreCase: ignoreCase.checked
+      };
 
-      var linesA = ignoreWhitespace.checked ? rawA.map(function (l) { return l.trim(); }) : rawA;
-      var linesB = ignoreWhitespace.checked ? rawB.map(function (l) { return l.trim(); }) : rawB;
+      var tokensA = tokenize(textA.value, granularity, granularity === "word" && opts.ignoreWhitespace);
+      var tokensB = tokenize(textB.value, granularity, granularity === "word" && opts.ignoreWhitespace);
 
-      if (linesA.length * linesB.length > 4000000) {
-        statusBox.textContent = "These texts are too large to compare in the browser. Try shorter excerpts.";
+      if (tokensA.length * tokensB.length > 4000000) {
+        statusBox.textContent = "These texts are too large to compare at this granularity in the browser. Try shorter excerpts or switch to a coarser comparison mode.";
         diffOutput.innerHTML = "";
         return;
       }
 
-      var diff = computeLcsDiff(linesA, linesB);
+      var keysA = buildKeys(tokensA, granularity, opts);
+      var keysB = buildKeys(tokensB, granularity, opts);
+
+      var diff = computeLcsDiff(tokensA, tokensB, keysA, keysB);
       var added = diff.filter(function (d) { return d.type === "added"; }).length;
       var removed = diff.filter(function (d) { return d.type === "removed"; }).length;
+      var same = diff.filter(function (d) { return d.type === "same"; }).length;
+      var label = unitLabel(granularity);
 
-      statusBox.textContent = diff.every(function (d) { return d.type === "same"; })
+      statusBox.textContent = (added === 0 && removed === 0)
         ? "No differences found — the two texts are identical."
-        : added + " line(s) added, " + removed + " line(s) removed.";
+        : plural(added, label) + " added, " + plural(removed, label) + " removed, " + plural(same, label) + " unchanged.";
 
-      diffOutput.innerHTML = diff.map(function (d) {
-        var marker = d.type === "added" ? "+" : d.type === "removed" ? "−" : " ";
-        return '<div class="diff-line ' + d.type + '"><span class="marker">' + marker + '</span><span>' + (escapeHtml(d.text) || " ") + '</span></div>';
-      }).join("");
+      var sep = (granularity === "word" && opts.ignoreWhitespace) ? " " : "";
+
+      if (granularity === "line") {
+        diffOutput.innerHTML = viewMode === "side" ? renderLineSide(diff) : renderLineInline(diff);
+      } else {
+        diffOutput.innerHTML = viewMode === "side" ? renderTokenSide(diff, sep) : renderTokenInline(diff, sep);
+      }
     });
 
     document.getElementById("clearBtn").addEventListener("click", function () {
