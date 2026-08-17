@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
   <meta charset="UTF-8" />
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -245,6 +246,14 @@
           <summary>Is this a substitute for a DEXA scan or professional body composition testing?</summary>
           <p>No — this is a tape-measure estimate based on a published formula. For a precise, clinical measurement of body fat and lean mass, a DEXA scan or other professional body composition test performed by a qualified provider is more accurate.</p>
         </details>
+        <details class="faq-item">
+          <summary>How are Fat Mass and Lean Mass calculated?</summary>
+          <p>If you enter your total body weight, the tool multiplies it by your body fat percentage to get Fat Mass, then subtracts that from your total weight to get Lean Mass — the weight left over from muscle, bone, organs, and water. Body weight is optional; without it, only the percentage and category are shown.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the category comparison chart show?</summary>
+          <p>It's a visual scale spanning the same Essential Fat, Athletes, Fitness, Average, and Obese categories used in the result, sized and colored to match, with a marker placed at your exact body fat percentage so you can see how close you are to the next category.</p>
+        </details>
       </div>
 
       <div class="related">
@@ -416,7 +425,80 @@
       document.getElementById("statBf").textContent = bf.toFixed(1) + "%";
       document.getElementById("statBfCategory").textContent = category;
 
+      var fatMassStat = document.getElementById("fatMassStat");
+      var leanMassStat = document.getElementById("leanMassStat");
+      var weightRaw = parseFloat(document.getElementById("weightBf").value);
+      var weightUnit = unit === "in" ? "lb" : "kg";
+      if (!isNaN(weightRaw) && weightRaw > 0) {
+        var fatMass = weightRaw * (bf / 100);
+        var leanMass = weightRaw - fatMass;
+        document.getElementById("statFatMass").textContent = fatMass.toFixed(1) + " " + weightUnit;
+        document.getElementById("statLeanMass").textContent = leanMass.toFixed(1) + " " + weightUnit;
+        fatMassStat.style.display = "block";
+        leanMassStat.style.display = "block";
+      } else {
+        fatMassStat.style.display = "none";
+        leanMassStat.style.display = "none";
+      }
+
+      renderGauge(bf, sex);
+
       statusBox.textContent = "Estimated body fat: " + bf.toFixed(1) + "% (" + category + ").";
+    }
+
+    var GAUGE_CATEGORIES = {
+      male: [
+        { name: "Essential", to: 6, color: "var(--color-primary)" },
+        { name: "Athletes", to: 14, color: "var(--color-accent)" },
+        { name: "Fitness", to: 18, color: "var(--color-success)" },
+        { name: "Average", to: 25, color: "#f59e0b" },
+        { name: "Obese", to: 40, color: "var(--color-danger)" }
+      ],
+      female: [
+        { name: "Essential", to: 14, color: "var(--color-primary)" },
+        { name: "Athletes", to: 21, color: "var(--color-accent)" },
+        { name: "Fitness", to: 25, color: "var(--color-success)" },
+        { name: "Average", to: 32, color: "#f59e0b" },
+        { name: "Obese", to: 45, color: "var(--color-danger)" }
+      ]
+    };
+
+    function renderGauge(bf, sexVal) {
+      var cats = GAUGE_CATEGORIES[sexVal];
+      var domainMax = cats[cats.length - 1].to;
+      var gauge = document.getElementById("bfGauge");
+      var labels = document.getElementById("bfGaugeLabels");
+      var wrap = document.getElementById("bfGaugeWrap");
+
+      gauge.innerHTML = "";
+      labels.innerHTML = "";
+      var prev = 0;
+      cats.forEach(function (cat) {
+        var widthPct = ((cat.to - prev) / domainMax) * 100;
+        var seg = document.createElement("div");
+        seg.className = "seg";
+        seg.style.width = widthPct + "%";
+        seg.style.background = cat.color;
+        gauge.appendChild(seg);
+
+        var label = document.createElement("span");
+        label.style.width = widthPct + "%";
+        label.textContent = cat.name;
+        labels.appendChild(label);
+
+        prev = cat.to;
+      });
+
+      var marker = gauge.querySelector(".bf-gauge-marker");
+      if (!marker) {
+        marker = document.createElement("div");
+        marker.className = "bf-gauge-marker";
+        gauge.appendChild(marker);
+      }
+      var pct = Math.max(0, Math.min(100, (bf / domainMax) * 100));
+      marker.style.left = pct + "%";
+
+      wrap.style.display = "block";
     }
 
     document.querySelectorAll(".tool-panel input").forEach(function (el) {

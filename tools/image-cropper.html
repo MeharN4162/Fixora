@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
   <meta charset="UTF-8" />
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -227,11 +228,15 @@
         </details>
         <details class="faq-item">
           <summary>Can I crop to a precise pixel size?</summary>
-          <p>Not by typing numbers directly - you resize the crop box visually by dragging its corner handles, optionally locked to a 1:1, 4:3, or 16:9 ratio. The tool scales your on-screen selection back to the image's real resolution when you click Crop Image, so the exported crop matches full source resolution even though the preview is scaled down to fit the screen.</p>
+          <p>Not by typing numbers directly - you resize the crop box visually by dragging its corner handles, optionally locked to a 1:1, 4:3, 3:2, 16:9, 9:16, or 4:5 ratio. The tool scales your on-screen selection back to the image's real resolution when you click Crop Image, so the exported crop matches full source resolution even though the preview is scaled down to fit the screen.</p>
         </details>
         <details class="faq-item">
           <summary>Does switching aspect ratio presets keep my crop box in the same place?</summary>
           <p>It keeps the box's width and top-left position, then recalculates height to match the new ratio (or vice versa) - so you may need to reposition slightly after switching presets, but you won't lose your general selection area.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I rotate the image before cropping?</summary>
+          <p>Yes - click Rotate Left or Rotate Right to turn the image in 90° steps before you position your crop box. The rotation is baked into the image used for cropping, so what you see is exactly what gets exported, and you can rotate as many times as you like before cropping.</p>
         </details>
         <details class="faq-item">
           <summary>Why does my crop preview look softer than the original image?</summary>
@@ -319,6 +324,7 @@
     var cropImg = document.getElementById("cropImg");
     var cropBox = document.getElementById("cropBox");
     var ratioRow = document.getElementById("ratioRow");
+    var rotateRow = document.getElementById("rotateRow");
     var cropBtn = document.getElementById("cropBtn");
     var downloadBtn = document.getElementById("downloadBtn");
     var statusBox = document.getElementById("statusBox");
@@ -342,6 +348,7 @@
           cropImg.src = e.target.result;
           cropStage.style.display = "block";
           ratioRow.style.display = "flex";
+          rotateRow.style.display = "flex";
           cropBtn.disabled = false;
           downloadBtn.style.display = "none";
 
@@ -439,6 +446,49 @@
     });
 
     window.addEventListener("mouseup", function () { dragMode = null; });
+
+    var rotateLeftBtn = document.getElementById("rotateLeftBtn");
+    var rotateRightBtn = document.getElementById("rotateRightBtn");
+
+    function resetBoxForCurrentImage() {
+      var stageW = cropStage.clientWidth;
+      var stageH = cropImg.clientHeight;
+      box = { x: stageW * 0.2, y: stageH * 0.2, w: stageW * 0.6, h: stageH * 0.6 };
+      var r = ratioValue();
+      if (r) box.h = box.w / r;
+      clampBox();
+      drawBox();
+    }
+
+    function rotateImage(direction) {
+      if (!naturalImg) return;
+      var w = naturalImg.naturalWidth;
+      var h = naturalImg.naturalHeight;
+      var canvas = document.createElement("canvas");
+      canvas.width = h;
+      canvas.height = w;
+      var ctx = canvas.getContext("2d");
+      if (direction === "right") {
+        ctx.translate(h, 0);
+        ctx.rotate(Math.PI / 2);
+      } else {
+        ctx.translate(0, w);
+        ctx.rotate(-Math.PI / 2);
+      }
+      ctx.drawImage(naturalImg, 0, 0);
+      var dataUrl = canvas.toDataURL("image/png");
+
+      var newImg = new Image();
+      newImg.onload = function () {
+        naturalImg = newImg;
+        cropImg.src = dataUrl;
+        requestAnimationFrame(resetBoxForCurrentImage);
+      };
+      newImg.src = dataUrl;
+    }
+
+    rotateLeftBtn.addEventListener("click", function () { rotateImage("left"); });
+    rotateRightBtn.addEventListener("click", function () { rotateImage("right"); });
 
     cropBtn.addEventListener("click", function () {
       if (!naturalImg) return;

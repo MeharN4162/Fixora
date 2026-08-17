@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
   <meta charset="UTF-8" />
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -201,7 +202,11 @@
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
           <summary>Why is the Base64 output larger than my original file?</summary>
-          <p>Base64 encoding represents every 3 bytes of binary data as 4 text characters, which adds roughly 33% overhead. The Base64 Size stat reflects this - it will always be larger than the original file size.</p>
+          <p>Base64 encoding represents every 3 bytes of binary data as 4 text characters, which adds roughly 33% overhead. The Base64 Size and Overhead stats reflect this - the encoded string will always be larger than the original file size.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What output formats can I copy or download?</summary>
+          <p>Six: Data URI, Raw Base64, a CSS background-image snippet, an HTML &lt;img&gt; tag, a JS const variable declaration, and a Markdown image tag. Switch between them with the tabs above the output box, then use "Copy to Clipboard" or "Download as .txt" to grab whichever one you need.</p>
         </details>
         <details class="faq-item">
           <summary>What's the difference between Data URI and Raw Base64?</summary>
@@ -310,6 +315,8 @@
       else if (currentFormat === "raw") outputText.value = rawBase64;
       else if (currentFormat === "css") outputText.value = "background-image: url(" + dataUri + ");";
       else if (currentFormat === "html") outputText.value = '<img src="' + dataUri + '" alt="" />';
+      else if (currentFormat === "js") outputText.value = 'const imageBase64 = "' + dataUri + '";';
+      else if (currentFormat === "markdown") outputText.value = '![](' + dataUri + ')';
     }
 
     document.querySelectorAll("#formatTabs [data-format]").forEach(function (pill) {
@@ -344,6 +351,8 @@
           document.getElementById("statOriginal").textContent = Fixora.formatBytes(file.size);
           document.getElementById("statEncoded").textContent = Fixora.formatBytes(rawBase64.length);
           document.getElementById("statDims").textContent = img.naturalWidth + " × " + img.naturalHeight;
+          var overheadPct = ((rawBase64.length - file.size) / file.size) * 100;
+          document.getElementById("statOverhead").textContent = "+" + overheadPct.toFixed(1) + "%";
         };
         img.src = dataUri;
 
