@@ -6,21 +6,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Lorem Ipsum Generator Online | Fixora</title>
-  <meta name="description" content="Generate placeholder Lorem Ipsum text online for free — by paragraphs, sentences, or words. Perfect for mockups and design layouts. No sign-up required." />
-  <meta name="keywords" content="lorem ipsum generator, placeholder text generator online free, dummy text" />
+  <meta name="description" content="Generate placeholder Lorem Ipsum text online for free — by paragraphs, sentences, or words, in Classic Latin or Business Jargon style, with optional HTML paragraph-tag output. Perfect for mockups and design layouts. No sign-up required." />
+  <meta name="keywords" content="lorem ipsum generator, placeholder text generator online free, dummy text, business jargon generator, html lorem ipsum" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/lorem-ipsum-generator.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixora" />
   <meta property="og:title" content="Free Lorem Ipsum Generator Online" />
-  <meta property="og:description" content="Generate placeholder Lorem Ipsum text online for free." />
+  <meta property="og:description" content="Generate placeholder Lorem Ipsum text online for free, in Classic Latin or Business Jargon style, with optional HTML output." />
   <meta property="og:url" content="https://fixoona.com/tools/lorem-ipsum-generator.html" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Lorem Ipsum Generator Online" />
-  <meta name="twitter:description" content="Generate placeholder Lorem Ipsum text online for free." />
+  <meta name="twitter:description" content="Generate placeholder Lorem Ipsum text online for free, in Classic Latin or Business Jargon style, with optional HTML output." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -59,7 +59,7 @@
       {
         "@type": "Question",
         "name": "Is this genuine, classical Lorem Ipsum text?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Not exactly. It's randomly assembled from a bank of about 110 real and pseudo-Latin words drawn from the traditional Lorem Ipsum passage, shuffled into new sentences on each generation, so the wording differs from the original fixed paragraph you may have seen elsewhere." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Not exactly, and it depends which text style you pick. The Classic Latin style is randomly assembled from a bank of about 85 real and pseudo-Latin words drawn from the traditional Lorem Ipsum passage, shuffled into new sentences on each generation, so the wording differs from the original fixed paragraph you may have seen elsewhere. The Business Jargon style swaps that bank for about 110 real English business and tech buzzwords instead." }
       },
       {
         "@type": "Question",
@@ -69,7 +69,17 @@
       {
         "@type": "Question",
         "name": "What does the \"Start with Lorem ipsum dolor sit amet…\" checkbox actually do?",
-        "acceptedAnswer": { "@type": "Answer", "text": "When checked, it forces the first word (in Words mode) or the first sentence (in Sentences and Paragraphs mode) to be the familiar classic opening, while everything after it stays randomly generated." }
+        "acceptedAnswer": { "@type": "Answer", "text": "When checked, it forces the first word (in Words mode) or the first sentence (in Sentences and Paragraphs mode) to be the familiar classic opening, while everything after it stays randomly generated. This checkbox only applies to the Classic Latin text style — it's hidden when Business Jargon is selected, since that style has no classic opening line to insert." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between the Classic Latin and Business Jargon text styles?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Classic Latin uses the traditional Lorem Ipsum word bank for the familiar look of placeholder text. Business Jargon swaps in a separate bank of about 110 real English words like \"synergy,\" \"roadmap,\" and \"stakeholder\" instead, which is useful when you want placeholder copy that reads like real (if buzzword-heavy) English rather than Latin — for example in mockups aimed at English-speaking clients or stakeholders." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the HTML output option do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "When checked, it wraps the generated text in real <p> tags so you can paste it straight into HTML markup. In Paragraphs mode, each paragraph gets wrapped in its own <p>...</p> tag; in Sentences or Words mode, the whole result is wrapped in a single <p>...</p> tag, since there's no paragraph structure to split it into." }
       },
       {
         "@type": "Question",
@@ -79,7 +89,7 @@
       {
         "@type": "Question",
         "name": "Does generating text require an internet connection?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Once the page has loaded, no — text is generated entirely in your browser from a word list built into the page's JavaScript, with no server calls involved." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Once the page has loaded, no — text is generated entirely in your browser from word lists built into the page's JavaScript, with no server calls involved." }
       }
     ]
   }
@@ -119,7 +129,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">📄</div>
       <h1>Lorem Ipsum Generator</h1>
-      <p>Generate placeholder text for mockups, layouts, and designs — by paragraphs, sentences, or words.</p>
+      <p>Generate placeholder text for mockups, layouts, and designs — by paragraphs, sentences, or words, in Classic Latin or Business Jargon style, with optional HTML output.</p>
     </section>
 
     <section class="container">
@@ -130,12 +140,19 @@
           <button class="pill" data-unit="words" type="button">Words</button>
         </div>
 
+        <label style="font-weight:600;font-size:0.9rem;display:block;margin:18px 0 8px;">Text Style</label>
+        <div class="pill-row" id="themeRow" style="margin-bottom:0;">
+          <button class="pill active" data-theme="classic" type="button">Classic Latin</button>
+          <button class="pill" data-theme="business" type="button">Business Jargon</button>
+        </div>
+
         <div class="field">
           <label for="countRange">Amount: <span id="countValue">3</span></label>
           <input type="range" id="countRange" min="1" max="20" value="3" style="width:100%;" />
         </div>
 
-        <label class="check-row"><input type="checkbox" id="startClassic" checked /> Start with "Lorem ipsum dolor sit amet…"</label>
+        <label class="check-row" id="startClassicRow"><input type="checkbox" id="startClassic" checked /> Start with "Lorem ipsum dolor sit amet…"</label>
+        <label class="check-row"><input type="checkbox" id="htmlOutput" /> HTML output (wrap in &lt;p&gt; tags)</label>
 
         <div class="actions">
           <button class="btn btn-primary" id="generateBtn">Generate</button>
@@ -153,8 +170,10 @@
         <h2>How to Generate Lorem Ipsum Placeholder Text</h2>
         <ol class="howto-steps">
           <li>Pick a unit using the pill buttons: Paragraphs, Sentences, or Words.</li>
+          <li>Pick a text style: Classic Latin for the traditional Latin-look filler, or Business Jargon for placeholder text made of real English business and tech buzzwords.</li>
           <li>Drag the Amount slider to set how many paragraphs, sentences, or words you want, from 1 to 20.</li>
-          <li>Leave "Start with 'Lorem ipsum dolor sit amet…'" checked for the familiar classic opening, or uncheck it for fully randomized wording throughout.</li>
+          <li>With Classic Latin selected, leave "Start with 'Lorem ipsum dolor sit amet…'" checked for the familiar classic opening, or uncheck it for fully randomized wording throughout.</li>
+          <li>Check "HTML output" if you want the result wrapped in real &lt;p&gt; tags, ready to paste straight into markup.</li>
           <li>Click Generate for a new batch, then Copy Text to grab the result for your mockup or layout.</li>
         </ol>
       </div>
@@ -163,7 +182,7 @@
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
           <summary>Is this genuine, classical Lorem Ipsum text?</summary>
-          <p>Not exactly. It's randomly assembled from a bank of about 110 real and pseudo-Latin words drawn from the traditional Lorem Ipsum passage, shuffled into new sentences on each generation, so the wording differs from the original fixed paragraph you may have seen elsewhere.</p>
+          <p>Not exactly, and it depends which text style you pick. The Classic Latin style is randomly assembled from a bank of about 85 real and pseudo-Latin words drawn from the traditional Lorem Ipsum passage, shuffled into new sentences on each generation, so the wording differs from the original fixed paragraph you may have seen elsewhere. The Business Jargon style swaps that bank for about 110 real English business and tech buzzwords instead.</p>
         </details>
         <details class="faq-item">
           <summary>Why does the text look different every time I click Generate?</summary>
@@ -171,7 +190,15 @@
         </details>
         <details class="faq-item">
           <summary>What does the "Start with Lorem ipsum dolor sit amet…" checkbox actually do?</summary>
-          <p>When checked, it forces the first word (in Words mode) or the first sentence (in Sentences and Paragraphs mode) to be the familiar classic opening, while everything after it stays randomly generated.</p>
+          <p>When checked, it forces the first word (in Words mode) or the first sentence (in Sentences and Paragraphs mode) to be the familiar classic opening, while everything after it stays randomly generated. This checkbox only applies to the Classic Latin text style — it's hidden when Business Jargon is selected, since that style has no classic opening line to insert.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What's the difference between the Classic Latin and Business Jargon text styles?</summary>
+          <p>Classic Latin uses the traditional Lorem Ipsum word bank for the familiar look of placeholder text. Business Jargon swaps in a separate bank of about 110 real English words like "synergy," "roadmap," and "stakeholder" instead, which is useful when you want placeholder copy that reads like real (if buzzword-heavy) English rather than Latin — for example in mockups aimed at English-speaking clients or stakeholders.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the HTML output option do?</summary>
+          <p>When checked, it wraps the generated text in real &lt;p&gt; tags so you can paste it straight into HTML markup. In Paragraphs mode, each paragraph gets wrapped in its own &lt;p&gt;...&lt;/p&gt; tag; in Sentences or Words mode, the whole result is wrapped in a single &lt;p&gt;...&lt;/p&gt; tag, since there's no paragraph structure to split it into.</p>
         </details>
         <details class="faq-item">
           <summary>Can I generate an exact number of characters?</summary>
@@ -179,7 +206,7 @@
         </details>
         <details class="faq-item">
           <summary>Does generating text require an internet connection?</summary>
-          <p>Once the page has loaded, no — text is generated entirely in your browser from a word list built into the page's JavaScript, with no server calls involved.</p>
+          <p>Once the page has loaded, no — text is generated entirely in your browser from word lists built into the page's JavaScript, with no server calls involved.</p>
         </details>
       </div>
 
@@ -253,57 +280,94 @@
 
   <script src="../assets/js/main.js"></script>
   <script>
-    var WORDS = ("lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore " +
-      "et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco laboris nisi aliquip ex ea " +
-      "commodo consequat duis aute irure in reprehenderit voluptate velit esse cillum eu fugiat nulla pariatur " +
-      "excepteur sint occaecat cupidatat non proident sunt culpa qui officia deserunt mollit anim id est laborum " +
-      "at vero accusamus iusto odio dignissimos ducimus blanditiis praesentium voluptatum deleniti atque corrupti " +
-      "quos quas molestias excepturi sint occaecati cupiditate provident similique mollitia animi").split(" ");
+    var WORD_BANKS = {
+      classic: ("lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore " +
+        "et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco laboris nisi aliquip ex ea " +
+        "commodo consequat duis aute irure in reprehenderit voluptate velit esse cillum eu fugiat nulla pariatur " +
+        "excepteur sint occaecat cupidatat non proident sunt culpa qui officia deserunt mollit anim id est laborum " +
+        "at vero accusamus iusto odio dignissimos ducimus blanditiis praesentium voluptatum deleniti atque corrupti " +
+        "quos quas molestias excepturi sint occaecati cupiditate provident similique mollitia animi").split(" "),
+      business: ("synergy leverage disrupt scalable agile pivot roadmap bandwidth onboarding deliverable stakeholder " +
+        "paradigm ecosystem framework workflow optimize streamline innovative dynamic robust seamless integrate " +
+        "empower holistic proactive actionable incentivize monetize ideate iterate benchmark cloud analytics " +
+        "dashboard metrics algorithm automation blockchain bootstrap deploy backend frontend latency uptime sprint " +
+        "milestone wireframe prototype churn funnel conversion engagement retention acquisition growth disruptive " +
+        "unicorn incubator accelerator venture capital funding runway pitch investor valuation equity merger " +
+        "capacity alignment ownership accountability transparency culture values mission vision purpose impact " +
+        "hustle grind transformation digital strategy execution collaborate brainstorm whiteboard quarterly " +
+        "enterprise customer centric scale innovate agility cadence prioritize backlog standup retrospective " +
+        "velocity kanban ideation synergistic momentum traction footprint headcount outsource crowdsource gamify " +
+        "personalize customize modernize").split(" ")
+    };
 
     var countRange = document.getElementById("countRange");
     var countValue = document.getElementById("countValue");
     var outputText = document.getElementById("outputText");
     var copyNote = document.getElementById("copyNote");
+    var startClassicRow = document.getElementById("startClassicRow");
     var unit = "paragraphs";
+    var theme = "classic";
 
-    function randInt(max) { return Math.floor(Math.random() * max); }
+    // Unbiased random integer in [0, max) using the browser's cryptographically
+    // secure RNG (rejection sampling avoids the modulo-bias of a plain % max).
+    function randInt(max) {
+      if (max <= 0) return 0;
+      var range = Math.floor(max);
+      var maxUint32 = 0xFFFFFFFF;
+      var limit = Math.floor((maxUint32 + 1) / range) * range;
+      var arr = new Uint32Array(1);
+      var val;
+      do {
+        crypto.getRandomValues(arr);
+        val = arr[0];
+      } while (val >= limit);
+      return val % range;
+    }
 
-    function randomSentence(minWords, maxWords) {
+    function randomSentence(bank, minWords, maxWords) {
       var len = minWords + randInt(maxWords - minWords);
       var words = [];
-      for (var i = 0; i < len; i++) words.push(WORDS[randInt(WORDS.length)]);
+      for (var i = 0; i < len; i++) words.push(bank[randInt(bank.length)]);
       var sentence = words.join(" ");
       return sentence.charAt(0).toUpperCase() + sentence.slice(1) + ".";
     }
 
-    function randomParagraph(sentenceCount) {
+    function randomParagraph(bank, sentenceCount) {
       var sentences = [];
-      for (var i = 0; i < sentenceCount; i++) sentences.push(randomSentence(6, 16));
+      for (var i = 0; i < sentenceCount; i++) sentences.push(randomSentence(bank, 6, 16));
       return sentences.join(" ");
     }
 
     function generate() {
       var count = parseInt(countRange.value, 10);
-      var startClassic = document.getElementById("startClassic").checked;
+      var startClassic = theme === "classic" && document.getElementById("startClassic").checked;
+      var htmlOutput = document.getElementById("htmlOutput").checked;
+      var bank = WORD_BANKS[theme];
       var result = "";
 
       if (unit === "words") {
         var words = [];
-        for (var i = 0; i < count; i++) words.push(WORDS[randInt(WORDS.length)]);
+        for (var i = 0; i < count; i++) words.push(bank[randInt(bank.length)]);
         if (startClassic && words.length) words[0] = "Lorem";
-        result = words.join(" ");
+        var wordsText = words.join(" ");
+        result = htmlOutput ? "<p>" + wordsText + "</p>" : wordsText;
       } else if (unit === "sentences") {
         var sentences = [];
-        for (var j = 0; j < count; j++) sentences.push(randomSentence(6, 16));
+        for (var j = 0; j < count; j++) sentences.push(randomSentence(bank, 6, 16));
         if (startClassic && sentences.length) sentences[0] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-        result = sentences.join(" ");
+        var sentencesText = sentences.join(" ");
+        result = htmlOutput ? "<p>" + sentencesText + "</p>" : sentencesText;
       } else {
         var paragraphs = [];
-        for (var k = 0; k < count; k++) paragraphs.push(randomParagraph(4 + randInt(3)));
+        for (var k = 0; k < count; k++) paragraphs.push(randomParagraph(bank, 4 + randInt(3)));
         if (startClassic && paragraphs.length) {
           paragraphs[0] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " + paragraphs[0];
         }
-        result = paragraphs.join("\n\n");
+        if (htmlOutput) {
+          result = paragraphs.map(function (p) { return "<p>" + p + "</p>"; }).join("\n\n");
+        } else {
+          result = paragraphs.join("\n\n");
+        }
       }
 
       outputText.value = result;
@@ -318,11 +382,22 @@
       });
     });
 
+    document.querySelectorAll("[data-theme]").forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        document.querySelectorAll("[data-theme]").forEach(function (p) { p.classList.remove("active"); });
+        pill.classList.add("active");
+        theme = pill.getAttribute("data-theme");
+        startClassicRow.style.display = theme === "classic" ? "" : "none";
+        generate();
+      });
+    });
+
     countRange.addEventListener("input", function () {
       countValue.textContent = countRange.value;
       generate();
     });
     document.getElementById("startClassic").addEventListener("change", generate);
+    document.getElementById("htmlOutput").addEventListener("change", generate);
     document.getElementById("generateBtn").addEventListener("click", generate);
     document.getElementById("copyBtn").addEventListener("click", function () {
       Fixora.copyText(outputText.value, copyNote);
