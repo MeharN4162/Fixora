@@ -221,34 +221,33 @@ p {
 .nav-brand {
   display: flex;
   align-items: center;
-  gap: 8px;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.25rem;
   color: var(--color-text);
 }
 
-.nav-brand .brand-mark {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  background: var(--gradient-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.nav-brand .brand-mark .brand-svg {
-  width: 60%;
-  height: 60%;
-}
-
 .nav-brand .brand-word {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 4px;
   background: var(--gradient-primary);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  letter-spacing: -0.02em;
+  font-size: 1.18em;
+}
+
+.nav-brand .brand-word::after {
+  content: "";
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  bottom: 0;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--gradient-primary);
 }
 
 .nav-links {
@@ -599,6 +598,7 @@ p {
     column-gap: 8px;
     row-gap: 2px;
     padding: 11px 10px;
+    height: 56px;
   }
 
   .grid .card:not(.guide-card) .icon {
@@ -611,6 +611,10 @@ p {
   .grid .card:not(.guide-card) h3 {
     font-size: 0.82rem;
     line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .grid .card:not(.guide-card) p {
@@ -684,6 +688,7 @@ p {
 .card:not(.guide-card) {
   display: grid;
   grid-template-columns: 44px 1fr;
+  grid-template-rows: auto auto auto;
   grid-template-areas:
     "icon title"
     "icon desc"
@@ -692,6 +697,7 @@ p {
   row-gap: 3px;
   padding: 16px 18px;
   align-items: start;
+  height: 112px;
 }
 
 .card:not(.guide-card):hover {
@@ -712,6 +718,10 @@ p {
   font-size: 0.98rem;
   align-self: end;
   line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .card:not(.guide-card) p {
@@ -727,7 +737,14 @@ p {
 .card:not(.guide-card) .card-cta {
   grid-area: cta;
   margin-top: 4px;
-  font-size: 0.8rem;
+  font-size: 0;
+}
+
+.card:not(.guide-card) .card-cta::after {
+  content: "→";
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
 }
 
 .card[hidden] {
