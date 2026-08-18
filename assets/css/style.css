@@ -244,6 +244,13 @@ p {
   height: 60%;
 }
 
+.nav-brand .brand-word {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .nav-links {
   display: flex;
   align-items: center;
@@ -560,28 +567,20 @@ p {
 @media (max-width: 560px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 10px;
   }
 
-  .grid .card {
+  .grid .card.guide-card {
     padding: 16px 13px;
     gap: 6px;
   }
 
-  .grid .card .icon {
-    width: 34px;
-    height: 34px;
-    font-size: 1.05rem;
-    margin-bottom: 2px;
-    border-radius: 9px;
-  }
-
-  .grid .card h3 {
+  .grid .card.guide-card h3 {
     font-size: 0.9rem;
     line-height: 1.25;
   }
 
-  .grid .card p {
+  .grid .card.guide-card p {
     font-size: 0.78rem;
     line-height: 1.35;
     display: -webkit-box;
@@ -590,9 +589,36 @@ p {
     overflow: hidden;
   }
 
-  .grid .card .card-cta {
+  .grid .card.guide-card .card-cta {
     font-size: 0.76rem;
     margin-top: 2px;
+  }
+
+  .grid .card:not(.guide-card) {
+    grid-template-columns: 30px 1fr;
+    column-gap: 8px;
+    row-gap: 2px;
+    padding: 11px 10px;
+  }
+
+  .grid .card:not(.guide-card) .icon {
+    width: 30px;
+    height: 30px;
+    font-size: 0.92rem;
+    border-radius: 8px;
+  }
+
+  .grid .card:not(.guide-card) h3 {
+    font-size: 0.82rem;
+    line-height: 1.2;
+  }
+
+  .grid .card:not(.guide-card) p {
+    display: none;
+  }
+
+  .grid .card:not(.guide-card) .card-cta {
+    display: none;
   }
 }
 
@@ -653,6 +679,57 @@ p {
   margin-top: 6px;
 }
 
+/* Compact, wide, icon-left layout for tool cards (not guide cards) —
+   cuts card height roughly in half so far more tools fit per screen. */
+.card:not(.guide-card) {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  grid-template-areas:
+    "icon title"
+    "icon desc"
+    "cta  cta";
+  column-gap: 14px;
+  row-gap: 3px;
+  padding: 16px 18px;
+  align-items: start;
+}
+
+.card:not(.guide-card):hover {
+  transform: translateY(-3px);
+}
+
+.card:not(.guide-card) .icon {
+  grid-area: icon;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 0;
+  align-self: center;
+  font-size: 1.15rem;
+}
+
+.card:not(.guide-card) h3 {
+  grid-area: title;
+  font-size: 0.98rem;
+  align-self: end;
+  line-height: 1.25;
+}
+
+.card:not(.guide-card) p {
+  grid-area: desc;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card:not(.guide-card) .card-cta {
+  grid-area: cta;
+  margin-top: 4px;
+  font-size: 0.8rem;
+}
+
 .card[hidden] {
   display: none;
 }
@@ -688,46 +765,6 @@ p {
 
 .tool-category:last-child {
   margin-bottom: 0;
-}
-
-/* Jump-to-category nav, sits above the featured tools grid */
-.cat-jump-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 22px 0 40px;
-}
-
-.cat-jump-nav a {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 9px 16px;
-  border-radius: 999px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  color: var(--color-text);
-  font-size: 0.88rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-}
-
-.cat-jump-nav a .count {
-  color: var(--color-text-muted);
-  font-weight: 500;
-}
-
-.cat-jump-nav a:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  border-color: transparent;
-  background: var(--gradient-primary);
-  color: #fff;
-}
-
-.cat-jump-nav a:hover .count {
-  color: rgba(255, 255, 255, 0.85);
 }
 
 /* "Show N more" toggle for long category grids */

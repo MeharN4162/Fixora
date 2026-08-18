@@ -667,12 +667,12 @@ document.documentElement.setAttribute("data-js", "true");
     });
   }
 
-  /* ---------- Homepage category browsing: jump nav + show-more ---------- */
+  /* ---------- Homepage category browsing: show-more ---------- */
   function initCategoryBrowsing() {
     var sections = Array.prototype.slice.call(document.querySelectorAll(".tool-category[id^='cat-']"));
     if (!sections.length) return;
 
-    var VISIBLE_COUNT = 8;
+    var VISIBLE_COUNT = 12;
 
     // Collapse long category grids behind a "Show N more" toggle.
     sections.forEach(function (section) {
@@ -700,30 +700,6 @@ document.documentElement.setAttribute("data-js", "true");
 
       grid.insertAdjacentElement("afterend", btn);
     });
-
-    // Build a "jump to category" pill nav from the section headings.
-    var headEl = document.querySelector("#tools .section-head");
-    if (!headEl) return;
-
-    var nav = document.createElement("nav");
-    nav.className = "cat-jump-nav";
-    nav.setAttribute("aria-label", "Jump to tool category");
-
-    sections.forEach(function (section) {
-      var iconEl = section.querySelector(".tcat-icon");
-      var titleEl = section.querySelector("h3");
-      var countEl = section.querySelector(".tcat-count");
-      if (!titleEl) return;
-
-      var a = document.createElement("a");
-      a.href = "#" + section.id;
-      a.innerHTML =
-        (iconEl ? iconEl.textContent : "") + " " + titleEl.textContent +
-        (countEl ? " <span class=\"count\">" + countEl.textContent + "</span>" : "");
-      nav.appendChild(a);
-    });
-
-    headEl.insertAdjacentElement("afterend", nav);
   }
 
   /* ---------- Toast notifications ---------- */
