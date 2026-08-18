@@ -667,6 +667,34 @@ document.documentElement.setAttribute("data-js", "true");
     });
   }
 
+  /* ---------- Tool card description expand/collapse ---------- */
+  function initCardDescExpand() {
+    var cards = Array.prototype.slice.call(document.querySelectorAll(".card:not(.guide-card)"));
+    cards.forEach(function (card) {
+      if (card.querySelector(".card-expand-toggle")) return;
+      var desc = card.querySelector("p");
+      if (!desc) return;
+      // Only add the toggle if the one-line clamp is actually cutting text off.
+      if (desc.scrollHeight <= desc.clientHeight + 1) return;
+
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "card-expand-toggle";
+      btn.setAttribute("aria-label", "Show full description");
+      btn.innerHTML =
+        '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>';
+
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var isOpen = card.classList.toggle("desc-expanded");
+        btn.setAttribute("aria-label", isOpen ? "Hide full description" : "Show full description");
+      });
+
+      card.appendChild(btn);
+    });
+  }
+
   /* ---------- Homepage category browsing: show-more ---------- */
   function initCategoryBrowsing() {
     var sections = Array.prototype.slice.call(document.querySelectorAll(".tool-category[id^='cat-']"));
@@ -693,7 +721,9 @@ document.documentElement.setAttribute("data-js", "true");
       btn.addEventListener("click", function () {
         var isOpen = section.classList.toggle("expanded");
         btn.querySelector(".label").textContent = isOpen ? "Show fewer" : "Show " + remaining + " more";
-        if (!isOpen) {
+        if (isOpen) {
+          initCardDescExpand();
+        } else {
           section.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       });
@@ -858,6 +888,7 @@ document.documentElement.setAttribute("data-js", "true");
     initCommandPalette();
     initCategoryChip();
     initCategoryBrowsing();
+    initCardDescExpand();
     initCookieBanner();
     initBackToTop();
     initHeroGlow();
