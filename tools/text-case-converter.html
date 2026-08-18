@@ -6,21 +6,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Text Case Converter Online — Upper, Lower, Title Case | Fixoona</title>
-  <meta name="description" content="Convert text between UPPERCASE, lowercase, Title Case, Sentence case, and more instantly. Free online text case converter, no sign-up required." />
-  <meta name="keywords" content="text case converter, uppercase to lowercase, title case converter online free" />
+  <meta name="description" content="Convert text into UPPERCASE, lowercase, Title Case, Sentence case, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, dot.case, Train-Case, aLtErNaTiNg, or InVeRsE case, and compare every variant at once with one-click copy. Free, no sign-up." />
+  <meta name="keywords" content="text case converter, uppercase to lowercase, title case converter online free, camelcase converter, snake case converter, kebab case converter" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/text-case-converter.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixoona" />
   <meta property="og:title" content="Free Text Case Converter Online" />
-  <meta property="og:description" content="Convert text between UPPERCASE, lowercase, Title Case, Sentence case, and more instantly." />
+  <meta property="og:description" content="Convert text into 13 case styles — UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case, and more — and compare them all side by side." />
   <meta property="og:url" content="https://fixoona.com/tools/text-case-converter.html" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Text Case Converter Online" />
-  <meta name="twitter:description" content="Convert text between UPPERCASE, lowercase, Title Case, Sentence case, and more instantly." />
+  <meta name="twitter:description" content="Convert text into 13 case styles — UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case, and more — and compare them all side by side." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='28' y='22' width='13' height='56' rx='6.5' fill='white'/%3E%3Cpath d='M28 22 L67 22 Q73 22 70.5 27.5 L45 37 Q28 40 28 30 Z' fill='white'/%3E%3Crect x='28' y='46' width='27' height='13' rx='6.5' fill='white'/%3E%3Ccircle cx='76' cy='28' r='7' fill='%23a5f3fc'/%3E%3C/svg%3E" />
 
@@ -80,10 +80,73 @@
         "@type": "Question",
         "name": "Does clicking a case button change my original input?",
         "acceptedAnswer": { "@type": "Answer", "text": "No. Your original text stays untouched in the \"Your Text\" box; only the read-only \"Result\" box updates. You can click through several case buttons in a row to compare outputs without retyping anything." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between PascalCase and camelCase?",
+        "acceptedAnswer": { "@type": "Answer", "text": "They use the same word-boundary logic, but PascalCase capitalizes the very first letter too, while camelCase leaves it lowercase. So \"hello world\" becomes \"HelloWorld\" in PascalCase but \"helloWorld\" in camelCase." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between kebab-case, dot.case, and CONSTANT_CASE?",
+        "acceptedAnswer": { "@type": "Answer", "text": "All three follow the same rule as snake_case — lowercase everything, collapse spaces and punctuation into a single separator, then trim separators from the ends — but kebab-case uses a hyphen, dot.case uses a period, and CONSTANT_CASE reuses the underscore separator from snake_case and uppercases the whole result." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is Train-Case different from kebab-case?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Train-Case splits the text into words the same way kebab-case does, but it capitalizes the first letter of every word before joining them with hyphens, so \"hello world\" becomes \"Hello-World\" instead of kebab-case's \"hello-world\"." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does InVeRsE CaSe do differently from aLtErNaTiNg case?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Inverse case flips the case each letter already has — an uppercase letter becomes lowercase and vice versa — so it depends entirely on your original text's casing. Alternating case ignores the original casing and imposes a fresh upper/lower/upper/lower pattern that only advances on letters." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the \"Compare All Cases\" list update live, and can I copy each row separately?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. As soon as you type or paste into \"Your Text\", the list below updates instantly to show every case variant at once — no button click needed — and each row has its own Copy button so you can grab exactly the variant you want." }
       }
     ]
   }
   </script>
+
+  <style>
+    .variant-list {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .variant-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--color-bg-soft);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+    }
+    .variant-label {
+      flex: 0 0 150px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+    .variant-value {
+      flex: 1;
+      word-break: break-word;
+      font-family: monospace;
+      font-size: 0.95rem;
+    }
+    .variant-empty {
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+    }
+    @media (max-width: 640px) {
+      .variant-row { flex-wrap: wrap; }
+      .variant-label { flex-basis: 100%; }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -119,7 +182,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🔡</div>
       <h1>Text Case Converter</h1>
-      <p>Instantly switch text between UPPERCASE, lowercase, Title Case, Sentence case, and more.</p>
+      <p>Instantly switch text between 13 case styles — UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case, and more — or compare every variant side by side and copy the one you need.</p>
     </section>
 
     <section class="container">
@@ -135,8 +198,14 @@
           <button class="btn btn-secondary" data-case="title">Title Case</button>
           <button class="btn btn-secondary" data-case="sentence">Sentence case</button>
           <button class="btn btn-secondary" data-case="camel">camelCase</button>
+          <button class="btn btn-secondary" data-case="pascal">PascalCase</button>
           <button class="btn btn-secondary" data-case="snake">snake_case</button>
+          <button class="btn btn-secondary" data-case="kebab">kebab-case</button>
+          <button class="btn btn-secondary" data-case="constant">CONSTANT_CASE</button>
+          <button class="btn btn-secondary" data-case="dot">dot.case</button>
+          <button class="btn btn-secondary" data-case="train">Train-Case</button>
           <button class="btn btn-secondary" data-case="alternating">aLtErNaTiNg</button>
+          <button class="btn btn-secondary" data-case="inverse">InVeRsE CaSe</button>
         </div>
 
         <div class="field" style="margin-top:22px;">
@@ -149,15 +218,22 @@
           <button class="btn btn-secondary" id="clearBtn">Clear All</button>
         </div>
         <div class="copy-note" id="copyNote"></div>
+
+        <div style="margin-top:28px;">
+          <h2 style="font-size:1.05rem;margin-bottom:4px;">Compare All Cases</h2>
+          <p style="color:var(--color-text-muted);font-size:0.9rem;margin-top:0;">Updates live as you type — copy any variant with its own button.</p>
+          <div class="variant-list" id="variantList"></div>
+        </div>
       </div>
 
       <div class="howto">
         <h2>How to Convert Text Between Cases</h2>
         <ol class="howto-steps">
           <li>Type or paste your text into the "Your Text" box.</li>
-          <li>Click one of the seven case buttons: UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, or aLtErNaTiNg.</li>
+          <li>Click one of the 13 case buttons: UPPERCASE, lowercase, Title Case, Sentence case, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, dot.case, Train-Case, aLtErNaTiNg, or InVeRsE CaSe.</li>
           <li>The converted version appears immediately in the read-only "Result" box below.</li>
           <li>Click Copy Result to copy the output, or Clear All to wipe both boxes and start fresh.</li>
+          <li>Or skip the buttons entirely — the "Compare All Cases" list underneath updates live as you type, showing every variant at once with its own Copy button.</li>
         </ol>
       </div>
 
@@ -182,6 +258,26 @@
         <details class="faq-item">
           <summary>Does clicking a case button change my original input?</summary>
           <p>No. Your original text stays untouched in the "Your Text" box; only the read-only "Result" box updates. You can click through several case buttons in a row to compare outputs without retyping anything.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What's the difference between PascalCase and camelCase?</summary>
+          <p>They use the same word-boundary logic, but PascalCase capitalizes the very first letter too, while camelCase leaves it lowercase. So "hello world" becomes "HelloWorld" in PascalCase but "helloWorld" in camelCase.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What's the difference between kebab-case, dot.case, and CONSTANT_CASE?</summary>
+          <p>All three follow the same rule as snake_case — lowercase everything, collapse spaces and punctuation into a single separator, then trim separators from the ends — but kebab-case uses a hyphen, dot.case uses a period, and CONSTANT_CASE reuses the underscore separator from snake_case and uppercases the whole result.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How is Train-Case different from kebab-case?</summary>
+          <p>Train-Case splits the text into words the same way kebab-case does, but it capitalizes the first letter of every word before joining them with hyphens, so "hello world" becomes "Hello-World" instead of kebab-case's "hello-world".</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does InVeRsE CaSe do differently from aLtErNaTiNg case?</summary>
+          <p>Inverse case flips the case each letter already has — an uppercase letter becomes lowercase and vice versa — so it depends entirely on your original text's casing. Alternating case ignores the original casing and imposes a fresh upper/lower/upper/lower pattern that only advances on letters.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does the "Compare All Cases" list update live, and can I copy each row separately?</summary>
+          <p>Yes. As soon as you type or paste into "Your Text", the list below updates instantly to show every case variant at once — no button click needed — and each row has its own Copy button so you can grab exactly the variant you want.</p>
         </details>
       </div>
 
@@ -299,15 +395,128 @@
       return result;
     }
 
+    function toPascalCase(str) {
+      var c = toCamelCase(str);
+      return c.charAt(0).toUpperCase() + c.slice(1);
+    }
+
+    function toKebabCase(str) {
+      return str
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-zA-Z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    }
+
+    function toConstantCase(str) {
+      return toSnakeCase(str).toUpperCase();
+    }
+
+    function toDotCase(str) {
+      return str
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-zA-Z0-9]+/g, ".")
+        .replace(/^\.+|\.+$/g, "");
+    }
+
+    function toTrainCase(str) {
+      return str
+        .trim()
+        .toLowerCase()
+        .split(/[^a-zA-Z0-9]+/)
+        .filter(Boolean)
+        .map(function (w) { return w.charAt(0).toUpperCase() + w.slice(1); })
+        .join("-");
+    }
+
+    function toInverseCase(str) {
+      var result = "";
+      for (var i = 0; i < str.length; i++) {
+        var ch = str[i];
+        var lower = ch.toLowerCase();
+        var upper = ch.toUpperCase();
+        if (ch === upper && ch !== lower) {
+          result += lower;
+        } else if (ch === lower && ch !== upper) {
+          result += upper;
+        } else {
+          result += ch;
+        }
+      }
+      return result;
+    }
+
     var transforms = {
       upper: function (s) { return s.toUpperCase(); },
       lower: function (s) { return s.toLowerCase(); },
       title: toTitleCase,
       sentence: toSentenceCase,
       camel: toCamelCase,
+      pascal: toPascalCase,
       snake: toSnakeCase,
-      alternating: toAlternatingCase
+      kebab: toKebabCase,
+      constant: toConstantCase,
+      dot: toDotCase,
+      train: toTrainCase,
+      alternating: toAlternatingCase,
+      inverse: toInverseCase
     };
+
+    var variantOrder = [
+      { key: "upper", label: "UPPERCASE" },
+      { key: "lower", label: "lowercase" },
+      { key: "title", label: "Title Case" },
+      { key: "sentence", label: "Sentence case" },
+      { key: "camel", label: "camelCase" },
+      { key: "pascal", label: "PascalCase" },
+      { key: "snake", label: "snake_case" },
+      { key: "kebab", label: "kebab-case" },
+      { key: "constant", label: "CONSTANT_CASE" },
+      { key: "dot", label: "dot.case" },
+      { key: "train", label: "Train-Case" },
+      { key: "alternating", label: "aLtErNaTiNg CaSe" },
+      { key: "inverse", label: "InVeRsE CaSe" }
+    ];
+
+    var variantList = document.getElementById("variantList");
+
+    function updateVariantList() {
+      var val = textInput.value;
+      variantList.innerHTML = "";
+      if (!val) {
+        var empty = document.createElement("p");
+        empty.className = "variant-empty";
+        empty.textContent = "Type something in \"Your Text\" above to see every case variant here.";
+        variantList.appendChild(empty);
+        return;
+      }
+      variantOrder.forEach(function (item) {
+        var row = document.createElement("div");
+        row.className = "variant-row";
+
+        var label = document.createElement("span");
+        label.className = "variant-label";
+        label.textContent = item.label;
+
+        var value = document.createElement("span");
+        value.className = "variant-value";
+        value.textContent = transforms[item.key](val);
+
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "btn btn-secondary";
+        btn.textContent = "Copy";
+        btn.addEventListener("click", function () {
+          Fixora.copyText(value.textContent);
+        });
+
+        row.appendChild(label);
+        row.appendChild(value);
+        row.appendChild(btn);
+        variantList.appendChild(row);
+      });
+    }
 
     document.querySelectorAll("[data-case]").forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -324,7 +533,11 @@
       textInput.value = "";
       textOutput.value = "";
       textInput.focus();
+      updateVariantList();
     });
+
+    textInput.addEventListener("input", updateVariantList);
+    updateVariantList();
   </script>
 </body>
 </html>

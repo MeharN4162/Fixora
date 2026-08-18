@@ -5,22 +5,22 @@
   <meta charset="UTF-8" />
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Free Unit Converter Online — Length, Weight, Temperature | Fixoona</title>
-  <meta name="description" content="Convert between length, weight, and temperature units instantly online for free. Metric to imperial and back, right in your browser." />
-  <meta name="keywords" content="unit converter, metric to imperial, length converter, weight converter, temperature converter" />
+  <title>Free Unit Converter Online — Length, Weight, Volume & More | Fixoona</title>
+  <meta name="description" content="Convert between length, weight, temperature, volume, area, speed, time, digital storage, pressure, and energy units instantly online for free, with the exact formula shown for every conversion. Metric to imperial and back, right in your browser." />
+  <meta name="keywords" content="unit converter, metric to imperial, length converter, weight converter, temperature converter, volume converter, area converter, speed converter, data storage converter, pressure converter, energy converter" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/unit-converter.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixoona" />
   <meta property="og:title" content="Free Unit Converter Online" />
-  <meta property="og:description" content="Convert between length, weight, and temperature units instantly online for free." />
+  <meta property="og:description" content="Convert length, weight, temperature, volume, area, speed, time, digital storage, pressure, and energy units instantly online for free." />
   <meta property="og:url" content="https://fixoona.com/tools/unit-converter.html" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Unit Converter Online" />
-  <meta name="twitter:description" content="Convert between length, weight, and temperature units instantly." />
+  <meta name="twitter:description" content="Convert length, weight, temperature, volume, area, speed, time, storage, pressure, and energy units instantly." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='28' y='22' width='13' height='56' rx='6.5' fill='white'/%3E%3Cpath d='M28 22 L67 22 Q73 22 70.5 27.5 L45 37 Q28 40 28 30 Z' fill='white'/%3E%3Crect x='28' y='46' width='27' height='13' rx='6.5' fill='white'/%3E%3Ccircle cx='76' cy='28' r='7' fill='%23a5f3fc'/%3E%3C/svg%3E" />
 
@@ -69,7 +69,7 @@
       {
         "@type": "Question",
         "name": "Can I convert between categories, like meters to pounds?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No — Length, Weight, and Temperature are separate unit systems that can't be meaningfully converted between each other. Switching categories with the pills resets the From and To dropdowns to that category's units." }
+        "acceptedAnswer": { "@type": "Answer", "text": "No — Length, Weight, Temperature, Volume, Area, Speed, Time, Digital Storage, Pressure, and Energy are separate unit systems that can't be meaningfully converted between each other. Switching categories with the pills resets the From and To dropdowns to that category's units." }
       },
       {
         "@type": "Question",
@@ -80,6 +80,26 @@
         "@type": "Question",
         "name": "Does the Swap Units button also swap the numeric value?",
         "acceptedAnswer": { "@type": "Answer", "text": "No, it swaps only the selected From and To units, not the number you typed — this lets you quickly see the reverse conversion rate for the same figure." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the conversion formula line under the result show?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It shows the exact multiplier or formula the tool just used, such as \"1 mi = 1.609344 km\" for a simple ratio or \"°F = °C × 9/5 + 32\" for temperature, so you can see and reuse the math yourself instead of treating the result as a black box." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Digital Storage use 1000 or 1024 for a kilobyte?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Both, as separate units. Kilobytes, Megabytes, Gigabytes, and Terabytes use the decimal (SI) definition where 1 GB = 1000 MB, matching how storage manufacturers and most operating systems report file and drive sizes. Kibibytes, Mebibytes, Gibibytes, and Tebibytes use the binary definition where 1 GiB = 1024 MiB, matching how RAM capacity is measured. Pick the unit that matches what you're converting." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are the Volume units US customary or UK imperial?",
+        "acceptedAnswer": { "@type": "Answer", "text": "US customary. Teaspoons, tablespoons, fluid ounces, cups, pints, quarts, and gallons all use US definitions (e.g., 1 US gallon = 3.785411784 liters). UK imperial gallons and pints are about 20% larger, so don't mix the two systems." }
+      },
+      {
+        "@type": "Question",
+        "name": "What day and year lengths does the Time category use for Months and Years?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A Month is the 30.44-day calendar average (2,629,746 seconds) and a Year is the 365.25-day Julian year (31,557,600 seconds) commonly used for scientific unit conversions. Both are averages, so converting a specific calendar month or leap year may be off by a day." }
       }
     ]
   }
@@ -119,7 +139,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">📏</div>
       <h1>Unit Converter</h1>
-      <p>Convert length, weight, and temperature between metric and imperial units — updated live as you type.</p>
+      <p>Convert length, weight, temperature, volume, area, speed, time, digital storage, pressure, and energy units — updated live as you type, with the formula shown for every result.</p>
     </section>
 
     <section class="container">
@@ -128,6 +148,13 @@
           <button class="pill active" data-category="length" type="button">Length</button>
           <button class="pill" data-category="weight" type="button">Weight</button>
           <button class="pill" data-category="temperature" type="button">Temperature</button>
+          <button class="pill" data-category="volume" type="button">Volume</button>
+          <button class="pill" data-category="area" type="button">Area</button>
+          <button class="pill" data-category="speed" type="button">Speed</button>
+          <button class="pill" data-category="time" type="button">Time</button>
+          <button class="pill" data-category="digital" type="button">Digital Storage</button>
+          <button class="pill" data-category="pressure" type="button">Pressure</button>
+          <button class="pill" data-category="energy" type="button">Energy</button>
         </div>
 
         <div class="row">
@@ -148,14 +175,15 @@
         </div>
 
         <div class="output-box" id="statusBox"></div>
+        <p id="formulaBox" style="font-size:0.85rem;color:var(--color-text-muted);margin-top:10px;"></p>
       </div>
 
       <div class="howto">
         <h2>How to Convert Units</h2>
         <ol class="howto-steps">
-          <li>Choose a category — Length, Weight, or Temperature — using the pills at the top of the tool.</li>
+          <li>Choose a category — Length, Weight, Temperature, Volume, Area, Speed, Time, Digital Storage, Pressure, or Energy — using the pills at the top of the tool.</li>
           <li>Enter a value in the "From" field and pick the starting unit from the dropdown.</li>
-          <li>Pick the target unit in the "To" dropdown — the converted value updates instantly as you type.</li>
+          <li>Pick the target unit in the "To" dropdown — the converted value updates instantly as you type, along with the exact formula used.</li>
           <li>Click "Swap Units" to flip the From/To units and see the reverse conversion.</li>
         </ol>
       </div>
@@ -172,7 +200,7 @@
         </details>
         <details class="faq-item">
           <summary>Can I convert between categories, like meters to pounds?</summary>
-          <p>No — Length, Weight, and Temperature are separate unit systems that can't be meaningfully converted between each other. Switching categories with the pills resets the From and To dropdowns to that category's units.</p>
+          <p>No — Length, Weight, Temperature, Volume, Area, Speed, Time, Digital Storage, Pressure, and Energy are separate unit systems that can't be meaningfully converted between each other. Switching categories with the pills resets the From and To dropdowns to that category's units.</p>
         </details>
         <details class="faq-item">
           <summary>What happens if I leave the input blank or type letters?</summary>
@@ -181,6 +209,22 @@
         <details class="faq-item">
           <summary>Does the Swap Units button also swap the numeric value?</summary>
           <p>No, it swaps only the selected From and To units, not the number you typed — this lets you quickly see the reverse conversion rate for the same figure.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the conversion formula line under the result show?</summary>
+          <p>It shows the exact multiplier or formula the tool just used, such as "1 mi = 1.609344 km" for a simple ratio or "°F = °C × 9/5 + 32" for temperature, so you can see and reuse the math yourself instead of treating the result as a black box.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does Digital Storage use 1000 or 1024 for a kilobyte?</summary>
+          <p>Both, as separate units. Kilobytes, Megabytes, Gigabytes, and Terabytes use the decimal (SI) definition where 1 GB = 1000 MB, matching how storage manufacturers and most operating systems report file and drive sizes. Kibibytes, Mebibytes, Gibibytes, and Tebibytes use the binary definition where 1 GiB = 1024 MiB, matching how RAM capacity is measured. Pick the unit that matches what you're converting.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Are the Volume units US customary or UK imperial?</summary>
+          <p>US customary. Teaspoons, tablespoons, fluid ounces, cups, pints, quarts, and gallons all use US definitions (e.g., 1 US gallon = 3.785411784 liters). UK imperial gallons and pints are about 20% larger, so don't mix the two systems.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What day and year lengths does the Time category use for Months and Years?</summary>
+          <p>A Month is the 30.44-day calendar average (2,629,746 seconds) and a Year is the 365.25-day Julian year (31,557,600 seconds) commonly used for scientific unit conversions. Both are averages, so converting a specific calendar month or leap year may be off by a day.</p>
         </details>
       </div>
 
@@ -291,6 +335,108 @@
           fahrenheit: { label: "Fahrenheit (°F)" },
           kelvin: { label: "Kelvin (K)" }
         }
+      },
+      volume: {
+        label: "Volume",
+        base: "liter",
+        note: "US customary units",
+        units: {
+          milliliter: { label: "Milliliters (mL)", toBase: 0.001 },
+          liter: { label: "Liters (L)", toBase: 1 },
+          cubicmeter: { label: "Cubic Meters (m³)", toBase: 1000 },
+          ustsp: { label: "Teaspoons (tsp)", toBase: 0.00492892159375 },
+          ustbsp: { label: "Tablespoons (tbsp)", toBase: 0.01478676478125 },
+          usfloz: { label: "Fluid Ounces (fl oz)", toBase: 0.0295735295625 },
+          uscup: { label: "Cups (cup)", toBase: 0.2365882365 },
+          uspint: { label: "Pints (pt)", toBase: 0.473176473 },
+          usquart: { label: "Quarts (qt)", toBase: 0.946352946 },
+          usgallon: { label: "Gallons (gal)", toBase: 3.785411784 },
+          cubicinch: { label: "Cubic Inches (in³)", toBase: 0.016387064 },
+          cubicfoot: { label: "Cubic Feet (ft³)", toBase: 28.316846592 }
+        }
+      },
+      area: {
+        label: "Area",
+        base: "square meter",
+        units: {
+          sqmillimeter: { label: "Square Millimeters (mm²)", toBase: 0.000001 },
+          sqcentimeter: { label: "Square Centimeters (cm²)", toBase: 0.0001 },
+          sqmeter: { label: "Square Meters (m²)", toBase: 1 },
+          hectare: { label: "Hectares (ha)", toBase: 10000 },
+          sqkilometer: { label: "Square Kilometers (km²)", toBase: 1000000 },
+          sqinch: { label: "Square Inches (in²)", toBase: 0.00064516 },
+          sqfoot: { label: "Square Feet (ft²)", toBase: 0.09290304 },
+          sqyard: { label: "Square Yards (yd²)", toBase: 0.83612736 },
+          acre: { label: "Acres (ac)", toBase: 4046.8564224 },
+          sqmile: { label: "Square Miles (mi²)", toBase: 2589988.110336 }
+        }
+      },
+      speed: {
+        label: "Speed",
+        base: "meter/second",
+        units: {
+          mps: { label: "Meters/Second (m/s)", toBase: 1 },
+          kph: { label: "Kilometers/Hour (km/h)", toBase: 1000 / 3600 },
+          mph: { label: "Miles/Hour (mph)", toBase: 0.44704 },
+          fps: { label: "Feet/Second (ft/s)", toBase: 0.3048 },
+          knot: { label: "Knots (kn)", toBase: 1852 / 3600 }
+        }
+      },
+      time: {
+        label: "Time",
+        base: "second",
+        units: {
+          millisecond: { label: "Milliseconds (ms)", toBase: 0.001 },
+          second: { label: "Seconds (s)", toBase: 1 },
+          minute: { label: "Minutes (min)", toBase: 60 },
+          hour: { label: "Hours (hr)", toBase: 3600 },
+          day: { label: "Days (d)", toBase: 86400 },
+          week: { label: "Weeks (wk)", toBase: 604800 },
+          month: { label: "Months (30.44-day avg)", toBase: 2629746 },
+          year: { label: "Years (365.25-day)", toBase: 31557600 }
+        }
+      },
+      digital: {
+        label: "Digital Storage",
+        base: "byte",
+        note: "decimal (1000-based) and binary (1024-based) units are both provided",
+        units: {
+          bit: { label: "Bits (b)", toBase: 0.125 },
+          byte: { label: "Bytes (B)", toBase: 1 },
+          kilobyte: { label: "Kilobytes (KB)", toBase: 1000 },
+          megabyte: { label: "Megabytes (MB)", toBase: 1000000 },
+          gigabyte: { label: "Gigabytes (GB)", toBase: 1000000000 },
+          terabyte: { label: "Terabytes (TB)", toBase: 1000000000000 },
+          kibibyte: { label: "Kibibytes (KiB)", toBase: 1024 },
+          mebibyte: { label: "Mebibytes (MiB)", toBase: 1048576 },
+          gibibyte: { label: "Gibibytes (GiB)", toBase: 1073741824 },
+          tebibyte: { label: "Tebibytes (TiB)", toBase: 1099511627776 }
+        }
+      },
+      pressure: {
+        label: "Pressure",
+        base: "pascal",
+        units: {
+          pascal: { label: "Pascals (Pa)", toBase: 1 },
+          kilopascal: { label: "Kilopascals (kPa)", toBase: 1000 },
+          bar: { label: "Bar", toBase: 100000 },
+          psi: { label: "PSI (lb/in²)", toBase: 6894.757293168361 },
+          atmosphere: { label: "Atmospheres (atm)", toBase: 101325 },
+          torr: { label: "Torr (mmHg)", toBase: 101325 / 760 }
+        }
+      },
+      energy: {
+        label: "Energy",
+        base: "joule",
+        units: {
+          joule: { label: "Joules (J)", toBase: 1 },
+          kilojoule: { label: "Kilojoules (kJ)", toBase: 1000 },
+          calorie: { label: "Calories (cal)", toBase: 4.184 },
+          kilocalorie: { label: "Kilocalories / food Calories (kcal)", toBase: 4184 },
+          watthour: { label: "Watt-hours (Wh)", toBase: 3600 },
+          kilowatthour: { label: "Kilowatt-hours (kWh)", toBase: 3600000 },
+          btu: { label: "BTU (International Table)", toBase: 1055.05585262 }
+        }
       }
     };
 
@@ -299,7 +445,21 @@
     var fromUnit = document.getElementById("fromUnit");
     var toUnit = document.getElementById("toUnit");
     var statusBox = document.getElementById("statusBox");
+    var formulaBox = document.getElementById("formulaBox");
     var currentCategory = "length";
+
+    function formatNumber(n) {
+      if (!isFinite(n)) return String(n);
+      if (n === 0) return "0";
+      var rounded = parseFloat(n.toPrecision(12));
+      return rounded.toString();
+    }
+
+    // Extracts the short symbol from a label like "Miles (mi)" -> "mi"
+    function symbolOf(label) {
+      var match = label.match(/\(([^)]+)\)/);
+      return match ? match[1] : label;
+    }
 
     function populateUnits() {
       var cat = UNITS[currentCategory];
@@ -333,27 +493,55 @@
       if (unit === "kelvin") return value + 273.15;
     }
 
+    // Temperature conversion formulas, used both for computing and for display text.
+    var TEMP_FORMULAS = {
+      "celsius-fahrenheit": "°F = °C × 9/5 + 32",
+      "celsius-kelvin": "K = °C + 273.15",
+      "fahrenheit-celsius": "°C = (°F − 32) × 5/9",
+      "fahrenheit-kelvin": "K = (°F − 32) × 5/9 + 273.15",
+      "kelvin-celsius": "°C = K − 273.15",
+      "kelvin-fahrenheit": "°F = (K − 273.15) × 9/5 + 32"
+    };
+
     function convert() {
       var input = parseFloat(fromValue.value);
       if (isNaN(input)) {
         toValue.value = "";
         statusBox.textContent = "Enter a number to convert.";
+        formulaBox.textContent = "";
         return;
       }
 
       var cat = UNITS[currentCategory];
       var result;
+      var formulaText;
 
       if (currentCategory === "temperature") {
         var celsius = toCelsius(input, fromUnit.value);
         result = fromCelsius(celsius, toUnit.value);
+        if (fromUnit.value === toUnit.value) {
+          formulaText = "No conversion needed — same unit.";
+        } else {
+          formulaText = "Formula: " + TEMP_FORMULAS[fromUnit.value + "-" + toUnit.value];
+        }
       } else {
-        var baseValue = input * cat.units[fromUnit.value].toBase;
-        result = baseValue / cat.units[toUnit.value].toBase;
+        var fromFactor = cat.units[fromUnit.value].toBase;
+        var toFactor = cat.units[toUnit.value].toBase;
+        var baseValue = input * fromFactor;
+        result = baseValue / toFactor;
+        var multiplier = fromFactor / toFactor;
+        var fromSym = symbolOf(cat.units[fromUnit.value].label);
+        var toSym = symbolOf(cat.units[toUnit.value].label);
+        if (fromUnit.value === toUnit.value) {
+          formulaText = "No conversion needed — same unit.";
+        } else {
+          formulaText = "Formula: 1 " + fromSym + " = " + formatNumber(multiplier) + " " + toSym + " (multiply by " + formatNumber(multiplier) + ")";
+        }
       }
 
-      toValue.value = (Math.round(result * 100000) / 100000).toString();
+      toValue.value = formatNumber(result);
       statusBox.textContent = input + " " + cat.units[fromUnit.value].label + " = " + toValue.value + " " + cat.units[toUnit.value].label;
+      formulaBox.textContent = formulaText;
     }
 
     document.querySelectorAll("[data-category]").forEach(function (pill) {
