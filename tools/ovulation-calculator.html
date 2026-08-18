@@ -5,24 +5,24 @@
   <meta charset="UTF-8" />
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Free Ovulation Calculator Online | Fixora</title>
-  <meta name="description" content="Estimate your ovulation day, fertile window, and next period start date for free based on your last period and cycle length. Instant results." />
+  <title>Free Ovulation Calculator Online | Fixoona</title>
+  <meta name="description" content="Estimate your ovulation day and fertile window for free, with adjustable cycle length and luteal phase length, a fertile window calendar, and predictions for your next 3 cycles." />
   <meta name="keywords" content="ovulation calculator, ovulation calculator online free, fertile window calculator" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/ovulation-calculator.html" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:site_name" content="Fixoona" />
   <meta property="og:title" content="Free Ovulation Calculator Online" />
-  <meta property="og:description" content="Estimate your ovulation day, fertile window, and next period date, for free." />
+  <meta property="og:description" content="Estimate your ovulation day, fertile window calendar, and next 3 cycles, for free." />
   <meta property="og:url" content="https://fixoona.com/tools/ovulation-calculator.html" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Ovulation Calculator Online" />
-  <meta name="twitter:description" content="Estimate your ovulation day, fertile window, and next period date, for free." />
+  <meta name="twitter:description" content="Estimate your ovulation day, fertile window calendar, and next 3 cycles, for free." />
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='28' y='22' width='13' height='56' rx='6.5' fill='white'/%3E%3Cpath d='M28 22 L67 22 Q73 22 70.5 27.5 L45 37 Q28 40 28 30 Z' fill='white'/%3E%3Crect x='28' y='46' width='27' height='13' rx='6.5' fill='white'/%3E%3Ccircle cx='76' cy='28' r='7' fill='%23a5f3fc'/%3E%3C/svg%3E" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -59,12 +59,17 @@
       {
         "@type": "Question",
         "name": "How is ovulation day calculated?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Ovulation is estimated to occur 14 days before your next period starts. The calculator adds your cycle length to the first day of your last period to estimate your next period, then subtracts 14 days to estimate ovulation day." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Ovulation is estimated to occur a set number of days before your next period — that number is your luteal phase length (14 days by default, but you can adjust it). The calculator adds your cycle length to the first day of your last period to estimate your next period, then subtracts your luteal phase length to estimate ovulation day." }
       },
       {
         "@type": "Question",
         "name": "What is the fertile window?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The fertile window is the estimated 6-day span with the highest chance of pregnancy — the 5 days before ovulation through ovulation day itself — since sperm can survive in the body for several days and the egg is viable for about 24 hours after release." }
+        "acceptedAnswer": { "@type": "Answer", "text": "The fertile window is the estimated 6-day span with the highest chance of pregnancy — the 5 days before ovulation through ovulation day itself — since sperm can survive in the body for several days and the egg is viable for about 24 hours after release. The calendar below shows this full window for your current cycle, not just the ovulation date." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the luteal phase, and why does its length matter?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The luteal phase is the time between ovulation and the start of your next period. Unlike the first half of the cycle, its length is fairly consistent for a given person — typically 10 to 16 days, most commonly around 14 — so entering your actual luteal phase length, if you know it from tracking, gives a more accurate ovulation estimate than always assuming 14 days." }
       },
       {
         "@type": "Question",
@@ -73,8 +78,13 @@
       },
       {
         "@type": "Question",
+        "name": "How reliable are the predictions for future cycles?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The multi-cycle predictions apply your same average cycle length and luteal phase length to each future cycle, so they become less reliable the further ahead they go — especially if your cycles are irregular. Treat predictions beyond your current cycle as a rough guide, not a firm schedule." }
+      },
+      {
+        "@type": "Question",
         "name": "Does this work for cycles outside the typical 21-35 day range?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The calculator will still compute a result, but the underlying assumption (ovulation 14 days before the next period) is best supported by research for cycles in the roughly 21-35 day range — very irregular cycles are harder to predict with this method." }
+        "acceptedAnswer": { "@type": "Answer", "text": "The calculator will still compute a result, but the underlying assumption — ovulation occurring a fixed number of days (your luteal phase length) before the next period — is best supported by research for cycles in the roughly 21-35 day range and luteal phases in the roughly 10-16 day range. Very irregular cycles are harder to predict with this method." }
       },
       {
         "@type": "Question",
@@ -84,6 +94,158 @@
     ]
   }
   </script>
+  <style>
+    .ov-calendar-wrap {
+      margin-top: 20px;
+    }
+    .ov-cal-month {
+      margin-bottom: 22px;
+    }
+    .ov-cal-month:last-child {
+      margin-bottom: 0;
+    }
+    .ov-cal-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .ov-cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+    }
+    .ov-cal-weekday {
+      text-align: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--color-text-muted);
+      padding-bottom: 4px;
+    }
+    .ov-cal-day {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      font-size: 0.82rem;
+      background: var(--color-surface);
+      color: var(--color-text);
+    }
+    .ov-cal-day.ov-cal-empty {
+      background: transparent;
+      border-color: transparent;
+    }
+    .ov-cal-day.ov-cal-fertile {
+      background: var(--color-bg-alt);
+      border-color: var(--color-primary-light);
+      font-weight: 600;
+    }
+    .ov-cal-day.ov-cal-ovulation {
+      background: var(--gradient-primary);
+      border-color: transparent;
+      color: #fff;
+      font-weight: 700;
+    }
+    .ov-cal-day.ov-cal-period::after {
+      content: "";
+      position: absolute;
+      bottom: 3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--color-danger);
+    }
+    .ov-cal-day.ov-cal-nextperiod {
+      border-color: var(--color-danger);
+      border-style: dashed;
+    }
+    .ov-cal-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 14px;
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+    }
+    .ov-cal-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .ov-swatch {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .ov-swatch--fertile {
+      background: var(--color-bg-alt);
+      border-color: var(--color-primary-light);
+    }
+    .ov-swatch--ovulation {
+      background: var(--gradient-primary);
+      border-color: transparent;
+    }
+    .ov-swatch--period::after {
+      content: "";
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--color-danger);
+    }
+    .ov-swatch--nextperiod {
+      border-color: var(--color-danger);
+      border-style: dashed;
+    }
+    .ov-cycle-table-wrap {
+      margin-top: 14px;
+      overflow-x: auto;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+    }
+    .ov-cycle-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      min-width: 480px;
+    }
+    .ov-cycle-table th,
+    .ov-cycle-table td {
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--color-border);
+      white-space: nowrap;
+    }
+    .ov-cycle-table thead th {
+      background: var(--color-bg-soft);
+      color: var(--color-text-muted);
+      font-weight: 600;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .ov-cycle-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .ov-cycle-table tbody tr:hover {
+      background: var(--color-bg-soft);
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -91,8 +253,8 @@
   <header class="site-header">
     <nav class="nav container" aria-label="Primary">
       <a href="../index.html" class="nav-brand">
-        <span class="brand-mark" aria-hidden="true"><svg class="brand-svg" viewBox="0 0 100 100"><rect x="30" y="24" width="13" height="52" rx="6.5" fill="#fff"/><rect x="30" y="24" width="38" height="13" rx="6.5" fill="#fff"/><rect x="30" y="47" width="29" height="13" rx="6.5" fill="#fff"/></svg></span>
-        Fixora
+        <span class="brand-mark" aria-hidden="true"><svg class="brand-svg" viewBox="0 0 100 100"><rect x="28" y="22" width="13" height="56" rx="6.5" fill="#fff"/><path d="M28 22 L67 22 Q73 22 70.5 27.5 L45 37 Q28 40 28 30 Z" fill="#fff"/><rect x="28" y="46" width="27" height="13" rx="6.5" fill="#fff"/><circle cx="76" cy="28" r="7" fill="#a5f3fc"/></svg></span>
+        Fixoona
       </a>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -119,7 +281,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🌸</div>
       <h1>Ovulation Calculator</h1>
-      <p>Estimate your ovulation day, fertile window, and next period start date from your last period and cycle length.</p>
+      <p>Estimate your ovulation day and full fertile window — with adjustable cycle and luteal phase length, a fertile window calendar, and predictions for your next 3 cycles.</p>
     </section>
 
     <section class="container">
@@ -131,7 +293,11 @@
           </div>
           <div class="field">
             <label for="cycleLengthOv">Average Cycle Length (days)</label>
-            <input type="number" id="cycleLengthOv" min="21" max="35" step="1" value="28" />
+            <input type="number" id="cycleLengthOv" min="21" max="45" step="1" value="28" />
+          </div>
+          <div class="field">
+            <label for="lutealLength">Average Luteal Phase Length (days)</label>
+            <input type="number" id="lutealLength" min="10" max="16" step="1" value="14" />
           </div>
         </div>
 
@@ -143,7 +309,32 @@
           <div class="stat"><strong id="statNextPeriod">–</strong><span>Next Period (Estimated)</span></div>
         </div>
 
-        <p style="font-size:0.85rem;color:var(--color-text-muted);margin-top:16px;">This is an estimate based on average cycle timing. It is not a substitute for advice from a doctor or fertility specialist, and should not be relied on as a form of contraception.</p>
+        <div id="calendarSection" style="display:none;">
+          <h3 style="margin-top:26px;margin-bottom:4px;">Fertile Window Calendar</h3>
+          <p style="font-size:0.85rem;color:var(--color-text-muted);margin:0;">Your current cycle's estimated fertile window and ovulation day, shown on the calendar.</p>
+          <div class="ov-calendar-wrap" id="calendarWrap"></div>
+          <div class="ov-cal-legend">
+            <span class="ov-cal-legend-item"><span class="ov-swatch ov-swatch--fertile" aria-hidden="true"></span>Fertile window</span>
+            <span class="ov-cal-legend-item"><span class="ov-swatch ov-swatch--ovulation" aria-hidden="true"></span>Estimated ovulation day</span>
+            <span class="ov-cal-legend-item"><span class="ov-swatch ov-swatch--period" aria-hidden="true"></span>Period start (last period)</span>
+            <span class="ov-cal-legend-item"><span class="ov-swatch ov-swatch--nextperiod" aria-hidden="true"></span>Next period (estimated)</span>
+          </div>
+        </div>
+
+        <div id="multiCycleSection" style="display:none;">
+          <h3 style="margin-top:26px;margin-bottom:4px;">Next 3 Cycles</h3>
+          <p style="font-size:0.85rem;color:var(--color-text-muted);margin:0;">Predicted fertile window, ovulation day, and next period for your current cycle and the two cycles after it.</p>
+          <div class="ov-cycle-table-wrap">
+            <table class="ov-cycle-table">
+              <thead>
+                <tr><th>Cycle</th><th>Fertile Window</th><th>Ovulation Day</th><th>Next Period</th></tr>
+              </thead>
+              <tbody id="cycleTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <p style="font-size:0.85rem;color:var(--color-text-muted);margin-top:16px;">This is an estimate based on average cycle timing, not a guarantee. Predictions for future cycles assume your cycle length and luteal phase stay the same each time, so they become less certain the further ahead they go. This is not a substitute for advice from a doctor or fertility specialist, and should not be relied on as a form of contraception.</p>
       </div>
 
       <div class="howto">
@@ -151,8 +342,9 @@
         <ol class="howto-steps">
           <li>Enter the first day of your last period.</li>
           <li>Enter your average cycle length in days (typically 21-35 days; 28 is the default).</li>
-          <li>Your estimated ovulation day, fertile window, and next period start date appear automatically.</li>
-          <li>Adjust the cycle length any time to see how it shifts your estimated dates.</li>
+          <li>Enter your average luteal phase length in days if you know it (typically 10-16 days; 14 is the default and most common).</li>
+          <li>Your estimated ovulation day, fertile window, and next period start date appear automatically, along with a fertile window calendar and predictions for your next 3 cycles.</li>
+          <li>Adjust the cycle length or luteal phase length any time to see how it shifts your estimated dates.</li>
         </ol>
       </div>
 
@@ -160,19 +352,27 @@
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
           <summary>How is ovulation day calculated?</summary>
-          <p>Ovulation is estimated to occur 14 days before your next period starts. The calculator adds your cycle length to the first day of your last period to estimate your next period, then subtracts 14 days to estimate ovulation day.</p>
+          <p>Ovulation is estimated to occur a set number of days before your next period — that number is your luteal phase length (14 days by default, but you can adjust it). The calculator adds your cycle length to the first day of your last period to estimate your next period, then subtracts your luteal phase length to estimate ovulation day.</p>
         </details>
         <details class="faq-item">
           <summary>What is the fertile window?</summary>
-          <p>The fertile window is the estimated 6-day span with the highest chance of pregnancy — the 5 days before ovulation through ovulation day itself — since sperm can survive in the body for several days and the egg is viable for about 24 hours after release.</p>
+          <p>The fertile window is the estimated 6-day span with the highest chance of pregnancy — the 5 days before ovulation through ovulation day itself — since sperm can survive in the body for several days and the egg is viable for about 24 hours after release. The calendar below shows this full window for your current cycle, not just the ovulation date.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is the luteal phase, and why does its length matter?</summary>
+          <p>The luteal phase is the time between ovulation and the start of your next period. Unlike the first half of the cycle, its length is fairly consistent for a given person — typically 10 to 16 days, most commonly around 14 — so entering your actual luteal phase length, if you know it from tracking, gives a more accurate ovulation estimate than always assuming 14 days.</p>
         </details>
         <details class="faq-item">
           <summary>What if my cycle length varies from month to month?</summary>
           <p>Enter your average cycle length for the best estimate. If your cycles vary a lot, ovulation timing will vary too, and this calculator's estimate will be less precise — tracking basal body temperature or ovulation test strips over a few cycles can help narrow it down.</p>
         </details>
         <details class="faq-item">
+          <summary>How reliable are the predictions for future cycles?</summary>
+          <p>The multi-cycle predictions apply your same average cycle length and luteal phase length to each future cycle, so they become less reliable the further ahead they go — especially if your cycles are irregular. Treat predictions beyond your current cycle as a rough guide, not a firm schedule.</p>
+        </details>
+        <details class="faq-item">
           <summary>Does this work for cycles outside the typical 21-35 day range?</summary>
-          <p>The calculator will still compute a result, but the underlying assumption (ovulation 14 days before the next period) is best supported by research for cycles in the roughly 21-35 day range — very irregular cycles are harder to predict with this method.</p>
+          <p>The calculator will still compute a result, but the underlying assumption — ovulation occurring a fixed number of days (your luteal phase length) before the next period — is best supported by research for cycles in the roughly 21-35 day range and luteal phases in the roughly 10-16 day range. Very irregular cycles are harder to predict with this method.</p>
         </details>
         <details class="faq-item">
           <summary>Is this a reliable form of birth control or a substitute for medical advice?</summary>
@@ -210,26 +410,28 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="../index.html" class="nav-brand">
-            <span class="brand-mark" aria-hidden="true"><svg class="brand-svg" viewBox="0 0 100 100"><rect x="30" y="24" width="13" height="52" rx="6.5" fill="#fff"/><rect x="30" y="24" width="38" height="13" rx="6.5" fill="#fff"/><rect x="30" y="47" width="29" height="13" rx="6.5" fill="#fff"/></svg></span>
-            Fixora
+            <span class="brand-mark" aria-hidden="true"><svg class="brand-svg" viewBox="0 0 100 100"><rect x="28" y="22" width="13" height="56" rx="6.5" fill="#fff"/><path d="M28 22 L67 22 Q73 22 70.5 27.5 L45 37 Q28 40 28 30 Z" fill="#fff"/><rect x="28" y="46" width="27" height="13" rx="6.5" fill="#fff"/><circle cx="76" cy="28" r="7" fill="#a5f3fc"/></svg></span>
+            Fixoona
           </a>
           <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
         </div>
         <div class="footer-col">
-          <h4>Tools</h4>
+          <h4>Popular Tools</h4>
           <ul>
             <li><a href="pdf-compressor.html">PDF Compressor</a></li>
             <li><a href="image-resizer.html">Image Resizer</a></li>
             <li><a href="word-counter.html">Word Counter</a></li>
             <li><a href="password-generator.html">Password Generator</a></li>
+            <li><a href="../all-tools.html">See All 100+ Tools →</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Guides</h4>
+          <h4>Popular Guides</h4>
           <ul>
             <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
             <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
             <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+            <li><a href="../index.html#guides">See All Guides →</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -243,7 +445,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
       </div>
     </div>
   </footer>
@@ -252,19 +454,145 @@
   <script>
     var lastPeriodDate = document.getElementById("lastPeriodDate");
     var cycleLengthOv = document.getElementById("cycleLengthOv");
+    var lutealLength = document.getElementById("lutealLength");
     var statusBox = document.getElementById("statusBox");
     var resultRow = document.getElementById("resultRow");
+    var calendarSection = document.getElementById("calendarSection");
+    var calendarWrap = document.getElementById("calendarWrap");
+    var multiCycleSection = document.getElementById("multiCycleSection");
+    var cycleTableBody = document.getElementById("cycleTableBody");
+
+    var WEEKDAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    var NUM_PREDICTED_CYCLES = 3;
 
     function formatDate(d) {
       return d.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
     }
 
+    function formatDateShort(d) {
+      return d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+    }
+
+    function addDays(date, days) {
+      var d = new Date(date);
+      d.setDate(d.getDate() + days);
+      return d;
+    }
+
+    // Integer key like 20260115 so day comparisons are independent of time-of-day / DST.
+    function dayKey(d) {
+      return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+    }
+
+    function monthKey(year, month) {
+      return year * 100 + month;
+    }
+
+    // Builds one month's calendar grid as an HTML string, marking any dates found in `markers`.
+    function buildMonthCalendar(year, month, markers) {
+      var monthStart = new Date(year, month, 1);
+      var daysInMonth = new Date(year, month + 1, 0).getDate();
+      var firstWeekday = monthStart.getDay();
+
+      var html = '<div class="ov-cal-month">';
+      html += '<div class="ov-cal-title">' + monthStart.toLocaleDateString(undefined, { month: "long", year: "numeric" }) + '</div>';
+      html += '<div class="ov-cal-grid">';
+
+      for (var w = 0; w < 7; w++) {
+        html += '<div class="ov-cal-weekday">' + WEEKDAY_LABELS[w] + '</div>';
+      }
+
+      for (var i = 0; i < firstWeekday; i++) {
+        html += '<div class="ov-cal-day ov-cal-empty"></div>';
+      }
+
+      for (var day = 1; day <= daysInMonth; day++) {
+        var cellDate = new Date(year, month, day);
+        var key = dayKey(cellDate);
+        var classes = ["ov-cal-day"];
+
+        if (key >= markers.fertileStartKey && key <= markers.fertileEndKey) {
+          classes.push("ov-cal-fertile");
+        }
+        if (key === markers.ovulationKey) {
+          classes.push("ov-cal-ovulation");
+        }
+        if (key === markers.periodKey) {
+          classes.push("ov-cal-period");
+        }
+        if (key === markers.nextPeriodKey) {
+          classes.push("ov-cal-nextperiod");
+        }
+
+        html += '<div class="' + classes.join(" ") + '">' + day + '</div>';
+      }
+
+      html += '</div></div>';
+      return html;
+    }
+
+    function renderCalendar(lmp, fertileStart, ovulationDate, nextPeriod) {
+      var markers = {
+        periodKey: dayKey(lmp),
+        fertileStartKey: dayKey(fertileStart),
+        fertileEndKey: dayKey(ovulationDate),
+        ovulationKey: dayKey(ovulationDate),
+        nextPeriodKey: dayKey(nextPeriod)
+      };
+
+      // Render every calendar month from the fertile window's start through the next period,
+      // capped at 4 months as a safety guard (a realistic cycle/luteal combination never needs that many).
+      var seen = {};
+      var months = [];
+      var cursor = new Date(fertileStart.getFullYear(), fertileStart.getMonth(), 1);
+      var endMarker = monthKey(nextPeriod.getFullYear(), nextPeriod.getMonth());
+      var guard = 0;
+
+      while (guard < 4) {
+        var mk = monthKey(cursor.getFullYear(), cursor.getMonth());
+        if (!seen[mk]) {
+          seen[mk] = true;
+          months.push({ year: cursor.getFullYear(), month: cursor.getMonth() });
+        }
+        if (mk >= endMarker) break;
+        cursor.setMonth(cursor.getMonth() + 1);
+        guard++;
+      }
+
+      var html = "";
+      for (var m = 0; m < months.length; m++) {
+        html += buildMonthCalendar(months[m].year, months[m].month, markers);
+      }
+      calendarWrap.innerHTML = html;
+    }
+
+    function renderCycleTable(lmp, cycle, luteal) {
+      var rows = "";
+      for (var i = 0; i < NUM_PREDICTED_CYCLES; i++) {
+        var cycleOvulation = addDays(lmp, i * cycle + (cycle - luteal));
+        var cycleFertileStart = addDays(cycleOvulation, -5);
+        var cycleNextPeriod = addDays(lmp, (i + 1) * cycle);
+        var label = i === 0 ? "Cycle 1 (current)" : "Cycle " + (i + 1);
+
+        rows += "<tr>";
+        rows += "<td>" + label + "</td>";
+        rows += "<td>" + formatDateShort(cycleFertileStart) + " – " + formatDateShort(cycleOvulation) + "</td>";
+        rows += "<td>" + formatDateShort(cycleOvulation) + "</td>";
+        rows += "<td>" + formatDateShort(cycleNextPeriod) + "</td>";
+        rows += "</tr>";
+      }
+      cycleTableBody.innerHTML = rows;
+    }
+
     function calculate() {
       var lmpVal = lastPeriodDate.value;
       var cycle = parseFloat(cycleLengthOv.value);
+      var luteal = parseFloat(lutealLength.value);
 
       if (!lmpVal) {
         resultRow.style.display = "none";
+        calendarSection.style.display = "none";
+        multiCycleSection.style.display = "none";
         statusBox.textContent = "Enter the first day of your last period to estimate ovulation.";
         return;
       }
@@ -273,41 +601,59 @@
         cycle = 28;
       }
 
+      if (isNaN(luteal) || luteal <= 0) {
+        luteal = 14;
+      }
+
       var lmp = new Date(lmpVal + "T00:00:00");
       var today = new Date();
       today.setHours(0, 0, 0, 0);
 
       if (isNaN(lmp.getTime())) {
         resultRow.style.display = "none";
+        calendarSection.style.display = "none";
+        multiCycleSection.style.display = "none";
         statusBox.textContent = "Please enter a valid date.";
         return;
       }
 
       if (lmp.getTime() > today.getTime()) {
         resultRow.style.display = "none";
+        calendarSection.style.display = "none";
+        multiCycleSection.style.display = "none";
         statusBox.textContent = "The date entered is in the future — please enter the first day of your last period, which should be in the past.";
         return;
       }
 
-      var ovulationDate = new Date(lmp);
-      ovulationDate.setDate(ovulationDate.getDate() + (cycle - 14));
+      if (luteal >= cycle) {
+        resultRow.style.display = "none";
+        calendarSection.style.display = "none";
+        multiCycleSection.style.display = "none";
+        statusBox.textContent = "Luteal phase length must be shorter than cycle length — please adjust one of the values.";
+        return;
+      }
 
-      var fertileStart = new Date(ovulationDate);
-      fertileStart.setDate(fertileStart.getDate() - 5);
-
-      var nextPeriod = new Date(lmp);
-      nextPeriod.setDate(nextPeriod.getDate() + cycle);
+      var ovulationDate = addDays(lmp, cycle - luteal);
+      var fertileStart = addDays(ovulationDate, -5);
+      var nextPeriod = addDays(lmp, cycle);
 
       resultRow.style.display = "flex";
       document.getElementById("statOvulation").textContent = formatDate(ovulationDate);
       document.getElementById("statFertileWindow").textContent = formatDate(fertileStart) + " – " + formatDate(ovulationDate);
       document.getElementById("statNextPeriod").textContent = formatDate(nextPeriod);
 
+      calendarSection.style.display = "block";
+      renderCalendar(lmp, fertileStart, ovulationDate, nextPeriod);
+
+      multiCycleSection.style.display = "block";
+      renderCycleTable(lmp, cycle, luteal);
+
       statusBox.textContent = "Estimated ovulation day: " + formatDate(ovulationDate) + ".";
     }
 
     lastPeriodDate.addEventListener("input", calculate);
     cycleLengthOv.addEventListener("input", calculate);
+    lutealLength.addEventListener("input", calculate);
 
     calculate();
   </script>

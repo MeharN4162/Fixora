@@ -5,24 +5,24 @@
   <meta charset="UTF-8" />
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Free Random Name Generator Online | Fixora</title>
-  <meta name="description" content="Generate random names for people, usernames, teams, or projects online for free. Instant results, no sign-up required." />
-  <meta name="keywords" content="random name generator, username generator, team name generator online free" />
+  <title>Free Random Name Generator Online | Fixoona</title>
+  <meta name="description" content="Generate random names for people, usernames, teams, projects, fantasy characters, businesses, pets, or babies online for free. Batch-generate up to 20 at once, filter by starting letter, and re-copy from a session history — no sign-up required." />
+  <meta name="keywords" content="random name generator, username generator, fantasy name generator, business name generator, pet name generator, baby name generator, team name generator online free" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/random-name-generator.html" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:site_name" content="Fixoona" />
   <meta property="og:title" content="Free Random Name Generator Online" />
-  <meta property="og:description" content="Generate random names for people, usernames, teams, or projects online for free." />
+  <meta property="og:description" content="Generate random names for people, usernames, teams, projects, fantasy characters, businesses, pets, or babies — with batch generation, letter filtering, and a re-copyable history." />
   <meta property="og:url" content="https://fixoona.com/tools/random-name-generator.html" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Random Name Generator Online" />
-  <meta name="twitter:description" content="Generate random names for people, usernames, teams, or projects online for free." />
+  <meta name="twitter:description" content="Generate random names for people, usernames, teams, projects, fantasy characters, businesses, pets, or babies — with batch generation, letter filtering, and a re-copyable history." />
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='28' y='22' width='13' height='56' rx='6.5' fill='white'/%3E%3Cpath d='M28 22 L67 22 Q73 22 70.5 27.5 L45 37 Q28 40 28 30 Z' fill='white'/%3E%3Crect x='28' y='46' width='27' height='13' rx='6.5' fill='white'/%3E%3Ccircle cx='76' cy='28' r='7' fill='%23a5f3fc'/%3E%3C/svg%3E" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -59,12 +59,12 @@
       {
         "@type": "Question",
         "name": "How many unique names can each category actually produce?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Person Name combines 30 first names with 20 last names for 600 possible combinations. Username and the other categories combine 20 adjectives with 20 nouns — Username also appends a random number up to 998, giving roughly 400,000 combinations, while Team Name and Project/Codename each have about 400 possible combinations." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Person Name and Fantasy Character each combine 30 first/given names with 20 last names or surnames for 600 possible combinations. Username combines 20 adjectives, 20 nouns, and a random number up to 998 for roughly 400,000 combinations. Business/Company Name combines 20 + 20 + 15 word lists for 6,000 combinations. Team Name and Project/Codename each combine 20 adjectives with 20 nouns for 400 combinations. Pet Name draws from a list of 40 names, and Baby Name (Boy) and Baby Name (Girl) each draw from a list of 30 names." }
       },
       {
         "@type": "Question",
         "name": "Can the generator produce duplicate names in the same batch?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No — it keeps track of names already generated in that batch and retries (up to 20 attempts per requested name) to avoid repeats. If you request more names than a category has unique combinations for, you may end up with fewer results than the slider asked for." }
+        "acceptedAnswer": { "@type": "Answer", "text": "No — it keeps track of names already generated in that batch and retries (up to 30 attempts per requested name) to avoid repeats. If you request more names than a category (or a letter-filtered subset of it) has unique combinations for, you may end up with fewer results than the slider asked for." }
       },
       {
         "@type": "Question",
@@ -74,16 +74,125 @@
       {
         "@type": "Question",
         "name": "Does the generator pull names from an online database or API?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No. All names are built client-side from a small set of fixed word lists (first names, last names, adjectives, and nouns) baked directly into the page's JavaScript — nothing is fetched from a server." }
+        "acceptedAnswer": { "@type": "Answer", "text": "No. All names are built client-side from a small set of fixed word lists (first names, last names, adjectives, nouns, fantasy names, business words, pet names, and baby names) baked directly into the page's JavaScript — nothing is fetched from a server." }
       },
       {
         "@type": "Question",
         "name": "Why do I sometimes see similar names across different batches?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Team Name and Project/Codename only draw from 20 adjectives and 20 nouns each, so with roughly 400 possible combinations, generating several batches in a row can occasionally surface names you've seen before." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Categories built from small word lists — Team Name, Project/Codename, Pet Name, and the two Baby Name lists — have only a few hundred (or, for Pet and Baby Names, a few dozen) possible outputs, so generating several batches in a row can surface names you've seen before. Username and Business/Company Name draw from much larger pools, so repeats are far less likely." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the \"Start with letter\" option do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It filters the selected category's underlying word list down to only the entries whose first letter matches your choice, then picks randomly from just that filtered subset using the same crypto.getRandomValues() source as every other pick — so every result is guaranteed to start with the letter you chose. Some letters have no matches in a given category's list; if that happens, you'll see a message instead of results." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a history of the names I've generated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every name you generate is added to the History list below the results, most recent first, capped at the last 40 entries. Click Copy next to any past entry to copy it again, or click Clear History to empty the list. It only exists in your browser tab's memory for the current session — reloading or closing the page clears it, and nothing is ever sent to a server." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I copy all the generated names at once?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — click Copy All above the results to copy every name in the current batch to your clipboard as a newline-separated list. You can also click Copy next to any single name, in the results or in History, to copy just that one." }
       }
     ]
   }
   </script>
+
+  <style>
+    .name-result-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+    }
+    .name-result-row + .name-result-row {
+      margin-top: 8px;
+    }
+    .name-result-text {
+      font-weight: 600;
+      word-break: break-word;
+    }
+    .name-copy-btn {
+      flex-shrink: 0;
+      background: none;
+      border: 1px solid var(--color-border);
+      color: var(--color-primary-dark);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    .name-copy-btn:hover {
+      background: var(--color-bg-soft);
+    }
+    .name-results-note {
+      color: var(--color-text-muted);
+      font-size: 0.85rem;
+      margin-top: 10px;
+    }
+    .name-history {
+      margin-top: 22px;
+      border-top: 1px solid var(--color-border);
+      padding-top: 14px;
+    }
+    .name-history-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .name-history-head h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+    .name-history-head button {
+      background: none;
+      border: none;
+      color: var(--color-text-muted);
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .name-history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 260px;
+      overflow-y: auto;
+    }
+    .name-history-list .empty {
+      color: var(--color-text-muted);
+      font-size: 0.85rem;
+    }
+    .name-history-entry {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.85rem;
+      padding: 7px 10px;
+      background: var(--color-bg-soft);
+      border-radius: var(--radius-sm);
+    }
+    .name-history-entry .name-history-detail {
+      color: var(--color-text-muted);
+      font-size: 0.78rem;
+    }
+    .name-history-entry .name-copy-btn {
+      font-size: 0.74rem;
+      padding: 3px 8px;
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -91,8 +200,8 @@
   <header class="site-header">
     <nav class="nav container" aria-label="Primary">
       <a href="../index.html" class="nav-brand">
-        <span class="brand-mark" aria-hidden="true"><svg class="brand-svg" viewBox="0 0 100 100"><rect x="30" y="24" width="13" height="52" rx="6.5" fill="#fff"/><rect x="30" y="24" width="38" height="13" rx="6.5" fill="#fff"/><rect x="30" y="47" width="29" height="13" rx="6.5" fill="#fff"/></svg></span>
-        Fixora
+        <span class="brand-mark" aria-hidden="true"><svg class="brand-svg" viewBox="0 0 100 100"><rect x="28" y="22" width="13" height="56" rx="6.5" fill="#fff"/><path d="M28 22 L67 22 Q73 22 70.5 27.5 L45 37 Q28 40 28 30 Z" fill="#fff"/><rect x="28" y="46" width="27" height="13" rx="6.5" fill="#fff"/><circle cx="76" cy="28" r="7" fill="#a5f3fc"/></svg></span>
+        Fixoona
       </a>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -119,7 +228,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🎲</div>
       <h1>Random Name Generator</h1>
-      <p>Generate random names for people, usernames, teams, or projects — instantly and for free.</p>
+      <p>Generate random names for people, usernames, teams, projects, fantasy characters, businesses, pets, or babies — instantly and for free.</p>
     </section>
 
     <section class="container">
@@ -131,28 +240,62 @@
             <option value="username">Username</option>
             <option value="team">Team Name</option>
             <option value="project">Project / Codename</option>
+            <option value="fantasy">Fantasy Character</option>
+            <option value="business">Business / Company Name</option>
+            <option value="pet">Pet Name</option>
+            <option value="babyboy">Baby Name (Boy)</option>
+            <option value="babygirl">Baby Name (Girl)</option>
           </select>
         </div>
 
-        <div class="field">
-          <label for="countRange">How many results: <span id="countValue">5</span></label>
-          <input type="range" id="countRange" min="1" max="20" value="5" style="width:100%;" />
+        <div class="row">
+          <div class="field">
+            <label for="letterFilter">Start with letter (optional)</label>
+            <select id="letterFilter">
+              <option value="">Any letter</option>
+              <option value="A">A</option><option value="B">B</option><option value="C">C</option>
+              <option value="D">D</option><option value="E">E</option><option value="F">F</option>
+              <option value="G">G</option><option value="H">H</option><option value="I">I</option>
+              <option value="J">J</option><option value="K">K</option><option value="L">L</option>
+              <option value="M">M</option><option value="N">N</option><option value="O">O</option>
+              <option value="P">P</option><option value="Q">Q</option><option value="R">R</option>
+              <option value="S">S</option><option value="T">T</option><option value="U">U</option>
+              <option value="V">V</option><option value="W">W</option><option value="X">X</option>
+              <option value="Y">Y</option><option value="Z">Z</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="countRange">How many results: <span id="countValue">5</span></label>
+            <input type="range" id="countRange" min="1" max="20" value="5" style="width:100%;" />
+          </div>
         </div>
 
         <div class="actions">
           <button class="btn btn-primary" id="generateBtn">Generate Names</button>
+          <button class="btn btn-secondary" id="copyAllBtn">Copy All</button>
         </div>
 
         <div class="output-box" id="resultsBox"></div>
+        <div class="name-results-note" id="resultsNote"></div>
+
+        <div class="name-history">
+          <div class="name-history-head">
+            <h3>History</h3>
+            <button type="button" id="clearHistoryBtn">Clear History</button>
+          </div>
+          <div class="name-history-list" id="nameHistoryList"><span class="empty">No names generated yet this session.</span></div>
+        </div>
       </div>
 
       <div class="howto">
         <h2>How to Generate Random Names</h2>
         <ol class="howto-steps">
-          <li>Choose what you need a name for: Person Name, Username, Team Name, or Project / Codename.</li>
+          <li>Choose what you need a name for: Person Name, Username, Team Name, Project / Codename, Fantasy Character, Business / Company Name, Pet Name, Baby Name (Boy), or Baby Name (Girl).</li>
+          <li>Optionally pick a letter from "Start with letter" to only generate names that begin with that letter for the chosen category.</li>
           <li>Drag the slider to set how many results you want, from 1 to 20.</li>
           <li>Click Generate Names for a fresh batch — a batch also loads automatically the first time the page opens.</li>
-          <li>Click Generate again anytime for a new set; results aren't saved, so copy any names you want to keep.</li>
+          <li>Click Copy next to any single name to copy just that one, or click Copy All to copy the whole batch as a list.</li>
+          <li>Every name you generate is added to the History list below, so you can scroll back and re-copy earlier results — click Clear History to reset it for this session.</li>
         </ol>
       </div>
 
@@ -160,11 +303,11 @@
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
           <summary>How many unique names can each category actually produce?</summary>
-          <p>Person Name combines 30 first names with 20 last names for 600 possible combinations. Username and the other categories combine 20 adjectives with 20 nouns — Username also appends a random number up to 998, giving roughly 400,000 combinations, while Team Name and Project/Codename each have about 400 possible combinations.</p>
+          <p>Person Name and Fantasy Character each combine 30 first/given names with 20 last names or surnames for 600 possible combinations. Username combines 20 adjectives, 20 nouns, and a random number up to 998 for roughly 400,000 combinations. Business/Company Name combines 20 + 20 + 15 word lists for 6,000 combinations. Team Name and Project/Codename each combine 20 adjectives with 20 nouns for 400 combinations. Pet Name draws from a list of 40 names, and Baby Name (Boy) and Baby Name (Girl) each draw from a list of 30 names.</p>
         </details>
         <details class="faq-item">
           <summary>Can the generator produce duplicate names in the same batch?</summary>
-          <p>No — it keeps track of names already generated in that batch and retries (up to 20 attempts per requested name) to avoid repeats. If you request more names than a category has unique combinations for, you may end up with fewer results than the slider asked for.</p>
+          <p>No — it keeps track of names already generated in that batch and retries (up to 30 attempts per requested name) to avoid repeats. If you request more names than a category (or a letter-filtered subset of it) has unique combinations for, you may end up with fewer results than the slider asked for.</p>
         </details>
         <details class="faq-item">
           <summary>Are these names guaranteed to be available as real usernames or domains?</summary>
@@ -172,11 +315,23 @@
         </details>
         <details class="faq-item">
           <summary>Does the generator pull names from an online database or API?</summary>
-          <p>No. All names are built client-side from a small set of fixed word lists (first names, last names, adjectives, and nouns) baked directly into the page's JavaScript — nothing is fetched from a server.</p>
+          <p>No. All names are built client-side from a small set of fixed word lists (first names, last names, adjectives, nouns, fantasy names, business words, pet names, and baby names) baked directly into the page's JavaScript — nothing is fetched from a server.</p>
         </details>
         <details class="faq-item">
           <summary>Why do I sometimes see similar names across different batches?</summary>
-          <p>Team Name and Project/Codename only draw from 20 adjectives and 20 nouns each, so with roughly 400 possible combinations, generating several batches in a row can occasionally surface names you've seen before.</p>
+          <p>Categories built from small word lists — Team Name, Project/Codename, Pet Name, and the two Baby Name lists — have only a few hundred (or, for Pet and Baby Names, a few dozen) possible outputs, so generating several batches in a row can surface names you've seen before. Username and Business/Company Name draw from much larger pools, so repeats are far less likely.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the "Start with letter" option do?</summary>
+          <p>It filters the selected category's underlying word list down to only the entries whose first letter matches your choice, then picks randomly from just that filtered subset using the same crypto.getRandomValues() source as every other pick — so every result is guaranteed to start with the letter you chose. Some letters have no matches in a given category's list; if that happens, you'll see a message instead of results.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is there a history of the names I've generated?</summary>
+          <p>Yes. Every name you generate is added to the History list below the results, most recent first, capped at the last 40 entries. Click Copy next to any past entry to copy it again, or click Clear History to empty the list. It only exists in your browser tab's memory for the current session — reloading or closing the page clears it, and nothing is ever sent to a server.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I copy all the generated names at once?</summary>
+          <p>Yes — click Copy All above the results to copy every name in the current batch to your clipboard as a newline-separated list. You can also click Copy next to any single name, in the results or in History, to copy just that one.</p>
         </details>
       </div>
 
@@ -210,26 +365,28 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="../index.html" class="nav-brand">
-            <span class="brand-mark" aria-hidden="true"><svg class="brand-svg" viewBox="0 0 100 100"><rect x="30" y="24" width="13" height="52" rx="6.5" fill="#fff"/><rect x="30" y="24" width="38" height="13" rx="6.5" fill="#fff"/><rect x="30" y="47" width="29" height="13" rx="6.5" fill="#fff"/></svg></span>
-            Fixora
+            <span class="brand-mark" aria-hidden="true"><svg class="brand-svg" viewBox="0 0 100 100"><rect x="28" y="22" width="13" height="56" rx="6.5" fill="#fff"/><path d="M28 22 L67 22 Q73 22 70.5 27.5 L45 37 Q28 40 28 30 Z" fill="#fff"/><rect x="28" y="46" width="27" height="13" rx="6.5" fill="#fff"/><circle cx="76" cy="28" r="7" fill="#a5f3fc"/></svg></span>
+            Fixoona
           </a>
           <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
         </div>
         <div class="footer-col">
-          <h4>Tools</h4>
+          <h4>Popular Tools</h4>
           <ul>
             <li><a href="pdf-compressor.html">PDF Compressor</a></li>
             <li><a href="image-resizer.html">Image Resizer</a></li>
             <li><a href="word-counter.html">Word Counter</a></li>
             <li><a href="password-generator.html">Password Generator</a></li>
+            <li><a href="../all-tools.html">See All 100+ Tools →</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Guides</h4>
+          <h4>Popular Guides</h4>
           <ul>
             <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
             <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
             <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+            <li><a href="../index.html#guides">See All Guides →</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -243,7 +400,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
       </div>
     </div>
   </footer>
@@ -255,63 +412,220 @@
     var ADJECTIVES = ["Swift","Silent","Crimson","Golden","Electric","Rapid","Iron","Frost","Solar","Lunar","Hidden","Bold","Rogue","Quantum","Cosmic","Velvet","Wild","Bright","Shadow","Neon"];
     var NOUNS = ["Falcon","Tiger","Comet","Phoenix","Otter","Panther","Wolf","Raven","Storm","Voyager","Ember","Nomad","Summit","Horizon","Pioneer","Cipher","Nexus","Ranger","Arrow","Beacon"];
 
-    function randInt(max) {
-      return Math.floor(Math.random() * max);
+    var FANTASY_FIRST = ["Thalindra","Kaelith","Sorina","Draven","Elowen","Mireth","Caspian","Lyra","Fenwick","Isolde","Aldric","Seraphine","Talon","Rhiannon","Corvin","Nymera","Bastian","Ophelia","Ezren","Wrenna","Galdor","Vesper","Thoren","Aveline","Kael","Selwyn","Maren","Doran","Isadora","Fenrik"];
+    var FANTASY_SURNAME = ["Nightwhisper","Stormrune","Ashvale","Duskbane","Silverleaf","Ironheart","Moonshadow","Blackthorn","Frostwind","Emberfall","Wolfsbane","Ravenscar","Thistledown","Starweaver","Grimhollow","Brightwater","Shadowmere","Oakenshield","Wintermere","Dawnbringer"];
+
+    var BIZ_WORD1 = ["Summit","Bright","Blue","Silver","North","Bridge","Clear","Prime","Apex","Bold","Vivid","Craft","True","Swift","Noble","Grand","Vital","Keen","Pure","Sky"];
+    var BIZ_WORD2 = ["Peak","Harbor","Ridge","Forge","Grove","Field","Stone","Wave","Point","Path","Spring","Haven","Works","Reach","Yard","Well","Gate","Line","Mark","Hollow"];
+    var BIZ_SUFFIX = ["Studio","Labs","Group","Co.","Collective","Partners","Systems","Ventures","Solutions","Agency","Workshop","Industries","House","Guild","Company"];
+
+    var PET_NAMES = ["Bella","Max","Charlie","Luna","Cooper","Milo","Daisy","Rocky","Lucy","Bailey","Zeus","Coco","Buddy","Molly","Teddy","Sadie","Duke","Ruby","Oliver","Stella","Jack","Maggie","Leo","Chloe","Winston","Penny","Bear","Zoe","Toby","Willow","Gus","Nala","Finn","Rosie","Simba","Piper","Loki","Ginger","Oscar","Peanut"];
+
+    var BABY_BOY = ["Liam","Noah","Oliver","Elijah","James","William","Benjamin","Lucas","Henry","Theodore","Jack","Levi","Alexander","Jackson","Mateo","Daniel","Michael","Mason","Sebastian","Ethan","Owen","Samuel","Wyatt","John","David","Leo","Luke","Julian","Hudson","Grayson"];
+    var BABY_GIRL = ["Olivia","Emma","Charlotte","Amelia","Sophia","Isabella","Ava","Mia","Evelyn","Luna","Harper","Camila","Sofia","Scarlett","Elizabeth","Eleanor","Emily","Chloe","Mila","Violet","Penelope","Gianna","Aria","Abigail","Ella","Avery","Hazel","Nora","Layla","Lily"];
+
+    /* Cryptographically secure random integer in [0, maxExclusive), using
+       rejection sampling so every outcome has an exactly equal chance
+       (same approach used across Fixoona's other random-generator tools). */
+    function secureRandomInt(maxExclusive) {
+      var array = new Uint32Array(1);
+      var limit = Math.floor(0xffffffff / maxExclusive) * maxExclusive;
+      do {
+        crypto.getRandomValues(array);
+      } while (array[0] >= limit);
+      return array[0] % maxExclusive;
     }
 
-    function generatePersonName() {
-      return FIRST_NAMES[randInt(FIRST_NAMES.length)] + " " + LAST_NAMES[randInt(LAST_NAMES.length)];
+    function pick(arr) {
+      return arr[secureRandomInt(arr.length)];
     }
 
-    function generateUsername() {
-      var word = ADJECTIVES[randInt(ADJECTIVES.length)] + NOUNS[randInt(NOUNS.length)];
-      var num = randInt(999);
-      return word + num;
-    }
-
-    function generateTeamName() {
-      return "The " + ADJECTIVES[randInt(ADJECTIVES.length)] + " " + NOUNS[randInt(NOUNS.length)] + "s";
-    }
-
-    function generateProjectName() {
-      return "Project " + ADJECTIVES[randInt(ADJECTIVES.length)] + NOUNS[randInt(NOUNS.length)];
-    }
-
-    var generators = {
-      person: generatePersonName,
-      username: generateUsername,
-      team: generateTeamName,
-      project: generateProjectName
+    var CATEGORIES = {
+      person: {
+        label: "Person Name",
+        primary: FIRST_NAMES,
+        build: function (word) { return word + " " + pick(LAST_NAMES); }
+      },
+      username: {
+        label: "Username",
+        primary: ADJECTIVES,
+        build: function (word) { return word + pick(NOUNS) + secureRandomInt(999); }
+      },
+      team: {
+        label: "Team Name",
+        primary: ADJECTIVES,
+        build: function (word) { return word + " " + pick(NOUNS) + "s"; }
+      },
+      project: {
+        label: "Project / Codename",
+        primary: ADJECTIVES,
+        build: function (word) { return word + pick(NOUNS); }
+      },
+      fantasy: {
+        label: "Fantasy Character",
+        primary: FANTASY_FIRST,
+        build: function (word) { return word + " " + pick(FANTASY_SURNAME); }
+      },
+      business: {
+        label: "Business / Company Name",
+        primary: BIZ_WORD1,
+        build: function (word) { return word + pick(BIZ_WORD2) + " " + pick(BIZ_SUFFIX); }
+      },
+      pet: {
+        label: "Pet Name",
+        primary: PET_NAMES,
+        build: function (word) { return word; }
+      },
+      babyboy: {
+        label: "Baby Name (Boy)",
+        primary: BABY_BOY,
+        build: function (word) { return word; }
+      },
+      babygirl: {
+        label: "Baby Name (Girl)",
+        primary: BABY_GIRL,
+        build: function (word) { return word; }
+      }
     };
 
+    var MAX_HISTORY = 40;
+    var nameHistory = [];
+    var currentResults = [];
+
+    var nameType = document.getElementById("nameType");
+    var letterFilter = document.getElementById("letterFilter");
     var countRange = document.getElementById("countRange");
     var countValue = document.getElementById("countValue");
+    var resultsBox = document.getElementById("resultsBox");
+    var resultsNote = document.getElementById("resultsNote");
+    var nameHistoryList = document.getElementById("nameHistoryList");
 
     countRange.addEventListener("input", function () {
       countValue.textContent = countRange.value;
     });
 
+    function renderResults() {
+      resultsBox.innerHTML = "";
+      currentResults.forEach(function (name) {
+        var row = document.createElement("div");
+        row.className = "name-result-row";
+
+        var text = document.createElement("span");
+        text.className = "name-result-text";
+        text.textContent = name;
+
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "name-copy-btn";
+        btn.textContent = "Copy";
+        btn.setAttribute("aria-label", "Copy " + name);
+        btn.addEventListener("click", function () {
+          Fixora.copyText(name);
+        });
+
+        row.appendChild(text);
+        row.appendChild(btn);
+        resultsBox.appendChild(row);
+      });
+    }
+
+    function renderHistory() {
+      if (nameHistory.length === 0) {
+        nameHistoryList.innerHTML = '<span class="empty">No names generated yet this session.</span>';
+        return;
+      }
+      nameHistoryList.innerHTML = "";
+      nameHistory.forEach(function (entry) {
+        var row = document.createElement("div");
+        row.className = "name-history-entry";
+
+        var label = document.createElement("span");
+        label.textContent = entry.name;
+
+        var detail = document.createElement("span");
+        detail.className = "name-history-detail";
+        detail.textContent = entry.categoryLabel;
+
+        var right = document.createElement("span");
+        right.style.display = "flex";
+        right.style.alignItems = "center";
+        right.style.gap = "8px";
+        right.appendChild(detail);
+
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "name-copy-btn";
+        btn.textContent = "Copy";
+        btn.setAttribute("aria-label", "Copy " + entry.name);
+        btn.addEventListener("click", function () {
+          Fixora.copyText(entry.name);
+        });
+        right.appendChild(btn);
+
+        row.appendChild(label);
+        row.appendChild(right);
+        nameHistoryList.appendChild(row);
+      });
+    }
+
+    function addToHistory(name, categoryLabel) {
+      nameHistory.unshift({ name: name, categoryLabel: categoryLabel });
+      if (nameHistory.length > MAX_HISTORY) nameHistory.length = MAX_HISTORY;
+    }
+
+    document.getElementById("clearHistoryBtn").addEventListener("click", function () {
+      nameHistory = [];
+      renderHistory();
+    });
+
+    document.getElementById("copyAllBtn").addEventListener("click", function () {
+      if (currentResults.length === 0) return;
+      Fixora.copyText(currentResults.join("\n"));
+    });
+
     document.getElementById("generateBtn").addEventListener("click", function () {
-      var type = document.getElementById("nameType").value;
+      var type = nameType.value;
       var count = parseInt(countRange.value, 10);
-      var fn = generators[type];
+      var letter = letterFilter.value;
+      var cfg = CATEGORIES[type];
+
+      var pool = cfg.primary;
+      if (letter) {
+        pool = pool.filter(function (w) { return w.charAt(0).toUpperCase() === letter; });
+      }
+
+      if (pool.length === 0) {
+        currentResults = [];
+        renderResults();
+        resultsNote.textContent = "No " + cfg.label + " names start with \"" + letter + "\". Try a different letter or category.";
+        return;
+      }
+
       var seen = {};
       var results = [];
-
       var attempts = 0;
-      while (results.length < count && attempts < count * 20) {
+      var maxAttempts = count * 30;
+
+      while (results.length < count && attempts < maxAttempts) {
         attempts++;
-        var name = fn();
+        var word = pool[secureRandomInt(pool.length)];
+        var name = cfg.build(word);
         if (!seen[name]) {
           seen[name] = true;
           results.push(name);
+          addToHistory(name, cfg.label);
         }
       }
 
-      var box = document.getElementById("resultsBox");
-      box.innerHTML = results.map(function (name) {
-        return '<div style="padding:8px 0;border-bottom:1px solid var(--color-border);font-weight:600;">' + name + '</div>';
-      }).join("");
+      currentResults = results;
+      renderResults();
+      renderHistory();
+
+      if (results.length < count) {
+        resultsNote.textContent = "Only " + results.length + " unique name" + (results.length === 1 ? "" : "s") + " could be generated for this combination.";
+      } else {
+        resultsNote.textContent = "";
+      }
     });
 
     document.getElementById("generateBtn").click();
