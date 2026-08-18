@@ -559,7 +559,40 @@ p {
 
 @media (max-width: 560px) {
   .grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .grid .card {
+    padding: 16px 13px;
+    gap: 6px;
+  }
+
+  .grid .card .icon {
+    width: 34px;
+    height: 34px;
+    font-size: 1.05rem;
+    margin-bottom: 2px;
+    border-radius: 9px;
+  }
+
+  .grid .card h3 {
+    font-size: 0.9rem;
+    line-height: 1.25;
+  }
+
+  .grid .card p {
+    font-size: 0.78rem;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .grid .card .card-cta {
+    font-size: 0.76rem;
+    margin-top: 2px;
   }
 }
 
@@ -655,6 +688,86 @@ p {
 
 .tool-category:last-child {
   margin-bottom: 0;
+}
+
+/* Jump-to-category nav, sits above the featured tools grid */
+.cat-jump-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 22px 0 40px;
+}
+
+.cat-jump-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.cat-jump-nav a .count {
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.cat-jump-nav a:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: transparent;
+  background: var(--gradient-primary);
+  color: #fff;
+}
+
+.cat-jump-nav a:hover .count {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* "Show N more" toggle for long category grids */
+.card-extra {
+  display: none;
+}
+
+.tool-category.expanded .card-extra {
+  display: flex;
+  animation: fadeInUp 0.4s ease both;
+}
+
+.show-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 11px 22px;
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--color-border);
+  background: transparent;
+  color: var(--color-primary-dark);
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.show-more-btn:hover {
+  border-color: var(--color-primary);
+  background: var(--color-bg-alt);
+  transform: translateY(-1px);
+}
+
+.show-more-btn .chev {
+  transition: transform 0.25s ease;
+}
+
+.tool-category.expanded .show-more-btn .chev {
+  transform: rotate(180deg);
 }
 
 .tool-category-head {
@@ -2037,3 +2150,4 @@ p {
   font-size: 0.92rem;
   line-height: 1.6;
 }
+

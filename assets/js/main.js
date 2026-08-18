@@ -667,6 +667,65 @@ document.documentElement.setAttribute("data-js", "true");
     });
   }
 
+  /* ---------- Homepage category browsing: jump nav + show-more ---------- */
+  function initCategoryBrowsing() {
+    var sections = Array.prototype.slice.call(document.querySelectorAll(".tool-category[id^='cat-']"));
+    if (!sections.length) return;
+
+    var VISIBLE_COUNT = 8;
+
+    // Collapse long category grids behind a "Show N more" toggle.
+    sections.forEach(function (section) {
+      var grid = section.querySelector(".grid");
+      if (!grid) return;
+      var cards = Array.prototype.slice.call(grid.children);
+      if (cards.length <= VISIBLE_COUNT) return;
+
+      var extra = cards.slice(VISIBLE_COUNT);
+      extra.forEach(function (card) { card.classList.add("card-extra"); });
+
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "show-more-btn";
+      var remaining = extra.length;
+      btn.innerHTML = "<span class=\"label\">Show " + remaining + " more</span><span class=\"chev\" aria-hidden=\"true\">▾</span>";
+
+      btn.addEventListener("click", function () {
+        var isOpen = section.classList.toggle("expanded");
+        btn.querySelector(".label").textContent = isOpen ? "Show fewer" : "Show " + remaining + " more";
+        if (!isOpen) {
+          section.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+
+      grid.insertAdjacentElement("afterend", btn);
+    });
+
+    // Build a "jump to category" pill nav from the section headings.
+    var headEl = document.querySelector("#tools .section-head");
+    if (!headEl) return;
+
+    var nav = document.createElement("nav");
+    nav.className = "cat-jump-nav";
+    nav.setAttribute("aria-label", "Jump to tool category");
+
+    sections.forEach(function (section) {
+      var iconEl = section.querySelector(".tcat-icon");
+      var titleEl = section.querySelector("h3");
+      var countEl = section.querySelector(".tcat-count");
+      if (!titleEl) return;
+
+      var a = document.createElement("a");
+      a.href = "#" + section.id;
+      a.innerHTML =
+        (iconEl ? iconEl.textContent : "") + " " + titleEl.textContent +
+        (countEl ? " <span class=\"count\">" + countEl.textContent + "</span>" : "");
+      nav.appendChild(a);
+    });
+
+    headEl.insertAdjacentElement("afterend", nav);
+  }
+
   /* ---------- Toast notifications ---------- */
   function ensureToastContainer() {
     var el = document.querySelector(".toast-container");
@@ -822,6 +881,7 @@ document.documentElement.setAttribute("data-js", "true");
     initCountUp();
     initCommandPalette();
     initCategoryChip();
+    initCategoryBrowsing();
     initCookieBanner();
     initBackToTop();
     initHeroGlow();
