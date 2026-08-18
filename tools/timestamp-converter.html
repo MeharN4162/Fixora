@@ -6,21 +6,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Unix Timestamp Converter Online | Fixoona</title>
-  <meta name="description" content="Convert Unix timestamps to human-readable dates and back, online for free. Supports seconds and milliseconds, right in your browser." />
-  <meta name="keywords" content="unix timestamp converter, epoch converter online free, timestamp to date" />
+  <meta name="description" content="Convert Unix timestamps to human-readable dates and back, online for free. Auto-detects seconds vs. milliseconds, shows relative time and RFC 2822/ISO 8601/UTC formats, and batch-converts multiple timestamps at once." />
+  <meta name="keywords" content="unix timestamp converter, epoch converter online free, timestamp to date, batch timestamp converter" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/timestamp-converter.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixoona" />
   <meta property="og:title" content="Free Unix Timestamp Converter Online" />
-  <meta property="og:description" content="Convert Unix timestamps to human-readable dates and back, online for free." />
+  <meta property="og:description" content="Convert Unix timestamps to human-readable dates and back, with auto unit detection, relative time, and batch conversion." />
   <meta property="og:url" content="https://fixoona.com/tools/timestamp-converter.html" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Unix Timestamp Converter Online" />
-  <meta name="twitter:description" content="Convert Unix timestamps to human-readable dates and back." />
+  <meta name="twitter:description" content="Convert Unix timestamps to human-readable dates and back, with batch conversion support." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='28' y='22' width='13' height='56' rx='6.5' fill='white'/%3E%3Cpath d='M28 22 L67 22 Q73 22 70.5 27.5 L45 37 Q28 40 28 30 Z' fill='white'/%3E%3Crect x='28' y='46' width='27' height='13' rx='6.5' fill='white'/%3E%3Ccircle cx='76' cy='28' r='7' fill='%23a5f3fc'/%3E%3C/svg%3E" />
 
@@ -64,12 +64,12 @@
       {
         "@type": "Question",
         "name": "What's the difference between seconds and milliseconds mode?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Some systems, like Unix/Linux and most APIs, store timestamps in seconds, while JavaScript's Date object and some web systems use milliseconds; the unit dropdown tells the converter which scale your number is in so it multiplies correctly." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Some systems, like Unix/Linux and most APIs, store timestamps in seconds, while JavaScript's Date object and some web systems use milliseconds. The Auto-detect option figures out which one you mean by counting digits — 10 digits or fewer is treated as seconds and 11 or more digits is treated as milliseconds — or you can force Seconds or Milliseconds manually from the dropdown." }
       },
       {
         "@type": "Question",
-        "name": "Why does the tool show three different date formats?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Local time reflects your device's time zone setting, UTC shows the same instant with no time zone offset, and ISO shows the standardized machine-readable format commonly used in code and APIs." }
+        "name": "Why does the tool show four different date formats?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Local time reflects your device's time zone setting, UTC shows the same instant with no time zone offset, ISO 8601 shows the standardized machine-readable format used in code and APIs, and RFC 2822 shows the format used in email headers and HTTP dates." }
       },
       {
         "@type": "Question",
@@ -80,6 +80,16 @@
         "@type": "Question",
         "name": "Does the Date to Timestamp conversion use my local time zone?",
         "acceptedAnswer": { "@type": "Answer", "text": "Yes — the date and time input reflects your browser's local time zone, so the timestamp it produces corresponds to that local moment, not UTC." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the relative time (for example, 3 hours ago) mean?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's the difference between the converted timestamp and the current moment, shown in the largest whole unit that fits (seconds, minutes, hours, days, months, or years), with the word ago for timestamps in the past and in for timestamps in the future." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I convert multiple timestamps at once?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — the Batch Convert box accepts one timestamp per line, auto-detects seconds or milliseconds for each line independently by counting digits, and returns the UTC time and ISO 8601 date for every valid line, skipping any line that isn't a valid number." }
       }
     ]
   }
@@ -119,7 +129,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🕒</div>
       <h1>Unix Timestamp Converter</h1>
-      <p>Convert between Unix timestamps and human-readable dates in either direction, using your local timezone or UTC.</p>
+      <p>Convert between Unix timestamps and human-readable dates in either direction, with automatic seconds/milliseconds detection, relative time, and batch conversion.</p>
     </section>
 
     <section class="container">
@@ -137,7 +147,8 @@
           <div class="field">
             <label for="tsUnit">Unit</label>
             <select id="tsUnit">
-              <option value="seconds" selected>Seconds</option>
+              <option value="auto" selected>Auto-detect</option>
+              <option value="seconds">Seconds</option>
               <option value="milliseconds">Milliseconds</option>
             </select>
           </div>
@@ -150,14 +161,22 @@
           <input type="datetime-local" id="dateInput" />
         </div>
         <div class="output-box" id="dateResult"></div>
+
+        <h3 style="margin:28px 0 14px;">Batch Convert</h3>
+        <div class="field">
+          <label for="batchInput">Multiple Timestamps (one per line, auto-detected)</label>
+          <textarea id="batchInput" rows="5" placeholder="1700000000&#10;1700000000000&#10;1735689600"></textarea>
+        </div>
+        <div class="output-box" id="batchResult"></div>
       </div>
 
       <div class="howto">
         <h2>How to Convert a Unix Timestamp</h2>
         <ol class="howto-steps">
           <li>Check the live "Current Unix Time" counter at the top, which updates every second.</li>
-          <li>To convert a timestamp to a date, enter the number in the Unix Timestamp field and select whether it's in seconds or milliseconds.</li>
-          <li>Read the result in three formats: your local time, UTC, and ISO 8601.</li>
+          <li>To convert a single timestamp, enter the number in the Unix Timestamp field. Leave the unit on Auto-detect and it will tell seconds from milliseconds by counting digits, or pick a unit manually.</li>
+          <li>Read the result in four formats — local time, UTC, ISO 8601, and RFC 2822 — plus a relative time like "3 hours ago" or "in 2 days".</li>
+          <li>To convert many timestamps at once, paste one per line into the Batch Convert box; each line is auto-detected and converted independently.</li>
           <li>To go the other direction, pick a date and time in the Date → Timestamp field to see its seconds and milliseconds values.</li>
         </ol>
       </div>
@@ -170,11 +189,11 @@
         </details>
         <details class="faq-item">
           <summary>What's the difference between seconds and milliseconds mode?</summary>
-          <p>Some systems, like Unix/Linux and most APIs, store timestamps in seconds, while JavaScript's Date object and some web systems use milliseconds; the unit dropdown tells the converter which scale your number is in so it multiplies correctly.</p>
+          <p>Some systems, like Unix/Linux and most APIs, store timestamps in seconds, while JavaScript's Date object and some web systems use milliseconds. The Auto-detect option figures out which one you mean by counting digits — 10 digits or fewer is treated as seconds and 11 or more digits is treated as milliseconds — or you can force Seconds or Milliseconds manually from the dropdown.</p>
         </details>
         <details class="faq-item">
-          <summary>Why does the tool show three different date formats?</summary>
-          <p>Local time reflects your device's time zone setting, UTC shows the same instant with no time zone offset, and ISO shows the standardized machine-readable format commonly used in code and APIs.</p>
+          <summary>Why does the tool show four different date formats?</summary>
+          <p>Local time reflects your device's time zone setting, UTC shows the same instant with no time zone offset, ISO 8601 shows the standardized machine-readable format used in code and APIs, and RFC 2822 shows the format used in email headers and HTTP dates.</p>
         </details>
         <details class="faq-item">
           <summary>What happens if I enter a timestamp that's invalid or too large?</summary>
@@ -183,6 +202,14 @@
         <details class="faq-item">
           <summary>Does the Date to Timestamp conversion use my local time zone?</summary>
           <p>Yes — the date and time input reflects your browser's local time zone, so the timestamp it produces corresponds to that local moment, not UTC.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the relative time (for example, 3 hours ago) mean?</summary>
+          <p>It's the difference between the converted timestamp and the current moment, shown in the largest whole unit that fits (seconds, minutes, hours, days, months, or years), with the word ago for timestamps in the past and in for timestamps in the future.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I convert multiple timestamps at once?</summary>
+          <p>Yes — the Batch Convert box accepts one timestamp per line, auto-detects seconds or milliseconds for each line independently by counting digits, and returns the UTC time and ISO 8601 date for every valid line, skipping any line that isn't a valid number.</p>
         </details>
       </div>
 
@@ -264,6 +291,8 @@
     var tsResult = document.getElementById("tsResult");
     var dateInput = document.getElementById("dateInput");
     var dateResult = document.getElementById("dateResult");
+    var batchInput = document.getElementById("batchInput");
+    var batchResult = document.getElementById("batchResult");
 
     function updateNow() {
       nowTimestamp.textContent = Math.floor(Date.now() / 1000);
@@ -271,13 +300,68 @@
     updateNow();
     setInterval(updateNow, 1000);
 
+    function pad2(n) { return String(n).padStart(2, "0"); }
+
+    // Formats a Date as "YYYY-MM-DD HH:MM:SS UTC" using UTC fields.
+    function formatUTC(d) {
+      return d.getUTCFullYear() + "-" + pad2(d.getUTCMonth() + 1) + "-" + pad2(d.getUTCDate()) +
+        " " + pad2(d.getUTCHours()) + ":" + pad2(d.getUTCMinutes()) + ":" + pad2(d.getUTCSeconds()) + " UTC";
+    }
+
+    // Digit-count heuristic: 10 digits or fewer = seconds, 11+ digits = milliseconds.
+    // Distinguishes e.g. 1700000000 (10 digits, seconds) from 1700000000000 (13 digits, ms).
+    function detectUnit(val) {
+      var digits = Math.trunc(Math.abs(val)).toString().length;
+      return digits > 10 ? "milliseconds" : "seconds";
+    }
+
+    function relativeTime(d) {
+      var diffSec = (d.getTime() - Date.now()) / 1000;
+      var abs = Math.abs(diffSec);
+      var future = diffSec > 0;
+      if (abs < 1) return "just now";
+      var units = [
+        ["year", 31536000],
+        ["month", 2592000],
+        ["day", 86400],
+        ["hour", 3600],
+        ["minute", 60],
+        ["second", 1]
+      ];
+      for (var i = 0; i < units.length; i++) {
+        var name = units[i][0], secs = units[i][1];
+        var count = Math.floor(abs / secs);
+        if (count >= 1) {
+          var label = count + " " + name + (count !== 1 ? "s" : "");
+          return future ? "in " + label : label + " ago";
+        }
+      }
+      return "just now";
+    }
+
     function convertTimestamp() {
-      var val = parseFloat(tsInput.value);
-      if (isNaN(val)) { tsResult.textContent = ""; return; }
-      var ms = tsUnit.value === "seconds" ? val * 1000 : val;
+      var raw = tsInput.value;
+      var val = parseFloat(raw);
+      if (raw === "" || isNaN(val)) { tsResult.textContent = ""; return; }
+
+      var chosenUnit = tsUnit.value;
+      var effectiveUnit = chosenUnit === "auto" ? detectUnit(val) : chosenUnit;
+      var ms = effectiveUnit === "seconds" ? val * 1000 : val;
       var d = new Date(ms);
       if (isNaN(d.getTime())) { tsResult.textContent = "Invalid timestamp."; return; }
-      tsResult.textContent = "Local: " + d.toString() + "\nUTC: " + d.toUTCString() + "\nISO: " + d.toISOString();
+
+      var lines = [];
+      if (chosenUnit === "auto") {
+        var digits = Math.trunc(Math.abs(val)).toString().length;
+        lines.push("Detected unit: " + effectiveUnit + " (" + digits + " digits)");
+      }
+      lines.push("Local: " + d.toString());
+      lines.push("UTC: " + formatUTC(d));
+      lines.push("ISO 8601: " + d.toISOString());
+      lines.push("RFC 2822: " + d.toUTCString());
+      lines.push("Relative: " + relativeTime(d));
+
+      tsResult.textContent = lines.join("\n");
       tsResult.style.whiteSpace = "pre-line";
     }
 
@@ -289,9 +373,28 @@
       dateResult.style.whiteSpace = "pre-line";
     }
 
+    function batchConvert() {
+      var lines = batchInput.value.split(/\r?\n/);
+      var out = [];
+      for (var i = 0; i < lines.length; i++) {
+        var trimmed = lines[i].trim();
+        if (!trimmed) continue;
+        var val = parseFloat(trimmed);
+        if (isNaN(val)) { out.push(trimmed + "  →  invalid"); continue; }
+        var unit = detectUnit(val);
+        var ms = unit === "seconds" ? val * 1000 : val;
+        var d = new Date(ms);
+        if (isNaN(d.getTime())) { out.push(trimmed + "  →  invalid"); continue; }
+        out.push(trimmed + " (" + unit + ")  →  " + formatUTC(d) + "  |  " + d.toISOString());
+      }
+      batchResult.textContent = out.join("\n");
+      batchResult.style.whiteSpace = "pre-line";
+    }
+
     tsInput.addEventListener("input", convertTimestamp);
     tsUnit.addEventListener("change", convertTimestamp);
     dateInput.addEventListener("input", convertDate);
+    batchInput.addEventListener("input", batchConvert);
   </script>
 </body>
 </html>
