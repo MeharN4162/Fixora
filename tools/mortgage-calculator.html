@@ -5,24 +5,24 @@
   <meta charset="UTF-8" />
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Free Mortgage Calculator Online — Monthly Payment Estimator | Fixora</title>
-  <meta name="description" content="Estimate your monthly mortgage payment for free — principal, interest, property tax, home insurance, and PMI, with a full cost breakdown. No sign-up." />
-  <meta name="keywords" content="mortgage calculator, mortgage calculator online free, monthly mortgage payment calculator" />
+  <title>Free Mortgage Calculator Online — Monthly Payment Estimator | Fixoona</title>
+  <meta name="description" content="Estimate your true monthly mortgage payment (PITI) for free — principal, interest, property tax, home insurance, auto-calculated PMI with a removal estimate, and HOA fees. No sign-up." />
+  <meta name="keywords" content="mortgage calculator, mortgage calculator online free, monthly mortgage payment calculator, PITI calculator" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/mortgage-calculator.html" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Fixora" />
+  <meta property="og:site_name" content="Fixoona" />
   <meta property="og:title" content="Free Mortgage Calculator Online" />
-  <meta property="og:description" content="Estimate your monthly mortgage payment for free, including taxes, insurance, and PMI." />
+  <meta property="og:description" content="Estimate your true monthly mortgage payment for free, including taxes, insurance, auto-calculated PMI, and HOA fees." />
   <meta property="og:url" content="https://fixoona.com/tools/mortgage-calculator.html" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Mortgage Calculator Online" />
-  <meta name="twitter:description" content="Estimate your monthly mortgage payment for free, including taxes, insurance, and PMI." />
+  <meta name="twitter:description" content="Estimate your true monthly mortgage payment for free, including taxes, insurance, auto-calculated PMI, and HOA fees." />
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='24' width='13' height='52' rx='6.5' fill='white'/%3E%3Crect x='30' y='24' width='38' height='13' rx='6.5' fill='white'/%3E%3Crect x='30' y='47' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='28' y='22' width='13' height='56' rx='6.5' fill='white'/%3E%3Cpath d='M28 22 L67 22 Q73 22 70.5 27.5 L45 37 Q28 40 28 30 Z' fill='white'/%3E%3Crect x='28' y='46' width='27' height='13' rx='6.5' fill='white'/%3E%3Ccircle cx='76' cy='28' r='7' fill='%23a5f3fc'/%3E%3C/svg%3E" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -58,13 +58,23 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Does this include PMI automatically?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No — PMI isn't calculated automatically since eligibility and rates vary by lender. If your down payment is under 20% of the home price, enter your lender's quoted monthly PMI amount in the PMI field and it will be added to your total monthly payment." }
+        "name": "Does this calculate PMI automatically?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — enter a PMI rate (a percentage of the loan amount per year; typical rates run about 0.3%–1.5%) and the calculator automatically adds monthly PMI to your payment whenever your down payment is below 20% of the home price. It also estimates the month PMI is projected to be removed, based on when standard amortization brings your loan balance down to 80% of the original home price. Once your down payment is 20% or more, PMI is automatically excluded." }
       },
       {
         "@type": "Question",
         "name": "Is property tax included in the estimate?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Only if you enter it. Property tax varies by county and assessed value, so this calculator doesn't guess a number for you — enter your annual property tax amount and it's divided by 12 and added to your monthly payment." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Only if you enter it. Property tax varies by county and assessed value, so this calculator doesn't guess a number for you — enter it either as an annual dollar amount or as a percentage of the home price per year, and it's divided by 12 and added to your monthly payment." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is PITI, and does this calculator show it?",
+        "acceptedAnswer": { "@type": "Answer", "text": "PITI stands for Principal, Interest, Taxes, and Insurance — the four core components of a typical mortgage payment. This calculator adds your Principal & Interest to property tax, home insurance, PMI (if applicable), and HOA fees to show your full real-world Total Monthly Payment, not just the loan's P&I portion." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this calculator include HOA fees?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — enter your monthly HOA (homeowners association) fee if your property has one, and it's added directly to your Total Monthly Payment. HOA fees aren't technically part of PITI, but they're a real recurring cost many homeowners budget for, so this calculator folds them into the full monthly total." }
       },
       {
         "@type": "Question",
@@ -91,8 +101,8 @@
   <header class="site-header">
     <nav class="nav container" aria-label="Primary">
       <a href="../index.html" class="nav-brand">
-        <span class="brand-mark" aria-hidden="true"><svg class="brand-svg" viewBox="0 0 100 100"><rect x="30" y="24" width="13" height="52" rx="6.5" fill="#fff"/><rect x="30" y="24" width="38" height="13" rx="6.5" fill="#fff"/><rect x="30" y="47" width="29" height="13" rx="6.5" fill="#fff"/></svg></span>
-        Fixora
+        <span class="brand-mark" aria-hidden="true"><svg class="brand-svg" viewBox="0 0 100 100"><rect x="28" y="22" width="13" height="56" rx="6.5" fill="#fff"/><path d="M28 22 L67 22 Q73 22 70.5 27.5 L45 37 Q28 40 28 30 Z" fill="#fff"/><rect x="28" y="46" width="27" height="13" rx="6.5" fill="#fff"/><circle cx="76" cy="28" r="7" fill="#a5f3fc"/></svg></span>
+        Fixoona
       </a>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -119,7 +129,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🏠</div>
       <h1>Mortgage Calculator</h1>
-      <p>Estimate your monthly mortgage payment — principal, interest, taxes, insurance, and PMI — with a full cost breakdown.</p>
+      <p>Estimate your true monthly mortgage payment (PITI) — principal, interest, taxes, insurance, auto-calculated PMI with a removal estimate, and HOA fees — with a full cost breakdown.</p>
     </section>
 
     <section class="container">
@@ -132,7 +142,10 @@
           <div class="field">
             <label for="downPayment">Down Payment ($)</label>
             <input type="number" id="downPayment" min="0" step="1000" value="80000" />
-            <span id="downPaymentPct" style="display:block;margin-top:6px;font-size:0.8rem;color:var(--color-text-muted);">20.0% of home price</span>
+          </div>
+          <div class="field">
+            <label for="downPaymentPercent">Down Payment (%)</label>
+            <input type="number" id="downPaymentPercent" min="0" max="100" step="0.1" value="20" />
           </div>
           <div class="field">
             <label for="loanTerm">Loan Term (years)</label>
@@ -146,8 +159,15 @@
             <input type="number" id="interestRate" min="0" step="0.01" value="6.5" />
           </div>
           <div class="field">
-            <label for="propertyTax">Annual Property Tax ($, optional)</label>
+            <label for="propertyTax">Property Tax (optional)</label>
             <input type="number" id="propertyTax" min="0" step="100" value="0" />
+          </div>
+          <div class="field" style="max-width:220px;">
+            <label for="propertyTaxUnit">Property Tax Unit</label>
+            <select id="propertyTaxUnit">
+              <option value="dollar" selected>$ per year</option>
+              <option value="percent">% of home price / year</option>
+            </select>
           </div>
           <div class="field">
             <label for="homeInsurance">Annual Home Insurance ($, optional)</label>
@@ -156,20 +176,26 @@
         </div>
 
         <div class="row">
+          <div class="field" style="max-width:320px;">
+            <label for="pmiRate">PMI Rate (%/year of loan amount, optional)</label>
+            <input type="number" id="pmiRate" min="0" step="0.01" value="0.5" />
+          </div>
           <div class="field" style="max-width:280px;">
-            <label for="pmi">Monthly PMI ($, optional)</label>
-            <input type="number" id="pmi" min="0" step="10" value="0" />
+            <label for="hoaFee">Monthly HOA Fee ($, optional)</label>
+            <input type="number" id="hoaFee" min="0" step="10" value="0" />
           </div>
         </div>
 
         <div class="output-box" id="statusBox"></div>
+        <div class="output-box" id="pmiBox" style="margin-top:10px;"></div>
 
         <div class="stat-row" id="resultRow" style="display:none;">
           <div class="stat"><strong id="statPI">–</strong><span>Principal &amp; Interest</span></div>
-          <div class="stat"><strong id="statTax">–</strong><span>Monthly Tax</span></div>
-          <div class="stat"><strong id="statInsurance">–</strong><span>Monthly Insurance</span></div>
+          <div class="stat"><strong id="statTax">–</strong><span>Monthly Property Tax</span></div>
+          <div class="stat"><strong id="statInsurance">–</strong><span>Monthly Home Insurance</span></div>
           <div class="stat"><strong id="statPMI">–</strong><span>Monthly PMI</span></div>
-          <div class="stat"><strong id="statTotalMonthly">–</strong><span>Total Monthly Payment</span></div>
+          <div class="stat"><strong id="statHOA">–</strong><span>Monthly HOA</span></div>
+          <div class="stat"><strong id="statTotalMonthly">–</strong><span>Total Monthly Payment (PITI + PMI + HOA)</span></div>
           <div class="stat"><strong id="statTotalInterest">–</strong><span>Total Interest Paid</span></div>
           <div class="stat"><strong id="statTotalPaid">–</strong><span>Total Paid Over Loan Term</span></div>
         </div>
@@ -178,22 +204,30 @@
       <div class="howto">
         <h2>How to Estimate a Mortgage Payment</h2>
         <ol class="howto-steps">
-          <li>Enter the home price and your planned down payment (the percent of the home price updates automatically).</li>
+          <li>Enter the home price and your planned down payment — as a dollar amount or a percentage, either field updates the other automatically.</li>
           <li>Enter the loan term in years and the annual interest rate.</li>
-          <li>Optionally enter annual property tax, annual home insurance, and monthly PMI if they apply to you.</li>
-          <li>Read your full payment breakdown below — it recalculates live as you adjust any field.</li>
+          <li>Optionally enter property tax (as a $ amount or % of home price per year), annual home insurance, a PMI rate, and a monthly HOA fee if they apply to you.</li>
+          <li>Read your full PITI breakdown below, including whether PMI applies and when it's projected to drop off — it recalculates live as you adjust any field.</li>
         </ol>
       </div>
 
       <div class="faq">
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
-          <summary>Does this include PMI automatically?</summary>
-          <p>No — PMI isn't calculated automatically since eligibility and rates vary by lender. If your down payment is under 20% of the home price, enter your lender's quoted monthly PMI amount in the PMI field and it will be added to your total monthly payment.</p>
+          <summary>Does this calculate PMI automatically?</summary>
+          <p>Yes — enter a PMI rate (a percentage of the loan amount per year; typical rates run about 0.3%–1.5%) and the calculator automatically adds monthly PMI to your payment whenever your down payment is below 20% of the home price. It also estimates the month PMI is projected to be removed, based on when standard amortization brings your loan balance down to 80% of the original home price. Once your down payment is 20% or more, PMI is automatically excluded.</p>
         </details>
         <details class="faq-item">
           <summary>Is property tax included in the estimate?</summary>
-          <p>Only if you enter it. Property tax varies by county and assessed value, so this calculator doesn't guess a number for you — enter your annual property tax amount and it's divided by 12 and added to your monthly payment.</p>
+          <p>Only if you enter it. Property tax varies by county and assessed value, so this calculator doesn't guess a number for you — enter it either as an annual dollar amount or as a percentage of the home price per year, and it's divided by 12 and added to your monthly payment.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is PITI, and does this calculator show it?</summary>
+          <p>PITI stands for Principal, Interest, Taxes, and Insurance — the four core components of a typical mortgage payment. This calculator adds your Principal &amp; Interest to property tax, home insurance, PMI (if applicable), and HOA fees to show your full real-world Total Monthly Payment, not just the loan's P&amp;I portion.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this calculator include HOA fees?</summary>
+          <p>Yes — enter your monthly HOA (homeowners association) fee if your property has one, and it's added directly to your Total Monthly Payment. HOA fees aren't technically part of PITI, but they're a real recurring cost many homeowners budget for, so this calculator folds them into the full monthly total.</p>
         </details>
         <details class="faq-item">
           <summary>What formula does this calculator use for the monthly payment?</summary>
@@ -244,26 +278,28 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="../index.html" class="nav-brand">
-            <span class="brand-mark" aria-hidden="true"><svg class="brand-svg" viewBox="0 0 100 100"><rect x="30" y="24" width="13" height="52" rx="6.5" fill="#fff"/><rect x="30" y="24" width="38" height="13" rx="6.5" fill="#fff"/><rect x="30" y="47" width="29" height="13" rx="6.5" fill="#fff"/></svg></span>
-            Fixora
+            <span class="brand-mark" aria-hidden="true"><svg class="brand-svg" viewBox="0 0 100 100"><rect x="28" y="22" width="13" height="56" rx="6.5" fill="#fff"/><path d="M28 22 L67 22 Q73 22 70.5 27.5 L45 37 Q28 40 28 30 Z" fill="#fff"/><rect x="28" y="46" width="27" height="13" rx="6.5" fill="#fff"/><circle cx="76" cy="28" r="7" fill="#a5f3fc"/></svg></span>
+            Fixoona
           </a>
           <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
         </div>
         <div class="footer-col">
-          <h4>Tools</h4>
+          <h4>Popular Tools</h4>
           <ul>
             <li><a href="pdf-compressor.html">PDF Compressor</a></li>
             <li><a href="image-resizer.html">Image Resizer</a></li>
             <li><a href="word-counter.html">Word Counter</a></li>
             <li><a href="password-generator.html">Password Generator</a></li>
+            <li><a href="../all-tools.html">See All 100+ Tools →</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Guides</h4>
+          <h4>Popular Guides</h4>
           <ul>
             <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
             <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
             <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
+            <li><a href="../index.html#guides">See All Guides →</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -277,7 +313,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© <span id="year"></span> Fixora. All rights reserved.</span>
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
       </div>
     </div>
   </footer>
@@ -286,17 +322,65 @@
   <script>
     var homePrice = document.getElementById("homePrice");
     var downPayment = document.getElementById("downPayment");
-    var downPaymentPct = document.getElementById("downPaymentPct");
+    var downPaymentPercent = document.getElementById("downPaymentPercent");
     var loanTerm = document.getElementById("loanTerm");
     var interestRate = document.getElementById("interestRate");
     var propertyTax = document.getElementById("propertyTax");
+    var propertyTaxUnit = document.getElementById("propertyTaxUnit");
     var homeInsurance = document.getElementById("homeInsurance");
-    var pmi = document.getElementById("pmi");
+    var pmiRate = document.getElementById("pmiRate");
+    var hoaFee = document.getElementById("hoaFee");
     var statusBox = document.getElementById("statusBox");
+    var pmiBox = document.getElementById("pmiBox");
     var resultRow = document.getElementById("resultRow");
+
+    var PMI_LTV_THRESHOLD = 0.8; // PMI is treated as required once loan-to-value exceeds 80% (down payment under 20%)
 
     function formatMoney(n) {
       return "$" + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function syncPercentFromDollar() {
+      var price = parseFloat(homePrice.value);
+      var down = parseFloat(downPayment.value);
+      if (price > 0 && !isNaN(down) && down >= 0) {
+        downPaymentPercent.value = ((down / price) * 100).toFixed(2);
+      }
+    }
+
+    function syncDollarFromPercent() {
+      var price = parseFloat(homePrice.value);
+      var pct = parseFloat(downPaymentPercent.value);
+      if (price > 0 && !isNaN(pct) && pct >= 0) {
+        downPayment.value = ((pct / 100) * price).toFixed(2);
+      }
+    }
+
+    // Finds the first month at which a standard (no extra-payment) amortization
+    // schedule brings the loan balance down to 80% of the original home price —
+    // the point at which PMI is typically eligible to be removed.
+    function findPmiDropoffMonth(loanAmount, annualRate, pi, n, targetBalance) {
+      if (loanAmount <= targetBalance) return 0;
+      var r = annualRate / 100 / 12;
+      var balance = loanAmount;
+      var month = 0;
+      while (balance > targetBalance && month < n) {
+        month++;
+        var interestPortion = annualRate === 0 ? 0 : balance * r;
+        var principalPortion = pi - interestPortion;
+        if (principalPortion <= 0) return -1;
+        balance -= principalPortion;
+      }
+      return balance <= targetBalance ? month : -1;
+    }
+
+    function formatYearsMonths(months) {
+      var yrs = Math.floor(months / 12);
+      var rem = months % 12;
+      var parts = [];
+      if (yrs > 0) parts.push(yrs + (yrs === 1 ? " yr" : " yrs"));
+      if (rem > 0 || yrs === 0) parts.push(rem + (rem === 1 ? " mo" : " mos"));
+      return parts.join(" ");
     }
 
     function calculate() {
@@ -304,23 +388,20 @@
       var down = parseFloat(downPayment.value);
       var years = parseFloat(loanTerm.value);
       var annualRate = parseFloat(interestRate.value);
-      var taxAnnual = parseFloat(propertyTax.value) || 0;
+      var taxInput = parseFloat(propertyTax.value) || 0;
       var insuranceAnnual = parseFloat(homeInsurance.value) || 0;
-      var pmiMonthly = parseFloat(pmi.value) || 0;
-
-      if (!price || price <= 0 || isNaN(down) || down < 0) {
-        downPaymentPct.textContent = "";
-      } else {
-        downPaymentPct.textContent = ((down / price) * 100).toFixed(1) + "% of home price";
-      }
+      var pmiRatePct = parseFloat(pmiRate.value) || 0;
+      var hoaMonthly = parseFloat(hoaFee.value) || 0;
 
       if (!price || price <= 0 || isNaN(down) || down < 0 || down >= price || !years || years <= 0 || isNaN(annualRate) || annualRate < 0) {
         resultRow.style.display = "none";
         statusBox.textContent = "Enter a valid home price, down payment (less than the home price), loan term, and interest rate.";
+        pmiBox.textContent = "";
         return;
       }
 
       var loanAmount = price - down;
+      var downPct = (down / price) * 100;
       var n = years * 12;
       var pi;
 
@@ -331,9 +412,15 @@
         pi = loanAmount * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
       }
 
+      var taxAnnual = propertyTaxUnit.value === "percent" ? (taxInput / 100) * price : taxInput;
       var monthlyTax = taxAnnual / 12;
       var monthlyInsurance = insuranceAnnual / 12;
-      var totalMonthly = pi + monthlyTax + monthlyInsurance + pmiMonthly;
+
+      var targetBalance = price * PMI_LTV_THRESHOLD;
+      var pmiRequired = loanAmount > targetBalance;
+      var pmiMonthly = pmiRequired ? (pmiRatePct / 100 * loanAmount) / 12 : 0;
+
+      var totalMonthly = pi + monthlyTax + monthlyInsurance + pmiMonthly + hoaMonthly;
       var totalPaid = pi * n;
       var totalInterest = totalPaid - loanAmount;
 
@@ -342,17 +429,37 @@
       document.getElementById("statTax").textContent = formatMoney(monthlyTax);
       document.getElementById("statInsurance").textContent = formatMoney(monthlyInsurance);
       document.getElementById("statPMI").textContent = formatMoney(pmiMonthly);
+      document.getElementById("statHOA").textContent = formatMoney(hoaMonthly);
       document.getElementById("statTotalMonthly").textContent = formatMoney(totalMonthly);
       document.getElementById("statTotalInterest").textContent = formatMoney(totalInterest);
       document.getElementById("statTotalPaid").textContent = formatMoney(totalPaid);
 
-      statusBox.textContent = "Loan amount: " + formatMoney(loanAmount) + " over " + years + " years at " + annualRate + "% APR.";
+      statusBox.textContent = "Loan amount: " + formatMoney(loanAmount) + " (" + (100 - downPct).toFixed(1) + "% financed) over " + years + " years at " + annualRate + "% APR.";
+
+      if (!pmiRequired) {
+        pmiBox.textContent = "No PMI required — your down payment of " + downPct.toFixed(1) + "% already meets the 20% equity threshold.";
+      } else if (pmiRatePct <= 0) {
+        pmiBox.textContent = "Your down payment is " + downPct.toFixed(1) + "% (under 20%), so PMI would normally apply — enter a PMI rate above to include it in your monthly payment and see when it's projected to drop off.";
+      } else {
+        var dropoffMonth = findPmiDropoffMonth(loanAmount, annualRate, pi, n, targetBalance);
+        if (dropoffMonth > 0) {
+          pmiBox.textContent = "PMI applies because your down payment is " + downPct.toFixed(1) + "% (under 20%). Based on standard amortization, it's projected to be removed after month " + dropoffMonth + " (" + formatYearsMonths(dropoffMonth) + " in), once your loan balance falls to 80% of the original home price (" + formatMoney(targetBalance) + ").";
+        } else {
+          pmiBox.textContent = "PMI applies because your down payment is " + downPct.toFixed(1) + "% (under 20%). It isn't projected to reach the 80% loan-to-value removal threshold within this loan's term based on standard amortization.";
+        }
+      }
     }
 
-    [homePrice, downPayment, loanTerm, interestRate, propertyTax, homeInsurance, pmi].forEach(function (el) {
+    downPayment.addEventListener("input", function () { syncPercentFromDollar(); calculate(); });
+    downPaymentPercent.addEventListener("input", function () { syncDollarFromPercent(); calculate(); });
+    homePrice.addEventListener("input", function () { syncPercentFromDollar(); calculate(); });
+
+    [loanTerm, interestRate, propertyTax, homeInsurance, pmiRate, hoaFee].forEach(function (el) {
       el.addEventListener("input", calculate);
     });
+    propertyTaxUnit.addEventListener("change", calculate);
 
+    syncPercentFromDollar();
     calculate();
   </script>
 </body>
