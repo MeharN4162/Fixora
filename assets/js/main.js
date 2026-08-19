@@ -695,43 +695,6 @@ document.documentElement.setAttribute("data-js", "true");
     });
   }
 
-  /* ---------- Homepage category browsing: show-more ---------- */
-  function initCategoryBrowsing() {
-    var sections = Array.prototype.slice.call(document.querySelectorAll(".tool-category[id^='cat-']"));
-    if (!sections.length) return;
-
-    var VISIBLE_COUNT = 12;
-
-    // Collapse long category grids behind a "Show N more" toggle.
-    sections.forEach(function (section) {
-      var grid = section.querySelector(".grid");
-      if (!grid) return;
-      var cards = Array.prototype.slice.call(grid.children);
-      if (cards.length <= VISIBLE_COUNT) return;
-
-      var extra = cards.slice(VISIBLE_COUNT);
-      extra.forEach(function (card) { card.classList.add("card-extra"); });
-
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "show-more-btn";
-      var remaining = extra.length;
-      btn.innerHTML = "<span class=\"label\">Show " + remaining + " more</span><span class=\"chev\" aria-hidden=\"true\">▾</span>";
-
-      btn.addEventListener("click", function () {
-        var isOpen = section.classList.toggle("expanded");
-        btn.querySelector(".label").textContent = isOpen ? "Show fewer" : "Show " + remaining + " more";
-        if (isOpen) {
-          initCardDescExpand();
-        } else {
-          section.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      });
-
-      grid.insertAdjacentElement("afterend", btn);
-    });
-  }
-
   /* ---------- Toast notifications ---------- */
   function ensureToastContainer() {
     var el = document.querySelector(".toast-container");
@@ -887,7 +850,6 @@ document.documentElement.setAttribute("data-js", "true");
     initCountUp();
     initCommandPalette();
     initCategoryChip();
-    initCategoryBrowsing();
     initCardDescExpand();
     initCookieBanner();
     initBackToTop();

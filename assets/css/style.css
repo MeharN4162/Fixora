@@ -825,46 +825,6 @@ p {
   margin-bottom: 0;
 }
 
-/* "Show N more" toggle for long category grids */
-.card-extra {
-  display: none;
-}
-
-.tool-category.expanded .card-extra {
-  display: flex;
-  animation: fadeInUp 0.4s ease both;
-}
-
-.show-more-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 20px;
-  padding: 11px 22px;
-  border-radius: var(--radius-md);
-  border: 1px dashed var(--color-border);
-  background: transparent;
-  color: var(--color-primary-dark);
-  font-weight: 600;
-  font-size: 0.92rem;
-  cursor: pointer;
-  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
-}
-
-.show-more-btn:hover {
-  border-color: var(--color-primary);
-  background: var(--color-bg-alt);
-  transform: translateY(-1px);
-}
-
-.show-more-btn .chev {
-  transition: transform 0.25s ease;
-}
-
-.tool-category.expanded .show-more-btn .chev {
-  transform: rotate(180deg);
-}
-
 .tool-category-head {
   display: flex;
   align-items: center;
