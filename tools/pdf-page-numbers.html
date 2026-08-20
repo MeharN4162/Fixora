@@ -6,7 +6,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free PDF Page Numbers Tool Online | Fixoona</title>
-  <meta name="description" content="Add page numbers to a PDF online for free, right in your browser. Choose position, starting number, and format. No uploads, no sign-up." />
+  <meta name="description" content="Add page numbers to a PDF online for free, right in your browser. Choose position, format, starting number, font size, and optionally skip the first page. No uploads, no sign-up." />
   <meta name="keywords" content="add page numbers to pdf, pdf page numbers online free, number pdf pages" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/pdf-page-numbers" />
@@ -64,7 +64,7 @@
       {
         "@type": "Question",
         "name": "What does the \"1 of 10, 2 of 10…\" format actually count?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The total shown is calculated from your Start At number plus the page count, not just the raw page count — so if you start at 5 on a 10-page document, it will show \"5 of 14,\" reflecting the numbering range rather than the physical page total." }
+        "acceptedAnswer": { "@type": "Answer", "text": "The total shown is calculated from your Start At number plus the number of pages that actually get numbered, not just the raw page count — so if you start at 5 on a 10-page document, it will show \"5 of 14,\" reflecting the numbering range rather than the physical page total. If Skip First Page is also checked, one fewer page gets numbered, so the total drops by one too — starting at 5 on a 10-page document with the first page skipped shows \"5 of 13\" on page 2." }
       },
       {
         "@type": "Question",
@@ -74,12 +74,17 @@
       {
         "@type": "Question",
         "name": "Can I add page numbers to only some pages, like skipping a cover page?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No — this tool applies the same position, format, and starting number to every page in the document; there's no option to exclude specific pages like a title page." }
+        "acceptedAnswer": { "@type": "Answer", "text": "You can skip exactly the first page — check \"Skip First Page\" and it's left blank while your Start At number appears starting on page 2 instead. There's no option to exclude other individual pages beyond that; every page after the first (or every page, if the box is unchecked) gets the same position, format, and sequential numbering." }
       },
       {
         "@type": "Question",
         "name": "Does adding page numbers affect the PDF's original content?",
         "acceptedAnswer": { "@type": "Answer", "text": "No — page numbers are drawn as new text on top of each existing page; nothing already on the page is removed or altered." }
+      },
+      {
+        "@type": "Question",
+        "name": "What page number formats can I choose from?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Five: \"1, 2, 3…\" (a bare number), \"Page 1, Page 2…\", \"1 of 10, 2 of 10…\", \"Page 1 of 10…\", and \"1 / 10…\" — pick whichever matches your document's style." }
       }
     ]
   }
@@ -148,6 +153,8 @@
               <option value="n" selected>1, 2, 3…</option>
               <option value="page-n">Page 1, Page 2…</option>
               <option value="n-of-total">1 of 10, 2 of 10…</option>
+              <option value="page-n-of-total">Page 1 of 10…</option>
+              <option value="n-slash-total">1 / 10…</option>
             </select>
           </div>
           <div class="field">
@@ -161,6 +168,8 @@
           <input type="range" id="fontSizeRange" min="8" max="24" value="11" style="width:100%;" />
         </div>
 
+        <label class="check-row"><input type="checkbox" id="skipFirstPage" /> Skip first page (e.g., a title/cover page — it's left blank and the Start At number appears on page 2 instead)</label>
+
         <div class="actions">
           <button class="btn btn-primary" id="applyBtn" disabled>Add Page Numbers</button>
           <a class="btn btn-secondary" id="downloadBtn" style="display:none;" download="numbered.pdf">Download PDF</a>
@@ -173,8 +182,9 @@
         <h2>How to Add Page Numbers to a PDF</h2>
         <ol class="howto-steps">
           <li>Upload your PDF.</li>
-          <li>Choose a Position (six options: top/bottom paired with left/center/right) and a Format ("1, 2, 3…", "Page 1, Page 2…", or "1 of 10, 2 of 10…").</li>
+          <li>Choose a Position (six options: top/bottom paired with left/center/right) and a Format ("1, 2, 3…", "Page 1, Page 2…", "1 of 10, 2 of 10…", "Page 1 of 10…", or "1 / 10…").</li>
           <li>Set the Start At number if you don't want numbering to begin at 1, and adjust the Font Size slider.</li>
+          <li>Check "Skip first page" if your PDF has a cover or title page you don't want numbered — the first page is left blank and your Start At number appears on the second page instead.</li>
           <li>Click "Add Page Numbers" and download the numbered PDF.</li>
         </ol>
       </div>
@@ -187,7 +197,7 @@
         </details>
         <details class="faq-item">
           <summary>What does the "1 of 10, 2 of 10…" format actually count?</summary>
-          <p>The total shown is calculated from your Start At number plus the page count, not just the raw page count — so if you start at 5 on a 10-page document, it will show "5 of 14," reflecting the numbering range rather than the physical page total.</p>
+          <p>The total shown is calculated from your Start At number plus the number of pages that actually get numbered, not just the raw page count — so if you start at 5 on a 10-page document, it will show "5 of 14," reflecting the numbering range rather than the physical page total. If Skip First Page is also checked, one fewer page gets numbered, so the total drops by one too — starting at 5 on a 10-page document with the first page skipped shows "5 of 13" on page 2.</p>
         </details>
         <details class="faq-item">
           <summary>Will the numbers overlap with my existing page content?</summary>
@@ -195,11 +205,15 @@
         </details>
         <details class="faq-item">
           <summary>Can I add page numbers to only some pages, like skipping a cover page?</summary>
-          <p>No — this tool applies the same position, format, and starting number to every page in the document; there's no option to exclude specific pages like a title page.</p>
+          <p>You can skip exactly the first page — check "Skip First Page" and it's left blank while your Start At number appears starting on page 2 instead. There's no option to exclude other individual pages beyond that; every page after the first (or every page, if the box is unchecked) gets the same position, format, and sequential numbering.</p>
         </details>
         <details class="faq-item">
           <summary>Does adding page numbers affect the PDF's original content?</summary>
           <p>No — page numbers are drawn as new text on top of each existing page; nothing already on the page is removed or altered.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What page number formats can I choose from?</summary>
+          <p>Five: "1, 2, 3…" (a bare number), "Page 1, Page 2…", "1 of 10, 2 of 10…", "Page 1 of 10…", and "1 / 10…" — pick whichever matches your document's style.</p>
         </details>
       </div>
 
@@ -314,6 +328,8 @@
     function formatLabel(format, num, total) {
       if (format === "page-n") return "Page " + num;
       if (format === "n-of-total") return num + " of " + total;
+      if (format === "page-n-of-total") return "Page " + num + " of " + total;
+      if (format === "n-slash-total") return num + " / " + total;
       return String(num);
     }
 
@@ -330,14 +346,23 @@
         var position = document.getElementById("positionSelect").value;
         var format = document.getElementById("formatSelect").value;
         var startAt = parseInt(document.getElementById("startNumber").value, 10) || 1;
+        var skipFirst = document.getElementById("skipFirstPage").checked;
 
         var pages = doc.getPages();
         var total = pages.length;
         var margin = 30;
 
+        // Pages actually getting a number: all of them, unless the first page is skipped.
+        var numberedCount = skipFirst ? Math.max(total - 1, 0) : total;
+        // Highest number shown, used as the "total" in formats like "5 of 14".
+        var maxNum = numberedCount > 0 ? startAt + numberedCount - 1 : startAt;
+
         pages.forEach(function (page, i) {
-          var num = startAt + i;
-          var label = formatLabel(format, num, startAt + total - 1);
+          if (skipFirst && i === 0) return; // leave the first (title/cover) page blank
+
+          var numberedIndex = skipFirst ? i - 1 : i;
+          var num = startAt + numberedIndex;
+          var label = formatLabel(format, num, maxNum);
           var textWidth = font.widthOfTextAtSize(label, fontSize);
           var { width, height } = page.getSize();
 
@@ -360,7 +385,9 @@
         downloadBtn.download = currentFile.name.replace(/\.pdf$/i, "") + "-numbered.pdf";
         downloadBtn.style.display = "inline-flex";
 
-        statusBox.textContent = "Done! Added page numbers to " + total + " page(s).";
+        statusBox.textContent = skipFirst
+          ? "Done! Added page numbers to " + numberedCount + " of " + total + " page(s) (first page skipped)."
+          : "Done! Added page numbers to " + total + " page(s).";
       } catch (err) {
         console.error(err);
         statusBox.textContent = "Something went wrong adding page numbers.";
