@@ -6,8 +6,8 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free QR Code Generator Online | Fixoona</title>
-  <meta name="description" content="Generate a QR code from any text, link, or message online for free. Download as a high-resolution PNG, right in your browser. No uploads, no sign-up." />
-  <meta name="keywords" content="qr code generator, create qr code online free, qr code from url" />
+  <meta name="description" content="Generate a QR code from any text, link, Wi-Fi network, email, phone number, or SMS online for free. Customize the colors, with a contrast check to keep it scannable. Download as a PNG, right in your browser. No uploads, no sign-up." />
+  <meta name="keywords" content="qr code generator, create qr code online free, qr code from url, wifi qr code generator, qr code color customizer" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/qr-code-generator" />
 
@@ -80,6 +80,16 @@
         "@type": "Question",
         "name": "Is my text sent to a server to generate the code?",
         "acceptedAnswer": { "@type": "Answer", "text": "No — the QR code is built entirely in your browser using a local QR-encoding library, so nothing you type is uploaded anywhere." }
+      },
+      {
+        "@type": "Question",
+        "name": "What do the Wi-Fi, Email, Phone, and SMS content types do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Instead of typing a raw link, these presets build the correctly formatted payload for you — for example, a Wi-Fi QR code encodes your network name, password, and security type in the standard WIFI: format so a phone camera can join the network directly, and Email/Phone/SMS build mailto:, tel:, and SMSTO: links that open the right app pre-filled when scanned." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I change the QR code's colors?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — use the Foreground Color and Background Color pickers. Keep them high-contrast (a dark foreground on a light background works best); the tool calculates the contrast ratio between your two colors and warns you if it's too low for most scanners to read reliably." }
       }
     ]
   }
@@ -124,8 +134,85 @@
     <section class="container">
       <div class="tool-panel">
         <div class="field">
-          <label for="qrText">Text or URL</label>
-          <textarea id="qrText" placeholder="https://example.com or any text…" style="min-height:110px;"></textarea>
+          <label for="contentType">Content Type</label>
+          <select id="contentType">
+            <option value="text" selected>Plain Text / URL</option>
+            <option value="wifi">Wi-Fi Network</option>
+            <option value="email">Email</option>
+            <option value="phone">Phone Number</option>
+            <option value="sms">SMS</option>
+          </select>
+        </div>
+
+        <div id="textFields">
+          <div class="field">
+            <label for="qrText">Text or URL</label>
+            <textarea id="qrText" placeholder="https://example.com or any text…" style="min-height:110px;"></textarea>
+          </div>
+        </div>
+
+        <div id="wifiFields" style="display:none;">
+          <div class="row">
+            <div class="field">
+              <label for="wifiSsid">Network Name (SSID)</label>
+              <input type="text" id="wifiSsid" placeholder="MyWiFiNetwork" />
+            </div>
+            <div class="field">
+              <label for="wifiSecurity">Security</label>
+              <select id="wifiSecurity">
+                <option value="WPA" selected>WPA/WPA2/WPA3</option>
+                <option value="WEP">WEP</option>
+                <option value="nopass">None (open network)</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="wifiPassword">Password</label>
+              <input type="text" id="wifiPassword" placeholder="Network password" />
+            </div>
+            <div class="field" style="display:flex;align-items:flex-end;">
+              <label style="display:flex;align-items:center;gap:8px;font-weight:500;"><input type="checkbox" id="wifiHidden" style="width:auto;" /> Hidden network</label>
+            </div>
+          </div>
+        </div>
+
+        <div id="emailFields" style="display:none;">
+          <div class="field">
+            <label for="emailTo">To</label>
+            <input type="email" id="emailTo" placeholder="someone@example.com" />
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="emailSubject">Subject (optional)</label>
+              <input type="text" id="emailSubject" placeholder="Subject line" />
+            </div>
+            <div class="field">
+              <label for="emailBody">Body (optional)</label>
+              <input type="text" id="emailBody" placeholder="Message body" />
+            </div>
+          </div>
+        </div>
+
+        <div id="phoneFields" style="display:none;">
+          <div class="field">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="tel" id="phoneNumber" placeholder="+15551234567" />
+          </div>
+        </div>
+
+        <div id="smsFields" style="display:none;">
+          <div class="row">
+            <div class="field">
+              <label for="smsNumber">Phone Number</label>
+              <input type="tel" id="smsNumber" placeholder="+15551234567" />
+            </div>
+            <div class="field">
+              <label for="smsMessage">Message (optional)</label>
+              <input type="text" id="smsMessage" placeholder="Pre-filled message" />
+            </div>
+          </div>
+          <p style="font-size:0.8rem;color:var(--color-text-muted);">SMS QR format support varies slightly by scanning app — most pre-fill the number and message correctly, but a few only pre-fill the number.</p>
         </div>
 
         <div class="row">
@@ -147,6 +234,18 @@
             </select>
           </div>
         </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="fgColor">Foreground Color</label>
+            <input type="color" id="fgColor" value="#000000" style="width:100%;height:44px;border:1px solid var(--color-border);border-radius:8px;cursor:pointer;" />
+          </div>
+          <div class="field">
+            <label for="bgColor">Background Color</label>
+            <input type="color" id="bgColor" value="#ffffff" style="width:100%;height:44px;border:1px solid var(--color-border);border-radius:8px;cursor:pointer;" />
+          </div>
+        </div>
+        <p id="contrastWarning" style="display:none;font-size:0.85rem;color:var(--color-danger);margin-top:-6px;">⚠ These colors are too close in contrast — most scanners will struggle to read this code. Try a darker foreground or lighter background.</p>
 
         <div class="actions">
           <button class="btn btn-primary" id="generateBtn">Generate QR Code</button>
@@ -189,6 +288,14 @@
         <details class="faq-item">
           <summary>Is my text sent to a server to generate the code?</summary>
           <p>No — the QR code is built entirely in your browser using a local QR-encoding library, so nothing you type is uploaded anywhere.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What do the Wi-Fi, Email, Phone, and SMS content types do?</summary>
+          <p>Instead of typing a raw link, these presets build the correctly formatted payload for you — for example, a Wi-Fi QR code encodes your network name, password, and security type in the standard WIFI: format so a phone camera can join the network directly, and Email/Phone/SMS build mailto:, tel:, and SMSTO: links that open the right app pre-filled when scanned.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I change the QR code's colors?</summary>
+          <p>Yes — use the Foreground Color and Background Color pickers. Keep them high-contrast (a dark foreground on a light background works best); the tool calculates the contrast ratio between your two colors and warns you if it's too low for most scanners to read reliably.</p>
         </details>
       </div>
 
@@ -270,15 +377,103 @@
     var statusBox = document.getElementById("statusBox");
     var qrPreview = document.getElementById("qrPreview");
     var downloadBtn = document.getElementById("downloadBtn");
+    var contentType = document.getElementById("contentType");
+    var fgColor = document.getElementById("fgColor");
+    var bgColor = document.getElementById("bgColor");
+    var contrastWarning = document.getElementById("contrastWarning");
+
+    var fieldPanels = {
+      text: document.getElementById("textFields"),
+      wifi: document.getElementById("wifiFields"),
+      email: document.getElementById("emailFields"),
+      phone: document.getElementById("phoneFields"),
+      sms: document.getElementById("smsFields")
+    };
+
+    contentType.addEventListener("change", function () {
+      Object.keys(fieldPanels).forEach(function (key) {
+        fieldPanels[key].style.display = key === contentType.value ? "block" : "none";
+      });
+    });
+
+    // Escapes characters with special meaning in the WIFI: QR payload format
+    // (backslash, semicolon, comma, colon, double-quote) per the de-facto spec.
+    function escapeWifiField(s) {
+      return String(s).replace(/([\\;,":])/g, "\\$1");
+    }
+
+    function buildPayload() {
+      var type = contentType.value;
+      if (type === "wifi") {
+        var ssid = document.getElementById("wifiSsid").value.trim();
+        var security = document.getElementById("wifiSecurity").value;
+        var password = document.getElementById("wifiPassword").value;
+        var hidden = document.getElementById("wifiHidden").checked;
+        if (!ssid) return null;
+        var pass = security === "nopass" ? "" : escapeWifiField(password);
+        return "WIFI:T:" + security + ";S:" + escapeWifiField(ssid) + ";P:" + pass + ";H:" + (hidden ? "true" : "false") + ";;";
+      }
+      if (type === "email") {
+        var to = document.getElementById("emailTo").value.trim();
+        if (!to) return null;
+        var subject = document.getElementById("emailSubject").value;
+        var body = document.getElementById("emailBody").value;
+        var qs = [];
+        if (subject) qs.push("subject=" + encodeURIComponent(subject));
+        if (body) qs.push("body=" + encodeURIComponent(body));
+        return "mailto:" + to + (qs.length ? "?" + qs.join("&") : "");
+      }
+      if (type === "phone") {
+        var num = document.getElementById("phoneNumber").value.trim();
+        if (!num) return null;
+        return "tel:" + num;
+      }
+      if (type === "sms") {
+        var smsNum = document.getElementById("smsNumber").value.trim();
+        if (!smsNum) return null;
+        var msg = document.getElementById("smsMessage").value;
+        return "SMSTO:" + smsNum + (msg ? ":" + msg : "");
+      }
+      return qrText.value.trim() || null;
+    }
+
+    // WCAG-style relative luminance + contrast ratio, to warn about
+    // foreground/background pairs too close together for a scanner to
+    // reliably tell dark modules from light ones.
+    function relativeLuminance(hex) {
+      var r = parseInt(hex.slice(1, 3), 16) / 255;
+      var g = parseInt(hex.slice(3, 5), 16) / 255;
+      var b = parseInt(hex.slice(5, 7), 16) / 255;
+      function lin(c) { return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }
+      return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+    }
+
+    function contrastRatio(hex1, hex2) {
+      var l1 = relativeLuminance(hex1) + 0.05;
+      var l2 = relativeLuminance(hex2) + 0.05;
+      return l1 > l2 ? l1 / l2 : l2 / l1;
+    }
+
+    function checkContrast() {
+      var ratio = contrastRatio(fgColor.value, bgColor.value);
+      var tooLow = ratio < 3;
+      contrastWarning.style.display = tooLow ? "block" : "none";
+      return !tooLow;
+    }
+
+    fgColor.addEventListener("input", checkContrast);
+    bgColor.addEventListener("input", checkContrast);
 
     var qrGeneration = 0;
 
     document.getElementById("generateBtn").addEventListener("click", function () {
-      var text = qrText.value.trim();
+      var text = buildPayload();
       if (!text) {
-        statusBox.textContent = "Enter some text or a URL first.";
+        statusBox.textContent = "Fill in the required field(s) above first.";
         return;
       }
+
+      var contrastOk = checkContrast();
 
       qrGeneration++;
       var myGeneration = qrGeneration;
@@ -292,35 +487,46 @@
         qr.addData(text);
         qr.make();
 
+        var moduleCount = qr.getModuleCount();
         var cellSize = parseInt(sizeSelect.value, 10);
-        var dataUrl = qr.createDataURL(cellSize, cellSize);
+        var margin = cellSize * 2;
+        var size = moduleCount * cellSize + margin * 2;
 
-        var img = new Image();
-        img.onload = function () {
-          if (myGeneration !== qrGeneration) return;
-          var canvas = document.createElement("canvas");
-          canvas.width = img.width;
-          canvas.height = img.height;
-          var ctx = canvas.getContext("2d");
-          ctx.drawImage(img, 0, 0);
+        var canvas = document.createElement("canvas");
+        canvas.width = size;
+        canvas.height = size;
+        var ctx = canvas.getContext("2d");
 
-          var pngUrl = canvas.toDataURL("image/png");
-          var previewImg = document.createElement("img");
-          previewImg.src = pngUrl;
-          previewImg.alt = "QR code for: " + text;
-          previewImg.style.maxWidth = "260px";
-          previewImg.style.border = "1px solid var(--color-border)";
-          previewImg.style.borderRadius = "12px";
-          qrPreview.appendChild(previewImg);
+        ctx.fillStyle = bgColor.value;
+        ctx.fillRect(0, 0, size, size);
+        ctx.fillStyle = fgColor.value;
+        for (var row = 0; row < moduleCount; row++) {
+          for (var col = 0; col < moduleCount; col++) {
+            if (qr.isDark(row, col)) {
+              ctx.fillRect(margin + col * cellSize, margin + row * cellSize, cellSize, cellSize);
+            }
+          }
+        }
 
-          downloadBtn.href = pngUrl;
-          downloadBtn.style.display = "inline-flex";
-          statusBox.textContent = "Done! Your QR code is ready to download.";
-        };
-        img.src = dataUrl;
+        if (myGeneration !== qrGeneration) return;
+
+        var pngUrl = canvas.toDataURL("image/png");
+        var previewImg = document.createElement("img");
+        previewImg.src = pngUrl;
+        previewImg.alt = "QR code for: " + text;
+        previewImg.style.maxWidth = "260px";
+        previewImg.style.border = "1px solid var(--color-border)";
+        previewImg.style.borderRadius = "12px";
+        qrPreview.appendChild(previewImg);
+
+        downloadBtn.href = pngUrl;
+        downloadBtn.style.display = "inline-flex";
+        statusBox.textContent = contrastOk
+          ? "Done! Your QR code is ready to download."
+          : "Generated, but the low color contrast may make this hard to scan — consider adjusting the colors above.";
       } catch (err) {
         console.error(err);
-        statusBox.textContent = "That text is too long for a QR code — try shortening it.";
+        statusBox.textContent = "That content is too long for a QR code — try shortening it or lowering the error correction level.";
       }
     });
   </script>
