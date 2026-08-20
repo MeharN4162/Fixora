@@ -6,8 +6,8 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Invoice Generator Online — Create & Download PDF | Fixoona</title>
-  <meta name="description" content="Create a professional invoice online for free and download it as a PDF. Add line items, tax, and notes — no sign-up, no watermark, no software to install." />
-  <meta name="keywords" content="invoice generator, free invoice template online, create invoice pdf" />
+  <meta name="description" content="Create a professional invoice online for free and download it as a PDF. Add multiple line items, a discount, tax, and quick Net 15/Net 30 due dates — no sign-up, no watermark, no software to install." />
+  <meta name="keywords" content="invoice generator, free invoice template online, create invoice pdf, invoice discount and tax calculator" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/invoice-generator" />
 
@@ -69,7 +69,12 @@
       {
         "@type": "Question",
         "name": "How is Tax calculated?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Tax is calculated as your Tax Rate percentage applied to the Subtotal (the sum of every line item's Quantity times Unit Price), and the Total is Subtotal plus Tax — all shown live in the stats row as you edit." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Tax is calculated as your Tax Rate percentage applied to the Subtotal after any Discount is subtracted, and the Total is that discounted subtotal plus Tax — all shown live in the stats row as you edit." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I apply a discount to the invoice?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — enter a Discount value and choose whether it's a Percentage of the Subtotal or a Flat Amount. The discount is subtracted from the Subtotal before Tax is applied, and the amount is shown in the stats row and printed as its own line on the PDF." }
       },
       {
         "@type": "Question",
@@ -80,6 +85,11 @@
         "@type": "Question",
         "name": "Are the invoice number and dates set automatically?",
         "acceptedAnswer": { "@type": "Answer", "text": "The Invoice # defaults to \"INV-001\" and the Date/Due Date fields default to today and 14 days from today, but all four are plain editable fields, so you can change them to match your own numbering scheme or payment terms." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I quickly set the due date to Net 15 or Net 30?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — the Net 15 and Net 30 buttons next to the Due Date field set it to 15 or 30 days after the Invoice Date (or today's date if the Invoice Date is empty) with one click; you can still edit the Due Date manually afterward." }
       }
     ]
   }
@@ -197,6 +207,10 @@
           <div class="field">
             <label for="dueDate">Due Date</label>
             <input type="date" id="dueDate" />
+            <div style="display:flex;gap:8px;margin-top:8px;">
+              <button type="button" class="pill" id="net15Btn">Net 15</button>
+              <button type="button" class="pill" id="net30Btn">Net 30</button>
+            </div>
           </div>
         </div>
 
@@ -208,6 +222,20 @@
         <button class="btn btn-secondary" id="addItemBtn" type="button" style="margin-top:6px;">+ Add Line Item</button>
 
         <div class="row" style="margin-top:20px;">
+          <div class="field">
+            <label for="discountValue">Discount</label>
+            <input type="number" id="discountValue" value="0" min="0" step="0.01" />
+          </div>
+          <div class="field">
+            <label for="discountType">Discount Type</label>
+            <select id="discountType">
+              <option value="percent">Percentage (%)</option>
+              <option value="flat">Flat Amount</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
           <div class="field">
             <label for="taxRate">Tax Rate (%)</label>
             <input type="number" id="taxRate" value="0" min="0" step="0.1" />
@@ -225,6 +253,7 @@
 
         <div class="stat-row">
           <div class="stat"><strong id="statSubtotal">–</strong><span>Subtotal</span></div>
+          <div class="stat"><strong id="statDiscount">–</strong><span>Discount</span></div>
           <div class="stat"><strong id="statTax">–</strong><span>Tax</span></div>
           <div class="stat"><strong id="statTotal">–</strong><span>Total</span></div>
         </div>
@@ -242,7 +271,7 @@
         <ol class="howto-steps">
           <li>Fill in your business details ("From") and your client's details ("Bill To"), plus the invoice number, date, and due date.</li>
           <li>Add, edit, or remove line items — description, quantity, and unit price — using "+ Add Line Item"; the Amount column and the Subtotal/Tax/Total stats update automatically as you type.</li>
-          <li>Set a Tax Rate and Currency Symbol, and add any Notes (like payment terms).</li>
+          <li>Set a Tax Rate, an optional Discount (as a percentage or a flat amount), and a Currency Symbol, and add any Notes (like payment terms). Use the Net 15 / Net 30 buttons to quickly set the Due Date.</li>
           <li>Click "Generate PDF Invoice" and download it.</li>
         </ol>
       </div>
@@ -259,7 +288,11 @@
         </details>
         <details class="faq-item">
           <summary>How is Tax calculated?</summary>
-          <p>Tax is calculated as your Tax Rate percentage applied to the Subtotal (the sum of every line item's Quantity times Unit Price), and the Total is Subtotal plus Tax — all shown live in the stats row as you edit.</p>
+          <p>Tax is calculated as your Tax Rate percentage applied to the Subtotal after any Discount is subtracted, and the Total is that discounted subtotal plus Tax — all shown live in the stats row as you edit.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I apply a discount to the invoice?</summary>
+          <p>Yes — enter a Discount value and choose whether it's a Percentage of the Subtotal or a Flat Amount. The discount is subtracted from the Subtotal before Tax is applied, and the amount is shown in the stats row and printed as its own line on the PDF.</p>
         </details>
         <details class="faq-item">
           <summary>Can I change the currency symbol?</summary>
@@ -268,6 +301,10 @@
         <details class="faq-item">
           <summary>Are the invoice number and dates set automatically?</summary>
           <p>The Invoice # defaults to "INV-001" and the Date/Due Date fields default to today and 14 days from today, but all four are plain editable fields, so you can change them to match your own numbering scheme or payment terms.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I quickly set the due date to Net 15 or Net 30?</summary>
+          <p>Yes — the Net 15 and Net 30 buttons next to the Due Date field set it to 15 or 30 days after the Invoice Date (or today's date if the Invoice Date is empty) with one click; you can still edit the Due Date manually afterward.</p>
         </details>
       </div>
 
@@ -381,19 +418,48 @@
         subtotal += amount;
       });
 
+      var discountValue = parseFloat(document.getElementById("discountValue").value) || 0;
+      var discountType = document.getElementById("discountType").value;
+      var discountAmount = discountType === "flat" ? discountValue : subtotal * (discountValue / 100);
+      if (discountAmount < 0) discountAmount = 0;
+      if (discountAmount > subtotal) discountAmount = subtotal;
+      var discountedSubtotal = subtotal - discountAmount;
+
       var taxRate = parseFloat(document.getElementById("taxRate").value) || 0;
-      var tax = subtotal * (taxRate / 100);
-      var total = subtotal + tax;
+      var tax = discountedSubtotal * (taxRate / 100);
+      var total = discountedSubtotal + tax;
 
       document.getElementById("statSubtotal").textContent = currency() + subtotal.toFixed(2);
+      document.getElementById("statDiscount").textContent = "-" + currency() + discountAmount.toFixed(2);
       document.getElementById("statTax").textContent = currency() + tax.toFixed(2);
       document.getElementById("statTotal").textContent = currency() + total.toFixed(2);
 
-      return { subtotal: subtotal, tax: tax, total: total, taxRate: taxRate };
+      return {
+        subtotal: subtotal,
+        discountValue: discountValue,
+        discountType: discountType,
+        discountAmount: discountAmount,
+        discountedSubtotal: discountedSubtotal,
+        tax: tax,
+        total: total,
+        taxRate: taxRate
+      };
     }
 
     document.getElementById("taxRate").addEventListener("input", updateTotals);
     document.getElementById("currency").addEventListener("input", updateTotals);
+    document.getElementById("discountValue").addEventListener("input", updateTotals);
+    document.getElementById("discountType").addEventListener("change", updateTotals);
+
+    function setDueDateFromTerms(days) {
+      var baseVal = document.getElementById("invoiceDate").value;
+      var base = baseVal ? new Date(baseVal + "T00:00:00") : new Date();
+      base.setDate(base.getDate() + days);
+      document.getElementById("dueDate").value = base.toISOString().slice(0, 10);
+    }
+
+    document.getElementById("net15Btn").addEventListener("click", function () { setDueDateFromTerms(15); });
+    document.getElementById("net30Btn").addEventListener("click", function () { setDueDateFromTerms(30); });
 
     // seed with a couple of starter rows
     addItemRow("Design services", 1, 500);
@@ -469,6 +535,12 @@
         page.drawText("Subtotal", { x: 390, y: y, size: 10, font: font });
         page.drawText(cur + totals.subtotal.toFixed(2), { x: 480, y: y, size: 10, font: font });
         y -= 18;
+        if (totals.discountAmount > 0) {
+          var discountLabel = totals.discountType === "flat" ? "Discount" : "Discount (" + totals.discountValue + "%)";
+          page.drawText(discountLabel, { x: 390, y: y, size: 10, font: font });
+          page.drawText("-" + cur + totals.discountAmount.toFixed(2), { x: 480, y: y, size: 10, font: font });
+          y -= 18;
+        }
         page.drawText("Tax (" + totals.taxRate + "%)", { x: 390, y: y, size: 10, font: font });
         page.drawText(cur + totals.tax.toFixed(2), { x: 480, y: y, size: 10, font: font });
         y -= 22;
