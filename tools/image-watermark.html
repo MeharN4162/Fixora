@@ -6,7 +6,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Image Watermark Tool Online | Fixoona</title>
-  <meta name="description" content="Add a custom text watermark to an image online for free, right in your browser. Adjust text, opacity, size, position, and angle. No uploads, no sign-up." />
+  <meta name="description" content="Add a custom text watermark to an image online for free, right in your browser. Adjust text, opacity, size, corner position, angle, and an optional readability outline. No uploads, no sign-up." />
   <meta name="keywords" content="image watermark, add watermark to photo online free, watermark maker" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/image-watermark" />
@@ -80,6 +80,16 @@
         "@type": "Question",
         "name": "Is my photo uploaded anywhere to add the watermark?",
         "acceptedAnswer": { "@type": "Answer", "text": "No. The watermark text is drawn directly onto a canvas containing your image using the Canvas 2D API, entirely inside your browser - the file is never sent to a server." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I move the watermark to a corner instead of the center?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes - in Single, centered layout mode, use the Position dropdown to choose Top Left, Top Right, Bottom Left, or Bottom Right instead of Center. Corner positions use a smaller text block than the centered one, since there's less room near an edge." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does \"Add outline for readability\" do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It draws a thin stroke around the watermark text in a color automatically chosen to contrast with your chosen fill color (dark outline for a light watermark, light outline for a dark one), which helps the text stay legible on busy or similarly-colored parts of a photo." }
       }
     ]
   }
@@ -166,6 +176,22 @@
           </div>
         </div>
 
+        <div class="row">
+          <div class="field" id="positionField">
+            <label for="positionSelect">Position (Single mode)</label>
+            <select id="positionSelect">
+              <option value="center" selected>Center</option>
+              <option value="top-left">Top Left</option>
+              <option value="top-right">Top Right</option>
+              <option value="bottom-left">Bottom Left</option>
+              <option value="bottom-right">Bottom Right</option>
+            </select>
+          </div>
+          <div class="field" style="display:flex;align-items:flex-end;">
+            <label style="display:flex;align-items:center;gap:8px;font-weight:500;"><input type="checkbox" id="outlineCheck" style="width:auto;" /> Add outline for readability</label>
+          </div>
+        </div>
+
         <div class="actions">
           <a class="btn btn-primary" id="downloadBtn" style="display:none;" download="watermarked.png">Download Watermarked Image</a>
         </div>
@@ -204,6 +230,14 @@
         <details class="faq-item">
           <summary>Is my photo uploaded anywhere to add the watermark?</summary>
           <p>No. The watermark text is drawn directly onto a canvas containing your image using the Canvas 2D API, entirely inside your browser - the file is never sent to a server.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I move the watermark to a corner instead of the center?</summary>
+          <p>Yes - in Single, centered layout mode, use the Position dropdown to choose Top Left, Top Right, Bottom Left, or Bottom Right instead of Center. Corner positions use a smaller text block than the centered one, since there's less room near an edge.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does "Add outline for readability" do?</summary>
+          <p>It draws a thin stroke around the watermark text in a color automatically chosen to contrast with your chosen fill color (dark outline for a light watermark, light outline for a dark one), which helps the text stay legible on busy or similarly-colored parts of a photo.</p>
         </details>
       </div>
 
@@ -287,7 +321,9 @@
 
     var naturalImg = null;
 
-    var controls = ["watermarkText", "fontSizeRange", "opacityRange", "angleRange", "colorPicker", "tileSelect"];
+    var controls = ["watermarkText", "fontSizeRange", "opacityRange", "angleRange", "colorPicker", "tileSelect", "positionSelect", "outlineCheck"];
+    var positionField = document.getElementById("positionField");
+    var tileSelectEl = document.getElementById("tileSelect");
 
     function hexToRgb(hex) {
       hex = hex.replace("#", "");
@@ -296,6 +332,12 @@
         g: parseInt(hex.substring(2, 4), 16),
         b: parseInt(hex.substring(4, 6), 16)
       };
+    }
+
+    // Relative luminance (WCAG formula) to pick a contrasting outline color.
+    function relativeLuminance(rgb) {
+      function lin(c) { c = c / 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }
+      return 0.2126 * lin(rgb.r) + 0.7152 * lin(rgb.g) + 0.0722 * lin(rgb.b);
     }
 
     var lastWatermarkUrl = null;
@@ -349,10 +391,23 @@
       var angle = parseInt(document.getElementById("angleRange").value, 10);
       var color = hexToRgb(document.getElementById("colorPicker").value);
       var tiled = document.getElementById("tileSelect").value === "tiled";
+      var position = document.getElementById("positionSelect").value;
+      var useOutline = document.getElementById("outlineCheck").checked;
 
       ctx.fillStyle = "rgba(" + color.r + "," + color.g + "," + color.b + "," + opacity + ")";
+      var outlineIsDark = relativeLuminance(color) > 0.5;
+      var outlineColor = outlineIsDark ? "0,0,0" : "255,255,255";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
+
+      function drawLine(line, x, y, size) {
+        if (useOutline) {
+          ctx.strokeStyle = "rgba(" + outlineColor + "," + opacity + ")";
+          ctx.lineWidth = Math.max(1, size / 14);
+          ctx.strokeText(line, x, y);
+        }
+        ctx.fillText(line, x, y);
+      }
 
       if (tiled) {
         var fontSize = Math.min(baseFontSize, Math.max(10, canvas.width / 6));
@@ -364,13 +419,29 @@
             ctx.save();
             ctx.translate(x, y);
             ctx.rotate(angle * Math.PI / 180);
-            ctx.fillText(text, 0, 0);
+            drawLine(text, 0, 0, fontSize);
             ctx.restore();
           }
         }
       } else {
-        var maxWidth = canvas.width * 0.8;
-        var maxHeight = canvas.height * 0.6;
+        var marginX = canvas.width * 0.05;
+        var marginY = canvas.height * 0.05;
+        var maxWidth, maxHeight, originX, originY;
+
+        if (position === "center") {
+          maxWidth = canvas.width * 0.8;
+          maxHeight = canvas.height * 0.6;
+          originX = canvas.width / 2;
+          originY = canvas.height / 2;
+        } else {
+          maxWidth = canvas.width * 0.4;
+          maxHeight = canvas.height * 0.22;
+          var halfW = maxWidth / 2;
+          var halfH = maxHeight / 2;
+          originX = position.indexOf("left") !== -1 ? marginX + halfW : canvas.width - marginX - halfW;
+          originY = position.indexOf("top") !== -1 ? marginY + halfH : canvas.height - marginY - halfH;
+        }
+
         var fit = fitTextBlock(text, maxWidth, maxHeight, baseFontSize);
         ctx.font = "bold " + fit.size + "px Inter, sans-serif";
 
@@ -378,11 +449,11 @@
         var blockHeight = fit.lines.length * lineHeight;
 
         ctx.save();
-        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.translate(originX, originY);
         ctx.rotate(angle * Math.PI / 180);
         fit.lines.forEach(function (line, i) {
-          var y = -blockHeight / 2 + lineHeight / 2 + i * lineHeight;
-          ctx.fillText(line, 0, y);
+          var ly = -blockHeight / 2 + lineHeight / 2 + i * lineHeight;
+          drawLine(line, 0, ly, fit.size);
         });
         ctx.restore();
       }
@@ -438,15 +509,24 @@
       if (e.key === "Enter" || e.key === " ") fileInput.click();
     });
 
+    function updatePositionFieldState() {
+      var isTiled = tileSelectEl.value === "tiled";
+      document.getElementById("positionSelect").disabled = isTiled;
+      positionField.style.opacity = isTiled ? "0.5" : "1";
+    }
+
     controls.forEach(function (id) {
       var el = document.getElementById(id);
       el.addEventListener("input", function () {
         if (id === "fontSizeRange") document.getElementById("fontSizeValue").textContent = el.value;
         if (id === "opacityRange") document.getElementById("opacityValue").textContent = el.value;
         if (id === "angleRange") document.getElementById("angleValue").textContent = el.value;
+        if (id === "tileSelect") updatePositionFieldState();
         render();
       });
     });
+
+    updatePositionFieldState();
   </script>
 </body>
 </html>
