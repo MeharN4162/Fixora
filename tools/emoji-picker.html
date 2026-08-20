@@ -6,7 +6,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Emoji Picker Online — Search & Copy Emoji | Fixoona</title>
-  <meta name="description" content="Search 2,392 emoji — including skin-tone variants — by name or keyword, browse them by clear category sections, and copy any of them to your clipboard instantly, right in your browser." />
+  <meta name="description" content="Search 2,392 emoji — including skin-tone variants — by name or keyword, browse them by clear category sections, copy any of them to your clipboard as the emoji or as a :shortcode: text label, and navigate the whole grid with your keyboard." />
   <meta name="keywords" content="emoji picker, emoji search online free, copy emoji" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/emoji-picker" />
@@ -80,6 +80,16 @@
         "@type": "Question",
         "name": "Do I need to install anything to use this?",
         "acceptedAnswer": { "@type": "Answer", "text": "No — everything runs directly in this page using your browser's built-in emoji rendering and Clipboard API; there's nothing to download or install." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I copy an emoji as a text shortcode instead of the character itself?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — turn on \"Copy as :shortcode: text\" above the grid and clicking an emoji will copy a colon-wrapped, underscore-separated version of its name (like :grinning_face: for 😀) instead of the emoji character itself. This is generated directly and consistently from each emoji's own name in this picker, so it won't necessarily match the shortcode syntax used by a specific chat app, but it's always a predictable, unique text label for that emoji." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use the keyboard to browse and copy emoji?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — Tab into the emoji grid, then use the arrow keys (or Home/End) to move between emoji, and press Enter or Space to copy whichever one is focused, all without touching your mouse." }
       }
     ]
   }
@@ -204,7 +214,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">😀</div>
       <h1>Emoji Picker</h1>
-      <p>Search all 2,392 standard emoji (including every skin-tone variant) by name or keyword, browse them in clear category sections — Smileys, People, Animals, Food, Activities, Travel, Objects, Symbols, Flags, and Hearts — and click any of them to copy it straight to your clipboard.</p>
+      <p>Search all 2,392 standard emoji (including every skin-tone variant) by name or keyword, browse them in clear category sections — Smileys, People, Animals, Food, Activities, Travel, Objects, Symbols, Flags, and Hearts — and click any of them (or navigate the grid with your keyboard) to copy it straight to your clipboard, either as the emoji itself or as :shortcode: text.</p>
     </section>
 
     <section class="container">
@@ -228,6 +238,11 @@
           <button type="button" class="pill" data-cat="hearts">Hearts</button>
         </div>
 
+        <label class="check-row" id="shortcodeModeRow">
+          <input type="checkbox" id="shortcodeMode" />
+          Copy as <code>:shortcode:</code> text instead of the emoji character (e.g. <code>:grinning_face:</code> for 😀)
+        </label>
+
         <div class="emoji-count" id="emojiCount"></div>
         <div class="emoji-results" id="emojiGrid"></div>
         <div class="emoji-empty" id="emojiEmpty" style="display:none;">No emoji matched your search. Try a different word.</div>
@@ -240,7 +255,8 @@
         <ol class="howto-steps">
           <li>Type a word into the search box — like "dog", "heart", or "pizza" — to filter across all 2,392 emoji by name or keyword.</li>
           <li>Or click a category pill (Smileys, People, Animals, Food, Activities, Travel, Objects, Symbols, Flags, Hearts) to browse one section at a time, or "All" to see every section with its own heading.</li>
-          <li>Click any emoji in the grid to copy it to your clipboard.</li>
+          <li>Click any emoji in the grid to copy it to your clipboard — or Tab into the grid and use the arrow keys (or Home/End) to move between emoji and Enter or Space to copy the focused one.</li>
+          <li>Turn on "Copy as :shortcode: text" if you'd rather copy a colon-wrapped text label like <code>:grinning_face:</code> instead of the emoji character itself.</li>
           <li>Paste it wherever you need it — a chat, a document, a caption, anywhere.</li>
         </ol>
       </div>
@@ -266,6 +282,14 @@
         <details class="faq-item">
           <summary>Do I need to install anything to use this?</summary>
           <p>No — everything runs directly in this page using your browser's built-in emoji rendering and Clipboard API; there's nothing to download or install.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I copy an emoji as a text shortcode instead of the character itself?</summary>
+          <p>Yes — turn on "Copy as :shortcode: text" above the grid and clicking an emoji will copy a colon-wrapped, underscore-separated version of its name (like :grinning_face: for 😀) instead of the emoji character itself. This is generated directly and consistently from each emoji's own name in this picker, so it won't necessarily match the shortcode syntax used by a specific chat app, but it's always a predictable, unique text label for that emoji.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I use the keyboard to browse and copy emoji?</summary>
+          <p>Yes — Tab into the emoji grid, then use the arrow keys (or Home/End) to move between emoji, and press Enter or Space to copy whichever one is focused, all without touching your mouse.</p>
         </details>
       </div>
 
@@ -2735,6 +2759,23 @@
       { char: "💑🏿", name: "couple with heart: dark skin tone", cat: "people", kw: ["couple","heart","family","dark","skin","tone"] }
     ];
 
+    // Builds a colon-wrapped, underscore-separated shortcode straight from an
+    // emoji's own name (e.g. "grinning face" -> "grinning_face"), so every
+    // entry gets a predictable, unique text label without guessing at any
+    // external app's shortcode syntax. "#" and "*" are spelled out first
+    // since they'd otherwise both collapse to nothing (keycap: # / keycap: *).
+    function toShortcode(name) {
+      return name
+        .toLowerCase()
+        .replace(/#/g, " hash ")
+        .replace(/\*/g, " star ")
+        .normalize("NFKD")
+        .replace(/[̀-ͯ]/g, "")
+        .replace(/[^a-z0-9]+/g, "_")
+        .replace(/^_+|_+$/g, "");
+    }
+    EMOJI.forEach(function (e) { e.shortcode = toShortcode(e.name); });
+
     var CATEGORY_ORDER = ["smileys", "people", "animals", "food", "activities", "travel", "objects", "symbols", "flags", "hearts"];
     var CATEGORY_LABELS = {
       smileys: "Smileys & Emotion",
@@ -2755,6 +2796,7 @@
     var emojiSearch = document.getElementById("emojiSearch");
     var copyNote = document.getElementById("copyNote");
     var categoryPills = document.querySelectorAll("#categoryPills .pill");
+    var shortcodeMode = document.getElementById("shortcodeMode");
     var activeCat = "smileys";
 
     function matchesQuery(e, query) {
@@ -2767,11 +2809,13 @@
       var btn = document.createElement("button");
       btn.type = "button";
       btn.className = "emoji-btn";
-      btn.title = e.name;
-      btn.setAttribute("aria-label", e.name);
+      var useShortcode = shortcodeMode.checked;
+      btn.title = useShortcode ? e.name + " — copies :" + e.shortcode + ":" : e.name;
+      btn.setAttribute("aria-label", useShortcode ? e.name + ", copies shortcode :" + e.shortcode + ":" : e.name);
       btn.textContent = e.char;
       btn.addEventListener("click", function () {
-        Fixora.copyText(e.char, copyNote);
+        var textToCopy = shortcodeMode.checked ? ":" + e.shortcode + ":" : e.char;
+        Fixora.copyText(textToCopy, copyNote);
         btn.classList.remove("copied");
         void btn.offsetWidth;
         btn.classList.add("copied");
@@ -2840,6 +2884,47 @@
         activeCat = pill.getAttribute("data-cat");
         renderGrid();
       });
+    });
+
+    shortcodeMode.addEventListener("change", renderGrid);
+
+    // Keyboard navigation: arrow keys move focus between emoji buttons,
+    // Home/End jump to the first/last one. Enter/Space already copy the
+    // focused emoji for free since these are native <button> elements.
+    var ARROW_KEYS = ["ArrowRight", "ArrowLeft", "ArrowUp", "ArrowDown", "Home", "End"];
+    emojiGrid.addEventListener("keydown", function (ev) {
+      if (ARROW_KEYS.indexOf(ev.key) === -1) return;
+      var target = ev.target;
+      if (!target.classList || !target.classList.contains("emoji-btn")) return;
+
+      var all = Array.prototype.slice.call(emojiGrid.querySelectorAll(".emoji-btn"));
+      var idx = all.indexOf(target);
+      if (idx === -1) return;
+
+      var nextIdx = idx;
+      if (ev.key === "ArrowRight") {
+        nextIdx = idx + 1;
+      } else if (ev.key === "ArrowLeft") {
+        nextIdx = idx - 1;
+      } else if (ev.key === "Home") {
+        nextIdx = 0;
+      } else if (ev.key === "End") {
+        nextIdx = all.length - 1;
+      } else if (ev.key === "ArrowUp" || ev.key === "ArrowDown") {
+        var grid = target.closest(".emoji-grid");
+        var cols = 1;
+        if (grid) {
+          var cssCols = getComputedStyle(grid).gridTemplateColumns.split(" ").filter(Boolean);
+          cols = cssCols.length || 1;
+        }
+        nextIdx = ev.key === "ArrowDown" ? idx + cols : idx - cols;
+      }
+
+      nextIdx = Math.max(0, Math.min(all.length - 1, nextIdx));
+      if (nextIdx !== idx) {
+        ev.preventDefault();
+        all[nextIdx].focus();
+      }
     });
 
     renderGrid();
