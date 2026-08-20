@@ -6,7 +6,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free PDF to PNG Converter Online | Fixoona</title>
-  <meta name="description" content="Convert PDF pages to lossless PNG images online for free. Download individual pages or all pages at once. No uploads, no sign-up." />
+  <meta name="description" content="Convert PDF pages to lossless PNG images online for free. Pick specific pages or the whole document, choose a resolution from 1x to 4x, and download individual pages or all pages at once. No uploads, no sign-up." />
   <meta name="keywords" content="pdf to png, convert pdf to png online free, pdf page to png" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/pdf-to-png" />
@@ -64,7 +64,7 @@
       {
         "@type": "Question",
         "name": "What resolution are the PNG images?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Each page renders at 2x scale before being exported, so a standard Letter/A4 page comes out around 1600-1700px wide — sharp enough for zooming in on fine text or printing." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Use the Resolution dropdown to pick a scale from 1x up to 4x before converting. At the default 2x, a standard Letter/A4 page comes out around 1600-1700px wide — sharp enough for zooming in on fine text or printing. Higher scales produce sharper, larger images; lower scales convert faster and produce smaller files." }
       },
       {
         "@type": "Question",
@@ -79,7 +79,7 @@
       {
         "@type": "Question",
         "name": "Can I convert just one page instead of the whole document?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The Convert button processes every page in the PDF, but you can download just the pages you need from the resulting thumbnail grid — the \"Download All Pages\" button is optional." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — use the Pages field to enter specific page numbers and ranges, like \"1-3, 5, 8-10\", and only those pages are converted. Leave it blank to convert every page. You can also download just the pages you need from the resulting thumbnail grid — the \"Download All Pages\" button is optional." }
       }
     ]
   }
@@ -148,7 +148,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🖼️</div>
       <h1>PDF to PNG Converter</h1>
-      <p>Turn every page of a PDF into a lossless PNG image — sharper than JPG for text and diagrams.</p>
+      <p>Turn every page of a PDF into a lossless PNG image — sharper than JPG for text and diagrams. Pick specific pages and a resolution if you want.</p>
     </section>
 
     <section class="container">
@@ -156,8 +156,25 @@
         <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload a PDF file">
           <div class="dz-icon" aria-hidden="true">📤</div>
           <strong>Click to upload or drag a PDF here</strong>
-          <small>All pages will be converted to PNG</small>
+          <small>All pages will be converted to PNG by default — pick specific pages below</small>
           <input type="file" id="fileInput" accept="application/pdf" hidden />
+        </div>
+
+        <div class="row" id="optionsRow" style="display:none;">
+          <div class="field">
+            <label for="pageRangeInput">Pages (e.g. 1-3, 5, 8-10 — blank for all)</label>
+            <input type="text" id="pageRangeInput" placeholder="All pages" />
+          </div>
+          <div class="field">
+            <label for="scaleSelect">Resolution</label>
+            <select id="scaleSelect">
+              <option value="1">1x (fastest, smaller files)</option>
+              <option value="1.5">1.5x</option>
+              <option value="2" selected>2x (default, sharp)</option>
+              <option value="3">3x (high resolution)</option>
+              <option value="4">4x (very high resolution, larger files)</option>
+            </select>
+          </div>
         </div>
 
         <div class="actions">
@@ -174,7 +191,8 @@
         <h2>How to Convert a PDF to PNG</h2>
         <ol class="howto-steps">
           <li>Upload your PDF.</li>
-          <li>Click "Convert to PNG" — each page renders as a thumbnail with its own Download link.</li>
+          <li>Optionally enter specific pages in the Pages field and pick a Resolution.</li>
+          <li>Click "Convert to PNG" — each selected page renders as a thumbnail with its own Download link.</li>
           <li>Download pages individually, or click "Download All Pages" to save every one.</li>
         </ol>
       </div>
@@ -187,7 +205,7 @@
         </details>
         <details class="faq-item">
           <summary>What resolution are the PNG images?</summary>
-          <p>Each page renders at 2x scale before being exported, so a standard Letter/A4 page comes out around 1600-1700px wide — sharp enough for zooming in on fine text or printing.</p>
+          <p>Use the Resolution dropdown to pick a scale from 1x up to 4x before converting. At the default 2x, a standard Letter/A4 page comes out around 1600-1700px wide — sharp enough for zooming in on fine text or printing. Higher scales produce sharper, larger images; lower scales convert faster and produce smaller files.</p>
         </details>
         <details class="faq-item">
           <summary>Why are my PNG files so much bigger than the JPGs from the other tool?</summary>
@@ -199,7 +217,7 @@
         </details>
         <details class="faq-item">
           <summary>Can I convert just one page instead of the whole document?</summary>
-          <p>The Convert button processes every page in the PDF, but you can download just the pages you need from the resulting thumbnail grid — the "Download All Pages" button is optional.</p>
+          <p>Yes — use the Pages field to enter specific page numbers and ranges, like "1-3, 5, 8-10", and only those pages are converted. Leave it blank to convert every page. You can also download just the pages you need from the resulting thumbnail grid — the "Download All Pages" button is optional.</p>
         </details>
       </div>
 
@@ -283,9 +301,46 @@
     var downloadAllBtn = document.getElementById("downloadAllBtn");
     var statusBox = document.getElementById("statusBox");
     var pageGrid = document.getElementById("pageGrid");
+    var optionsRow = document.getElementById("optionsRow");
+    var pageRangeInput = document.getElementById("pageRangeInput");
+    var scaleSelect = document.getElementById("scaleSelect");
 
     var currentFile = null;
+    var currentPdf = null;
     var generatedPages = [];
+
+    // Parses "1-3, 5, 8-10" into a sorted, deduped array of valid page
+    // numbers clamped to [1, maxPage]. Returns null (meaning "all pages")
+    // for blank input, or throws with a message for malformed input.
+    function parsePageRange(rangeStr, maxPage) {
+      var trimmed = rangeStr.trim();
+      if (!trimmed) return null;
+
+      var pages = {};
+      var parts = trimmed.split(",");
+      for (var i = 0; i < parts.length; i++) {
+        var part = parts[i].trim();
+        if (!part) continue;
+        var m = part.match(/^(\d+)\s*-\s*(\d+)$/);
+        if (m) {
+          var start = parseInt(m[1], 10);
+          var end = parseInt(m[2], 10);
+          if (start > end) { var t = start; start = end; end = t; }
+          for (var p = start; p <= end; p++) {
+            if (p >= 1 && p <= maxPage) pages[p] = true;
+          }
+        } else if (/^\d+$/.test(part)) {
+          var n = parseInt(part, 10);
+          if (n >= 1 && n <= maxPage) pages[n] = true;
+        } else {
+          throw new Error('Could not understand "' + part + '" — use page numbers and ranges like "1-3, 5".');
+        }
+      }
+
+      var result = Object.keys(pages).map(Number).sort(function (a, b) { return a - b; });
+      if (!result.length) throw new Error("That page range doesn't match any pages in this " + maxPage + "-page PDF.");
+      return result;
+    }
 
     function handleFiles(files) {
       var file = files[0];
@@ -294,10 +349,28 @@
         return;
       }
       currentFile = file;
-      convertBtn.disabled = false;
+      currentPdf = null;
+      pageRangeInput.value = "";
+      optionsRow.style.display = "none";
+      convertBtn.disabled = true;
       downloadAllBtn.style.display = "none";
       pageGrid.innerHTML = "";
-      statusBox.textContent = file.name + " ready. Click Convert to PNG.";
+      generatedPages = [];
+      loadPdf(file);
+    }
+
+    async function loadPdf(file) {
+      statusBox.textContent = "Reading PDF…";
+      try {
+        var arrayBuffer = await file.arrayBuffer();
+        currentPdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        optionsRow.style.display = "flex";
+        convertBtn.disabled = false;
+        statusBox.textContent = file.name + " (" + currentPdf.numPages + " page(s)) ready. Click Convert to PNG.";
+      } catch (err) {
+        console.error(err);
+        statusBox.textContent = "Couldn't read that PDF. Please try a different file.";
+      }
     }
 
     Fixora.setupDropzone(dropzone, fileInput, handleFiles);
@@ -306,21 +379,32 @@
     });
 
     convertBtn.addEventListener("click", async function () {
-      if (!currentFile) return;
+      if (!currentFile || !currentPdf) return;
+
+      var pageList;
+      try {
+        pageList = parsePageRange(pageRangeInput.value, currentPdf.numPages);
+      } catch (err) {
+        statusBox.textContent = err.message;
+        return;
+      }
+      var pagesToRender = pageList || Array.from({ length: currentPdf.numPages }, function (_, i) { return i + 1; });
+      var scale = parseFloat(scaleSelect.value) || 2;
+
       convertBtn.disabled = true;
       pageGrid.innerHTML = "";
       generatedPages = [];
-      statusBox.textContent = "Reading PDF…";
+      downloadAllBtn.style.display = "none";
+      statusBox.textContent = "Converting…";
 
       try {
-        var arrayBuffer = await currentFile.arrayBuffer();
-        var pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
         var baseName = currentFile.name.replace(/\.pdf$/i, "");
 
-        for (var i = 1; i <= pdf.numPages; i++) {
-          statusBox.textContent = "Converting page " + i + " of " + pdf.numPages + "…";
-          var page = await pdf.getPage(i);
-          var viewport = page.getViewport({ scale: 2 });
+        for (var idx = 0; idx < pagesToRender.length; idx++) {
+          var pageNum = pagesToRender[idx];
+          statusBox.textContent = "Converting page " + pageNum + " (" + (idx + 1) + " of " + pagesToRender.length + ")…";
+          var page = await currentPdf.getPage(pageNum);
+          var viewport = page.getViewport({ scale: scale });
 
           var canvas = document.createElement("canvas");
           canvas.width = viewport.width;
@@ -331,20 +415,21 @@
           await page.render({ canvasContext: ctx, viewport: viewport }).promise;
 
           var dataUrl = canvas.toDataURL("image/png");
-          var filename = baseName + "-page-" + i + ".png";
+          var filename = baseName + "-page-" + pageNum + ".png";
           generatedPages.push({ dataUrl: dataUrl, filename: filename });
 
           var thumb = document.createElement("div");
           thumb.className = "page-thumb";
           thumb.innerHTML =
-            '<img src="' + dataUrl + '" alt="Page ' + i + ' of ' + currentFile.name + ' converted to PNG" loading="lazy" />' +
-            '<div class="thumb-foot">Page ' + i + '<br/>' +
+            '<img src="' + dataUrl + '" alt="Page ' + pageNum + ' of ' + currentFile.name + ' converted to PNG" loading="lazy" />' +
+            '<div class="thumb-foot">Page ' + pageNum + '<br/>' +
             '<a class="btn btn-secondary" download="' + filename + '" href="' + dataUrl + '">Download</a>' +
             '</div>';
           pageGrid.appendChild(thumb);
         }
 
-        statusBox.textContent = "Done! Converted " + pdf.numPages + " page(s) to PNG.";
+        var pageLabel = pageList ? pagesToRender.length + " selected page(s)" : pagesToRender.length + " page(s)";
+        statusBox.textContent = "Done! Converted " + pageLabel + " to PNG at " + scale + "x scale.";
         downloadAllBtn.style.display = "inline-flex";
       } catch (err) {
         console.error(err);
