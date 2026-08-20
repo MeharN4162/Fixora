@@ -6,8 +6,8 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Online Signature Maker — Draw or Type Your Signature | Fixoona</title>
-  <meta name="description" content="Create a signature online for free, right in your browser — draw with your mouse or type your name in a cursive font. Download a transparent PNG. No uploads." />
-  <meta name="keywords" content="signature maker, create signature online free, draw signature, type signature online" />
+  <meta name="description" content="Create a signature online for free, right in your browser — draw with your mouse or type your name in a cursive font, undo mistakes stroke-by-stroke, and resize the drawing area. Download a transparent PNG. No uploads." />
+  <meta name="keywords" content="signature maker, create signature online free, draw signature, type signature online, signature undo" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/signature-maker" />
 
@@ -80,6 +80,16 @@
         "@type": "Question",
         "name": "Is this a legally binding electronic signature?",
         "acceptedAnswer": { "@type": "Answer", "text": "No - this produces a visual image of a signature, similar to signing on paper and scanning it in. It doesn't provide the cryptographic verification or audit trail that dedicated e-signature services offer for legally binding contracts." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I undo a mistake without clearing everything?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, in Draw mode. Each time you start a new stroke, the tool saves a snapshot of the canvas right before that stroke begins. Clicking Undo restores the most recent snapshot, removing only your last stroke rather than wiping the whole signature - you can undo up to your last 20 strokes." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I make the drawing area bigger?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes - use the Drawing Area dropdown in Draw mode to switch between Compact, Standard, and Large. A bigger canvas gives you more room to draw a detailed signature. Note that changing the size clears whatever you've drawn so far, since the canvas is recreated at the new dimensions." }
       }
     ]
   }
@@ -171,8 +181,17 @@
               <label for="penThickness">Thickness: <span id="penThicknessValue">3</span>px</label>
               <input type="range" id="penThickness" min="1" max="10" value="3" style="width:100%;" />
             </div>
+            <div class="field">
+              <label for="padSize">Drawing Area</label>
+              <select id="padSize">
+                <option value="180">Compact</option>
+                <option value="220" selected>Standard</option>
+                <option value="320">Large</option>
+              </select>
+            </div>
           </div>
           <div class="actions">
+            <button class="btn btn-secondary" id="undoSigBtn" type="button" disabled>Undo</button>
             <button class="btn btn-secondary" id="clearSigBtn" type="button">Clear</button>
           </div>
         </div>
@@ -235,6 +254,14 @@
         <details class="faq-item">
           <summary>Is this a legally binding electronic signature?</summary>
           <p>No - this produces a visual image of a signature, similar to signing on paper and scanning it in. It doesn't provide the cryptographic verification or audit trail that dedicated e-signature services offer for legally binding contracts.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I undo a mistake without clearing everything?</summary>
+          <p>Yes, in Draw mode. Each time you start a new stroke, the tool saves a snapshot of the canvas right before that stroke begins. Clicking Undo restores the most recent snapshot, removing only your last stroke rather than wiping the whole signature - you can undo up to your last 20 strokes.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I make the drawing area bigger?</summary>
+          <p>Yes - use the Drawing Area dropdown in Draw mode to switch between Compact, Standard, and Large. A bigger canvas gives you more room to draw a detailed signature. Note that changing the size clears whatever you've drawn so far, since the canvas is recreated at the new dimensions.</p>
         </details>
       </div>
 
@@ -322,6 +349,8 @@
     var penThickness = document.getElementById("penThickness");
     var penThicknessValue = document.getElementById("penThicknessValue");
     var clearSigBtn = document.getElementById("clearSigBtn");
+    var undoSigBtn = document.getElementById("undoSigBtn");
+    var padSize = document.getElementById("padSize");
     var nameInput = document.getElementById("nameInput");
     var typeColor = document.getElementById("typeColor");
     var typeSize = document.getElementById("typeSize");
@@ -347,6 +376,11 @@
       sigCtx.lineJoin = "round";
       resizeCanvas(typeCanvas, typeCtx);
       drawTypeSignature();
+      // A resize changes the canvas backing store size, which would make any
+      // saved undo snapshots the wrong dimensions — drop them rather than
+      // risk a putImageData mismatch.
+      strokeHistory = [];
+      updateUndoState();
     }
     window.addEventListener("resize", setupPads);
 
@@ -369,6 +403,8 @@
     // ---- Draw mode ----
     var drawing = false;
     var lastPt = null;
+    var strokeHistory = [];
+    var STROKE_HISTORY_MAX = 20;
 
     function getPos(canvas, e) {
       var rect = canvas.getBoundingClientRect();
@@ -376,9 +412,16 @@
       return { x: point.clientX - rect.left, y: point.clientY - rect.top };
     }
 
+    function updateUndoState() {
+      undoSigBtn.disabled = strokeHistory.length === 0;
+    }
+
     sigPad.addEventListener("pointerdown", function (e) {
       drawing = true;
       lastPt = getPos(sigPad, e);
+      strokeHistory.push(sigCtx.getImageData(0, 0, sigPad.width, sigPad.height));
+      if (strokeHistory.length > STROKE_HISTORY_MAX) strokeHistory.shift();
+      updateUndoState();
     });
     sigPad.addEventListener("pointermove", function (e) {
       if (!drawing) return;
@@ -397,8 +440,27 @@
       penThicknessValue.textContent = penThickness.value;
     });
 
+    undoSigBtn.addEventListener("click", function () {
+      if (!strokeHistory.length) return;
+      var snapshot = strokeHistory.pop();
+      sigCtx.putImageData(snapshot, 0, 0);
+      updateUndoState();
+    });
+
     clearSigBtn.addEventListener("click", function () {
       sigCtx.clearRect(0, 0, sigPad.width, sigPad.height);
+      strokeHistory = [];
+      updateUndoState();
+    });
+
+    padSize.addEventListener("change", function () {
+      sigPad.style.height = padSize.value + "px";
+      resizeCanvas(sigPad, sigCtx);
+      sigCtx.lineCap = "round";
+      sigCtx.lineJoin = "round";
+      strokeHistory = [];
+      updateUndoState();
+      statusBox.textContent = "Drawing area resized — previous strokes were cleared.";
     });
 
     // ---- Type mode ----
