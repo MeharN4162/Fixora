@@ -6,21 +6,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free PDF Page Reorder Tool Online | Fixoona</title>
-  <meta name="description" content="Reorder the pages of a PDF online for free, right in your browser. See every page and rearrange them exactly how you want. No uploads, no sign-up." />
-  <meta name="keywords" content="reorder pdf pages, rearrange pdf pages online free, pdf page organizer" />
+  <meta name="description" content="Reorder, delete, or duplicate PDF pages online for free, right in your browser. Drag pages into place, remove ones you don't need, duplicate any page, or reverse the whole order instantly. No uploads, no sign-up." />
+  <meta name="keywords" content="reorder pdf pages, rearrange pdf pages online free, pdf page organizer, delete pdf pages, duplicate pdf page, reverse pdf page order" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/pdf-reorder" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixoona" />
   <meta property="og:title" content="Free PDF Page Reorder Tool Online" />
-  <meta property="og:description" content="Reorder the pages of a PDF online for free, right in your browser." />
+  <meta property="og:description" content="Reorder, delete, or duplicate PDF pages online for free, right in your browser." />
   <meta property="og:url" content="https://fixoona.com/tools/pdf-reorder" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free PDF Page Reorder Tool Online" />
-  <meta name="twitter:description" content="Reorder the pages of a PDF online for free." />
+  <meta name="twitter:description" content="Reorder, delete, or duplicate PDF pages online for free." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='23' width='15' height='54' rx='7.5' fill='white'/%3E%3Crect x='30' y='23' width='42' height='14' rx='7' fill='white'/%3E%3Crect x='30' y='46' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -80,6 +80,21 @@
         "@type": "Question",
         "name": "Is there a limit to how many pages I can reorder?",
         "acceptedAnswer": { "@type": "Answer", "text": "No hard limit, but every page is rendered as a thumbnail image in your browser when the file loads, so very long documents may take longer to load and use more memory since everything runs locally on your device." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I delete a page while reordering?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — each thumbnail has its own delete button that removes just that page from the final PDF. The remaining pages shift up and renumber automatically, and the button disables itself once a single page is left, since a PDF can't have zero pages." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I duplicate a page instead of just moving it?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — each thumbnail's duplicate button inserts an exact copy of that page directly after it, keeping the original's selectable text, images, and rotation intact. The new copy is labeled \"· copy\" so you can tell it apart from the page it came from." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a quick way to reverse the whole page order?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — click \"Reverse Page Order\" above the Save button to instantly flip the entire document so the last page becomes the first and vice versa, without dragging every thumbnail individually." }
       }
     ]
   }
@@ -141,6 +156,44 @@
       opacity: 0.3;
       cursor: not-allowed;
     }
+    .reorder-item .psel-thumb-stage {
+      position: relative;
+    }
+    .reorder-item .page-actions {
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      display: flex;
+      gap: 4px;
+      z-index: 3;
+    }
+    .reorder-item .page-actions button {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: none;
+      background: rgba(11, 18, 32, 0.6);
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .reorder-item .page-actions button:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .reorder-item .copy-tag {
+      position: absolute;
+      bottom: 6px;
+      left: 6px;
+      background: rgba(11, 18, 32, 0.75);
+      color: #fff;
+      font-size: 0.66rem;
+      padding: 2px 6px;
+      border-radius: 5px;
+      z-index: 2;
+    }
     body.fx-drag-active {
       cursor: grabbing;
     }
@@ -182,7 +235,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🔀</div>
       <h1>Reorder PDF Pages</h1>
-      <p>See every page, then press and hold a thumbnail to drag it into the order you want.</p>
+      <p>See every page, then press and hold a thumbnail to drag it into the order you want — delete pages you don't need, duplicate any page, or reverse the whole document in one click.</p>
     </section>
 
     <section class="container">
@@ -195,6 +248,10 @@
         </div>
 
         <div class="page-select-grid" id="pageGrid"></div>
+
+        <div class="actions" id="quickActions" style="display:none;">
+          <button class="btn btn-secondary" id="reverseBtn" type="button">⇅ Reverse Page Order</button>
+        </div>
 
         <div class="actions">
           <button class="btn btn-primary" id="saveBtn" disabled>Save Reordered PDF</button>
@@ -209,6 +266,8 @@
         <ol class="howto-steps">
           <li>Upload your PDF — every page renders as a thumbnail labeled with its position and original page number.</li>
           <li>Press and hold a thumbnail's grip handle and drag it to a new spot — or use the small up/down buttons if you'd rather not drag.</li>
+          <li>Use a thumbnail's delete button to remove that page, or its duplicate button to insert a copy right after it.</li>
+          <li>Need the whole document backwards? Click "Reverse Page Order" to flip every page's position in one click.</li>
           <li>Watch the "Position N (was page M)" label update as you move pages around, confirming the new order.</li>
           <li>Click "Save Reordered PDF" and download the result.</li>
         </ol>
@@ -235,6 +294,18 @@
         <details class="faq-item">
           <summary>Is there a limit to how many pages I can reorder?</summary>
           <p>No hard limit, but every page is rendered as a thumbnail image in your browser when the file loads, so very long documents may take longer to load and use more memory since everything runs locally on your device.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I delete a page while reordering?</summary>
+          <p>Yes — each thumbnail has its own delete button that removes just that page from the final PDF. The remaining pages shift up and renumber automatically, and the button disables itself once a single page is left, since a PDF can't have zero pages.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I duplicate a page instead of just moving it?</summary>
+          <p>Yes — each thumbnail's duplicate button inserts an exact copy of that page directly after it, keeping the original's selectable text, images, and rotation intact. The new copy is labeled "· copy" so you can tell it apart from the page it came from.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is there a quick way to reverse the whole page order?</summary>
+          <p>Yes — click "Reverse Page Order" above the Save button to instantly flip the entire document so the last page becomes the first and vice versa, without dragging every thumbnail individually.</p>
         </details>
       </div>
 
@@ -320,11 +391,21 @@
     var saveBtn = document.getElementById("saveBtn");
     var downloadBtn = document.getElementById("downloadBtn");
     var statusBox = document.getElementById("statusBox");
+    var quickActions = document.getElementById("quickActions");
+    var reverseBtn = document.getElementById("reverseBtn");
 
     var currentFile = null;
     var pageOrder = []; // array of original 0-based indices, in current display order
     var thumbDataUrls = [];
     var lastDownloadUrl = null;
+
+    var DUPLICATE_SVG =
+      '<svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      '<rect x="7" y="7" width="9" height="9" rx="1.5"></rect><path d="M4.5 12.5V5.5a1 1 0 0 1 1-1H12"></path></svg>';
+    var DELETE_SVG =
+      '<svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      '<path d="M4.5 6h11"></path><path d="M8 6V4.5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1V6"></path>' +
+      '<path d="M5.5 6.5l.8 8.8a1 1 0 0 0 1 .9h5.4a1 1 0 0 0 1-.9l.8-8.8"></path><path d="M8.3 9.2v4M11.7 9.2v4"></path></svg>';
 
     function resetDownload() {
       if (lastDownloadUrl) { URL.revokeObjectURL(lastDownloadUrl); lastDownloadUrl = null; }
@@ -333,7 +414,11 @@
 
     function renderGrid() {
       pageGrid.innerHTML = "";
+      var seenCounts = {};
       pageOrder.forEach(function (origIndex, position) {
+        seenCounts[origIndex] = (seenCounts[origIndex] || 0) + 1;
+        var isCopy = seenCounts[origIndex] > 1;
+
         var item = document.createElement("div");
         item.className = "page-select-item reorder-item";
         item.setAttribute("data-index", String(position));
@@ -352,6 +437,44 @@
         img.alt = "Page " + (origIndex + 1) + " preview";
         img.draggable = false;
         stage.appendChild(img);
+
+        if (isCopy) {
+          var copyTag = document.createElement("div");
+          copyTag.className = "copy-tag";
+          copyTag.textContent = "· copy";
+          stage.appendChild(copyTag);
+        }
+
+        var pageActions = document.createElement("div");
+        pageActions.className = "page-actions";
+
+        var dupBtn = document.createElement("button");
+        dupBtn.type = "button";
+        dupBtn.innerHTML = DUPLICATE_SVG;
+        dupBtn.title = "Duplicate this page";
+        dupBtn.setAttribute("aria-label", "Duplicate page " + (origIndex + 1));
+        dupBtn.addEventListener("click", function () {
+          pageOrder.splice(position + 1, 0, origIndex);
+          renderGrid();
+          resetDownload();
+        });
+
+        var delBtn = document.createElement("button");
+        delBtn.type = "button";
+        delBtn.innerHTML = DELETE_SVG;
+        delBtn.title = "Delete this page";
+        delBtn.disabled = pageOrder.length <= 1;
+        delBtn.setAttribute("aria-label", "Delete page " + (origIndex + 1));
+        delBtn.addEventListener("click", function () {
+          if (pageOrder.length <= 1) return;
+          pageOrder.splice(position, 1);
+          renderGrid();
+          resetDownload();
+        });
+
+        pageActions.appendChild(dupBtn);
+        pageActions.appendChild(delBtn);
+        stage.appendChild(pageActions);
 
         var label = document.createElement("div");
         label.className = "psel-label";
@@ -435,6 +558,7 @@
       pageOrder = thumbDataUrls.map(function (_, i) { return i; });
       renderGrid();
       saveBtn.disabled = false;
+      quickActions.style.display = "flex";
       statusBox.textContent = "Loaded " + totalPages + " page(s). Use the arrows to reorder, then save.";
     }
 
@@ -454,6 +578,13 @@
     Fixora.setupDropzone(dropzone, fileInput, handleFiles);
     dropzone.addEventListener("keydown", function (e) {
       if (e.key === "Enter" || e.key === " ") fileInput.click();
+    });
+
+    reverseBtn.addEventListener("click", function () {
+      if (!pageOrder.length) return;
+      pageOrder.reverse();
+      renderGrid();
+      resetDownload();
     });
 
     saveBtn.addEventListener("click", async function () {

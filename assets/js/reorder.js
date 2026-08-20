@@ -8,7 +8,7 @@
  * the tool's own render function is called to keep the DOM in sync.
  *
  * Usage:
- *   FixoraReorder.enable({
+ *   FixoonaReorder.enable({
  *     container: listEl,            // parent element that holds the items
  *     itemSelector: ".my-item",     // selector matching each item (must carry data-index)
  *     handleSelector: ".drag-handle", // optional — restrict drag-start to this element
@@ -216,5 +216,5 @@
     };
   }
 
-  global.FixoraReorder = { enable: enable, moveItem: moveItem, gripSVG: GRIP_SVG };
+  global.FixoonaReorder = { enable: enable, moveItem: moveItem, gripSVG: GRIP_SVG };
 })(window);
