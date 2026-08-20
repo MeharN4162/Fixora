@@ -6,7 +6,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Excel to PDF Converter Online | Fixoona</title>
-  <meta name="description" content="Convert an Excel spreadsheet (.xlsx/.xls) to PDF online for free, right in your browser. Choose portrait or landscape, fit wide tables to the page width, and combine multiple sheets into one PDF. No uploads, no sign-up." />
+  <meta name="description" content="Convert an Excel spreadsheet (.xlsx/.xls) to PDF online for free, right in your browser. Choose portrait or landscape, fit wide tables to the page width, see each sheet's size, and combine multiple sheets into one PDF. No uploads, no sign-up." />
   <meta name="keywords" content="excel to pdf, convert xlsx to pdf online free, spreadsheet to pdf" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/excel-to-pdf" />
@@ -80,6 +80,16 @@
         "@type": "Question",
         "name": "What do the Page Orientation and \"Fit table to page width\" options do?",
         "acceptedAnswer": { "@type": "Answer", "text": "Page Orientation sets the printed page to Portrait or Landscape by writing an @page CSS rule the browser's print engine respects — pick Landscape for wide tables with many columns. \"Fit table to page width\" shrinks the font size and forces the table to a fixed layout at 100% width so it doesn't get cut off at the page's right edge instead of overflowing onto extra printed pages." }
+      },
+      {
+        "@type": "Question",
+        "name": "What do the numbers next to each sheet name mean?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Each sheet is listed with its used range as rows × columns, so you can tell at a glance how large a sheet is before deciding whether to include it — a sheet showing (200 × 15), for example, has 200 rows and 15 columns of data." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a faster way to check or uncheck every sheet?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — use the \"Select All\" or \"Select None\" links above the sheet checklist instead of clicking each checkbox individually." }
       }
     ]
   }
@@ -219,7 +229,14 @@
         </div>
 
         <div class="field no-print" id="sheetSelectWrap" style="display:none;margin-top:8px;">
-          <label>Sheets to Include</label>
+          <label style="display:flex;align-items:center;justify-content:space-between;">
+            <span>Sheets to Include</span>
+            <span>
+              <button type="button" class="section-link" id="selectAllSheetsBtn" style="background:none;border:none;cursor:pointer;font-size:0.85rem;">Select All</button>
+              &nbsp;·&nbsp;
+              <button type="button" class="section-link" id="selectNoneSheetsBtn" style="background:none;border:none;cursor:pointer;font-size:0.85rem;">Select None</button>
+            </span>
+          </label>
           <div class="sheet-check-list" id="sheetChecklist"></div>
         </div>
 
@@ -268,6 +285,14 @@
         <details class="faq-item">
           <summary>What do the Page Orientation and "Fit table to page width" options do?</summary>
           <p>Page Orientation sets the printed page to Portrait or Landscape by writing an @page CSS rule the browser's print engine respects — pick Landscape for wide tables with many columns. "Fit table to page width" shrinks the font size and forces the table to a fixed layout at 100% width so it doesn't get cut off at the page's right edge instead of overflowing onto extra printed pages.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What do the numbers next to each sheet name mean?</summary>
+          <p>Each sheet is listed with its used range as rows × columns, so you can tell at a glance how large a sheet is before deciding whether to include it — a sheet showing (200 × 15), for example, has 200 rows and 15 columns of data.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is there a faster way to check or uncheck every sheet?</summary>
+          <p>Yes — use the "Select All" or "Select None" links above the sheet checklist instead of clicking each checkbox individually.</p>
         </details>
       </div>
 
@@ -427,7 +452,16 @@
           cb.checked = idx === 0; // only the first sheet is included by default
           cb.addEventListener("change", renderSelectedSheets);
           label.appendChild(cb);
-          label.appendChild(document.createTextNode(name));
+
+          var ws = workbook.Sheets[name];
+          var dimsText = "";
+          if (ws["!ref"]) {
+            var range = XLSX.utils.decode_range(ws["!ref"]);
+            var rows = range.e.r - range.s.r + 1;
+            var cols = range.e.c - range.s.c + 1;
+            dimsText = " (" + rows + " × " + cols + ")";
+          }
+          label.appendChild(document.createTextNode(name + dimsText));
           sheetChecklist.appendChild(label);
         });
 
@@ -449,6 +483,15 @@
     orientationSelect.addEventListener("change", updatePageStyle);
     fitWidthCheck.addEventListener("change", renderSelectedSheets);
     updatePageStyle();
+
+    document.getElementById("selectAllSheetsBtn").addEventListener("click", function () {
+      sheetChecklist.querySelectorAll('input[type="checkbox"]').forEach(function (cb) { cb.checked = true; });
+      renderSelectedSheets();
+    });
+    document.getElementById("selectNoneSheetsBtn").addEventListener("click", function () {
+      sheetChecklist.querySelectorAll('input[type="checkbox"]').forEach(function (cb) { cb.checked = false; });
+      renderSelectedSheets();
+    });
 
     downloadBtn.addEventListener("click", function () {
       window.print();
