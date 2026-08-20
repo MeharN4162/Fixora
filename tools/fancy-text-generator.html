@@ -6,7 +6,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Fancy Text Generator — Cool Fonts for Bio & Social Media | Fixoona</title>
-  <meta name="description" content="Turn plain text into bold, italic, double-struck, circled, small caps, strikethrough, and upside-down styles using real Unicode characters. Free, instant, no sign-up." />
+  <meta name="description" content="Turn plain text into bold, italic, script, double-struck, circled, small caps, strikethrough, and upside-down styles using real Unicode characters. Search styles, pin favorites, and copy instantly. Free, no sign-up." />
   <meta name="keywords" content="fancy text generator, cool fonts for instagram bio, unicode text generator, bold text generator" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/fancy-text-generator" />
@@ -14,13 +14,13 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixoona" />
   <meta property="og:title" content="Free Fancy Text Generator" />
-  <meta property="og:description" content="Turn plain text into bold, italic, double-struck, circled, small caps, and more using real Unicode characters." />
+  <meta property="og:description" content="Turn plain text into bold, italic, script, double-struck, circled, small caps, and more using real Unicode characters. Search styles and pin favorites." />
   <meta property="og:url" content="https://fixoona.com/tools/fancy-text-generator" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Fancy Text Generator" />
-  <meta name="twitter:description" content="Turn plain text into bold, italic, double-struck, circled, small caps, and more using real Unicode characters." />
+  <meta name="twitter:description" content="Turn plain text into bold, italic, script, double-struck, circled, small caps, and more using real Unicode characters. Search styles and pin favorites." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='23' width='15' height='54' rx='7.5' fill='white'/%3E%3Crect x='30' y='23' width='42' height='14' rx='7' fill='white'/%3E%3Crect x='30' y='46' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -64,12 +64,17 @@
       {
         "@type": "Question",
         "name": "Why don't italic and bold italic styles include styled numbers?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Because Unicode simply never assigned mathematical italic or bold-italic code points to digits — that block of the standard only defines styled letters, not numbers. Bold, Double-Struck, Fullwidth, and Circled styles do include styled digits because separate code points exist for those." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Because Unicode simply never assigned mathematical italic, script, or sans-serif italic/bold-italic code points to digits — those blocks of the standard only define styled letters, not numbers. Bold, Double-Struck, Fullwidth, Circled, Sans-Serif, Sans-Serif Bold, and Monospace styles do include styled digits because separate code points exist for those." }
       },
       {
         "@type": "Question",
         "name": "Why does lowercase 'h' look different in the Italic style?",
         "acceptedAnswer": { "@type": "Answer", "text": "It's a genuine Unicode quirk: lowercase italic h isn't part of the systematic Mathematical Alphanumeric block like the other letters — it reuses the pre-existing Planck constant symbol (U+210E) instead, so this tool hardcodes that one exception to match real Unicode." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do letters like B, E, F, H, I, L, M, R (and e, g, o) look different in the Script style?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Unicode has the same historical quirk here as it does with italic h: those specific Script letters aren't part of the systematic Mathematical Script block either — they reuse older, pre-existing 'Letterlike Symbols' (like ℬ, ℰ, ℱ, ℋ, ℐ, ℒ, ℳ, ℛ, ℯ, ℊ, ℴ) instead of newly assigned code points. The Fraktur style has a smaller version of the same issue (C, H, I, R, Z). This tool hardcodes all of these exceptions to match real Unicode." }
       },
       {
         "@type": "Question",
@@ -80,6 +85,16 @@
         "@type": "Question",
         "name": "Is any of my text sent to a server to generate these styles?",
         "acceptedAnswer": { "@type": "Answer", "text": "No — every style is computed instantly in your browser using JavaScript character-code math. Nothing you type is uploaded anywhere." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I save my favorite styles for quick access?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — click the star next to any style to pin it as a favorite. Favorites are saved in your browser's local storage (not uploaded anywhere) and appear pinned at the top of the list, so your most-used styles are always one click away next time you visit." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I search or filter the list of styles?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — use the filter box above the results to instantly narrow the list down to styles matching what you type, like \"bold\" or \"circle\". Clear the box to see all styles again." }
       }
     ]
   }
@@ -117,6 +132,25 @@
       flex-shrink: 0;
       padding: 7px 14px;
       font-size: 0.83rem;
+    }
+    .fancy-star {
+      flex-shrink: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.05rem;
+      line-height: 1;
+      padding: 4px;
+      color: var(--color-text-muted);
+    }
+    .fancy-star:hover,
+    .fancy-star.is-active {
+      color: var(--color-primary);
+    }
+    .fancy-empty {
+      padding: 14px 0;
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
     }
     @media (max-width: 560px) {
       .fancy-row {
@@ -171,6 +205,11 @@
           <input type="text" id="fancyInput" placeholder="Type something…" maxlength="200" />
         </div>
 
+        <div class="field" style="margin-top:14px;">
+          <label for="fancyFilter">Filter Styles</label>
+          <input type="text" id="fancyFilter" placeholder="Search styles… e.g. bold, circle, script" />
+        </div>
+
         <div class="field" id="fancyResults" style="margin-top:22px;"></div>
 
         <div class="copy-note" id="copyNote"></div>
@@ -180,8 +219,9 @@
         <h2>How to Generate Fancy Text</h2>
         <ol class="howto-steps">
           <li>Type or paste your text into the box at the top.</li>
-          <li>All 20 styled versions below update instantly as you type.</li>
-          <li>Browse Bold, Italic, Bold Italic, Sans-Serif, Sans-Serif Bold, Monospace, Double-Struck, Fullwidth, Circled, Circled (Filled), Squared, Squared (Filled), Small Caps, Superscript, Fraktur, Fraktur Bold, Script Bold, Strikethrough, Underline, and Upside Down.</li>
+          <li>All 23 styled versions below update instantly as you type.</li>
+          <li>Browse Bold, Italic, Bold Italic, Sans-Serif, Sans-Serif Bold, Sans-Serif Italic, Sans-Serif Bold Italic, Monospace, Double-Struck, Fullwidth, Circled, Circled (Filled), Squared, Squared (Filled), Small Caps, Superscript, Fraktur, Fraktur Bold, Script, Script Bold, Strikethrough, Underline, and Upside Down.</li>
+          <li>Use the filter box to jump straight to a style by name, or click the ★ next to any style to pin it to the top of the list for quick access next time you visit.</li>
           <li>Click "Copy" next to any style to copy that exact version to your clipboard.</li>
           <li>Paste it into your bio, username, caption, or wherever you like.</li>
         </ol>
@@ -195,11 +235,15 @@
         </details>
         <details class="faq-item">
           <summary>Why don't italic and bold italic styles include styled numbers?</summary>
-          <p>Because Unicode simply never assigned mathematical italic or bold-italic code points to digits — that block of the standard only defines styled letters, not numbers. Bold, Double-Struck, Fullwidth, and Circled styles do include styled digits because separate code points exist for those.</p>
+          <p>Because Unicode simply never assigned mathematical italic, script, or sans-serif italic/bold-italic code points to digits — those blocks of the standard only define styled letters, not numbers. Bold, Double-Struck, Fullwidth, Circled, Sans-Serif, Sans-Serif Bold, and Monospace styles do include styled digits because separate code points exist for those.</p>
         </details>
         <details class="faq-item">
           <summary>Why does lowercase 'h' look different in the Italic style?</summary>
           <p>It's a genuine Unicode quirk: lowercase italic h isn't part of the systematic Mathematical Alphanumeric block like the other letters — it reuses the pre-existing Planck constant symbol (U+210E) instead, so this tool hardcodes that one exception to match real Unicode.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why do letters like B, E, F, H, I, L, M, R (and e, g, o) look different in the Script style?</summary>
+          <p>Unicode has the same historical quirk here as it does with italic h: those specific Script letters aren't part of the systematic Mathematical Script block either — they reuse older, pre-existing 'Letterlike Symbols' (like ℬ, ℰ, ℱ, ℋ, ℐ, ℒ, ℳ, ℛ, ℯ, ℊ, ℴ) instead of newly assigned code points. The Fraktur style has a smaller version of the same issue (C, H, I, R, Z). This tool hardcodes all of these exceptions to match real Unicode.</p>
         </details>
         <details class="faq-item">
           <summary>Are these accessible to screen readers?</summary>
@@ -208,6 +252,14 @@
         <details class="faq-item">
           <summary>Is any of my text sent to a server to generate these styles?</summary>
           <p>No — every style is computed instantly in your browser using JavaScript character-code math. Nothing you type is uploaded anywhere.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I save my favorite styles for quick access?</summary>
+          <p>Yes — click the star next to any style to pin it as a favorite. Favorites are saved in your browser's local storage (not uploaded anywhere) and appear pinned at the top of the list, so your most-used styles are always one click away next time you visit.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I search or filter the list of styles?</summary>
+          <p>Yes — use the filter box above the results to instantly narrow the list down to styles matching what you type, like "bold" or "circle". Clear the box to see all styles again.</p>
         </details>
       </div>
 
@@ -350,7 +402,11 @@
       return ch;
     }
 
-    var SMALL_CAPS_CODES = [0x1D00, 0x0299, 0x1D04, 0x1D05, 0x1D07, 0xA730, 0x0262, 0x029C, 0x026A, 0x1D0A, 0x1D0B, 0x029F, 0x1D0D, 0x0274, 0x1D0F, 0x1D18, 0x71, 0x0280, 0xA731, 0x1D1B, 0x1D1C, 0x1D20, 0x1D21, 0x78, 0x028F, 0x1D22];
+    // Index 16 (q) uses U+A7AF LATIN LETTER SMALL CAPITAL Q — a real, if lesser-known,
+    // Unicode 7.0 code point (previously this table incorrectly fell back to plain "q").
+    // Index 23 (x) intentionally falls back to plain "x" in mapSmallCaps below — Unicode
+    // has never assigned a small-capital X anywhere, so no correct glyph exists to use.
+    var SMALL_CAPS_CODES = [0x1D00, 0x0299, 0x1D04, 0x1D05, 0x1D07, 0xA730, 0x0262, 0x029C, 0x026A, 0x1D0A, 0x1D0B, 0x029F, 0x1D0D, 0x0274, 0x1D0F, 0x1D18, 0xA7AF, 0x0280, 0xA731, 0x1D1B, 0x1D1C, 0x1D20, 0x1D21, 0x78, 0x028F, 0x1D22];
     var SMALL_CAPS = SMALL_CAPS_CODES.map(function (c) { return String.fromCodePoint(c); }).join("");
     function mapSmallCaps(ch) {
       var c = ch.charCodeAt(0);
@@ -442,6 +498,38 @@
       return ch;
     }
 
+    // Plain (non-bold) Mathematical Script reuses several pre-existing "Letterlike
+    // Symbols" instead of dedicated code points — the same kind of historical hole
+    // as italic h. Verified against Unicode character names for every letter.
+    var SCRIPT_UPPER_EXCEPTIONS = { 66: 0x212C, 69: 0x2130, 70: 0x2131, 72: 0x210B, 73: 0x2110, 76: 0x2112, 77: 0x2133, 82: 0x211B };
+    var SCRIPT_LOWER_EXCEPTIONS = { 101: 0x212F, 103: 0x210A, 111: 0x2134 };
+    function mapScript(ch) {
+      var c = ch.charCodeAt(0);
+      if (c >= 65 && c <= 90) {
+        if (SCRIPT_UPPER_EXCEPTIONS[c]) return String.fromCodePoint(SCRIPT_UPPER_EXCEPTIONS[c]);
+        return String.fromCodePoint(0x1D49C + (c - 65));
+      }
+      if (c >= 97 && c <= 122) {
+        if (SCRIPT_LOWER_EXCEPTIONS[c]) return String.fromCodePoint(SCRIPT_LOWER_EXCEPTIONS[c]);
+        return String.fromCodePoint(0x1D4B6 + (c - 97));
+      }
+      return ch;
+    }
+
+    function mapSansSerifItalic(ch) {
+      var c = ch.charCodeAt(0);
+      if (c >= 65 && c <= 90) return String.fromCodePoint(0x1D608 + (c - 65));
+      if (c >= 97 && c <= 122) return String.fromCodePoint(0x1D622 + (c - 97));
+      return ch;
+    }
+
+    function mapSansSerifBoldItalic(ch) {
+      var c = ch.charCodeAt(0);
+      if (c >= 65 && c <= 90) return String.fromCodePoint(0x1D63C + (c - 65));
+      if (c >= 97 && c <= 122) return String.fromCodePoint(0x1D656 + (c - 97));
+      return ch;
+    }
+
     function mapStrikethrough(str) {
       var out = "";
       for (var i = 0; i < str.length; i++) out += str[i] + "̶";
@@ -492,7 +580,10 @@
         case "circledFilled": return mapEach(input, mapCircledFilled);
         case "fraktur": return mapEach(input, mapFraktur);
         case "frakturBold": return mapEach(input, mapFrakturBold);
+        case "script": return mapEach(input, mapScript);
         case "scriptBold": return mapEach(input, mapScriptBold);
+        case "sansSerifItalic": return mapEach(input, mapSansSerifItalic);
+        case "sansSerifBoldItalic": return mapEach(input, mapSansSerifBoldItalic);
         default: return input;
       }
     }
@@ -503,6 +594,8 @@
       { id: "boldItalic", label: "Bold Italic" },
       { id: "sansSerif", label: "Sans-Serif" },
       { id: "sansSerifBold", label: "Sans-Serif Bold" },
+      { id: "sansSerifItalic", label: "Sans-Serif Italic" },
+      { id: "sansSerifBoldItalic", label: "Sans-Serif Bold Italic" },
       { id: "monospace", label: "Monospace" },
       { id: "doubleStruck", label: "Double-Struck" },
       { id: "fullwidth", label: "Fullwidth" },
@@ -514,19 +607,91 @@
       { id: "superscript", label: "Superscript" },
       { id: "fraktur", label: "Fraktur" },
       { id: "frakturBold", label: "Fraktur Bold" },
+      { id: "script", label: "Script" },
       { id: "scriptBold", label: "Script Bold" },
       { id: "strikethrough", label: "Strikethrough" },
       { id: "underline", label: "Underline" },
       { id: "upsideDown", label: "Upside Down" }
     ];
 
+    var fancyFilter = document.getElementById("fancyFilter");
+    var FAVORITES_KEY = "fixora_fancy_favorites";
+
+    function loadFavorites() {
+      try {
+        var raw = localStorage.getItem(FAVORITES_KEY);
+        var parsed = raw ? JSON.parse(raw) : [];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveFavorites(list) {
+      try {
+        localStorage.setItem(FAVORITES_KEY, JSON.stringify(list));
+      } catch (e) {
+        // localStorage unavailable (private mode, etc.) — favorites just won't persist.
+      }
+    }
+
+    var favorites = loadFavorites();
+
+    function isFavorite(id) {
+      return favorites.indexOf(id) !== -1;
+    }
+
+    function toggleFavorite(id) {
+      var idx = favorites.indexOf(id);
+      if (idx === -1) favorites.push(id);
+      else favorites.splice(idx, 1);
+      saveFavorites(favorites);
+      render();
+    }
+
+    function getVisibleStyles() {
+      var query = (fancyFilter.value || "").trim().toLowerCase();
+      var list = query
+        ? STYLES.filter(function (style) { return style.label.toLowerCase().indexOf(query) !== -1; })
+        : STYLES.slice();
+      list.sort(function (a, b) {
+        var favA = isFavorite(a.id) ? 0 : 1;
+        var favB = isFavorite(b.id) ? 0 : 1;
+        if (favA !== favB) return favA - favB;
+        return 0;
+      });
+      return list;
+    }
+
     function render() {
       var text = fancyInput.value || "";
       fancyResults.innerHTML = "";
-      STYLES.forEach(function (style) {
+      var visible = getVisibleStyles();
+
+      if (visible.length === 0) {
+        var empty = document.createElement("div");
+        empty.className = "fancy-empty";
+        empty.textContent = "No styles match your search.";
+        fancyResults.appendChild(empty);
+        return;
+      }
+
+      visible.forEach(function (style) {
         var out = text ? styleText(text, style.id) : "";
         var row = document.createElement("div");
         row.className = "fancy-row";
+
+        var starred = isFavorite(style.id);
+        var star = document.createElement("button");
+        star.type = "button";
+        star.className = "fancy-star" + (starred ? " is-active" : "");
+        star.textContent = starred ? "★" : "☆";
+        star.setAttribute("aria-pressed", starred ? "true" : "false");
+        star.setAttribute("aria-label", (starred ? "Unpin " : "Pin ") + style.label + " as favorite");
+        star.addEventListener("click", function () {
+          toggleFavorite(style.id);
+        });
+        row.appendChild(star);
 
         var label = document.createElement("span");
         label.className = "fancy-label";
@@ -553,6 +718,7 @@
     }
 
     fancyInput.addEventListener("input", render);
+    fancyFilter.addEventListener("input", render);
     fancyInput.value = "Fixoona";
     render();
   </script>
