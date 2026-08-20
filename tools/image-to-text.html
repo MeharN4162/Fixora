@@ -6,7 +6,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Image to Text Converter Online (OCR) | Fixoona</title>
-  <meta name="description" content="Extract text from an image online for free using OCR, right in your browser. Works on screenshots, scanned documents, and photos of text. No uploads, no sign-up." />
+  <meta name="description" content="Extract text from an image online for free using OCR, right in your browser. Track live recognition progress, see a confidence score, and optionally boost accuracy with grayscale and contrast preprocessing. No uploads, no sign-up." />
   <meta name="keywords" content="image to text, ocr online free, extract text from image, picture to text converter" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/image-to-text" />
@@ -28,6 +28,48 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <style>
+    .preprocess-options {
+      margin-top: 18px;
+    }
+    .ocr-progress {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .ocr-progress-track {
+      flex: 1;
+      height: 8px;
+      background: var(--color-bg-soft);
+      border: 1px solid var(--color-border);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .ocr-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--color-primary);
+      border-radius: 999px;
+      transition: width 0.2s ease;
+    }
+    .ocr-progress-label {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      min-width: 40px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .confidence-note {
+      margin-top: 12px;
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+    }
+    .confidence-note strong {
+      color: var(--color-text);
+    }
+  </style>
 
   <script type="application/ld+json">
   {
@@ -80,6 +122,16 @@
         "@type": "Question",
         "name": "Can it read handwriting?",
         "acceptedAnswer": { "@type": "Answer", "text": "Not reliably. Tesseract's OCR model is trained primarily on printed and typed text; handwritten text recognition is a different, much harder problem and results will generally be poor." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the tool show how confident it is in the extracted text?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. After each extraction, Tesseract.js reports a confidence score from 0-100% indicating how certain the OCR engine is about the recognized text overall. Lower scores usually mean blurrier images, unusual fonts, or low contrast." }
+      },
+      {
+        "@type": "Question",
+        "name": "What do the grayscale and contrast boost options do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "They're optional preprocessing filters applied to your image with the HTML canvas before OCR runs. Grayscale removes color information that can confuse the recognizer, and contrast boost widens the gap between text and background. Both can improve accuracy on photos with uneven lighting or low-contrast text - try toggling them if your results look off." }
       }
     ]
   }
@@ -132,8 +184,18 @@
 
         <img id="previewImg" class="preview-img" style="display:none;max-height:280px;object-fit:contain;" alt="Preview of uploaded image" />
 
+        <div class="preprocess-options" id="preprocessOptions" style="display:none;">
+          <label class="check-row"><input type="checkbox" id="grayscaleOpt" /> Convert to grayscale before OCR</label>
+          <label class="check-row"><input type="checkbox" id="contrastOpt" /> Boost contrast before OCR</label>
+        </div>
+
         <div class="actions">
           <button class="btn btn-primary" id="extractBtn" disabled>Extract Text</button>
+        </div>
+
+        <div class="ocr-progress" id="ocrProgress" style="display:none;">
+          <div class="ocr-progress-track"><div class="ocr-progress-fill" id="ocrProgressFill"></div></div>
+          <span class="ocr-progress-label" id="ocrProgressLabel">0%</span>
         </div>
 
         <div class="output-box" id="statusBox">
@@ -145,6 +207,8 @@
           <textarea id="resultText" readonly style="min-height:200px;"></textarea>
         </div>
 
+        <div class="confidence-note" id="confidenceNote" style="display:none;"></div>
+
         <div class="actions" id="resultActions" style="display:none;">
           <button class="btn btn-secondary" id="copyBtn">Copy Text</button>
         </div>
@@ -155,9 +219,10 @@
         <h2>How to Extract Text from an Image (OCR)</h2>
         <ol class="howto-steps">
           <li>Click the upload area or drag in a JPG, PNG, or WebP image containing text — screenshots, scans, and photos all work.</li>
+          <li>Optionally check "Convert to grayscale" or "Boost contrast" if the image has uneven lighting or low-contrast text — both are applied on-device before OCR runs.</li>
           <li>Click "Extract Text" — the first time you do this, the browser downloads a one-time OCR language pack (about 11MB).</li>
-          <li>Watch the status message for live recognition progress as the OCR engine analyzes the image.</li>
-          <li>Once done, review the extracted text in the box below and click "Copy Text" to copy it to your clipboard.</li>
+          <li>Watch the progress bar for live recognition progress as the OCR engine analyzes the image.</li>
+          <li>Once done, review the extracted text and its confidence score, then click "Copy Text" to copy it to your clipboard.</li>
         </ol>
       </div>
 
@@ -182,6 +247,14 @@
         <details class="faq-item">
           <summary>Can it read handwriting?</summary>
           <p>Not reliably. Tesseract's OCR model is trained primarily on printed and typed text; handwritten text recognition is a different, much harder problem and results will generally be poor.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does the tool show how confident it is in the extracted text?</summary>
+          <p>Yes. After each extraction, Tesseract.js reports a confidence score from 0-100% indicating how certain the OCR engine is about the recognized text overall. Lower scores usually mean blurrier images, unusual fonts, or low contrast.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What do the grayscale and contrast boost options do?</summary>
+          <p>They're optional preprocessing filters applied to your image with the HTML canvas before OCR runs. Grayscale removes color information that can confuse the recognizer, and contrast boost widens the gap between text and background. Both can improve accuracy on photos with uneven lighting or low-contrast text - try toggling them if your results look off.</p>
         </details>
       </div>
 
@@ -266,9 +339,21 @@
     var resultText = document.getElementById("resultText");
     var resultActions = document.getElementById("resultActions");
     var copyNote = document.getElementById("copyNote");
+    var preprocessOptions = document.getElementById("preprocessOptions");
+    var grayscaleOpt = document.getElementById("grayscaleOpt");
+    var contrastOpt = document.getElementById("contrastOpt");
+    var ocrProgress = document.getElementById("ocrProgress");
+    var ocrProgressFill = document.getElementById("ocrProgressFill");
+    var ocrProgressLabel = document.getElementById("ocrProgressLabel");
+    var confidenceNote = document.getElementById("confidenceNote");
 
     var currentFile = null;
     var worker = null;
+
+    function setProgress(pct) {
+      ocrProgressFill.style.width = pct + "%";
+      ocrProgressLabel.textContent = pct + "%";
+    }
 
     function handleFiles(files) {
       var file = files[0];
@@ -286,9 +371,61 @@
       };
       reader.readAsDataURL(file);
 
+      preprocessOptions.style.display = "flex";
+      preprocessOptions.style.flexDirection = "column";
       resultField.style.display = "none";
       resultActions.style.display = "none";
+      confidenceNote.style.display = "none";
+      ocrProgress.style.display = "none";
+      setProgress(0);
       statusBox.textContent = file.name + " ready. Click Extract Text.";
+    }
+
+    // Applies the optional grayscale/contrast-boost preprocessing to the
+    // uploaded image on an offscreen canvas before OCR runs. Tesseract.js's
+    // worker.recognize() accepts an HTMLCanvasElement directly, so the
+    // canvas itself is passed straight in when either option is checked.
+    function getRecognitionInput() {
+      var grayscale = grayscaleOpt.checked;
+      var contrast = contrastOpt.checked;
+      if (!grayscale && !contrast) return Promise.resolve(currentFile);
+
+      return new Promise(function (resolve) {
+        function process() {
+          var canvas = document.createElement("canvas");
+          canvas.width = previewImg.naturalWidth;
+          canvas.height = previewImg.naturalHeight;
+          var ctx = canvas.getContext("2d");
+          ctx.drawImage(previewImg, 0, 0);
+
+          var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          var data = imageData.data;
+          // Standard contrast-adjustment factor for a fixed +60 boost.
+          var factor = contrast ? (259 * (60 + 255)) / (255 * (259 - 60)) : 1;
+
+          for (var i = 0; i < data.length; i += 4) {
+            var r = data[i], g = data[i + 1], b = data[i + 2];
+            if (grayscale) {
+              var gray = 0.299 * r + 0.587 * g + 0.114 * b;
+              r = g = b = gray;
+            }
+            if (contrast) {
+              r = factor * (r - 128) + 128;
+              g = factor * (g - 128) + 128;
+              b = factor * (b - 128) + 128;
+            }
+            data[i] = Math.max(0, Math.min(255, r));
+            data[i + 1] = Math.max(0, Math.min(255, g));
+            data[i + 2] = Math.max(0, Math.min(255, b));
+          }
+
+          ctx.putImageData(imageData, 0, 0);
+          resolve(canvas);
+        }
+
+        if (previewImg.complete && previewImg.naturalWidth) process();
+        else previewImg.addEventListener("load", process, { once: true });
+      });
     }
 
     Fixora.setupDropzone(dropzone, fileInput, handleFiles);
@@ -305,6 +442,10 @@
         langPath: "../assets/js/vendor/tesseract/",
         gzip: true,
         logger: function (m) {
+          if (typeof m.progress === "number") {
+            ocrProgress.style.display = "flex";
+            setProgress(Math.round(m.progress * 100));
+          }
           if (m.status === "recognizing text") {
             statusBox.textContent = "Recognizing text… " + Math.round(m.progress * 100) + "%";
           } else if (m.status) {
@@ -320,22 +461,34 @@
       extractBtn.disabled = true;
       resultField.style.display = "none";
       resultActions.style.display = "none";
+      confidenceNote.style.display = "none";
+      ocrProgress.style.display = "flex";
+      setProgress(0);
 
       try {
+        var input = await getRecognitionInput();
         var w = await getWorker();
         statusBox.textContent = "Recognizing text…";
-        var result = await w.recognize(currentFile);
+        var result = await w.recognize(input);
         var text = result.data.text.trim();
+        var confidence = result.data.confidence;
 
         resultText.value = text || "No text detected in this image.";
         resultField.style.display = "block";
         resultActions.style.display = "flex";
+        setProgress(100);
         statusBox.textContent = text
           ? "Done! Extracted " + text.split(/\s+/).filter(Boolean).length + " word(s)."
           : "Finished, but no readable text was found in that image.";
+
+        if (typeof confidence === "number") {
+          confidenceNote.innerHTML = "Confidence score: <strong>" + Math.round(confidence) + "%</strong> — how certain the OCR engine is about this result.";
+          confidenceNote.style.display = "block";
+        }
       } catch (err) {
         console.error(err);
         statusBox.textContent = "Something went wrong running OCR on that image. Please try a different file.";
+        ocrProgress.style.display = "none";
       } finally {
         extractBtn.disabled = false;
       }
