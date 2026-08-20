@@ -6,8 +6,8 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free WebP to JPG Converter Online | Fixoona</title>
-  <meta name="description" content="Convert WebP images to JPG format online for free, right in your browser. Ideal for sites and apps that don't accept WebP. No uploads, no sign-up." />
-  <meta name="keywords" content="webp to jpg, convert webp to jpg online free, webp converter" />
+  <meta name="description" content="Convert WebP images to JPG format online for free, right in your browser — batch-convert multiple files at once, with a custom fill color for transparent areas. No uploads, no sign-up." />
+  <meta name="keywords" content="webp to jpg, convert webp to jpg online free, webp converter, batch webp to jpg" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/webp-to-jpg" />
 
@@ -59,7 +59,7 @@
       {
         "@type": "Question",
         "name": "What happens to transparency in my WebP file?",
-        "acceptedAnswer": { "@type": "Answer", "text": "JPEG doesn't support transparency, so the canvas is filled with solid white before your image is drawn on top - any transparent areas in the source WebP become white in the resulting JPG." }
+        "acceptedAnswer": { "@type": "Answer", "text": "JPEG doesn't support transparency, so the canvas is filled with your chosen fill color (white by default - use the Transparency Fill Color picker to change it) before your image is drawn on top; any transparent areas in the source WebP take on that color in the resulting JPG." }
       },
       {
         "@type": "Question",
@@ -80,6 +80,16 @@
         "@type": "Question",
         "name": "Is my WebP file uploaded anywhere during conversion?",
         "acceptedAnswer": { "@type": "Answer", "text": "No. The file is read and decoded locally via the FileReader and Image APIs, and the JPG is produced entirely client-side with canvas.toBlob()." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I convert more than one WebP file at once?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes - select or drag multiple WebP files and each one is converted with the same quality and fill-color settings, listed with its own before/after file size and a separate Download button per file." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I change the fill color used for transparent areas?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes - use the Transparency Fill Color picker. It defaults to white, but you can pick any color to match where the JPG will be used, since JPEG has no way to represent transparency itself." }
       }
     ]
   }
@@ -123,29 +133,39 @@
 
     <section class="container">
       <div class="tool-panel">
-        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload a WebP image">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload one or more WebP images">
           <div class="dz-icon" aria-hidden="true">🖼️</div>
-          <strong>Click to upload or drag a WebP here</strong>
-          <small>WebP files only. Transparent areas become white.</small>
-          <input type="file" id="fileInput" accept="image/webp" hidden />
+          <strong>Click to upload or drag WebP file(s) here</strong>
+          <small>WebP files only. Transparent areas are flattened to the fill color below.</small>
+          <input type="file" id="fileInput" accept="image/webp" multiple hidden />
         </div>
 
-        <img id="previewImg" class="preview-img" style="display:none;" alt="Preview of converted JPG image" />
-
-        <div class="field" style="margin-top:16px;">
-          <label for="qualityRange">JPG Quality: <span id="qualityValue">90%</span></label>
-          <input type="range" id="qualityRange" min="40" max="100" value="90" style="width:100%;" />
+        <div class="row" style="margin-top:16px;">
+          <div class="field">
+            <label for="qualityRange">JPG Quality: <span id="qualityValue">90%</span></label>
+            <input type="range" id="qualityRange" min="40" max="100" value="90" style="width:100%;" />
+          </div>
+          <div class="field">
+            <label for="fillColor">Transparency Fill Color</label>
+            <input type="color" id="fillColor" value="#ffffff" style="width:100%;height:44px;border:1px solid var(--color-border);border-radius:8px;cursor:pointer;" />
+          </div>
         </div>
 
-        <div class="stat-row" id="fileInfo" style="display:none;">
-          <div class="stat"><strong id="statOriginal">–</strong><span>WebP Size</span></div>
-          <div class="stat"><strong id="statNew">–</strong><span>JPG Size</span></div>
-          <div class="stat"><strong id="statDims">–</strong><span>Dimensions</span></div>
+        <div id="singleResult">
+          <img id="previewImg" class="preview-img" style="display:none;" alt="Preview of converted JPG image" />
+
+          <div class="stat-row" id="fileInfo" style="display:none;">
+            <div class="stat"><strong id="statOriginal">–</strong><span>WebP Size</span></div>
+            <div class="stat"><strong id="statNew">–</strong><span>JPG Size</span></div>
+            <div class="stat"><strong id="statDims">–</strong><span>Dimensions</span></div>
+          </div>
+
+          <div class="actions">
+            <a class="btn btn-primary" id="downloadBtn" style="display:none;" download="converted.jpg">Download JPG</a>
+          </div>
         </div>
 
-        <div class="actions">
-          <a class="btn btn-primary" id="downloadBtn" style="display:none;" download="converted.jpg">Download JPG</a>
-        </div>
+        <div id="batchResults" style="display:none;margin-top:16px;flex-direction:column;gap:10px;"></div>
 
         <div class="output-box" id="statusBox"></div>
       </div>
@@ -164,7 +184,7 @@
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
           <summary>What happens to transparency in my WebP file?</summary>
-          <p>JPEG doesn't support transparency, so the canvas is filled with solid white before your image is drawn on top - any transparent areas in the source WebP become white in the resulting JPG.</p>
+          <p>JPEG doesn't support transparency, so the canvas is filled with your chosen fill color (white by default - use the Transparency Fill Color picker to change it) before your image is drawn on top; any transparent areas in the source WebP take on that color in the resulting JPG.</p>
         </details>
         <details class="faq-item">
           <summary>My browser says it can't read the WebP file - why?</summary>
@@ -181,6 +201,14 @@
         <details class="faq-item">
           <summary>Is my WebP file uploaded anywhere during conversion?</summary>
           <p>No. The file is read and decoded locally via the FileReader and Image APIs, and the JPG is produced entirely client-side with canvas.toBlob().</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I convert more than one WebP file at once?</summary>
+          <p>Yes - select or drag multiple WebP files and each one is converted with the same quality and fill-color settings, listed with its own before/after file size and a separate Download button per file.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I change the fill color used for transparent areas?</summary>
+          <p>Yes - use the Transparency Fill Color picker. It defaults to white, but you can pick any color to match where the JPG will be used, since JPEG has no way to represent transparency itself.</p>
         </details>
       </div>
 
@@ -263,79 +291,147 @@
     var fileInfo = document.getElementById("fileInfo");
     var qualityRange = document.getElementById("qualityRange");
     var qualityValue = document.getElementById("qualityValue");
+    var fillColor = document.getElementById("fillColor");
+    var singleResult = document.getElementById("singleResult");
+    var batchResults = document.getElementById("batchResults");
 
-    var currentFile = null;
-    var currentImg = null;
-    var lastConvertedUrl = null;
+    var loadedFiles = []; // [{ file, img }]
+    var lastObjectUrls = [];
     var convertGeneration = 0;
     var convertTimer = null;
 
-    qualityRange.addEventListener("input", function () {
-      qualityValue.textContent = qualityRange.value + "%";
-      if (currentImg) {
-        clearTimeout(convertTimer);
-        convertTimer = setTimeout(convert, 120);
-      }
-    });
-
-    function handleFiles(files) {
-      var file = files[0];
-      if (!file || file.type !== "image/webp") {
-        statusBox.textContent = "Please choose a WebP image.";
-        return;
-      }
-      currentFile = file;
-      statusBox.textContent = "Reading WebP…";
-
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        var img = new Image();
-        img.onload = function () {
-          currentImg = img;
-          convert();
-        };
-        img.onerror = function () {
-          statusBox.textContent = "This browser couldn't decode that WebP file. Please try a recent version of Chrome, Firefox, Edge, or Safari.";
-        };
-        img.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
+    function scheduleConvert() {
+      if (!loadedFiles.length) return;
+      clearTimeout(convertTimer);
+      convertTimer = setTimeout(convertAll, 120);
     }
 
-    function convert() {
+    qualityRange.addEventListener("input", function () {
+      qualityValue.textContent = qualityRange.value + "%";
+      scheduleConvert();
+    });
+    fillColor.addEventListener("input", scheduleConvert);
+
+    function handleFiles(files) {
+      var webpFiles = Array.prototype.filter.call(files, function (f) { return f.type === "image/webp"; });
+      if (!webpFiles.length) {
+        statusBox.textContent = "Please choose one or more WebP images.";
+        return;
+      }
+
+      statusBox.textContent = "Reading " + webpFiles.length + " file" + (webpFiles.length === 1 ? "" : "s") + "…";
+      loadedFiles = [];
+      var pending = webpFiles.length;
+      var hadError = false;
+
+      webpFiles.forEach(function (file) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          var img = new Image();
+          img.onload = function () {
+            loadedFiles.push({ file: file, img: img });
+            pending--;
+            if (pending === 0) {
+              if (hadError && loadedFiles.length) {
+                statusBox.textContent = "Some files couldn't be decoded and were skipped.";
+              }
+              convertAll();
+            }
+          };
+          img.onerror = function () {
+            hadError = true;
+            pending--;
+            if (pending === 0) {
+              if (!loadedFiles.length) {
+                statusBox.textContent = "This browser couldn't decode that WebP file. Please try a recent version of Chrome, Firefox, Edge, or Safari.";
+              } else {
+                convertAll();
+              }
+            }
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function convertOne(entry, quality, fill, callback) {
       var canvas = document.createElement("canvas");
-      canvas.width = currentImg.naturalWidth;
-      canvas.height = currentImg.naturalHeight;
+      canvas.width = entry.img.naturalWidth;
+      canvas.height = entry.img.naturalHeight;
       var ctx = canvas.getContext("2d");
-      ctx.fillStyle = "#ffffff";
+      ctx.fillStyle = fill;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(currentImg, 0, 0);
+      ctx.drawImage(entry.img, 0, 0);
+      canvas.toBlob(function (blob) {
+        callback(blob, canvas.width, canvas.height);
+      }, "image/jpeg", quality);
+    }
+
+    function convertAll() {
+      if (!loadedFiles.length) return;
+
+      lastObjectUrls.forEach(function (u) { URL.revokeObjectURL(u); });
+      lastObjectUrls = [];
 
       var quality = parseInt(qualityRange.value, 10) / 100;
+      var fill = fillColor.value;
       convertGeneration++;
       var myGeneration = convertGeneration;
 
-      canvas.toBlob(function (blob) {
-        if (myGeneration !== convertGeneration) return;
+      if (loadedFiles.length === 1) {
+        batchResults.style.display = "none";
+        singleResult.style.display = "block";
 
-        var url = URL.createObjectURL(blob);
-        if (lastConvertedUrl) URL.revokeObjectURL(lastConvertedUrl);
-        lastConvertedUrl = url;
+        var entry = loadedFiles[0];
+        convertOne(entry, quality, fill, function (blob, w, h) {
+          if (myGeneration !== convertGeneration) return;
+          var url = URL.createObjectURL(blob);
+          lastObjectUrls.push(url);
 
-        previewImg.src = url;
-        previewImg.style.display = "block";
+          previewImg.src = url;
+          previewImg.style.display = "block";
 
-        downloadBtn.href = url;
-        downloadBtn.download = currentFile.name.replace(/\.webp$/i, "") + ".jpg";
-        downloadBtn.style.display = "inline-flex";
+          downloadBtn.href = url;
+          downloadBtn.download = entry.file.name.replace(/\.webp$/i, "") + ".jpg";
+          downloadBtn.style.display = "inline-flex";
 
-        fileInfo.style.display = "flex";
-        document.getElementById("statOriginal").textContent = Fixora.formatBytes(currentFile.size);
-        document.getElementById("statNew").textContent = Fixora.formatBytes(blob.size);
-        document.getElementById("statDims").textContent = canvas.width + " × " + canvas.height;
+          fileInfo.style.display = "flex";
+          document.getElementById("statOriginal").textContent = Fixora.formatBytes(entry.file.size);
+          document.getElementById("statNew").textContent = Fixora.formatBytes(blob.size);
+          document.getElementById("statDims").textContent = w + " × " + h;
 
-        statusBox.textContent = "Done! Your JPG is ready to download.";
-      }, "image/jpeg", quality);
+          statusBox.textContent = "Done! Your JPG is ready to download.";
+        });
+      } else {
+        singleResult.style.display = "none";
+        batchResults.style.display = "flex";
+        batchResults.innerHTML = "";
+        statusBox.textContent = "Converting " + loadedFiles.length + " files…";
+
+        var doneCount = 0;
+        loadedFiles.forEach(function (entry, i) {
+          convertOne(entry, quality, fill, function (blob, w, h) {
+            if (myGeneration !== convertGeneration) return;
+            var url = URL.createObjectURL(blob);
+            lastObjectUrls.push(url);
+
+            var row = document.createElement("div");
+            row.className = "row";
+            row.style.alignItems = "center";
+            row.innerHTML =
+              '<div style="flex:1;font-size:0.9rem;">' + entry.file.name.replace(/\.webp$/i, "") + '.jpg' +
+              '<div style="font-size:0.78rem;color:var(--color-text-muted);">' + Fixora.formatBytes(entry.file.size) + ' → ' + Fixora.formatBytes(blob.size) + ' · ' + w + '×' + h + '</div></div>' +
+              '<a class="btn btn-secondary" href="' + url + '" download="' + entry.file.name.replace(/\.webp$/i, "") + '.jpg">Download</a>';
+            batchResults.appendChild(row);
+
+            doneCount++;
+            if (doneCount === loadedFiles.length) {
+              statusBox.textContent = "Done! All " + loadedFiles.length + " files converted — download each one above.";
+            }
+          });
+        });
+      }
     }
 
     Fixora.setupDropzone(dropzone, fileInput, handleFiles);
