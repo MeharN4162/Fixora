@@ -6,7 +6,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Image Blur Tool Online — Blur Part of a Photo | Fixoona</title>
-  <meta name="description" content="Blur or pixelate a specific area of a photo online for free, right in your browser — hide a license plate, face, or private info. No uploads, no sign-up." />
+  <meta name="description" content="Blur or pixelate part of a photo online for free, right in your browser — draw a rectangle or circle over a face, plate, or private info. No uploads, no sign-up." />
   <meta name="keywords" content="blur part of image online free, pixelate photo, blur license plate, blur face in photo" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/image-blur-tool" />
@@ -64,7 +64,12 @@
       {
         "@type": "Question",
         "name": "Can I blur more than one area in the same photo?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes - draw as many rectangular regions as you need by clicking and dragging on the image, and remove any of them individually from the region list before downloading." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes - draw as many regions as you need by clicking and dragging on the image, and remove any of them individually from the region list before downloading." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use a circular selection instead of a rectangle?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes - switch the Shape option to Circle before drawing. It's clipped with the canvas ellipse path rather than a rectangle, which fits a face far more naturally than a boxy region and leaves less of the surrounding background affected." }
       },
       {
         "@type": "Question",
@@ -197,6 +202,13 @@
             </div>
           </div>
           <div class="field">
+            <label>Shape</label>
+            <div class="row">
+              <label class="check-row"><input type="radio" name="regionShape" value="rect" checked /> Rectangle</label>
+              <label class="check-row"><input type="radio" name="regionShape" value="circle" /> Circle</label>
+            </div>
+          </div>
+          <div class="field">
             <label for="strengthRange">Strength: <span id="strengthValue">20</span></label>
             <input type="range" id="strengthRange" min="4" max="40" value="20" style="width:100%;" />
           </div>
@@ -216,8 +228,8 @@
         <h2>How to Blur Part of a Photo</h2>
         <ol class="howto-steps">
           <li>Click the upload area or drag in a JPG, PNG, or WebP image.</li>
-          <li>Click and drag directly on the image to draw a rectangle over the area you want to hide.</li>
-          <li>Choose Blur or Pixelate, and adjust the strength slider to your liking.</li>
+          <li>Click and drag directly on the image to draw a region over the area you want to hide.</li>
+          <li>Choose Blur or Pixelate, pick a Rectangle or Circle shape, and adjust the strength slider to your liking.</li>
           <li>Draw more regions if needed, remove any from the list, then click "Download Image" to save the result.</li>
         </ol>
       </div>
@@ -230,7 +242,11 @@
         </details>
         <details class="faq-item">
           <summary>Can I blur more than one area in the same photo?</summary>
-          <p>Yes - draw as many rectangular regions as you need by clicking and dragging on the image, and remove any of them individually from the region list before downloading.</p>
+          <p>Yes - draw as many regions as you need by clicking and dragging on the image, and remove any of them individually from the region list before downloading.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I use a circular selection instead of a rectangle?</summary>
+          <p>Yes - switch the Shape option to Circle before drawing. It's clipped with the canvas ellipse path rather than a rectangle, which fits a face far more naturally than a boxy region and leaves less of the surrounding background affected.</p>
         </details>
         <details class="faq-item">
           <summary>Is the blurred or pixelated pixel data actually changed, or is it just a visual overlay?</summary>
@@ -338,8 +354,9 @@
 
     var ctx = mainCanvas.getContext("2d");
     var naturalImg = null;
-    var regions = []; // { x, y, w, h } in natural canvas pixel space
+    var regions = []; // { x, y, w, h, shape } in natural canvas pixel space
     var mode = "blur";
+    var shape = "rect";
 
     function handleFiles(files) {
       var file = files[0];
@@ -381,10 +398,26 @@
       });
     });
 
+    document.querySelectorAll('input[name="regionShape"]').forEach(function (r) {
+      r.addEventListener("change", function () {
+        shape = r.value;
+      });
+    });
+
     strengthRange.addEventListener("input", function () {
       strengthValue.textContent = strengthRange.value;
       renderComposite();
     });
+
+    function clipToRegion(region) {
+      ctx.beginPath();
+      if (region.shape === "circle") {
+        ctx.ellipse(region.x + region.w / 2, region.y + region.h / 2, region.w / 2, region.h / 2, 0, 0, Math.PI * 2);
+      } else {
+        ctx.rect(region.x, region.y, region.w, region.h);
+      }
+      ctx.clip();
+    }
 
     function applyPixelate(region, strength) {
       var blockSize = Math.max(2, strength);
@@ -398,6 +431,7 @@
       sctx.drawImage(naturalImg, region.x, region.y, region.w, region.h, 0, 0, smallW, smallH);
 
       ctx.save();
+      clipToRegion(region);
       ctx.imageSmoothingEnabled = false;
       ctx.drawImage(small, 0, 0, smallW, smallH, region.x, region.y, region.w, region.h);
       ctx.restore();
@@ -405,9 +439,7 @@
 
     function applyBlur(region, strength) {
       ctx.save();
-      ctx.beginPath();
-      ctx.rect(region.x, region.y, region.w, region.h);
-      ctx.clip();
+      clipToRegion(region);
       ctx.filter = "blur(" + strength + "px)";
       ctx.drawImage(naturalImg, 0, 0, mainCanvas.width, mainCanvas.height);
       ctx.filter = "none";
@@ -430,7 +462,8 @@
       regions.forEach(function (r, i) {
         var item = document.createElement("div");
         item.className = "region-list-item";
-        item.innerHTML = "<span>Region " + (i + 1) + " (" + Math.round(r.w) + " × " + Math.round(r.h) + "px)</span>" +
+        var shapeLabel = r.shape === "circle" ? "Circle" : "Rectangle";
+        item.innerHTML = "<span>Region " + (i + 1) + " (" + shapeLabel + ", " + Math.round(r.w) + " × " + Math.round(r.h) + "px)</span>" +
           '<button type="button" data-index="' + i + '" aria-label="Remove region">×</button>';
         regionListEl.appendChild(item);
       });
@@ -477,6 +510,7 @@
       dragStartPt = pointFromEvent(e);
       previewBox = document.createElement("div");
       previewBox.className = "blur-region-box";
+      if (shape === "circle") previewBox.style.borderRadius = "50%";
       blurOverlay.appendChild(previewBox);
       e.preventDefault();
     }
@@ -507,6 +541,7 @@
         rect.y = Math.max(0, Math.min(rect.y, mainCanvas.height));
         rect.w = Math.min(rect.w, mainCanvas.width - rect.x);
         rect.h = Math.min(rect.h, mainCanvas.height - rect.y);
+        rect.shape = shape;
         regions.push(rect);
         renderComposite();
         renderRegionList();
