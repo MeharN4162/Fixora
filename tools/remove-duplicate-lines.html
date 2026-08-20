@@ -6,7 +6,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Duplicate Line Remover & Text Sorter Online | Fixoona</title>
-  <meta name="description" content="Remove duplicate lines (keeping the first or last occurrence), strip blank lines, trim and normalize whitespace, sort alphabetically, and optionally number the output — free, instant, in your browser." />
+  <meta name="description" content="Remove duplicate lines (keep the first or last occurrence), strip blank lines, trim whitespace from each line, sort alphabetically, and optionally number the output — free, instant, with a live stats breakdown, in your browser." />
   <meta name="keywords" content="remove duplicate lines, duplicate line remover, unique lines tool, text sorter online" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/remove-duplicate-lines" />
@@ -64,17 +64,22 @@
       {
         "@type": "Question",
         "name": "Can I keep the last occurrence instead of the first?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No — this tool always keeps the first occurrence of each unique line and discards later repeats. There's no option to keep the last occurrence instead; if you need that behavior, you could reverse your input before pasting it in, run the tool, then reverse the output back." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — use the \"Keep which occurrence\" setting next to duplicate removal. \"Keep first occurrence\" (the default) keeps each line's first appearance and discards later repeats. \"Keep last occurrence\" keeps each line's final appearance instead, in the position where that last occurrence appeared, and discards the earlier repeats." }
       },
       {
         "@type": "Question",
         "name": "What does case-insensitive duplicate matching actually do?",
-        "acceptedAnswer": { "@type": "Answer", "text": "When enabled, two lines that differ only in letter case — like \"Apple\" and \"apple\" — are treated as the same line for duplicate detection, and only the first one encountered is kept in its original casing. When disabled, comparison is exact, so \"Apple\" and \"apple\" are both kept as distinct lines." }
+        "acceptedAnswer": { "@type": "Answer", "text": "When enabled, two lines that differ only in letter case — like \"Apple\" and \"apple\" — are treated as the same line for duplicate detection, and only one of them is kept in its original casing, based on the \"Keep which occurrence\" setting (first or last). When disabled, comparison is exact, so \"Apple\" and \"apple\" are both kept as distinct lines." }
       },
       {
         "@type": "Question",
         "name": "In what order are the options applied?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The tool trims whitespace from each line first (if enabled), then removes blank lines (if enabled), then removes duplicates (if enabled), and finally applies sorting (if selected). This order means trimming can turn a line that looked non-empty into an empty one before the blank-line filter runs, and sorting always happens last." }
+        "acceptedAnswer": { "@type": "Answer", "text": "The tool trims whitespace from each line first (if enabled), then removes blank lines (if enabled), then removes duplicates using the \"keep first\" or \"keep last\" occurrence setting (if enabled), then applies sorting (if selected), and finally numbers the output lines (if enabled). This order means trimming can turn a line that looked non-empty into an empty one before the blank-line filter runs, sorting always happens after duplicates are removed, and numbering is always the last step so the numbers reflect the final, cleaned-up list." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does numbering the output affect duplicate detection or sorting?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — line numbers are added only as the final display step, after duplicates have already been removed and sorting has already been applied. Numbers are not part of the text that gets compared, so they're purely a cosmetic prefix added last and never cause two identical lines to be treated as different." }
       },
       {
         "@type": "Question",
@@ -148,19 +153,33 @@ cherry
 date</textarea>
         </div>
 
-        <label class="check-row" id="dedupeOption"><input type="checkbox" id="dedupeCheck" checked /> Remove duplicate lines</label>
-        <label class="check-row" id="caseOption" style="padding-left:25px;"><input type="checkbox" id="caseCheck" /> Case-insensitive duplicate matching</label>
-        <label class="check-row"><input type="checkbox" id="blankCheck" checked /> Remove empty/blank lines</label>
-        <label class="check-row"><input type="checkbox" id="trimCheck" checked /> Trim whitespace from start/end of each line</label>
-
-        <div class="field" style="max-width:340px;">
-          <label for="sortSelect">Sort Order</label>
-          <select id="sortSelect">
-            <option value="none">No sorting (keep original order)</option>
-            <option value="asc">Sort A → Z</option>
-            <option value="desc">Sort Z → A</option>
-          </select>
+        <div class="dupline-options-grid">
+          <label class="check-row" id="dedupeOption"><input type="checkbox" id="dedupeCheck" checked /> Remove duplicate lines</label>
+          <label class="check-row"><input type="checkbox" id="blankCheck" checked /> Remove empty/blank lines</label>
+          <label class="check-row" id="caseOption" style="padding-left:25px;"><input type="checkbox" id="caseCheck" /> Case-insensitive duplicate matching</label>
+          <label class="check-row"><input type="checkbox" id="trimCheck" checked /> Trim whitespace from start/end of each line</label>
         </div>
+
+        <div class="row" style="margin-top:14px;">
+          <div class="field" id="occurrenceOption" style="max-width:340px;padding-left:25px;">
+            <label for="occurrenceSelect">Keep which occurrence</label>
+            <select id="occurrenceSelect">
+              <option value="first">Keep first occurrence</option>
+              <option value="last">Keep last occurrence</option>
+            </select>
+          </div>
+
+          <div class="field" style="max-width:340px;">
+            <label for="sortSelect">Sort Order</label>
+            <select id="sortSelect">
+              <option value="none">No sorting (keep original order)</option>
+              <option value="asc">Sort A → Z</option>
+              <option value="desc">Sort Z → A</option>
+            </select>
+          </div>
+        </div>
+
+        <label class="check-row" style="margin-top:10px;"><input type="checkbox" id="numberCheck" /> Number output lines</label>
 
         <div class="actions">
           <button class="btn btn-primary" id="processBtn" type="button">Process</button>
@@ -185,8 +204,9 @@ date</textarea>
         <ol class="howto-steps">
           <li>Paste your list of lines into the input box (a sample with duplicates is pre-filled).</li>
           <li>Choose which options to apply: remove duplicates, case-insensitive matching, remove blank lines, and/or trim whitespace.</li>
-          <li>Pick a sort order if you want the result alphabetized, or leave it as "No sorting" to preserve original order.</li>
-          <li>Click "Process" to see the cleaned-up result and a stats line showing how many lines were removed.</li>
+          <li>If removing duplicates, choose whether to keep each line's first or last occurrence.</li>
+          <li>Pick a sort order if you want the result alphabetized, or leave it as "No sorting" to preserve original order. Optionally turn on "Number output lines" to prefix each result line with its position.</li>
+          <li>Click "Process" to see the cleaned-up result and a stats breakdown of exactly how many lines were removed as blanks and how many as duplicates.</li>
           <li>Click "Copy Result" to copy the output to your clipboard.</li>
         </ol>
       </div>
@@ -199,15 +219,19 @@ date</textarea>
         </details>
         <details class="faq-item">
           <summary>Can I keep the last occurrence instead of the first?</summary>
-          <p>No — this tool always keeps the first occurrence of each unique line and discards later repeats. There's no option to keep the last occurrence instead; if you need that behavior, you could reverse your input before pasting it in, run the tool, then reverse the output back.</p>
+          <p>Yes — use the "Keep which occurrence" setting next to duplicate removal. "Keep first occurrence" (the default) keeps each line's first appearance and discards later repeats. "Keep last occurrence" keeps each line's final appearance instead, in the position where that last occurrence appeared, and discards the earlier repeats.</p>
         </details>
         <details class="faq-item">
           <summary>What does case-insensitive duplicate matching actually do?</summary>
-          <p>When enabled, two lines that differ only in letter case — like "Apple" and "apple" — are treated as the same line for duplicate detection, and only the first one encountered is kept in its original casing. When disabled, comparison is exact, so "Apple" and "apple" are both kept as distinct lines.</p>
+          <p>When enabled, two lines that differ only in letter case — like "Apple" and "apple" — are treated as the same line for duplicate detection, and only one of them is kept in its original casing, based on the "Keep which occurrence" setting (first or last). When disabled, comparison is exact, so "Apple" and "apple" are both kept as distinct lines.</p>
         </details>
         <details class="faq-item">
           <summary>In what order are the options applied?</summary>
-          <p>The tool trims whitespace from each line first (if enabled), then removes blank lines (if enabled), then removes duplicates (if enabled), and finally applies sorting (if selected). This order means trimming can turn a line that looked non-empty into an empty one before the blank-line filter runs, and sorting always happens last.</p>
+          <p>The tool trims whitespace from each line first (if enabled), then removes blank lines (if enabled), then removes duplicates using the "keep first" or "keep last" occurrence setting (if enabled), then applies sorting (if selected), and finally numbers the output lines (if enabled). This order means trimming can turn a line that looked non-empty into an empty one before the blank-line filter runs, sorting always happens after duplicates are removed, and numbering is always the last step so the numbers reflect the final, cleaned-up list.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does numbering the output affect duplicate detection or sorting?</summary>
+          <p>No — line numbers are added only as the final display step, after duplicates have already been removed and sorting has already been applied. Numbers are not part of the text that gets compared, so they're purely a cosmetic prefix added last and never cause two identical lines to be treated as different.</p>
         </details>
         <details class="faq-item">
           <summary>Is my text uploaded anywhere while I use this tool?</summary>
@@ -295,41 +319,63 @@ date</textarea>
     var caseOption = document.getElementById("caseOption");
     var blankCheck = document.getElementById("blankCheck");
     var trimCheck = document.getElementById("trimCheck");
+    var occurrenceSelect = document.getElementById("occurrenceSelect");
+    var occurrenceOption = document.getElementById("occurrenceOption");
+    var numberCheck = document.getElementById("numberCheck");
     var sortSelect = document.getElementById("sortSelect");
 
-    function updateCaseOptionState() {
-      caseCheck.disabled = !dedupeCheck.checked;
-      caseOption.style.opacity = dedupeCheck.checked ? "1" : "0.5";
+    function updateDedupeSubOptionsState() {
+      var enabled = dedupeCheck.checked;
+      caseCheck.disabled = !enabled;
+      occurrenceSelect.disabled = !enabled;
+      caseOption.style.opacity = enabled ? "1" : "0.5";
+      occurrenceOption.style.opacity = enabled ? "1" : "0.5";
     }
-    dedupeCheck.addEventListener("change", updateCaseOptionState);
-    updateCaseOptionState();
+    dedupeCheck.addEventListener("change", updateDedupeSubOptionsState);
+    updateDedupeSubOptionsState();
 
     function process() {
       var raw = inputText.value;
-      var inputLineCount = raw === "" ? 0 : raw.split(/\r\n|\r|\n/).length;
-
-      var lines = raw.split(/\r\n|\r|\n/);
+      var lines = raw === "" ? [] : raw.split(/\r\n|\r|\n/);
+      var inputLineCount = lines.length;
 
       if (trimCheck.checked) {
         lines = lines.map(function (l) { return l.trim(); });
       }
 
+      var countBeforeBlank = lines.length;
       if (blankCheck.checked) {
         lines = lines.filter(function (l) { return l.trim() !== ""; });
       }
+      var blankRemoved = countBeforeBlank - lines.length;
 
+      var countBeforeDedupe = lines.length;
       if (dedupeCheck.checked) {
         var seen = {};
         var out = [];
-        lines.forEach(function (l) {
-          var key = caseCheck.checked ? l.toLowerCase() : l;
-          if (!Object.prototype.hasOwnProperty.call(seen, key)) {
-            seen[key] = true;
-            out.push(l);
+        if (occurrenceSelect.value === "last") {
+          // Walk from the end so the *last* occurrence of each key is the one kept,
+          // then reverse to restore forward order (positioned at its last occurrence).
+          for (var i = lines.length - 1; i >= 0; i--) {
+            var keyLast = caseCheck.checked ? lines[i].toLowerCase() : lines[i];
+            if (!Object.prototype.hasOwnProperty.call(seen, keyLast)) {
+              seen[keyLast] = true;
+              out.push(lines[i]);
+            }
           }
-        });
+          out.reverse();
+        } else {
+          lines.forEach(function (l) {
+            var keyFirst = caseCheck.checked ? l.toLowerCase() : l;
+            if (!Object.prototype.hasOwnProperty.call(seen, keyFirst)) {
+              seen[keyFirst] = true;
+              out.push(l);
+            }
+          });
+        }
         lines = out;
       }
+      var dupRemoved = countBeforeDedupe - lines.length;
 
       var sortMode = sortSelect.value;
       if (sortMode === "asc") {
@@ -338,15 +384,19 @@ date</textarea>
         lines = lines.slice().sort(function (a, b) { return b.localeCompare(a); });
       }
 
-      var result = lines.join("\n");
-      outputText.value = result;
+      var outputLineCount = lines.length;
 
-      var outputLineCount = raw === "" ? 0 : (lines.length);
-      var removed = inputLineCount - outputLineCount;
-      if (removed < 0) removed = 0;
+      var outputLines = lines;
+      if (numberCheck.checked) {
+        outputLines = lines.map(function (l, idx) { return (idx + 1) + ". " + l; });
+      }
+
+      outputText.value = outputLines.join("\n");
+
       statusBox.textContent = "Input: " + inputLineCount + " line" + (inputLineCount === 1 ? "" : "s") +
-        " → Output: " + outputLineCount + " line" + (outputLineCount === 1 ? "" : "s") +
-        " (" + removed + " removed)";
+        " → " + blankRemoved + " blank" + (blankRemoved === 1 ? "" : "s") + " removed, " +
+        dupRemoved + " duplicate" + (dupRemoved === 1 ? "" : "s") + " removed" +
+        " → Output: " + outputLineCount + " line" + (outputLineCount === 1 ? "" : "s") + ".";
       statusBox.style.color = "var(--color-text-muted)";
     }
 
