@@ -6,21 +6,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Character Counter Online — Twitter, Instagram & More | Fixoona</title>
-  <meta name="description" content="Count characters live and check them against Twitter/X, Instagram, TikTok, LinkedIn, Facebook, Pinterest, YouTube, SMS, and meta description limits online for free, plus a live reading-time estimate. No sign-up." />
-  <meta name="keywords" content="character counter, twitter character counter online free, instagram caption limit" />
+  <meta name="description" content="Count characters live, check them against Twitter/X, Instagram, TikTok, LinkedIn, Facebook, Pinterest, YouTube, SMS, meta description, and title tag limits, and see a live letter/digit/punctuation breakdown, UTF-8 byte size, and most frequent character. Free, no sign-up." />
+  <meta name="keywords" content="character counter, twitter character counter online free, instagram caption limit, utf-8 byte counter, character type breakdown, title tag character limit checker" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/character-counter" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixoona" />
   <meta property="og:title" content="Free Character Counter Online" />
-  <meta property="og:description" content="Count characters live and check them against social media and SEO limits, free." />
+  <meta property="og:description" content="Count characters live, check them against social media, SEO, and SMS limits, and see a character breakdown, UTF-8 byte size, and most frequent character — free." />
   <meta property="og:url" content="https://fixoona.com/tools/character-counter" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Character Counter Online" />
-  <meta name="twitter:description" content="Count characters live and check them against social media and SEO limits." />
+  <meta name="twitter:description" content="Count characters live, check platform limits, and see a character breakdown, byte size, and most frequent character — free." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='23' width='15' height='54' rx='7.5' fill='white'/%3E%3Crect x='30' y='23' width='42' height='14' rx='7' fill='white'/%3E%3Crect x='30' y='46' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -80,6 +80,26 @@
         "@type": "Question",
         "name": "How is the reading time estimated?",
         "acceptedAnswer": { "@type": "Answer", "text": "It's based on your live word count divided by 200 words per minute, a commonly used average adult silent-reading speed. Results under a minute are shown in seconds; longer text is shown in minutes and seconds. Actual reading speed varies by person and content, so treat it as a useful estimate rather than an exact figure." }
+      },
+      {
+        "@type": "Question",
+        "name": "What counts as a letter, digit, or punctuation character in the breakdown?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Letters and digits are matched using Unicode letter and number categories, so accented letters and non-Latin scripts are counted correctly, not just A–Z and 0–9. Whitespace covers spaces, tabs, and line breaks. Punctuation & symbols covers marks like periods and commas as well as symbols such as $, %, and emoji. Anything left over — mostly combining accent marks and other formatting characters — is grouped under Other." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the UTF-8 byte count differ from the character count?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The Characters count is your browser's raw text length, which is how platforms like X and SMS carriers measure length. UTF-8 Bytes measures how many bytes that same text takes up once encoded, which matters for size limits measured in bytes rather than characters. Plain English letters, numbers, and punctuation take 1 byte each in UTF-8, but accented letters and non-Latin scripts typically take 2–3 bytes each and emoji can take 4 bytes each, so text with those characters will show a byte count higher than its character count." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why can the character breakdown total be lower than the Characters count above it?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The Characters count counts raw browser text units, and emoji or certain rare symbols are counted as two units each. The character breakdown instead groups text by whole Unicode characters, counting an emoji as one symbol rather than two, so text containing emoji can show a breakdown total slightly lower than the Characters count. Both numbers are correct — they're just counting slightly different things." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is the most frequent character calculated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The tool counts every non-whitespace character in your text — spaces, tabs, and line breaks are excluded — and shows whichever one appears most often, along with its count and share of all non-whitespace characters. Turn on \"Case-sensitive\" to count uppercase and lowercase letters separately (so \"A\" and \"a\" are tracked apart); leave it off to combine them. If multiple characters are tied for the top spot, whichever one appears first in your text is shown." }
       }
     ]
   }
@@ -120,6 +140,89 @@
     }
     .limit-row.over .limit-bar-fill { background: var(--color-danger, #dc2626); }
     .limit-row.over .limit-count { color: var(--color-danger, #dc2626); font-weight: 600; }
+
+    .cc-panel {
+      margin-top: 26px;
+      padding-top: 22px;
+      border-top: 1px solid var(--color-border);
+    }
+    .cc-panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .cc-panel-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      margin: 0 0 14px;
+    }
+    .cc-panel-head .cc-panel-title { margin: 0; }
+    .cc-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      cursor: pointer;
+    }
+    .breakdown-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 640px) {
+      .breakdown-list { grid-template-columns: 1fr; }
+    }
+    .breakdown-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+    }
+    .breakdown-row .breakdown-name { flex: 1; font-size: 0.9rem; font-weight: 600; }
+    .breakdown-row .breakdown-count { font-family: monospace; font-size: 0.85rem; color: var(--color-text-muted); white-space: nowrap; }
+    .breakdown-row .breakdown-bar {
+      width: 70px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--color-border);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .breakdown-row .breakdown-bar-fill {
+      height: 100%;
+      background: var(--color-primary);
+      transition: width 0.15s ease;
+    }
+    .freq-box {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 14px 18px;
+      background: var(--color-bg-soft);
+      border-radius: var(--radius-sm);
+      min-height: 28px;
+    }
+    .freq-char {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      min-width: 44px;
+      text-align: center;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 4px 10px;
+    }
+    .freq-meta { font-size: 0.9rem; color: var(--color-text-muted); }
+    .freq-meta strong { color: var(--color-text); font-family: var(--font-display); font-size: 1.05rem; }
+    .freq-empty { font-size: 0.9rem; color: var(--color-text-muted); }
   </style>
 </head>
 <body>
@@ -155,7 +258,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🔤</div>
       <h1>Character Counter</h1>
-      <p>Count characters live, check them against common platform limits, and see an estimated reading time as you type.</p>
+      <p>Count characters live, check them against common platform and SEO limits, and see a full breakdown by character type, UTF-8 byte size, and your most frequent character — all updated as you type.</p>
     </section>
 
     <section class="container">
@@ -168,6 +271,7 @@
         <div class="stat-row">
           <div class="stat"><strong id="statChars">0</strong><span>Characters</span></div>
           <div class="stat"><strong id="statCharsNoSpace">0</strong><span>Chars (no spaces)</span></div>
+          <div class="stat"><strong id="statBytes">0</strong><span>UTF-8 Bytes</span></div>
           <div class="stat"><strong id="statWords">0</strong><span>Words</span></div>
           <div class="stat"><strong id="statReadTime">0 sec</strong><span>Reading time</span></div>
         </div>
@@ -182,14 +286,36 @@
         <div class="actions">
           <button class="btn btn-secondary" id="clearBtn">Clear Text</button>
         </div>
+
+        <div class="cc-panel" id="breakdownPanel">
+          <h2 class="cc-panel-title">Character Breakdown</h2>
+          <div class="breakdown-list" id="breakdownList"></div>
+        </div>
+
+        <div class="cc-panel" id="freqPanel">
+          <div class="cc-panel-head">
+            <h2 class="cc-panel-title">Most Frequent Character</h2>
+            <label class="cc-toggle">
+              <input type="checkbox" id="caseSensitive" style="width:auto;" />
+              Case-sensitive
+            </label>
+          </div>
+          <div class="freq-box">
+            <span class="freq-empty" id="freqEmpty">Start typing to see your most frequent character.</span>
+            <div class="freq-char" id="freqChar" style="display:none;">–</div>
+            <div class="freq-meta" id="freqMeta" style="display:none;"></div>
+          </div>
+        </div>
       </div>
 
       <div class="howto">
         <h2>How to Count Characters Against Platform Limits</h2>
         <ol class="howto-steps">
           <li>Type or paste your text into the box above.</li>
-          <li>Watch the character, word, no-space, and reading-time stats update live as you type.</li>
-          <li>Check the limit bars below — each one turns red if you've gone over that platform's limit, covering X/Twitter, Instagram, TikTok, LinkedIn, Facebook, Pinterest, YouTube titles and descriptions, meta descriptions, and SMS segments.</li>
+          <li>Watch the character, no-space, UTF-8 byte, word, and reading-time stats update live as you type.</li>
+          <li>Check the limit bars below — each one turns red if you've gone over that platform's limit, covering X/Twitter, Instagram, TikTok, LinkedIn, Facebook, Pinterest, YouTube titles and descriptions, meta descriptions, title tags, and SMS segments.</li>
+          <li>Scroll to the Character Breakdown panel to see how many letters, digits, whitespace characters, punctuation/symbols, and other characters make up your text.</li>
+          <li>Scroll to Most Frequent Character to see which character appears most often — toggle "Case-sensitive" if you want uppercase and lowercase tracked separately.</li>
           <li>Trim your text until every bar you care about is back within range.</li>
         </ol>
       </div>
@@ -215,6 +341,22 @@
         <details class="faq-item">
           <summary>How is the reading time estimated?</summary>
           <p>It's based on your live word count divided by 200 words per minute, a commonly used average adult silent-reading speed. Results under a minute are shown in seconds; longer text is shown in minutes and seconds. Actual reading speed varies by person and content, so treat it as a useful estimate rather than an exact figure.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What counts as a letter, digit, or punctuation character in the breakdown?</summary>
+          <p>Letters and digits are matched using Unicode letter and number categories, so accented letters and non-Latin scripts are counted correctly, not just A–Z and 0–9. Whitespace covers spaces, tabs, and line breaks. Punctuation & symbols covers marks like periods and commas as well as symbols such as $, %, and emoji. Anything left over — mostly combining accent marks and other formatting characters — is grouped under Other.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why does the UTF-8 byte count differ from the character count?</summary>
+          <p>The Characters count is your browser's raw text length, which is how platforms like X and SMS carriers measure length. UTF-8 Bytes measures how many bytes that same text takes up once encoded, which matters for size limits measured in bytes rather than characters. Plain English letters, numbers, and punctuation take 1 byte each in UTF-8, but accented letters and non-Latin scripts typically take 2–3 bytes each and emoji can take 4 bytes each, so text with those characters will show a byte count higher than its character count.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why can the character breakdown total be lower than the Characters count above it?</summary>
+          <p>The Characters count counts raw browser text units, and emoji or certain rare symbols are counted as two units each. The character breakdown instead groups text by whole Unicode characters, counting an emoji as one symbol rather than two, so text containing emoji can show a breakdown total slightly lower than the Characters count. Both numbers are correct — they're just counting slightly different things.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How is the most frequent character calculated?</summary>
+          <p>The tool counts every non-whitespace character in your text — spaces, tabs, and line breaks are excluded — and shows whichever one appears most often, along with its count and share of all non-whitespace characters. Turn on "Case-sensitive" to count uppercase and lowercase letters separately (so "A" and "a" are tracked apart); leave it off to combine them. If multiple characters are tied for the top spot, whichever one appears first in your text is shown.</p>
         </details>
       </div>
 
@@ -301,7 +443,16 @@
       { name: "Pinterest description", max: 500 },
       { name: "YouTube title", max: 100 },
       { name: "YouTube description", max: 5000 },
-      { name: "Meta description (SEO)", max: 160 }
+      { name: "Meta description (SEO)", max: 160 },
+      { name: "Title tag (SEO)", max: 60 }
+    ];
+
+    var BREAKDOWN_TYPES = [
+      { key: "letters", name: "Letters" },
+      { key: "digits", name: "Digits" },
+      { key: "spaces", name: "Whitespace" },
+      { key: "punct", name: "Punctuation & symbols" },
+      { key: "other", name: "Other" }
     ];
 
     LIMITS.forEach(function (limit, i) {
@@ -314,6 +465,60 @@
         '<span class="limit-count" id="limitCount' + i + '">0 / ' + limit.max + '</span>';
       limitList.appendChild(row);
     });
+
+    var breakdownList = document.getElementById("breakdownList");
+    BREAKDOWN_TYPES.forEach(function (type, i) {
+      var row = document.createElement("div");
+      row.className = "breakdown-row";
+      row.innerHTML =
+        '<span class="breakdown-name">' + type.name + '</span>' +
+        '<div class="breakdown-bar"><div class="breakdown-bar-fill" id="breakdownBar' + i + '"></div></div>' +
+        '<span class="breakdown-count" id="breakdownCount' + i + '">0 (0%)</span>';
+      breakdownList.appendChild(row);
+    });
+
+    // Splits text into Unicode code points (so surrogate-pair characters like
+    // emoji count as one character each) and buckets each one into exactly
+    // one category, so the totals always add up to the code-point count.
+    function analyzeCharTypes(text) {
+      var codePoints = Array.from(text);
+      var result = { total: codePoints.length, letters: 0, digits: 0, spaces: 0, punct: 0, other: 0 };
+      for (var i = 0; i < codePoints.length; i++) {
+        var ch = codePoints[i];
+        if (/\p{L}/u.test(ch)) result.letters++;
+        else if (/\p{N}/u.test(ch)) result.digits++;
+        else if (/\s/.test(ch)) result.spaces++;
+        else if (/[\p{P}\p{S}]/u.test(ch)) result.punct++;
+        else result.other++;
+      }
+      return result;
+    }
+
+    // Finds the most common non-whitespace character. Ties are broken by
+    // whichever character appears first in the text.
+    function analyzeFrequency(text, caseSensitive) {
+      var chars = Array.from(text).filter(function (ch) { return !/\s/.test(ch); });
+      if (chars.length === 0) return null;
+      var counts = {};
+      var order = [];
+      for (var i = 0; i < chars.length; i++) {
+        var key = caseSensitive ? chars[i] : chars[i].toLowerCase();
+        if (!(key in counts)) {
+          counts[key] = 0;
+          order.push(key);
+        }
+        counts[key]++;
+      }
+      var bestChar = order[0];
+      var bestCount = counts[bestChar];
+      for (var j = 1; j < order.length; j++) {
+        if (counts[order[j]] > bestCount) {
+          bestChar = order[j];
+          bestCount = counts[order[j]];
+        }
+      }
+      return { char: bestChar, count: bestCount, total: chars.length };
+    }
 
     function formatReadingTime(words) {
       var wordsPerMinute = 200;
@@ -330,11 +535,39 @@
       var chars = text.length;
       var charsNoSpace = text.replace(/\s/g, "").length;
       var words = text.trim() ? text.trim().split(/\s+/).length : 0;
+      var bytes = new TextEncoder().encode(text).length;
 
       document.getElementById("statChars").textContent = chars;
       document.getElementById("statCharsNoSpace").textContent = charsNoSpace;
+      document.getElementById("statBytes").textContent = bytes;
       document.getElementById("statWords").textContent = words;
       document.getElementById("statReadTime").textContent = formatReadingTime(words);
+
+      var ct = analyzeCharTypes(text);
+      BREAKDOWN_TYPES.forEach(function (type, i) {
+        var count = ct[type.key];
+        var pct = ct.total === 0 ? 0 : (count / ct.total) * 100;
+        document.getElementById("breakdownBar" + i).style.width = pct + "%";
+        document.getElementById("breakdownCount" + i).textContent = count + " (" + pct.toFixed(1) + "%)";
+      });
+
+      var freqEmpty = document.getElementById("freqEmpty");
+      var freqCharEl = document.getElementById("freqChar");
+      var freqMetaEl = document.getElementById("freqMeta");
+      var freq = analyzeFrequency(text, document.getElementById("caseSensitive").checked);
+      if (!freq) {
+        freqEmpty.style.display = "block";
+        freqCharEl.style.display = "none";
+        freqMetaEl.style.display = "none";
+      } else {
+        var freqPct = ((freq.count / freq.total) * 100).toFixed(1);
+        freqEmpty.style.display = "none";
+        freqCharEl.style.display = "block";
+        freqMetaEl.style.display = "block";
+        freqCharEl.textContent = freq.char;
+        freqMetaEl.innerHTML = "<strong>" + freq.count + "</strong> occurrence" + (freq.count === 1 ? "" : "s") +
+          " &nbsp;(" + freqPct + "% of " + freq.total + " non-space character" + (freq.total === 1 ? "" : "s") + ")";
+      }
 
       LIMITS.forEach(function (limit, i) {
         var pct = Math.min(100, (chars / limit.max) * 100);
@@ -353,6 +586,7 @@
     }
 
     textInput.addEventListener("input", update);
+    document.getElementById("caseSensitive").addEventListener("change", update);
     document.getElementById("clearBtn").addEventListener("click", function () {
       textInput.value = "";
       update();

@@ -6,8 +6,8 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free URL Encoder & Decoder Online | Fixoona</title>
-  <meta name="description" content="Encode or decode URLs and URL components online for free, right in your browser. See both encodeURIComponent and encodeURI results at once, live, with a clear explanation of when to use each. No sign-up." />
-  <meta name="keywords" content="url encoder, url decoder, percent encoding online free, encodeuricomponent vs encodeuri" />
+  <meta name="description" content="Encode or decode URLs and URL components online for free, right in your browser. Toggle encodeURIComponent vs encodeURI, switch between %20 and + for spaces, process a batch of lines at once, and watch a live character-by-character preview of what changes. No sign-up." />
+  <meta name="keywords" content="url encoder, url decoder, percent encoding online free, encodeuricomponent vs encodeuri, batch url encoder, url encode plus vs %20" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/url-encoder" />
 
@@ -82,6 +82,45 @@
       .url-result-row { flex-wrap: wrap; }
       .url-result-row .url-result-head { width: 100%; }
     }
+    .url-preview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .url-preview-col small {
+      display: block;
+      font-size: 0.76rem;
+      color: var(--color-text-muted);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .url-preview-box {
+      min-height: 60px;
+      max-height: 220px;
+      overflow: auto;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      color: var(--color-text);
+      font-family: monospace;
+      font-size: 0.85rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .url-hl {
+      background: var(--color-bg-alt);
+      color: var(--color-primary);
+      border-radius: 3px;
+      font-weight: 600;
+    }
+    .url-hl-err {
+      color: var(--color-danger);
+    }
+    @media (max-width: 640px) {
+      .url-preview-grid { grid-template-columns: 1fr; }
+    }
   </style>
 
   <script type="application/ld+json">
@@ -129,7 +168,22 @@
       {
         "@type": "Question",
         "name": "Why did decoding fail with an error?",
-        "acceptedAnswer": { "@type": "Answer", "text": "decodeURIComponent and decodeURI throw an error on malformed percent sequences, such as a stray \"%\" not followed by two valid hex digits. The tool catches that and tells you the input may contain invalid encoding." }
+        "acceptedAnswer": { "@type": "Answer", "text": "decodeURIComponent and decodeURI throw an error on malformed percent sequences, such as a stray \"%\" not followed by two valid hex digits. The tool catches that and tells you the input may contain invalid encoding. In batch mode, only the specific line with the problem is marked as invalid in the result — the rest of the batch still processes normally." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does batch mode do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "When \"Batch mode\" is checked, the tool treats each line of the input as a separate item and encodes or decodes them independently, joining the results back together one per line — useful for processing a list of URLs or query values at once. If one line contains invalid encoding, only that line is marked as unable to process; the rest of the batch still completes." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between %20 and + for encoding spaces?",
+        "acceptedAnswer": { "@type": "Answer", "text": "%20 is the standard percent-encoding for a space and is what encodeURIComponent and encodeURI produce. The + character is a separate, older convention used specifically by the application/x-www-form-urlencoded format (classic HTML form submissions and query strings built that way) to represent a space. Checking \"Use + for spaces\" makes the tool convert between + and a literal space instead of %20, matching that form-encoded convention." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the highlighting in the Live Preview show?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The Live Preview updates as you type and highlights, character by character, exactly which parts of your input will change. In Encode mode it highlights characters that aren't safe to leave as-is and shows what they become; in Decode mode it highlights each %XX sequence (and + if that option is checked) and shows what it decodes to, so you can see exactly why the output looks the way it does before running the conversion." }
       },
       {
         "@type": "Question",
@@ -173,7 +227,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🔗</div>
       <h1>URL Encoder & Decoder</h1>
-      <p>Percent-encode or decode URLs and query strings — handles spaces, symbols, and special characters correctly.</p>
+      <p>Percent-encode or decode URLs and query strings — handles spaces, symbols, and unicode correctly, with batch input and a live character-by-character preview.</p>
     </section>
 
     <section class="container">
@@ -189,6 +243,8 @@
         </div>
 
         <label class="check-row"><input type="checkbox" id="componentMode" checked /> Encode/decode as URL component (recommended for query values)</label>
+        <label class="check-row"><input type="checkbox" id="plusForSpace" /> Use "+" for spaces instead of %20 (application/x-www-form-urlencoded style)</label>
+        <label class="check-row"><input type="checkbox" id="batchMode" /> Batch mode — treat each line as a separate item</label>
 
         <div class="actions">
           <button class="btn btn-primary" id="convertBtn">Encode</button>
@@ -203,14 +259,29 @@
         </div>
 
         <div class="output-box" id="statusBox"></div>
+
+        <div class="field" style="margin-top:22px;">
+          <label>Live Preview <span style="font-weight:400;color:var(--color-text-muted);font-size:0.8rem;">— updates as you type, highlighting exactly which characters change and why</span></label>
+          <div class="url-preview-grid">
+            <div class="url-preview-col">
+              <small>Before</small>
+              <div class="url-preview-box" id="previewBefore" aria-live="polite"></div>
+            </div>
+            <div class="url-preview-col">
+              <small>After</small>
+              <div class="url-preview-box" id="previewAfter" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="howto">
         <h2>How to Encode or Decode a URL</h2>
         <ol class="howto-steps">
           <li>Choose "Encode" or "Decode" with the pill toggle at the top of the tool.</li>
-          <li>Paste the text or URL you want to process into the input box.</li>
-          <li>Leave "Encode/decode as URL component" checked for a single query value (the default), or uncheck it if you're processing a complete URL.</li>
+          <li>Paste the text or URL you want to process into the input box — or check "Batch mode" first to process a list, one item per line.</li>
+          <li>Leave "Encode/decode as URL component" checked for a single query value (the default), or uncheck it if you're processing a complete URL. Check "Use + for spaces" if you're working with form-encoded (application/x-www-form-urlencoded) data.</li>
+          <li>Watch the Live Preview update as you type — it highlights exactly which characters change and why.</li>
           <li>Click the action button, then copy the result with "Copy Result".</li>
         </ol>
       </div>
@@ -231,7 +302,19 @@
         </details>
         <details class="faq-item">
           <summary>Why did decoding fail with an error?</summary>
-          <p>decodeURIComponent and decodeURI throw an error on malformed percent sequences, such as a stray "%" not followed by two valid hex digits. The tool catches that and tells you the input may contain invalid encoding.</p>
+          <p>decodeURIComponent and decodeURI throw an error on malformed percent sequences, such as a stray "%" not followed by two valid hex digits. The tool catches that and tells you the input may contain invalid encoding. In batch mode, only the specific line with the problem is marked as invalid in the result — the rest of the batch still processes normally.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does batch mode do?</summary>
+          <p>When "Batch mode" is checked, the tool treats each line of the input as a separate item and encodes or decodes them independently, joining the results back together one per line — useful for processing a list of URLs or query values at once. If one line contains invalid encoding, only that line is marked as unable to process; the rest of the batch still completes.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What's the difference between %20 and + for encoding spaces?</summary>
+          <p>%20 is the standard percent-encoding for a space and is what encodeURIComponent and encodeURI produce. The + character is a separate, older convention used specifically by the application/x-www-form-urlencoded format (classic HTML form submissions and query strings built that way) to represent a space. Checking "Use + for spaces" makes the tool convert between + and a literal space instead of %20, matching that form-encoded convention.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the highlighting in the Live Preview show?</summary>
+          <p>The Live Preview updates as you type and highlights, character by character, exactly which parts of your input will change. In Encode mode it highlights characters that aren't safe to leave as-is and shows what they become; in Decode mode it highlights each %XX sequence (and + if that option is checked) and shows what it decodes to, so you can see exactly why the output looks the way it does before running the conversion.</p>
         </details>
         <details class="faq-item">
           <summary>Does this tool send my URL to a server to process it?</summary>
@@ -316,32 +399,156 @@
     var statusBox = document.getElementById("statusBox");
     var copyNote = document.getElementById("copyNote");
     var componentMode = document.getElementById("componentMode");
+    var plusForSpace = document.getElementById("plusForSpace");
+    var batchMode = document.getElementById("batchMode");
+    var inputLabel = document.getElementById("inputLabel");
+    var previewBefore = document.getElementById("previewBefore");
+    var previewAfter = document.getElementById("previewAfter");
     var mode = "encode";
+
+    function escapeHtml(s) {
+      return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    function updateLabels() {
+      var base = mode === "encode" ? "Text or URL to Encode" : "Encoded URL to Decode";
+      inputLabel.textContent = base + (batchMode.checked ? " — one item per line" : "");
+      convertBtn.textContent = mode === "encode" ? "Encode" : "Decode";
+      inputText.placeholder = batchMode.checked
+        ? "e.g.\nhttps://example.com/a b\nhttps://example.com/c d"
+        : "e.g. https://example.com/search?q=hello world";
+    }
+
+    // Builds highlighted before/after HTML for one line in Encode mode.
+    function highlightEncodeLine(text, encFn) {
+      var before = [], after = [];
+      Array.from(text).forEach(function (ch) {
+        var encoded;
+        try { encoded = encFn(ch); } catch (e) { encoded = ch; }
+        if (plusForSpace.checked && ch === " ") { encoded = "+"; }
+        if (encoded !== ch) {
+          before.push('<span class="url-hl" title="Will be percent-encoded">' + escapeHtml(ch) + "</span>");
+          after.push('<span class="url-hl" title="Encoded result">' + escapeHtml(encoded) + "</span>");
+        } else {
+          before.push(escapeHtml(ch));
+          after.push(escapeHtml(ch));
+        }
+      });
+      return { before: before.join(""), after: after.join("") };
+    }
+
+    // Builds highlighted before/after HTML for one line in Decode mode.
+    function highlightDecodeLine(text, decFn) {
+      var pattern = plusForSpace.checked ? /(?:%[0-9A-Fa-f]{2})+|\+/g : /(?:%[0-9A-Fa-f]{2})+/g;
+      var before = [], after = [];
+      var lastIndex = 0, m;
+      while ((m = pattern.exec(text)) !== null) {
+        if (m.index > lastIndex) {
+          var lit = escapeHtml(text.slice(lastIndex, m.index));
+          before.push(lit);
+          after.push(lit);
+        }
+        var token = m[0];
+        if (token === "+") {
+          before.push('<span class="url-hl" title="Will decode to a space (form-encoded style)">+</span>');
+          after.push('<span class="url-hl" title="Decoded from +"> </span>');
+        } else {
+          try {
+            var decoded = decFn(token);
+            var same = decoded === token;
+            before.push('<span class="url-hl" title="' + (same ? "Reserved character — left as-is" : "Percent-encoded byte(s)") + '">' + escapeHtml(token) + "</span>");
+            after.push('<span class="url-hl" title="' + (same ? "Left encoded (reserved character)" : "Decoded result") + '">' + escapeHtml(decoded) + "</span>");
+          } catch (e) {
+            before.push('<span class="url-hl url-hl-err" title="Malformed percent-encoding">' + escapeHtml(token) + "</span>");
+            after.push('<span class="url-hl url-hl-err" title="Cannot decode">' + escapeHtml(token) + "</span>");
+          }
+        }
+        lastIndex = pattern.lastIndex;
+      }
+      if (lastIndex < text.length) {
+        var rest = escapeHtml(text.slice(lastIndex));
+        before.push(rest);
+        after.push(rest);
+      }
+      return { before: before.join(""), after: after.join("") };
+    }
+
+    function updatePreview() {
+      var text = inputText.value;
+      if (!text) {
+        previewBefore.innerHTML = "";
+        previewAfter.innerHTML = "";
+        return;
+      }
+      var encFn = componentMode.checked ? encodeURIComponent : encodeURI;
+      var decFn = componentMode.checked ? decodeURIComponent : decodeURI;
+      var lines = batchMode.checked ? text.split("\n") : [text];
+      var beforeAll = [], afterAll = [];
+      lines.forEach(function (line) {
+        var res = mode === "encode" ? highlightEncodeLine(line, encFn) : highlightDecodeLine(line, decFn);
+        beforeAll.push(res.before);
+        afterAll.push(res.after);
+      });
+      previewBefore.innerHTML = beforeAll.join("\n");
+      previewAfter.innerHTML = afterAll.join("\n");
+    }
 
     document.querySelectorAll("[data-mode]").forEach(function (pill) {
       pill.addEventListener("click", function () {
         document.querySelectorAll("[data-mode]").forEach(function (p) { p.classList.remove("active"); });
         pill.classList.add("active");
         mode = pill.getAttribute("data-mode");
-        convertBtn.textContent = mode === "encode" ? "Encode" : "Decode";
-        document.getElementById("inputLabel").textContent = mode === "encode" ? "Text or URL to Encode" : "Encoded URL to Decode";
+        updateLabels();
         outputText.value = "";
         statusBox.textContent = "";
+        updatePreview();
       });
     });
 
+    [componentMode, plusForSpace, batchMode].forEach(function (el) {
+      el.addEventListener("change", function () {
+        updateLabels();
+        updatePreview();
+      });
+    });
+
+    inputText.addEventListener("input", updatePreview);
+
     convertBtn.addEventListener("click", function () {
-      try {
-        var fn = mode === "encode"
-          ? (componentMode.checked ? encodeURIComponent : encodeURI)
-          : (componentMode.checked ? decodeURIComponent : decodeURI);
-        outputText.value = fn(inputText.value);
-        statusBox.textContent = mode === "encode" ? "Encoded successfully." : "Decoded successfully.";
-        statusBox.style.color = "var(--color-success)";
-      } catch (err) {
-        outputText.value = "";
-        statusBox.textContent = "Couldn't process that input — it may contain invalid encoding.";
+      var encFn = componentMode.checked ? encodeURIComponent : encodeURI;
+      var decFn = componentMode.checked ? decodeURIComponent : decodeURI;
+      var lines = batchMode.checked ? inputText.value.split("\n") : [inputText.value];
+      var results = [];
+      var errorCount = 0;
+
+      lines.forEach(function (line) {
+        try {
+          if (mode === "encode") {
+            var out = encFn(line);
+            if (plusForSpace.checked) { out = out.replace(/%20/g, "+"); }
+            results.push(out);
+          } else {
+            var src = plusForSpace.checked ? line.replace(/\+/g, " ") : line;
+            results.push(decFn(src));
+          }
+        } catch (err) {
+          errorCount++;
+          results.push("[invalid input — could not " + mode + "]");
+        }
+      });
+
+      outputText.value = results.join("\n");
+
+      if (errorCount > 0) {
+        if (batchMode.checked && lines.length > 1) {
+          statusBox.textContent = errorCount + " of " + lines.length + " lines could not be " + (mode === "encode" ? "encoded" : "decoded") + " — check for invalid characters or malformed % sequences. Failed lines are marked in the result.";
+        } else {
+          statusBox.textContent = "Couldn't process that input — it may contain invalid encoding.";
+        }
         statusBox.style.color = "var(--color-danger)";
+      } else {
+        statusBox.textContent = (mode === "encode" ? "Encoded" : "Decoded") + (batchMode.checked && lines.length > 1 ? " " + lines.length + " lines successfully." : " successfully.");
+        statusBox.style.color = "var(--color-success)";
       }
     });
 
@@ -353,8 +560,12 @@
       inputText.value = "";
       outputText.value = "";
       statusBox.textContent = "";
+      previewBefore.innerHTML = "";
+      previewAfter.innerHTML = "";
       inputText.focus();
     });
+
+    updateLabels();
   </script>
 </body>
 </html>
