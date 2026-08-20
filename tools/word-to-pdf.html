@@ -6,8 +6,8 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Word to PDF Converter Online | Fixoona</title>
-  <meta name="description" content="Convert a Word (.docx) document to PDF online for free, right in your browser. No uploads, no sign-up, formatting preserved." />
-  <meta name="keywords" content="word to pdf, convert docx to pdf online free, doc to pdf" />
+  <meta name="description" content="Convert a Word (.docx) document to PDF online for free, right in your browser — choose Letter/A4/Legal page size and margins, or copy the plain text. No uploads, no sign-up." />
+  <meta name="keywords" content="word to pdf, convert docx to pdf online free, doc to pdf, docx to pdf page size" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/word-to-pdf" />
 
@@ -80,6 +80,16 @@
         "@type": "Question",
         "name": "Does this upload my Word document to a server?",
         "acceptedAnswer": { "@type": "Answer", "text": "No — the .docx file is read and converted entirely in your browser using a JavaScript library, and the \"Save as PDF\" step uses your own browser's built-in print engine, so your document never leaves your device." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I change the page size or margins of the PDF?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — use the Page Size (Letter, A4, or Legal) and Margins (Normal, Narrow, or Wide) dropdowns that appear once your document is converted. These set the actual @page size and margin used when your browser's print dialog generates the PDF." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I get the plain text without saving a PDF?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — click \"Copy Document Text\" to copy just the plain text content of the converted document to your clipboard, without any formatting, in case that's all you need." }
       }
     ]
   }
@@ -159,8 +169,33 @@
           <input type="file" id="fileInput" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" hidden />
         </div>
 
+        <div class="row no-print" id="printOptions" style="display:none;">
+          <div class="field">
+            <label for="pageSizeSelect">Page Size</label>
+            <select id="pageSizeSelect">
+              <option value="letter" selected>Letter (8.5in x 11in)</option>
+              <option value="a4">A4 (210mm x 297mm)</option>
+              <option value="legal">Legal (8.5in x 14in)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="marginSelect">Margins</label>
+            <select id="marginSelect">
+              <option value="0.75in">Normal</option>
+              <option value="0.4in">Narrow</option>
+              <option value="1.25in">Wide</option>
+            </select>
+          </div>
+        </div>
+
         <div class="actions no-print">
           <button class="btn btn-primary" id="downloadBtn" style="display:none;">Save as PDF</button>
+          <button class="btn btn-secondary" id="copyTextBtn" style="display:none;">Copy Document Text</button>
+        </div>
+
+        <div class="stat-row no-print" id="docStats" style="display:none;">
+          <div class="stat"><strong id="statWords">–</strong><span>Words</span></div>
+          <div class="stat"><strong id="statChars">–</strong><span>Characters</span></div>
         </div>
 
         <div class="output-box no-print" id="statusBox"></div>
@@ -203,6 +238,14 @@
         <details class="faq-item">
           <summary>Does this upload my Word document to a server?</summary>
           <p>No — the .docx file is read and converted entirely in your browser using a JavaScript library, and the "Save as PDF" step uses your own browser's built-in print engine, so your document never leaves your device.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I change the page size or margins of the PDF?</summary>
+          <p>Yes — use the Page Size (Letter, A4, or Legal) and Margins (Normal, Narrow, or Wide) dropdowns that appear once your document is converted. These set the actual @page size and margin used when your browser's print dialog generates the PDF.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I get the plain text without saving a PDF?</summary>
+          <p>Yes — click "Copy Document Text" to copy just the plain text content of the converted document to your clipboard, without any formatting, in case that's all you need.</p>
         </details>
       </div>
 
@@ -281,8 +324,27 @@
     var dropzone = document.getElementById("dropzone");
     var fileInput = document.getElementById("fileInput");
     var downloadBtn = document.getElementById("downloadBtn");
+    var copyTextBtn = document.getElementById("copyTextBtn");
     var statusBox = document.getElementById("statusBox");
     var printArea = document.getElementById("printArea");
+    var printOptions = document.getElementById("printOptions");
+    var pageSizeSelect = document.getElementById("pageSizeSelect");
+    var marginSelect = document.getElementById("marginSelect");
+    var docStats = document.getElementById("docStats");
+
+    var pageSizeMap = { letter: "letter", a4: "A4", legal: "legal" };
+
+    var pageStyleTag = document.createElement("style");
+    document.head.appendChild(pageStyleTag);
+
+    function updatePageStyle() {
+      var size = pageSizeMap[pageSizeSelect.value] || "letter";
+      var margin = marginSelect.value;
+      pageStyleTag.textContent = "@page { size: " + size + "; margin: " + margin + "; }";
+    }
+    pageSizeSelect.addEventListener("change", updatePageStyle);
+    marginSelect.addEventListener("change", updatePageStyle);
+    updatePageStyle();
 
     function handleFiles(files) {
       var file = files[0];
@@ -293,6 +355,9 @@
       }
 
       downloadBtn.style.display = "none";
+      copyTextBtn.style.display = "none";
+      docStats.style.display = "none";
+      printOptions.style.display = "none";
       printArea.style.display = "none";
       statusBox.textContent = "Converting " + file.name + "…";
 
@@ -303,6 +368,14 @@
             printArea.innerHTML = result.value;
             printArea.style.display = "block";
             downloadBtn.style.display = "inline-flex";
+            copyTextBtn.style.display = "inline-flex";
+            printOptions.style.display = "flex";
+
+            var text = printArea.textContent || "";
+            var words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            document.getElementById("statWords").textContent = words.toLocaleString();
+            document.getElementById("statChars").textContent = text.length.toLocaleString();
+            docStats.style.display = "flex";
 
             if (result.messages && result.messages.length) {
               statusBox.textContent = "Converted with " + result.messages.length + " minor formatting note(s). Preview below, then click Save as PDF.";
@@ -328,6 +401,10 @@
 
     downloadBtn.addEventListener("click", function () {
       window.print();
+    });
+
+    copyTextBtn.addEventListener("click", function () {
+      Fixora.copyText(printArea.textContent || "");
     });
   </script>
 </body>
