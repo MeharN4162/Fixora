@@ -6,8 +6,8 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free JPG to WebP Converter Online | Fixoona</title>
-  <meta name="description" content="Convert JPG images to WebP format online for free, right in your browser. Smaller files, adjustable quality. No uploads, no sign-up." />
-  <meta name="keywords" content="jpg to webp, convert jpg to webp online free, image converter" />
+  <meta name="description" content="Convert JPG images to WebP format online for free, right in your browser — batch-convert multiple files at once, with adjustable quality. No uploads, no sign-up." />
+  <meta name="keywords" content="jpg to webp, convert jpg to webp online free, image converter, batch jpg to webp" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/jpg-to-webp" />
 
@@ -80,6 +80,11 @@
         "@type": "Question",
         "name": "Is this conversion done on a server?",
         "acceptedAnswer": { "@type": "Answer", "text": "No - everything runs in your browser using the Canvas API's toBlob() method. Your JPG is never uploaded anywhere." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I convert more than one JPG at once?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes - select or drag multiple JPG files and each one is converted at the same quality setting, listed with its own before/after file size and a separate Download button per file." }
       }
     ]
   }
@@ -125,29 +130,33 @@
       <div class="tool-panel">
         <div id="unsupportedNotice" class="output-box" style="display:none;"></div>
 
-        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload a JPG image">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload one or more JPG images">
           <div class="dz-icon" aria-hidden="true">🖼️</div>
-          <strong>Click to upload or drag a JPG here</strong>
+          <strong>Click to upload or drag JPG file(s) here</strong>
           <small>JPG / JPEG files only</small>
-          <input type="file" id="fileInput" accept="image/jpeg" hidden />
+          <input type="file" id="fileInput" accept="image/jpeg" multiple hidden />
         </div>
-
-        <img id="previewImg" class="preview-img" style="display:none;" alt="Preview of converted WebP image" />
 
         <div class="field" style="margin-top:16px;">
           <label for="qualityRange">WebP Quality: <span id="qualityValue">85%</span></label>
           <input type="range" id="qualityRange" min="30" max="100" value="85" style="width:100%;" />
         </div>
 
-        <div class="stat-row" id="fileInfo" style="display:none;">
-          <div class="stat"><strong id="statOriginal">–</strong><span>JPG Size</span></div>
-          <div class="stat"><strong id="statNew">–</strong><span>WebP Size</span></div>
-          <div class="stat"><strong id="statDims">–</strong><span>Dimensions</span></div>
+        <div id="singleResult">
+          <img id="previewImg" class="preview-img" style="display:none;" alt="Preview of converted WebP image" />
+
+          <div class="stat-row" id="fileInfo" style="display:none;">
+            <div class="stat"><strong id="statOriginal">–</strong><span>JPG Size</span></div>
+            <div class="stat"><strong id="statNew">–</strong><span>WebP Size</span></div>
+            <div class="stat"><strong id="statDims">–</strong><span>Dimensions</span></div>
+          </div>
+
+          <div class="actions">
+            <a class="btn btn-primary" id="downloadBtn" style="display:none;" download="converted.webp">Download WebP</a>
+          </div>
         </div>
 
-        <div class="actions">
-          <a class="btn btn-primary" id="downloadBtn" style="display:none;" download="converted.webp">Download WebP</a>
-        </div>
+        <div id="batchResults" style="display:none;margin-top:16px;flex-direction:column;gap:10px;"></div>
 
         <div class="output-box" id="statusBox"></div>
       </div>
@@ -183,6 +192,10 @@
         <details class="faq-item">
           <summary>Is this conversion done on a server?</summary>
           <p>No - everything runs in your browser using the Canvas API's toBlob() method. Your JPG is never uploaded anywhere.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I convert more than one JPG at once?</summary>
+          <p>Yes - select or drag multiple JPG files and each one is converted at the same quality setting, listed with its own before/after file size and a separate Download button per file.</p>
         </details>
       </div>
 
@@ -266,10 +279,11 @@
     var qualityRange = document.getElementById("qualityRange");
     var qualityValue = document.getElementById("qualityValue");
     var unsupportedNotice = document.getElementById("unsupportedNotice");
+    var singleResult = document.getElementById("singleResult");
+    var batchResults = document.getElementById("batchResults");
 
-    var currentFile = null;
-    var currentImg = null;
-    var lastConvertedUrl = null;
+    var loadedFiles = []; // [{ file, img }]
+    var lastObjectUrls = [];
     var convertGeneration = 0;
     var convertTimer = null;
     var webpSupported = null;
@@ -292,12 +306,15 @@
       }
     });
 
+    function scheduleConvert() {
+      if (!loadedFiles.length) return;
+      clearTimeout(convertTimer);
+      convertTimer = setTimeout(convertAll, 120);
+    }
+
     qualityRange.addEventListener("input", function () {
       qualityValue.textContent = qualityRange.value + "%";
-      if (currentImg) {
-        clearTimeout(convertTimer);
-        convertTimer = setTimeout(convert, 120);
-      }
+      scheduleConvert();
     });
 
     function handleFiles(files) {
@@ -305,66 +322,124 @@
         statusBox.textContent = "WebP export isn't supported in this browser.";
         return;
       }
-      var file = files[0];
-      if (!file || !/image\/jpe?g/.test(file.type)) {
-        statusBox.textContent = "Please choose a JPG/JPEG image.";
+      var jpgFiles = Array.prototype.filter.call(files, function (f) { return /image\/jpe?g/.test(f.type); });
+      if (!jpgFiles.length) {
+        statusBox.textContent = "Please choose one or more JPG/JPEG images.";
         return;
       }
-      currentFile = file;
-      statusBox.textContent = "Converting…";
 
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        var img = new Image();
-        img.onload = function () {
-          currentImg = img;
-          convert();
+      statusBox.textContent = "Reading " + jpgFiles.length + " file" + (jpgFiles.length === 1 ? "" : "s") + "…";
+      loadedFiles = [];
+      var pending = jpgFiles.length;
+
+      jpgFiles.forEach(function (file) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          var img = new Image();
+          img.onload = function () {
+            loadedFiles.push({ file: file, img: img });
+            pending--;
+            if (pending === 0) convertAll();
+          };
+          img.onerror = function () {
+            pending--;
+            if (pending === 0) {
+              if (!loadedFiles.length) {
+                statusBox.textContent = "Couldn't read that image. Please try a different file.";
+              } else {
+                convertAll();
+              }
+            }
+          };
+          img.src = e.target.result;
         };
-        img.onerror = function () {
-          statusBox.textContent = "Couldn't read that image. Please try a different file.";
-        };
-        img.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
+      });
     }
 
-    function convert() {
+    function convertOne(entry, quality, callback) {
       var canvas = document.createElement("canvas");
-      canvas.width = currentImg.naturalWidth;
-      canvas.height = currentImg.naturalHeight;
+      canvas.width = entry.img.naturalWidth;
+      canvas.height = entry.img.naturalHeight;
       var ctx = canvas.getContext("2d");
-      ctx.drawImage(currentImg, 0, 0);
+      ctx.drawImage(entry.img, 0, 0);
+      canvas.toBlob(function (blob) {
+        callback(blob, canvas.width, canvas.height);
+      }, "image/webp", quality);
+    }
+
+    function convertAll() {
+      if (!loadedFiles.length) return;
+
+      lastObjectUrls.forEach(function (u) { URL.revokeObjectURL(u); });
+      lastObjectUrls = [];
 
       var quality = parseInt(qualityRange.value, 10) / 100;
       convertGeneration++;
       var myGeneration = convertGeneration;
 
-      canvas.toBlob(function (blob) {
-        if (myGeneration !== convertGeneration) return;
+      if (loadedFiles.length === 1) {
+        batchResults.style.display = "none";
+        singleResult.style.display = "block";
 
-        if (!blob || blob.type !== "image/webp") {
-          statusBox.textContent = "Your browser couldn't produce a WebP file. Please try Chrome, Edge, or Firefox.";
-          return;
-        }
+        var entry = loadedFiles[0];
+        convertOne(entry, quality, function (blob, w, h) {
+          if (myGeneration !== convertGeneration) return;
+          if (!blob || blob.type !== "image/webp") {
+            statusBox.textContent = "Your browser couldn't produce a WebP file. Please try Chrome, Edge, or Firefox.";
+            return;
+          }
 
-        var url = URL.createObjectURL(blob);
-        if (lastConvertedUrl) URL.revokeObjectURL(lastConvertedUrl);
-        lastConvertedUrl = url;
+          var url = URL.createObjectURL(blob);
+          lastObjectUrls.push(url);
 
-        previewImg.src = url;
-        previewImg.style.display = "block";
+          previewImg.src = url;
+          previewImg.style.display = "block";
 
-        downloadBtn.href = url;
-        downloadBtn.download = currentFile.name.replace(/\.jpe?g$/i, "") + ".webp";
-        downloadBtn.style.display = "inline-flex";
+          downloadBtn.href = url;
+          downloadBtn.download = entry.file.name.replace(/\.jpe?g$/i, "") + ".webp";
+          downloadBtn.style.display = "inline-flex";
 
-        fileInfo.style.display = "flex";
-        document.getElementById("statOriginal").textContent = Fixora.formatBytes(currentFile.size);
-        document.getElementById("statNew").textContent = Fixora.formatBytes(blob.size);
-        document.getElementById("statDims").textContent = canvas.width + " × " + canvas.height;
+          fileInfo.style.display = "flex";
+          document.getElementById("statOriginal").textContent = Fixora.formatBytes(entry.file.size);
+          document.getElementById("statNew").textContent = Fixora.formatBytes(blob.size);
+          document.getElementById("statDims").textContent = w + " × " + h;
 
-        statusBox.textContent = "Done! Your WebP is ready to download.";
-      }, "image/webp", quality);
+          statusBox.textContent = "Done! Your WebP is ready to download.";
+        });
+      } else {
+        singleResult.style.display = "none";
+        batchResults.style.display = "flex";
+        batchResults.innerHTML = "";
+        statusBox.textContent = "Converting " + loadedFiles.length + " files…";
+
+        var doneCount = 0;
+        loadedFiles.forEach(function (entry) {
+          convertOne(entry, quality, function (blob, w, h) {
+            if (myGeneration !== convertGeneration) return;
+            if (!blob || blob.type !== "image/webp") {
+              statusBox.textContent = "Your browser couldn't produce a WebP file. Please try Chrome, Edge, or Firefox.";
+              return;
+            }
+            var url = URL.createObjectURL(blob);
+            lastObjectUrls.push(url);
+
+            var row = document.createElement("div");
+            row.className = "row";
+            row.style.alignItems = "center";
+            row.innerHTML =
+              '<div style="flex:1;font-size:0.9rem;">' + entry.file.name.replace(/\.jpe?g$/i, "") + '.webp' +
+              '<div style="font-size:0.78rem;color:var(--color-text-muted);">' + Fixora.formatBytes(entry.file.size) + ' → ' + Fixora.formatBytes(blob.size) + ' · ' + w + '×' + h + '</div></div>' +
+              '<a class="btn btn-secondary" href="' + url + '" download="' + entry.file.name.replace(/\.jpe?g$/i, "") + '.webp">Download</a>';
+            batchResults.appendChild(row);
+
+            doneCount++;
+            if (doneCount === loadedFiles.length) {
+              statusBox.textContent = "Done! All " + loadedFiles.length + " files converted — download each one above.";
+            }
+          });
+        });
+      }
     }
 
     Fixora.setupDropzone(dropzone, fileInput, handleFiles);
