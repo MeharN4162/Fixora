@@ -6,7 +6,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free PDF Rotator Online — Rotate PDF Pages | Fixoona</title>
-  <meta name="description" content="Rotate all or specific pages of a PDF online for free, right in your browser. Fix sideways or upside-down scans instantly. No uploads, no sign-up." />
+  <meta name="description" content="Rotate PDF pages individually, in a selection, or all at once, free and right in your browser. Each thumbnail has its own rotate buttons, plus Rotate All and Reset. No uploads, no sign-up." />
   <meta name="keywords" content="pdf rotator, rotate pdf pages online free, fix sideways pdf" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/pdf-rotator" />
@@ -58,8 +58,13 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Can I rotate different pages by different amounts?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Select just the pages that need rotating, apply left/right rotation to that selection, then select a different set of pages and rotate them separately before generating the final PDF — each page's rotation is tracked independently." }
+        "name": "Can I rotate a single page without changing the others?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — every thumbnail has its own ↺ and ↻ buttons. Click either one to rotate just that page by 90°; every other page's rotation stays exactly as it was." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a quick way to rotate every page at once?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — the \"Rotate All Left 90°\" and \"Rotate All Right 90°\" buttons rotate every page in the document with one click. You can still override individual pages afterward using each thumbnail's own rotate buttons, or by selecting a subset of pages and using \"Rotate Selected Left/Right 90°\"." }
       },
       {
         "@type": "Question",
@@ -74,7 +79,12 @@
       {
         "@type": "Question",
         "name": "Can I rotate by an angle other than 90°?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No — each click rotates the selected pages by exactly 90°, so you can only land on 0°, 90°, 180°, or 270°. For fine-grained tilt correction, this tool isn't the right fit." }
+        "acceptedAnswer": { "@type": "Answer", "text": "No — each click, whether on a single page's own buttons, a selection, or Rotate All, turns the page(s) by exactly 90°, so you can only land on 0°, 90°, 180°, or 270°. For fine-grained tilt correction, this tool isn't the right fit." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I undo all my rotations at once?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — click \"Reset All Rotations\" to instantly set every page back to 0°, discarding every rotation you've applied across the whole document in one click." }
       },
       {
         "@type": "Question",
@@ -84,6 +94,31 @@
     ]
   }
   </script>
+
+  <style>
+    .page-select-item .page-rotate-controls {
+      display: flex;
+      gap: 6px;
+      padding: 0 8px 10px;
+    }
+    .page-select-item .page-rotate-btn {
+      flex: 1;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface-2);
+      color: var(--color-text);
+      border-radius: 6px;
+      padding: 4px 0;
+      font-size: 0.9rem;
+      line-height: 1.2;
+      cursor: pointer;
+      transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+    }
+    .page-select-item .page-rotate-btn:hover {
+      border-color: var(--color-primary-light);
+      color: var(--color-primary);
+      background: var(--color-surface);
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -118,7 +153,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🔃</div>
       <h1>PDF Rotator</h1>
-      <p>See every page, click to select the ones that are sideways or upside-down, and rotate just those — with a live preview.</p>
+      <p>See every page, rotate any single one with its own buttons, select several to batch-rotate, or rotate the whole document at once — with a live preview.</p>
     </section>
 
     <section class="container">
@@ -126,7 +161,7 @@
         <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload a PDF file">
           <div class="dz-icon" aria-hidden="true">📤</div>
           <strong>Click to upload or drag a PDF here</strong>
-          <small>We'll show every page so you can click to select</small>
+          <small>We'll show every page with its own rotate buttons</small>
           <input type="file" id="fileInput" accept="application/pdf" hidden />
         </div>
 
@@ -139,8 +174,14 @@
         <div class="page-select-grid" id="pageGrid"></div>
 
         <div class="actions" id="rotateActions" style="display:none;">
-          <button class="btn btn-secondary" id="rotateLeftBtn" type="button">↺ Rotate Left 90°</button>
-          <button class="btn btn-secondary" id="rotateRightBtn" type="button">↻ Rotate Right 90°</button>
+          <button class="btn btn-secondary" id="rotateLeftBtn" type="button">↺ Rotate Selected Left 90°</button>
+          <button class="btn btn-secondary" id="rotateRightBtn" type="button">↻ Rotate Selected Right 90°</button>
+        </div>
+
+        <div class="actions" id="rotateAllActions" style="display:none;">
+          <button class="btn btn-secondary" id="rotateAllLeftBtn" type="button">↺ Rotate All Left 90°</button>
+          <button class="btn btn-secondary" id="rotateAllRightBtn" type="button">↻ Rotate All Right 90°</button>
+          <button class="btn btn-secondary" id="resetRotationsBtn" type="button">Reset All Rotations</button>
         </div>
 
         <div class="actions">
@@ -154,9 +195,9 @@
       <div class="howto">
         <h2>How to Rotate PDF Pages</h2>
         <ol class="howto-steps">
-          <li>Upload your PDF — every page renders as a thumbnail.</li>
-          <li>Click one or more page thumbnails to select them (click again to deselect), or use "Select All"/"Select None".</li>
-          <li>With pages selected, click "Rotate Left 90°" or "Rotate Right 90°" as many times as needed — the thumbnail preview updates live and shows the current rotation angle.</li>
+          <li>Upload your PDF — every page renders as a thumbnail with its own ↺ / ↻ rotate buttons.</li>
+          <li>Click a thumbnail's own rotate button to fix a single page, or click one or more thumbnails to select them (click again to deselect, or use "Select All"/"Select None") and rotate the whole selection with "Rotate Selected Left/Right 90°".</li>
+          <li>Need to fix the whole document? "Rotate All Left 90°" / "Rotate All Right 90°" rotates every page at once — you can still override individual pages afterward. "Reset All Rotations" clears every change back to 0°.</li>
           <li>Click "Generate Rotated PDF" and download the result.</li>
         </ol>
       </div>
@@ -164,8 +205,12 @@
       <div class="faq">
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
-          <summary>Can I rotate different pages by different amounts?</summary>
-          <p>Yes. Select just the pages that need rotating, apply left/right rotation to that selection, then select a different set of pages and rotate them separately before generating the final PDF — each page's rotation is tracked independently.</p>
+          <summary>Can I rotate a single page without changing the others?</summary>
+          <p>Yes — every thumbnail has its own ↺ and ↻ buttons. Click either one to rotate just that page by 90°; every other page's rotation stays exactly as it was.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is there a quick way to rotate every page at once?</summary>
+          <p>Yes — the "Rotate All Left 90°" and "Rotate All Right 90°" buttons rotate every page in the document with one click. You can still override individual pages afterward using each thumbnail's own rotate buttons, or by selecting a subset of pages and using "Rotate Selected Left/Right 90°".</p>
         </details>
         <details class="faq-item">
           <summary>What if I rotate a page 90° left and then 90° right?</summary>
@@ -177,7 +222,11 @@
         </details>
         <details class="faq-item">
           <summary>Can I rotate by an angle other than 90°?</summary>
-          <p>No — each click rotates the selected pages by exactly 90°, so you can only land on 0°, 90°, 180°, or 270°. For fine-grained tilt correction, this tool isn't the right fit.</p>
+          <p>No — each click, whether on a single page's own buttons, a selection, or Rotate All, turns the page(s) by exactly 90°, so you can only land on 0°, 90°, 180°, or 270°. For fine-grained tilt correction, this tool isn't the right fit.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I undo all my rotations at once?</summary>
+          <p>Yes — click "Reset All Rotations" to instantly set every page back to 0°, discarding every rotation you've applied across the whole document in one click.</p>
         </details>
         <details class="faq-item">
           <summary>Why is the "Generate Rotated PDF" button disabled at first?</summary>
@@ -267,6 +316,7 @@
     var statusBox = document.getElementById("statusBox");
     var toolbar = document.getElementById("toolbar");
     var rotateActions = document.getElementById("rotateActions");
+    var rotateAllActions = document.getElementById("rotateAllActions");
     var pageGrid = document.getElementById("pageGrid");
     var pselCount = document.getElementById("pselCount");
 
@@ -316,19 +366,50 @@
       }
     }
 
-    function rotateSelected(delta) {
-      if (selected.size === 0) {
-        statusBox.textContent = "Click one or more pages first, then rotate.";
-        return;
-      }
-      selected.forEach(function (index) {
-        rotations[index] = ((rotations[index] + delta) % 360 + 360) % 360;
-        applyRotationVisual(index);
-      });
+    // Single source of truth for the rotation math, reused by every control
+    // (per-page buttons, selection rotate, rotate-all, reset) so a page's
+    // net rotation is always one cumulative value, never several uncoordinated ones.
+    function applyDelta(index, delta) {
+      rotations[index] = ((rotations[index] + delta) % 360 + 360) % 360;
+      applyRotationVisual(index);
+    }
+
+    function updateGenerateState() {
       var anyRotated = rotations.some(function (r) { return r !== 0; });
       rotateBtn.disabled = !anyRotated;
-      statusBox.textContent = "Rotation preview updated. Click Generate Rotated PDF when ready.";
+    }
+
+    function finishRotationChange(message) {
+      updateGenerateState();
+      statusBox.textContent = message;
       resetDownload();
+    }
+
+    function rotateSelected(delta) {
+      if (selected.size === 0) {
+        statusBox.textContent = "Click one or more pages first, then rotate — or use Rotate All.";
+        return;
+      }
+      selected.forEach(function (index) { applyDelta(index, delta); });
+      finishRotationChange("Rotation preview updated. Click Generate Rotated PDF when ready.");
+    }
+
+    function rotateAll(delta) {
+      for (var i = 0; i < totalPages; i++) { applyDelta(i, delta); }
+      finishRotationChange("Rotated all " + totalPages + " page(s). Click Generate Rotated PDF when ready, or fine-tune individual pages first.");
+    }
+
+    function rotatePage(index, delta) {
+      applyDelta(index, delta);
+      finishRotationChange("Rotation preview updated. Click Generate Rotated PDF when ready.");
+    }
+
+    function resetAllRotations() {
+      for (var i = 0; i < totalPages; i++) {
+        rotations[i] = 0;
+        applyRotationVisual(i);
+      }
+      finishRotationChange("All rotations reset to 0°.");
     }
 
     async function renderThumbnails(file) {
@@ -342,6 +423,7 @@
       rotations = new Array(totalPages).fill(0);
       toolbar.style.display = "flex";
       rotateActions.style.display = "flex";
+      rotateAllActions.style.display = "flex";
       selected = new Set();
       updateCount();
 
@@ -378,9 +460,33 @@
           rotLabel.className = "psel-rotation";
           rotLabel.textContent = "0°";
 
+          var rotControls = document.createElement("div");
+          rotControls.className = "page-rotate-controls";
+          var rotLeftBtn = document.createElement("button");
+          rotLeftBtn.type = "button";
+          rotLeftBtn.className = "page-rotate-btn";
+          rotLeftBtn.innerHTML = "↺";
+          rotLeftBtn.setAttribute("aria-label", "Rotate page " + pageNum + " left 90°");
+          rotLeftBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            rotatePage(pageIndex, -90);
+          });
+          var rotRightBtn = document.createElement("button");
+          rotRightBtn.type = "button";
+          rotRightBtn.className = "page-rotate-btn";
+          rotRightBtn.innerHTML = "↻";
+          rotRightBtn.setAttribute("aria-label", "Rotate page " + pageNum + " right 90°");
+          rotRightBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            rotatePage(pageIndex, 90);
+          });
+          rotControls.appendChild(rotLeftBtn);
+          rotControls.appendChild(rotRightBtn);
+
           item.appendChild(stage);
           item.appendChild(rotLabel);
           item.appendChild(label);
+          item.appendChild(rotControls);
           item.appendChild(badge);
           item.addEventListener("click", function () { toggleItem(item, pageIndex); });
           pageGrid.appendChild(item);
@@ -424,6 +530,9 @@
 
     document.getElementById("rotateLeftBtn").addEventListener("click", function () { rotateSelected(-90); });
     document.getElementById("rotateRightBtn").addEventListener("click", function () { rotateSelected(90); });
+    document.getElementById("rotateAllLeftBtn").addEventListener("click", function () { rotateAll(-90); });
+    document.getElementById("rotateAllRightBtn").addEventListener("click", function () { rotateAll(90); });
+    document.getElementById("resetRotationsBtn").addEventListener("click", function () { resetAllRotations(); });
 
     rotateBtn.addEventListener("click", async function () {
       if (!currentFile) return;
