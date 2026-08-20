@@ -291,6 +291,9 @@
     var rotateControls = document.getElementById("rotateControls");
     var downloadBtn = document.getElementById("downloadBtn");
     var statusBox = document.getElementById("statusBox");
+    var angleField = document.getElementById("angleField");
+    var angleRange = document.getElementById("angleRange");
+    var angleValue = document.getElementById("angleValue");
 
     var naturalImg = null;
     var currentFile = null;
@@ -319,8 +322,11 @@
           naturalImg = img;
           rotateStage.style.display = "block";
           rotateControls.style.display = "flex";
+          angleField.style.display = "block";
+          angleRange.value = 0;
+          angleValue.textContent = "0";
           render();
-          statusBox.textContent = "Use the buttons to rotate, then download.";
+          statusBox.textContent = "Use the slider or buttons to rotate, then download.";
         };
         img.onerror = function () {
           statusBox.textContent = "Couldn't read that image. Please try a different file.";
@@ -339,11 +345,15 @@
       if (!naturalImg) return;
       var w = naturalImg.naturalWidth;
       var h = naturalImg.naturalHeight;
-      var swapped = rotationDeg === 90 || rotationDeg === 270;
+      var rad = (rotationDeg * Math.PI) / 180;
+      var cos = Math.abs(Math.cos(rad));
+      var sin = Math.abs(Math.sin(rad));
 
+      // General rotated-rectangle bounding box — works for exact 90-degree
+      // steps AND arbitrary free angles, so nothing gets cropped at any angle.
       var canvas = document.createElement("canvas");
-      canvas.width = swapped ? h : w;
-      canvas.height = swapped ? w : h;
+      canvas.width = Math.round(w * cos + h * sin);
+      canvas.height = Math.round(w * sin + h * cos);
       var ctx = canvas.getContext("2d");
 
       if (outputMime === "image/jpeg") {
@@ -352,7 +362,7 @@
       }
 
       ctx.translate(canvas.width / 2, canvas.height / 2);
-      ctx.rotate((rotationDeg * Math.PI) / 180);
+      ctx.rotate(rad);
       ctx.drawImage(naturalImg, -w / 2, -h / 2);
 
       canvas.toBlob(function (blob) {
@@ -367,16 +377,36 @@
       }, outputMime, 0.92);
     }
 
+    function syncAngleUI() {
+      angleRange.value = rotationDeg > 180 ? rotationDeg - 360 : rotationDeg;
+      angleValue.textContent = angleRange.value;
+    }
+
+    angleRange.addEventListener("input", function () {
+      rotationDeg = parseInt(angleRange.value, 10);
+      if (rotationDeg < 0) rotationDeg += 360;
+      angleValue.textContent = angleRange.value;
+      render();
+    });
+
     document.getElementById("rotateLeftBtn").addEventListener("click", function () {
       rotationDeg = (rotationDeg + 270) % 360;
+      syncAngleUI();
       render();
     });
     document.getElementById("rotateRightBtn").addEventListener("click", function () {
       rotationDeg = (rotationDeg + 90) % 360;
+      syncAngleUI();
       render();
     });
     document.getElementById("rotate180Btn").addEventListener("click", function () {
       rotationDeg = (rotationDeg + 180) % 360;
+      syncAngleUI();
+      render();
+    });
+    document.getElementById("resetAngleBtn").addEventListener("click", function () {
+      rotationDeg = 0;
+      syncAngleUI();
       render();
     });
   </script>
