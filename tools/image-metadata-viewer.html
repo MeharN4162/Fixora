@@ -6,21 +6,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Image Metadata & EXIF Viewer Online | Fixoona</title>
-  <meta name="description" content="View an image's file info and EXIF data online for free — camera, date taken, and GPS location if present. Check what a photo reveals before you share it. No uploads, no sign-up." />
-  <meta name="keywords" content="image metadata viewer, exif viewer online free, check photo gps location" />
+  <meta name="description" content="View an image's file info and EXIF data online for free — camera, date taken, and GPS location with a map link if present. Download a clean copy with the metadata stripped, or view every raw EXIF tag. No uploads, no sign-up." />
+  <meta name="keywords" content="image metadata viewer, exif viewer online free, check photo gps location, remove exif metadata from photo" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/image-metadata-viewer" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixoona" />
   <meta property="og:title" content="Free Image Metadata & EXIF Viewer Online" />
-  <meta property="og:description" content="View an image's file info and EXIF data online for free — camera, date taken, and GPS location if present." />
+  <meta property="og:description" content="View an image's file info and EXIF data online for free — camera, date taken, and GPS location with a map link if present. Download a clean copy with the metadata stripped." />
   <meta property="og:url" content="https://fixoona.com/tools/image-metadata-viewer" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Image Metadata & EXIF Viewer Online" />
-  <meta name="twitter:description" content="View an image's file info and EXIF data online for free — camera, date taken, and GPS location if present." />
+  <meta name="twitter:description" content="View an image's file info and EXIF data online for free — camera, date taken, and GPS location with a map link if present. Download a clean copy with the metadata stripped." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='23' width='15' height='54' rx='7.5' fill='white'/%3E%3Crect x='30' y='23' width='42' height='14' rx='7' fill='white'/%3E%3Crect x='30' y='46' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -59,7 +59,7 @@
       {
         "@type": "Question",
         "name": "Why does this tool warn me about GPS coordinates?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Many phone cameras embed the exact latitude and longitude where a photo was taken inside its EXIF data. This tool parses that data locally and, if it finds GPS coordinates, displays a clear warning - because anyone who receives your original, un-stripped file could see precisely where the photo was taken." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Many phone cameras embed the exact latitude and longitude where a photo was taken inside its EXIF data. This tool parses that data locally and, if it finds GPS coordinates, displays a clear warning with a \"View this location on OpenStreetMap\" link so you can see exactly what the photo reveals - because anyone who receives your original, un-stripped file could see precisely where it was taken." }
       },
       {
         "@type": "Question",
@@ -79,7 +79,17 @@
       {
         "@type": "Question",
         "name": "What camera details can this tool show, beyond GPS?",
-        "acceptedAnswer": { "@type": "Answer", "text": "When present in the file, it displays camera make and model, date taken, exposure time, aperture (f-number), ISO, focal length, image orientation, and the software used to process the image - everything the tool can extract from the standard EXIF and GPS IFD tags." }
+        "acceptedAnswer": { "@type": "Answer", "text": "When present in the file, it displays camera make and model, lens model, date taken, exposure time, aperture (f-number), ISO, focal length, exposure program, metering mode, flash status, white balance, image orientation, GPS altitude, and the software used to process the image - everything the tool can extract from the standard EXIF and GPS IFD tags." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I remove GPS and EXIF data before sharing a photo?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Click \"Download Clean Copy (No Metadata)\" and the tool redraws your image onto an HTML canvas and re-encodes it - canvas re-encoding produces a brand-new image file containing only pixel data, with no EXIF segment at all, since the browser's encoder never copies the original file's metadata bytes. Before offering the download, the tool re-parses the new file with the same EXIF parser used above to confirm zero tags remain, and the whole process happens locally in your browser." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I see the raw, unformatted EXIF tags?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. When EXIF data is found, an expandable \"View all raw EXIF tags\" section lists every tag the parser decoded from the file's IFD0, Exif, and GPS blocks - including less common fields not shown in the main table above - each labeled with its tag number and name." }
       }
     ]
   }
@@ -150,7 +160,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🔎</div>
       <h1>Image Metadata & EXIF Viewer</h1>
-      <p>See exactly what's embedded in a photo — camera details, timestamps, and GPS location if present — before you share it.</p>
+      <p>See exactly what's embedded in a photo — camera details, timestamps, and GPS location if present — then download a clean copy with the metadata stripped.</p>
     </section>
 
     <section class="container">
@@ -166,6 +176,11 @@
           <div class="meta-section-title">File Info</div>
           <table class="meta-table" id="fileTable"></table>
 
+          <div class="actions" id="stripActions" style="display:none;">
+            <button type="button" class="btn btn-primary" id="stripBtn">Download Clean Copy (No Metadata)</button>
+          </div>
+          <div class="output-box" id="stripStatus" style="display:none;"></div>
+
           <div id="exifWrap" style="display:none;">
             <div class="meta-section-title">Camera / EXIF</div>
             <table class="meta-table" id="exifTable"></table>
@@ -174,6 +189,13 @@
           <div id="gpsWarning" class="gps-warning" style="display:none;"></div>
 
           <div id="noExifNote" class="output-box" style="display:none;">No EXIF data found in this image. This is normal for screenshots, PNGs, WebP files, or photos already stripped of metadata (many messaging apps do this automatically).</div>
+
+          <details class="faq-item" id="rawTagsDetails" style="display:none;">
+            <summary>View all raw EXIF tags</summary>
+            <div style="padding:0 18px 16px;">
+              <table class="meta-table" id="rawTagsTable" style="margin-top:0;"></table>
+            </div>
+          </details>
         </div>
 
         <div class="output-box" id="statusBox"></div>
@@ -184,8 +206,10 @@
         <ol class="howto-steps">
           <li>Click the upload area or drag in an image — JPGs from cameras and phones carry the most detail.</li>
           <li>The tool immediately shows basic File Info: name, type, size, dimensions, and last modified date.</li>
-          <li>If the file is a JPG with an embedded EXIF segment, a Camera / EXIF section appears with details like make, model, date taken, exposure settings, and GPS coordinates if present.</li>
-          <li>If GPS data is found, read the on-page privacy warning before sharing the original file with anyone.</li>
+          <li>If the file is a JPG with an embedded EXIF segment, a Camera / EXIF section appears with details like make, model, lens, date taken, exposure settings, and GPS coordinates if present.</li>
+          <li>If GPS data is found, read the on-page privacy warning and use the "View this location on OpenStreetMap" link to see exactly what the file reveals.</li>
+          <li>Click "Download Clean Copy (No Metadata)" to re-encode the image on a canvas and get a version verified to have zero EXIF tags, ready to share safely.</li>
+          <li>Expand "View all raw EXIF tags" to see every tag the parser found, decoded straight from the file's IFD0, Exif, and GPS blocks.</li>
         </ol>
       </div>
 
@@ -193,7 +217,7 @@
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
           <summary>Why does this tool warn me about GPS coordinates?</summary>
-          <p>Many phone cameras embed the exact latitude and longitude where a photo was taken inside its EXIF data. This tool parses that data locally and, if it finds GPS coordinates, displays a clear warning - because anyone who receives your original, un-stripped file could see precisely where the photo was taken.</p>
+          <p>Many phone cameras embed the exact latitude and longitude where a photo was taken inside its EXIF data. This tool parses that data locally and, if it finds GPS coordinates, displays a clear warning with a "View this location on OpenStreetMap" link so you can see exactly what the photo reveals - because anyone who receives your original, un-stripped file could see precisely where it was taken.</p>
         </details>
         <details class="faq-item">
           <summary>Why don't PNG or WebP files show any EXIF data?</summary>
@@ -209,7 +233,15 @@
         </details>
         <details class="faq-item">
           <summary>What camera details can this tool show, beyond GPS?</summary>
-          <p>When present in the file, it displays camera make and model, date taken, exposure time, aperture (f-number), ISO, focal length, image orientation, and the software used to process the image - everything the tool can extract from the standard EXIF and GPS IFD tags.</p>
+          <p>When present in the file, it displays camera make and model, lens model, date taken, exposure time, aperture (f-number), ISO, focal length, exposure program, metering mode, flash status, white balance, image orientation, GPS altitude, and the software used to process the image - everything the tool can extract from the standard EXIF and GPS IFD tags.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I remove GPS and EXIF data before sharing a photo?</summary>
+          <p>Yes. Click "Download Clean Copy (No Metadata)" and the tool redraws your image onto an HTML canvas and re-encodes it - canvas re-encoding produces a brand-new image file containing only pixel data, with no EXIF segment at all, since the browser's encoder never copies the original file's metadata bytes. Before offering the download, the tool re-parses the new file with the same EXIF parser used above to confirm zero tags remain, and the whole process happens locally in your browser.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I see the raw, unformatted EXIF tags?</summary>
+          <p>Yes. When EXIF data is found, an expandable "View all raw EXIF tags" section lists every tag the parser decoded from the file's IFD0, Exif, and GPS blocks - including less common fields not shown in the main table above - each labeled with its tag number and name.</p>
         </details>
       </div>
 
@@ -293,8 +325,38 @@
     var gpsWarning = document.getElementById("gpsWarning");
     var noExifNote = document.getElementById("noExifNote");
     var statusBox = document.getElementById("statusBox");
+    var stripActions = document.getElementById("stripActions");
+    var stripBtn = document.getElementById("stripBtn");
+    var stripStatus = document.getElementById("stripStatus");
+    var rawTagsDetails = document.getElementById("rawTagsDetails");
+    var rawTagsTable = document.getElementById("rawTagsTable");
+
+    var currentFile = null;
+    var currentImg = null;
 
     var TYPE_SIZES = { 1: 1, 2: 1, 3: 2, 4: 4, 5: 8, 7: 1, 9: 4, 10: 8 };
+
+    var IFD0_TAG_NAMES = {
+      0x010f: "Make", 0x0110: "Model", 0x0112: "Orientation", 0x011a: "XResolution",
+      0x011b: "YResolution", 0x0128: "ResolutionUnit", 0x0131: "Software", 0x0132: "DateTime",
+      0x013b: "Artist", 0x8298: "Copyright"
+    };
+    var EXIF_TAG_NAMES = {
+      0x829a: "ExposureTime", 0x829d: "FNumber", 0x8822: "ExposureProgram", 0x8827: "ISOSpeedRatings",
+      0x9000: "ExifVersion", 0x9003: "DateTimeOriginal", 0x9004: "DateTimeDigitized",
+      0x9101: "ComponentsConfiguration", 0x9201: "ShutterSpeedValue", 0x9202: "ApertureValue",
+      0x9204: "ExposureBiasValue", 0x9205: "MaxApertureValue", 0x9207: "MeteringMode",
+      0x9209: "Flash", 0x920a: "FocalLength", 0x927c: "MakerNote", 0x9286: "UserComment",
+      0xa000: "FlashpixVersion", 0xa001: "ColorSpace", 0xa002: "PixelXDimension",
+      0xa003: "PixelYDimension", 0xa402: "ExposureMode", 0xa403: "WhiteBalance",
+      0xa406: "SceneCaptureType", 0xa432: "LensSpecification", 0xa433: "LensMake", 0xa434: "LensModel"
+    };
+    var GPS_TAG_NAMES = {
+      0x0000: "GPSVersionID", 0x0001: "GPSLatitudeRef", 0x0002: "GPSLatitude",
+      0x0003: "GPSLongitudeRef", 0x0004: "GPSLongitude", 0x0005: "GPSAltitudeRef",
+      0x0006: "GPSAltitude", 0x0007: "GPSTimeStamp", 0x000d: "GPSSpeed",
+      0x0010: "GPSImgDirection", 0x001d: "GPSDateStamp"
+    };
 
     function parseExif(buffer) {
       var view = new DataView(buffer);
@@ -332,6 +394,30 @@
           var str = "";
           for (var i = 0; i < count - 1; i++) str += String.fromCharCode(view.getUint8(dataOffset + i));
           return str.trim();
+        }
+        if (type === 1) {
+          if (count === 1) return view.getUint8(dataOffset);
+          var arrB = [];
+          for (var bb = 0; bb < count; bb++) arrB.push(view.getUint8(dataOffset + bb));
+          return arrB;
+        }
+        if (type === 7) {
+          if (count > 64) return "<binary data, " + count + " bytes>";
+          var bytes7 = [];
+          for (var q = 0; q < count; q++) bytes7.push(view.getUint8(dataOffset + q));
+          var printable7 = true;
+          for (var r = 0; r < bytes7.length; r++) {
+            var bv = bytes7[r];
+            if (bv !== 0 && (bv < 32 || bv > 126)) { printable7 = false; break; }
+          }
+          if (printable7) {
+            var s7 = "";
+            for (var s = 0; s < bytes7.length; s++) { if (bytes7[s] !== 0) s7 += String.fromCharCode(bytes7[s]); }
+            return s7.trim();
+          }
+          var hex7 = [];
+          for (var u = 0; u < bytes7.length; u++) { var hh = bytes7[u].toString(16); if (hh.length < 2) hh = "0" + hh; hex7.push(hh); }
+          return hex7.join(" ");
         }
         if (type === 3) {
           if (count === 1) return view.getUint16(dataOffset, little);
@@ -393,6 +479,11 @@
           result.fNumber = exifIFD[0x829d];
           result.iso = exifIFD[0x8827];
           result.focalLength = exifIFD[0x920a];
+          result.lensModel = exifIFD[0xa434];
+          result.flash = exifIFD[0x9209];
+          result.whiteBalance = exifIFD[0xa403];
+          result.exposureProgram = exifIFD[0x8822];
+          result.meteringMode = exifIFD[0x9207];
         } catch (e) {}
       }
 
@@ -411,8 +502,18 @@
             result.gpsLat = latDeg;
             result.gpsLon = lonDeg;
           }
+          if (typeof gpsIFD[0x0006] === "number") {
+            result.gpsAltitude = gpsIFD[0x0006];
+            result.gpsAltitudeRef = gpsIFD[0x0005];
+          }
         } catch (e) {}
       }
+
+      result.raw = {
+        ifd0: ifd0,
+        exif: ifd0[0x8769] ? exifIFD : null,
+        gps: ifd0[0x8825] ? gpsIFD : null
+      };
 
       return result;
     }
@@ -435,6 +536,62 @@
       7: "Rotated 270° CW + flipped", 8: "Rotated 270° CW"
     };
 
+    var WHITE_BALANCE_LABELS = { 0: "Auto", 1: "Manual" };
+    var EXPOSURE_PROGRAM_LABELS = {
+      0: "Not defined", 1: "Manual", 2: "Program AE", 3: "Aperture priority",
+      4: "Shutter priority", 5: "Creative program", 6: "Action program",
+      7: "Portrait mode", 8: "Landscape mode"
+    };
+    var METERING_MODE_LABELS = {
+      0: "Unknown", 1: "Average", 2: "Center-weighted average", 3: "Spot",
+      4: "Multi-spot", 5: "Pattern", 6: "Partial", 255: "Other"
+    };
+
+    function decodeFlash(v) {
+      if (typeof v !== "number") return null;
+      if (v & 0x20) return "No flash function";
+      return (v & 0x1) ? "Flash fired" : "Flash did not fire";
+    }
+
+    function hexTag(tagId) {
+      var h = tagId.toString(16);
+      while (h.length < 4) h = "0" + h;
+      return "0x" + h;
+    }
+
+    function formatRawValue(v) {
+      if (v === null || v === undefined) return null;
+      if (Array.isArray(v)) return v.map(formatRawValue).join(", ");
+      if (typeof v === "number") return (Math.round(v * 10000) / 10000).toString();
+      return String(v);
+    }
+
+    function addRawGroup(entries, tagNames, groupLabel) {
+      var added = false;
+      if (!entries) return added;
+      Object.keys(entries).forEach(function (key) {
+        var tagId = parseInt(key, 10);
+        if (tagId === 0x8769 || tagId === 0x8825) return; // sub-IFD pointers, not data
+        var val = formatRawValue(entries[key]);
+        if (val === null || val === "") return;
+        var name = tagNames[tagId] || "Unknown tag";
+        addRow(rawTagsTable, groupLabel + " " + hexTag(tagId) + " " + name, val);
+        added = true;
+      });
+      return added;
+    }
+
+    function buildRawTagsTable(exif) {
+      rawTagsTable.innerHTML = "";
+      var any = false;
+      if (exif.raw) {
+        if (addRawGroup(exif.raw.ifd0, IFD0_TAG_NAMES, "IFD0")) any = true;
+        if (addRawGroup(exif.raw.exif, EXIF_TAG_NAMES, "Exif")) any = true;
+        if (addRawGroup(exif.raw.gps, GPS_TAG_NAMES, "GPS")) any = true;
+      }
+      rawTagsDetails.style.display = any ? "block" : "none";
+    }
+
     function handleFiles(files) {
       var file = files[0];
       if (!file || file.type.indexOf("image/") !== 0) {
@@ -448,6 +605,14 @@
       exifWrap.style.display = "none";
       gpsWarning.style.display = "none";
       noExifNote.style.display = "none";
+      rawTagsTable.innerHTML = "";
+      rawTagsDetails.style.display = "none";
+      rawTagsDetails.open = false;
+      stripActions.style.display = "none";
+      stripStatus.style.display = "none";
+      stripStatus.textContent = "";
+      currentFile = file;
+      currentImg = null;
 
       var img = new Image();
       var objectUrl = URL.createObjectURL(file);
@@ -457,6 +622,8 @@
         addRow(fileTable, "File size", Fixora.formatBytes(file.size));
         addRow(fileTable, "Dimensions", img.naturalWidth + " × " + img.naturalHeight + "px");
         addRow(fileTable, "Last modified", file.lastModified ? new Date(file.lastModified).toLocaleString() : "Unknown");
+        currentImg = img;
+        stripActions.style.display = "flex";
         URL.revokeObjectURL(objectUrl);
       };
       img.src = objectUrl;
@@ -476,20 +643,33 @@
           var hasAnyExif = false;
           if (exif.make) { addRow(exifTable, "Camera Make", exif.make); hasAnyExif = true; }
           if (exif.model) { addRow(exifTable, "Camera Model", exif.model); hasAnyExif = true; }
+          if (exif.lensModel) { addRow(exifTable, "Lens Model", exif.lensModel); hasAnyExif = true; }
           if (exif.dateTimeOriginal || exif.dateTime) { addRow(exifTable, "Date Taken", exif.dateTimeOriginal || exif.dateTime); hasAnyExif = true; }
           if (exif.exposureTime) { addRow(exifTable, "Exposure Time", (exif.exposureTime < 1 ? "1/" + Math.round(1 / exif.exposureTime) : exif.exposureTime) + " s"); hasAnyExif = true; }
           if (exif.fNumber) { addRow(exifTable, "Aperture", "f/" + exif.fNumber.toFixed(1)); hasAnyExif = true; }
           if (exif.iso) { addRow(exifTable, "ISO", exif.iso); hasAnyExif = true; }
           if (exif.focalLength) { addRow(exifTable, "Focal Length", exif.focalLength.toFixed(1) + " mm"); hasAnyExif = true; }
+          if (typeof exif.exposureProgram === "number") { addRow(exifTable, "Exposure Program", EXPOSURE_PROGRAM_LABELS[exif.exposureProgram] || exif.exposureProgram); hasAnyExif = true; }
+          if (typeof exif.meteringMode === "number") { addRow(exifTable, "Metering Mode", METERING_MODE_LABELS[exif.meteringMode] || exif.meteringMode); hasAnyExif = true; }
+          if (typeof exif.flash === "number" && decodeFlash(exif.flash)) { addRow(exifTable, "Flash", decodeFlash(exif.flash)); hasAnyExif = true; }
+          if (typeof exif.whiteBalance === "number") { addRow(exifTable, "White Balance", WHITE_BALANCE_LABELS[exif.whiteBalance] || exif.whiteBalance); hasAnyExif = true; }
           if (exif.orientation) { addRow(exifTable, "Orientation", ORIENTATION_LABELS[exif.orientation] || exif.orientation); hasAnyExif = true; }
           if (exif.software) { addRow(exifTable, "Software", exif.software); hasAnyExif = true; }
 
           if (typeof exif.gpsLat === "number" && typeof exif.gpsLon === "number") {
             addRow(exifTable, "GPS Location", exif.gpsLat.toFixed(6) + ", " + exif.gpsLon.toFixed(6));
             hasAnyExif = true;
+            if (typeof exif.gpsAltitude === "number") {
+              addRow(exifTable, "GPS Altitude", Math.abs(exif.gpsAltitude).toFixed(1) + " m " + (exif.gpsAltitudeRef === 1 ? "below sea level" : "above sea level"));
+            }
+            var latStr = exif.gpsLat.toFixed(6);
+            var lonStr = exif.gpsLon.toFixed(6);
+            var mapUrl = "https://www.openstreetmap.org/?mlat=" + latStr + "&mlon=" + lonStr + "#map=15/" + latStr + "/" + lonStr;
             gpsWarning.style.display = "block";
-            gpsWarning.innerHTML = "⚠️ <strong>This photo contains GPS coordinates.</strong> Anyone who gets the original file could see exactly where it was taken. Most social platforms strip this automatically on upload, but direct file shares (email, messaging apps, cloud drives) often don't.";
+            gpsWarning.innerHTML = "⚠️ <strong>This photo contains GPS coordinates.</strong> Anyone who gets the original file could see exactly where it was taken. Most social platforms strip this automatically on upload, but direct file shares (email, messaging apps, cloud drives) often don't.<br><br><a href=\"" + mapUrl + "\" target=\"_blank\" rel=\"noopener\">View this location on OpenStreetMap →</a>";
           }
+
+          buildRawTagsTable(exif);
 
           if (hasAnyExif) {
             exifWrap.style.display = "block";
@@ -507,6 +687,66 @@
       };
       reader.readAsArrayBuffer(file);
     }
+
+    function extForMime(mime) {
+      if (mime === "image/png") return "png";
+      if (mime === "image/webp") return "webp";
+      return "jpg";
+    }
+
+    stripBtn.addEventListener("click", function () {
+      if (!currentImg || !currentFile) return;
+      stripStatus.style.display = "block";
+      stripStatus.textContent = "Re-encoding…";
+
+      var canvas = document.createElement("canvas");
+      canvas.width = currentImg.naturalWidth;
+      canvas.height = currentImg.naturalHeight;
+      var ctx = canvas.getContext("2d");
+      var mime = currentFile.type === "image/png" ? "image/png" : currentFile.type === "image/webp" ? "image/webp" : "image/jpeg";
+      if (mime === "image/jpeg") {
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+      ctx.drawImage(currentImg, 0, 0);
+
+      canvas.toBlob(function (blob) {
+        if (!blob) {
+          stripStatus.textContent = "Couldn't re-encode this image.";
+          return;
+        }
+
+        var ext = extForMime(mime);
+        var baseName = currentFile.name.replace(/\.[^.]+$/, "") || "image";
+        var cleanName = baseName + "-clean." + ext;
+
+        var verifyReader = new FileReader();
+        verifyReader.onload = function (ve) {
+          var stillHasTags = false;
+          try {
+            var checkExif = parseExif(ve.target.result);
+            if (checkExif) {
+              stillHasTags = Object.keys(checkExif).some(function (k) {
+                if (k === "raw") return false;
+                var v = checkExif[k];
+                return v !== null && v !== undefined && v !== "";
+              });
+            }
+          } catch (err) {
+            stillHasTags = false;
+          }
+          Fixora.downloadBlob(blob, cleanName);
+          stripStatus.textContent = stillHasTags
+            ? "Downloaded " + cleanName + " — warning: some data may remain, please double-check."
+            : "Downloaded " + cleanName + " — verified clean, no EXIF data remains.";
+        };
+        verifyReader.onerror = function () {
+          Fixora.downloadBlob(blob, cleanName);
+          stripStatus.textContent = "Downloaded " + cleanName + ".";
+        };
+        verifyReader.readAsArrayBuffer(blob);
+      }, mime, 0.92);
+    });
 
     Fixora.setupDropzone(dropzone, fileInput, handleFiles);
     dropzone.addEventListener("keydown", function (e) {
