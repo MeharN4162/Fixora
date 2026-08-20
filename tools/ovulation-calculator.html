@@ -242,8 +242,24 @@
     .ov-cycle-table tbody tr:last-child td {
       border-bottom: none;
     }
-    .ov-cycle-table tbody tr:hover {
+    .ov-cycle-table tbody tr:nth-child(even) {
       background: var(--color-bg-soft);
+    }
+    .ov-cycle-table tbody tr.ov-current-row {
+      background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+    }
+    .ov-cycle-table tbody tr:hover {
+      background: color-mix(in srgb, var(--color-primary) 14%, transparent);
+    }
+    .ov-date-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--gradient-primary);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.82rem;
     }
   </style>
 </head>
@@ -572,10 +588,10 @@
         var cycleNextPeriod = addDays(lmp, (i + 1) * cycle);
         var label = i === 0 ? "Cycle 1 (current)" : "Cycle " + (i + 1);
 
-        rows += "<tr>";
+        rows += "<tr" + (i === 0 ? " class=\"ov-current-row\"" : "") + ">";
         rows += "<td>" + label + "</td>";
         rows += "<td>" + formatDateShort(cycleFertileStart) + " – " + formatDateShort(cycleOvulation) + "</td>";
-        rows += "<td>" + formatDateShort(cycleOvulation) + "</td>";
+        rows += "<td><span class=\"ov-date-badge\">" + formatDateShort(cycleOvulation) + "</span></td>";
         rows += "<td>" + formatDateShort(cycleNextPeriod) + "</td>";
         rows += "</tr>";
       }
