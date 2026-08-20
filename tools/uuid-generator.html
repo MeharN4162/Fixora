@@ -5,22 +5,22 @@
   <meta charset="UTF-8" />
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Free UUID / GUID Generator Online | Fixoona</title>
-  <meta name="description" content="Generate random UUID v4 / GUID values online for free, right in your browser. Generate 1 to 100 at once, with lowercase/UPPERCASE, hyphens, no-hyphens, or braces {} formats. No sign-up." />
-  <meta name="keywords" content="uuid generator, guid generator online free, random uuid v4, bulk uuid generator" />
+  <title>Free UUID / GUID Generator (v1, v4, v7) Online | Fixoona</title>
+  <meta name="description" content="Generate free UUID / GUID values online — version 1 (time-based), version 4 (random), version 7 (time-ordered), plus the Nil and Max UUIDs — right in your browser. Batch-generate 1 to 100 at once, in lowercase/UPPERCASE, with/without hyphens, or braces {} formats, then copy as a plain list, array, or SQL. Includes a UUID validator. No sign-up." />
+  <meta name="keywords" content="uuid generator, guid generator online free, random uuid v4, uuid v7 generator, uuid v1 generator, bulk uuid generator, uuid validator" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/uuid-generator" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixoona" />
-  <meta property="og:title" content="Free UUID / GUID Generator Online" />
-  <meta property="og:description" content="Generate random UUID v4 / GUID values online for free, right in your browser." />
+  <meta property="og:title" content="Free UUID / GUID Generator (v1, v4, v7) Online" />
+  <meta property="og:description" content="Generate UUID v1, v4, and v7 values, plus the Nil and Max UUIDs, free in your browser. Batch generate, copy as list/array/SQL, and validate existing UUIDs." />
   <meta property="og:url" content="https://fixoona.com/tools/uuid-generator" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Free UUID / GUID Generator Online" />
-  <meta name="twitter:description" content="Generate random UUID v4 / GUID values online for free, right in your browser." />
+  <meta name="twitter:title" content="Free UUID / GUID Generator (v1, v4, v7) Online" />
+  <meta name="twitter:description" content="Generate UUID v1, v4, and v7 values, plus the Nil and Max UUIDs, free in your browser. Batch generate, copy as list/array/SQL, and validate existing UUIDs." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='23' width='15' height='54' rx='7.5' fill='white'/%3E%3Crect x='30' y='23' width='42' height='14' rx='7' fill='white'/%3E%3Crect x='30' y='46' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -58,13 +58,13 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "What version of UUID does this generate?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Version 4 — a randomly generated UUID as defined by RFC 4122, where the version and variant bits are set rather than derived from a MAC address or timestamp like version 1, so each ID is effectively random rather than sequential or traceable to your machine." }
+        "name": "What UUID versions does this tool support?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Four options: version 1 (time-based, using the current timestamp plus a randomly generated node identifier since browsers don't expose a MAC address), version 4 (fully random, the most common choice), version 7 (time-ordered — sorts chronologically like version 1 but uses a Unix millisecond timestamp per RFC 9562, which makes it a good primary key for databases), and the two special constants, the Nil UUID (all zeros) and the Max UUID (all ones)." }
       },
       {
         "@type": "Question",
         "name": "How is the randomness actually generated?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The tool first tries crypto.randomUUID(), a built-in browser method for generating RFC-compliant v4 UUIDs. If that isn't available, it falls back to manually building one from 16 random bytes pulled from crypto.getRandomValues() and setting the version and variant bits by hand." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Version 4 UUIDs are generated with the browser's built-in crypto.randomUUID() when available, falling back to 16 random bytes from crypto.getRandomValues() with the version and variant bits set by hand. Versions 1 and 7 always build their bytes manually from crypto.getRandomValues() output combined with the current timestamp, since they aren't plain random UUIDs." }
       },
       {
         "@type": "Question",
@@ -74,12 +74,32 @@
       {
         "@type": "Question",
         "name": "Can two generated UUIDs collide?",
-        "acceptedAnswer": { "@type": "Answer", "text": "In practice, no. With 122 random bits in a v4 UUID, the probability of ever generating a duplicate is astronomically small, which is why UUIDs are widely used as unique identifiers for database rows and API resources without checking for collisions." }
+        "acceptedAnswer": { "@type": "Answer", "text": "In practice, no. A version 4 UUID has 122 random bits, so the odds of a duplicate are astronomically small. Version 1 and version 7 UUIDs add a timestamp on top of dozens of random bits, so two generated at the exact same moment would still need to also match on every random bit to collide — equally implausible. This is why UUIDs are trusted as unique identifiers without checking for collisions." }
       },
       {
         "@type": "Question",
         "name": "Is there a limit to how many UUIDs I can generate at once?",
         "acceptedAnswer": { "@type": "Answer", "text": "Yes — the count field accepts 1 to 100 per click; entering a higher number is automatically capped at 100." }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the Nil and Max UUIDs?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The Nil UUID (00000000-0000-0000-0000-000000000000) and Max UUID (ffffffff-ffff-ffff-ffff-ffffffffffff) are two reserved constants defined by the UUID specification, representing the lowest and highest possible 128-bit values. They're sometimes used as sentinel values in code — for example to mean 'no ID assigned' — rather than as everyday random identifiers, so selecting either of them from the version dropdown always returns the same constant instead of a new random value." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does version 1 get a node ID without my MAC address?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Real version 1 UUIDs are meant to embed the generating computer's network card address, but browsers don't expose that for privacy reasons. Instead, this tool generates a random 48-bit node ID and sets its multicast bit, exactly as RFC 4122 recommends when a real hardware address isn't available — so the result is a valid, spec-compliant version 1 UUID that simply can't be traced back to a physical device." }
+      },
+      {
+        "@type": "Question",
+        "name": "What copy formats are available for a batch of UUIDs?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Besides copying one UUID at a time, 'Copy All' can output the whole batch as a plain list (one per line), a comma-separated line, a JSON/JavaScript array literal like [\"...\", \"...\"], or a SQL VALUES clause ready to paste into an INSERT statement. Pick the format from the 'Copy format' dropdown before clicking Copy All." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I check whether a UUID I already have is valid?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — paste it into the 'Validate a UUID' box and click Check. The tool accepts UUIDs with or without hyphens or braces, tells you whether the format is valid, reports its version number (or that it doesn't have a recognized RFC 4122 version), and shows its variant bits, so you can confirm an ID from another system is actually a well-formed UUID." }
       }
     ]
   }
@@ -139,7 +159,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🆔</div>
       <h1>UUID / GUID Generator</h1>
-      <p>Generate 1 to 100 random version-4 UUIDs at once, using your browser's cryptographically secure random generator — with lowercase/UPPERCASE, hyphens, no-hyphens, or braces {…} formats.</p>
+      <p>Generate 1 to 100 UUIDs at once — version 1 (time-based), version 4 (random), version 7 (time-ordered), or the special Nil/Max UUIDs — using your browser's cryptographically secure random generator. Choose lowercase/UPPERCASE, hyphens, no-hyphens, or braces {…} formats, then copy as a plain list, array, or SQL values.</p>
     </section>
 
     <section class="container">
@@ -148,6 +168,16 @@
           <div class="field">
             <label for="countInput">How many?</label>
             <input type="number" id="countInput" value="5" min="1" max="100" />
+          </div>
+          <div class="field">
+            <label for="versionSelect">UUID version</label>
+            <select id="versionSelect">
+              <option value="v4" selected>Version 4 (Random)</option>
+              <option value="v1">Version 1 (Time-based)</option>
+              <option value="v7">Version 7 (Time-ordered)</option>
+              <option value="nil">Nil UUID (all zeros)</option>
+              <option value="max">Max UUID (all ones)</option>
+            </select>
           </div>
           <div class="field">
             <label for="caseSelect">Letter case</label>
@@ -164,7 +194,17 @@
               <option value="braces">Braces {…} (Windows GUID)</option>
             </select>
           </div>
+          <div class="field">
+            <label for="copyFormatSelect">Copy format (for "Copy All")</label>
+            <select id="copyFormatSelect">
+              <option value="list" selected>Plain list (one per line)</option>
+              <option value="csv">Comma-separated</option>
+              <option value="array">Array literal ["...", "..."]</option>
+              <option value="sql">SQL VALUES rows</option>
+            </select>
+          </div>
         </div>
+        <p style="font-size:0.85rem;color:var(--color-text-muted);margin-top:-8px;">Nil and Max UUIDs are fixed constants, not random values — selecting either always generates just 1, ignoring "How many?".</p>
 
         <div class="actions">
           <button class="btn btn-primary" id="generateBtn">Generate</button>
@@ -174,27 +214,39 @@
         <div class="output-box" id="statusBox"></div>
 
         <div class="uuid-list" id="uuidList"></div>
+
+        <h3 style="margin:28px 0 14px;">Validate a UUID</h3>
+        <div class="field">
+          <label for="validateInput">Paste a UUID to check</label>
+          <input type="text" id="validateInput" placeholder="e.g. 550e8400-e29b-41d4-a716-446655440000" />
+        </div>
+        <div class="actions">
+          <button class="btn btn-primary" id="validateBtn" type="button">Check</button>
+        </div>
+        <div class="output-box" id="validatorBox"></div>
       </div>
 
       <div class="howto">
         <h2>How to Generate UUIDs</h2>
         <ol class="howto-steps">
           <li>Enter how many UUIDs you want (1 to 100) in the "How many?" field.</li>
-          <li>Choose lowercase or UPPERCASE letters, and a format (with hyphens, no hyphens, or wrapped in braces for Windows-style GUIDs), from the two dropdowns.</li>
+          <li>Pick a UUID version: 1 (time-based), 4 (random, default), 7 (time-ordered), or the fixed Nil/Max constants.</li>
+          <li>Choose lowercase or UPPERCASE letters, and a format (with hyphens, no hyphens, or wrapped in braces for Windows-style GUIDs).</li>
           <li>Click "Generate" to produce the list.</li>
-          <li>Copy one UUID with its row's "Copy" button, or click "Copy All" to copy the whole list at once, one per line.</li>
+          <li>Copy one UUID with its row's "Copy" button, or pick a "Copy format" and click "Copy All" to copy the whole batch as a list, CSV, array, or SQL VALUES rows.</li>
+          <li>To check a UUID you already have, paste it into "Validate a UUID" and click "Check" to see its version and variant.</li>
         </ol>
       </div>
 
       <div class="faq">
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
-          <summary>What version of UUID does this generate?</summary>
-          <p>Version 4 — a randomly generated UUID as defined by RFC 4122, where the version and variant bits are set rather than derived from a MAC address or timestamp like version 1, so each ID is effectively random rather than sequential or traceable to your machine.</p>
+          <summary>What UUID versions does this tool support?</summary>
+          <p>Four options: version 1 (time-based, using the current timestamp plus a randomly generated node identifier since browsers don't expose a MAC address), version 4 (fully random, the most common choice), version 7 (time-ordered — sorts chronologically like version 1 but uses a Unix millisecond timestamp per RFC 9562, which makes it a good primary key for databases), and the two special constants, the Nil UUID (all zeros) and the Max UUID (all ones).</p>
         </details>
         <details class="faq-item">
           <summary>How is the randomness actually generated?</summary>
-          <p>The tool first tries crypto.randomUUID(), a built-in browser method for generating RFC-compliant v4 UUIDs. If that isn't available, it falls back to manually building one from 16 random bytes pulled from crypto.getRandomValues() and setting the version and variant bits by hand.</p>
+          <p>Version 4 UUIDs are generated with the browser's built-in crypto.randomUUID() when available, falling back to 16 random bytes from crypto.getRandomValues() with the version and variant bits set by hand. Versions 1 and 7 always build their bytes manually from crypto.getRandomValues() output combined with the current timestamp, since they aren't plain random UUIDs.</p>
         </details>
         <details class="faq-item">
           <summary>What do the letter case and format options change?</summary>
@@ -202,11 +254,27 @@
         </details>
         <details class="faq-item">
           <summary>Can two generated UUIDs collide?</summary>
-          <p>In practice, no. With 122 random bits in a v4 UUID, the probability of ever generating a duplicate is astronomically small, which is why UUIDs are widely used as unique identifiers for database rows and API resources without checking for collisions.</p>
+          <p>In practice, no. A version 4 UUID has 122 random bits, so the odds of a duplicate are astronomically small. Version 1 and version 7 UUIDs add a timestamp on top of dozens of random bits, so two generated at the exact same moment would still need to also match on every random bit to collide — equally implausible. This is why UUIDs are trusted as unique identifiers without checking for collisions.</p>
         </details>
         <details class="faq-item">
           <summary>Is there a limit to how many UUIDs I can generate at once?</summary>
           <p>Yes — the count field accepts 1 to 100 per click; entering a higher number is automatically capped at 100.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What are the Nil and Max UUIDs?</summary>
+          <p>The Nil UUID (00000000-0000-0000-0000-000000000000) and Max UUID (ffffffff-ffff-ffff-ffff-ffffffffffff) are two reserved constants defined by the UUID specification, representing the lowest and highest possible 128-bit values. They're sometimes used as sentinel values in code — for example to mean 'no ID assigned' — rather than as everyday random identifiers, so selecting either of them from the version dropdown always returns the same constant instead of a new random value.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does version 1 get a node ID without my MAC address?</summary>
+          <p>Real version 1 UUIDs are meant to embed the generating computer's network card address, but browsers don't expose that for privacy reasons. Instead, this tool generates a random 48-bit node ID and sets its multicast bit, exactly as RFC 4122 recommends when a real hardware address isn't available — so the result is a valid, spec-compliant version 1 UUID that simply can't be traced back to a physical device.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What copy formats are available for a batch of UUIDs?</summary>
+          <p>Besides copying one UUID at a time, 'Copy All' can output the whole batch as a plain list (one per line), a comma-separated line, a JSON/JavaScript array literal like ["...", "..."], or a SQL VALUES clause ready to paste into an INSERT statement. Pick the format from the 'Copy format' dropdown before clicking Copy All.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I check whether a UUID I already have is valid?</summary>
+          <p>Yes — paste it into the 'Validate a UUID' box and click Check. The tool accepts UUIDs with or without hyphens or braces, tells you whether the format is valid, reports its version number (or that it doesn't have a recognized RFC 4122 version), and shows its variant bits, so you can confirm an ID from another system is actually a well-formed UUID.</p>
         </details>
       </div>
 
@@ -282,21 +350,18 @@
   <script src="../assets/js/main.js"></script>
   <script>
     var countInput = document.getElementById("countInput");
+    var versionSelect = document.getElementById("versionSelect");
     var caseSelect = document.getElementById("caseSelect");
     var hyphensSelect = document.getElementById("hyphensSelect");
+    var copyFormatSelect = document.getElementById("copyFormatSelect");
     var statusBox = document.getElementById("statusBox");
     var uuidList = document.getElementById("uuidList");
+    var validateInput = document.getElementById("validateInput");
+    var validatorBox = document.getElementById("validatorBox");
 
     var lastUuids = [];
 
-    function generateUuidV4() {
-      if (window.crypto && crypto.randomUUID) {
-        return crypto.randomUUID();
-      }
-      var bytes = new Uint8Array(16);
-      crypto.getRandomValues(bytes);
-      bytes[6] = (bytes[6] & 0x0f) | 0x40;
-      bytes[8] = (bytes[8] & 0x3f) | 0x80;
+    function bytesToUuidString(bytes) {
       var hex = [];
       for (var i = 0; i < 16; i++) hex.push(bytes[i].toString(16).padStart(2, "0"));
       return hex[0] + hex[1] + hex[2] + hex[3] + "-" +
@@ -304,6 +369,101 @@
         hex[6] + hex[7] + "-" +
         hex[8] + hex[9] + "-" +
         hex[10] + hex[11] + hex[12] + hex[13] + hex[14] + hex[15];
+    }
+
+    // Version 4: fully random, per RFC 4122 section 4.4.
+    function generateUuidV4() {
+      if (window.crypto && crypto.randomUUID) {
+        return crypto.randomUUID();
+      }
+      var bytes = new Uint8Array(16);
+      crypto.getRandomValues(bytes);
+      bytes[6] = (bytes[6] & 0x0f) | 0x40; // version nibble = 0100
+      bytes[8] = (bytes[8] & 0x3f) | 0x80; // variant bits = 10
+      return bytesToUuidString(bytes);
+    }
+
+    // Version 7: time-ordered, per RFC 9562 section 5.7.
+    // Layout: 48-bit unix_ts_ms | 4-bit version (0111) | 12-bit rand_a | 2-bit variant (10) | 62-bit rand_b.
+    function generateUuidV7() {
+      var ts = BigInt(Date.now());
+      var r = new Uint8Array(10);
+      crypto.getRandomValues(r);
+      var bytes = new Uint8Array(16);
+      bytes[0] = Number((ts >> 40n) & 0xffn);
+      bytes[1] = Number((ts >> 32n) & 0xffn);
+      bytes[2] = Number((ts >> 24n) & 0xffn);
+      bytes[3] = Number((ts >> 16n) & 0xffn);
+      bytes[4] = Number((ts >> 8n) & 0xffn);
+      bytes[5] = Number(ts & 0xffn);
+      bytes[6] = 0x70 | (r[0] & 0x0f); // version nibble = 0111 + top 4 bits of rand_a
+      bytes[7] = r[1];                 // remaining 8 bits of rand_a (12 bits total)
+      bytes[8] = 0x80 | (r[2] & 0x3f); // variant bits = 10 + top 6 bits of rand_b
+      bytes[9] = r[3];
+      bytes[10] = r[4];
+      bytes[11] = r[5];
+      bytes[12] = r[6];
+      bytes[13] = r[7];
+      bytes[14] = r[8];
+      bytes[15] = r[9];
+      return bytesToUuidString(bytes);
+    }
+
+    // Version 1: time-based, per RFC 4122 section 4.2. Browsers don't expose a
+    // MAC address, so the 48-bit node ID is generated randomly with its
+    // multicast bit set — the exact fallback RFC 4122 section 4.5 describes
+    // for systems without a real IEEE 802 address.
+    var GREGORIAN_OFFSET_MS = 12219292800000; // ms between 1582-10-15 and 1970-01-01
+    function generateUuidV1() {
+      var msTime = Date.now() + GREGORIAN_OFFSET_MS;
+      var fracBytes = new Uint8Array(2);
+      crypto.getRandomValues(fracBytes);
+      // JS clocks only have ms resolution; fill the 100ns sub-field randomly
+      // rather than always zero, so successive calls within the same ms differ.
+      var frac = ((fracBytes[0] << 8) | fracBytes[1]) % 10000;
+      var ts = BigInt(msTime) * 10000n + BigInt(frac);
+
+      var timeLow = ts & 0xffffffffn;
+      var timeMid = (ts >> 32n) & 0xffffn;
+      var timeHiAndVersion = ((ts >> 48n) & 0x0fffn) | 0x1000n; // version nibble = 0001
+
+      var csBytes = new Uint8Array(2);
+      crypto.getRandomValues(csBytes);
+      var clockSeq = ((csBytes[0] << 8) | csBytes[1]) & 0x3fff; // 14 random bits
+      var clockSeqHiAndReserved = ((clockSeq >> 8) & 0x3f) | 0x80; // variant bits = 10
+      var clockSeqLow = clockSeq & 0xff;
+
+      var node = new Uint8Array(6);
+      crypto.getRandomValues(node);
+      node[0] |= 0x01; // multicast bit set = randomly generated node, per RFC 4122 4.5
+
+      function hx(n, len) { return n.toString(16).padStart(len, "0"); }
+      var nodeHex = "";
+      for (var i = 0; i < 6; i++) nodeHex += hx(node[i], 2);
+
+      return hx(Number(timeLow), 8) + "-" +
+        hx(Number(timeMid), 4) + "-" +
+        hx(Number(timeHiAndVersion), 4) + "-" +
+        hx(clockSeqHiAndReserved, 2) + hx(clockSeqLow, 2) + "-" +
+        nodeHex;
+    }
+
+    var NIL_UUID = "00000000-0000-0000-0000-000000000000";
+    var MAX_UUID = "ffffffff-ffff-ffff-ffff-ffffffffffff";
+
+    function generateUuidByVersion(version) {
+      if (version === "v1") return generateUuidV1();
+      if (version === "v7") return generateUuidV7();
+      if (version === "nil") return NIL_UUID;
+      if (version === "max") return MAX_UUID;
+      return generateUuidV4();
+    }
+
+    function formatForCopyAll(list, format) {
+      if (format === "csv") return list.join(", ");
+      if (format === "array") return "[" + list.map(function (u) { return "\"" + u + "\""; }).join(", ") + "]";
+      if (format === "sql") return list.map(function (u) { return "  ('" + u + "')"; }).join(",\n") + ";";
+      return list.join("\n");
     }
 
     document.getElementById("generateBtn").addEventListener("click", function () {
@@ -314,9 +474,13 @@
       }
       count = Math.min(count, 100);
 
+      var version = versionSelect.value;
+      var isConstant = version === "nil" || version === "max";
+      if (isConstant) count = 1;
+
       var results = [];
       for (var i = 0; i < count; i++) {
-        var uuid = generateUuidV4();
+        var uuid = generateUuidByVersion(version);
         if (hyphensSelect.value === "nohyphens") uuid = uuid.replace(/-/g, "");
         else if (hyphensSelect.value === "braces") uuid = "{" + uuid + "}";
         if (caseSelect.value === "upper") uuid = uuid.toUpperCase();
@@ -340,7 +504,9 @@
         uuidList.appendChild(row);
       });
 
-      statusBox.textContent = "Generated " + count + " UUID(s).";
+      statusBox.textContent = isConstant
+        ? "Generated the " + (version === "nil" ? "Nil" : "Max") + " UUID (a fixed constant)."
+        : "Generated " + count + " UUID(s).";
     });
 
     document.getElementById("copyAllBtn").addEventListener("click", function () {
@@ -348,7 +514,56 @@
         statusBox.textContent = "Generate some UUIDs first.";
         return;
       }
-      Fixora.copyText(lastUuids.join("\n"));
+      Fixora.copyText(formatForCopyAll(lastUuids, copyFormatSelect.value));
+    });
+
+    // --- Validator ---
+    function normalizeForValidation(input) {
+      var s = input.trim();
+      if (s.indexOf("urn:uuid:") === 0) s = s.slice(9);
+      if (s.charAt(0) === "{" && s.charAt(s.length - 1) === "}") s = s.slice(1, -1);
+      return s;
+    }
+
+    var VERSION_LABELS = {
+      "0": "0 (unassigned)",
+      "1": "1 (time-based)",
+      "2": "2 (DCE security)",
+      "3": "3 (name-based, MD5)",
+      "4": "4 (random)",
+      "5": "5 (name-based, SHA-1)",
+      "6": "6 (reordered time-based)",
+      "7": "7 (time-ordered)",
+      "8": "8 (custom / vendor-specific)"
+    };
+
+    document.getElementById("validateBtn").addEventListener("click", function () {
+      var s = normalizeForValidation(validateInput.value || "");
+      var hyphenated = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+      var plain = /^[0-9a-f]{32}$/i;
+
+      if (!s || (!hyphenated.test(s) && !plain.test(s))) {
+        validatorBox.textContent = "Not a valid UUID format. Expected 32 hex characters, optionally grouped as 8-4-4-4-12 with hyphens (surrounding braces and a urn:uuid: prefix are stripped automatically).";
+        return;
+      }
+
+      var hex = s.replace(/-/g, "").toLowerCase();
+      var versionNibble = hex.charAt(12);
+      var variantValue = parseInt(hex.charAt(16), 16);
+
+      var versionLabel = VERSION_LABELS[versionNibble] || ("unrecognized (" + versionNibble + ")");
+
+      var variantLabel;
+      if (variantValue >= 8 && variantValue <= 11) variantLabel = "10xx — RFC 4122 / RFC 9562 (standard)";
+      else if (variantValue >= 12 && variantValue <= 13) variantLabel = "110x — Microsoft (legacy, reserved)";
+      else if (variantValue >= 14 && variantValue <= 15) variantLabel = "111x — reserved for future use";
+      else variantLabel = "0xxx — NCS (legacy, reserved)";
+
+      var special = "";
+      if (/^0+$/.test(hex)) special = " This is the special Nil UUID.";
+      else if (/^f+$/.test(hex)) special = " This is the special Max UUID.";
+
+      validatorBox.innerHTML = "Valid UUID format.<br>Version: " + versionLabel + "<br>Variant: " + variantLabel + "." + special;
     });
 
     document.getElementById("generateBtn").click();
