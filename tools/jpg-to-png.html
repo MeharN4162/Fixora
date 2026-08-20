@@ -6,8 +6,8 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free JPG to PNG Converter Online | Fixoona</title>
-  <meta name="description" content="Convert JPG images to PNG format online for free, right in your browser. Fast, private, no uploads, no sign-up required." />
-  <meta name="keywords" content="jpg to png, convert jpg to png online free, image converter" />
+  <meta name="description" content="Convert JPG images to PNG format online for free, right in your browser — batch-convert multiple files at once. Fast, private, no uploads, no sign-up required." />
+  <meta name="keywords" content="jpg to png, convert jpg to png online free, image converter, batch jpg to png" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/jpg-to-png" />
 
@@ -79,7 +79,7 @@
       {
         "@type": "Question",
         "name": "Can I convert multiple JPGs at once?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Not currently - this tool handles one image at a time. Upload a new JPG to replace the current preview and start another conversion." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes - select or drag multiple JPG files and each one is converted, listed with its own before/after file size and a separate Download button per file." }
       }
     ]
   }
@@ -123,24 +123,28 @@
 
     <section class="container">
       <div class="tool-panel">
-        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload a JPG image">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload one or more JPG images">
           <div class="dz-icon" aria-hidden="true">🖼️</div>
-          <strong>Click to upload or drag a JPG here</strong>
+          <strong>Click to upload or drag JPG file(s) here</strong>
           <small>JPG / JPEG files only</small>
-          <input type="file" id="fileInput" accept="image/jpeg" hidden />
+          <input type="file" id="fileInput" accept="image/jpeg" multiple hidden />
         </div>
 
-        <img id="previewImg" class="preview-img" style="display:none;" alt="Preview of uploaded JPG image" />
+        <div id="singleResult">
+          <img id="previewImg" class="preview-img" style="display:none;" alt="Preview of uploaded JPG image" />
 
-        <div class="stat-row" id="fileInfo" style="display:none;">
-          <div class="stat"><strong id="statOriginal">–</strong><span>JPG Size</span></div>
-          <div class="stat"><strong id="statNew">–</strong><span>PNG Size</span></div>
-          <div class="stat"><strong id="statDims">–</strong><span>Dimensions</span></div>
+          <div class="stat-row" id="fileInfo" style="display:none;">
+            <div class="stat"><strong id="statOriginal">–</strong><span>JPG Size</span></div>
+            <div class="stat"><strong id="statNew">–</strong><span>PNG Size</span></div>
+            <div class="stat"><strong id="statDims">–</strong><span>Dimensions</span></div>
+          </div>
+
+          <div class="actions">
+            <a class="btn btn-primary" id="downloadBtn" style="display:none;" download="converted.png">Download PNG</a>
+          </div>
         </div>
 
-        <div class="actions">
-          <a class="btn btn-primary" id="downloadBtn" style="display:none;" download="converted.png">Download PNG</a>
-        </div>
+        <div id="batchResults" style="display:none;margin-top:16px;flex-direction:column;gap:10px;"></div>
 
         <div class="output-box" id="statusBox"></div>
       </div>
@@ -175,7 +179,7 @@
         </details>
         <details class="faq-item">
           <summary>Can I convert multiple JPGs at once?</summary>
-          <p>Not currently - this tool handles one image at a time. Upload a new JPG to replace the current preview and start another conversion.</p>
+          <p>Yes - select or drag multiple JPG files and each one is converted, listed with its own before/after file size and a separate Download button per file.</p>
         </details>
       </div>
 
@@ -256,15 +260,12 @@
     var downloadBtn = document.getElementById("downloadBtn");
     var statusBox = document.getElementById("statusBox");
     var fileInfo = document.getElementById("fileInfo");
+    var singleResult = document.getElementById("singleResult");
+    var batchResults = document.getElementById("batchResults");
 
-    function handleFiles(files) {
-      var file = files[0];
-      if (!file || !/image\/jpe?g/.test(file.type)) {
-        statusBox.textContent = "Please choose a JPG/JPEG image.";
-        return;
-      }
+    var lastObjectUrls = [];
 
-      statusBox.textContent = "Converting…";
+    function convertOne(file, callback) {
       var reader = new FileReader();
       reader.onload = function (e) {
         var img = new Image();
@@ -274,27 +275,76 @@
           canvas.height = img.naturalHeight;
           var ctx = canvas.getContext("2d");
           ctx.drawImage(img, 0, 0);
-
           canvas.toBlob(function (blob) {
-            var url = URL.createObjectURL(blob);
-            previewImg.src = url;
-            previewImg.style.display = "block";
-
-            downloadBtn.href = url;
-            downloadBtn.download = file.name.replace(/\.jpe?g$/i, "") + ".png";
-            downloadBtn.style.display = "inline-flex";
-
-            fileInfo.style.display = "flex";
-            document.getElementById("statOriginal").textContent = Fixora.formatBytes(file.size);
-            document.getElementById("statNew").textContent = Fixora.formatBytes(blob.size);
-            document.getElementById("statDims").textContent = canvas.width + " × " + canvas.height;
-
-            statusBox.textContent = "Done! Your PNG is ready to download.";
+            callback(blob, canvas.width, canvas.height);
           }, "image/png");
         };
         img.src = e.target.result;
       };
       reader.readAsDataURL(file);
+    }
+
+    function handleFiles(files) {
+      var jpgFiles = Array.prototype.filter.call(files, function (f) { return /image\/jpe?g/.test(f.type); });
+      if (!jpgFiles.length) {
+        statusBox.textContent = "Please choose one or more JPG/JPEG images.";
+        return;
+      }
+
+      lastObjectUrls.forEach(function (u) { URL.revokeObjectURL(u); });
+      lastObjectUrls = [];
+
+      if (jpgFiles.length === 1) {
+        batchResults.style.display = "none";
+        singleResult.style.display = "block";
+        statusBox.textContent = "Converting…";
+
+        var file = jpgFiles[0];
+        convertOne(file, function (blob, w, h) {
+          var url = URL.createObjectURL(blob);
+          lastObjectUrls.push(url);
+          previewImg.src = url;
+          previewImg.style.display = "block";
+
+          downloadBtn.href = url;
+          downloadBtn.download = file.name.replace(/\.jpe?g$/i, "") + ".png";
+          downloadBtn.style.display = "inline-flex";
+
+          fileInfo.style.display = "flex";
+          document.getElementById("statOriginal").textContent = Fixora.formatBytes(file.size);
+          document.getElementById("statNew").textContent = Fixora.formatBytes(blob.size);
+          document.getElementById("statDims").textContent = w + " × " + h;
+
+          statusBox.textContent = "Done! Your PNG is ready to download.";
+        });
+      } else {
+        singleResult.style.display = "none";
+        batchResults.style.display = "flex";
+        batchResults.innerHTML = "";
+        statusBox.textContent = "Converting " + jpgFiles.length + " files…";
+
+        var doneCount = 0;
+        jpgFiles.forEach(function (file) {
+          convertOne(file, function (blob, w, h) {
+            var url = URL.createObjectURL(blob);
+            lastObjectUrls.push(url);
+
+            var row = document.createElement("div");
+            row.className = "row";
+            row.style.alignItems = "center";
+            row.innerHTML =
+              '<div style="flex:1;font-size:0.9rem;">' + file.name.replace(/\.jpe?g$/i, "") + '.png' +
+              '<div style="font-size:0.78rem;color:var(--color-text-muted);">' + Fixora.formatBytes(file.size) + ' → ' + Fixora.formatBytes(blob.size) + ' · ' + w + '×' + h + '</div></div>' +
+              '<a class="btn btn-secondary" href="' + url + '" download="' + file.name.replace(/\.jpe?g$/i, "") + '.png">Download</a>';
+            batchResults.appendChild(row);
+
+            doneCount++;
+            if (doneCount === jpgFiles.length) {
+              statusBox.textContent = "Done! All " + jpgFiles.length + " files converted — download each one above.";
+            }
+          });
+        });
+      }
     }
 
     Fixora.setupDropzone(dropzone, fileInput, handleFiles);
