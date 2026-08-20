@@ -6,7 +6,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free PDF OCR Online — Extract Text from Scanned PDFs | Fixoona</title>
-  <meta name="description" content="Extract text from a scanned or image-based PDF online for free using OCR, right in your browser. No uploads, no sign-up." />
+  <meta name="description" content="Extract text from a scanned or image-based PDF online for free using OCR, right in your browser — choose specific pages or the whole document, track live recognition progress, and see a confidence score. No uploads, no sign-up." />
   <meta name="keywords" content="pdf ocr, extract text from scanned pdf online free, ocr pdf" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/pdf-ocr" />
@@ -14,13 +14,13 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixoona" />
   <meta property="og:title" content="Free PDF OCR Online" />
-  <meta property="og:description" content="Extract text from a scanned PDF online for free using OCR, right in your browser." />
+  <meta property="og:description" content="Extract text from a scanned PDF online for free using OCR, right in your browser, with page selection and a live progress bar." />
   <meta property="og:url" content="https://fixoona.com/tools/pdf-ocr" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free PDF OCR Online" />
-  <meta name="twitter:description" content="Extract text from a scanned PDF online for free using OCR." />
+  <meta name="twitter:description" content="Extract text from a scanned PDF online for free using OCR, with page selection and live progress." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='23' width='15' height='54' rx='7.5' fill='white'/%3E%3Crect x='30' y='23' width='42' height='14' rx='7' fill='white'/%3E%3Crect x='30' y='46' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -28,6 +28,45 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <style>
+    .ocr-progress {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .ocr-progress-track {
+      flex: 1;
+      height: 8px;
+      background: var(--color-bg-soft);
+      border: 1px solid var(--color-border);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .ocr-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--color-primary);
+      border-radius: 999px;
+      transition: width 0.2s ease;
+    }
+    .ocr-progress-label {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      min-width: 40px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .confidence-note {
+      margin-top: 12px;
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+    }
+    .confidence-note strong {
+      color: var(--color-text);
+    }
+  </style>
 
   <script type="application/ld+json">
   {
@@ -80,6 +119,21 @@
         "@type": "Question",
         "name": "Is my file uploaded anywhere?",
         "acceptedAnswer": { "@type": "Answer", "text": "No — page rendering and OCR recognition both run entirely inside your browser. Your PDF is never uploaded to a server." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I run OCR on just some pages instead of the whole PDF?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — use the Pages field to enter specific page numbers and ranges, like \"1-3, 5, 8-10\", and only those pages are rendered and scanned. Leave it blank to run OCR on every page, and use Re-Run OCR to apply a new page range without re-uploading the file." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the tool show progress while OCR is running?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — a progress bar tracks Tesseract.js's real recognition progress for the page currently being scanned, combined with how many pages are left, so you can see how far along the whole job is instead of just guessing from the status text." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it show how confident it is in the extracted text?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — Tesseract.js reports a confidence score from 0-100% for each page, and once OCR finishes the tool shows the average confidence across all processed pages, giving a rough sense of how reliable the result is overall." }
       }
     ]
   }
@@ -130,12 +184,30 @@
           <input type="file" id="fileInput" accept="application/pdf" hidden />
         </div>
 
+        <div class="row" id="optionsRow" style="display:none;">
+          <div class="field">
+            <label for="pageRangeInput">Pages (e.g. 1-3, 5, 8-10 — blank for all)</label>
+            <input type="text" id="pageRangeInput" placeholder="All pages" />
+          </div>
+        </div>
+
+        <div class="actions" id="reRunActions" style="display:none;">
+          <button class="btn btn-secondary" id="reRunBtn">Re-Run OCR</button>
+        </div>
+
+        <div class="ocr-progress" id="ocrProgress" style="display:none;">
+          <div class="ocr-progress-track"><div class="ocr-progress-fill" id="ocrProgressFill"></div></div>
+          <span class="ocr-progress-label" id="ocrProgressLabel">0%</span>
+        </div>
+
         <div class="output-box" id="statusBox"></div>
 
         <div class="field" id="resultField" style="display:none;margin-top:16px;">
           <label for="resultText">Extracted text</label>
           <textarea id="resultText" readonly style="min-height:280px;"></textarea>
         </div>
+
+        <div class="confidence-note" id="confidenceNote" style="display:none;"></div>
 
         <div class="actions" id="resultActions" style="display:none;">
           <button class="btn btn-secondary" id="copyBtn">Copy Text</button>
@@ -149,8 +221,9 @@
         <ol class="howto-steps">
           <li>Click the upload area and choose your scanned or image-based PDF.</li>
           <li>The first run downloads the OCR engine's language data (about 11MB) — this is cached, so later runs start immediately.</li>
-          <li>Each page is rendered as an image and scanned for text, with progress shown per page.</li>
-          <li>Copy the extracted text or download it as a .txt file once it's done.</li>
+          <li>Optionally enter a page range like "1-3, 5" in the Pages field and click "Re-Run OCR" to scan only those pages — leave it blank to scan the whole document.</li>
+          <li>Each page is rendered as an image and scanned for text, with a live progress bar tracking recognition as it happens.</li>
+          <li>Review the extracted text and its confidence score, then copy it or download it as a .txt file once it's done.</li>
         </ol>
       </div>
 
@@ -175,6 +248,18 @@
         <details class="faq-item">
           <summary>Is my file uploaded anywhere?</summary>
           <p>No — page rendering and OCR recognition both run entirely inside your browser. Your PDF is never uploaded to a server.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I run OCR on just some pages instead of the whole PDF?</summary>
+          <p>Yes — use the Pages field to enter specific page numbers and ranges, like "1-3, 5, 8-10", and only those pages are rendered and scanned. Leave it blank to run OCR on every page, and use Re-Run OCR to apply a new page range without re-uploading the file.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does the tool show progress while OCR is running?</summary>
+          <p>Yes — a progress bar tracks Tesseract.js's real recognition progress for the page currently being scanned, combined with how many pages are left, so you can see how far along the whole job is instead of just guessing from the status text.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does it show how confident it is in the extracted text?</summary>
+          <p>Yes — Tesseract.js reports a confidence score from 0-100% for each page, and once OCR finishes the tool shows the average confidence across all processed pages, giving a rough sense of how reliable the result is overall.</p>
         </details>
       </div>
 
@@ -261,9 +346,64 @@
     var resultActions = document.getElementById("resultActions");
     var downloadBtn = document.getElementById("downloadBtn");
     var copyNote = document.getElementById("copyNote");
+    var optionsRow = document.getElementById("optionsRow");
+    var pageRangeInput = document.getElementById("pageRangeInput");
+    var reRunActions = document.getElementById("reRunActions");
+    var reRunBtn = document.getElementById("reRunBtn");
+    var ocrProgress = document.getElementById("ocrProgress");
+    var ocrProgressFill = document.getElementById("ocrProgressFill");
+    var ocrProgressLabel = document.getElementById("ocrProgressLabel");
+    var confidenceNote = document.getElementById("confidenceNote");
 
     var worker = null;
     var lastDownloadUrl = null;
+    var currentPdf = null;
+    var currentFile = null;
+
+    // Progress bookkeeping read by the Tesseract logger below: which page
+    // (0-based) is currently being recognized, and how many pages total,
+    // so the bar reflects real cross-page progress rather than resetting
+    // to 0% at the start of every page.
+    var pageIndexForProgress = 0;
+    var totalPagesForProgress = 1;
+
+    // Parses "1-3, 5, 8-10" into a sorted, deduped array of valid page
+    // numbers clamped to [1, maxPage]. Returns null (meaning "all pages")
+    // for blank input, or throws with a message for malformed input.
+    function parsePageRange(rangeStr, maxPage) {
+      var trimmed = rangeStr.trim();
+      if (!trimmed) return null;
+
+      var pages = {};
+      var parts = trimmed.split(",");
+      for (var i = 0; i < parts.length; i++) {
+        var part = parts[i].trim();
+        if (!part) continue;
+        var m = part.match(/^(\d+)\s*-\s*(\d+)$/);
+        if (m) {
+          var start = parseInt(m[1], 10);
+          var end = parseInt(m[2], 10);
+          if (start > end) { var t = start; start = end; end = t; }
+          for (var p = start; p <= end; p++) {
+            if (p >= 1 && p <= maxPage) pages[p] = true;
+          }
+        } else if (/^\d+$/.test(part)) {
+          var n = parseInt(part, 10);
+          if (n >= 1 && n <= maxPage) pages[n] = true;
+        } else {
+          throw new Error('Could not understand "' + part + '" — use page numbers and ranges like "1-3, 5".');
+        }
+      }
+
+      var result = Object.keys(pages).map(Number).sort(function (a, b) { return a - b; });
+      if (!result.length) throw new Error("That page range doesn't match any pages in this " + maxPage + "-page PDF.");
+      return result;
+    }
+
+    function setProgress(pct) {
+      ocrProgressFill.style.width = pct + "%";
+      ocrProgressLabel.textContent = pct + "%";
+    }
 
     async function getWorker() {
       if (worker) return worker;
@@ -272,7 +412,13 @@
         workerPath: "../assets/js/vendor/tesseract/worker.min.js",
         corePath: "../assets/js/vendor/tesseract/tesseract-core-simd.wasm.js",
         langPath: "../assets/js/vendor/tesseract/",
-        gzip: true
+        gzip: true,
+        logger: function (m) {
+          if (m.status === "recognizing text" && typeof m.progress === "number") {
+            var overall = ((pageIndexForProgress + m.progress) / totalPagesForProgress) * 100;
+            setProgress(Math.round(overall));
+          }
+        }
       });
       return worker;
     }
@@ -283,7 +429,9 @@
         statusBox.textContent = "Please choose a valid PDF file.";
         return;
       }
-      run(file);
+      currentFile = file;
+      pageRangeInput.value = "";
+      loadAndRun(file);
     }
 
     Fixora.setupDropzone(dropzone, fileInput, handleFiles);
@@ -291,22 +439,61 @@
       if (e.key === "Enter" || e.key === " ") fileInput.click();
     });
 
-    async function run(file) {
+    async function loadAndRun(file) {
       resultField.style.display = "none";
       resultActions.style.display = "none";
       downloadBtn.style.display = "none";
+      confidenceNote.style.display = "none";
+      optionsRow.style.display = "none";
+      reRunActions.style.display = "none";
+      ocrProgress.style.display = "none";
       if (lastDownloadUrl) { URL.revokeObjectURL(lastDownloadUrl); lastDownloadUrl = null; }
 
       try {
         statusBox.textContent = "Reading PDF…";
         var arrayBuffer = await file.arrayBuffer();
-        var pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        currentPdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        optionsRow.style.display = "flex";
+        reRunActions.style.display = "flex";
+        await run();
+      } catch (err) {
+        console.error(err);
+        statusBox.textContent = "Something went wrong reading that PDF. Please try a different file.";
+      }
+    }
+
+    async function run() {
+      if (!currentPdf || !currentFile) return;
+
+      var pageList;
+      try {
+        pageList = parsePageRange(pageRangeInput.value, currentPdf.numPages);
+      } catch (err) {
+        statusBox.textContent = err.message;
+        return;
+      }
+      var pagesToRead = pageList || Array.from({ length: currentPdf.numPages }, function (_, i) { return i + 1; });
+
+      resultField.style.display = "none";
+      resultActions.style.display = "none";
+      downloadBtn.style.display = "none";
+      confidenceNote.style.display = "none";
+      if (lastDownloadUrl) { URL.revokeObjectURL(lastDownloadUrl); lastDownloadUrl = null; }
+
+      try {
         var w = await getWorker();
 
-        var pageTexts = [];
-        for (var i = 1; i <= pdf.numPages; i++) {
-          statusBox.textContent = "Rendering page " + i + " of " + pdf.numPages + "…";
-          var page = await pdf.getPage(i);
+        var pageResults = [];
+        var confidences = [];
+        totalPagesForProgress = pagesToRead.length;
+        ocrProgress.style.display = "flex";
+        setProgress(0);
+
+        for (var idx = 0; idx < pagesToRead.length; idx++) {
+          var pageNum = pagesToRead[idx];
+          pageIndexForProgress = idx;
+          statusBox.textContent = "Rendering page " + pageNum + " (" + (idx + 1) + " of " + pagesToRead.length + ")…";
+          var page = await currentPdf.getPage(pageNum);
           var viewport = page.getViewport({ scale: 2.5 });
 
           var canvas = document.createElement("canvas");
@@ -317,35 +504,51 @@
           ctx.fillRect(0, 0, canvas.width, canvas.height);
           await page.render({ canvasContext: ctx, viewport: viewport }).promise;
 
-          statusBox.textContent = "Running OCR on page " + i + " of " + pdf.numPages + "…";
+          statusBox.textContent = "Running OCR on page " + pageNum + " (" + (idx + 1) + " of " + pagesToRead.length + ")…";
           var result = await w.recognize(canvas);
-          pageTexts.push(result.data.text.trim());
+          pageResults.push({ num: pageNum, text: result.data.text.trim() });
+          if (typeof result.data.confidence === "number") confidences.push(result.data.confidence);
 
           canvas.width = 0;
           canvas.height = 0;
         }
 
-        var fullText = pageTexts.map(function (t, idx) {
-          return "--- Page " + (idx + 1) + " ---\n" + (t || "(no text detected)");
+        var fullText = pageResults.map(function (p) {
+          return "--- Page " + p.num + " ---\n" + (p.text || "(no text detected)");
         }).join("\n\n");
 
         resultText.value = fullText;
         resultField.style.display = "block";
         resultActions.style.display = "flex";
+        setProgress(100);
 
         var blob = new Blob([fullText], { type: "text/plain" });
         var url = URL.createObjectURL(blob);
         lastDownloadUrl = url;
         downloadBtn.href = url;
-        downloadBtn.download = file.name.replace(/\.pdf$/i, "") + "-ocr.txt";
+        downloadBtn.download = currentFile.name.replace(/\.pdf$/i, "") + "-ocr.txt";
         downloadBtn.style.display = "inline-flex";
 
-        statusBox.textContent = "Done! Ran OCR on " + pdf.numPages + " page(s).";
+        var pageLabel = pageList ? pagesToRead.length + " selected page(s)" : pagesToRead.length + " page(s)";
+        statusBox.textContent = "Done! Ran OCR on " + pageLabel + ".";
+
+        if (confidences.length) {
+          var avgConfidence = confidences.reduce(function (a, b) { return a + b; }, 0) / confidences.length;
+          confidenceNote.innerHTML = "Average confidence score: <strong>" + Math.round(avgConfidence) + "%</strong> across " + confidences.length + " page(s) — how certain the OCR engine is about the recognized text overall.";
+          confidenceNote.style.display = "block";
+        }
       } catch (err) {
         console.error(err);
-        statusBox.textContent = "Something went wrong reading that PDF. Please try a different file.";
+        statusBox.textContent = "Something went wrong running OCR on that PDF. Please try a different file.";
+        ocrProgress.style.display = "none";
       }
     }
+
+    reRunBtn.addEventListener("click", run);
+
+    document.getElementById("copyBtn").addEventListener("click", function () {
+      Fixora.copyText(resultText.value, copyNote);
+    });
   </script>
 </body>
 </html>
