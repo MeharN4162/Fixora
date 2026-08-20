@@ -6,7 +6,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Passport Photo Maker Online — Crop to Size | Fixoona</title>
-  <meta name="description" content="Crop and resize your photo to standard passport and visa photo dimensions online for free, right in your browser. US, UK/EU, and India presets. No uploads." />
+  <meta name="description" content="Crop and resize your photo to standard passport and visa photo dimensions online for free, right in your browser. US, UK/EU, India, Canada, and China presets, plus a 4x6 print-sheet download. No uploads." />
   <meta name="keywords" content="passport photo maker, passport photo size online free, visa photo cropper, passport photo tool" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/passport-photo-maker" />
@@ -64,7 +64,7 @@
       {
         "@type": "Question",
         "name": "What size presets are available?",
-        "acceptedAnswer": { "@type": "Answer", "text": "US Passport/Visa at 2×2 inches (51×51mm), exported as 600×600px; UK/EU Passport at 35×45mm, exported as 413×531px; and India Passport/Visa at 2×2 inches, exported as 600×600px. All three are generated at 300 DPI." }
+        "acceptedAnswer": { "@type": "Answer", "text": "US Passport/Visa at 2×2 inches (51×51mm), exported as 600×600px; UK/EU Passport at 35×45mm, exported as 413×531px; India Passport/Visa at 2×2 inches, exported as 600×600px; Canada Passport at 50×70mm, exported as 591×827px; and China Visa at 33×48mm, exported as 390×567px. All are generated at 300 DPI." }
       },
       {
         "@type": "Question",
@@ -80,6 +80,11 @@
         "@type": "Question",
         "name": "Is my photo uploaded anywhere to process it?",
         "acceptedAnswer": { "@type": "Answer", "text": "No. Everything happens locally on the Canvas API in your browser tab - your photo is never sent to a server." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does \"Download 4×6\" Print Sheet\" do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It generates a single 4×6 inch image (1200×1800px at 300 DPI) tiled with as many full-size copies of your cropped photo as physically fit at your chosen preset's exact dimensions, so you can print multiple copies cheaply at a standard photo kiosk instead of paying for individual prints." }
       }
     ]
   }
@@ -205,6 +210,8 @@
             <option value="us" selected>US Passport / Visa (2×2 in, 51×51mm) — 600×600px</option>
             <option value="uk">UK/EU Passport (35×45mm) — 413×531px</option>
             <option value="india">India Passport/Visa (2×2 in) — 600×600px</option>
+            <option value="canada">Canada Passport (50×70mm) — 591×827px</option>
+            <option value="china">China Visa (33×48mm) — 390×567px</option>
           </select>
         </div>
 
@@ -230,6 +237,7 @@
 
         <div class="actions">
           <button class="btn btn-primary" id="downloadBtn" disabled>Download Photo</button>
+          <button class="btn btn-secondary" id="downloadSheetBtn" disabled>Download 4×6" Print Sheet</button>
         </div>
 
         <div class="output-box" id="statusBox"></div>
@@ -253,7 +261,7 @@
         </details>
         <details class="faq-item">
           <summary>What size presets are available?</summary>
-          <p>US Passport/Visa at 2×2 inches (51×51mm), exported as 600×600px; UK/EU Passport at 35×45mm, exported as 413×531px; and India Passport/Visa at 2×2 inches, exported as 600×600px. All three are generated at 300 DPI.</p>
+          <p>US Passport/Visa at 2×2 inches (51×51mm), exported as 600×600px; UK/EU Passport at 35×45mm, exported as 413×531px; India Passport/Visa at 2×2 inches, exported as 600×600px; Canada Passport at 50×70mm, exported as 591×827px; and China Visa at 33×48mm, exported as 390×567px. All are generated at 300 DPI.</p>
         </details>
         <details class="faq-item">
           <summary>How do I position my face correctly in the crop box?</summary>
@@ -266,6 +274,10 @@
         <details class="faq-item">
           <summary>Is my photo uploaded anywhere to process it?</summary>
           <p>No. Everything happens locally on the Canvas API in your browser tab - your photo is never sent to a server.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does "Download 4×6" Print Sheet" do?</summary>
+          <p>It generates a single 4×6 inch image (1200×1800px at 300 DPI) tiled with as many full-size copies of your cropped photo as physically fit at your chosen preset's exact dimensions, so you can print multiple copies cheaply at a standard photo kiosk instead of paying for individual prints.</p>
         </details>
       </div>
 
@@ -354,15 +366,18 @@
     var cropImg = document.getElementById("cropImg");
     var cropBox = document.getElementById("cropBox");
     var downloadBtn = document.getElementById("downloadBtn");
+    var downloadSheetBtn = document.getElementById("downloadSheetBtn");
     var statusBox = document.getElementById("statusBox");
     var previewCanvas = document.getElementById("previewCanvas");
     var previewMeta = document.getElementById("previewMeta");
     var previewCtx = previewCanvas.getContext("2d");
 
     var PRESETS = {
-      us:    { w: 600, h: 600, label: "US Passport / Visa" },
-      uk:    { w: 413, h: 531, label: "UK/EU Passport" },
-      india: { w: 600, h: 600, label: "India Passport/Visa" }
+      us:     { w: 600, h: 600, label: "US Passport / Visa" },
+      uk:     { w: 413, h: 531, label: "UK/EU Passport" },
+      india:  { w: 600, h: 600, label: "India Passport/Visa" },
+      canada: { w: 591, h: 827, label: "Canada Passport" },
+      china:  { w: 390, h: 567, label: "China Visa" }
     };
 
     var naturalImg = null;
@@ -394,6 +409,7 @@
           presetField.style.display = "block";
           ppLayout.style.display = "grid";
           downloadBtn.disabled = false;
+          downloadSheetBtn.disabled = false;
 
           requestAnimationFrame(function () {
             var stageW = cropStage.clientWidth;
@@ -537,6 +553,51 @@
       canvas.toBlob(function (blob) {
         Fixora.downloadBlob(blob, "passport-photo-" + p.w + "x" + p.h + ".jpg");
         statusBox.textContent = "Done! Downloaded at exactly " + p.w + " × " + p.h + "px (" + Fixora.formatBytes(blob.size) + ").";
+      }, "image/jpeg", 0.92);
+    });
+
+    downloadSheetBtn.addEventListener("click", function () {
+      if (!naturalImg) return;
+      var p = currentPreset();
+
+      var scaleX = naturalImg.naturalWidth / cropImg.clientWidth;
+      var scaleY = naturalImg.naturalHeight / cropImg.clientHeight;
+      var sx = box.x * scaleX;
+      var sy = box.y * scaleY;
+      var sw = box.w * scaleX;
+      var sh = box.h * scaleY;
+
+      // 4x6in sheet at 300 DPI, packed with as many full-size copies of the
+      // selected preset as actually fit given a small margin/gap.
+      var sheetW = 1200, sheetH = 1800;
+      var margin = 15, gap = 10;
+      var cols = Math.max(1, Math.floor((sheetW - 2 * margin + gap) / (p.w + gap)));
+      var rows = Math.max(1, Math.floor((sheetH - 2 * margin + gap) / (p.h + gap)));
+      var count = cols * rows;
+
+      var canvas = document.createElement("canvas");
+      canvas.width = sheetW;
+      canvas.height = sheetH;
+      var ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      var gridW = cols * p.w + (cols - 1) * gap;
+      var gridH = rows * p.h + (rows - 1) * gap;
+      var startX = (sheetW - gridW) / 2;
+      var startY = (sheetH - gridH) / 2;
+
+      for (var r = 0; r < rows; r++) {
+        for (var c = 0; c < cols; c++) {
+          var dx = startX + c * (p.w + gap);
+          var dy = startY + r * (p.h + gap);
+          ctx.drawImage(naturalImg, sx, sy, sw, sh, dx, dy, p.w, p.h);
+        }
+      }
+
+      canvas.toBlob(function (blob) {
+        Fixora.downloadBlob(blob, "passport-photo-sheet-4x6.jpg");
+        statusBox.textContent = "Done! Downloaded a 4×6\" sheet with " + count + " " + (count === 1 ? "copy" : "copies") + " at " + p.w + "×" + p.h + "px each (" + Fixora.formatBytes(blob.size) + ").";
       }, "image/jpeg", 0.92);
     });
   </script>
