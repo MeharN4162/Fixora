@@ -69,7 +69,7 @@
       {
         "@type": "Question",
         "name": "Can I sign more than one page?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes — use the page selector to switch to a different page, place your signature there, then save. Each save applies your current signature and position to the currently selected page." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — signatures accumulate into the same document as you go. Place and add your signature on one page, switch to another page with the page selector, place and add it again, and so on; a note under the page selector shows whether the currently viewed page already has a signature applied. \"Download Signed PDF\" always downloads the current state with every signature you've added so far, not just the most recent one." }
       },
       {
         "@type": "Question",
@@ -170,6 +170,7 @@
             <div class="field" id="pageSelectWrap" style="display:none;max-width:200px;margin-bottom:12px;">
               <label for="pageSelect">Page</label>
               <select id="pageSelect"></select>
+              <p id="pageSignedNote" style="font-size:0.8rem;color:var(--color-success);margin-top:4px;display:none;">✓ This page already has a signature applied</p>
             </div>
             <p style="font-size:0.85rem;color:var(--color-text-muted);margin-bottom:8px;">Click anywhere on the page to place your signature.</p>
             <div class="page-preview-stage" id="pageStage">
@@ -202,9 +203,9 @@
             </div>
 
             <div class="actions">
-              <button class="btn btn-primary" id="saveBtn" type="button" disabled>Add Signature & Save PDF</button>
+              <button class="btn btn-primary" id="saveBtn" type="button" disabled>Add Signature to This Page</button>
             </div>
-            <a class="btn btn-secondary" id="downloadBtn" style="display:none;margin-top:10px;">Download Signed PDF</a>
+            <a class="btn btn-secondary" id="downloadBtn" style="display:none;margin-top:10px;">Download Signed PDF (<span id="signedCount">0</span> page<span id="signedCountPlural">s</span> signed)</a>
           </div>
         </div>
 
@@ -217,7 +218,8 @@
           <li>Upload your PDF — if it has multiple pages, pick which one to sign.</li>
           <li>Draw your signature with your mouse or finger, or switch to Upload Image to use a photo of your real signature.</li>
           <li>Click anywhere on the page preview to place it, then use the size slider to adjust.</li>
-          <li>Click Add Signature & Save PDF and download the result.</li>
+          <li>Click "Add Signature to This Page" — to sign additional pages, switch pages with the selector and repeat, since signatures accumulate into the same document.</li>
+          <li>Click "Download Signed PDF" to save the result with every signature you've added.</li>
         </ol>
       </div>
 
@@ -233,7 +235,7 @@
         </details>
         <details class="faq-item">
           <summary>Can I sign more than one page?</summary>
-          <p>Yes — use the page selector to switch to a different page, place your signature there, then save. Each save applies your current signature and position to the currently selected page.</p>
+          <p>Yes — signatures accumulate into the same document as you go. Place and add your signature on one page, switch to another page with the page selector, place and add it again, and so on; a note under the page selector shows whether the currently viewed page already has a signature applied. "Download Signed PDF" always downloads the current state with every signature you've added so far, not just the most recent one.</p>
         </details>
         <details class="faq-item">
           <summary>Should I draw my signature or upload an image of it?</summary>
@@ -343,12 +345,24 @@
 
     var currentFile = null;
     var pdfDocPdfjs = null;
+    var pdfDocLib = null; // accumulating PDFLib document — signatures persist across pages
     var currentPageNum = 1;
     var totalPages = 1;
     var sigMode = "draw";
     var uploadedSigDataUrl = null;
     var placement = null; // { xFrac, yFrac } relative to displayed image
     var lastDownloadUrl = null;
+    var signedPages = {}; // pageNum -> true, tracks which pages already have a signature this session
+    var pageSignedNote = document.getElementById("pageSignedNote");
+    var signedCountEl = document.getElementById("signedCount");
+    var signedCountPluralEl = document.getElementById("signedCountPlural");
+
+    function updateSignedIndicators() {
+      pageSignedNote.style.display = signedPages[currentPageNum] ? "block" : "none";
+      var count = Object.keys(signedPages).length;
+      signedCountEl.textContent = count;
+      signedCountPluralEl.textContent = count === 1 ? "" : "s";
+    }
 
     var sigCtx = sigPad.getContext("2d");
     function resizeSigPad() {
@@ -465,6 +479,7 @@
       placement = null;
       sigMarker.style.display = "none";
       saveBtn.disabled = true;
+      updateSignedIndicators();
     }
 
     function handleFiles(files) {
@@ -476,11 +491,22 @@
       currentFile = file;
       statusBox.textContent = "Loading PDF…";
 
+      signedPages = {};
+
+      var fileBuf1, fileBuf2;
       file.arrayBuffer().then(function (buf) {
-        return pdfjsLib.getDocument({ data: buf }).promise;
-      }).then(function (pdf) {
-        pdfDocPdfjs = pdf;
-        totalPages = pdf.numPages;
+        fileBuf1 = buf;
+        return file.arrayBuffer();
+      }).then(function (buf) {
+        fileBuf2 = buf;
+        return Promise.all([
+          pdfjsLib.getDocument({ data: fileBuf1 }).promise,
+          PDFLib.PDFDocument.load(fileBuf2)
+        ]);
+      }).then(function (results) {
+        pdfDocPdfjs = results[0];
+        pdfDocLib = results[1];
+        totalPages = pdfDocPdfjs.numPages;
         currentPageNum = 1;
 
         pageSelect.innerHTML = "";
@@ -540,15 +566,13 @@
       }
 
       saveBtn.disabled = true;
-      statusBox.textContent = "Saving…";
+      statusBox.textContent = "Applying signature…";
 
       try {
         var sigBytes = await (await fetch(sigDataUrl)).arrayBuffer();
-        var pdfBytes = await currentFile.arrayBuffer();
-        var doc = await PDFLib.PDFDocument.load(pdfBytes);
-        var sigImage = await doc.embedPng(sigBytes);
+        var sigImage = await pdfDocLib.embedPng(sigBytes);
 
-        var pages = doc.getPages();
+        var pages = pdfDocLib.getPages();
         var targetPage = pages[currentPageNum - 1];
         var pageSize = targetPage.getSize();
 
@@ -561,7 +585,10 @@
 
         targetPage.drawImage(sigImage, { x: xPt, y: yPt, width: wPt, height: hPt });
 
-        var outBytes = await doc.save();
+        signedPages[currentPageNum] = true;
+        updateSignedIndicators();
+
+        var outBytes = await pdfDocLib.save();
         var blob = new Blob([outBytes], { type: "application/pdf" });
         var url = URL.createObjectURL(blob);
         if (lastDownloadUrl) URL.revokeObjectURL(lastDownloadUrl);
@@ -571,7 +598,8 @@
         downloadBtn.download = currentFile.name.replace(/\.pdf$/i, "") + "-signed.pdf";
         downloadBtn.style.display = "inline-flex";
 
-        statusBox.textContent = "Done! Signature added to page " + currentPageNum + ".";
+        var pageCount = Object.keys(signedPages).length;
+        statusBox.textContent = "Done! Signature added to page " + currentPageNum + " (" + pageCount + " page" + (pageCount === 1 ? "" : "s") + " signed so far). Switch pages to add more, or download now.";
       } catch (err) {
         console.error(err);
         statusBox.textContent = "Something went wrong saving the signed PDF.";
