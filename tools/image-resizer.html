@@ -6,21 +6,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Image Resizer Online — Resize Photos Instantly | Fixoona</title>
-  <meta name="description" content="Resize any image online for free, right in your browser. Set exact pixel dimensions or scale by percentage while keeping aspect ratio. No uploads, no sign-up." />
-  <meta name="keywords" content="image resizer, resize image online free, resize photo dimensions" />
+  <meta name="description" content="Resize images online for free, right in your browser. Set exact pixel dimensions or a percentage scale, batch-resize multiple images at once, use social media size presets, and export as PNG, JPEG, or WebP. No uploads, no sign-up." />
+  <meta name="keywords" content="image resizer, resize image online free, resize photo dimensions, batch image resizer, resize multiple images" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/image-resizer" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixoona" />
   <meta property="og:title" content="Free Image Resizer Online" />
-  <meta property="og:description" content="Resize any image online for free, right in your browser." />
+  <meta property="og:description" content="Resize images online for free — set exact dimensions or a percentage scale, batch-resize multiple files, and export as PNG, JPEG, or WebP." />
   <meta property="og:url" content="https://fixoona.com/tools/image-resizer" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Image Resizer Online" />
-  <meta name="twitter:description" content="Resize any image online for free, right in your browser." />
+  <meta name="twitter:description" content="Resize images online for free — set exact dimensions or a percentage scale, batch-resize multiple files, and export as PNG, JPEG, or WebP." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='23' width='15' height='54' rx='7.5' fill='white'/%3E%3Crect x='30' y='23' width='42' height='14' rx='7' fill='white'/%3E%3Crect x='30' y='46' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -68,8 +68,18 @@
       },
       {
         "@type": "Question",
-        "name": "What file format is the resized download?",
-        "acceptedAnswer": { "@type": "Answer", "text": "It matches your source file's type - resizing a JPG produces a JPG, and anything else (PNG, WebP, etc.) is exported as PNG at 92% quality for lossy formats." }
+        "name": "What do the quick preset buttons do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Each preset button (like Instagram Post 1080 × 1080 or YouTube Thumbnail 1280 × 720) instantly fills the Width and Height fields with that exact pixel size in Exact Pixels mode. You can still edit the numbers afterward, or uncheck Lock aspect ratio first if you want to type your own custom dimensions instead." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I resize multiple images at once?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes - select or drag in more than one image and the tool switches to batch mode. The same Width/Height (or Percentage), Output Format, and Quality settings are applied to every image, and each one gets its own Download button once processed, since there's no zip file involved. In Exact Pixels mode the identical width and height are applied to every file, which can stretch images whose original ratio differs from the first image loaded; Percentage Scale mode avoids this because it scales each image relative to its own original dimensions." }
+      },
+      {
+        "@type": "Question",
+        "name": "What output format will my resized image download as?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Choose from the Output Format dropdown: \"Same as source\" keeps your original file's format (JPG stays JPG, PNG stays PNG, WebP stays WebP), or you can force the output to PNG, JPEG, or WebP regardless of what you uploaded. For JPEG or WebP output, the Quality slider controls the compression level passed to the browser's encoder." }
       },
       {
         "@type": "Question",
@@ -79,7 +89,7 @@
       {
         "@type": "Question",
         "name": "Is my image uploaded to resize it?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No. The resize is performed locally with the Canvas API's drawImage() scaling - your file stays on your device throughout." }
+        "acceptedAnswer": { "@type": "Answer", "text": "No. The resize (and any format conversion) is performed locally with the Canvas API's drawImage() scaling and toBlob() encoding - your files stay on your device throughout, even in batch mode." }
       }
     ]
   }
@@ -118,19 +128,20 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">📐</div>
       <h1>Image Resizer</h1>
-      <p>Resize any image to exact pixel dimensions or a percentage scale — right in your browser.</p>
+      <p>Resize one or many images to exact pixel dimensions or a percentage scale, and export as PNG, JPEG, or WebP — right in your browser.</p>
     </section>
 
     <section class="container">
       <div class="tool-panel">
-        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload an image">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload image or images">
           <div class="dz-icon" aria-hidden="true">🖼️</div>
-          <strong>Click to upload or drag an image here</strong>
-          <small>JPG, PNG, or WebP supported</small>
-          <input type="file" id="fileInput" accept="image/*" hidden />
+          <strong>Click to upload or drag image(s) here</strong>
+          <small>JPG, PNG, or WebP — add one image, or several at once for batch resizing</small>
+          <input type="file" id="fileInput" accept="image/*" multiple hidden />
         </div>
 
         <img id="previewImg" class="preview-img" style="display:none;" alt="Preview of uploaded image" />
+        <div class="file-list" id="fileList" style="display:none;"></div>
 
         <div class="field" style="margin-top:20px;">
           <label>Resize Mode</label>
@@ -152,6 +163,20 @@
             </div>
           </div>
           <label class="check-row"><input type="checkbox" id="lockRatio" checked /> Lock aspect ratio</label>
+
+          <div class="field" style="margin-top:6px;">
+            <label>Quick Presets</label>
+            <div class="pill-row" id="presetPills">
+              <button type="button" class="pill" data-w="1080" data-h="1080">Instagram Post — 1080 × 1080</button>
+              <button type="button" class="pill" data-w="1080" data-h="1920">Instagram Story — 1080 × 1920</button>
+              <button type="button" class="pill" data-w="820" data-h="312">Facebook Cover — 820 × 312</button>
+              <button type="button" class="pill" data-w="1600" data-h="900">Twitter/X Post — 1600 × 900</button>
+              <button type="button" class="pill" data-w="1280" data-h="720">YouTube Thumbnail — 1280 × 720</button>
+              <button type="button" class="pill" data-w="1584" data-h="396">LinkedIn Banner — 1584 × 396</button>
+              <button type="button" class="pill" data-w="512" data-h="512">Profile Avatar — 512 × 512</button>
+              <button type="button" class="pill" data-w="1920" data-h="1080">Full HD — 1920 × 1080</button>
+            </div>
+          </div>
         </div>
 
         <div id="percentFields" style="display:none;">
@@ -160,6 +185,25 @@
             <input type="range" id="percentInput" min="1" max="200" value="50" style="width:100%;" />
           </div>
         </div>
+
+        <div class="row" style="margin-top:4px;">
+          <div class="field">
+            <label for="formatSelect">Output Format</label>
+            <select id="formatSelect">
+              <option value="original" selected>Same as source</option>
+              <option value="image/png">PNG</option>
+              <option value="image/jpeg">JPEG</option>
+              <option value="image/webp">WebP</option>
+            </select>
+          </div>
+          <div class="field" id="qualityField" style="display:none;">
+            <label for="qualityRange">Quality: <span id="qualityValue">92%</span></label>
+            <input type="range" id="qualityRange" min="10" max="100" value="92" style="width:100%;" />
+          </div>
+        </div>
+        <p style="font-size:0.85rem;color:var(--color-text-muted);margin-top:-8px;display:none;" id="formatNote">
+          <strong>Note:</strong> JPEG output does not support transparency — transparent areas will be filled with white. Choose PNG or WebP instead to keep transparency.
+        </p>
 
         <div class="actions">
           <button class="btn btn-primary" id="resizeBtn" disabled>Resize Image</button>
@@ -172,10 +216,11 @@
       <div class="howto">
         <h2>How to Resize an Image</h2>
         <ol class="howto-steps">
-          <li>Click the upload area or drag in a JPG, PNG, or WebP image — the current pixel dimensions load automatically.</li>
-          <li>Choose "Exact Pixels" to type a specific width and height, or "Percentage Scale" to scale by a percentage (1–200%).</li>
+          <li>Click the upload area or drag in a JPG, PNG, or WebP image — or several images at once to switch into batch mode. Pixel dimensions load automatically.</li>
+          <li>Choose "Exact Pixels" to type a specific width and height (or tap a quick preset like Instagram Post or YouTube Thumbnail to fill them in instantly), or "Percentage Scale" to scale by a percentage (1–200%).</li>
           <li>In Exact Pixels mode, leave "Lock aspect ratio" checked so changing width automatically recalculates height (and vice versa).</li>
-          <li>Click "Resize Image", then "Download Image" to save the result.</li>
+          <li>Pick an Output Format — Same as source, PNG, JPEG, or WebP — and drag the Quality slider if you chose JPEG or WebP.</li>
+          <li>Click "Resize Image" (or "Resize All Images" in batch mode), then download the result — each file gets its own Download button in batch mode.</li>
         </ol>
       </div>
 
@@ -190,8 +235,16 @@
           <p>You can then set width and height independently, which will stretch or squash the image if the new ratio doesn't match the original - useful for fitting a specific banner or thumbnail size, but it will distort the image's proportions.</p>
         </details>
         <details class="faq-item">
-          <summary>What file format is the resized download?</summary>
-          <p>It matches your source file's type - resizing a JPG produces a JPG, and anything else (PNG, WebP, etc.) is exported as PNG at 92% quality for lossy formats.</p>
+          <summary>What do the quick preset buttons do?</summary>
+          <p>Each preset button (like Instagram Post 1080 × 1080 or YouTube Thumbnail 1280 × 720) instantly fills the Width and Height fields with that exact pixel size in Exact Pixels mode. You can still edit the numbers afterward, or uncheck Lock aspect ratio first if you want to type your own custom dimensions instead.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I resize multiple images at once?</summary>
+          <p>Yes - select or drag in more than one image and the tool switches to batch mode. The same Width/Height (or Percentage), Output Format, and Quality settings are applied to every image, and each one gets its own Download button once processed, since there's no zip file involved. In Exact Pixels mode the identical width and height are applied to every file, which can stretch images whose original ratio differs from the first image loaded; Percentage Scale mode avoids this because it scales each image relative to its own original dimensions.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What output format will my resized image download as?</summary>
+          <p>Choose from the Output Format dropdown: "Same as source" keeps your original file's format (JPG stays JPG, PNG stays PNG, WebP stays WebP), or you can force the output to PNG, JPEG, or WebP regardless of what you uploaded. For JPEG or WebP output, the Quality slider controls the compression level passed to the browser's encoder.</p>
         </details>
         <details class="faq-item">
           <summary>Does resizing reduce file size the same way compression does?</summary>
@@ -199,7 +252,7 @@
         </details>
         <details class="faq-item">
           <summary>Is my image uploaded to resize it?</summary>
-          <p>No. The resize is performed locally with the Canvas API's drawImage() scaling - your file stays on your device throughout.</p>
+          <p>No. The resize (and any format conversion) is performed locally with the Canvas API's drawImage() scaling and toBlob() encoding - your files stay on your device throughout, even in batch mode.</p>
         </details>
       </div>
 
@@ -277,6 +330,7 @@
     var dropzone = document.getElementById("dropzone");
     var fileInput = document.getElementById("fileInput");
     var previewImg = document.getElementById("previewImg");
+    var fileListEl = document.getElementById("fileList");
     var resizeBtn = document.getElementById("resizeBtn");
     var downloadBtn = document.getElementById("downloadBtn");
     var statusBox = document.getElementById("statusBox");
@@ -289,14 +343,22 @@
     var pixelFields = document.getElementById("pixelFields");
     var percentFields = document.getElementById("percentFields");
     var modeRadios = document.querySelectorAll('input[name="mode"]');
+    var presetPills = document.getElementById("presetPills");
+    var formatSelect = document.getElementById("formatSelect");
+    var qualityField = document.getElementById("qualityField");
+    var qualityRange = document.getElementById("qualityRange");
+    var qualityValue = document.getElementById("qualityValue");
+    var formatNote = document.getElementById("formatNote");
 
     var currentImg = null;
     var currentFile = null;
     var naturalRatio = 1;
 
+    var batchFiles = []; // { file, img, dataUrl, status, resultUrl, resultBlob, resultName }
+    var isBatchMode = false;
+
     modeRadios.forEach(function (radio) {
       radio.addEventListener("change", function () {
-        var isPixels = radio.value === "pixels" && radio.checked;
         if (radio.checked) {
           pixelFields.style.display = radio.value === "pixels" ? "block" : "none";
           percentFields.style.display = radio.value === "percent" ? "block" : "none";
@@ -308,44 +370,195 @@
       percentValue.textContent = percentInput.value + "%";
     });
 
+    function clearPresetActive() {
+      Array.prototype.forEach.call(presetPills.querySelectorAll(".pill.active"), function (p) {
+        p.classList.remove("active");
+      });
+    }
+
     widthInput.addEventListener("input", function () {
-      if (lockRatio.checked && naturalRatio) {
+      clearPresetActive();
+      if (lockRatio.checked && naturalRatio && widthInput.value) {
         heightInput.value = Math.round(widthInput.value / naturalRatio);
       }
     });
 
     heightInput.addEventListener("input", function () {
-      if (lockRatio.checked && naturalRatio) {
+      clearPresetActive();
+      if (lockRatio.checked && naturalRatio && heightInput.value) {
         widthInput.value = Math.round(heightInput.value * naturalRatio);
       }
     });
 
+    // Toggling "Lock aspect ratio" on mid-edit recalculates height from the
+    // CURRENT width immediately, instead of leaving a stale height value in
+    // place until the next time width or height is edited.
+    lockRatio.addEventListener("change", function () {
+      if (lockRatio.checked && naturalRatio && widthInput.value) {
+        heightInput.value = Math.round(widthInput.value / naturalRatio);
+      }
+    });
+
+    presetPills.addEventListener("click", function (e) {
+      var btn = e.target.closest(".pill");
+      if (!btn) return;
+
+      document.querySelector('input[name="mode"][value="pixels"]').checked = true;
+      pixelFields.style.display = "block";
+      percentFields.style.display = "none";
+
+      widthInput.value = btn.getAttribute("data-w");
+      heightInput.value = btn.getAttribute("data-h");
+
+      clearPresetActive();
+      btn.classList.add("active");
+    });
+
+    qualityRange.addEventListener("input", function () {
+      qualityValue.textContent = qualityRange.value + "%";
+    });
+
+    function currentSourceType() {
+      if (isBatchMode) return batchFiles[0] && batchFiles[0].file.type;
+      return currentFile && currentFile.type;
+    }
+
+    function updateQualityVisibility() {
+      var fmt = formatSelect.value;
+      var effective = fmt === "original" ? (currentSourceType() || "") : fmt;
+      var isLossy = effective === "image/jpeg" || effective === "image/jpg" || effective === "image/webp";
+      qualityField.style.display = isLossy ? "block" : "none";
+      formatNote.style.display = fmt === "image/jpeg" ? "block" : "none";
+    }
+
+    formatSelect.addEventListener("change", updateQualityVisibility);
+
+    function getQuality() {
+      return parseInt(qualityRange.value, 10) / 100;
+    }
+
+    function extFor(mimeType) {
+      if (mimeType === "image/jpeg" || mimeType === "image/jpg") return "jpg";
+      if (mimeType === "image/webp") return "webp";
+      return "png";
+    }
+
+    function resizeCanvas(img, targetW, targetH, mimeType) {
+      var canvas = document.createElement("canvas");
+      canvas.width = targetW;
+      canvas.height = targetH;
+      var ctx = canvas.getContext("2d");
+      ctx.imageSmoothingQuality = "high";
+      if (mimeType === "image/jpeg" || mimeType === "image/jpg") {
+        // JPEG has no alpha channel — paint white behind the image first so
+        // transparent areas don't turn black.
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, targetW, targetH);
+      }
+      ctx.drawImage(img, 0, 0, targetW, targetH);
+      return canvas;
+    }
+
+    function loadImageEntry(file) {
+      return new Promise(function (resolve) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          var img = new Image();
+          img.onload = function () {
+            resolve({
+              file: file,
+              img: img,
+              dataUrl: e.target.result,
+              status: "ready",
+              resultUrl: null,
+              resultBlob: null,
+              resultName: null
+            });
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function renderFileList() {
+      fileListEl.innerHTML = "";
+      batchFiles.forEach(function (entry) {
+        var item = document.createElement("div");
+        item.className = "file-list-item";
+        var dims = entry.img.naturalWidth + " × " + entry.img.naturalHeight + "px";
+        var actionHtml;
+        if (entry.status === "done" && entry.resultUrl) {
+          actionHtml = '<a class="btn btn-secondary" style="padding:6px 14px;font-size:0.82rem;" href="' + entry.resultUrl + '" download="' + entry.resultName + '">Download</a>';
+        } else if (entry.status === "processing") {
+          actionHtml = '<span class="file-meta">Resizing…</span>';
+        } else {
+          actionHtml = '<span class="file-meta">Ready</span>';
+        }
+        item.innerHTML =
+          '<img class="file-thumb" src="' + entry.dataUrl + '" alt="Preview of ' + entry.file.name + '" />' +
+          '<span class="file-name">' + entry.file.name + '</span>' +
+          '<span class="file-meta">' + dims + '</span>' +
+          '<span class="file-actions">' + actionHtml + '</span>';
+        fileListEl.appendChild(item);
+      });
+    }
+
     function handleFiles(files) {
-      var file = files[0];
-      if (!file || file.type.indexOf("image/") !== 0) {
+      var imgFiles = Array.prototype.filter.call(files, function (f) {
+        return f.type.indexOf("image/") === 0;
+      });
+
+      if (imgFiles.length === 0) {
         statusBox.textContent = "Please choose a valid image file.";
         return;
       }
-      currentFile = file;
 
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        var img = new Image();
-        img.onload = function () {
-          currentImg = img;
-          naturalRatio = img.naturalWidth / img.naturalHeight;
-          widthInput.value = img.naturalWidth;
-          heightInput.value = img.naturalHeight;
+      batchFiles.forEach(function (entry) {
+        if (entry.resultUrl) URL.revokeObjectURL(entry.resultUrl);
+      });
+      batchFiles = [];
+      downloadBtn.style.display = "none";
 
-          previewImg.src = e.target.result;
-          previewImg.style.display = "block";
+      Promise.all(imgFiles.map(loadImageEntry)).then(function (entries) {
+        isBatchMode = entries.length > 1;
+
+        if (isBatchMode) {
+          batchFiles = entries;
+          currentImg = null;
+          currentFile = null;
+          naturalRatio = entries[0].img.naturalWidth / entries[0].img.naturalHeight;
+          widthInput.value = entries[0].img.naturalWidth;
+          heightInput.value = entries[0].img.naturalHeight;
+
+          previewImg.style.display = "none";
+          fileListEl.style.display = "flex";
+          renderFileList();
+
+          resizeBtn.textContent = "Resize All Images";
           resizeBtn.disabled = false;
-          downloadBtn.style.display = "none";
-          statusBox.textContent = "Image loaded (" + img.naturalWidth + " × " + img.naturalHeight + "px). Set your target size and click Resize.";
-        };
-        img.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
+          statusBox.textContent = entries.length + " images loaded. Settings apply to all of them; each gets its own Download button.";
+        } else {
+          var entry = entries[0];
+          currentImg = entry.img;
+          currentFile = entry.file;
+          naturalRatio = entry.img.naturalWidth / entry.img.naturalHeight;
+          widthInput.value = entry.img.naturalWidth;
+          heightInput.value = entry.img.naturalHeight;
+
+          previewImg.src = entry.dataUrl;
+          previewImg.style.display = "block";
+          fileListEl.style.display = "none";
+          fileListEl.innerHTML = "";
+
+          resizeBtn.textContent = "Resize Image";
+          resizeBtn.disabled = false;
+          statusBox.textContent = "Image loaded (" + entry.img.naturalWidth + " × " + entry.img.naturalHeight + "px). Set your target size and click Resize.";
+        }
+
+        clearPresetActive();
+        updateQualityVisibility();
+      });
     }
 
     Fixora.setupDropzone(dropzone, fileInput, handleFiles);
@@ -353,7 +566,7 @@
       if (e.key === "Enter" || e.key === " ") fileInput.click();
     });
 
-    resizeBtn.addEventListener("click", function () {
+    function resizeSingle() {
       if (!currentImg) return;
 
       var mode = document.querySelector('input[name="mode"]:checked').value;
@@ -373,22 +586,87 @@
         return;
       }
 
-      var canvas = document.createElement("canvas");
-      canvas.width = targetW;
-      canvas.height = targetH;
-      var ctx = canvas.getContext("2d");
-      ctx.imageSmoothingQuality = "high";
-      ctx.drawImage(currentImg, 0, 0, targetW, targetH);
+      var mimeType = formatSelect.value === "original" ? ((currentFile && currentFile.type) || "image/png") : formatSelect.value;
+      var canvas = resizeCanvas(currentImg, targetW, targetH, mimeType);
+      var quality = (mimeType === "image/jpeg" || mimeType === "image/webp") ? getQuality() : undefined;
 
-      var mimeType = (currentFile && currentFile.type) || "image/png";
       canvas.toBlob(function (blob) {
         var url = URL.createObjectURL(blob);
         downloadBtn.href = url;
-        var ext = mimeType.indexOf("png") !== -1 ? "png" : "jpg";
+        var ext = extFor(mimeType);
         downloadBtn.download = "resized-" + targetW + "x" + targetH + "." + ext;
         downloadBtn.style.display = "inline-flex";
         statusBox.textContent = "Done! Resized to " + targetW + " × " + targetH + "px (" + Fixora.formatBytes(blob.size) + ").";
-      }, mimeType, 0.92);
+      }, mimeType, quality);
+    }
+
+    function resizeBatch() {
+      if (batchFiles.length === 0) return;
+
+      var mode = document.querySelector('input[name="mode"]:checked').value;
+      var pxW, pxH, pct;
+
+      if (mode === "pixels") {
+        pxW = parseInt(widthInput.value, 10);
+        pxH = parseInt(heightInput.value, 10);
+        if (!pxW || !pxH || pxW < 1 || pxH < 1) {
+          statusBox.textContent = "Please enter a valid width and height.";
+          return;
+        }
+      } else {
+        pct = parseInt(percentInput.value, 10) / 100;
+        if (!pct || pct <= 0) {
+          statusBox.textContent = "Please choose a valid percentage.";
+          return;
+        }
+      }
+
+      resizeBtn.disabled = true;
+      statusBox.textContent = "Resizing " + batchFiles.length + " image(s)…";
+
+      batchFiles.forEach(function (entry) { entry.status = "processing"; });
+      renderFileList();
+
+      var doneCount = 0;
+
+      batchFiles.forEach(function (entry) {
+        var targetW, targetH;
+        if (mode === "pixels") {
+          targetW = pxW;
+          targetH = pxH;
+        } else {
+          targetW = Math.round(entry.img.naturalWidth * pct);
+          targetH = Math.round(entry.img.naturalHeight * pct);
+        }
+
+        var mimeType = formatSelect.value === "original" ? (entry.file.type || "image/png") : formatSelect.value;
+        var canvas = resizeCanvas(entry.img, targetW, targetH, mimeType);
+        var quality = (mimeType === "image/jpeg" || mimeType === "image/webp") ? getQuality() : undefined;
+
+        canvas.toBlob(function (blob) {
+          if (entry.resultUrl) URL.revokeObjectURL(entry.resultUrl);
+          entry.resultUrl = URL.createObjectURL(blob);
+          entry.resultBlob = blob;
+          entry.resultName = "resized-" + targetW + "x" + targetH + "." + extFor(mimeType);
+          entry.status = "done";
+
+          doneCount++;
+          renderFileList();
+
+          if (doneCount === batchFiles.length) {
+            resizeBtn.disabled = false;
+            statusBox.textContent = "Done! Resized " + batchFiles.length + " image(s). Click each Download button to save it.";
+          }
+        }, mimeType, quality);
+      });
+    }
+
+    resizeBtn.addEventListener("click", function () {
+      if (isBatchMode) {
+        resizeBatch();
+      } else {
+        resizeSingle();
+      }
     });
   </script>
 </body>
