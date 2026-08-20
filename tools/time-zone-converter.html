@@ -6,23 +6,23 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Time Zone Converter Online | Fixoona</title>
-  <meta name="description" content="Convert a date and time between time zones online for free. See the same moment across major world cities instantly. No sign-up." />
-  <meta name="keywords" content="time zone converter, convert time zones online free, world clock" />
+  <meta name="description" content="Convert a date and time between time zones online for free. See the same moment across 15+ major world cities, watch a live-updating clock for each zone, and find overlapping business-hour meeting times. No sign-up." />
+  <meta name="keywords" content="time zone converter, convert time zones online free, world clock, live time zone clock, best meeting time finder" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://fixoona.com/tools/time-zone-converter.html" />
+  <link rel="canonical" href="https://fixoona.com/tools/time-zone-converter" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixoona" />
   <meta property="og:title" content="Free Time Zone Converter Online" />
-  <meta property="og:description" content="Convert a date and time between time zones online for free." />
-  <meta property="og:url" content="https://fixoona.com/tools/time-zone-converter.html" />
+  <meta property="og:description" content="Convert time zones, watch a live clock for major cities, and find overlapping meeting hours — free, no sign-up." />
+  <meta property="og:url" content="https://fixoona.com/tools/time-zone-converter" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Time Zone Converter Online" />
-  <meta name="twitter:description" content="Convert a date and time between time zones online for free." />
+  <meta name="twitter:description" content="Convert time zones, watch a live clock for major cities, and find overlapping meeting hours — free, no sign-up." />
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='28' y='22' width='13' height='56' rx='6.5' fill='white'/%3E%3Cpath d='M28 22 L67 22 Q73 22 70.5 27.5 L45 37 Q28 40 28 30 Z' fill='white'/%3E%3Crect x='28' y='46' width='27' height='13' rx='6.5' fill='white'/%3E%3Ccircle cx='76' cy='28' r='7' fill='%23a5f3fc'/%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='23' width='15' height='54' rx='7.5' fill='white'/%3E%3Crect x='30' y='23' width='42' height='14' rx='7' fill='white'/%3E%3Crect x='30' y='46' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,7 +34,7 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Time Zone Converter",
-    "url": "https://fixoona.com/tools/time-zone-converter.html",
+    "url": "https://fixoona.com/tools/time-zone-converter",
     "applicationCategory": "Utility",
     "operatingSystem": "Any (Web Browser)",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -47,7 +47,7 @@
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
       { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
-      { "@type": "ListItem", "position": 3, "name": "Time Zone Converter", "item": "https://fixoona.com/tools/time-zone-converter.html" }
+      { "@type": "ListItem", "position": 3, "name": "Time Zone Converter", "item": "https://fixoona.com/tools/time-zone-converter" }
     ]
   }
   </script>
@@ -80,6 +80,16 @@
         "@type": "Question",
         "name": "Is the converted time based on a 12-hour or 24-hour clock?",
         "acceptedAnswer": { "@type": "Answer", "text": "Results are displayed in 12-hour format with AM/PM, along with the weekday, month, and day, for each time zone in the table." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the tool show the current time in each zone live?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — the \"Current Time in Each Zone\" grid reads the real time from your device and reformats it for every listed zone using the Intl.DateTimeFormat API, refreshing every second without reloading the page." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the best meeting time finder work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Pick two or more zones and a date, and it checks all 24 hours of that day, converting each one into every selected zone's local time with Intl.DateTimeFormat, then highlights the hours that fall within 9 AM-6 PM business hours in every selected zone at once — correctly accounting for daylight saving time on that specific date." }
       }
     ]
   }
@@ -97,6 +107,77 @@
     .tz-table td:first-child { color: var(--color-text-muted); }
     .tz-table td:last-child { text-align: right; font-family: var(--font-display); font-weight: 600; }
     .tz-table tr.is-source { background: rgba(37,99,235,0.06); }
+
+    .tz-live-note { color: var(--color-text-muted); font-size: 0.9rem; margin-top: -6px; margin-bottom: 4px; }
+    .tz-live-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .tz-live-card {
+      background: var(--color-bg-soft);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+    }
+    .tz-live-card.is-device { border-color: var(--color-primary-light); }
+    .tz-live-card .tz-live-label {
+      font-size: 0.76rem;
+      color: var(--color-text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .tz-live-card .tz-live-time {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-top: 4px;
+    }
+    .tz-live-card .tz-live-date {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      margin-top: 2px;
+    }
+
+    .meeting-zone-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .meeting-zone-pills .pill { font-size: 0.82rem; padding: 6px 12px; }
+
+    .meeting-grid-wrap { overflow-x: auto; margin-top: 20px; }
+    .meeting-grid { border-collapse: collapse; width: 100%; min-width: 800px; }
+    .meeting-grid th, .meeting-grid td {
+      padding: 6px 3px;
+      text-align: center;
+      font-size: 0.7rem;
+      border-bottom: 1px solid var(--color-border);
+      white-space: nowrap;
+    }
+    .meeting-grid th { color: var(--color-text-muted); font-weight: 600; }
+    .meeting-grid td.zone-label, .meeting-grid th.zone-label {
+      text-align: left;
+      padding-right: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    .meeting-grid td.hour-cell { border-radius: 4px; font-family: var(--font-display); }
+    .meeting-grid td.hour-cell.is-business { background: color-mix(in srgb, var(--color-success) 22%, transparent); }
+    .meeting-grid td.hour-cell.is-overlap { outline: 2px solid var(--color-primary); outline-offset: -2px; font-weight: 700; }
+
+    .meeting-summary { margin-top: 16px; }
+    .meeting-summary .overlap-block {
+      background: var(--color-bg-soft);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      font-size: 0.92rem;
+    }
+    .meeting-summary .overlap-block strong { display: block; margin-bottom: 6px; color: var(--color-primary); }
+    .meeting-summary .overlap-block div { margin-top: 2px; }
   </style>
 </head>
 <body>
@@ -104,19 +185,18 @@
 
   <header class="site-header">
     <nav class="nav container" aria-label="Primary">
-      <a href="../index.html" class="nav-brand">
-        <span class="brand-mark" aria-hidden="true"><svg class="brand-svg" viewBox="0 0 100 100"><rect x="28" y="22" width="13" height="56" rx="6.5" fill="#fff"/><path d="M28 22 L67 22 Q73 22 70.5 27.5 L45 37 Q28 40 28 30 Z" fill="#fff"/><rect x="28" y="46" width="27" height="13" rx="6.5" fill="#fff"/><circle cx="76" cy="28" r="7" fill="#a5f3fc"/></svg></span>
-        Fixoona
+      <a href="../index" class="nav-brand">
+        <span class="brand-word">Fixoona</span>
       </a>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links">
         <li class="theme-toggle-item"><button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button></li>
-        <li><a href="../index.html">Home</a></li>        <li><a href="../all-tools.html">All Tools</a></li>
-        <li><a href="../index.html#guides">Guides</a></li>
-        <li><a href="../about.html">About</a></li>
-        <li><a href="../contact.html">Contact</a></li>
+        <li><a href="../index">Home</a></li>        <li><a href="../all-tools">All Tools</a></li>
+        <li><a href="../index#guides">Guides</a></li>
+        <li><a href="../about">About</a></li>
+        <li><a href="../contact">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -124,8 +204,8 @@
   <main id="main">
     <div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="../index.html">Home</a><span class="sep">/</span>
-        <a href="../index.html#tools">Tools</a><span class="sep">/</span>
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
         <span>Time Zone Converter</span>
       </nav>
     </div>
@@ -133,7 +213,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🌍</div>
       <h1>Time Zone Converter</h1>
-      <p>Pick a date, time, and zone — see that exact moment across major cities worldwide.</p>
+      <p>Pick a date, time, and zone — see that exact moment across major cities worldwide, watch a live clock for each zone, and find the best overlapping meeting time.</p>
     </section>
 
     <section class="container">
@@ -159,6 +239,32 @@
         <table class="tz-table" id="resultTable"></table>
       </div>
 
+      <div class="tool-panel" id="liveClocksPanel">
+        <h2>Current Time in Each Zone</h2>
+        <p class="tz-live-note">A quick-reference clock for every zone below, refreshing every second.</p>
+        <div class="tz-live-grid" id="liveGrid"></div>
+      </div>
+
+      <div class="tool-panel" id="meetingPanel">
+        <h2>Find the Best Meeting Time</h2>
+        <p>Select the zones you're scheduling across, pick a date, and the highlighted hours are within 9 AM-6 PM business hours in every selected zone at the same time.</p>
+        <div class="row">
+          <div class="field">
+            <label for="meetingDate">Meeting date</label>
+            <input type="date" id="meetingDate" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Zones to compare</label>
+          <div class="meeting-zone-pills" id="meetingZonePills"></div>
+        </div>
+        <div class="output-box" id="meetingStatus"></div>
+        <div class="meeting-grid-wrap">
+          <table class="meeting-grid" id="meetingGrid"></table>
+        </div>
+        <div class="meeting-summary" id="meetingSummary"></div>
+      </div>
+
       <div class="howto">
         <h2>How to Convert a Time Zone</h2>
         <ol class="howto-steps">
@@ -166,6 +272,8 @@
           <li>Choose the time zone that date and time refers to from the "In this time zone" dropdown (it defaults to your device's detected zone).</li>
           <li>Click "Convert" to see that exact moment translated across 15+ major world city time zones in the results table.</li>
           <li>Click "Use Current Time" anytime to reset the inputs to the present moment in your local time zone.</li>
+          <li>Scroll to "Current Time in Each Zone" for a live, second-by-second clock for every zone — handy as a quick reference without converting anything.</li>
+          <li>In "Find the Best Meeting Time," select two or more zones and a date to see which hours fall within 9 AM-6 PM business hours in every selected zone at once.</li>
         </ol>
       </div>
 
@@ -191,6 +299,14 @@
           <summary>Is the converted time based on a 12-hour or 24-hour clock?</summary>
           <p>Results are displayed in 12-hour format with AM/PM, along with the weekday, month, and day, for each time zone in the table.</p>
         </details>
+        <details class="faq-item">
+          <summary>Does the tool show the current time in each zone live?</summary>
+          <p>Yes — the "Current Time in Each Zone" grid reads the real time from your device and reformats it for every listed zone using the Intl.DateTimeFormat API, refreshing every second without reloading the page.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does the best meeting time finder work?</summary>
+          <p>Pick two or more zones and a date, and it checks all 24 hours of that day, converting each one into every selected zone's local time with Intl.DateTimeFormat, then highlights the hours that fall within 9 AM-6 PM business hours in every selected zone at once — correctly accounting for daylight saving time on that specific date.</p>
+        </details>
       </div>
 
       <div class="related">
@@ -198,17 +314,17 @@
           <div><h2>Related Tools & Guides</h2></div>
         </div>
         <div class="grid reveal-group">
-          <a class="card" href="date-difference-calculator.html">
+          <a class="card" href="date-difference-calculator">
             <span class="icon" aria-hidden="true">📅</span>
             <h3>Date Difference Calculator</h3>
             <p>Find the number of days between two dates.</p>
           </a>
-          <a class="card" href="timestamp-converter.html">
+          <a class="card" href="timestamp-converter">
             <span class="icon" aria-hidden="true">🕒</span>
             <h3>Timestamp Converter</h3>
             <p>Convert Unix timestamps to readable dates.</p>
           </a>
-          <a class="card" href="countdown-timer.html">
+          <a class="card" href="countdown-timer">
             <span class="icon" aria-hidden="true">⏱️</span>
             <h3>Countdown Timer & Stopwatch</h3>
             <p>Time an event or count down to a date.</p>
@@ -222,38 +338,37 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="../index.html" class="nav-brand">
-            <span class="brand-mark" aria-hidden="true"><svg class="brand-svg" viewBox="0 0 100 100"><rect x="28" y="22" width="13" height="56" rx="6.5" fill="#fff"/><path d="M28 22 L67 22 Q73 22 70.5 27.5 L45 37 Q28 40 28 30 Z" fill="#fff"/><rect x="28" y="46" width="27" height="13" rx="6.5" fill="#fff"/><circle cx="76" cy="28" r="7" fill="#a5f3fc"/></svg></span>
-            Fixoona
+          <a href="../index" class="nav-brand">
+            <span class="brand-word">Fixoona</span>
           </a>
           <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
         </div>
         <div class="footer-col">
           <h4>Popular Tools</h4>
           <ul>
-            <li><a href="pdf-compressor.html">PDF Compressor</a></li>
-            <li><a href="image-resizer.html">Image Resizer</a></li>
-            <li><a href="word-counter.html">Word Counter</a></li>
-            <li><a href="password-generator.html">Password Generator</a></li>
-            <li><a href="../all-tools.html">See All 100+ Tools →</a></li>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Popular Guides</h4>
           <ul>
-            <li><a href="../blog/compress-pdf-guide.html">Compress a PDF</a></li>
-            <li><a href="../blog/image-format-guide.html">Image Formats</a></li>
-            <li><a href="../blog/strong-password-guide.html">Strong Passwords</a></li>
-            <li><a href="../index.html#guides">See All Guides →</a></li>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Company</h4>
           <ul>
-            <li><a href="../about.html">About Us</a></li>
-            <li><a href="../contact.html">Contact</a></li>
-            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
-            <li><a href="../terms.html">Terms of Service</a></li>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
           </ul>
         </div>
       </div>
@@ -302,6 +417,16 @@
       sourceZone.appendChild(opt);
     });
     sourceZone.value = deviceZone;
+
+    var ALL_ZONES = (function () {
+      var list = [{ id: deviceZone, label: "This device (" + deviceZone + ")" }].concat(ZONES);
+      var seenIds = {};
+      return list.filter(function (z) {
+        if (seenIds[z.id]) return false;
+        seenIds[z.id] = true;
+        return true;
+      });
+    })();
 
     function pad(n) { return n < 10 ? "0" + n : "" + n; }
 
@@ -364,12 +489,7 @@
 
       resultTable.innerHTML = "";
 
-      var allZones = [{ id: deviceZone, label: "This device (" + deviceZone + ")" }].concat(ZONES);
-      var seen = {};
-      allZones.forEach(function (z) {
-        if (seen[z.id]) return;
-        seen[z.id] = true;
-
+      ALL_ZONES.forEach(function (z) {
         var row = document.createElement("tr");
         if (z.id === fromZone) row.className = "is-source";
 
@@ -383,7 +503,7 @@
         resultTable.appendChild(row);
       });
 
-      statusBox.textContent = "Showing that moment across " + allZones.length + " time zones.";
+      statusBox.textContent = "Showing that moment across " + ALL_ZONES.length + " time zones.";
     }
 
     document.getElementById("convertBtn").addEventListener("click", convert);
@@ -394,6 +514,216 @@
     });
 
     convert();
+
+    /* ---------- Live current time in each zone ---------- */
+
+    var liveGrid = document.getElementById("liveGrid");
+    var liveClockFmt = {}; // cache one Intl.DateTimeFormat per zone
+
+    ALL_ZONES.forEach(function (z) {
+      var card = document.createElement("div");
+      card.className = "tz-live-card" + (z.id === deviceZone ? " is-device" : "");
+
+      var label = document.createElement("div");
+      label.className = "tz-live-label";
+      label.textContent = z.label || z.id;
+
+      var time = document.createElement("div");
+      time.className = "tz-live-time";
+      time.id = "live-time-" + z.id.replace(/[^a-zA-Z0-9]/g, "-");
+
+      var dateEl = document.createElement("div");
+      dateEl.className = "tz-live-date";
+      dateEl.id = "live-date-" + z.id.replace(/[^a-zA-Z0-9]/g, "-");
+
+      card.appendChild(label);
+      card.appendChild(time);
+      card.appendChild(dateEl);
+      liveGrid.appendChild(card);
+
+      liveClockFmt[z.id] = {
+        time: new Intl.DateTimeFormat("en-US", { timeZone: z.id, hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true }),
+        date: new Intl.DateTimeFormat("en-US", { timeZone: z.id, weekday: "short", month: "short", day: "numeric" }),
+        timeEl: time,
+        dateEl: dateEl
+      };
+    });
+
+    function tickLiveGrid() {
+      var now = new Date();
+      ALL_ZONES.forEach(function (z) {
+        var f = liveClockFmt[z.id];
+        f.timeEl.textContent = f.time.format(now);
+        f.dateEl.textContent = f.date.format(now);
+      });
+    }
+
+    tickLiveGrid();
+    setInterval(tickLiveGrid, 1000);
+
+    /* ---------- Best meeting time finder ---------- */
+
+    var meetingDate = document.getElementById("meetingDate");
+    var meetingZonePills = document.getElementById("meetingZonePills");
+    var meetingStatus = document.getElementById("meetingStatus");
+    var meetingGrid = document.getElementById("meetingGrid");
+    var meetingSummary = document.getElementById("meetingSummary");
+
+    var BUSINESS_START = 9;  // 9 AM
+    var BUSINESS_END = 18;   // 6 PM (exclusive)
+
+    function toDateOnlyValue(date) {
+      return date.getFullYear() + "-" + pad(date.getMonth() + 1) + "-" + pad(date.getDate());
+    }
+    meetingDate.value = toDateOnlyValue(new Date());
+
+    var DEFAULT_MEETING_ZONES = [deviceZone, "Europe/London", "America/New_York", "Asia/Tokyo"];
+    var meetingSelected = {};
+
+    ALL_ZONES.forEach(function (z) {
+      var pill = document.createElement("button");
+      pill.type = "button";
+      pill.className = "pill";
+      pill.textContent = z.label || z.id;
+      pill.dataset.zoneId = z.id;
+      var isDefault = DEFAULT_MEETING_ZONES.indexOf(z.id) !== -1;
+      meetingSelected[z.id] = isDefault;
+      if (isDefault) pill.classList.add("active");
+      pill.addEventListener("click", function () {
+        meetingSelected[z.id] = !meetingSelected[z.id];
+        pill.classList.toggle("active", meetingSelected[z.id]);
+        runMeetingFinder();
+      });
+      meetingZonePills.appendChild(pill);
+    });
+
+    function localHourInZone(date, timeZone) {
+      var parts = new Intl.DateTimeFormat("en-US", { timeZone: timeZone, hourCycle: "h23", hour: "2-digit" }).formatToParts(date);
+      var h = parts.find(function (p) { return p.type === "hour"; }).value;
+      return parseInt(h, 10);
+    }
+
+    function formatClockTime(date, timeZone) {
+      return new Intl.DateTimeFormat("en-US", { timeZone: timeZone, hour: "numeric", minute: "2-digit", hour12: true }).format(date);
+    }
+
+    function formatHourOnly(date, timeZone) {
+      return new Intl.DateTimeFormat("en-US", { timeZone: timeZone, hour: "numeric", hour12: true }).format(date);
+    }
+
+    function runMeetingFinder() {
+      var selectedZones = ALL_ZONES.filter(function (z) { return meetingSelected[z.id]; });
+
+      meetingGrid.innerHTML = "";
+      meetingSummary.innerHTML = "";
+
+      if (selectedZones.length < 2) {
+        meetingStatus.textContent = "Select at least 2 time zones above to compare business hours.";
+        return;
+      }
+
+      var raw = meetingDate.value;
+      if (!raw) {
+        meetingStatus.textContent = "Please choose a meeting date.";
+        return;
+      }
+      var dParts = raw.split("-").map(Number);
+      var y = dParts[0], mo = dParts[1] - 1, d = dParts[2];
+
+      // Anchor the 24 hour columns to the device's local day so the grid reads naturally.
+      var anchorZone = deviceZone;
+      var hourInstants = [];
+      for (var hr = 0; hr < 24; hr++) {
+        hourInstants.push(zonedTimeToUtc(y, mo, d, hr, 0, anchorZone));
+      }
+
+      // hourOk[zoneId][hr] = true if that zone is within business hours at that instant
+      var hourOk = {};
+      var overlap = [];
+      for (var hr2 = 0; hr2 < 24; hr2++) {
+        var instant = hourInstants[hr2];
+        var allOk = true;
+        selectedZones.forEach(function (z) {
+          if (!hourOk[z.id]) hourOk[z.id] = [];
+          var localHr = localHourInZone(instant, z.id);
+          var ok = localHr >= BUSINESS_START && localHr < BUSINESS_END;
+          hourOk[z.id][hr2] = ok;
+          if (!ok) allOk = false;
+        });
+        overlap[hr2] = allOk;
+      }
+
+      // Build the grid table
+      var thead = document.createElement("tr");
+      var cornerTh = document.createElement("th");
+      cornerTh.className = "zone-label";
+      cornerTh.textContent = "Zone";
+      thead.appendChild(cornerTh);
+      for (var h1 = 0; h1 < 24; h1++) {
+        var th = document.createElement("th");
+        th.textContent = formatHourOnly(hourInstants[h1], anchorZone).replace(/\s/g, "");
+        thead.appendChild(th);
+      }
+      meetingGrid.appendChild(thead);
+
+      selectedZones.forEach(function (z) {
+        var row = document.createElement("tr");
+        var labelTd = document.createElement("td");
+        labelTd.className = "zone-label";
+        labelTd.textContent = z.label || z.id;
+        row.appendChild(labelTd);
+
+        for (var h2 = 0; h2 < 24; h2++) {
+          var cell = document.createElement("td");
+          cell.className = "hour-cell";
+          if (hourOk[z.id][h2]) cell.classList.add("is-business");
+          if (overlap[h2]) cell.classList.add("is-overlap");
+          cell.textContent = formatHourOnly(hourInstants[h2], z.id).replace(/\s/g, "");
+          row.appendChild(cell);
+        }
+        meetingGrid.appendChild(row);
+      });
+
+      // Group contiguous overlapping hours into ranges and summarize per zone
+      var groups = [];
+      var i = 0;
+      while (i < 24) {
+        if (overlap[i]) {
+          var start = i;
+          while (i < 24 && overlap[i]) i++;
+          groups.push([start, i]);
+        } else {
+          i++;
+        }
+      }
+
+      if (groups.length === 0) {
+        meetingStatus.textContent = "No overlapping business hours (9 AM-6 PM) found across all " + selectedZones.length + " selected zones on this date.";
+        var noneMsg = document.createElement("p");
+        noneMsg.textContent = "Try removing a zone or picking a different date — some zone combinations (e.g. US and East Asia) rarely share standard business hours.";
+        meetingSummary.appendChild(noneMsg);
+      } else {
+        meetingStatus.textContent = "Found " + groups.length + " overlapping window" + (groups.length > 1 ? "s" : "") + " across " + selectedZones.length + " zones on " + raw + ".";
+        groups.forEach(function (g) {
+          var startInstant = hourInstants[g[0]];
+          var endInstant = g[1] < 24 ? hourInstants[g[1]] : zonedTimeToUtc(y, mo, d, 23, 60, anchorZone);
+          var block = document.createElement("div");
+          block.className = "overlap-block";
+          var title = document.createElement("strong");
+          title.textContent = "Overlap window " + (groups.indexOf(g) + 1);
+          block.appendChild(title);
+          selectedZones.forEach(function (z) {
+            var line = document.createElement("div");
+            line.textContent = (z.label || z.id) + ": " + formatClockTime(startInstant, z.id) + " – " + formatClockTime(endInstant, z.id);
+            block.appendChild(line);
+          });
+          meetingSummary.appendChild(block);
+        });
+      }
+    }
+
+    meetingDate.addEventListener("change", runMeetingFinder);
+    runMeetingFinder();
   </script>
 </body>
 </html>
