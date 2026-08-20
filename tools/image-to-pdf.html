@@ -6,7 +6,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Image to PDF Converter Online | Fixoona</title>
-  <meta name="description" content="Convert JPG or PNG images into a PDF document online for free, right in your browser. Combine multiple images into one PDF. No uploads, no sign-up." />
+  <meta name="description" content="Convert JPG or PNG images into a PDF document online for free, right in your browser. Combine multiple images into one PDF, with auto orientation matching for A4/US Letter pages. No uploads, no sign-up." />
   <meta name="keywords" content="image to pdf, jpg to pdf, png to pdf, convert image to pdf online free" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/image-to-pdf" />
@@ -80,6 +80,11 @@
         "@type": "Question",
         "name": "Can I remove an image after adding it?",
         "acceptedAnswer": { "@type": "Answer", "text": "Yes, click the ✕ button next to any file in the list to remove it before creating the PDF." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does a landscape photo look small on an A4 or US Letter page?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Those page sizes default to portrait, so a wide landscape image gets shrunk to fit within a tall page, leaving big margins on the sides. Use the Orientation dropdown (shown once A4 or US Letter is selected) and choose \"Auto (match each image)\" to have each page's orientation follow that specific image's shape, or force every page to Portrait or Landscape regardless of image shape." }
       }
     ]
   }
@@ -132,13 +137,23 @@
 
         <div class="file-list" id="fileList"></div>
 
-        <div class="field" style="margin-top:20px;">
-          <label for="pageSizeSelect">Page Size</label>
-          <select id="pageSizeSelect">
-            <option value="fit" selected>Fit to Image</option>
-            <option value="a4">A4</option>
-            <option value="letter">US Letter</option>
-          </select>
+        <div class="row" style="margin-top:20px;">
+          <div class="field">
+            <label for="pageSizeSelect">Page Size</label>
+            <select id="pageSizeSelect">
+              <option value="fit" selected>Fit to Image</option>
+              <option value="a4">A4</option>
+              <option value="letter">US Letter</option>
+            </select>
+          </div>
+          <div class="field" id="orientationField" style="display:none;">
+            <label for="orientationSelect">Orientation (A4 / US Letter)</label>
+            <select id="orientationSelect">
+              <option value="auto" selected>Auto (match each image)</option>
+              <option value="portrait">Always Portrait</option>
+              <option value="landscape">Always Landscape</option>
+            </select>
+          </div>
         </div>
 
         <div class="actions">
@@ -180,6 +195,10 @@
         <details class="faq-item">
           <summary>Can I remove an image after adding it?</summary>
           <p>Yes, click the ✕ button next to any file in the list to remove it before creating the PDF.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why does a landscape photo look small on an A4 or US Letter page?</summary>
+          <p>Those page sizes default to portrait, so a wide landscape image gets shrunk to fit within a tall page, leaving big margins on the sides. Use the Orientation dropdown (shown once A4 or US Letter is selected) and choose "Auto (match each image)" to have each page's orientation follow that specific image's shape, or force every page to Portrait or Landscape regardless of image shape.</p>
         </details>
       </div>
 
@@ -262,6 +281,14 @@
     var downloadBtn = document.getElementById("downloadBtn");
     var statusBox = document.getElementById("statusBox");
     var pageSizeSelect = document.getElementById("pageSizeSelect");
+    var orientationField = document.getElementById("orientationField");
+    var orientationSelect = document.getElementById("orientationSelect");
+
+    function updateOrientationFieldVisibility() {
+      orientationField.style.display = pageSizeSelect.value === "fit" ? "none" : "block";
+    }
+    pageSizeSelect.addEventListener("change", updateOrientationFieldVisibility);
+    updateOrientationFieldVisibility();
 
     var files = []; // { file, thumbUrl }
 
@@ -359,7 +386,10 @@
           if (mode === "fit") {
             pdfDoc.addPage([imgW, imgH]).drawImage(embedded, { x: 0, y: 0, width: imgW, height: imgH });
           } else {
-            var pageDims = PAGE_SIZES[mode];
+            var basePageDims = PAGE_SIZES[mode];
+            var wantLandscape = orientationSelect.value === "landscape" ||
+              (orientationSelect.value === "auto" && imgW > imgH);
+            var pageDims = wantLandscape ? [basePageDims[1], basePageDims[0]] : basePageDims;
             var page = pdfDoc.addPage(pageDims);
             var scale = Math.min(pageDims[0] / imgW, pageDims[1] / imgH) * 0.92;
             var drawW = imgW * scale, drawH = imgH * scale;
