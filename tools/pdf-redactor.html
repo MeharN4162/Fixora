@@ -74,7 +74,7 @@
       {
         "@type": "Question",
         "name": "Can I redact more than one area, or multiple pages?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes - use the page selector to move between pages, draw as many black boxes as you need on each page, and remove any box before downloading. Every page of the PDF is flattened to an image in the final output, whether or not you added redaction boxes to it." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes - use the page selector to move between pages, draw as many black boxes as you need on each page, and undo, clear, or remove any box before downloading. A \"Review All Pending Redactions\" panel lists every page that currently has boxes so you can check your work across the whole document before finalizing. Every page of the PDF is flattened to an image in the final output, whether or not you added redaction boxes to it." }
       },
       {
         "@type": "Question",
@@ -146,6 +146,20 @@
       color: var(--color-primary-dark);
       font-size: 0.86rem;
     }
+    .region-list-item.current-page {
+      border-color: var(--color-primary);
+    }
+    .region-list-item button.goto-btn {
+      width: auto;
+      padding: 0 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    #undoBoxBtn:disabled,
+    #clearPageBtn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   </style>
 </head>
 <body>
@@ -208,6 +222,16 @@
           <div>
             <h3 style="font-size:0.95rem;margin-bottom:10px;">Redaction Boxes (this page)</h3>
             <div class="region-list" id="regionList"></div>
+            <p class="region-empty-note" id="regionEmptyNote" style="font-size:0.82rem;color:var(--color-text-muted);"></p>
+            <div class="actions" style="margin-top:12px;">
+              <button class="btn btn-secondary" id="undoBoxBtn" type="button">Undo Last Box</button>
+              <button class="btn btn-secondary" id="clearPageBtn" type="button">Clear This Page</button>
+            </div>
+
+            <h3 style="font-size:0.95rem;margin:22px 0 4px;">Review All Pending Redactions</h3>
+            <p id="totalSummary" style="font-size:0.82rem;color:var(--color-text-muted);margin-bottom:10px;"></p>
+            <div class="region-list" id="pageOverviewList"></div>
+
             <div class="actions" style="margin-top:16px;">
               <button class="btn btn-primary" id="downloadBtn" type="button">Download Redacted PDF</button>
             </div>
@@ -222,8 +246,9 @@
         <ol class="howto-steps">
           <li>Upload your PDF — every page is rendered as an image preview.</li>
           <li>If it has multiple pages, use the page selector to pick the one you want to redact.</li>
-          <li>Click and drag directly on the page to draw a solid black box over any sensitive text or area, repeating for as many regions and pages as you need.</li>
-          <li>Remove any box you don't want from the list, then click "Download Redacted PDF".</li>
+          <li>Click and drag directly on the page to draw a solid black box over any sensitive text or area, repeating for as many regions and pages as you need. Use "Undo Last Box" or "Clear This Page" to fix mistakes.</li>
+          <li>Check the "Review All Pending Redactions" list to see every page that currently has boxes before you finalize anything.</li>
+          <li>Remove any box you don't want from the per-page list, then click "Download Redacted PDF".</li>
         </ol>
       </div>
 
@@ -243,7 +268,7 @@
         </details>
         <details class="faq-item">
           <summary>Can I redact more than one area, or multiple pages?</summary>
-          <p>Yes - use the page selector to move between pages, draw as many black boxes as you need on each page, and remove any box before downloading. Every page of the PDF is flattened to an image in the final output, whether or not you added redaction boxes to it.</p>
+          <p>Yes - use the page selector to move between pages, draw as many black boxes as you need on each page, and undo, clear, or remove any box before downloading. A "Review All Pending Redactions" panel lists every page that currently has boxes so you can check your work across the whole document before finalizing. Every page of the PDF is flattened to an image in the final output, whether or not you added redaction boxes to it.</p>
         </details>
         <details class="faq-item">
           <summary>Is my PDF uploaded anywhere to redact it?</summary>
@@ -340,6 +365,11 @@
     var pageCanvas = document.getElementById("pageCanvas");
     var redactOverlay = document.getElementById("redactOverlay");
     var regionListEl = document.getElementById("regionList");
+    var regionEmptyNote = document.getElementById("regionEmptyNote");
+    var undoBoxBtn = document.getElementById("undoBoxBtn");
+    var clearPageBtn = document.getElementById("clearPageBtn");
+    var totalSummary = document.getElementById("totalSummary");
+    var pageOverviewList = document.getElementById("pageOverviewList");
     var downloadBtn = document.getElementById("downloadBtn");
     var statusBox = document.getElementById("statusBox");
 
@@ -379,8 +409,87 @@
       pageCanvas.height = src.height;
       pageCtx.drawImage(src, 0, 0);
       renderExistingBoxOverlay();
-      renderRegionList();
+      renderAllRedactionInfo();
     }
+
+    // Refreshes everything that reports on redaction boxes: the per-page
+    // list, the "review all pending redactions" overview, the page select
+    // labels, and the undo/clear button states.
+    function renderAllRedactionInfo() {
+      renderRegionList();
+      renderPageOverview();
+      updatePageSelectLabels();
+    }
+
+    function totalBoxCount() {
+      var total = 0;
+      for (var p in boxesPerPage) total += boxesPerPage[p].length;
+      return total;
+    }
+
+    function pagesWithBoxes() {
+      var pages = [];
+      for (var i = 1; i <= totalPages; i++) {
+        if (boxesPerPage[i] && boxesPerPage[i].length > 0) pages.push(i);
+      }
+      return pages;
+    }
+
+    function updatePageSelectLabels() {
+      var options = pageSelect.options;
+      for (var i = 0; i < options.length; i++) {
+        var pageNum = parseInt(options[i].value, 10);
+        var count = (boxesPerPage[pageNum] || []).length;
+        options[i].textContent = "Page " + pageNum + (count > 0 ? " (" + count + " box" + (count === 1 ? "" : "es") + ")" : "");
+      }
+    }
+
+    function renderPageOverview() {
+      pageOverviewList.innerHTML = "";
+      var pages = pagesWithBoxes();
+      var total = totalBoxCount();
+
+      totalSummary.textContent = total === 0
+        ? "No redaction boxes drawn yet."
+        : total + " box" + (total === 1 ? "" : "es") + " across " + pages.length + " page" + (pages.length === 1 ? "" : "s") + " of " + totalPages + ".";
+
+      if (pages.length === 0) return;
+
+      pages.forEach(function (pageNum) {
+        var count = boxesPerPage[pageNum].length;
+        var item = document.createElement("div");
+        item.className = "region-list-item" + (pageNum === currentPageNum ? " current-page" : "");
+        item.innerHTML = "<span>Page " + pageNum + " — " + count + " box" + (count === 1 ? "" : "es") + "</span>" +
+          '<button type="button" class="goto-btn" data-page="' + pageNum + '">Go</button>';
+        pageOverviewList.appendChild(item);
+      });
+    }
+
+    pageOverviewList.addEventListener("click", function (e) {
+      var btn = e.target.closest("button.goto-btn");
+      if (!btn) return;
+      var pageNum = parseInt(btn.getAttribute("data-page"), 10);
+      pageSelect.value = pageNum;
+      showPage(pageNum);
+    });
+
+    undoBoxBtn.addEventListener("click", function () {
+      var boxes = boxesPerPage[currentPageNum];
+      if (!boxes || boxes.length === 0) return;
+      boxes.pop();
+      renderExistingBoxOverlay();
+      renderAllRedactionInfo();
+      statusBox.textContent = "Removed the last box on page " + currentPageNum + ".";
+    });
+
+    clearPageBtn.addEventListener("click", function () {
+      var boxes = boxesPerPage[currentPageNum];
+      if (!boxes || boxes.length === 0) return;
+      boxesPerPage[currentPageNum] = [];
+      renderExistingBoxOverlay();
+      renderAllRedactionInfo();
+      statusBox.textContent = "Cleared all boxes on page " + currentPageNum + ".";
+    });
 
     function renderExistingBoxOverlay() {
       // Remove old preview boxes (existing markers), keep nothing else in overlay
@@ -399,13 +508,17 @@
 
     function renderRegionList() {
       regionListEl.innerHTML = "";
-      boxesPerPage[currentPageNum].forEach(function (b, i) {
+      var boxes = boxesPerPage[currentPageNum] || [];
+      boxes.forEach(function (b, i) {
         var item = document.createElement("div");
         item.className = "region-list-item";
         item.innerHTML = "<span>Box " + (i + 1) + "</span>" +
           '<button type="button" data-index="' + i + '" aria-label="Remove box">×</button>';
         regionListEl.appendChild(item);
       });
+      regionEmptyNote.textContent = boxes.length === 0 ? "No boxes on this page yet — click and drag on the page above to add one." : "";
+      undoBoxBtn.disabled = boxes.length === 0;
+      clearPageBtn.disabled = boxes.length === 0;
     }
 
     regionListEl.addEventListener("click", function (e) {
@@ -414,7 +527,7 @@
       var index = parseInt(btn.getAttribute("data-index"), 10);
       boxesPerPage[currentPageNum].splice(index, 1);
       renderExistingBoxOverlay();
-      renderRegionList();
+      renderAllRedactionInfo();
     });
 
     function handleFiles(files) {
@@ -446,6 +559,7 @@
 
         redactorLayout.style.display = "grid";
         showPage(1);
+        renderAllRedactionInfo();
         statusBox.textContent = "Click and drag on the page to draw a redaction box.";
       }).catch(function (err) {
         console.error(err);
@@ -516,9 +630,16 @@
         rect.h = Math.min(rect.h, pageCanvas.height - rect.y);
         boxesPerPage[currentPageNum].push(rect);
         renderExistingBoxOverlay();
-        renderRegionList();
+        renderAllRedactionInfo();
         statusBox.textContent = "Box added to page " + currentPageNum + ". Draw more, or download when ready.";
       }
+    }
+
+    function cancelDrag() {
+      if (!dragging) return;
+      dragging = false;
+      if (previewBox && redactOverlay.contains(previewBox)) redactOverlay.removeChild(previewBox);
+      previewBox = null;
     }
 
     redactOverlay.addEventListener("mousedown", startDrag);
@@ -527,11 +648,23 @@
     redactOverlay.addEventListener("touchstart", startDrag, { passive: false });
     window.addEventListener("touchmove", moveDrag, { passive: true });
     window.addEventListener("touchend", endDrag);
+    window.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") cancelDrag();
+    });
 
     downloadBtn.addEventListener("click", async function () {
       if (!pdfDocPdfjs) return;
+
+      var boxCount = totalBoxCount();
+      if (boxCount === 0) {
+        var proceed = window.confirm("You haven't drawn any redaction boxes yet. Download anyway? (Every page will still be flattened to an image, but nothing will be blacked out.)");
+        if (!proceed) return;
+      }
+
       downloadBtn.disabled = true;
-      statusBox.textContent = "Flattening pages and building the redacted PDF…";
+      statusBox.textContent = boxCount > 0
+        ? "Flattening " + totalPages + " page(s) with " + boxCount + " redaction box" + (boxCount === 1 ? "" : "es") + "…"
+        : "Flattening " + totalPages + " page(s)…";
 
       try {
         var outDoc = await PDFLib.PDFDocument.create();
