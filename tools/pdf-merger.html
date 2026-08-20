@@ -6,7 +6,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free PDF Merger Online — Combine PDF Files | Fixoona</title>
-  <meta name="description" content="Merge multiple PDF files into one document online for free, right in your browser. Reorder pages before combining. No uploads, no sign-up." />
+  <meta name="description" content="Merge multiple PDF files into one document online for free, right in your browser. Reorder files, see each one's page count, and combine them. No uploads, no sign-up." />
   <meta name="keywords" content="pdf merger, combine pdf files, merge pdf online free" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/pdf-merger" />
@@ -80,6 +80,11 @@
         "@type": "Question",
         "name": "Can I merge PDFs that have different page sizes?",
         "acceptedAnswer": { "@type": "Answer", "text": "Yes — each source PDF's pages are copied as-is, so a merged file can freely mix page sizes (e.g. some A4, some Letter) without being forced onto a single uniform size." }
+      },
+      {
+        "@type": "Question",
+        "name": "Where do the page counts next to each file come from?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Each PDF is read locally to generate its thumbnail, and the real page count from that read is shown next to the file size — the total shown once all files are loaded is the exact number of pages your merged PDF will contain." }
       }
     ]
   }
@@ -209,6 +214,10 @@
           <summary>Can I merge PDFs that have different page sizes?</summary>
           <p>Yes — each source PDF's pages are copied as-is, so a merged file can freely mix page sizes (e.g. some A4, some Letter) without being forced onto a single uniform size.</p>
         </details>
+        <details class="faq-item">
+          <summary>Where do the page counts next to each file come from?</summary>
+          <p>Each PDF is read locally to generate its thumbnail, and the real page count from that read is shown next to the file size — the total shown once all files are loaded is the exact number of pages your merged PDF will contain.</p>
+        </details>
       </div>
 
       <div class="related">
@@ -306,11 +315,13 @@
           ? '<img class="file-thumb" src="' + entry.thumb + '" alt="First page of ' + entry.file.name + '" draggable="false" />'
           : '<span class="file-thumb" aria-hidden="true"></span>';
 
+        var pageCountText = entry.pageCount != null ? entry.pageCount + (entry.pageCount === 1 ? " page" : " pages") : "…";
+
         item.innerHTML =
           '<span class="drag-handle" aria-hidden="true" title="Drag to reorder">' + FixoonaReorder.gripSVG + '</span>' +
           thumbHtml +
           '<span class="file-name">' + (index + 1) + '. ' + entry.file.name + '</span>' +
-          '<span class="file-meta">' + Fixora.formatBytes(entry.file.size) + '</span>' +
+          '<span class="file-meta">' + Fixora.formatBytes(entry.file.size) + ' · ' + pageCountText + '</span>' +
           '<span class="file-actions">' +
           '<button type="button" data-action="up" data-index="' + index + '" aria-label="Move up">↑</button>' +
           '<button type="button" data-action="down" data-index="' + index + '" aria-label="Move down">↓</button>' +
@@ -320,11 +331,19 @@
       });
 
       mergeBtn.disabled = files.length < 2;
-      statusBox.textContent = files.length === 0
-        ? ""
-        : files.length === 1
-          ? "Add at least one more PDF to merge."
-          : files.length + " PDFs ready — reorder if needed, then click Merge PDFs.";
+
+      if (files.length === 0) {
+        statusBox.textContent = "";
+      } else if (files.length === 1) {
+        statusBox.textContent = "Add at least one more PDF to merge.";
+      } else {
+        var knownCounts = files.filter(function (f) { return f.pageCount != null; });
+        var totalPages = knownCounts.reduce(function (sum, f) { return sum + f.pageCount; }, 0);
+        var totalText = knownCounts.length === files.length
+          ? totalPages + " total page" + (totalPages === 1 ? "" : "s")
+          : "counting pages…";
+        statusBox.textContent = files.length + " PDFs ready (" + totalText + ") — reorder if needed, then click Merge PDFs.";
+      }
     }
 
     FixoonaReorder.enable({
@@ -343,6 +362,7 @@
       try {
         var bytes = await entry.file.arrayBuffer();
         var pdf = await pdfjsLib.getDocument({ data: bytes }).promise;
+        entry.pageCount = pdf.numPages;
         var page = await pdf.getPage(1);
         var viewport = page.getViewport({ scale: 1 });
         var scale = 80 / viewport.width;
@@ -395,7 +415,7 @@
     function handleFiles(fileListInput) {
       Array.prototype.forEach.call(fileListInput, function (f) {
         if (f.type === "application/pdf") {
-          var entry = { file: f, thumb: null };
+          var entry = { file: f, thumb: null, pageCount: null };
           files.push(entry);
           generateThumb(entry);
         }
@@ -434,7 +454,7 @@
         downloadBtn.download = "merged.pdf";
         downloadBtn.style.display = "inline-flex";
 
-        statusBox.textContent = "Done! Merged " + files.length + " PDFs into one " + Fixora.formatBytes(blob.size) + " file.";
+        statusBox.textContent = "Done! Merged " + files.length + " PDFs (" + mergedPdf.getPageCount() + " pages total) into one " + Fixora.formatBytes(blob.size) + " file.";
       } catch (err) {
         console.error(err);
         statusBox.textContent = "Something went wrong merging those PDFs. Make sure all files are valid PDFs.";
