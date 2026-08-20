@@ -6,21 +6,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Sales Tax Calculator Online | Fixoona</title>
-  <meta name="description" content="Free sales tax calculator — add tax to a price, or reverse-calculate the pre-tax price and tax amount from a tax-inclusive total. Instant, live results." />
-  <meta name="keywords" content="sales tax calculator, sales tax calculator online free, reverse sales tax calculator" />
+  <meta name="description" content="Free sales tax calculator — add tax to a price, reverse-calculate the pre-tax price from a tax-inclusive total, or total a multi-item receipt. Includes quick-fill U.S. state base tax rate presets. Instant, live results." />
+  <meta name="keywords" content="sales tax calculator, sales tax calculator online free, reverse sales tax calculator, multi item sales tax calculator, state sales tax rates" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/sales-tax-calculator" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixoona" />
   <meta property="og:title" content="Free Sales Tax Calculator Online" />
-  <meta property="og:description" content="Add sales tax to a price, or reverse-calculate the price before tax, for free." />
+  <meta property="og:description" content="Add sales tax to a price, reverse-calculate the price before tax, or total a multi-item receipt — with U.S. state rate presets, for free." />
   <meta property="og:url" content="https://fixoona.com/tools/sales-tax-calculator" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Sales Tax Calculator Online" />
-  <meta name="twitter:description" content="Add sales tax to a price, or reverse-calculate the price before tax, for free." />
+  <meta name="twitter:description" content="Add sales tax to a price, reverse-calculate the price before tax, or total a multi-item receipt — with U.S. state rate presets, for free." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='23' width='15' height='54' rx='7.5' fill='white'/%3E%3Crect x='30' y='23' width='42' height='14' rx='7' fill='white'/%3E%3Crect x='30' y='46' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -80,6 +80,16 @@
         "@type": "Question",
         "name": "Is my price or purchase information saved anywhere?",
         "acceptedAnswer": { "@type": "Answer", "text": "No — everything is calculated locally in your browser and nothing you enter is sent to a server or stored." }
+      },
+      {
+        "@type": "Question",
+        "name": "How accurate is the state tax rate quick-fill?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The state dropdown fills in the base state-level sales tax rate only — it does not include county, city, or special district taxes, which can add several more percentage points depending on exactly where you are. Rates also change over time as states adjust them. Treat it as a fast starting point, not an authoritative or current figure, and check your local tax authority for the exact combined rate that applies to you." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Multiple Items mode calculate the total?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Each item's price is multiplied by its quantity and added together to get a subtotal, then the tax rate is applied once to that subtotal (not to each item separately) to get the tax amount, and the total is the subtotal plus that tax amount — matching how tax is actually applied on a real multi-item receipt." }
       }
     ]
   }
@@ -126,6 +136,66 @@
         <div class="pill-row" id="modeRow">
           <button class="pill active" data-mode="add" type="button">Add Tax to a Price</button>
           <button class="pill" data-mode="reverse" type="button">Find Price Before Tax</button>
+          <button class="pill" data-mode="items" type="button">Multiple Items</button>
+        </div>
+
+        <div class="field" style="margin-top:16px;">
+          <label for="stateSelect">Quick-fill tax rate from a U.S. state (optional)</label>
+          <select id="stateSelect">
+            <option value="">— Enter rate manually —</option>
+            <option value="4">Alabama (4%)</option>
+            <option value="0">Alaska (0% state — local taxes may still apply)</option>
+            <option value="5.6">Arizona (5.6%)</option>
+            <option value="6.5">Arkansas (6.5%)</option>
+            <option value="7.25">California (7.25%)</option>
+            <option value="2.9">Colorado (2.9%)</option>
+            <option value="6.35">Connecticut (6.35%)</option>
+            <option value="0">Delaware (0%)</option>
+            <option value="6">Florida (6%)</option>
+            <option value="4">Georgia (4%)</option>
+            <option value="4">Hawaii (4% general excise)</option>
+            <option value="6">Idaho (6%)</option>
+            <option value="6.25">Illinois (6.25%)</option>
+            <option value="7">Indiana (7%)</option>
+            <option value="6">Iowa (6%)</option>
+            <option value="6.5">Kansas (6.5%)</option>
+            <option value="6">Kentucky (6%)</option>
+            <option value="4.45">Louisiana (4.45%)</option>
+            <option value="5.5">Maine (5.5%)</option>
+            <option value="6">Maryland (6%)</option>
+            <option value="6.25">Massachusetts (6.25%)</option>
+            <option value="6">Michigan (6%)</option>
+            <option value="6.875">Minnesota (6.875%)</option>
+            <option value="7">Mississippi (7%)</option>
+            <option value="4.225">Missouri (4.225%)</option>
+            <option value="0">Montana (0%)</option>
+            <option value="5.5">Nebraska (5.5%)</option>
+            <option value="6.85">Nevada (6.85%)</option>
+            <option value="0">New Hampshire (0%)</option>
+            <option value="6.625">New Jersey (6.625%)</option>
+            <option value="5">New Mexico (5% gross receipts)</option>
+            <option value="4">New York (4%)</option>
+            <option value="4.75">North Carolina (4.75%)</option>
+            <option value="5">North Dakota (5%)</option>
+            <option value="5.75">Ohio (5.75%)</option>
+            <option value="4.5">Oklahoma (4.5%)</option>
+            <option value="0">Oregon (0%)</option>
+            <option value="6">Pennsylvania (6%)</option>
+            <option value="7">Rhode Island (7%)</option>
+            <option value="6">South Carolina (6%)</option>
+            <option value="4.2">South Dakota (4.2%)</option>
+            <option value="7">Tennessee (7%)</option>
+            <option value="6.25">Texas (6.25%)</option>
+            <option value="4.85">Utah (4.85%)</option>
+            <option value="6">Vermont (6%)</option>
+            <option value="4.3">Virginia (4.3%)</option>
+            <option value="6.5">Washington (6.5%)</option>
+            <option value="6">Washington D.C. (6%)</option>
+            <option value="6">West Virginia (6%)</option>
+            <option value="5">Wisconsin (5%)</option>
+            <option value="4">Wyoming (4%)</option>
+          </select>
+          <p style="font-size:0.8rem;color:var(--color-text-muted);margin-top:6px;">These are approximate <strong>base state rates only</strong> — actual combined rates with county/city/district taxes are often higher and change over time. Use this as a starting point, not a substitute for checking your exact local rate.</p>
         </div>
 
         <div id="addFields">
@@ -162,7 +232,21 @@
           </div>
         </div>
 
-        <p style="font-size:0.85rem;color:var(--color-text-muted);margin-top:16px;">Sales tax rates vary by U.S. state, county, city, and country — enter your local rate rather than a rate you find elsewhere, since this tool doesn't assume or look up any specific rate for you.</p>
+        <div id="itemsFields" style="display:none;">
+          <div class="field">
+            <label for="taxRateItems">Tax Rate (%)</label>
+            <input type="number" id="taxRateItems" min="0" step="0.01" value="8" style="max-width:160px;" />
+          </div>
+          <div id="itemRows" style="margin-top:12px;display:flex;flex-direction:column;gap:8px;"></div>
+          <button class="btn btn-secondary" id="addItemBtn" type="button" style="margin-top:10px;">+ Add Item</button>
+          <div class="stat-row">
+            <div class="stat"><strong id="statSubtotal">–</strong><span>Subtotal</span></div>
+            <div class="stat"><strong id="statTaxAmountItems">–</strong><span>Tax Amount</span></div>
+            <div class="stat"><strong id="statTotalItems">–</strong><span>Total</span></div>
+          </div>
+        </div>
+
+        <p style="font-size:0.85rem;color:var(--color-text-muted);margin-top:16px;">Sales tax rates vary by U.S. state, county, city, and country — enter your local rate rather than a rate you find elsewhere, since this tool doesn't assume or look up any specific rate for you unless you use the state quick-fill above.</p>
 
         <div class="output-box" id="statusBox"></div>
       </div>
@@ -198,6 +282,14 @@
         <details class="faq-item">
           <summary>Is my price or purchase information saved anywhere?</summary>
           <p>No — everything is calculated locally in your browser and nothing you enter is sent to a server or stored.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How accurate is the state tax rate quick-fill?</summary>
+          <p>The state dropdown fills in the base state-level sales tax rate only — it does not include county, city, or special district taxes, which can add several more percentage points depending on exactly where you are. Rates also change over time as states adjust them. Treat it as a fast starting point, not an authoritative or current figure, and check your local tax authority for the exact combined rate that applies to you.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does Multiple Items mode calculate the total?</summary>
+          <p>Each item's price is multiplied by its quantity and added together to get a subtotal, then the tax rate is applied once to that subtotal (not to each item separately) to get the tax amount, and the total is the subtotal plus that tax amount — matching how tax is actually applied on a real multi-item receipt.</p>
         </details>
       </div>
 
@@ -275,7 +367,10 @@
     var mode = "add";
     var addFields = document.getElementById("addFields");
     var reverseFields = document.getElementById("reverseFields");
+    var itemsFields = document.getElementById("itemsFields");
     var statusBox = document.getElementById("statusBox");
+    var itemRows = document.getElementById("itemRows");
+    var itemIdCounter = 0;
 
     document.querySelectorAll("#modeRow [data-mode]").forEach(function (pill) {
       pill.addEventListener("click", function () {
@@ -284,13 +379,47 @@
         mode = pill.getAttribute("data-mode");
         addFields.style.display = mode === "add" ? "block" : "none";
         reverseFields.style.display = mode === "reverse" ? "block" : "none";
+        itemsFields.style.display = mode === "items" ? "block" : "none";
         calculate();
       });
+    });
+
+    document.getElementById("stateSelect").addEventListener("change", function () {
+      if (this.value === "") return;
+      if (mode === "add") document.getElementById("taxRateAdd").value = this.value;
+      else if (mode === "reverse") document.getElementById("taxRateReverse").value = this.value;
+      else document.getElementById("taxRateItems").value = this.value;
+      calculate();
     });
 
     function formatMoney(n) {
       return "$" + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
+
+    function addItemRow(desc, price, qty) {
+      itemIdCounter++;
+      var id = itemIdCounter;
+      var row = document.createElement("div");
+      row.className = "row";
+      row.style.alignItems = "flex-end";
+      row.dataset.rowId = id;
+      row.innerHTML =
+        '<div class="field" style="flex:2;"><label>Item</label><input type="text" class="item-desc" placeholder="e.g. Widget" value="' + (desc || "") + '" /></div>' +
+        '<div class="field"><label>Price ($)</label><input type="number" class="item-price" min="0" step="0.01" value="' + (price != null ? price : "") + '" /></div>' +
+        '<div class="field" style="max-width:100px;"><label>Qty</label><input type="number" class="item-qty" min="1" step="1" value="' + (qty != null ? qty : 1) + '" /></div>' +
+        '<button class="btn btn-secondary item-remove" type="button" style="height:44px;">Remove</button>';
+      itemRows.appendChild(row);
+      row.querySelectorAll("input").forEach(function (el) { el.addEventListener("input", calculate); });
+      row.querySelector(".item-remove").addEventListener("click", function () {
+        row.remove();
+        calculate();
+      });
+    }
+
+    document.getElementById("addItemBtn").addEventListener("click", function () {
+      addItemRow("", "", 1);
+      calculate();
+    });
 
     function calculate() {
       if (mode === "add") {
@@ -308,7 +437,7 @@
         document.getElementById("statTaxAmountAdd").textContent = formatMoney(taxAmount);
         document.getElementById("statTotalAdd").textContent = formatMoney(total);
         statusBox.textContent = "A " + formatMoney(price) + " price with " + rate + "% tax comes to " + formatMoney(total) + ".";
-      } else {
+      } else if (mode === "reverse") {
         var totalPrice = parseFloat(document.getElementById("totalPrice").value);
         var rateReverse = parseFloat(document.getElementById("taxRateReverse").value);
 
@@ -323,13 +452,40 @@
         document.getElementById("statPreTax").textContent = formatMoney(preTax);
         document.getElementById("statTaxAmountReverse").textContent = formatMoney(taxAmountReverse);
         statusBox.textContent = "A total of " + formatMoney(totalPrice) + " with " + rateReverse + "% tax means the price before tax was " + formatMoney(preTax) + ".";
+      } else {
+        var rateItems = parseFloat(document.getElementById("taxRateItems").value);
+        if (isNaN(rateItems) || rateItems < 0) {
+          statusBox.textContent = "Enter a valid tax rate.";
+          return;
+        }
+
+        var subtotal = 0;
+        var itemCount = 0;
+        itemRows.querySelectorAll(".row").forEach(function (row) {
+          var p = parseFloat(row.querySelector(".item-price").value);
+          var q = parseFloat(row.querySelector(".item-qty").value);
+          if (!isNaN(p) && p >= 0 && !isNaN(q) && q > 0) {
+            subtotal += p * q;
+            itemCount++;
+          }
+        });
+
+        var taxAmountItems = subtotal * (rateItems / 100);
+        var totalItems = subtotal + taxAmountItems;
+
+        document.getElementById("statSubtotal").textContent = formatMoney(subtotal);
+        document.getElementById("statTaxAmountItems").textContent = formatMoney(taxAmountItems);
+        document.getElementById("statTotalItems").textContent = formatMoney(totalItems);
+        statusBox.textContent = itemCount + " item" + (itemCount === 1 ? "" : "s") + " totaling " + formatMoney(subtotal) + " plus " + rateItems + "% tax (" + formatMoney(taxAmountItems) + ") comes to " + formatMoney(totalItems) + ".";
       }
     }
 
-    document.querySelectorAll("#addFields input, #reverseFields input").forEach(function (el) {
+    document.querySelectorAll("#addFields input, #reverseFields input, #itemsFields input").forEach(function (el) {
       el.addEventListener("input", calculate);
     });
 
+    addItemRow("Item 1", 25, 2);
+    addItemRow("Item 2", 10, 1);
     calculate();
   </script>
 </body>
