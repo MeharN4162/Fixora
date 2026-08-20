@@ -6,8 +6,8 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free ASCII Text Art Generator — Big Block Letters | Fixoona</title>
-  <meta name="description" content="Turn any word into big block-letter ASCII art banner text, with real uppercase and lowercase glyphs plus !, ., and ? punctuation, instantly, in your browser. Great for code comments, terminals, and forum posts. Free, no sign-up." />
-  <meta name="keywords" content="ascii text art generator, ascii banner generator, block letter text generator, text to ascii art" />
+  <meta name="description" content="Turn any word — or multiple lines — into big block-letter ASCII art banner text, with real uppercase and lowercase glyphs plus !, ., and ? punctuation, left/center/right alignment, an optional border frame, and a one-click .txt download, instantly, in your browser. Great for code comments, terminals, and forum posts. Free, no sign-up." />
+  <meta name="keywords" content="ascii text art generator, ascii banner generator, block letter text generator, text to ascii art, multi-line ascii art, ascii art border" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/ascii-text-art-generator" />
 
@@ -80,6 +80,26 @@
         "@type": "Question",
         "name": "Does this use an image or a real bitmap font file?",
         "acceptedAnswer": { "@type": "Answer", "text": "No — there's no image or font file involved. Each letter is a small hardcoded grid of hash and space characters defined directly in the page's JavaScript, assembled column by column into plain text." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I create multi-line ASCII art with different alignment?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — press Enter in the text box to start a new line, and each line becomes its own block-letter banner. Use the Left, Center, or Right alignment control to decide how shorter lines are padded to match the widest line in your art." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I add a border around the ASCII art?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — turning on \"Add a border frame around the output\" wraps the finished banner in a plain +, -, and | box drawn from the same monospace characters, so it still pastes cleanly anywhere a fixed-width font is supported." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I save the ASCII art as a file instead of copying it?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — the Download .txt button saves the exact ASCII art shown on screen as a plain-text .txt file, with the same alignment and border (if enabled) preserved." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the preview text size control change the actual ASCII art?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the preview size slider only changes how large the art appears on your screen; it doesn't add or remove any characters, so copying or downloading still gives you the exact same plain-text content." }
       }
     ]
   }
@@ -118,15 +138,32 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🔠</div>
       <h1>ASCII Text Art Generator</h1>
-      <p>Turn any word into big block-letter banner text made of plain # characters, with distinct uppercase and lowercase glyphs plus !, ., and ? punctuation, ready to paste anywhere monospace.</p>
+      <p>Turn any word — or several lines — into big block-letter banner text made of plain # characters, with distinct uppercase and lowercase glyphs, punctuation, left/center/right alignment, an optional border frame, and a one-click .txt download, ready to paste or save anywhere monospace.</p>
     </section>
 
     <section class="container">
       <div class="tool-panel">
         <div class="field">
           <label for="asciiInput">Your Text</label>
-          <input type="text" id="asciiInput" placeholder="Type a word…" maxlength="24" />
+          <textarea id="asciiInput" placeholder="Type a word or a few lines…" maxlength="150" rows="3" style="resize:vertical;"></textarea>
         </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Alignment (for multi-line text)</label>
+            <div class="row" style="gap:18px;">
+              <label class="check-row"><input type="radio" name="alignOption" value="left" /> Left</label>
+              <label class="check-row"><input type="radio" name="alignOption" value="center" checked /> Center</label>
+              <label class="check-row"><input type="radio" name="alignOption" value="right" /> Right</label>
+            </div>
+          </div>
+          <div class="field">
+            <label for="previewSizeRange">Preview Text Size</label>
+            <input type="range" id="previewSizeRange" min="10" max="26" value="15" style="width:100%;" />
+          </div>
+        </div>
+
+        <label class="check-row"><input type="checkbox" id="borderToggle" /> Add a border frame around the output</label>
 
         <div class="field" style="margin-top:22px;">
           <label for="asciiOutput">ASCII Art</label>
@@ -135,6 +172,7 @@
 
         <div class="actions">
           <button class="btn btn-primary" id="copyBtn">Copy ASCII Art</button>
+          <button class="btn btn-secondary" id="downloadBtn">Download .txt</button>
           <button class="btn btn-secondary" id="clearBtn">Clear</button>
         </div>
         <div class="copy-note" id="copyNote"></div>
@@ -143,10 +181,12 @@
       <div class="howto">
         <h2>How to Generate ASCII Text Art</h2>
         <ol class="howto-steps">
-          <li>Type your text into the input box — uppercase letters, lowercase letters, numbers, spaces, and !, ., or ? are all supported with their own distinct glyphs.</li>
+          <li>Type your text into the box — uppercase letters, lowercase letters, numbers, spaces, and !, ., or ? are all supported with their own distinct glyphs. Press Enter to add another line.</li>
           <li>The block-letter ASCII art renders instantly below in monospace text, keeping the case you typed.</li>
-          <li>Click "Copy ASCII Art" to copy the full multi-line art to your clipboard.</li>
-          <li>Paste it into a code comment, terminal, forum post, or anywhere that keeps a monospace font.</li>
+          <li>If you typed more than one line, pick Left, Center, or Right alignment to control how shorter lines are padded to match the widest line.</li>
+          <li>Optionally turn on the border frame, and drag the preview size slider to zoom the on-screen art (this only affects how big it looks, not the text itself).</li>
+          <li>Click "Copy ASCII Art" to copy it to your clipboard, or "Download .txt" to save it as a plain-text file.</li>
+          <li>Paste or open it in a code comment, terminal, forum post, or anywhere that keeps a monospace font.</li>
         </ol>
       </div>
 
@@ -171,6 +211,22 @@
         <details class="faq-item">
           <summary>Does this use an image or a real bitmap font file?</summary>
           <p>No — there's no image or font file involved. Each letter is a small hardcoded grid of hash and space characters defined directly in the page's JavaScript, assembled column by column into plain text.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I create multi-line ASCII art with different alignment?</summary>
+          <p>Yes — press Enter in the text box to start a new line, and each line becomes its own block-letter banner. Use the Left, Center, or Right alignment control to decide how shorter lines are padded to match the widest line in your art.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I add a border around the ASCII art?</summary>
+          <p>Yes — turning on "Add a border frame around the output" wraps the finished banner in a plain +, -, and | box drawn from the same monospace characters, so it still pastes cleanly anywhere a fixed-width font is supported.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I save the ASCII art as a file instead of copying it?</summary>
+          <p>Yes — the Download .txt button saves the exact ASCII art shown on screen as a plain-text .txt file, with the same alignment and border (if enabled) preserved.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does the preview text size control change the actual ASCII art?</summary>
+          <p>No — the preview size slider only changes how large the art appears on your screen; it doesn't add or remove any characters, so copying or downloading still gives you the exact same plain-text content.</p>
         </details>
       </div>
 
@@ -314,12 +370,15 @@
       "?": [" ### ", "#   #", "  ## ", "     ", "  #  "]
     };
     var FONT_ROWS = 5;
+    var MAX_LINE_CHARS = 24;
+    var MAX_LINES = 6;
 
-    function textToAsciiArt(input) {
-      var chars = input.split("");
+    // Converts one line of text into its 5-row block-letter grid.
+    // Returns null when the line has no renderable characters (e.g. blank line).
+    function lineToRows(line) {
       var rows = ["", "", "", "", ""];
       var any = false;
-      chars.forEach(function (ch) {
+      line.split("").forEach(function (ch) {
         var glyph = FONT[ch] || FONT[ch.toUpperCase()];
         if (!glyph) return;
         any = true;
@@ -327,20 +386,79 @@
           rows[r] += glyph[r] + " ";
         }
       });
-      if (!any) return "";
-      return rows.map(function (r) { return r.replace(/ $/, ""); }).join("\n");
+      if (!any) return null;
+      return rows.map(function (r) { return r.replace(/ $/, ""); });
+    }
+
+    // Builds the full multi-line ASCII art: each input line becomes its own
+    // block-letter banner, shorter banners are padded to match the widest one
+    // according to the chosen alignment, and an optional border frame is
+    // drawn around the whole result using plain +, -, and | characters.
+    function buildAsciiArt(text, align, withBorder) {
+      var lines = text.split(/\r?\n/).slice(0, MAX_LINES);
+      var blocks = [];
+      lines.forEach(function (line) {
+        var rows = lineToRows(line.slice(0, MAX_LINE_CHARS));
+        if (rows) blocks.push(rows);
+      });
+      if (!blocks.length) return "";
+
+      var maxWidth = 0;
+      blocks.forEach(function (b) { maxWidth = Math.max(maxWidth, b[0].length); });
+
+      var alignedBlocks = blocks.map(function (b) {
+        var diff = maxWidth - b[0].length;
+        var left = align === "right" ? diff : align === "center" ? Math.floor(diff / 2) : 0;
+        var right = diff - left;
+        var leftPad = " ".repeat(left);
+        var rightPad = " ".repeat(right);
+        return b.map(function (row) { return leftPad + row + rightPad; });
+      });
+
+      var outRows = [];
+      alignedBlocks.forEach(function (b, idx) {
+        if (idx > 0) outRows.push(" ".repeat(maxWidth));
+        outRows = outRows.concat(b);
+      });
+
+      if (withBorder) {
+        var border = "+" + "-".repeat(maxWidth + 2) + "+";
+        var framed = [border];
+        outRows.forEach(function (row) { framed.push("| " + row + " |"); });
+        framed.push(border);
+        outRows = framed;
+      }
+
+      return outRows.join("\n");
     }
 
     var asciiInput = document.getElementById("asciiInput");
     var asciiOutput = document.getElementById("asciiOutput");
     var copyNote = document.getElementById("copyNote");
+    var borderToggle = document.getElementById("borderToggle");
+    var previewSizeRange = document.getElementById("previewSizeRange");
+    var alignRadios = document.querySelectorAll('input[name="alignOption"]');
+
+    function getAlign() {
+      var checked = document.querySelector('input[name="alignOption"]:checked');
+      return checked ? checked.value : "center";
+    }
 
     function render() {
-      asciiOutput.textContent = textToAsciiArt(asciiInput.value);
+      asciiOutput.textContent = buildAsciiArt(asciiInput.value, getAlign(), borderToggle.checked);
+    }
+
+    function updatePreviewSize() {
+      asciiOutput.style.fontSize = previewSizeRange.value + "px";
     }
 
     asciiInput.addEventListener("input", render);
-    asciiInput.value = "Fixoona!";
+    borderToggle.addEventListener("change", render);
+    alignRadios.forEach(function (r) { r.addEventListener("change", render); });
+    previewSizeRange.addEventListener("input", updatePreviewSize);
+
+    asciiInput.value = "Fixoona!\nAscii Art";
+    updatePreviewSize();
     render();
 
     document.getElementById("copyBtn").addEventListener("click", function () {
@@ -351,6 +469,17 @@
       var escaped = plain.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
       var html = "<pre style=\"font-family:'Courier New',Consolas,monospace;white-space:pre;\">" + escaped + "</pre>";
       Fixora.copyRichText(plain, html, copyNote);
+    });
+
+    document.getElementById("downloadBtn").addEventListener("click", function () {
+      var plain = asciiOutput.textContent;
+      if (!plain) {
+        copyNote.textContent = "Type something first.";
+        setTimeout(function () { copyNote.textContent = ""; }, 2000);
+        return;
+      }
+      var blob = new Blob([plain], { type: "text/plain" });
+      Fixora.downloadBlob(blob, "ascii-text-art.txt");
     });
 
     document.getElementById("clearBtn").addEventListener("click", function () {
