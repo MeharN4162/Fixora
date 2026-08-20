@@ -6,8 +6,8 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Text to PDF Converter Online | Fixoona</title>
-  <meta name="description" content="Convert plain text to a PDF online for free, right in your browser. Paste or upload a .txt file and download a paginated PDF. No uploads to a server, no sign-up." />
-  <meta name="keywords" content="text to pdf, convert txt to pdf online free, plain text to pdf" />
+  <meta name="description" content="Convert plain text to a PDF online for free, right in your browser. Choose page size (Letter/A4/Legal), font (Helvetica/Times/Courier), font size, margins, and left/center/justify alignment. No uploads to a server, no sign-up." />
+  <meta name="keywords" content="text to pdf, convert txt to pdf online free, plain text to pdf, txt to pdf with font size and margins" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/text-to-pdf" />
 
@@ -74,7 +74,17 @@
       {
         "@type": "Question",
         "name": "Can I use a custom font or change text color?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No — this tool always uses the standard Helvetica font in plain black text; there's no option for custom fonts, bold/italic formatting, or color in the current version." }
+        "acceptedAnswer": { "@type": "Answer", "text": "You can choose between Helvetica, Times New Roman, and Courier, plus adjust font size, margins, and text alignment; text color is fixed to plain black and there's no bold/italic formatting in the current version." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the Justify text alignment work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Justify stretches the spacing between words so each wrapped line — except the last line of a paragraph and lines with only one word — reaches the full width of the page margins, the same way word processors justify text; Left and Center alignment don't add extra spacing." }
+      },
+      {
+        "@type": "Question",
+        "name": "What page sizes and margins can I choose?",
+        "acceptedAnswer": { "@type": "Answer", "text": "You can pick Letter, A4, or Legal for page size, and Narrow (0.5 in), Normal (0.78 in), or Wide (1 in) margins; the tool recalculates line wrapping for whichever combination you choose so text never overflows the page width." }
       },
       {
         "@type": "Question",
@@ -140,15 +150,36 @@
             <select id="pageSizeSelect">
               <option value="letter" selected>Letter (8.5 × 11 in)</option>
               <option value="a4">A4</option>
+              <option value="legal">Legal (8.5 × 14 in)</option>
             </select>
           </div>
           <div class="field" style="flex:1;min-width:180px;">
-            <label for="fontSizeSelect">Font Size</label>
-            <select id="fontSizeSelect">
-              <option value="10">Small (10pt)</option>
-              <option value="12" selected>Normal (12pt)</option>
-              <option value="14">Large (14pt)</option>
+            <label for="fontFamilySelect">Font</label>
+            <select id="fontFamilySelect">
+              <option value="helvetica" selected>Helvetica</option>
+              <option value="times">Times New Roman</option>
+              <option value="courier">Courier (monospace)</option>
             </select>
+          </div>
+          <div class="field" style="flex:1;min-width:180px;">
+            <label for="marginSelect">Margins</label>
+            <select id="marginSelect">
+              <option value="narrow">Narrow (0.5 in)</option>
+              <option value="normal" selected>Normal (0.78 in)</option>
+              <option value="wide">Wide (1 in)</option>
+            </select>
+          </div>
+          <div class="field" style="flex:1;min-width:180px;">
+            <label for="alignSelect">Text Alignment</label>
+            <select id="alignSelect">
+              <option value="left" selected>Left</option>
+              <option value="center">Center</option>
+              <option value="justify">Justify</option>
+            </select>
+          </div>
+          <div class="field" style="flex:1;min-width:220px;">
+            <label for="fontSizeRange">Font Size: <span id="fontSizeValue">12</span>pt</label>
+            <input type="range" id="fontSizeRange" min="8" max="24" step="1" value="12" style="width:100%;" />
           </div>
         </div>
 
@@ -164,7 +195,7 @@
         <h2>How to Convert Text to PDF</h2>
         <ol class="howto-steps">
           <li>Type or paste your text into the box, or click "Upload .txt File" to load a text file.</li>
-          <li>Choose a Page Size (Letter or A4) and Font Size (Small/Normal/Large).</li>
+          <li>Choose a Page Size (Letter, A4, or Legal), Font (Helvetica, Times New Roman, or Courier), Margins (Narrow/Normal/Wide), Text Alignment (Left/Center/Justify), and drag the Font Size slider (8–24pt).</li>
           <li>Click "Convert to PDF" — long lines wrap automatically and new pages are added as needed.</li>
           <li>Download the finished PDF.</li>
         </ol>
@@ -186,7 +217,15 @@
         </details>
         <details class="faq-item">
           <summary>Can I use a custom font or change text color?</summary>
-          <p>No — this tool always uses the standard Helvetica font in plain black text; there's no option for custom fonts, bold/italic formatting, or color in the current version.</p>
+          <p>You can choose between Helvetica, Times New Roman, and Courier, plus adjust font size, margins, and text alignment; text color is fixed to plain black and there's no bold/italic formatting in the current version.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does the Justify text alignment work?</summary>
+          <p>Justify stretches the spacing between words so each wrapped line — except the last line of a paragraph and lines with only one word — reaches the full width of the page margins, the same way word processors justify text; Left and Center alignment don't add extra spacing.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What page sizes and margins can I choose?</summary>
+          <p>You can pick Letter, A4, or Legal for page size, and Narrow (0.5 in), Normal (0.78 in), or Wide (1 in) margins; the tool recalculates line wrapping for whichever combination you choose so text never overflows the page width.</p>
         </details>
         <details class="faq-item">
           <summary>What file types can I upload with "Upload .txt File"?</summary>
@@ -271,17 +310,43 @@
     var txtFileInput = document.getElementById("txtFileInput");
     var clearBtn = document.getElementById("clearBtn");
     var pageSizeSelect = document.getElementById("pageSizeSelect");
-    var fontSizeSelect = document.getElementById("fontSizeSelect");
+    var fontFamilySelect = document.getElementById("fontFamilySelect");
+    var marginSelect = document.getElementById("marginSelect");
+    var alignSelect = document.getElementById("alignSelect");
+    var fontSizeRange = document.getElementById("fontSizeRange");
+    var fontSizeValue = document.getElementById("fontSizeValue");
     var convertBtn = document.getElementById("convertBtn");
     var downloadBtn = document.getElementById("downloadBtn");
     var statusBox = document.getElementById("statusBox");
 
     var lastDownloadUrl = null;
 
+    // Verified against assets/js/vendor/pdf-lib.min.js: PDFLib.PageSizes has
+    // Letter:[612,792], A4:[595.28,841.89], Legal:[612,1008] (points, 72/in).
     var PAGE_SIZES = {
       letter: [612, 792],
-      a4: [595.28, 841.89]
+      a4: [595.28, 841.89],
+      legal: [612, 1008]
     };
+
+    // Verified StandardFonts enum values present in the vendored pdf-lib:
+    // Helvetica, TimesRoman ("Times-Roman"), Courier.
+    var FONTS = {
+      helvetica: "Helvetica",
+      times: "TimesRoman",
+      courier: "Courier"
+    };
+
+    var MARGINS = {
+      narrow: 36,
+      normal: 56,
+      wide: 72
+    };
+
+    fontSizeRange.addEventListener("input", function () {
+      fontSizeValue.textContent = fontSizeRange.value;
+      resetDownload();
+    });
 
     function resetDownload() {
       if (lastDownloadUrl) {
@@ -294,7 +359,9 @@
 
     textInput.addEventListener("input", resetDownload);
     pageSizeSelect.addEventListener("change", resetDownload);
-    fontSizeSelect.addEventListener("change", resetDownload);
+    fontFamilySelect.addEventListener("change", resetDownload);
+    marginSelect.addEventListener("change", resetDownload);
+    alignSelect.addEventListener("change", resetDownload);
 
     uploadTxtBtn.addEventListener("click", function () { txtFileInput.click(); });
     txtFileInput.addEventListener("change", function () {
@@ -320,19 +387,28 @@
       textInput.focus();
     });
 
+    // Returns an array of line objects: { text, words, forceSplit, isLast }.
+    // `words` (the space-separated tokens that make up the line) is kept so
+    // justify alignment can distribute extra space between them; it's null
+    // for force-split fragments of an overlong word, which can't be justified.
+    // `isLast` marks the final wrapped line of this paragraph (justify skips it,
+    // matching normal word-processor behavior).
     function wrapLineToWidth(line, font, size, maxWidth) {
-      if (line === "") return [""];
+      if (line === "") return [{ text: "", words: [], forceSplit: false, isLast: true }];
       var words = line.split(" ");
       var lines = [];
       var current = "";
+      var currentWords = [];
 
       words.forEach(function (word) {
         var candidate = current ? current + " " + word : word;
         if (font.widthOfTextAtSize(candidate, size) <= maxWidth || !current) {
           current = candidate;
+          currentWords.push(word);
         } else {
-          lines.push(current);
+          lines.push({ text: current, words: currentWords, forceSplit: false });
           current = word;
+          currentWords = [word];
         }
 
         while (font.widthOfTextAtSize(current, size) > maxWidth && current.length > 1) {
@@ -342,13 +418,50 @@
             if (font.widthOfTextAtSize(current.slice(0, mid), size) <= maxWidth) lo = mid;
             else hi = mid - 1;
           }
-          lines.push(current.slice(0, lo));
-          current = current.slice(lo);
+          var piece = current.slice(0, lo);
+          var rest = current.slice(lo);
+          lines.push({ text: piece, words: null, forceSplit: true });
+          current = rest;
+          currentWords = rest ? [rest] : [];
         }
       });
 
-      if (current) lines.push(current);
-      return lines.length ? lines : [""];
+      if (current) lines.push({ text: current, words: currentWords, forceSplit: false });
+      if (!lines.length) return [{ text: "", words: [], forceSplit: false, isLast: true }];
+      lines[lines.length - 1].isLast = true;
+      return lines;
+    }
+
+    // Draws one wrapped line at the correct x for the chosen alignment.
+    // Left: draw at the margin. Center: center the whole line's measured
+    // width within the content column. Justify: spread the natural
+    // inter-word gaps so the line's words span the full content width —
+    // skipped for the last line of a paragraph, single-word lines, and
+    // force-split word fragments, same as standard word-processor justify.
+    function drawLine(page, lineObj, font, size, x0, y, contentWidth, align) {
+      var text = lineObj.text;
+      if (!text) return;
+      var lineWidth = font.widthOfTextAtSize(text, size);
+
+      if (align === "center") {
+        page.drawText(text, { x: x0 + Math.max(0, (contentWidth - lineWidth) / 2), y: y, size: size, font: font });
+        return;
+      }
+
+      if (align === "justify" && !lineObj.forceSplit && lineObj.words && lineObj.words.length > 1 && !lineObj.isLast) {
+        var wordWidths = lineObj.words.map(function (w) { return font.widthOfTextAtSize(w, size); });
+        var totalWordWidth = wordWidths.reduce(function (a, b) { return a + b; }, 0);
+        var gaps = lineObj.words.length - 1;
+        var gapWidth = (contentWidth - totalWordWidth) / gaps;
+        var x = x0;
+        lineObj.words.forEach(function (w, i) {
+          page.drawText(w, { x: x, y: y, size: size, font: font });
+          x += wordWidths[i] + gapWidth;
+        });
+        return;
+      }
+
+      page.drawText(text, { x: x0, y: y, size: size, font: font });
     }
 
     convertBtn.addEventListener("click", async function () {
@@ -364,13 +477,14 @@
 
       try {
         var pageSize = PAGE_SIZES[pageSizeSelect.value];
-        var fontSize = parseInt(fontSizeSelect.value, 10);
-        var margin = 56;
+        var fontSize = parseInt(fontSizeRange.value, 10);
+        var margin = MARGINS[marginSelect.value];
+        var align = alignSelect.value;
         var lineHeight = fontSize * 1.35;
         var contentWidth = pageSize[0] - margin * 2;
 
         var doc = await PDFLib.PDFDocument.create();
-        var font = await doc.embedFont(PDFLib.StandardFonts.Helvetica);
+        var font = await doc.embedFont(PDFLib.StandardFonts[FONTS[fontFamilySelect.value]]);
 
         var rawLines = text.replace(/\r\n/g, "\n").split("\n");
         var allLines = [];
@@ -383,14 +497,12 @@
         var page = doc.addPage(pageSize);
         var y = pageSize[1] - margin;
 
-        allLines.forEach(function (line) {
+        allLines.forEach(function (lineObj) {
           if (y < margin) {
             page = doc.addPage(pageSize);
             y = pageSize[1] - margin;
           }
-          if (line) {
-            page.drawText(line, { x: margin, y: y, size: fontSize, font: font });
-          }
+          drawLine(page, lineObj, font, fontSize, margin, y, contentWidth, align);
           y -= lineHeight;
         });
 
