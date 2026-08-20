@@ -6,21 +6,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free QR Code Scanner Online — Decode QR from Image | Fixoona</title>
-  <meta name="description" content="Scan and decode a QR code from any image online for free. Upload a photo or screenshot and instantly read the encoded text or link, right in your browser." />
-  <meta name="keywords" content="qr code scanner, decode qr code online free, read qr code from image" />
+  <meta name="description" content="Scan and decode a QR code from any image online for free. Upload a photo or screenshot to instantly read the encoded text, with smart parsing for links, Wi-Fi logins, and contact cards (vCards), plus a session scan history — right in your browser." />
+  <meta name="keywords" content="qr code scanner, decode qr code online free, read qr code from image, wifi qr code reader, vcard qr code scanner" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/qr-code-scanner" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixoona" />
   <meta property="og:title" content="Free QR Code Scanner Online" />
-  <meta property="og:description" content="Upload an image and decode its QR code online for free, right in your browser." />
+  <meta property="og:description" content="Upload an image and decode its QR code online for free, with smart Wi-Fi, vCard, and link detection, right in your browser." />
   <meta property="og:url" content="https://fixoona.com/tools/qr-code-scanner" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free QR Code Scanner Online" />
-  <meta name="twitter:description" content="Upload an image and decode its QR code online for free, right in your browser." />
+  <meta name="twitter:description" content="Upload an image and decode its QR code online for free, with smart Wi-Fi, vCard, and link detection, right in your browser." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='23' width='15' height='54' rx='7.5' fill='white'/%3E%3Crect x='30' y='23' width='42' height='14' rx='7' fill='white'/%3E%3Crect x='30' y='46' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -78,12 +78,165 @@
       },
       {
         "@type": "Question",
-        "name": "Why does it show the decoded text as a clickable link sometimes?",
-        "acceptedAnswer": { "@type": "Answer", "text": "When the decoded text starts with http:// or https://, the tool also displays it as a clickable link so you can open it directly, in addition to showing the raw text in a field you can copy." }
+        "name": "What does the tool do differently for Wi-Fi codes, contact cards, and links?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It automatically detects the content type and shows relevant details instead of just raw text: Wi-Fi QR codes display the parsed network name, security type, and password with a one-click copy button; contact card (vCard) QR codes display the parsed name, organization, phone, and email with Call and Email buttons; links show an \"Open link\" button; and email or phone QR codes show a ready-to-use email or call button. The raw decoded text is always shown too, so you can copy it directly." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can it read Wi-Fi QR codes and show me the password?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — QR codes generated in the standard WIFI: format are parsed into the network name (SSID), security type, and password, each shown as text plus one-click copy buttons, so you can join the network without retyping anything." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can it read contact card (vCard) QR codes?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — QR codes containing a standard vCard (starting with BEGIN:VCARD) are parsed into the contact's name, organization, title, phone number(s), and email(s), with quick Call and Email buttons for the first phone number and email address found." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Scan History for?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It keeps a list of your decoded QR codes from this browser tab, each with its detected type and a Copy button, so you can revisit earlier scans without re-uploading the image. It only exists in memory for the current page session and clears if you reload the page or click \"Clear\"." }
       }
     ]
   }
   </script>
+
+  <style>
+    .qr-type-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--color-primary);
+      background: var(--color-bg-soft);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 4px 10px;
+      margin-bottom: 14px;
+    }
+    .qr-parsed {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+      padding: 12px 14px;
+      background: var(--color-bg-soft);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+    }
+    .qr-parsed-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.88rem;
+      flex-wrap: wrap;
+    }
+    .qr-parsed-row .qpf-label {
+      color: var(--color-text-muted);
+      flex: none;
+    }
+    .qr-parsed-row .qpf-value {
+      color: var(--color-text);
+      font-family: monospace;
+      text-align: right;
+      word-break: break-word;
+    }
+    .qr-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .qr-actions .btn {
+      flex: none;
+    }
+    .scan-history {
+      margin-top: 22px;
+      border-top: 1px solid var(--color-border);
+      padding-top: 14px;
+    }
+    .scan-history-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .scan-history-head h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+    .scan-history-head button {
+      background: none;
+      border: none;
+      color: var(--color-text-muted);
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .scan-history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 260px;
+      overflow-y: auto;
+    }
+    .scan-history-list .empty {
+      color: var(--color-text-muted);
+      font-size: 0.85rem;
+    }
+    .scan-entry {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.85rem;
+      padding: 8px 10px;
+      background: var(--color-bg-soft);
+      border-radius: var(--radius-sm);
+    }
+    .scan-entry-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .scan-entry-type {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--color-primary);
+    }
+    .scan-entry-preview {
+      color: var(--color-text);
+      font-family: monospace;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100%;
+    }
+    .scan-entry-time {
+      color: var(--color-text-muted);
+      font-size: 0.75rem;
+    }
+    .scan-entry-copy {
+      flex: none;
+      background: none;
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+      border-radius: var(--radius-sm);
+      padding: 4px 10px;
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+    .scan-entry-copy:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -118,7 +271,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">📷</div>
       <h1>QR Code Scanner</h1>
-      <p>Upload an image containing a QR code and instantly decode the text or link it holds — scanned entirely in your browser.</p>
+      <p>Upload an image containing a QR code and instantly decode the text, link, Wi-Fi login, or contact card it holds — scanned entirely in your browser.</p>
     </section>
 
     <section class="container">
@@ -133,18 +286,29 @@
         <img id="previewImg" class="preview-img" style="display:none;max-width:220px;" alt="Preview of uploaded image" />
 
         <div class="field" id="resultField" style="margin-top:20px;display:none;">
-          <label for="decodedOutput">Decoded Text</label>
+          <div class="qr-type-badge" id="typeBadge"></div>
+
+          <div class="qr-parsed" id="parsedFields" style="display:none;"></div>
+
+          <div class="qr-actions" id="quickActions" style="display:none;"></div>
+
+          <label for="decodedOutput">Raw Decoded Text</label>
           <div class="row" style="align-items:center;">
             <input type="text" id="decodedOutput" readonly style="font-family:monospace;font-size:0.9rem;" />
             <button class="btn btn-secondary" id="copyBtn" style="flex:none;">Copy</button>
           </div>
-          <p id="linkWrap" style="margin-top:10px;display:none;">
-            <a id="decodedLink" href="#" target="_blank" rel="noopener noreferrer">Open this link ↗</a>
-          </p>
         </div>
 
         <div class="copy-note" id="copyNote"></div>
         <div class="output-box" id="statusBox"></div>
+
+        <div class="scan-history">
+          <div class="scan-history-head">
+            <h3>Scan History</h3>
+            <button type="button" id="clearHistoryBtn">Clear</button>
+          </div>
+          <div class="scan-history-list" id="scanHistoryList"><span class="empty">No scans yet this session.</span></div>
+        </div>
       </div>
 
       <div class="howto">
@@ -152,7 +316,8 @@
         <ol class="howto-steps">
           <li>Click the upload area or drag in an image file that contains a QR code — a photo, screenshot, or exported PNG all work.</li>
           <li>The tool draws the image onto a canvas and scans its pixels locally for a QR pattern.</li>
-          <li>If a code is found, the decoded text appears in the field below — click "Copy" to copy it, or click the link if it's a URL.</li>
+          <li>If a code is found, its content type is detected automatically — links, Wi-Fi logins, contact cards (vCards), email addresses, and phone numbers each get parsed fields and a quick-action button, like Open link, Copy Wi-Fi password, or Call, alongside the raw decoded text you can copy.</li>
+          <li>Every successful scan is added to the Scan History list below, so you can revisit or copy earlier results from the same session — click "Clear" to reset it.</li>
           <li>If no code is found, try a clearer or more tightly cropped photo of just the QR code.</li>
         </ol>
       </div>
@@ -176,8 +341,20 @@
           <p>No — this tool only decodes QR codes from an image file you upload or drag in; it doesn't request access to your camera for a live scan.</p>
         </details>
         <details class="faq-item">
-          <summary>Why does it show the decoded text as a clickable link sometimes?</summary>
-          <p>When the decoded text starts with http:// or https://, the tool also displays it as a clickable link so you can open it directly, in addition to showing the raw text in a field you can copy.</p>
+          <summary>What does the tool do differently for Wi-Fi codes, contact cards, and links?</summary>
+          <p>It automatically detects the content type and shows relevant details instead of just raw text: Wi-Fi QR codes display the parsed network name, security type, and password with a one-click copy button; contact card (vCard) QR codes display the parsed name, organization, phone, and email with Call and Email buttons; links show an "Open link" button; and email or phone QR codes show a ready-to-use email or call button. The raw decoded text is always shown too, so you can copy it directly.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can it read Wi-Fi QR codes and show me the password?</summary>
+          <p>Yes — QR codes generated in the standard WIFI: format are parsed into the network name (SSID), security type, and password, each shown as text plus one-click copy buttons, so you can join the network without retyping anything.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can it read contact card (vCard) QR codes?</summary>
+          <p>Yes — QR codes containing a standard vCard (starting with BEGIN:VCARD) are parsed into the contact's name, organization, title, phone number(s), and email(s), with quick Call and Email buttons for the first phone number and email address found.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is the Scan History for?</summary>
+          <p>It keeps a list of your decoded QR codes from this browser tab, each with its detected type and a Copy button, so you can revisit earlier scans without re-uploading the image. It only exists in memory for the current page session and clears if you reload the page or click "Clear".</p>
         </details>
       </div>
 
@@ -259,10 +436,256 @@
     var statusBox = document.getElementById("statusBox");
     var resultField = document.getElementById("resultField");
     var decodedOutput = document.getElementById("decodedOutput");
-    var linkWrap = document.getElementById("linkWrap");
-    var decodedLink = document.getElementById("decodedLink");
+    var typeBadge = document.getElementById("typeBadge");
+    var parsedFields = document.getElementById("parsedFields");
+    var quickActions = document.getElementById("quickActions");
     var copyNote = document.getElementById("copyNote");
     var copyBtn = document.getElementById("copyBtn");
+    var scanHistoryList = document.getElementById("scanHistoryList");
+    var clearHistoryBtn = document.getElementById("clearHistoryBtn");
+
+    // Scan history is kept in memory only for the current page session —
+    // it is never written to localStorage/sessionStorage or sent anywhere.
+    var scanHistory = [];
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+      });
+    }
+
+    function detectContentType(text) {
+      if (/^WIFI:/i.test(text)) return "wifi";
+      if (/^BEGIN:VCARD/i.test(text)) return "vcard";
+      if (/^https?:\/\//i.test(text)) return "url";
+      if (/^mailto:/i.test(text)) return "mailto";
+      if (/^tel:/i.test(text)) return "tel";
+      return "text";
+    }
+
+    function typeLabel(type) {
+      switch (type) {
+        case "url": return "Link (URL)";
+        case "wifi": return "Wi-Fi network";
+        case "vcard": return "Contact card (vCard)";
+        case "mailto": return "Email address";
+        case "tel": return "Phone number";
+        default: return "Plain text";
+      }
+    }
+
+    // Parses a WIFI: QR payload, e.g. "WIFI:T:WPA;S:MyNetwork;P:MyPass123;H:false;;"
+    // Handles fields in any order and backslash-escaped ; , : \ characters per the spec.
+    function parseWifiString(text) {
+      var body = text.replace(/^WIFI:/i, "");
+      var fields = {};
+      var re = /([TSPH]):((?:\\.|[^\\;])*);/g;
+      var m;
+      while ((m = re.exec(body)) !== null) {
+        fields[m[1].toUpperCase()] = m[2].replace(/\\([\\;,:])/g, "$1");
+      }
+      return {
+        ssid: fields.S || "",
+        security: fields.T || "",
+        password: fields.P || "",
+        hidden: /^true$/i.test(fields.H || "")
+      };
+    }
+
+    function wifiSecurityLabel(t) {
+      if (!t) return "None (open network)";
+      var u = t.toUpperCase();
+      if (u === "WPA" || u === "WPA2" || u === "WPA3") return "WPA/WPA2";
+      if (u === "WEP") return "WEP";
+      if (u === "NOPASS") return "None (open network)";
+      return t;
+    }
+
+    function unescapeVCardValue(v) {
+      return v.replace(/\\n/gi, " ").replace(/\\,/g, ",").replace(/\\;/g, ";").replace(/\\\\/g, "\\");
+    }
+
+    // Parses a minimal vCard payload (BEGIN:VCARD ... END:VCARD) into display fields.
+    function parseVCard(text) {
+      var lines = text.split(/\r\n|\r|\n/);
+      var result = { fn: "", org: "", title: "", tels: [], emails: [], urls: [] };
+      lines.forEach(function (rawLine) {
+        var line = rawLine.trim();
+        if (!line || /^(BEGIN|END|VERSION):/i.test(line)) return;
+        var idx = line.indexOf(":");
+        if (idx === -1) return;
+        var key = line.slice(0, idx).split(";")[0].toUpperCase();
+        var val = unescapeVCardValue(line.slice(idx + 1));
+        if (key === "FN") {
+          result.fn = val;
+        } else if (key === "N" && !result.fn) {
+          var parts = val.split(";");
+          result.fn = [parts[1], parts[0]].filter(Boolean).join(" ");
+        } else if (key === "ORG") {
+          result.org = val.split(";").filter(Boolean).join(", ");
+        } else if (key === "TITLE") {
+          result.title = val;
+        } else if (key === "TEL") {
+          result.tels.push(val);
+        } else if (key === "EMAIL") {
+          result.emails.push(val);
+        } else if (key === "URL") {
+          result.urls.push(val);
+        }
+      });
+      return result;
+    }
+
+    function fieldRow(label, value) {
+      if (!value) return "";
+      return '<div class="qr-parsed-row"><span class="qpf-label">' + escapeHtml(label) +
+        '</span><span class="qpf-value">' + escapeHtml(value) + "</span></div>";
+    }
+
+    function clearChildren(el) {
+      while (el.firstChild) el.removeChild(el.firstChild);
+    }
+
+    function makeActionLink(text, href, newTab) {
+      var a = document.createElement("a");
+      a.className = "btn btn-secondary";
+      a.textContent = text;
+      a.href = href;
+      if (newTab) {
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+      }
+      return a;
+    }
+
+    function makeActionButton(text, onClick) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "btn btn-secondary";
+      b.textContent = text;
+      b.addEventListener("click", onClick);
+      return b;
+    }
+
+    function renderResult(text) {
+      var type = detectContentType(text);
+      typeBadge.textContent = "Detected type: " + typeLabel(type);
+      clearChildren(quickActions);
+      parsedFields.innerHTML = "";
+      parsedFields.style.display = "none";
+      quickActions.style.display = "none";
+
+      if (type === "url") {
+        quickActions.appendChild(makeActionLink("Open link ↗", text, true));
+        quickActions.style.display = "flex";
+      } else if (type === "wifi") {
+        var wifi = parseWifiString(text);
+        parsedFields.innerHTML =
+          fieldRow("Network name (SSID)", wifi.ssid) +
+          fieldRow("Security", wifiSecurityLabel(wifi.security)) +
+          fieldRow("Password", wifi.password || "(none)") +
+          fieldRow("Hidden network", wifi.hidden ? "Yes" : "No");
+        parsedFields.style.display = "block";
+        if (wifi.password) {
+          quickActions.appendChild(makeActionButton("Copy Wi-Fi password", function () {
+            Fixora.copyText(wifi.password, copyNote);
+          }));
+        }
+        if (wifi.ssid) {
+          quickActions.appendChild(makeActionButton("Copy network name", function () {
+            Fixora.copyText(wifi.ssid, copyNote);
+          }));
+        }
+        quickActions.style.display = "flex";
+      } else if (type === "vcard") {
+        var card = parseVCard(text);
+        parsedFields.innerHTML =
+          fieldRow("Name", card.fn) +
+          fieldRow("Organization", card.org) +
+          fieldRow("Title", card.title) +
+          fieldRow("Phone", card.tels.join(", ")) +
+          fieldRow("Email", card.emails.join(", ")) +
+          fieldRow("Website", card.urls.join(", "));
+        parsedFields.style.display = "block";
+        if (card.tels[0]) {
+          quickActions.appendChild(makeActionLink("📞 Call " + card.tels[0], "tel:" + card.tels[0].replace(/[^\d+]/g, "")));
+        }
+        if (card.emails[0]) {
+          quickActions.appendChild(makeActionLink("✉️ Email " + card.emails[0], "mailto:" + card.emails[0]));
+        }
+        quickActions.style.display = "flex";
+      } else if (type === "mailto") {
+        var addr = text.slice(7).split("?")[0];
+        quickActions.appendChild(makeActionLink("✉️ Send email to " + (addr || "address"), text));
+        quickActions.style.display = "flex";
+      } else if (type === "tel") {
+        var num = text.slice(4);
+        quickActions.appendChild(makeActionLink("📞 Call " + num, text));
+        quickActions.style.display = "flex";
+      }
+    }
+
+    function formatTime(d) {
+      var hh = d.getHours();
+      var mm = d.getMinutes();
+      var ampm = hh >= 12 ? "PM" : "AM";
+      hh = hh % 12;
+      if (hh === 0) hh = 12;
+      mm = mm < 10 ? "0" + mm : mm;
+      return hh + ":" + mm + " " + ampm;
+    }
+
+    function renderHistory() {
+      clearChildren(scanHistoryList);
+      if (scanHistory.length === 0) {
+        var empty = document.createElement("span");
+        empty.className = "empty";
+        empty.textContent = "No scans yet this session.";
+        scanHistoryList.appendChild(empty);
+        return;
+      }
+      scanHistory.forEach(function (entry) {
+        var row = document.createElement("div");
+        row.className = "scan-entry";
+
+        var info = document.createElement("div");
+        info.className = "scan-entry-info";
+
+        var typeSpan = document.createElement("span");
+        typeSpan.className = "scan-entry-type";
+        typeSpan.textContent = typeLabel(entry.type) + " · " + formatTime(entry.time);
+
+        var previewSpan = document.createElement("span");
+        previewSpan.className = "scan-entry-preview";
+        previewSpan.textContent = entry.text.length > 60 ? entry.text.slice(0, 60) + "…" : entry.text;
+
+        info.appendChild(typeSpan);
+        info.appendChild(previewSpan);
+
+        var copyEntryBtn = document.createElement("button");
+        copyEntryBtn.type = "button";
+        copyEntryBtn.className = "scan-entry-copy";
+        copyEntryBtn.textContent = "Copy";
+        copyEntryBtn.addEventListener("click", function () {
+          Fixora.copyText(entry.text, copyNote);
+        });
+
+        row.appendChild(info);
+        row.appendChild(copyEntryBtn);
+        scanHistoryList.appendChild(row);
+      });
+    }
+
+    function addScanToHistory(text) {
+      scanHistory.unshift({ text: text, type: detectContentType(text), time: new Date() });
+      if (scanHistory.length > 20) scanHistory.length = 20;
+      renderHistory();
+    }
+
+    clearHistoryBtn.addEventListener("click", function () {
+      scanHistory = [];
+      renderHistory();
+    });
 
     function handleFiles(files) {
       var file = files[0];
@@ -272,7 +695,8 @@
       }
 
       resultField.style.display = "none";
-      linkWrap.style.display = "none";
+      quickActions.style.display = "none";
+      parsedFields.style.display = "none";
       decodedOutput.value = "";
       statusBox.textContent = "Reading image…";
 
@@ -303,16 +727,8 @@
           if (code && code.data) {
             decodedOutput.value = code.data;
             resultField.style.display = "block";
-
-            var isUrl = /^https?:\/\//i.test(code.data);
-            if (isUrl) {
-              decodedLink.href = code.data;
-              decodedLink.textContent = code.data + " ↗";
-              linkWrap.style.display = "block";
-            } else {
-              linkWrap.style.display = "none";
-            }
-
+            renderResult(code.data);
+            addScanToHistory(code.data);
             statusBox.textContent = "QR code decoded successfully.";
           } else {
             resultField.style.display = "none";
