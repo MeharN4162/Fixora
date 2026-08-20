@@ -5,22 +5,22 @@
   <meta charset="UTF-8" />
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Free Image Flip / Mirror Tool Online | Fixoona</title>
-  <meta name="description" content="Flip or mirror an image horizontally or vertically online for free, right in your browser. No uploads, no sign-up, no quality loss." />
-  <meta name="keywords" content="image flip, mirror image online free, flip photo horizontally vertically" />
+  <title>Free Image Flip / Mirror & Rotate Tool Online | Fixoona</title>
+  <meta name="description" content="Flip or mirror an image horizontally or vertically, combine it with 90/180/270 degree rotation, and batch-process multiple images at once — free, right in your browser. Choose PNG or JPEG output with a quality slider. No uploads, no sign-up." />
+  <meta name="keywords" content="image flip, mirror image online free, flip photo horizontally vertically, flip and rotate image, batch image flip" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/image-flip" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixoona" />
-  <meta property="og:title" content="Free Image Flip / Mirror Tool Online" />
-  <meta property="og:description" content="Flip or mirror an image horizontally or vertically online for free, right in your browser." />
+  <meta property="og:title" content="Free Image Flip / Mirror & Rotate Tool Online" />
+  <meta property="og:description" content="Flip or mirror an image, combine it with 90/180/270 degree rotation, and batch-process multiple images at once — free, right in your browser." />
   <meta property="og:url" content="https://fixoona.com/tools/image-flip" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Free Image Flip / Mirror Tool Online" />
-  <meta name="twitter:description" content="Flip or mirror an image horizontally or vertically online for free, right in your browser." />
+  <meta name="twitter:title" content="Free Image Flip / Mirror & Rotate Tool Online" />
+  <meta name="twitter:description" content="Flip or mirror an image, combine it with 90/180/270 degree rotation, and batch-process multiple images at once — free, right in your browser." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='23' width='15' height='54' rx='7.5' fill='white'/%3E%3Crect x='30' y='23' width='42' height='14' rx='7' fill='white'/%3E%3Crect x='30' y='46' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -33,7 +33,7 @@
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Image Flip Tool",
+    "name": "Image Flip & Rotate Tool",
     "url": "https://fixoona.com/tools/image-flip",
     "applicationCategory": "Utility",
     "operatingSystem": "Any (Web Browser)",
@@ -58,28 +58,38 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Can I flip both horizontally and vertically at the same time?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Horizontal and vertical flips are tracked independently, so clicking both buttons combines them - the result is equivalent to rotating the image 180 degrees while also mirroring it." }
+        "name": "Can I flip and rotate an image at the same time?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Flip Horizontal, Flip Vertical, and the 90°/180°/270° rotate buttons all apply together - for example, flipping horizontally then rotating 90° right produces a single combined result, not two separate steps you'd have to redo." }
       },
       {
         "@type": "Question",
-        "name": "Does flipping change the image dimensions?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No. Unlike rotation, a horizontal or vertical flip mirrors pixels across an axis without swapping width and height, so the canvas size stays exactly the same as the source image." }
+        "name": "Does rotating or flipping change the image dimensions?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Rotating by 90° or 270° swaps the width and height, so a 1200x800 photo becomes 800x1200 - the canvas automatically resizes to match. A 180° rotation and both flip directions keep the original width and height unchanged, since they mirror or invert pixels without turning the rectangle on its side." }
       },
       {
         "@type": "Question",
-        "name": "What format is the downloaded file?",
-        "acceptedAnswer": { "@type": "Answer", "text": "It matches your upload - a JPG stays a JPG, a WebP stays a WebP, and anything else exports as PNG. JPG output gets a white background since JPEG doesn't support transparency, while PNG and WebP keep any transparent areas intact." }
+        "name": "Can I flip or rotate multiple images at once?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Select or drag in more than one image and the same flip/rotate settings apply to all of them together, with each result listed separately with its own thumbnail and Download button. There's no single ZIP download - each processed image downloads individually." }
       },
       {
         "@type": "Question",
-        "name": "Does flipping lose any image quality?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The flip transform itself doesn't blur or resample pixels. If your source is a JPG or WebP, the download is re-encoded at 92% quality on export, the same minor compression step any canvas-based JPEG/WebP save involves." }
+        "name": "Can I choose the output format instead of matching my original?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. The Output Format dropdown lets you keep the original format (the default - JPG stays JPG, WebP stays WebP, anything else exports as PNG), or force PNG or JPEG regardless of what you uploaded. Choosing JPEG reveals a Quality slider from 40% to 100% so you can balance file size against visual quality; JPEG output always gets a white background since JPEG can't store transparency, while PNG and WebP keep any transparent areas intact." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I compare the result with my original image before downloading?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Use the \"Show Original\" toggle above the preview to switch between your untouched upload and the current flipped/rotated result, so you can check the change before downloading. It's available whenever you're working with a single image." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does flipping or rotating lose any image quality?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Flipping and rotating in exact 90° steps doesn't blur or resample any pixels - the tool just redraws the canvas with the pixels rearranged. If your output format is JPEG or WebP (whether matched from your upload or chosen manually), the download is re-encoded at your selected Quality setting (92% by default), the same minor compression step any canvas-based JPEG/WebP save involves." }
       },
       {
         "@type": "Question",
         "name": "Is this processed on a server or in my browser?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Entirely in your browser. The tool uses the Canvas API's scale transform to mirror the image locally - nothing is uploaded." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Entirely in your browser. The tool uses the Canvas API's rotate and scale transforms to flip and rotate the image locally, including in batch mode - nothing is ever uploaded to a server." }
       }
     ]
   }
@@ -90,7 +100,7 @@
       display: none;
       text-align: center;
       margin-top: 20px;
-      background: repeating-conic-gradient(#e5e7eb 0% 25%, #fff 0% 50%) 50% / 20px 20px;
+      background: repeating-conic-gradient(var(--color-border) 0% 25%, var(--color-surface) 0% 50%) 50% / 20px 20px;
       border-radius: var(--radius-md);
       padding: 20px;
     }
@@ -98,6 +108,59 @@
       max-width: 100%;
       max-height: 55vh;
       display: inline-block;
+    }
+    .quick-rotate-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .preview-toggle-row {
+      display: none;
+      margin-top: 12px;
+    }
+    .batch-list {
+      margin-top: 18px;
+      border-top: 1px solid var(--color-border);
+    }
+    .batch-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .batch-thumb {
+      width: 52px;
+      height: 52px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      background: repeating-conic-gradient(var(--color-border) 0% 25%, var(--color-surface) 0% 50%) 50% / 12px 12px;
+      flex-shrink: 0;
+    }
+    .batch-meta {
+      flex: 1;
+      min-width: 0;
+    }
+    .batch-meta strong {
+      display: block;
+      font-size: 0.92rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .batch-meta span {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+    .batch-row .btn {
+      flex-shrink: 0;
+      padding: 7px 14px;
+      font-size: 0.83rem;
+    }
+    @media (max-width: 560px) {
+      .batch-row { flex-wrap: wrap; }
     }
   </style>
 </head>
@@ -133,28 +196,55 @@
 
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🔁</div>
-      <h1>Image Flip / Mirror</h1>
-      <p>Mirror an image horizontally or vertically — no quality loss.</p>
+      <h1>Image Flip / Mirror & Rotate</h1>
+      <p>Mirror an image horizontally or vertically, combine it with 90°/180°/270° rotation, and batch-process multiple images at once — no quality loss.</p>
     </section>
 
     <section class="container">
       <div class="tool-panel">
-        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload an image">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload one or more images">
           <div class="dz-icon" aria-hidden="true">🖼️</div>
-          <strong>Click to upload or drag an image here</strong>
-          <small>JPG, PNG, or WebP supported</small>
-          <input type="file" id="fileInput" accept="image/*" hidden />
+          <strong>Click to upload or drag one or more images here</strong>
+          <small>JPG, PNG, or WebP supported. Select multiple files to batch process.</small>
+          <input type="file" id="fileInput" accept="image/*" multiple hidden />
         </div>
 
         <div class="rotate-stage" id="rotateStage">
-          <img id="previewImg" alt="Flipped image preview" />
+          <img id="previewImg" alt="Flipped and rotated image preview" />
+        </div>
+
+        <div class="actions preview-toggle-row" id="previewToggleRow">
+          <button class="btn btn-secondary" id="toggleOriginalBtn" type="button">Show Original</button>
         </div>
 
         <div class="actions" id="flipControls" style="display:none;">
           <button class="btn btn-secondary" id="flipHBtn" type="button">⇋ Flip Horizontal</button>
           <button class="btn btn-secondary" id="flipVBtn" type="button">⇵ Flip Vertical</button>
-          <button class="btn btn-secondary" id="resetBtn" type="button">Reset</button>
         </div>
+
+        <div class="quick-rotate-row" id="rotateControls" style="display:none;">
+          <button class="btn btn-secondary" id="rotateLeftBtn" type="button">⟲ Rotate Left 90°</button>
+          <button class="btn btn-secondary" id="rotateRightBtn" type="button">⟳ Rotate Right 90°</button>
+          <button class="btn btn-secondary" id="rotate180Btn" type="button">↻ Rotate 180°</button>
+          <button class="btn btn-secondary" id="resetBtn" type="button">Reset All</button>
+        </div>
+
+        <div class="row" id="formatRow" style="display:none;margin-top:16px;">
+          <div class="field" style="margin:0;">
+            <label for="formatSelect">Output Format</label>
+            <select id="formatSelect">
+              <option value="match">Match Original Format</option>
+              <option value="png">PNG</option>
+              <option value="jpeg">JPEG</option>
+            </select>
+          </div>
+          <div class="field" id="qualityField" style="margin:0;display:none;">
+            <label for="qualityRange">Quality: <span id="qualityValue">92%</span></label>
+            <input type="range" id="qualityRange" min="40" max="100" value="92" style="width:100%;" />
+          </div>
+        </div>
+
+        <div id="batchResults" class="batch-list" style="display:none;"></div>
 
         <div class="actions">
           <a class="btn btn-primary" id="downloadBtn" style="display:none;">Download Flipped Image</a>
@@ -164,36 +254,46 @@
       </div>
 
       <div class="howto">
-        <h2>How to Flip or Mirror an Image</h2>
+        <h2>How to Flip, Mirror, or Rotate an Image</h2>
         <ol class="howto-steps">
-          <li>Click the upload area or drag in a JPG, PNG, or WebP image.</li>
+          <li>Click the upload area or drag in one or more JPG, PNG, or WebP images — select multiple files at once to batch process.</li>
           <li>Click "Flip Horizontal" to mirror left-to-right, or "Flip Vertical" to mirror top-to-bottom — you can combine both.</li>
-          <li>Use "Reset" at any point to return to the original, unflipped image.</li>
-          <li>Click "Download Flipped Image" to save the result.</li>
+          <li>Use "Rotate Left 90°", "Rotate Right 90°", or "Rotate 180°" alongside any flip — rotating by 90° or 270° automatically resizes the canvas to fit. "Reset All" clears both flip and rotation.</li>
+          <li>With a single image, use "Show Original" to compare against your untouched upload before downloading.</li>
+          <li>Pick an Output Format (Match Original, PNG, or JPEG) — choosing JPEG reveals a Quality slider.</li>
+          <li>Click "Download Flipped Image" for a single file, or the "Download" button next to each result in batch mode.</li>
         </ol>
       </div>
 
       <div class="faq">
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
-          <summary>Can I flip both horizontally and vertically at the same time?</summary>
-          <p>Yes. Horizontal and vertical flips are tracked independently, so clicking both buttons combines them - the result is equivalent to rotating the image 180 degrees while also mirroring it.</p>
+          <summary>Can I flip and rotate an image at the same time?</summary>
+          <p>Yes. Flip Horizontal, Flip Vertical, and the 90°/180°/270° rotate buttons all apply together - for example, flipping horizontally then rotating 90° right produces a single combined result, not two separate steps you'd have to redo.</p>
         </details>
         <details class="faq-item">
-          <summary>Does flipping change the image dimensions?</summary>
-          <p>No. Unlike rotation, a horizontal or vertical flip mirrors pixels across an axis without swapping width and height, so the canvas size stays exactly the same as the source image.</p>
+          <summary>Does rotating or flipping change the image dimensions?</summary>
+          <p>Rotating by 90° or 270° swaps the width and height, so a 1200x800 photo becomes 800x1200 - the canvas automatically resizes to match. A 180° rotation and both flip directions keep the original width and height unchanged, since they mirror or invert pixels without turning the rectangle on its side.</p>
         </details>
         <details class="faq-item">
-          <summary>What format is the downloaded file?</summary>
-          <p>It matches your upload - a JPG stays a JPG, a WebP stays a WebP, and anything else exports as PNG. JPG output gets a white background since JPEG doesn't support transparency, while PNG and WebP keep any transparent areas intact.</p>
+          <summary>Can I flip or rotate multiple images at once?</summary>
+          <p>Yes. Select or drag in more than one image and the same flip/rotate settings apply to all of them together, with each result listed separately with its own thumbnail and Download button. There's no single ZIP download - each processed image downloads individually.</p>
         </details>
         <details class="faq-item">
-          <summary>Does flipping lose any image quality?</summary>
-          <p>The flip transform itself doesn't blur or resample pixels. If your source is a JPG or WebP, the download is re-encoded at 92% quality on export, the same minor compression step any canvas-based JPEG/WebP save involves.</p>
+          <summary>Can I choose the output format instead of matching my original?</summary>
+          <p>Yes. The Output Format dropdown lets you keep the original format (the default - JPG stays JPG, WebP stays WebP, anything else exports as PNG), or force PNG or JPEG regardless of what you uploaded. Choosing JPEG reveals a Quality slider from 40% to 100% so you can balance file size against visual quality; JPEG output always gets a white background since JPEG can't store transparency, while PNG and WebP keep any transparent areas intact.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I compare the result with my original image before downloading?</summary>
+          <p>Yes. Use the "Show Original" toggle above the preview to switch between your untouched upload and the current flipped/rotated result, so you can check the change before downloading. It's available whenever you're working with a single image.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does flipping or rotating lose any image quality?</summary>
+          <p>Flipping and rotating in exact 90° steps doesn't blur or resample any pixels - the tool just redraws the canvas with the pixels rearranged. If your output format is JPEG or WebP (whether matched from your upload or chosen manually), the download is re-encoded at your selected Quality setting (92% by default), the same minor compression step any canvas-based JPEG/WebP save involves.</p>
         </details>
         <details class="faq-item">
           <summary>Is this processed on a server or in my browser?</summary>
-          <p>Entirely in your browser. The tool uses the Canvas API's scale transform to mirror the image locally - nothing is uploaded.</p>
+          <p>Entirely in your browser. The tool uses the Canvas API's rotate and scale transforms to flip and rotate the image locally, including in batch mode - nothing is ever uploaded to a server.</p>
         </details>
       </div>
 
@@ -272,48 +372,91 @@
     var fileInput = document.getElementById("fileInput");
     var rotateStage = document.getElementById("rotateStage");
     var previewImg = document.getElementById("previewImg");
+    var previewToggleRow = document.getElementById("previewToggleRow");
+    var toggleOriginalBtn = document.getElementById("toggleOriginalBtn");
     var flipControls = document.getElementById("flipControls");
+    var rotateControls = document.getElementById("rotateControls");
+    var formatRow = document.getElementById("formatRow");
+    var formatSelect = document.getElementById("formatSelect");
+    var qualityField = document.getElementById("qualityField");
+    var qualityRange = document.getElementById("qualityRange");
+    var qualityValue = document.getElementById("qualityValue");
+    var batchResults = document.getElementById("batchResults");
     var downloadBtn = document.getElementById("downloadBtn");
     var statusBox = document.getElementById("statusBox");
 
-    var naturalImg = null;
-    var currentFile = null;
+    var currentItems = [];
     var flipH = false;
     var flipV = false;
-    var lastUrl = null;
-    var outputMime = "image/png";
-    var outputExt = "png";
+    var rotationDeg = 0;
+    var showingOriginal = false;
+    var lastConvertedUrl = null;
+    var batchUrls = [];
+    var renderGeneration = 0;
+
+    function resolveOutput(file) {
+      if (formatSelect.value === "png") return { mime: "image/png", ext: "png" };
+      if (formatSelect.value === "jpeg") return { mime: "image/jpeg", ext: "jpg" };
+      if (file.type === "image/jpeg") return { mime: "image/jpeg", ext: "jpg" };
+      if (file.type === "image/webp") return { mime: "image/webp", ext: "webp" };
+      return { mime: "image/png", ext: "png" };
+    }
+
+    function updateQualityVisibility() {
+      var needsQuality = formatSelect.value === "jpeg" || currentItems.some(function (it) {
+        return formatSelect.value === "match" && (it.file.type === "image/jpeg" || it.file.type === "image/webp");
+      });
+      qualityField.style.display = needsQuality ? "block" : "none";
+    }
 
     function handleFiles(files) {
-      var file = files[0];
-      if (!file || file.type.indexOf("image/") !== 0) {
-        statusBox.textContent = "Please choose a valid image file.";
+      var list = Array.prototype.filter.call(files, function (f) { return f.type.indexOf("image/") === 0; });
+      if (!list.length) {
+        statusBox.textContent = "Please choose one or more valid image files.";
         return;
       }
-      currentFile = file;
+
       flipH = false;
       flipV = false;
+      rotationDeg = 0;
+      showingOriginal = false;
+      toggleOriginalBtn.textContent = "Show Original";
+      statusBox.textContent = "Reading " + list.length + " file" + (list.length > 1 ? "s" : "") + "…";
 
-      if (file.type === "image/jpeg") { outputMime = "image/jpeg"; outputExt = "jpg"; }
-      else if (file.type === "image/webp") { outputMime = "image/webp"; outputExt = "webp"; }
-      else { outputMime = "image/png"; outputExt = "png"; }
+      var loaded = 0;
+      var items = new Array(list.length);
+      list.forEach(function (file, idx) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          var img = new Image();
+          img.onload = function () {
+            items[idx] = { file: file, img: img };
+            loaded++;
+            if (loaded === list.length) finishLoad(items);
+          };
+          img.onerror = function () {
+            loaded++;
+            if (loaded === list.length) finishLoad(items);
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
 
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        var img = new Image();
-        img.onload = function () {
-          naturalImg = img;
-          rotateStage.style.display = "block";
-          flipControls.style.display = "flex";
-          render();
-          statusBox.textContent = "Use the buttons to flip, then download.";
-        };
-        img.onerror = function () {
-          statusBox.textContent = "Couldn't read that image. Please try a different file.";
-        };
-        img.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
+    function finishLoad(items) {
+      currentItems = items.filter(Boolean);
+      if (!currentItems.length) {
+        statusBox.textContent = "Couldn't read those images. Please try different files.";
+        return;
+      }
+      rotateStage.style.display = "block";
+      flipControls.style.display = "flex";
+      rotateControls.style.display = "flex";
+      formatRow.style.display = "flex";
+      updateQualityVisibility();
+      render();
+      statusBox.textContent = "Use the buttons to flip or rotate, then download.";
     }
 
     Fixora.setupDropzone(dropzone, fileInput, handleFiles);
@@ -321,48 +464,171 @@
       if (e.key === "Enter" || e.key === " ") fileInput.click();
     });
 
-    function render() {
-      if (!naturalImg) return;
-      var w = naturalImg.naturalWidth;
-      var h = naturalImg.naturalHeight;
+    function renderOne(item) {
+      var img = item.img;
+      var w = img.naturalWidth;
+      var h = img.naturalHeight;
+      var swapped = rotationDeg === 90 || rotationDeg === 270;
+      var output = resolveOutput(item.file);
 
       var canvas = document.createElement("canvas");
-      canvas.width = w;
-      canvas.height = h;
+      canvas.width = swapped ? h : w;
+      canvas.height = swapped ? w : h;
       var ctx = canvas.getContext("2d");
 
-      if (outputMime === "image/jpeg") {
+      if (output.mime === "image/jpeg") {
         ctx.fillStyle = "#ffffff";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
       }
 
-      ctx.translate(w / 2, h / 2);
+      ctx.translate(canvas.width / 2, canvas.height / 2);
+      ctx.rotate((rotationDeg * Math.PI) / 180);
       ctx.scale(flipH ? -1 : 1, flipV ? -1 : 1);
-      ctx.drawImage(naturalImg, -w / 2, -h / 2);
+      ctx.drawImage(img, -w / 2, -h / 2);
 
-      canvas.toBlob(function (blob) {
-        var url = URL.createObjectURL(blob);
-        if (lastUrl) URL.revokeObjectURL(lastUrl);
-        lastUrl = url;
+      var quality = parseInt(qualityRange.value, 10) / 100;
+      var hasQuality = output.mime === "image/jpeg" || output.mime === "image/webp";
 
-        previewImg.src = url;
-        downloadBtn.href = url;
-        downloadBtn.download = (currentFile.name.replace(/\.[^.]+$/, "") || "flipped") + "-flipped." + outputExt;
-        downloadBtn.style.display = "inline-flex";
-      }, outputMime, 0.92);
+      return new Promise(function (resolve) {
+        canvas.toBlob(function (blob) {
+          resolve({ blob: blob, width: canvas.width, height: canvas.height, ext: output.ext });
+        }, output.mime, hasQuality ? quality : undefined);
+      });
+    }
+
+    function updatePreviewDisplay() {
+      if (currentItems.length !== 1 || !lastConvertedUrl) return;
+      previewImg.src = showingOriginal ? currentItems[0].img.src : lastConvertedUrl;
+    }
+
+    function render() {
+      if (!currentItems.length) return;
+      renderGeneration++;
+      var myGeneration = renderGeneration;
+
+      Promise.all(currentItems.map(renderOne)).then(function (results) {
+        if (myGeneration !== renderGeneration) return;
+
+        if (lastConvertedUrl) { URL.revokeObjectURL(lastConvertedUrl); lastConvertedUrl = null; }
+        batchUrls.forEach(function (u) { URL.revokeObjectURL(u); });
+        batchUrls = [];
+
+        if (currentItems.length === 1) {
+          batchResults.style.display = "none";
+          batchResults.innerHTML = "";
+          rotateStage.style.display = "block";
+
+          var r = results[0];
+          var url = URL.createObjectURL(r.blob);
+          lastConvertedUrl = url;
+
+          previewToggleRow.style.display = "block";
+          updatePreviewDisplay();
+
+          downloadBtn.href = url;
+          downloadBtn.download = (currentItems[0].file.name.replace(/\.[^.]+$/, "") || "flipped") + "-flipped." + r.ext;
+          downloadBtn.style.display = "inline-flex";
+
+          statusBox.textContent = "Done! Your image is ready to download.";
+        } else {
+          previewToggleRow.style.display = "none";
+          downloadBtn.style.display = "none";
+          rotateStage.style.display = "none";
+
+          batchResults.style.display = "block";
+          batchResults.innerHTML = "";
+
+          results.forEach(function (r, i) {
+            var item = currentItems[i];
+            var url = URL.createObjectURL(r.blob);
+            batchUrls.push(url);
+
+            var row = document.createElement("div");
+            row.className = "batch-row";
+
+            var thumb = document.createElement("img");
+            thumb.className = "batch-thumb";
+            thumb.src = url;
+            thumb.alt = "";
+
+            var meta = document.createElement("div");
+            meta.className = "batch-meta";
+            var name = document.createElement("strong");
+            var baseName = item.file.name.replace(/\.[^.]+$/, "") || "flipped";
+            name.textContent = baseName + "-flipped." + r.ext;
+            var stats = document.createElement("span");
+            stats.textContent = Fixora.formatBytes(item.file.size) + " → " + Fixora.formatBytes(r.blob.size) + " · " + r.width + "×" + r.height;
+            meta.appendChild(name);
+            meta.appendChild(stats);
+
+            var btn = document.createElement("a");
+            btn.className = "btn btn-secondary";
+            btn.href = url;
+            btn.download = baseName + "-flipped." + r.ext;
+            btn.textContent = "Download";
+
+            row.appendChild(thumb);
+            row.appendChild(meta);
+            row.appendChild(btn);
+            batchResults.appendChild(row);
+          });
+
+          statusBox.textContent = "Done! " + results.length + " images ready — download each below.";
+        }
+      });
     }
 
     document.getElementById("flipHBtn").addEventListener("click", function () {
       flipH = !flipH;
+      showingOriginal = false;
+      toggleOriginalBtn.textContent = "Show Original";
       render();
     });
     document.getElementById("flipVBtn").addEventListener("click", function () {
       flipV = !flipV;
+      showingOriginal = false;
+      toggleOriginalBtn.textContent = "Show Original";
+      render();
+    });
+    document.getElementById("rotateLeftBtn").addEventListener("click", function () {
+      rotationDeg = (rotationDeg + 270) % 360;
+      showingOriginal = false;
+      toggleOriginalBtn.textContent = "Show Original";
+      render();
+    });
+    document.getElementById("rotateRightBtn").addEventListener("click", function () {
+      rotationDeg = (rotationDeg + 90) % 360;
+      showingOriginal = false;
+      toggleOriginalBtn.textContent = "Show Original";
+      render();
+    });
+    document.getElementById("rotate180Btn").addEventListener("click", function () {
+      rotationDeg = (rotationDeg + 180) % 360;
+      showingOriginal = false;
+      toggleOriginalBtn.textContent = "Show Original";
       render();
     });
     document.getElementById("resetBtn").addEventListener("click", function () {
       flipH = false;
       flipV = false;
+      rotationDeg = 0;
+      showingOriginal = false;
+      toggleOriginalBtn.textContent = "Show Original";
+      render();
+    });
+
+    toggleOriginalBtn.addEventListener("click", function () {
+      showingOriginal = !showingOriginal;
+      toggleOriginalBtn.textContent = showingOriginal ? "Show Result" : "Show Original";
+      updatePreviewDisplay();
+    });
+
+    formatSelect.addEventListener("change", function () {
+      updateQualityVisibility();
+      render();
+    });
+    qualityRange.addEventListener("input", function () {
+      qualityValue.textContent = qualityRange.value + "%";
       render();
     });
   </script>
