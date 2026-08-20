@@ -6,21 +6,21 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Meme Generator Online | Fixoona</title>
-  <meta name="description" content="Create a meme online for free — upload an image, add top and bottom text, and download it instantly. No sign-up, no watermark." />
-  <meta name="keywords" content="meme generator, make a meme online free, meme maker" />
+  <meta name="description" content="Create a meme online for free — upload an image, add multiple draggable text boxes with a choice of fonts, sizes, and colors, and download it instantly. No sign-up, no watermark." />
+  <meta name="keywords" content="meme generator, make a meme online free, meme maker, meme text editor" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/meme-generator" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixoona" />
   <meta property="og:title" content="Free Meme Generator Online" />
-  <meta property="og:description" content="Create a meme online for free — upload an image, add text, and download it instantly." />
+  <meta property="og:description" content="Create a meme online for free — upload an image, add draggable text boxes with custom fonts and colors, and download it instantly." />
   <meta property="og:url" content="https://fixoona.com/tools/meme-generator" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Meme Generator Online" />
-  <meta name="twitter:description" content="Create a meme online for free — upload an image, add text, and download it." />
+  <meta name="twitter:description" content="Create a meme online for free — upload an image, add draggable text boxes with custom fonts and colors, and download it." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='23' width='15' height='54' rx='7.5' fill='white'/%3E%3Crect x='30' y='23' width='42' height='14' rx='7' fill='white'/%3E%3Crect x='30' y='46' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -59,17 +59,32 @@
       {
         "@type": "Question",
         "name": "Why does my text automatically appear in ALL CAPS?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The tool converts both the top and bottom text to uppercase automatically, matching the classic meme text style - you don't need to type in caps yourself." }
+        "acceptedAnswer": { "@type": "Answer", "text": "The tool converts the text in every text box to uppercase automatically, matching the classic meme text style - you don't need to type in caps yourself." }
       },
       {
         "@type": "Question",
         "name": "What happens if my text is too long to fit?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The tool wraps long text onto multiple lines automatically, and if it still doesn't fit within about 92% of the image width and 40% of its height, it progressively shrinks the font size until the whole line block fits without running off the edges." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Each text box wraps long captions onto multiple lines automatically, and if the block still doesn't fit within about 92% of the image's width and 90% of its height, it progressively shrinks that box's font size until every line fits without spilling past the edges of the image." }
       },
       {
         "@type": "Question",
         "name": "Can I use a custom font instead of the classic meme style?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No - the text is always rendered in bold Impact (falling back to Arial Black) with a black stroke outline, which is the traditional meme look. There's currently no font picker in this tool." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes - each text box has its own Font dropdown with five real, working styles: Impact (the classic meme look), Arial Black, Comic Sans MS, Space Grotesk, and Georgia. Every box can use a different font, and the bold black-outline treatment is still applied automatically for readability." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I change the text color or outline color?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes - each text box has its own Text Color and Outline Color pickers, so you're not limited to the classic white-with-black-outline look, though that's still the default for every new box." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I move the text anywhere on the image?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes - click and drag any text box directly on the meme image to reposition it exactly where you want. Dragging is constrained to inside the image so a box can't be lost off the edge, and each box also has a reset button that returns it to its starting position." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I add more than two lines of text?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes - click \"+ Add Text Box\" to add as many independent text boxes as you like, each with its own text, position, font, size, and colors, and remove any box you no longer need with its ✕ button." }
       },
       {
         "@type": "Question",
@@ -84,6 +99,102 @@
     ]
   }
   </script>
+
+  <style>
+    .meme-canvas-wrap {
+      position: relative;
+      display: inline-block;
+      max-width: 100%;
+      margin-top: 16px;
+    }
+    .meme-canvas-wrap canvas {
+      display: block;
+      max-width: 100%;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      touch-action: none;
+    }
+    .layer-outline {
+      position: absolute;
+      border: 2px dashed var(--color-primary);
+      border-radius: 6px;
+      pointer-events: none;
+      display: none;
+    }
+    .layer-row {
+      padding: 14px;
+      background: var(--color-bg-soft);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 12px;
+    }
+    .layer-row.is-active {
+      border-color: var(--color-primary);
+    }
+    .layer-row .layer-text {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      color: var(--color-text);
+      font-family: var(--font-main);
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+    .layer-row-controls {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .layer-row-controls .layer-font {
+      flex: 1 1 130px;
+      min-width: 120px;
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      color: var(--color-text);
+      font-size: 0.85rem;
+    }
+    .layer-row-controls .layer-size {
+      flex: 1 1 90px;
+      min-width: 80px;
+    }
+    .layer-size-value {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      width: 40px;
+      flex: none;
+      text-align: right;
+    }
+    .layer-row-controls input[type="color"] {
+      width: 38px;
+      height: 34px;
+      padding: 0;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      background: none;
+      flex: none;
+      cursor: pointer;
+    }
+    .layer-row-controls .btn {
+      flex: none;
+      padding: 7px 12px;
+      font-size: 0.85rem;
+    }
+    .layer-row-controls .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .layer-hint {
+      color: var(--color-text-muted);
+      font-size: 0.88rem;
+      margin: -4px 0 14px;
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -118,7 +229,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">😂</div>
       <h1>Meme Generator</h1>
-      <p>Upload an image, add your top and bottom text, and download your meme — no watermark, no sign-up.</p>
+      <p>Upload an image, add as many draggable text boxes as you like with your own fonts and colors, and download your meme — no watermark, no sign-up.</p>
     </section>
 
     <section class="container">
@@ -130,22 +241,17 @@
           <input type="file" id="fileInput" accept="image/*" hidden />
         </div>
 
-        <canvas id="memeCanvas" style="display:none;max-width:100%;border-radius:var(--radius-md);border:1px solid var(--color-border);margin-top:16px;"></canvas>
-
-        <div class="row" style="margin-top:16px;">
-          <div class="field">
-            <label for="topText">Top Text</label>
-            <input type="text" id="topText" placeholder="ONE DOES NOT SIMPLY" />
-          </div>
-          <div class="field">
-            <label for="bottomText">Bottom Text</label>
-            <input type="text" id="bottomText" placeholder="WALK INTO MORDOR" />
-          </div>
+        <div class="meme-canvas-wrap" id="canvasWrap" style="display:none;">
+          <canvas id="memeCanvas"></canvas>
+          <div class="layer-outline" id="layerOutline" aria-hidden="true"></div>
         </div>
 
+        <p class="layer-hint" id="layerHint" style="display:none;">Tip: click and drag any text directly on the image above to move it.</p>
+
         <div class="field">
-          <label for="fontSizeRange">Text Size: <span id="fontSizeValue">42</span>px</label>
-          <input type="range" id="fontSizeRange" min="20" max="90" value="42" style="width:100%;" />
+          <label>Text Boxes</label>
+          <div id="layersList"></div>
+          <button class="btn btn-secondary" id="addLayerBtn" type="button">+ Add Text Box</button>
         </div>
 
         <div class="actions">
@@ -159,8 +265,9 @@
         <h2>How to Make a Meme</h2>
         <ol class="howto-steps">
           <li>Click the upload area or drag in a JPG, PNG, or WebP image to use as your meme's background.</li>
-          <li>Type your Top Text and/or Bottom Text — both are automatically shown in bold, uppercase Impact-style lettering with a black outline.</li>
-          <li>Adjust the "Text Size" slider (20–90px) if you want larger or smaller lettering.</li>
+          <li>Type into the default Top Text and Bottom Text boxes, or click "+ Add Text Box" for more — every box is shown in bold, uppercase lettering with an outline automatically.</li>
+          <li>Click and drag any text directly on the image to position it exactly where you want.</li>
+          <li>Use each box's Font dropdown, Size slider, and Text/Outline color pickers to style it however you like.</li>
           <li>Click "Download Meme" to save the finished image as a PNG.</li>
         </ol>
       </div>
@@ -169,15 +276,27 @@
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
           <summary>Why does my text automatically appear in ALL CAPS?</summary>
-          <p>The tool converts both the top and bottom text to uppercase automatically, matching the classic meme text style - you don't need to type in caps yourself.</p>
+          <p>The tool converts the text in every text box to uppercase automatically, matching the classic meme text style - you don't need to type in caps yourself.</p>
         </details>
         <details class="faq-item">
           <summary>What happens if my text is too long to fit?</summary>
-          <p>The tool wraps long text onto multiple lines automatically, and if it still doesn't fit within about 92% of the image width and 40% of its height, it progressively shrinks the font size until the whole line block fits without running off the edges.</p>
+          <p>Each text box wraps long captions onto multiple lines automatically, and if the block still doesn't fit within about 92% of the image's width and 90% of its height, it progressively shrinks that box's font size until every line fits without spilling past the edges of the image.</p>
         </details>
         <details class="faq-item">
           <summary>Can I use a custom font instead of the classic meme style?</summary>
-          <p>No - the text is always rendered in bold Impact (falling back to Arial Black) with a black stroke outline, which is the traditional meme look. There's currently no font picker in this tool.</p>
+          <p>Yes - each text box has its own Font dropdown with five real, working styles: Impact (the classic meme look), Arial Black, Comic Sans MS, Space Grotesk, and Georgia. Every box can use a different font, and the bold black-outline treatment is still applied automatically for readability.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I change the text color or outline color?</summary>
+          <p>Yes - each text box has its own Text Color and Outline Color pickers, so you're not limited to the classic white-with-black-outline look, though that's still the default for every new box.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I move the text anywhere on the image?</summary>
+          <p>Yes - click and drag any text box directly on the meme image to reposition it exactly where you want. Dragging is constrained to inside the image so a box can't be lost off the edge, and each box also has a reset button that returns it to its starting position.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I add more than two lines of text?</summary>
+          <p>Yes - click "+ Add Text Box" to add as many independent text boxes as you like, each with its own text, position, font, size, and colors, and remove any box you no longer need with its ✕ button.</p>
         </details>
         <details class="faq-item">
           <summary>What file format does my meme download as?</summary>
@@ -262,21 +381,82 @@
   <script>
     var dropzone = document.getElementById("dropzone");
     var fileInput = document.getElementById("fileInput");
+    var canvasWrap = document.getElementById("canvasWrap");
     var canvas = document.getElementById("memeCanvas");
     var ctx = canvas.getContext("2d");
-    var topText = document.getElementById("topText");
-    var bottomText = document.getElementById("bottomText");
-    var fontSizeRange = document.getElementById("fontSizeRange");
+    var layerOutline = document.getElementById("layerOutline");
+    var layerHint = document.getElementById("layerHint");
+    var layersList = document.getElementById("layersList");
+    var addLayerBtn = document.getElementById("addLayerBtn");
     var downloadBtn = document.getElementById("downloadBtn");
     var statusBox = document.getElementById("statusBox");
+
+    var MAX_LAYERS = 8;
+
+    // Real, working font stacks only — Impact/Arial Black are web-safe on
+    // virtually every OS, Comic Sans MS and Georgia are web-safe too, and
+    // Space Grotesk is already loaded by this page's Google Fonts <link>.
+    var FONT_STACKS = {
+      "impact": "Impact, 'Arial Black', sans-serif",
+      "arial-black": "'Arial Black', Arial, sans-serif",
+      "comic-sans": "'Comic Sans MS', 'Comic Sans', cursive",
+      "space-grotesk": "'Space Grotesk', sans-serif",
+      "georgia": "Georgia, 'Times New Roman', serif"
+    };
+    var FONT_LABELS = {
+      "impact": "Impact (Classic)",
+      "arial-black": "Arial Black",
+      "comic-sans": "Comic Sans MS",
+      "space-grotesk": "Space Grotesk",
+      "georgia": "Georgia"
+    };
+    var FONT_ORDER = ["impact", "arial-black", "comic-sans", "space-grotesk", "georgia"];
 
     var naturalImg = null;
     var lastMemeUrl = null;
     var renderGeneration = 0;
     var blobTimer = null;
+    var layerIdCounter = 0;
+    var activeDragId = null;
+    var dragOffsetX = 0;
+    var dragOffsetY = 0;
 
-    function wrapLines(text, maxWidth, size) {
-      ctx.font = "bold " + size + "px Impact, 'Arial Black', sans-serif";
+    function makeLayer(placeholder, xFrac, yFrac) {
+      layerIdCounter++;
+      return {
+        id: layerIdCounter,
+        text: "",
+        placeholder: placeholder,
+        font: "impact",
+        size: 42,
+        color: "#ffffff",
+        strokeColor: "#000000",
+        xFrac: xFrac,
+        yFrac: yFrac,
+        defaultXFrac: xFrac,
+        defaultYFrac: yFrac,
+        _box: null
+      };
+    }
+
+    var layers = [
+      makeLayer("ONE DOES NOT SIMPLY", 0.5, 0.14),
+      makeLayer("WALK INTO MORDOR", 0.5, 0.86)
+    ];
+
+    function getLayerById(id) {
+      for (var i = 0; i < layers.length; i++) {
+        if (layers[i].id === id) return layers[i];
+      }
+      return null;
+    }
+
+    function escapeAttr(str) {
+      return String(str).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+    }
+
+    function wrapLines(text, maxWidth, size, font) {
+      ctx.font = "bold " + size + "px " + font;
       var words = text.toUpperCase().split(/\s+/).filter(Boolean);
       var lines = [];
       var current = "";
@@ -297,31 +477,51 @@
     // Shrinks font size until the wrapped block fits both the available width
     // (via wrapping) and height (via shrinking) — long text degrades to more,
     // smaller lines instead of running off the edge of the image.
-    function fitTextBlock(text, maxWidth, maxHeight, baseSize) {
+    function fitTextBlock(text, maxWidth, maxHeight, baseSize, font) {
       var size = baseSize;
-      var lines = wrapLines(text, maxWidth, size);
+      var lines = wrapLines(text, maxWidth, size, font);
 
       while (size > 10) {
         var lineHeight = size * 1.15;
         if (lines.length * lineHeight <= maxHeight) break;
         size -= 2;
-        lines = wrapLines(text, maxWidth, size);
+        lines = wrapLines(text, maxWidth, size, font);
       }
       return { size: size, lines: lines };
     }
 
-    function drawTextBlock(lines, size, centerX, startY) {
-      ctx.font = "bold " + size + "px Impact, 'Arial Black', sans-serif";
-      ctx.textAlign = "center";
-      ctx.lineWidth = Math.max(2, size / 12);
-      ctx.strokeStyle = "#000";
-      ctx.fillStyle = "#fff";
-      var lineHeight = size * 1.15;
-      lines.forEach(function (line, i) {
-        var y = startY + i * lineHeight;
-        ctx.strokeText(line, centerX, y);
-        ctx.fillText(line, centerX, y);
+    // Computes (and caches on the layer) the wrapped lines, font size, and
+    // pixel bounding box for a layer, in canvas-internal coordinates. Reused
+    // by both drawing and pointer hit-testing so the two never disagree.
+    function computeLayerBox(layer) {
+      if (!layer.text) return null;
+      var maxWidth = canvas.width * 0.92;
+      var maxHeight = canvas.height * 0.9;
+      var font = FONT_STACKS[layer.font] || FONT_STACKS.impact;
+      var fit = fitTextBlock(layer.text, maxWidth, maxHeight, layer.size, font);
+      var lineHeight = fit.size * 1.15;
+
+      ctx.font = "bold " + fit.size + "px " + font;
+      var width = 0;
+      fit.lines.forEach(function (line) {
+        width = Math.max(width, ctx.measureText(line).width);
       });
+      var height = fit.lines.length * lineHeight;
+      var centerX = layer.xFrac * canvas.width;
+      var centerY = layer.yFrac * canvas.height;
+
+      return {
+        lines: fit.lines,
+        size: fit.size,
+        font: font,
+        lineHeight: lineHeight,
+        width: width,
+        height: height,
+        centerX: centerX,
+        centerY: centerY,
+        left: centerX - width / 2,
+        top: centerY - height / 2
+      };
     }
 
     function drawCanvas() {
@@ -329,20 +529,23 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(naturalImg, 0, 0, canvas.width, canvas.height);
 
-      var baseSize = parseInt(fontSizeRange.value, 10);
-      var maxWidth = canvas.width * 0.92;
-      var maxHeight = canvas.height * 0.4;
+      layers.forEach(function (layer) {
+        var box = computeLayerBox(layer);
+        layer._box = box;
+        if (!box) return;
 
-      if (topText.value) {
-        var top = fitTextBlock(topText.value, maxWidth, maxHeight, baseSize);
-        drawTextBlock(top.lines, top.size, canvas.width / 2, top.size + 14);
-      }
-      if (bottomText.value) {
-        var bottom = fitTextBlock(bottomText.value, maxWidth, maxHeight, baseSize);
-        var lineHeight = bottom.size * 1.15;
-        var startY = canvas.height - 20 - (bottom.lines.length - 1) * lineHeight;
-        drawTextBlock(bottom.lines, bottom.size, canvas.width / 2, startY);
-      }
+        ctx.font = "bold " + box.size + "px " + box.font;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "top";
+        ctx.lineWidth = Math.max(2, box.size / 12);
+        ctx.strokeStyle = layer.strokeColor;
+        ctx.fillStyle = layer.color;
+        box.lines.forEach(function (line, i) {
+          var y = box.top + i * box.lineHeight;
+          ctx.strokeText(line, box.centerX, y);
+          ctx.fillText(line, box.centerX, y);
+        });
+      });
     }
 
     function updateDownloadBlob() {
@@ -369,6 +572,196 @@
       blobTimer = setTimeout(updateDownloadBlob, 150);
     }
 
+    /* ---------- Text box list (add / remove / edit) ---------- */
+
+    function buildFontOptions(selected) {
+      return FONT_ORDER.map(function (key) {
+        return '<option value="' + key + '"' + (key === selected ? " selected" : "") + '>' + FONT_LABELS[key] + "</option>";
+      }).join("");
+    }
+
+    function renderLayersList() {
+      layersList.innerHTML = "";
+      layers.forEach(function (layer, i) {
+        var row = document.createElement("div");
+        row.className = "layer-row";
+        row.setAttribute("data-id", layer.id);
+        row.innerHTML =
+          '<input type="text" class="layer-text" data-field="text" placeholder="' + escapeAttr(layer.placeholder) + '" value="' + escapeAttr(layer.text) + '" aria-label="Text box ' + (i + 1) + '" />' +
+          '<div class="layer-row-controls">' +
+            '<select class="layer-font" data-field="font" aria-label="Font for text box ' + (i + 1) + '">' + buildFontOptions(layer.font) + "</select>" +
+            '<input type="range" class="layer-size" data-field="size" min="14" max="120" value="' + layer.size + '" aria-label="Font size for text box ' + (i + 1) + '" />' +
+            '<span class="layer-size-value">' + layer.size + "px</span>" +
+            '<input type="color" class="layer-color" data-field="color" value="' + layer.color + '" aria-label="Text color for text box ' + (i + 1) + '" />' +
+            '<input type="color" class="layer-stroke" data-field="strokeColor" value="' + layer.strokeColor + '" aria-label="Outline color for text box ' + (i + 1) + '" />' +
+            '<button type="button" class="btn btn-secondary" data-action="reset" title="Reset position">Reset Pos</button>' +
+            '<button type="button" class="btn btn-secondary" data-action="remove"' + (layers.length <= 1 ? " disabled" : "") + ' title="Remove text box">Remove</button>' +
+          "</div>";
+        layersList.appendChild(row);
+      });
+      addLayerBtn.disabled = layers.length >= MAX_LAYERS;
+    }
+
+    function rowIdFor(el) {
+      var row = el.closest(".layer-row");
+      return row ? parseInt(row.getAttribute("data-id"), 10) : null;
+    }
+
+    layersList.addEventListener("input", function (e) {
+      var field = e.target.getAttribute("data-field");
+      if (!field) return;
+      var layer = getLayerById(rowIdFor(e.target));
+      if (!layer) return;
+
+      if (field === "text") {
+        layer.text = e.target.value;
+      } else if (field === "size") {
+        layer.size = parseInt(e.target.value, 10);
+        var row = e.target.closest(".layer-row");
+        var span = row && row.querySelector(".layer-size-value");
+        if (span) span.textContent = layer.size + "px";
+      } else if (field === "color") {
+        layer.color = e.target.value;
+      } else if (field === "strokeColor") {
+        layer.strokeColor = e.target.value;
+      }
+      render();
+    });
+
+    layersList.addEventListener("change", function (e) {
+      if (e.target.getAttribute("data-field") !== "font") return;
+      var layer = getLayerById(rowIdFor(e.target));
+      if (!layer) return;
+      layer.font = e.target.value;
+      render();
+    });
+
+    layersList.addEventListener("click", function (e) {
+      var action = e.target.getAttribute("data-action");
+      if (!action) return;
+      var id = rowIdFor(e.target);
+      var layer = getLayerById(id);
+      if (!layer) return;
+
+      if (action === "remove" && layers.length > 1) {
+        layers = layers.filter(function (l) { return l.id !== id; });
+        renderLayersList();
+        render();
+      } else if (action === "reset") {
+        layer.xFrac = layer.defaultXFrac;
+        layer.yFrac = layer.defaultYFrac;
+        render();
+      }
+    });
+
+    addLayerBtn.addEventListener("click", function () {
+      if (layers.length >= MAX_LAYERS) return;
+      layers.push(makeLayer("Enter text", 0.5, 0.5));
+      renderLayersList();
+      render();
+    });
+
+    /* ---------- Draggable text positioning on the canvas ---------- */
+
+    // Converts a pointer event's viewport coordinates into canvas-internal
+    // pixel coordinates, correcting for any CSS scaling between the canvas's
+    // displayed size and its actual drawing-buffer resolution (canvas.width/
+    // height). Example: canvas shown at 400px wide but internally 800px —
+    // scaleX = 800/400 = 2, so a pointer 200px into the display maps to
+    // internal x = 200 * 2 = 400, i.e. the true center column of the bitmap.
+    function getCanvasPos(evt) {
+      var rect = canvas.getBoundingClientRect();
+      var scaleX = canvas.width / rect.width;
+      var scaleY = canvas.height / rect.height;
+      return {
+        x: (evt.clientX - rect.left) * scaleX,
+        y: (evt.clientY - rect.top) * scaleY
+      };
+    }
+
+    function hitTestLayer(pos) {
+      var pad = 10;
+      for (var i = layers.length - 1; i >= 0; i--) {
+        var box = layers[i]._box;
+        if (!box) continue;
+        if (pos.x >= box.left - pad && pos.x <= box.left + box.width + pad &&
+            pos.y >= box.top - pad && pos.y <= box.top + box.height + pad) {
+          return layers[i];
+        }
+      }
+      return null;
+    }
+
+    function showOutlineForLayer(layer) {
+      var box = layer._box;
+      if (!box) { layerOutline.style.display = "none"; return; }
+      var canvasRect = canvas.getBoundingClientRect();
+      var wrapRect = canvasWrap.getBoundingClientRect();
+      var scaleX = canvasRect.width / canvas.width;
+      var scaleY = canvasRect.height / canvas.height;
+      var pad = 8;
+      layerOutline.style.left = (canvasRect.left - wrapRect.left + (box.left - pad) * scaleX) + "px";
+      layerOutline.style.top = (canvasRect.top - wrapRect.top + (box.top - pad) * scaleY) + "px";
+      layerOutline.style.width = ((box.width + pad * 2) * scaleX) + "px";
+      layerOutline.style.height = ((box.height + pad * 2) * scaleY) + "px";
+      layerOutline.style.display = "block";
+    }
+
+    function hideOutline() {
+      layerOutline.style.display = "none";
+    }
+
+    canvas.addEventListener("pointerdown", function (evt) {
+      if (!naturalImg) return;
+      var pos = getCanvasPos(evt);
+      var layer = hitTestLayer(pos);
+      if (!layer) return;
+      activeDragId = layer.id;
+      dragOffsetX = pos.x - layer.xFrac * canvas.width;
+      dragOffsetY = pos.y - layer.yFrac * canvas.height;
+      canvas.setPointerCapture(evt.pointerId);
+      canvas.style.cursor = "grabbing";
+      showOutlineForLayer(layer);
+      evt.preventDefault();
+    });
+
+    canvas.addEventListener("pointermove", function (evt) {
+      var pos = getCanvasPos(evt);
+
+      if (activeDragId == null) {
+        var hover = hitTestLayer(pos);
+        canvas.style.cursor = hover ? "grab" : "default";
+        if (hover) showOutlineForLayer(hover); else hideOutline();
+        return;
+      }
+
+      var layer = getLayerById(activeDragId);
+      if (!layer) return;
+
+      var nx = pos.x - dragOffsetX;
+      var ny = pos.y - dragOffsetY;
+      // Clamp so a box can't be dragged off-canvas and lost.
+      nx = Math.max(0, Math.min(canvas.width, nx));
+      ny = Math.max(0, Math.min(canvas.height, ny));
+      layer.xFrac = nx / canvas.width;
+      layer.yFrac = ny / canvas.height;
+      render();
+      showOutlineForLayer(layer);
+    });
+
+    function endDrag() {
+      activeDragId = null;
+      canvas.style.cursor = "default";
+      hideOutline();
+    }
+    canvas.addEventListener("pointerup", endDrag);
+    canvas.addEventListener("pointercancel", endDrag);
+    canvas.addEventListener("pointerleave", function () {
+      if (activeDragId == null) hideOutline();
+    });
+
+    /* ---------- Upload handling ---------- */
+
     function handleFiles(files) {
       var file = files[0];
       if (!file || file.type.indexOf("image/") !== 0) {
@@ -383,9 +776,10 @@
           naturalImg = img;
           canvas.width = img.naturalWidth;
           canvas.height = img.naturalHeight;
-          canvas.style.display = "block";
+          canvasWrap.style.display = "inline-block";
+          layerHint.style.display = "block";
           render();
-          statusBox.textContent = "Add your top and bottom text, then download.";
+          statusBox.textContent = "Add text to your boxes, drag them into place, then download.";
         };
         img.src = e.target.result;
       };
@@ -397,11 +791,7 @@
       if (e.key === "Enter" || e.key === " ") fileInput.click();
     });
 
-    [topText, bottomText].forEach(function (el) { el.addEventListener("input", render); });
-    fontSizeRange.addEventListener("input", function () {
-      document.getElementById("fontSizeValue").textContent = fontSizeRange.value;
-      render();
-    });
+    renderLayersList();
   </script>
 </body>
 </html>
