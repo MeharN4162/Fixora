@@ -6,7 +6,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Tool to Extract Images from PDF Online | Fixoona</title>
-  <meta name="description" content="Extract every embedded photo from a PDF online for free. Limit extraction to a page range, skip tiny decorative images, and save as PNG or JPG. Right in your browser, no uploads, no sign-up." />
+  <meta name="description" content="Extract every embedded photo from a PDF online for free. Limit extraction to a page range and skip tiny decorative images below a size you set. Right in your browser, no uploads, no sign-up." />
   <meta name="keywords" content="extract images from pdf, pdf image extractor online free, save pdf pictures" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/pdf-extract-images" />
@@ -14,13 +14,13 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixoona" />
   <meta property="og:title" content="Free Tool to Extract Images from PDF Online" />
-  <meta property="og:description" content="Extract every embedded photo from a PDF online for free — pick a page range, filter out tiny images, and save as PNG or JPG." />
+  <meta property="og:description" content="Extract every embedded photo from a PDF online for free — pick a page range and filter out tiny images." />
   <meta property="og:url" content="https://fixoona.com/tools/pdf-extract-images" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Free Tool to Extract Images from PDF Online" />
-  <meta name="twitter:description" content="Extract every embedded photo from a PDF online for free — page range, size filter, and PNG or JPG output." />
+  <meta name="twitter:description" content="Extract every embedded photo from a PDF online for free — page range and minimum-size filter included." />
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='0.55' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='22' width='100' height='100' fill='url(%23g)'/%3E%3Crect x='30' y='23' width='15' height='54' rx='7.5' fill='white'/%3E%3Crect x='30' y='23' width='42' height='14' rx='7' fill='white'/%3E%3Crect x='30' y='46' width='29' height='13' rx='6.5' fill='white'/%3E%3C/svg%3E" />
 
@@ -80,6 +80,16 @@
         "@type": "Question",
         "name": "What format are the extracted images saved as?",
         "acceptedAnswer": { "@type": "Answer", "text": "PNG, regardless of what format the image was originally embedded in (even if it was a JPEG in the source PDF) — PNG is lossless, which keeps the crop-and-export step from adding further compression artifacts." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I extract images from just a few pages instead of the whole PDF?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — use the Pages field to enter specific page numbers and ranges, like \"1-3, 5, 8-10\", and only those pages are scanned for images. Leave it blank to scan every page." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I skip tiny icons and bullet images?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Set the \"Minimum size\" field to the smallest width or height (in pixels) you want to keep — any embedded image narrower or shorter than that on the rendered page is skipped automatically, which is useful for filtering out small icons, bullets, and decorative dividers." }
       }
     ]
   }
@@ -156,7 +166,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🖼️</div>
       <h1>Extract Images from PDF</h1>
-      <p>Pull every embedded photo out of a PDF and download them individually as PNGs. Images are rendered at high resolution, so quality is excellent — just not always byte-identical to the original file.</p>
+      <p>Pull every embedded photo out of a PDF and download them individually as PNGs. Limit extraction to specific pages and filter out images smaller than a size you choose. Images are rendered at high resolution, so quality is excellent — just not always byte-identical to the original file.</p>
     </section>
 
     <section class="container">
@@ -169,8 +179,20 @@
           <input type="file" id="fileInput" accept="application/pdf" hidden />
         </div>
 
-        <div class="actions" id="downloadAllRow" style="display:none;">
-          <button class="btn btn-primary" id="downloadAllBtn">Download All Images</button>
+        <div class="row" id="optionsRow" style="display:none;">
+          <div class="field">
+            <label for="pageRangeInput">Pages (e.g. 1-3, 5, 8-10 — blank for all)</label>
+            <input type="text" id="pageRangeInput" placeholder="All pages" />
+          </div>
+          <div class="field">
+            <label for="minSizeInput">Minimum size (px) — skip images smaller than this</label>
+            <input type="number" id="minSizeInput" min="0" step="1" value="40" />
+          </div>
+        </div>
+
+        <div class="actions" id="actionsRow" style="display:none;">
+          <button class="btn btn-secondary" id="reExtractBtn">Re-Extract</button>
+          <button class="btn btn-primary" id="downloadAllBtn" style="display:none;">Download All Images</button>
         </div>
 
         <div class="output-box" id="statusBox"></div>
@@ -181,7 +203,8 @@
       <div class="howto">
         <h2>How to Extract Images from a PDF</h2>
         <ol class="howto-steps">
-          <li>Upload your PDF.</li>
+          <li>Upload your PDF — extraction starts automatically with all pages and a minimum size of 40px.</li>
+          <li>Optionally narrow the Pages field to specific pages, adjust the minimum size to skip small icons, then click "Re-Extract".</li>
           <li>Wait while it scans each page for embedded photos — the status message tracks progress page by page.</li>
           <li>Browse the grid of extracted images, each labeled with its pixel dimensions.</li>
           <li>Download images individually, or click "Download All Images" to save every one.</li>
@@ -209,6 +232,14 @@
         <details class="faq-item">
           <summary>What format are the extracted images saved as?</summary>
           <p>PNG, regardless of what format the image was originally embedded in (even if it was a JPEG in the source PDF) — PNG is lossless, which keeps the crop-and-export step from adding further compression artifacts.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I extract images from just a few pages instead of the whole PDF?</summary>
+          <p>Yes — use the Pages field to enter specific page numbers and ranges, like "1-3, 5, 8-10", and only those pages are scanned for images. Leave it blank to scan every page.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How do I skip tiny icons and bullet images?</summary>
+          <p>Set the "Minimum size" field to the smallest width or height (in pixels) you want to keep — any embedded image narrower or shorter than that on the rendered page is skipped automatically, which is useful for filtering out small icons, bullets, and decorative dividers.</p>
         </details>
       </div>
 
@@ -290,8 +321,48 @@
     var fileInput = document.getElementById("fileInput");
     var statusBox = document.getElementById("statusBox");
     var imageGrid = document.getElementById("imageGrid");
-    var downloadAllRow = document.getElementById("downloadAllRow");
+    var optionsRow = document.getElementById("optionsRow");
+    var pageRangeInput = document.getElementById("pageRangeInput");
+    var minSizeInput = document.getElementById("minSizeInput");
+    var actionsRow = document.getElementById("actionsRow");
+    var reExtractBtn = document.getElementById("reExtractBtn");
+    var downloadAllBtn = document.getElementById("downloadAllBtn");
     var extracted = [];
+    var currentPdf = null;
+    var currentFile = null;
+
+    // Parses "1-3, 5, 8-10" into a sorted, deduped array of valid page
+    // numbers clamped to [1, maxPage]. Returns null (meaning "all pages")
+    // for blank input, or throws with a message for malformed input.
+    function parsePageRange(rangeStr, maxPage) {
+      var trimmed = rangeStr.trim();
+      if (!trimmed) return null;
+
+      var pages = {};
+      var parts = trimmed.split(",");
+      for (var i = 0; i < parts.length; i++) {
+        var part = parts[i].trim();
+        if (!part) continue;
+        var m = part.match(/^(\d+)\s*-\s*(\d+)$/);
+        if (m) {
+          var start = parseInt(m[1], 10);
+          var end = parseInt(m[2], 10);
+          if (start > end) { var t = start; start = end; end = t; }
+          for (var p = start; p <= end; p++) {
+            if (p >= 1 && p <= maxPage) pages[p] = true;
+          }
+        } else if (/^\d+$/.test(part)) {
+          var n = parseInt(part, 10);
+          if (n >= 1 && n <= maxPage) pages[n] = true;
+        } else {
+          throw new Error('Could not understand "' + part + '" — use page numbers and ranges like "1-3, 5".');
+        }
+      }
+
+      var result = Object.keys(pages).map(Number).sort(function (a, b) { return a - b; });
+      if (!result.length) throw new Error("That page range doesn't match any pages in this " + maxPage + "-page PDF.");
+      return result;
+    }
 
     // Combine two PDF-style affine matrices [a,b,c,d,e,f], applying m1 first
     // then m2 to a point. This lets us track the content-stream CTM (via the
@@ -319,7 +390,7 @@
     // (render/getOperatorList/OPS), so it keeps working across pdf.js
     // versions. The operator list is used purely to find *where* each
     // image was painted.
-    async function extractFromPage(pdf, pageNum) {
+    async function extractFromPage(pdf, pageNum, minSize) {
       var page = await pdf.getPage(pageNum);
       var scale = 3;
       var viewport = page.getViewport({ scale: scale });
@@ -389,6 +460,7 @@
           var w = maxX - minX;
           var h = maxY - minY;
           if (w < 2 || h < 2) continue;
+          if (w < minSize || h < minSize) continue;
 
           var canvas = document.createElement("canvas");
           canvas.width = w;
@@ -417,24 +489,59 @@
         statusBox.textContent = "Please choose a valid PDF file.";
         return;
       }
-      run(file);
+      currentFile = file;
+      pageRangeInput.value = "";
+      minSizeInput.value = "40";
+      loadAndExtract(file);
     }
 
-    async function run(file) {
+    async function loadAndExtract(file) {
+      statusBox.textContent = "Reading PDF…";
       imageGrid.innerHTML = "";
       extracted = [];
-      downloadAllRow.style.display = "none";
-      statusBox.textContent = "Reading PDF…";
+      optionsRow.style.display = "none";
+      actionsRow.style.display = "none";
+      downloadAllBtn.style.display = "none";
 
       try {
         var arrayBuffer = await file.arrayBuffer();
-        var pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-        var baseName = file.name.replace(/\.pdf$/i, "");
+        currentPdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        optionsRow.style.display = "flex";
+        actionsRow.style.display = "flex";
+        await run();
+      } catch (err) {
+        console.error(err);
+        statusBox.textContent = "Something went wrong reading that PDF. Please try a different file.";
+      }
+    }
+
+    async function run() {
+      if (!currentPdf) return;
+
+      var pageList;
+      try {
+        pageList = parsePageRange(pageRangeInput.value, currentPdf.numPages);
+      } catch (err) {
+        statusBox.textContent = err.message;
+        return;
+      }
+      var pagesToRead = pageList || Array.from({ length: currentPdf.numPages }, function (_, i) { return i + 1; });
+
+      var minSize = parseInt(minSizeInput.value, 10);
+      if (!(minSize >= 0)) minSize = 0;
+
+      imageGrid.innerHTML = "";
+      extracted = [];
+      downloadAllBtn.style.display = "none";
+
+      try {
+        var baseName = currentFile.name.replace(/\.pdf$/i, "");
         var count = 0;
 
-        for (var i = 1; i <= pdf.numPages; i++) {
-          statusBox.textContent = "Scanning page " + i + " of " + pdf.numPages + "…";
-          var canvases = await extractFromPage(pdf, i);
+        for (var idx = 0; idx < pagesToRead.length; idx++) {
+          var pageNum = pagesToRead[idx];
+          statusBox.textContent = "Scanning page " + pageNum + " (" + (idx + 1) + " of " + pagesToRead.length + ")…";
+          var canvases = await extractFromPage(currentPdf, pageNum, minSize);
 
           canvases.forEach(function (canvas) {
             count++;
@@ -452,11 +559,12 @@
           });
         }
 
+        var pageLabel = pageList ? pagesToRead.length + " selected page(s)" : pagesToRead.length + " page(s)";
         if (count === 0) {
-          statusBox.textContent = "No embedded photos found in this PDF — it may only contain text or vector graphics.";
+          statusBox.textContent = "No embedded photos found across " + pageLabel + " — either this PDF only contains text or vector graphics, or every image was smaller than the minimum size filter.";
         } else {
-          statusBox.textContent = "Done! Found " + count + " image(s) across " + pdf.numPages + " page(s).";
-          downloadAllRow.style.display = "flex";
+          statusBox.textContent = "Done! Found " + count + " image(s) across " + pageLabel + ".";
+          downloadAllBtn.style.display = "inline-flex";
         }
       } catch (err) {
         console.error(err);
@@ -468,6 +576,8 @@
     dropzone.addEventListener("keydown", function (e) {
       if (e.key === "Enter" || e.key === " ") fileInput.click();
     });
+
+    reExtractBtn.addEventListener("click", run);
 
     document.getElementById("downloadAllBtn").addEventListener("click", function () {
       extracted.forEach(function (item, idx) {
