@@ -6,7 +6,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free PDF Metadata Editor Online — View & Strip Metadata | Fixoona</title>
-  <meta name="description" content="View, edit, or strip a PDF's metadata online for free — title, author, subject, keywords, creator, producer, language, and creation/modification dates. Right in your browser, no uploads, no sign-up." />
+  <meta name="description" content="View, edit, or strip a PDF's metadata online for free — title, author, subject, keywords, creator, producer, language, and creation date. Right in your browser, no uploads, no sign-up." />
   <meta name="keywords" content="pdf metadata editor, remove pdf metadata online free, pdf properties editor" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/pdf-metadata" />
@@ -59,12 +59,12 @@
       {
         "@type": "Question",
         "name": "What's the difference between \"Save Changes\" and \"Strip All Metadata\"?",
-        "acceptedAnswer": { "@type": "Answer", "text": "\"Save Changes\" writes whatever is currently in the Title/Author/Subject/Keywords/Creator/Producer/Language fields — including any edits you made — plus any Created or Modified date you've changed. \"Strip All Metadata\" clears the Title, Author, Subject, Keywords, Creator, Producer, and Language fields to blank and saves, removing that identifying information from the PDF entirely; it leaves the Created/Modified dates untouched since a blank date isn't meaningfully more private and most PDF readers expect a valid one." }
+        "acceptedAnswer": { "@type": "Answer", "text": "\"Save Changes\" writes whatever is currently in the Title/Author/Subject/Keywords/Creator/Producer/Language fields — including any edits you made — plus the Created date if you changed it. \"Strip All Metadata\" clears the Title, Author, Subject, Keywords, Creator, Producer fields to blank and saves, removing that identifying information from the PDF entirely; it also resets the Language and Created fields in the form, but since those two are only written when you've actually entered a value, the PDF's existing creation date and any existing language tag are left untouched by Strip. In both cases the Modified date is stamped automatically to the exact moment you save — the PDF library controls that field and it can't be set manually." }
       },
       {
         "@type": "Question",
         "name": "Can I edit the Created and Modified dates?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes — both load as editable date/time fields pre-filled from the PDF, alongside the page count which stays read-only. Change either one and click \"Save Changes\" to apply it, or use \"Set Both to Now\" to stamp the current date and time on both fields at once." }
+        "acceptedAnswer": { "@type": "Answer", "text": "You can edit the Created date — it loads as an editable field pre-filled from the PDF, and you can also click \"Set Created to Now\" for a quick timestamp. The Modified date can't be set manually: the PDF library always overwrites it with the exact moment you click \"Save Changes,\" and the actual stamped value is shown after saving." }
       },
       {
         "@type": "Question",
@@ -123,7 +123,7 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">🏷️</div>
       <h1>PDF Metadata Editor</h1>
-      <p>View, edit, or completely strip a PDF's hidden metadata — including its language and creation/modification dates — useful for privacy before sharing a file.</p>
+      <p>View, edit, or completely strip a PDF's hidden metadata — including its language and creation date — useful for privacy before sharing a file.</p>
     </section>
 
     <section class="container">
@@ -164,24 +164,20 @@
             <label for="metaLanguage">Language (e.g. en, en-US, fr)</label>
             <input type="text" id="metaLanguage" maxlength="20" placeholder="Leave blank to keep existing" />
           </div>
-          <div class="row">
-            <div class="field">
-              <label for="metaCreated">Created</label>
-              <input type="datetime-local" id="metaCreated" />
-            </div>
-            <div class="field">
-              <label for="metaModified">Modified</label>
-              <input type="datetime-local" id="metaModified" />
-            </div>
+          <div class="field">
+            <label for="metaCreated">Created</label>
+            <input type="datetime-local" id="metaCreated" />
           </div>
+          <p style="font-size:0.85rem;color:var(--color-text-muted);margin-top:-10px;">Modification date can't be manually set — the PDF library always stamps it with the exact moment you click "Save Changes," shown below after saving.</p>
           <div class="stat-row">
             <div class="stat"><strong id="statPages">–</strong><span>Pages</span></div>
+            <div class="stat"><strong id="statModifiedDisplay">–</strong><span>Last Modified</span></div>
           </div>
 
           <div class="actions">
             <button class="btn btn-primary" id="applyBtn">Save Changes</button>
             <button class="btn btn-secondary" id="stripBtn">Strip All Metadata</button>
-            <button class="btn btn-secondary" id="setNowBtn" type="button">Set Both Dates to Now</button>
+            <button class="btn btn-secondary" id="setNowBtn" type="button">Set Created to Now</button>
             <a class="btn btn-secondary" id="downloadBtn" style="display:none;" download="edited.pdf">Download PDF</a>
           </div>
         </div>
@@ -192,9 +188,9 @@
       <div class="howto">
         <h2>How to Edit or Strip PDF Metadata</h2>
         <ol class="howto-steps">
-          <li>Upload your PDF — its current Title, Author, Subject, Keywords, Creator, Producer, and Created/Modified dates load automatically, along with a read-only page count. The Language field starts blank since it can only be written, not read back.</li>
-          <li>Edit any of the text fields, set a Language code, or adjust the Created/Modified dates — use "Set Both Dates to Now" for a quick timestamp.</li>
-          <li>Click "Save Changes" to apply your edits, or "Strip All Metadata" to clear the Title/Author/Subject/Keywords/Creator/Producer/Language fields at once.</li>
+          <li>Upload your PDF — its current Title, Author, Subject, Keywords, Creator, Producer, and Created date load automatically, along with a read-only page count. The Language field starts blank since it can only be written, not read back.</li>
+          <li>Edit any of the text fields, set a Language code, or adjust the Created date — use "Set Created to Now" for a quick timestamp. The Modified date can't be set manually; the PDF library always stamps it with the exact moment you save.</li>
+          <li>Click "Save Changes" to apply your edits, or "Strip All Metadata" to clear the Title/Author/Subject/Keywords/Creator/Producer fields at once — the Created date and any existing Language tag are left as-is.</li>
           <li>Download the updated PDF.</li>
         </ol>
       </div>
@@ -203,11 +199,11 @@
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
           <summary>What's the difference between "Save Changes" and "Strip All Metadata"?</summary>
-          <p>"Save Changes" writes whatever is currently in the Title/Author/Subject/Keywords/Creator/Producer/Language fields — including any edits you made — plus any Created or Modified date you've changed. "Strip All Metadata" clears the Title, Author, Subject, Keywords, Creator, Producer, and Language fields to blank and saves, removing that identifying information from the PDF entirely; it leaves the Created/Modified dates untouched since a blank date isn't meaningfully more private and most PDF readers expect a valid one.</p>
+          <p>"Save Changes" writes whatever is currently in the Title/Author/Subject/Keywords/Creator/Producer/Language fields — including any edits you made — plus the Created date if you changed it. "Strip All Metadata" clears the Title, Author, Subject, Keywords, Creator, Producer fields to blank and saves, removing that identifying information from the PDF entirely; it also resets the Language and Created fields in the form, but since those two are only written when you've actually entered a value, the PDF's existing creation date and any existing language tag are left untouched by Strip. In both cases the Modified date is stamped automatically to the exact moment you save — the PDF library controls that field and it can't be set manually.</p>
         </details>
         <details class="faq-item">
           <summary>Can I edit the Created and Modified dates?</summary>
-          <p>Yes — both load as editable date/time fields pre-filled from the PDF, alongside the page count which stays read-only. Change either one and click "Save Changes" to apply it, or use "Set Both to Now" to stamp the current date and time on both fields at once.</p>
+          <p>You can edit the Created date — it loads as an editable field pre-filled from the PDF, and you can also click "Set Created to Now" for a quick timestamp. The Modified date can't be set manually: the PDF library always overwrites it with the exact moment you click "Save Changes," and the actual stamped value is shown after saving.</p>
         </details>
         <details class="faq-item">
           <summary>Why would I want to strip a PDF's metadata?</summary>
@@ -317,6 +313,12 @@
       return d ? new Date(d).toLocaleString() : "—";
     }
 
+    function pad2(n) { return n < 10 ? "0" + n : "" + n; }
+    function toLocalInputValue(date) {
+      return date.getFullYear() + "-" + pad2(date.getMonth() + 1) + "-" + pad2(date.getDate()) +
+        "T" + pad2(date.getHours()) + ":" + pad2(date.getMinutes());
+    }
+
     async function loadFile(file) {
       statusBox.textContent = "Reading metadata…";
       resetDownload();
@@ -331,9 +333,11 @@
         document.getElementById("metaKeywords").value = (doc.getKeywords() || "");
         document.getElementById("metaCreator").value = doc.getCreator() || "";
         document.getElementById("metaProducer").value = doc.getProducer() || "";
-        document.getElementById("statCreated").textContent = fmtDate(doc.getCreationDate());
-        document.getElementById("statModified").textContent = fmtDate(doc.getModificationDate());
         document.getElementById("statPages").textContent = doc.getPageCount();
+        document.getElementById("statModifiedDisplay").textContent = fmtDate(doc.getModificationDate());
+
+        var createdDate = doc.getCreationDate();
+        document.getElementById("metaCreated").value = createdDate ? toLocalInputValue(createdDate) : "";
 
         fieldsWrap.style.display = "block";
         statusBox.textContent = file.name + " loaded. Edit fields and save, or strip everything.";
@@ -370,6 +374,8 @@
         doc.setKeywords(fields.keywords ? fields.keywords.split(",").map(function (k) { return k.trim(); }).filter(Boolean) : []);
         doc.setCreator(fields.creator || "");
         doc.setProducer(fields.producer || "");
+        if (fields.created) doc.setCreationDate(new Date(fields.created));
+        if (fields.language) doc.setLanguage(fields.language);
 
         var newBytes = await doc.save();
         var blob = new Blob([newBytes], { type: "application/pdf" });
@@ -379,6 +385,13 @@
         downloadBtn.href = url;
         downloadBtn.download = currentFile.name.replace(/\.pdf$/i, "") + "-edited.pdf";
         downloadBtn.style.display = "inline-flex";
+
+        // pdf-lib always stamps the modification date to the exact save
+        // moment, regardless of any prior value -- read it back from the
+        // saved document rather than guessing, so this always reflects
+        // the real output.
+        var savedDoc = await PDFLib.PDFDocument.load(newBytes);
+        document.getElementById("statModifiedDisplay").textContent = fmtDate(savedDoc.getModificationDate());
 
         statusBox.textContent = "Done! Metadata updated.";
       } catch (err) {
@@ -395,13 +408,19 @@
         subject: document.getElementById("metaSubject").value,
         keywords: document.getElementById("metaKeywords").value,
         creator: document.getElementById("metaCreator").value,
-        producer: document.getElementById("metaProducer").value
+        producer: document.getElementById("metaProducer").value,
+        created: document.getElementById("metaCreated").value,
+        language: document.getElementById("metaLanguage").value
       });
+    });
+
+    document.getElementById("setNowBtn").addEventListener("click", function () {
+      document.getElementById("metaCreated").value = toLocalInputValue(new Date());
     });
 
     document.getElementById("stripBtn").addEventListener("click", function () {
       if (!currentFile) return;
-      ["metaTitle", "metaAuthor", "metaSubject", "metaKeywords", "metaCreator", "metaProducer"].forEach(function (id) {
+      ["metaTitle", "metaAuthor", "metaSubject", "metaKeywords", "metaCreator", "metaProducer", "metaLanguage", "metaCreated"].forEach(function (id) {
         document.getElementById(id).value = "";
       });
       saveWithFields({});
