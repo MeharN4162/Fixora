@@ -1136,6 +1136,11 @@ p {
 
 .field input[type="text"],
 .field input[type="number"],
+.field input[type="date"],
+.field input[type="email"],
+.field input[type="tel"],
+.field input[type="url"],
+.field input[type="password"],
 .field textarea,
 .field select {
   width: 100%;
@@ -1146,6 +1151,19 @@ p {
   font-size: 0.98rem;
   background: var(--color-surface);
   color: var(--color-text);
+}
+
+.field input[type="date"] {
+  cursor: text;
+  /* Inherits color-scheme (light/dark) from :root, so the native
+     calendar popup and picker icon match the site's current theme
+     automatically instead of always rendering in light mode. */
+}
+
+.field input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 3px;
 }
 
 .field textarea {
