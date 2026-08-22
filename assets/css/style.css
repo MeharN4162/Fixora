@@ -1190,6 +1190,232 @@ p {
   outline-offset: 1px;
 }
 
+/* Custom date/time picker (assets/js/date-picker.js) — replaces the
+   native browser popup, which color-scheme can theme but not restyle. */
+.fx-dp-wrap {
+  position: relative;
+}
+
+.fx-dp-native {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fx-dp-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  font-family: var(--font-main);
+  font-size: 0.98rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  text-align: left;
+}
+
+.fx-dp-trigger:focus,
+.fx-dp-trigger[aria-expanded="true"] {
+  outline: 2px solid var(--color-primary-light);
+  outline-offset: 1px;
+}
+
+.fx-dp-trigger.fx-dp-placeholder .fx-dp-trigger-text {
+  color: var(--color-text-muted);
+}
+
+.fx-dp-trigger-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fx-dp-icon {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+}
+
+.fx-dp-popup {
+  position: absolute;
+  top: calc(100% + 6px);
+  z-index: 40;
+  width: max-content;
+  max-width: min(320px, calc(100vw - 40px));
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 14px;
+}
+
+.fx-dp-cal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.fx-dp-cal-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.fx-dp-nav {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-soft);
+  color: var(--color-text);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.fx-dp-nav:hover {
+  background: var(--color-bg-alt);
+}
+
+.fx-dp-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  text-align: center;
+}
+
+.fx-dp-weekdays span {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  padding: 4px 0;
+}
+
+.fx-dp-day {
+  aspect-ratio: 1;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  border-radius: 999px;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.fx-dp-day:hover {
+  background: var(--color-bg-alt);
+}
+
+.fx-dp-day-today {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.fx-dp-day-selected {
+  background: var(--gradient-primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.fx-dp-day-selected:hover {
+  background: var(--gradient-primary);
+}
+
+.fx-dp-day-empty {
+  cursor: default;
+}
+
+.fx-dp-time-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+}
+
+.fx-dp-time-label {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-right: 2px;
+}
+
+.fx-dp-time-input {
+  width: 50px;
+  padding: 6px 4px;
+  text-align: center;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-soft);
+  color: var(--color-text);
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+}
+
+.fx-dp-time-colon {
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.fx-dp-ampm {
+  display: flex;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-left: auto;
+}
+
+.fx-dp-ampm-btn {
+  padding: 6px 10px;
+  border: none;
+  background: var(--color-bg-soft);
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.fx-dp-ampm-active {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.fx-dp-footer {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+}
+
+.fx-dp-footer-btn {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-soft);
+  color: var(--color-text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.fx-dp-footer-btn:hover {
+  background: var(--color-bg-alt);
+}
+
+.fx-dp-footer-btn-primary {
+  background: var(--gradient-primary);
+  color: #fff;
+  border-color: transparent;
+}
+
 .row {
   display: flex;
   gap: 14px;
