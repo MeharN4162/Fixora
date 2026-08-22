@@ -221,10 +221,17 @@ p {
 .nav-brand {
   display: flex;
   align-items: center;
+  gap: 9px;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.25rem;
   color: var(--color-text);
+}
+
+.nav-brand-icon {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
 }
 
 .nav-brand .brand-word {
