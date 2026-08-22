@@ -100,13 +100,30 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
     }
     .tz-table tr { border-bottom: 1px solid var(--color-border); }
     .tz-table tr:last-child { border-bottom: none; }
-    .tz-table td { padding: 10px 8px; font-size: 0.92rem; }
+    .tz-table tr:nth-child(even) { background: var(--color-bg-soft); }
+    .tz-table tr:hover { background: color-mix(in srgb, var(--color-primary) 10%, transparent); }
+    .tz-table td { padding: 11px 14px; font-size: 0.92rem; }
     .tz-table td:first-child { color: var(--color-text-muted); }
-    .tz-table td:last-child { text-align: right; font-family: var(--font-display); font-weight: 600; }
-    .tz-table tr.is-source { background: rgba(37,99,235,0.06); }
+    .tz-table td:last-child { text-align: right; }
+    .tz-table tr.is-source { background: color-mix(in srgb, var(--color-primary) 8%, transparent); }
+    .tz-table tr.is-source td:first-child { color: var(--color-text); font-weight: 600; }
+    .tz-time-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: var(--gradient-primary);
+      color: #fff;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.86rem;
+    }
 
     .tz-live-note { color: var(--color-text-muted); font-size: 0.9rem; margin-top: -6px; margin-bottom: 4px; }
     .tz-live-grid {
@@ -496,7 +513,10 @@
         var td1 = document.createElement("td");
         td1.textContent = z.label || z.id;
         var td2 = document.createElement("td");
-        td2.textContent = formatInZone(utcInstant, z.id);
+        var badge = document.createElement("span");
+        badge.className = "tz-time-badge";
+        badge.textContent = formatInZone(utcInstant, z.id);
+        td2.appendChild(badge);
 
         row.appendChild(td1);
         row.appendChild(td2);
