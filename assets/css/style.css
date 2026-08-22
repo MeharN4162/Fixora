@@ -229,9 +229,10 @@ p {
 }
 
 .nav-brand-icon {
-  width: 26px;
-  height: 26px;
+  height: 30px;
+  width: auto;
   flex-shrink: 0;
+  display: block;
 }
 
 .nav-brand .brand-word {
