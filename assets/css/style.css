@@ -2693,7 +2693,7 @@ p {
    ========================================================= */
 .mascot-wrap {
   position: fixed;
-  bottom: 96px;
+  bottom: 150px;
   right: 24px;
   z-index: 54;
   display: flex;
@@ -2752,7 +2752,7 @@ p {
 @media (max-width: 640px) {
   .fab-surprise span { display: none; }
   .fab-surprise { padding: 14px; }
-  .mascot-wrap { right: 12px; bottom: 88px; max-width: calc(100vw - 100px); }
+  .mascot-wrap { right: 12px; bottom: 128px; max-width: calc(100vw - 100px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
