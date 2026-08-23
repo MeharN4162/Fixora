@@ -57,10 +57,16 @@
   }
 
   document.addEventListener("mousedown", function (e) {
-    if (openPopup && !openPopup.wrap.contains(e.target)) closeOpenPopup();
+    if (openPopup && !openPopup.wrap.contains(e.target) && !openPopup.popup.contains(e.target)) closeOpenPopup();
   });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && openPopup) { openPopup.trigger.focus(); closeOpenPopup(); }
+  });
+  window.addEventListener("scroll", function () {
+    if (openPopup) closeOpenPopup();
+  }, true);
+  window.addEventListener("resize", function () {
+    if (openPopup) closeOpenPopup();
   });
 
   function enhance(input) {
@@ -101,7 +107,11 @@
     var popup = document.createElement("div");
     popup.className = "fx-dp-popup";
     popup.style.display = "none";
-    wrap.appendChild(popup);
+    // Appended to <body> (not wrap) and positioned with getBoundingClientRect
+    // math in openThis(), so it can't be clipped by an ancestor's
+    // "overflow: hidden" (e.g. .tool-panel) regardless of where the field
+    // sits on the page.
+    document.body.appendChild(popup);
 
     var now = new Date();
     var state = { viewY: now.getFullYear(), viewM: now.getMonth(), y: null, mo: null, d: null, h: 0, min: 0 };
@@ -248,11 +258,29 @@
       renderCalendar();
       popup.style.display = "block";
       trigger.setAttribute("aria-expanded", "true");
-      popup.style.left = "0"; popup.style.right = "auto";
-      var rect = wrap.getBoundingClientRect();
-      if (rect.left + popup.offsetWidth > window.innerWidth - 12) {
-        popup.style.left = "auto"; popup.style.right = "0";
+
+      var margin = 8;
+      var triggerRect = trigger.getBoundingClientRect();
+      var popupW = popup.offsetWidth;
+      var popupH = popup.offsetHeight;
+
+      var left = triggerRect.left;
+      if (left + popupW > window.innerWidth - margin) {
+        left = window.innerWidth - margin - popupW;
       }
+      if (left < margin) left = margin;
+
+      var openBelow = triggerRect.bottom + margin + popupH <= window.innerHeight;
+      var top;
+      if (openBelow || triggerRect.top - margin - popupH < margin) {
+        top = triggerRect.bottom + margin;
+      } else {
+        top = triggerRect.top - margin - popupH;
+      }
+
+      popup.style.left = left + "px";
+      popup.style.top = top + "px";
+
       openPopup = { wrap: wrap, popup: popup, trigger: trigger, input: input };
     }
 
