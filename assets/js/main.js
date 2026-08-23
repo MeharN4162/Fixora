@@ -429,6 +429,125 @@ document.documentElement.setAttribute("data-js", "true");
     });
   }
 
+  /* ---------- Hero search button (forwards to the real ⌘K palette) ---------- */
+  function initHeroSearchBtn() {
+    var btn = document.getElementById("heroSearchBtn");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var cmdkTrigger = document.getElementById("cmdkTrigger");
+      if (cmdkTrigger) cmdkTrigger.click();
+    });
+  }
+
+  /* ---------- Category pill row: active state follows scroll position ---------- */
+  function initCategoryPills() {
+    var row = document.getElementById("categoryPills");
+    if (!row) return;
+    var pills = Array.prototype.slice.call(row.querySelectorAll(".pill"));
+    var sections = pills
+      .map(function (pill) {
+        var id = pill.getAttribute("data-jump");
+        return id ? document.getElementById(id) : null;
+      })
+      .filter(Boolean);
+    if (!sections.length || !("IntersectionObserver" in window)) return;
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var id = entry.target.id;
+          pills.forEach(function (p) {
+            p.classList.toggle("active", p.getAttribute("data-jump") === id);
+          });
+        });
+      },
+      { rootMargin: "-40% 0px -55% 0px" }
+    );
+    sections.forEach(function (s) { observer.observe(s); });
+  }
+
+  /* ---------- Surprise Me: random tool picker (homepage only) ---------- */
+  function initSurpriseMe() {
+    var fab = document.getElementById("surpriseBtn");
+    var overlay = document.getElementById("surpriseOverlay");
+    if (!fab || !overlay) return;
+
+    var toolList = SITE_INDEX.filter(function (item) { return item.type === "Tool"; });
+    var iconEl = document.getElementById("surpriseIcon");
+    var titleEl = document.getElementById("surpriseTitle");
+    var descEl = document.getElementById("surpriseDesc");
+    var linkEl = document.getElementById("surpriseLink");
+
+    function pick() {
+      var buf = new Uint32Array(1);
+      crypto.getRandomValues(buf);
+      return toolList[buf[0] % toolList.length];
+    }
+
+    function roll() {
+      var t = pick();
+      iconEl.textContent = t.icon;
+      titleEl.textContent = t.name;
+      descEl.textContent = "One of " + toolList.length + "+ free tools — give it a try.";
+      linkEl.href = t.href;
+      iconEl.classList.remove("spinning");
+      void iconEl.offsetWidth;
+      iconEl.classList.add("spinning");
+    }
+
+    fab.addEventListener("click", function () {
+      roll();
+      overlay.classList.add("open");
+    });
+    var againBtn = document.getElementById("surpriseAgain");
+    if (againBtn) againBtn.addEventListener("click", roll);
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay) overlay.classList.remove("open");
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && overlay.classList.contains("open")) overlay.classList.remove("open");
+    });
+  }
+
+  /* ---------- Mascot: one friendly tip per browser session (homepage only) ---------- */
+  function initMascot() {
+    var wrap = document.getElementById("mascotWrap");
+    if (!wrap) return;
+
+    var lines = [
+      "Psst — every tool here works fully offline once the page loads. No wifi, no problem.",
+      "Nothing you upload ever leaves your browser. No servers, no accounts, just tools.",
+      "Fun fact: this whole site is 100+ tools and not one of them needs a sign-up."
+    ];
+
+    var textEl = document.getElementById("mascotText");
+    var closeBtn = document.getElementById("mascotClose");
+    var hideTimer = null;
+
+    function show() {
+      var buf = new Uint32Array(1);
+      crypto.getRandomValues(buf);
+      textEl.textContent = lines[buf[0] % lines.length];
+      wrap.classList.add("show");
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(hide, 8000);
+    }
+    function hide() {
+      wrap.classList.remove("show");
+      clearTimeout(hideTimer);
+    }
+
+    if (closeBtn) closeBtn.addEventListener("click", hide);
+
+    try {
+      if (sessionStorage.getItem("fixora_mascot_seen")) return;
+      sessionStorage.setItem("fixora_mascot_seen", "1");
+    } catch (e) { /* private-browsing storage block: still fine to show once */ }
+
+    setTimeout(show, 3000);
+  }
+
   /* ---------- Output-box completion flash ---------- */
   function initOutputFlash() {
     if (!("MutationObserver" in window)) return;
@@ -855,6 +974,10 @@ document.documentElement.setAttribute("data-js", "true");
     initBackToTop();
     initHeroGlow();
     initOutputFlash();
+    initHeroSearchBtn();
+    initCategoryPills();
+    initSurpriseMe();
+    initMascot();
     recordRecentVisit();
     renderRecentlyUsed();
   });

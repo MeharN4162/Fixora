@@ -85,8 +85,13 @@
     <section class="hero">
       <div class="container">
         <span class="eyebrow">100% Free · No Sign-Up · Runs In Your Browser</span>
-        <h1>Free online tools that <span>just work</span>, plus guides that fix real problems</h1>
+        <h1>Free online tools that <span>just work</span>,<br>plus guides that fix real problems</h1>
         <p class="lead">Compress PDFs, resize images, generate passwords, and more — instantly, privately, and for free. No installs, no accounts, no uploads to a server.</p>
+
+        <button type="button" class="hero-search-btn" id="heroSearchBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <span>Search 100+ tools and guides…</span>
+        </button>
 
         <div class="hero-stats">
           <div><strong data-count-to="100" data-count-suffix="+">0+</strong><span>Free Tools</span></div>
@@ -95,6 +100,15 @@
         </div>
       </div>
     </section>
+
+    <div class="pill-row" id="categoryPills" style="justify-content:center;max-width:var(--container-width);margin:24px auto 0;padding:0 20px;">
+      <a href="#tools" class="pill active" data-jump="tools">All</a>
+      <a href="#cat-pdf" class="pill" data-jump="cat-pdf">📄 PDF Tools</a>
+      <a href="#cat-image" class="pill" data-jump="cat-image">🖼️ Image Tools</a>
+      <a href="#cat-text" class="pill" data-jump="cat-text">🔤 Text Tools</a>
+      <a href="#cat-calc" class="pill" data-jump="cat-calc">🧮 Calculators</a>
+      <a href="#cat-dev" class="pill" data-jump="cat-dev">💻 Developer Tools</a>
+    </div>
 
     <!-- FEATURED TOOLS -->
     <section class="section" id="tools">
@@ -1167,6 +1181,40 @@
       </div>
     </div>
   </footer>
+
+  <button type="button" class="fab-surprise" id="surpriseBtn">
+    <span class="fab-emoji" aria-hidden="true">🎲</span><span>Surprise Me</span>
+  </button>
+
+  <div class="mascot-wrap" id="mascotWrap">
+    <div>
+      <div class="mascot-bubble">
+        <button type="button" class="mascot-close" id="mascotClose" aria-label="Dismiss">✕</button>
+        <span id="mascotText"></span>
+      </div>
+    </div>
+    <svg class="mascot-figure" width="56" height="56" viewBox="0 0 100 100" aria-hidden="true">
+      <defs><linearGradient id="mascotGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563eb"/><stop offset="0.5" stop-color="#7c3aed"/><stop offset="1" stop-color="#06b6d4"/></linearGradient></defs>
+      <rect x="10" y="18" width="80" height="70" rx="24" fill="url(#mascotGrad)"/>
+      <circle cx="36" cy="50" r="8" fill="#fff"/><circle cx="64" cy="50" r="8" fill="#fff"/>
+      <circle cx="38" cy="51" r="3.4" fill="#0f172a"/><circle cx="62" cy="51" r="3.4" fill="#0f172a"/>
+      <path d="M38 68 Q50 78 62 68" stroke="#fff" stroke-width="4" stroke-linecap="round" fill="none"/>
+      <rect x="42" y="4" width="16" height="16" rx="5" fill="url(#mascotGrad)"/>
+      <circle cx="50" cy="6" r="4" fill="#fb7185"/>
+    </svg>
+  </div>
+
+  <div class="surprise-overlay" id="surpriseOverlay">
+    <div class="surprise-box">
+      <div class="surprise-icon" id="surpriseIcon">🔧</div>
+      <h3 id="surpriseTitle">Tool name</h3>
+      <p id="surpriseDesc">Description</p>
+      <div class="surprise-actions">
+        <button type="button" class="surprise-ghost" id="surpriseAgain">Roll again</button>
+        <a class="surprise-primary" id="surpriseLink" href="#">Take me there</a>
+      </div>
+    </div>
+  </div>
 
   <script src="assets/js/main.js"></script>
 </body>
