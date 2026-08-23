@@ -515,26 +515,70 @@ document.documentElement.setAttribute("data-js", "true");
     var wrap = document.getElementById("mascotWrap");
     if (!wrap) return;
 
-    var lines = [
-      "Hey! How's your day going so far? Hope it's a good one. 👋",
-      "Which tool are you here for today? There's 100+ to pick from.",
-      "No pressure, but I believe in you. Whatever you're fixing, you've got this. 💪",
-      "Fun fact: nothing you upload here ever leaves your browser. Not even to say hi to a server.",
-      "Plot twist: this whole site works offline once it's loaded. No wifi, no problem.",
-      "Quick reminder that you're doing great and also this site is free forever.",
-      "Stuck on something? There's probably a tool for that. There's a tool for almost everything here.",
-      "Not gonna lie, I get kind of excited when someone finds the tool they needed. Go find yours.",
-      "Zero sign-ups, zero accounts, zero of my business what you're working on. Carry on!"
+    // Openers are generic enough to prefix any body line without a grammar
+    // mismatch (including "" for a body standing on its own), so a small
+    // set of openers x a larger set of bodies gives real combinatorial
+    // variety without needing any server-generated text.
+    var openers = ["Hey!", "Psst —", "Yo!", "So,", "Quick one —", "Just so you know —", "", "", ""];
+    var bodies = [
+      "How's your day going so far? Hope it's treating you well.",
+      "Which tool are you here for today? There's 100+ to choose from.",
+      "No pressure, but I believe in you. Whatever you're fixing, you've got this.",
+      "Nothing you upload here ever leaves your browser. Not even to say hi to a server.",
+      "This whole site works offline once it's loaded. No wifi, no problem.",
+      "Reminder: you're doing great, and also this site is free forever.",
+      "Stuck on something? There's probably a tool here for that. Almost always is.",
+      "I get weirdly excited when someone finds the exact tool they needed. Go find yours.",
+      "Zero sign-ups, zero accounts, zero of my business what you're working on. Carry on.",
+      "Fun fact: every tool on this site runs entirely on your device, right now.",
+      "Take a breath. Whatever brought you here, you're one click from done.",
+      "If you're procrastinating right now, no judgment. I'm just a rectangle.",
+      "You could try the Surprise Me button. It's more fun than it has any right to be.",
+      "Somewhere out there, someone's using this site at 3am to fix a PDF. Respect.",
+      "Dark mode or light mode? No wrong answer, I like both equally.",
+      "No ads here follow you around the rest of the internet. Just the ones on this page.",
+      "Password Generator, Word Counter, or something with 'PDF' in the name — the classics never miss.",
+      "I'm not a real robot. I'm a very enthusiastic rectangle with a gradient.",
+      "Whatever you're trying to fix today, you're already halfway there by showing up.",
+      "Hot tip: bookmark this page. Future-you will thank present-you.",
+      "I was going to say something profound, but honestly, go use a tool. That's the profound part.",
+      "Every tool here was built to just work. No 14-step tutorial required.",
+      "You have great taste in websites, by the way. Just saying.",
+      "If this site ever asks you to sign up for something, that's a bug — tell someone.",
+      "Somewhere between 'free' and 'actually good,' this site is trying to live.",
+      "Take your time. I'll be right here being a small, friendly rectangle."
     ];
 
     var textEl = document.getElementById("mascotText");
     var closeBtn = document.getElementById("mascotClose");
     var hideTimer = null;
 
-    function show() {
+    function randomIndex(max) {
       var buf = new Uint32Array(1);
       crypto.getRandomValues(buf);
-      textEl.textContent = lines[buf[0] % lines.length];
+      return buf[0] % max;
+    }
+
+    function lastBodyIndex() {
+      try { return parseInt(localStorage.getItem("fixora_mascot_last"), 10); } catch (e) { return -1; }
+    }
+    function rememberBodyIndex(i) {
+      try { localStorage.setItem("fixora_mascot_last", String(i)); } catch (e) { /* ignore */ }
+    }
+
+    function compose() {
+      var last = lastBodyIndex();
+      var bodyIdx = randomIndex(bodies.length);
+      if (bodies.length > 1 && bodyIdx === last) {
+        bodyIdx = (bodyIdx + 1 + randomIndex(bodies.length - 1)) % bodies.length;
+      }
+      rememberBodyIndex(bodyIdx);
+      var opener = openers[randomIndex(openers.length)];
+      return opener ? opener + " " + bodies[bodyIdx] : bodies[bodyIdx];
+    }
+
+    function show() {
+      textEl.textContent = compose();
       wrap.classList.add("show");
       clearTimeout(hideTimer);
       hideTimer = setTimeout(hide, 8000);
