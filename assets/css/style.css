@@ -229,33 +229,10 @@ p {
 }
 
 .nav-brand-icon {
-  height: 30px;
+  height: 36px;
   width: auto;
   flex-shrink: 0;
   display: block;
-}
-
-.nav-brand .brand-word {
-  position: relative;
-  display: inline-block;
-  padding-bottom: 4px;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  letter-spacing: -0.02em;
-  font-size: 1.18em;
-}
-
-.nav-brand .brand-word::after {
-  content: "";
-  position: absolute;
-  left: 1px;
-  right: 1px;
-  bottom: 0;
-  height: 3px;
-  border-radius: 2px;
-  background: var(--gradient-primary);
 }
 
 .nav-links {
