@@ -221,7 +221,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 20px;
+  padding: 16px 20px;
 }
 
 .nav-brand {
@@ -235,10 +235,16 @@ p {
 }
 
 .nav-brand-icon {
-  height: 36px;
+  height: 38px;
   width: auto;
   flex-shrink: 0;
   display: block;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }
 
 .nav-links {
@@ -322,11 +328,6 @@ p {
 /* =========================================================
    Theme toggle
    ========================================================= */
-.theme-toggle-item {
-  display: flex;
-  align-items: center;
-}
-
 .theme-toggle {
   display: inline-flex;
   align-items: center;
