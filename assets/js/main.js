@@ -516,9 +516,15 @@ document.documentElement.setAttribute("data-js", "true");
     if (!wrap) return;
 
     var lines = [
-      "Psst — every tool here works fully offline once the page loads. No wifi, no problem.",
-      "Nothing you upload ever leaves your browser. No servers, no accounts, just tools.",
-      "Fun fact: this whole site is 100+ tools and not one of them needs a sign-up."
+      "Hey! How's your day going so far? Hope it's a good one. 👋",
+      "Which tool are you here for today? There's 100+ to pick from.",
+      "No pressure, but I believe in you. Whatever you're fixing, you've got this. 💪",
+      "Fun fact: nothing you upload here ever leaves your browser. Not even to say hi to a server.",
+      "Plot twist: this whole site works offline once it's loaded. No wifi, no problem.",
+      "Quick reminder that you're doing great and also this site is free forever.",
+      "Stuck on something? There's probably a tool for that. There's a tool for almost everything here.",
+      "Not gonna lie, I get kind of excited when someone finds the tool they needed. Go find yours.",
+      "Zero sign-ups, zero accounts, zero of my business what you're working on. Carry on!"
     ];
 
     var textEl = document.getElementById("mascotText");
