@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Markdown Syntax Guide: The Cheat Sheet You Actually Need | Fixoona</title>
+  <meta name="description" content="Every core Markdown syntax rule explained: headings, emphasis, lists, links, images, code, and tables — plus what GitHub Flavored Markdown adds on top." />
+  <meta name="keywords" content="markdown syntax guide, markdown cheat sheet, github flavored markdown, markdown table syntax" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/markdown-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Markdown Syntax Guide: The Cheat Sheet You Actually Need" />
+  <meta property="og:description" content="Every core Markdown syntax rule explained, in one place." />
+  <meta property="og:url" content="https://fixoona.com/blog/markdown-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Markdown Syntax Guide: The Cheat Sheet You Actually Need" />
+  <meta name="twitter:description" content="Every core Markdown syntax rule explained, in one place." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Markdown Syntax Guide: The Cheat Sheet You Actually Need",
+    "description": "Every core Markdown syntax rule explained, in one place.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-08-24",
+    "dateModified": "2026-08-24",
+    "mainEntityOfPage": "https://fixoona.com/blog/markdown-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/#guides" },
+      { "@type": "ListItem", "position": 3, "name": "Markdown Syntax Guide", "item": "https://fixoona.com/blog/markdown-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What's the difference between CommonMark and GitHub Flavored Markdown (GFM)?",
+        "acceptedAnswer": { "@type": "Answer", "text": "CommonMark is a strict, standardized specification of core Markdown syntax — headings, emphasis, lists, links, and code. GFM builds on top of CommonMark and adds extra features that aren't part of the original syntax, most notably tables, strikethrough text, automatic linking of raw URLs, and task list checkboxes. Most modern tools (GitHub, GitLab, many note apps) support GFM rather than plain CommonMark." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I create a line break without starting a new paragraph?",
+        "acceptedAnswer": { "@type": "Answer", "text": "End the line with two or more trailing spaces before the line break, or use an explicit &lt;br&gt; HTML tag. A single line break in the source Markdown is treated as a space and gets merged into the same paragraph — this trips up a lot of people writing Markdown for the first time, since it behaves differently from a plain text editor." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use raw HTML inside Markdown?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, in most implementations — Markdown was designed to allow HTML to pass through unmodified for anything its own syntax doesn't cover. This is useful for things like custom line breaks, embedded iframes, or specific styling, though some platforms (especially ones rendering untrusted user content) disable or sanitize raw HTML for security reasons." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why aren't my Markdown table columns aligning?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Table columns don't need to visually line up in the source Markdown — the pipe characters (|) alone define the column boundaries, and the renderer handles the actual alignment. What does matter is the separator row directly under the header (made of dashes and pipes, like |---|---|), which must be present and correctly formatted or the table won't render as a table at all." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#guides">Guides</a><span class="sep">/</span>
+        <span>Markdown Syntax Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Developer Guides · 6 min read · Updated August 2026</p>
+      <h1>Markdown Syntax Guide: The Cheat Sheet You Actually Need</h1>
+      <div class="article-hero-img" aria-hidden="true">📝</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#headings">Headings</a></li>
+          <li><a href="#emphasis">Bold, Italic, and Strikethrough</a></li>
+          <li><a href="#lists">Lists</a></li>
+          <li><a href="#links-images">Links and Images</a></li>
+          <li><a href="#code">Code</a></li>
+          <li><a href="#tables">Tables</a></li>
+          <li><a href="#convert">Converting Markdown to HTML</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>Markdown is the plain-text formatting syntax behind READMEs, GitHub issues, chat apps, static site generators, and most documentation tools. Its whole appeal is that it's readable even unrendered — but the exact syntax rules are easy to half-remember. Here's the reference version.</p>
+
+        <h2 id="headings">Headings</h2>
+        <p>A hash symbol followed by a space creates a heading — one hash for the largest, up to six for the smallest:</p>
+        <pre><code># Heading 1
+## Heading 2
+### Heading 3</code></pre>
+
+        <h2 id="emphasis">Bold, Italic, and Strikethrough</h2>
+        <ul>
+          <li><strong>Bold:</strong> wrap text in double asterisks or double underscores — <code>**bold**</code> or <code>__bold__</code></li>
+          <li><strong>Italic:</strong> wrap text in single asterisks or underscores — <code>*italic*</code> or <code>_italic_</code></li>
+          <li><strong>Strikethrough</strong> (GFM only): wrap text in double tildes — <code>~~strikethrough~~</code></li>
+        </ul>
+
+        <h2 id="lists">Lists</h2>
+        <p>Unordered lists use a dash, asterisk, or plus sign followed by a space. Ordered lists use a number followed by a period — the actual numbers don't need to be sequential, Markdown renumbers them automatically:</p>
+        <pre><code>- First item
+- Second item
+
+1. First step
+2. Second step</code></pre>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> Nest a list item by indenting it with two or four spaces (implementations vary) under its parent item.
+        </div>
+
+        <h2 id="links-images">Links and Images</h2>
+        <p>A link wraps the display text in square brackets, immediately followed by the URL in parentheses. An image uses the same syntax with an exclamation point in front:</p>
+        <pre><code>[Fixoona](https://fixoona.com)
+![alt text](image.jpg)</code></pre>
+
+        <h2 id="code">Code</h2>
+        <p>Inline code uses single backticks: <code>`like this`</code>. A multi-line code block uses triple backticks on their own line before and after the code, optionally followed by a language name for syntax highlighting:</p>
+        <pre><code>```js
+function hello() {
+  return "hi";
+}
+```</code></pre>
+
+        <h2 id="tables">Tables</h2>
+        <p>Tables are a GFM addition, not part of core Markdown. Columns are separated by pipes, and a dash-based separator row under the header defines the table structure:</p>
+        <pre><code>| Name  | Role   |
+|-------|--------|
+| Ada   | Coder  |
+| Grace | Coder  |</code></pre>
+
+        <h2 id="convert">Converting Markdown to HTML</h2>
+        <p>To see exactly how a piece of Markdown will render — including GFM extras like tables and strikethrough — paste it into our free <a href="../tools/markdown-to-html">Markdown to HTML</a> tool. It renders a live preview side-by-side with your source, and lets you copy the output as raw HTML or as rich text.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>What's the difference between CommonMark and GitHub Flavored Markdown (GFM)?</strong> CommonMark is a strict, standardized specification of core Markdown syntax — headings, emphasis, lists, links, and code. GFM builds on top of CommonMark and adds extra features that aren't part of the original syntax, most notably tables, strikethrough text, automatic linking of raw URLs, and task list checkboxes. Most modern tools (GitHub, GitLab, many note apps) support GFM rather than plain CommonMark.</p>
+        <p><strong>How do I create a line break without starting a new paragraph?</strong> End the line with two or more trailing spaces before the line break, or use an explicit &lt;br&gt; HTML tag. A single line break in the source Markdown is treated as a space and gets merged into the same paragraph — this trips up a lot of people writing Markdown for the first time, since it behaves differently from a plain text editor.</p>
+        <p><strong>Can I use raw HTML inside Markdown?</strong> Yes, in most implementations — Markdown was designed to allow HTML to pass through unmodified for anything its own syntax doesn't cover. This is useful for things like custom line breaks, embedded iframes, or specific styling, though some platforms (especially ones rendering untrusted user content) disable or sanitize raw HTML for security reasons.</p>
+        <p><strong>Why aren't my Markdown table columns aligning?</strong> Table columns don't need to visually line up in the source Markdown — the pipe characters (|) alone define the column boundaries, and the renderer handles the actual alignment. What does matter is the separator row directly under the header (made of dashes and pipes, like |---|---|), which must be present and correctly formatted or the table won't render as a table at all.</p>
+
+        <div class="tip-box">
+          Want to see your Markdown rendered? Try the <a href="../tools/markdown-to-html">free Markdown to HTML</a> tool — instant preview, no sign-up.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

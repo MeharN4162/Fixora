@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unix Timestamps Explained: What They Are and How to Convert Them | Fixoona</title>
+  <meta name="description" content="What a Unix timestamp actually is, why JavaScript timestamps look 1000x too big, the Year 2038 problem, and how timezones factor in. Free converter included." />
+  <meta name="keywords" content="unix timestamp explained, epoch time, javascript timestamp milliseconds, year 2038 problem" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/unix-timestamp-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Unix Timestamps Explained: What They Are and How to Convert Them" />
+  <meta property="og:description" content="What a Unix timestamp actually is, and how to convert it correctly." />
+  <meta property="og:url" content="https://fixoona.com/blog/unix-timestamp-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Unix Timestamps Explained: What They Are and How to Convert Them" />
+  <meta name="twitter:description" content="What a Unix timestamp actually is, and how to convert it correctly." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Unix Timestamps Explained: What They Are and How to Convert Them",
+    "description": "What a Unix timestamp actually is, and how to convert it correctly.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-08-24",
+    "dateModified": "2026-08-24",
+    "mainEntityOfPage": "https://fixoona.com/blog/unix-timestamp-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/#guides" },
+      { "@type": "ListItem", "position": 3, "name": "Unix Timestamp Guide", "item": "https://fixoona.com/blog/unix-timestamp-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why do timestamps in JavaScript look 1000x too large?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The Unix standard defines a timestamp as seconds since the epoch, but JavaScript's Date.now() and new Date().getTime() return milliseconds instead. A timestamp of 1735689600 (seconds) becomes 1735689600000 in JavaScript — exactly 1000 times larger — which is the most common source of off-by-1000x bugs when mixing timestamps between JavaScript and other languages or APIs." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Year 2038 problem?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Older systems store Unix timestamps as a signed 32-bit integer, which can only count up to 2,147,483,647 seconds after the epoch — a limit reached on January 19, 2038. After that instant, those systems overflow and wrap around to a negative number, which typically gets interpreted as a date in 1901. Modern systems avoid this by using 64-bit integers, which won't overflow for billions of years." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are Unix timestamps affected by timezones?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — a Unix timestamp represents a single, absolute instant in time (seconds since midnight UTC on January 1, 1970), the same moment everywhere on Earth. Timezone only comes into play when you convert that timestamp into a human-readable date and time, since the same instant displays as a different local clock time depending on which timezone you're rendering it in." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can Unix timestamps represent dates before 1970?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, as negative numbers. A timestamp of -86400, for example, represents exactly one day before the epoch: December 31, 1969. Most modern parsers handle negative timestamps correctly, though some older or stricter systems reject them, so it's worth checking if you're working with historical dates." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#guides">Guides</a><span class="sep">/</span>
+        <span>Unix Timestamp Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Developer Guides · 5 min read · Updated August 2026</p>
+      <h1>Unix Timestamps Explained: What They Are and How to Convert Them</h1>
+      <div class="article-hero-img" aria-hidden="true">🕒</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#what-is">What a Unix Timestamp Is</a></li>
+          <li><a href="#seconds-vs-ms">Seconds vs. Milliseconds</a></li>
+          <li><a href="#year-2038">The Year 2038 Problem</a></li>
+          <li><a href="#timezones">Timezones and Timestamps</a></li>
+          <li><a href="#convert">Converting a Timestamp</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>A Unix timestamp is a single number that represents an exact moment in time: the number of seconds that have passed since midnight UTC on January 1, 1970 — a moment programmers call "the epoch." It shows up constantly in logs, APIs, databases, and file metadata because a single integer is simpler to store, compare, and sort than a formatted date string.</p>
+
+        <h2 id="what-is">What a Unix Timestamp Is</h2>
+        <p>The number itself only counts upward, one per second, from the epoch. As of mid-2026, that count is somewhere past 1.78 billion — meaning about 1.78 billion seconds have elapsed since January 1, 1970. It's not tied to any particular timezone or calendar format; it's just a raw count of elapsed seconds, which is exactly why it's useful for computers even though it's meaningless to a human without conversion.</p>
+
+        <h2 id="seconds-vs-ms">Seconds vs. Milliseconds</h2>
+        <p>The original Unix standard counts in seconds, but JavaScript's built-in <code>Date.now()</code> returns milliseconds — exactly 1000 times larger. This is the single most common source of confusion when timestamps move between systems: a value like <code>1735689600</code> is a valid seconds-based timestamp, while <code>1735689600000</code> is the same instant in milliseconds. Feeding a seconds-based timestamp into a function expecting milliseconds (or vice versa) produces a date that's wildly wrong — usually landing somewhere in 1970 or the year 56000-something.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> A quick sanity check: current seconds-based timestamps are 10 digits long; current milliseconds-based timestamps are 13 digits long. If the digit count doesn't match what you expect, you're probably looking at the wrong unit.
+        </div>
+
+        <h2 id="year-2038">The Year 2038 Problem</h2>
+        <p>Older systems store a Unix timestamp as a signed 32-bit integer, which tops out at 2,147,483,647 — a value reached at 03:14:07 UTC on January 19, 2038. After that instant, the count overflows and wraps to a large negative number, which many affected systems then misinterpret as a date back in December 1901. This is the same category of bug as the Y2K problem, just with a different number and a later deadline. Most modern software has already migrated to 64-bit timestamps, which won't overflow for roughly 292 billion years, but plenty of older embedded systems and file formats still use the 32-bit version.</p>
+
+        <h2 id="timezones">Timezones and Timestamps</h2>
+        <p>A raw timestamp is timezone-independent — it represents one specific instant everywhere on Earth simultaneously. Timezone only enters the picture when you convert that instant into a human-readable date and clock time, since the same timestamp displays as different local times in New York, London, and Tokyo. If two systems disagree about what time a given timestamp represents, the timestamp itself is fine; the bug is almost always in how one of them is formatting it for display.</p>
+
+        <h2 id="convert">Converting a Timestamp</h2>
+        <p>Rather than doing epoch math by hand, paste a timestamp — or a date — into our free <a href="../tools/timestamp-converter">Timestamp Converter</a>. It auto-detects whether you've entered seconds or milliseconds, shows the result in relative time plus RFC 2822, ISO 8601, and UTC formats, and can batch-convert several timestamps at once.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>Why do timestamps in JavaScript look 1000x too large?</strong> The Unix standard defines a timestamp as seconds since the epoch, but JavaScript's Date.now() and new Date().getTime() return milliseconds instead. A timestamp of 1735689600 (seconds) becomes 1735689600000 in JavaScript — exactly 1000 times larger — which is the most common source of off-by-1000x bugs when mixing timestamps between JavaScript and other languages or APIs.</p>
+        <p><strong>What is the Year 2038 problem?</strong> Older systems store Unix timestamps as a signed 32-bit integer, which can only count up to 2,147,483,647 seconds after the epoch — a limit reached on January 19, 2038. After that instant, those systems overflow and wrap around to a negative number, which typically gets interpreted as a date in 1901. Modern systems avoid this by using 64-bit integers, which won't overflow for billions of years.</p>
+        <p><strong>Are Unix timestamps affected by timezones?</strong> No — a Unix timestamp represents a single, absolute instant in time (seconds since midnight UTC on January 1, 1970), the same moment everywhere on Earth. Timezone only comes into play when you convert that timestamp into a human-readable date and time, since the same instant displays as a different local clock time depending on which timezone you're rendering it in.</p>
+        <p><strong>Can Unix timestamps represent dates before 1970?</strong> Yes, as negative numbers. A timestamp of -86400, for example, represents exactly one day before the epoch: December 31, 1969. Most modern parsers handle negative timestamps correctly, though some older or stricter systems reject them, so it's worth checking if you're working with historical dates.</p>
+
+        <div class="tip-box">
+          Need to convert a timestamp right now? Try the <a href="../tools/timestamp-converter">free Timestamp Converter</a> — no sign-up, works entirely in your browser.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
