@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Resizing 101: Resolution, Aspect Ratio, and Not Losing Quality | Fixoona</title>
+  <meta name="description" content="Why upscaling an image makes it blurry, what aspect ratio actually controls, DPI vs pixel dimensions explained, and how to resize without distorting a photo." />
+  <meta name="keywords" content="how to resize an image without losing quality, aspect ratio explained, dpi vs pixels, image upscaling blurry" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/image-resizing-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Image Resizing 101: Resolution, Aspect Ratio, and Not Losing Quality" />
+  <meta property="og:description" content="Why upscaling gets blurry, and how to resize an image correctly." />
+  <meta property="og:url" content="https://fixoona.com/blog/image-resizing-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Image Resizing 101: Resolution, Aspect Ratio, and Not Losing Quality" />
+  <meta name="twitter:description" content="Why upscaling gets blurry, and how to resize an image correctly." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Image Resizing 101: Resolution, Aspect Ratio, and Not Losing Quality",
+    "description": "Why upscaling gets blurry, and how to resize an image correctly.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-08-25",
+    "dateModified": "2026-08-25",
+    "mainEntityOfPage": "https://fixoona.com/blog/image-resizing-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/#guides" },
+      { "@type": "ListItem", "position": 3, "name": "Image Resizing Guide", "item": "https://fixoona.com/blog/image-resizing-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why does an image get blurry when I make it bigger?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Upscaling forces the software to invent new pixel data that never existed in the original file, since a small image simply doesn't contain enough detail to fill a larger canvas. The result is interpolated — essentially guessed — pixel values, which is why enlarged images tend to look soft, blurry, or blocky instead of sharp." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does aspect ratio actually control?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Aspect ratio is the proportional relationship between an image's width and height, like 16:9 or 4:3. Changing an image's dimensions without preserving this ratio stretches or squashes the image — people look wider or taller than they should, circles turn into ovals. Locking the aspect ratio while resizing keeps everything proportionally correct." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between DPI and pixel dimensions?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Pixel dimensions (like 1920×1080) describe the actual number of pixels an image contains — this is what matters for screens and web use. DPI (dots per inch) only matters for print, describing how densely those same pixels are packed onto a physical page; a higher DPI at the same pixel count produces a smaller, sharper printed image, while a lower DPI produces a larger, blurrier one." }
+      },
+      {
+        "@type": "Question",
+        "name": "What image dimensions should I use for social media?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It varies by platform and by post type (feed post, story, cover photo), and platforms update their recommended sizes periodically, so there's no single universal answer. Most image tools that support social presets keep an updated list, which is more reliable than memorizing exact pixel dimensions that can change." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#guides">Guides</a><span class="sep">/</span>
+        <span>Image Resizing Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Image Guides · 5 min read · Updated August 2026</p>
+      <h1>Image Resizing 101: Resolution, Aspect Ratio, and Not Losing Quality</h1>
+      <div class="article-hero-img" aria-hidden="true">📐</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#upscaling">Why Upscaling Gets Blurry</a></li>
+          <li><a href="#aspect-ratio">Aspect Ratio</a></li>
+          <li><a href="#dpi">DPI vs. Pixel Dimensions</a></li>
+          <li><a href="#social">Social Media Sizes</a></li>
+          <li><a href="#resize">Resizing an Image</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>Resizing sounds like it should be trivial — just change the dimensions — but getting it right without stretching, blurring, or cropping something unintentionally means understanding a few things about how digital images actually work.</p>
+
+        <h2 id="upscaling">Why Upscaling Gets Blurry</h2>
+        <p>A digital image only contains a fixed amount of pixel data. Shrinking an image is straightforward — you're removing information the eye won't miss. Enlarging an image is fundamentally different: there's no extra detail to reveal, so the software has to invent new pixel values by interpolating between existing ones. The result is a plausible-looking but ultimately guessed image, which is why upscaled images tend to look soft or blocky rather than genuinely sharper.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> If you need a much larger version of a small image, start from the highest-resolution original you can find rather than repeatedly upscaling — quality loss compounds with each enlargement.
+        </div>
+
+        <h2 id="aspect-ratio">Aspect Ratio</h2>
+        <p>Aspect ratio is the proportional relationship between width and height — 16:9 for widescreen video, 1:1 for a square Instagram post, 4:3 for older photos. Resizing an image without keeping this ratio locked stretches or squashes it: people look unnaturally wide or tall, circles become ovals. Most resizing tools offer a "lock aspect ratio" option specifically to prevent this — changing one dimension automatically adjusts the other to match.</p>
+
+        <h2 id="dpi">DPI vs. Pixel Dimensions</h2>
+        <p>These get confused constantly, but they answer different questions. Pixel dimensions (like 1920×1080) are the actual grid of pixels an image contains — this is what matters for screens, web pages, and digital use in general, since a screen just displays pixels directly. DPI (dots per inch) only becomes relevant for physical printing — it describes how densely those pixels get packed onto paper. The same 1920×1080 image printed at 100 DPI comes out roughly 19×11 inches; printed at 300 DPI, the same pixel data comes out much smaller and noticeably sharper, since more of those pixels are packed into each inch.</p>
+
+        <h2 id="social">Social Media Sizes</h2>
+        <p>Every platform has its own preferred dimensions for feed posts, stories, and cover images, and those recommended sizes shift over time as platforms redesign their layouts. Rather than memorizing numbers that go stale, a resizing tool with built-in, kept-updated social presets is a more reliable approach than a static list from an old article.</p>
+
+        <h2 id="resize">Resizing an Image</h2>
+        <p>To resize an image without the guesswork, use our free <a href="../tools/image-resizer">Image Resizer</a>. Set exact pixel dimensions or a percentage scale, batch-resize multiple images at once, use built-in social media presets, and export as PNG, JPEG, or WebP — all processed locally in your browser.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>Why does an image get blurry when I make it bigger?</strong> Upscaling forces the software to invent new pixel data that never existed in the original file, since a small image simply doesn't contain enough detail to fill a larger canvas. The result is interpolated — essentially guessed — pixel values, which is why enlarged images tend to look soft, blurry, or blocky instead of sharp.</p>
+        <p><strong>What does aspect ratio actually control?</strong> Aspect ratio is the proportional relationship between an image's width and height, like 16:9 or 4:3. Changing an image's dimensions without preserving this ratio stretches or squashes the image — people look wider or taller than they should, circles turn into ovals. Locking the aspect ratio while resizing keeps everything proportionally correct.</p>
+        <p><strong>What's the difference between DPI and pixel dimensions?</strong> Pixel dimensions (like 1920×1080) describe the actual number of pixels an image contains — this is what matters for screens and web use. DPI (dots per inch) only matters for print, describing how densely those same pixels are packed onto a physical page; a higher DPI at the same pixel count produces a smaller, sharper printed image, while a lower DPI produces a larger, blurrier one.</p>
+        <p><strong>What image dimensions should I use for social media?</strong> It varies by platform and by post type (feed post, story, cover photo), and platforms update their recommended sizes periodically, so there's no single universal answer. Most image tools that support social presets keep an updated list, which is more reliable than memorizing exact pixel dimensions that can change.</p>
+
+        <div class="tip-box">
+          Need to resize an image right now? Try the <a href="../tools/image-resizer">free Image Resizer</a> — exact dimensions or social presets, no uploads.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What's Hiding in a PDF's Metadata (And Why You Might Want to Remove It) | Fixoona</title>
+  <meta name="description" content="What information a PDF's metadata actually stores — author name, software used, edit history — and why it's worth checking or stripping before sharing a document publicly." />
+  <meta name="keywords" content="pdf metadata explained, remove pdf author info, pdf privacy metadata, what is pdf metadata" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/pdf-metadata-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="What's Hiding in a PDF's Metadata (And Why You Might Want to Remove It)" />
+  <meta property="og:description" content="What a PDF's metadata stores, and why it's worth checking before sharing." />
+  <meta property="og:url" content="https://fixoona.com/blog/pdf-metadata-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="What's Hiding in a PDF's Metadata (And Why You Might Want to Remove It)" />
+  <meta name="twitter:description" content="What a PDF's metadata stores, and why it's worth checking before sharing." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "What's Hiding in a PDF's Metadata (And Why You Might Want to Remove It)",
+    "description": "What a PDF's metadata stores, and why it's worth checking before sharing.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-08-25",
+    "dateModified": "2026-08-25",
+    "mainEntityOfPage": "https://fixoona.com/blog/pdf-metadata-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/#guides" },
+      { "@type": "ListItem", "position": 3, "name": "PDF Metadata Guide", "item": "https://fixoona.com/blog/pdf-metadata-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can PDF metadata reveal my real name even if I didn't type it anywhere in the document?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. The Author field is frequently auto-filled by word processors and PDF software using the name or username registered on the computer that created the file, not something the person deliberately typed. It's easy to forget this field even exists, which is why it's worth checking before sharing a sensitive or anonymous document." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does deleting the visible text in a PDF also remove its metadata?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — metadata lives in a separate part of the file structure from the visible page content, so editing or deleting text on the page has no effect on it. Metadata has to be checked and edited or removed specifically, using a tool built for that purpose, not by editing the document body." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between a PDF's standard metadata and its XMP metadata?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Standard (Document Info) metadata is the older, simpler field set — title, author, subject, keywords, creation date. XMP (Extensible Metadata Platform) is a newer, more flexible XML-based format that can store the same fields plus much more, including custom fields many editors add automatically. A PDF can carry both simultaneously, and they don't always match, which is worth checking if privacy matters." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it safe to remove all metadata from a PDF?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Generally yes for personal or shared documents — the visible content and functionality of the PDF are unaffected by stripping metadata. The one exception is documents where metadata serves a legitimate purpose, like an official record that needs to show a verified creation date or authorship for compliance reasons — check whether that applies before stripping it from something with legal or archival significance." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#guides">Guides</a><span class="sep">/</span>
+        <span>PDF Metadata Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">PDF Guides · 5 min read · Updated August 2026</p>
+      <h1>What's Hiding in a PDF's Metadata (And Why You Might Want to Remove It)</h1>
+      <div class="article-hero-img" aria-hidden="true">🏷️</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#what-is">What PDF Metadata Actually Stores</a></li>
+          <li><a href="#author">The Author Field Nobody Remembers Setting</a></li>
+          <li><a href="#not-visible">Why Editing the Text Doesn't Remove It</a></li>
+          <li><a href="#xmp">Standard Metadata vs. XMP</a></li>
+          <li><a href="#check">Checking or Removing It</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>Every PDF carries a hidden layer of information alongside its visible pages — details about who made it, what software built it, and when. Most of the time nobody looks at this data, but it's worth checking before sharing a document more widely than you intended.</p>
+
+        <h2 id="what-is">What PDF Metadata Actually Stores</h2>
+        <p>Standard PDF metadata includes fields like title, author, subject, keywords, the software used to create the file, and creation and modification dates. None of it is visible when you open and read the document normally — it only shows up if someone specifically checks a file's Properties or uses a metadata-viewing tool.</p>
+
+        <h2 id="author">The Author Field Nobody Remembers Setting</h2>
+        <p>The Author field is one of the most commonly overlooked privacy leaks in ordinary document sharing. Word processors and PDF export tools frequently auto-populate this field using the name or account username registered on the computer that created the file — not something the person typed deliberately. Someone trying to share a document anonymously, or simply not wanting their real name attached, can easily forget this field exists at all.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> This is especially relevant for resumes, complaint letters, or anything shared outside your organization where the software that created it defaults to your full legal name or work email as "author."
+        </div>
+
+        <h2 id="not-visible">Why Editing the Text Doesn't Remove It</h2>
+        <p>Metadata lives in a separate structural layer of the PDF file, entirely apart from the visible page content. Deleting, redacting, or rewriting the text on the page has zero effect on it — the only way to change or remove metadata is with a tool that specifically targets that layer of the file.</p>
+
+        <h2 id="xmp">Standard Metadata vs. XMP</h2>
+        <p>Beyond the classic Document Info fields, most modern PDFs also carry XMP metadata — a more flexible, XML-based format that can duplicate the same fields and add many custom ones, often inserted automatically by editing software. A PDF can have both kinds of metadata simultaneously, and they don't always agree with each other, so a thorough check (or removal) needs to cover both.</p>
+
+        <h2 id="check">Checking or Removing It</h2>
+        <p>To see exactly what's stored in a PDF — or strip it out entirely before sharing — use our free <a href="../tools/pdf-metadata">PDF Metadata Editor</a>. It shows title, author, subject, keywords, creator, producer, language, and creation date, and lets you edit or clear any of it, all locally in your browser.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>Can PDF metadata reveal my real name even if I didn't type it anywhere in the document?</strong> Yes. The Author field is frequently auto-filled by word processors and PDF software using the name or username registered on the computer that created the file, not something the person deliberately typed. It's easy to forget this field even exists, which is why it's worth checking before sharing a sensitive or anonymous document.</p>
+        <p><strong>Does deleting the visible text in a PDF also remove its metadata?</strong> No — metadata lives in a separate part of the file structure from the visible page content, so editing or deleting text on the page has no effect on it. Metadata has to be checked and edited or removed specifically, using a tool built for that purpose, not by editing the document body.</p>
+        <p><strong>What's the difference between a PDF's standard metadata and its XMP metadata?</strong> Standard (Document Info) metadata is the older, simpler field set — title, author, subject, keywords, creation date. XMP (Extensible Metadata Platform) is a newer, more flexible XML-based format that can store the same fields plus much more, including custom fields many editors add automatically. A PDF can carry both simultaneously, and they don't always match, which is worth checking if privacy matters.</p>
+        <p><strong>Is it safe to remove all metadata from a PDF?</strong> Generally yes for personal or shared documents — the visible content and functionality of the PDF are unaffected by stripping metadata. The one exception is documents where metadata serves a legitimate purpose, like an official record that needs to show a verified creation date or authorship for compliance reasons — check whether that applies before stripping it from something with legal or archival significance.</p>
+
+        <div class="tip-box">
+          Want to check a PDF's hidden metadata right now? Try the <a href="../tools/pdf-metadata">free PDF Metadata Editor</a> — no uploads, no sign-up.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>URL Encoding Explained: What %20 and Friends Actually Mean | Fixoona</title>
+  <meta name="description" content="Why URLs can't contain spaces or certain symbols directly, what percent-encoding actually does, and the real difference between encodeURIComponent and encodeURI." />
+  <meta name="keywords" content="url encoding explained, percent encoding, encodeuricomponent vs encodeuri, what does %20 mean" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/url-encoding-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="URL Encoding Explained: What %20 and Friends Actually Mean" />
+  <meta property="og:description" content="What percent-encoding does, and when each encoding style applies." />
+  <meta property="og:url" content="https://fixoona.com/blog/url-encoding-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="URL Encoding Explained: What %20 and Friends Actually Mean" />
+  <meta name="twitter:description" content="What percent-encoding does, and when each encoding style applies." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "URL Encoding Explained: What %20 and Friends Actually Mean",
+    "description": "What percent-encoding does, and when each encoding style applies.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-08-25",
+    "dateModified": "2026-08-25",
+    "mainEntityOfPage": "https://fixoona.com/blog/url-encoding-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/#guides" },
+      { "@type": "ListItem", "position": 3, "name": "URL Encoding Guide", "item": "https://fixoona.com/blog/url-encoding-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why do spaces in a URL sometimes show up as %20 and other times as a plus sign?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Both represent an encoded space, but in different contexts. %20 is the standard percent-encoding used throughout a URL's path. A plus sign specifically represents a space only within a query string's form-encoded data (the part after the ?), a convention left over from HTML form submissions — it isn't valid as a space anywhere else in the URL." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the real difference between encodeURIComponent and encodeURI in JavaScript?",
+        "acceptedAnswer": { "@type": "Answer", "text": "encodeURIComponent escapes nearly every special character, including things like /, ?, and &amp;, making it correct for encoding a single value — like a search term — that will be inserted into a URL. encodeURI leaves those structural characters alone because it assumes you're encoding a complete, already-structured URL and don't want to break its existing slashes or query separators." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why can't URLs just contain spaces and special characters directly?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Certain characters — spaces, &amp;, ?, #, and others — already have structural meaning within a URL (separating the path from the query string, separating query parameters from each other, and so on). If those characters appeared unencoded inside actual data, like a search term, a parser couldn't tell whether they were part of the data or part of the URL's own structure. Percent-encoding sidesteps the ambiguity entirely." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is URL encoding the same thing as encryption?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — URL encoding (percent-encoding) is fully reversible and provides no confidentiality whatsoever. Anyone can decode it instantly with no key required. It exists purely to make certain characters safe to transmit inside a URL, not to hide or protect the data in any way." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#guides">Guides</a><span class="sep">/</span>
+        <span>URL Encoding Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Developer Guides · 5 min read · Updated August 2026</p>
+      <h1>URL Encoding Explained: What %20 and Friends Actually Mean</h1>
+      <div class="article-hero-img" aria-hidden="true">🔗</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#what-is">What URL Encoding Actually Does</a></li>
+          <li><a href="#space">Why Spaces Become %20 (or +)</a></li>
+          <li><a href="#component-vs-uri">encodeURIComponent vs. encodeURI</a></li>
+          <li><a href="#reserved">Reserved and Unsafe Characters</a></li>
+          <li><a href="#encode">Encoding or Decoding a URL</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>URLs can only safely contain a limited set of characters. Anything outside that set — spaces, accented letters, emoji, or symbols that already have structural meaning in a URL — has to be represented differently, using a scheme called percent-encoding. That's where things like <code>%20</code> come from.</p>
+
+        <h2 id="what-is">What URL Encoding Actually Does</h2>
+        <p>Percent-encoding replaces an unsafe character with a percent sign followed by its two-digit hexadecimal byte value. A space (byte value 32 in decimal, 20 in hex) becomes <code>%20</code>. An ampersand becomes <code>%26</code>. This lets any character — even ones outside the basic set URLs officially support — travel safely inside a URL without being confused for part of its structure.</p>
+
+        <h2 id="space">Why Spaces Become %20 (or +)</h2>
+        <p>You'll see spaces represented two different ways depending on context. <code>%20</code> is the general percent-encoding for a space, valid anywhere in a URL. A plus sign (<code>+</code>) also represents a space, but only inside form-encoded query string data — a convention that dates back to how HTML forms originally submitted data. Outside a query string, a literal <code>+</code> means an actual plus character, not a space, which is why mixing up the two contexts is a common source of bugs.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> When in doubt, %20 is the safer, unambiguous choice — it means "space" in every part of a URL, while + only means "space" in one specific context.
+        </div>
+
+        <h2 id="component-vs-uri">encodeURIComponent vs. encodeURI</h2>
+        <p>JavaScript provides two different encoding functions, and picking the wrong one is a frequent source of broken links:</p>
+        <ul>
+          <li><strong>encodeURIComponent:</strong> Escapes nearly everything, including <code>/</code>, <code>?</code>, <code>&amp;</code>, and <code>#</code>. Use this when encoding a single piece of data — like a search term or a filename — that will be inserted into a URL.</li>
+          <li><strong>encodeURI:</strong> Leaves structural characters like <code>/</code>, <code>?</code>, and <code>&amp;</code> untouched, since it assumes you're encoding a whole, already-valid URL and don't want to break its existing structure.</li>
+        </ul>
+        <p>Using encodeURI on a single query parameter (instead of encodeURIComponent) is a classic bug — any <code>&amp;</code> or <code>=</code> inside your actual data will be misread as a new parameter boundary instead of literal data.</p>
+
+        <h2 id="reserved">Reserved and Unsafe Characters</h2>
+        <p>Characters like <code>&amp;</code>, <code>=</code>, <code>?</code>, <code>#</code>, and <code>/</code> are called "reserved" because they already have specific structural meaning in a URL — separating the path from the query string, separating parameters, and so on. If actual data needs to contain one of these characters, it must be encoded, or a URL parser will misinterpret where the structure ends and the data begins.</p>
+
+        <h2 id="encode">Encoding or Decoding a URL</h2>
+        <p>Rather than tracking which function or character set applies, paste text into our free <a href="../tools/url-encoder">URL Encoder/Decoder</a>. It toggles between encodeURIComponent and encodeURI, switches between %20 and + for spaces, can process a batch of lines at once, and shows a live, character-by-character preview of exactly what's changing.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>Why do spaces in a URL sometimes show up as %20 and other times as a plus sign?</strong> Both represent an encoded space, but in different contexts. %20 is the standard percent-encoding used throughout a URL's path. A plus sign specifically represents a space only within a query string's form-encoded data (the part after the ?), a convention left over from HTML form submissions — it isn't valid as a space anywhere else in the URL.</p>
+        <p><strong>What's the real difference between encodeURIComponent and encodeURI in JavaScript?</strong> encodeURIComponent escapes nearly every special character, including things like /, ?, and &amp;, making it correct for encoding a single value — like a search term — that will be inserted into a URL. encodeURI leaves those structural characters alone because it assumes you're encoding a complete, already-structured URL and don't want to break its existing slashes or query separators.</p>
+        <p><strong>Why can't URLs just contain spaces and special characters directly?</strong> Certain characters — spaces, &amp;, ?, #, and others — already have structural meaning within a URL (separating the path from the query string, separating query parameters from each other, and so on). If those characters appeared unencoded inside actual data, like a search term, a parser couldn't tell whether they were part of the data or part of the URL's own structure. Percent-encoding sidesteps the ambiguity entirely.</p>
+        <p><strong>Is URL encoding the same thing as encryption?</strong> No — URL encoding (percent-encoding) is fully reversible and provides no confidentiality whatsoever. Anyone can decode it instantly with no key required. It exists purely to make certain characters safe to transmit inside a URL, not to hide or protect the data in any way.</p>
+
+        <div class="tip-box">
+          Need to encode or decode a URL right now? Try the <a href="../tools/url-encoder">free URL Encoder/Decoder</a> — instant, no sign-up.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
