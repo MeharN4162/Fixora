@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSS Gradients Explained: Linear, Radial, and Conic | Fixoona</title>
+  <meta name="description" content="The difference between linear, radial, and conic CSS gradients, how color stops control where colors transition, and why gradients hurt performance far less than images." />
+  <meta name="keywords" content="css gradient types, linear vs radial gradient, css gradient color stops, conic gradient explained" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/css-gradients-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="CSS Gradients Explained: Linear, Radial, and Conic" />
+  <meta property="og:description" content="The difference between the three gradient types, and how color stops work." />
+  <meta property="og:url" content="https://fixoona.com/blog/css-gradients-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CSS Gradients Explained: Linear, Radial, and Conic" />
+  <meta name="twitter:description" content="The difference between the three gradient types, and how color stops work." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "CSS Gradients Explained: Linear, Radial, and Conic",
+    "description": "The difference between the three gradient types, and how color stops work.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-08-27",
+    "dateModified": "2026-08-27",
+    "mainEntityOfPage": "https://fixoona.com/blog/css-gradients-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/#guides" },
+      { "@type": "ListItem", "position": 3, "name": "CSS Gradients Guide", "item": "https://fixoona.com/blog/css-gradients-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What's the difference between a linear and a radial gradient?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A linear gradient transitions colors along a straight line at a specified angle, producing bands of color across the element. A radial gradient instead transitions colors outward from a center point in expanding circles or ellipses, producing a spotlight-like or bullseye effect rather than straight bands." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does a conic gradient actually do differently?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A conic gradient transitions colors around a center point like the hands of a clock sweeping in a circle, rather than radiating outward from the center (radial) or moving in a straight line (linear). It's the natural choice for effects like pie charts, color wheels, or loading spinners, since the color change follows a rotational angle instead of distance or direction." }
+      },
+      {
+        "@type": "Question",
+        "name": "What do color stops control in a gradient?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A color stop defines both a specific color and the position along the gradient where that color should appear at full strength. Between two stops, CSS smoothly interpolates the color transition. Adding more stops gives finer control over exactly where and how sharply colors change, rather than being limited to one smooth transition between just two colors." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are CSS gradients better for performance than a gradient image?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Generally yes. A CSS gradient is rendered directly by the browser using a small amount of code, with no image file to download, decode, or cache, and it scales perfectly to any element size without pixelation. An image-based gradient adds an extra network request and file size, and can look blurry or banded if scaled beyond its original resolution." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#guides">Guides</a><span class="sep">/</span>
+        <span>CSS Gradients Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Developer Guides · 5 min read · Updated August 2026</p>
+      <h1>CSS Gradients Explained: Linear, Radial, and Conic</h1>
+      <div class="article-hero-img" aria-hidden="true">🎨</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#linear">Linear Gradients</a></li>
+          <li><a href="#radial">Radial Gradients</a></li>
+          <li><a href="#conic">Conic Gradients</a></li>
+          <li><a href="#color-stops">What Color Stops Control</a></li>
+          <li><a href="#performance">Gradients vs. Gradient Images</a></li>
+          <li><a href="#create">Creating One Right Now</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>CSS supports three distinct gradient shapes, and picking the right one is really about picking the right underlying geometry for the effect you want.</p>
+
+        <h2 id="linear">Linear Gradients</h2>
+        <p>A linear gradient transitions colors along a straight line at a specified angle, producing color bands across the element — a classic top-to-bottom or diagonal color fade. It's the most commonly used gradient type, well-suited to backgrounds, buttons, and overlays.</p>
+
+        <h2 id="radial">Radial Gradients</h2>
+        <p>A radial gradient transitions colors outward from a center point in expanding circles or ellipses, creating a spotlight or bullseye-like effect rather than straight bands. It's the right choice when you want attention drawn toward (or away from) a specific point rather than across a directional line.</p>
+
+        <h2 id="conic">Conic Gradients</h2>
+        <p>A conic gradient transitions colors around a center point like the hands of a clock sweeping in a full circle, rather than radiating outward (radial) or moving along a straight line (linear). It's the natural fit for pie charts, color wheels, and loading spinners, since the color changes based on rotational angle rather than distance from a point.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> All three gradient types can be layered and combined as multiple background images on a single element, letting you build more complex effects than any single gradient type could achieve alone.
+        </div>
+
+        <h2 id="color-stops">What Color Stops Control</h2>
+        <p>A color stop pins a specific color to a specific position along the gradient. Between two stops, the browser smoothly interpolates the transition. Adding more stops gives finer control over where and how abruptly colors change — a gradient with several tightly-spaced stops near one point creates a sharp transition there, while spreading stops out creates a slower, smoother blend.</p>
+
+        <h2 id="performance">Gradients vs. Gradient Images</h2>
+        <p>A CSS gradient is rendered directly by the browser from a small amount of code — no image file to download, decode, or cache — and it scales perfectly to any element size with no pixelation or blur. A gradient baked into an image file adds a network request and file size overhead, and can look blurry or banded once stretched beyond its original resolution, which is why CSS gradients are generally the better choice wherever they're achievable.</p>
+
+        <h2 id="create">Creating One Right Now</h2>
+        <p>Build a linear, radial, or conic gradient with a live preview, curated preset palettes, and ready-to-paste CSS code using our free <a href="../tools/css-gradient-generator">CSS Gradient Generator</a>.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>What's the difference between a linear and a radial gradient?</strong> A linear gradient transitions colors along a straight line at a specified angle, producing bands of color across the element. A radial gradient instead transitions colors outward from a center point in expanding circles or ellipses, producing a spotlight-like or bullseye effect rather than straight bands.</p>
+        <p><strong>What does a conic gradient actually do differently?</strong> A conic gradient transitions colors around a center point like the hands of a clock sweeping in a circle, rather than radiating outward from the center (radial) or moving in a straight line (linear). It's the natural choice for effects like pie charts, color wheels, or loading spinners, since the color change follows a rotational angle instead of distance or direction.</p>
+        <p><strong>What do color stops control in a gradient?</strong> A color stop defines both a specific color and the position along the gradient where that color should appear at full strength. Between two stops, CSS smoothly interpolates the color transition. Adding more stops gives finer control over exactly where and how sharply colors change, rather than being limited to one smooth transition between just two colors.</p>
+        <p><strong>Are CSS gradients better for performance than a gradient image?</strong> Generally yes. A CSS gradient is rendered directly by the browser using a small amount of code, with no image file to download, decode, or cache, and it scales perfectly to any element size without pixelation. An image-based gradient adds an extra network request and file size, and can look blurry or banded if scaled beyond its original resolution.</p>
+
+        <div class="tip-box">
+          Want to build one right now? Try the <a href="../tools/css-gradient-generator">free CSS Gradient Generator</a> — live preview, ready-to-paste code.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

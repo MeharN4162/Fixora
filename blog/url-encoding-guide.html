@@ -66,12 +66,12 @@
       {
         "@type": "Question",
         "name": "What's the real difference between encodeURIComponent and encodeURI in JavaScript?",
-        "acceptedAnswer": { "@type": "Answer", "text": "encodeURIComponent escapes nearly every special character, including things like /, ?, and &amp;, making it correct for encoding a single value — like a search term — that will be inserted into a URL. encodeURI leaves those structural characters alone because it assumes you're encoding a complete, already-structured URL and don't want to break its existing slashes or query separators." }
+        "acceptedAnswer": { "@type": "Answer", "text": "encodeURIComponent escapes nearly every special character, including things like /, ?, and &, making it correct for encoding a single value — like a search term — that will be inserted into a URL. encodeURI leaves those structural characters alone because it assumes you're encoding a complete, already-structured URL and don't want to break its existing slashes or query separators." }
       },
       {
         "@type": "Question",
         "name": "Why can't URLs just contain spaces and special characters directly?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Certain characters — spaces, &amp;, ?, #, and others — already have structural meaning within a URL (separating the path from the query string, separating query parameters from each other, and so on). If those characters appeared unencoded inside actual data, like a search term, a parser couldn't tell whether they were part of the data or part of the URL's own structure. Percent-encoding sidesteps the ambiguity entirely." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Certain characters — spaces, &, ?, #, and others — already have structural meaning within a URL (separating the path from the query string, separating query parameters from each other, and so on). If those characters appeared unencoded inside actual data, like a search term, a parser couldn't tell whether they were part of the data or part of the URL's own structure. Percent-encoding sidesteps the ambiguity entirely." }
       },
       {
         "@type": "Question",
