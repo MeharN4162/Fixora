@@ -38,7 +38,7 @@
     "author": { "@type": "Organization", "name": "Fixoona" },
     "publisher": { "@type": "Organization", "name": "Fixoona" },
     "datePublished": "2026-08-13",
-    "dateModified": "2026-08-13",
+    "dateModified": "2026-08-27",
     "mainEntityOfPage": "https://fixoona.com/blog/compare-text-documents-guide"
   }
   </script>
@@ -127,6 +127,7 @@
         <ul>
           <li><a href="#what-diff">What a "Diff" Actually Compares</a></li>
           <li><a href="#how-to">How to Compare Two Texts</a></li>
+          <li><a href="#pdf">Comparing PDFs</a></li>
           <li><a href="#reading">Reading the Results Correctly</a></li>
           <li><a href="#limits">Limitations Worth Knowing</a></li>
           <li><a href="#faq">FAQ</a></li>
@@ -152,6 +153,9 @@
           <strong>Tip:</strong> If you're comparing code or structured data, keep whitespace-ignore <em>off</em> — indentation differences are often meaningful there. For prose or copy-pasted text, turning it on cuts a lot of noise.
         </div>
 
+        <h2 id="pdf">Comparing Two PDFs Instead of Plain Text</h2>
+        <p>The same line-by-line comparison logic applies just as well to two versions of a PDF — the difference is simply where the text comes from first. A PDF comparison tool extracts each document's text layer before running the same diff, so contract revisions or edited reports can be compared without manually copying text out of each file first.</p>
+
         <h2 id="reading">Reading the Results Correctly</h2>
         <p>A few patterns are worth recognizing:</p>
         <ul>
@@ -170,7 +174,7 @@
         <p><strong>Is there a size limit on how much text I can compare?</strong> Yes. If the number of lines in text A multiplied by the number of lines in text B exceeds 4,000,000, the comparison is refused and you're asked for shorter excerpts, since the underlying LCS grid grows with the product of both line counts.</p>
 
         <div class="tip-box">
-          Ready to compare? Try the <a href="../tools/text-diff-checker">free Text Diff Checker</a> — nothing you paste leaves your browser.
+          Ready to compare? Try the <a href="../tools/text-diff-checker">free Text Diff Checker</a> for plain text, or <a href="../tools/pdf-compare">Compare PDFs</a> for two document files — nothing you upload leaves your browser.
         </div>
       </article>
     </div>
