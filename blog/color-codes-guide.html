@@ -38,7 +38,7 @@
     "author": { "@type": "Organization", "name": "Fixoona" },
     "publisher": { "@type": "Organization", "name": "Fixoona" },
     "datePublished": "2026-08-17",
-    "dateModified": "2026-08-17",
+    "dateModified": "2026-08-27",
     "mainEntityOfPage": "https://fixoona.com/blog/color-codes-guide"
   }
   </script>
@@ -129,6 +129,7 @@
           <li><a href="#rgb">RGB</a></li>
           <li><a href="#hsl">HSL</a></li>
           <li><a href="#when-to-use">Which One Should You Use?</a></li>
+          <li><a href="#from-image">Picking a Color from an Image</a></li>
           <li><a href="#faq">FAQ</a></li>
         </ul>
       </aside>
@@ -157,6 +158,9 @@
           <li>Reach for HSL while you're still designing and want to fine-tune lightness or saturation without losing the hue.</li>
         </ol>
 
+        <h2 id="from-image">Picking a Color from an Image</h2>
+        <p>Sometimes you don't have a color code to start from — just a photo or design mockup with a color you want to match exactly. An eyedropper tool zooms into the image so you can click the precise pixel, then reads that pixel's value back out in hex, RGB, or HSL, whichever format you need for your CSS or design tool.</p>
+
         <h2 id="faq">FAQ</h2>
         <p><strong>What does the # in a hex color code mean?</strong> The # is just a prefix that tells a program the following characters are a hexadecimal (base-16) color value, not a decimal number or another kind of code. It carries no color information itself — #FF0000 and FF0000 represent the same red, the # is simply the conventional marker for this format.</p>
         <p><strong>Why would I use HSL instead of RGB?</strong> HSL separates a color into Hue (the base color, 0-360°), Saturation (how vivid vs. gray), and Lightness (how close to black or white) — which maps to how humans actually think about adjusting color. To make an RGB color lighter you have to recalculate all three R, G, and B numbers together; in HSL you just increase the Lightness value and the hue stays exactly the same.</p>
@@ -164,7 +168,7 @@
         <p><strong>Do all three formats represent exactly the same colors?</strong> Yes — hex, RGB, and HSL are just three different ways of writing the same underlying color space; converting between them is a lossless, purely mathematical transformation. A color converter switching a value from one format to another doesn't change what color it is, only how it's written.</p>
 
         <div class="tip-box">
-          Need to convert a color right now? Try the <a href="../tools/color-converter">free Color Converter</a> — instant conversion, nothing leaves your browser.
+          Need to convert a color right now? Try the <a href="../tools/color-converter">free Color Converter</a>, or <a href="../tools/image-color-picker">pick one straight from an image</a> — nothing leaves your browser.
         </div>
       </article>
     </div>

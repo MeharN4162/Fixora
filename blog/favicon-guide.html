@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What Makes a Good Favicon (And Why Yours Might Not Show Up) | Fixoona</title>
+  <meta name="description" content="Why favicons need multiple sizes, why browsers sometimes keep showing an old one, and how to design an icon that still reads clearly at 16 pixels." />
+  <meta name="keywords" content="favicon sizes explained, favicon not updating, how to design a favicon, favicon.ico vs png" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/favicon-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="What Makes a Good Favicon (And Why Yours Might Not Show Up)" />
+  <meta property="og:description" content="Why favicons need multiple sizes, and how to design one that reads at 16px." />
+  <meta property="og:url" content="https://fixoona.com/blog/favicon-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="What Makes a Good Favicon (And Why Yours Might Not Show Up)" />
+  <meta name="twitter:description" content="Why favicons need multiple sizes, and how to design one that reads at 16px." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "What Makes a Good Favicon (And Why Yours Might Not Show Up)",
+    "description": "Why favicons need multiple sizes, and how to design one that reads at 16px.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-08-27",
+    "dateModified": "2026-08-27",
+    "mainEntityOfPage": "https://fixoona.com/blog/favicon-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/#guides" },
+      { "@type": "ListItem", "position": 3, "name": "Favicon Guide", "item": "https://fixoona.com/blog/favicon-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why does my new favicon not show up even after I've uploaded it?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Browsers cache favicons aggressively, often far more stubbornly than regular page content, so the old icon can persist in a browser tab or bookmark for a long time even after the file on the server has genuinely changed. A hard refresh, clearing the site's cached data, or simply waiting usually resolves it — it's rarely a sign the new favicon wasn't uploaded correctly." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do favicons need so many different sizes instead of one image?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The icon shows up in many different contexts at very different sizes — a tiny 16×16 browser tab, a larger bookmarks bar entry, an even larger home-screen icon on a phone. A single image scaled up or down for all of these tends to look blurry or lose detail at the extremes, so a proper favicon set includes multiple pre-sized versions, each optimized for its specific use." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does a detailed logo often look bad as a favicon?",
+        "acceptedAnswer": { "@type": "Answer", "text": "At 16×16 pixels — the size of a typical browser tab icon — there simply isn't enough resolution to render fine detail, thin lines, or small text legibly. A favicon that reads clearly at that tiny size usually needs to be a simplified mark: bold shapes, high contrast, and minimal detail, even if it differs somewhat from a more detailed full logo used elsewhere." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is favicon.ico still necessary, or do modern browsers just use PNG?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Modern browsers generally support PNG favicons declared via a link tag, and PNG is the more flexible, common format for that. favicon.ico at the site root is still checked by some browsers and older software as a fallback if no icon link is explicitly declared, so including it alongside PNG sizes remains good practice for broad compatibility." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#guides">Guides</a><span class="sep">/</span>
+        <span>Favicon Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Image Guides · 5 min read · Updated August 2026</p>
+      <h1>What Makes a Good Favicon (And Why Yours Might Not Show Up)</h1>
+      <div class="article-hero-img" aria-hidden="true">⭐</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#sizes">Why Favicons Need Multiple Sizes</a></li>
+          <li><a href="#design">Designing an Icon That Reads at 16px</a></li>
+          <li><a href="#caching">Why It Might Not Show Up Right Away</a></li>
+          <li><a href="#ico-vs-png">favicon.ico vs. PNG</a></li>
+          <li><a href="#generate">Generating a Favicon Right Now</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>A favicon is small, easy to overlook, and surprisingly fussy to get right. Here's why it needs more than a single image file, and why a brand-new one sometimes stubbornly refuses to appear.</p>
+
+        <h2 id="sizes">Why Favicons Need Multiple Sizes</h2>
+        <p>The same icon shows up across very different contexts — a tiny browser tab, a larger bookmarks bar row, an even bigger home-screen icon on a phone. Scaling one image up or down for all of these tends to look soft or lose detail at the extremes, which is why a proper favicon set includes several purpose-sized versions rather than one file stretched everywhere.</p>
+
+        <h2 id="design">Designing an Icon That Reads at 16px</h2>
+        <p>A typical browser tab renders the favicon at just 16×16 pixels — not much room for detail. A design that looks great as a full logo can turn into an illegible blur at that size if it relies on thin lines or fine text. The icons that hold up are simple: bold shapes, strong contrast, and a design that's still recognizable stripped down to its simplest form.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> Zoom your design out to roughly the size of a browser tab (or just look at a small preview) before finalizing it — what looks fine at full size can fall apart at favicon scale.
+        </div>
+
+        <h2 id="caching">Why It Might Not Show Up Right Away</h2>
+        <p>Browsers cache favicons unusually aggressively, often more stubbornly than regular page content. Uploading a new favicon can leave the old one showing in an already-open tab or an existing bookmark for a surprisingly long time, even though the file itself has genuinely changed on the server. This is almost always a caching delay, not a sign the upload failed — a hard refresh or waiting it out typically resolves it.</p>
+
+        <h2 id="ico-vs-png">favicon.ico vs. PNG</h2>
+        <p>Modern browsers generally support PNG favicons declared through a link tag, which is more flexible than the older .ico format. A favicon.ico file at the site's root is still checked by some browsers and tools as a fallback when no icon is explicitly declared, so including both remains the safer, broadly compatible approach.</p>
+
+        <h2 id="generate">Generating a Favicon Right Now</h2>
+        <p>Upload any image to our free <a href="../tools/favicon-generator">Favicon Generator</a> to get a complete set — favicon.ico plus six standard PNG sizes — with optional background color and padding for non-square sources, plus a real-size preview of how it'll look in a tab, bookmarks bar, and home screen.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>Why does my new favicon not show up even after I've uploaded it?</strong> Browsers cache favicons aggressively, often far more stubbornly than regular page content, so the old icon can persist in a browser tab or bookmark for a long time even after the file on the server has genuinely changed. A hard refresh, clearing the site's cached data, or simply waiting usually resolves it — it's rarely a sign the new favicon wasn't uploaded correctly.</p>
+        <p><strong>Why do favicons need so many different sizes instead of one image?</strong> The icon shows up in many different contexts at very different sizes — a tiny 16×16 browser tab, a larger bookmarks bar entry, an even larger home-screen icon on a phone. A single image scaled up or down for all of these tends to look blurry or lose detail at the extremes, so a proper favicon set includes multiple pre-sized versions, each optimized for its specific use.</p>
+        <p><strong>Why does a detailed logo often look bad as a favicon?</strong> At 16×16 pixels — the size of a typical browser tab icon — there simply isn't enough resolution to render fine detail, thin lines, or small text legibly. A favicon that reads clearly at that tiny size usually needs to be a simplified mark: bold shapes, high contrast, and minimal detail, even if it differs somewhat from a more detailed full logo used elsewhere.</p>
+        <p><strong>Is favicon.ico still necessary, or do modern browsers just use PNG?</strong> Modern browsers generally support PNG favicons declared via a link tag, and PNG is the more flexible, common format for that. favicon.ico at the site root is still checked by some browsers and older software as a fallback if no icon link is explicitly declared, so including it alongside PNG sizes remains good practice for broad compatibility.</p>
+
+        <div class="tip-box">
+          Need a favicon set right now? Try the <a href="../tools/favicon-generator">free Favicon Generator</a> — no sign-up, no watermark.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
