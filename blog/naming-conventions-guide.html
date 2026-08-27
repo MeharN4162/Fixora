@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Naming Conventions Explained: camelCase, PascalCase, snake_case | Fixoona</title>
+  <meta name="description" content="What camelCase, PascalCase, snake_case, and kebab-case actually are, which languages and contexts expect which one, and why mixing them causes real bugs." />
+  <meta name="keywords" content="camelcase vs pascalcase, snake_case vs kebab-case, naming convention programming, when to use each case style" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/naming-conventions-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Naming Conventions Explained: camelCase, PascalCase, snake_case" />
+  <meta property="og:description" content="Which case style each language and context expects, and why." />
+  <meta property="og:url" content="https://fixoona.com/blog/naming-conventions-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Naming Conventions Explained: camelCase, PascalCase, snake_case" />
+  <meta name="twitter:description" content="Which case style each language and context expects, and why." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Naming Conventions Explained: camelCase, PascalCase, snake_case",
+    "description": "Which case style each language and context expects, and why.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-08-27",
+    "dateModified": "2026-08-27",
+    "mainEntityOfPage": "https://fixoona.com/blog/naming-conventions-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/#guides" },
+      { "@type": "ListItem", "position": 3, "name": "Naming Conventions Guide", "item": "https://fixoona.com/blog/naming-conventions-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why does JavaScript use camelCase while Python typically uses snake_case?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's mostly historical convention rather than a technical requirement — both languages can technically parse either style. JavaScript's official style guides and its standard library (methods like getElementById) established camelCase early on, while Python's official style guide (PEP 8) explicitly recommends snake_case for functions and variables, and each ecosystem has followed its own convention ever since." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the actual difference between camelCase and PascalCase?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The only difference is the first letter. camelCase starts lowercase (myVariableName), while PascalCase starts with a capital letter (MyClassName). In many languages, this isn't just a style preference — PascalCase is conventionally reserved for class and type names, while camelCase is used for variables and function names, so the two conventions coexist as a way to distinguish what kind of thing is being named." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do URLs typically use kebab-case instead of snake_case?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Search engines have historically treated a hyphen as a word separator in a URL, but not always treated an underscore the same way — meaning \"blue-widget\" might be read as two separate words while \"blue_widget\" could be read as one combined word. Hyphens also render more clearly as visual gaps between words in a URL bar than underscores do, which is why kebab-case became the standard for URL slugs specifically." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does mixing naming conventions in the same codebase actually cause bugs?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It can, directly — if a variable is defined as userName in one place and referenced as username or user_name elsewhere, most languages will throw an undefined-variable error rather than treating them as the same thing, since case and separators are literally part of the identifier. Beyond outright breakage, inconsistent naming also makes code meaningfully harder to search, read, and maintain." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#guides">Guides</a><span class="sep">/</span>
+        <span>Naming Conventions Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Developer Guides · 5 min read · Updated August 2026</p>
+      <h1>Naming Conventions Explained: camelCase, PascalCase, snake_case</h1>
+      <div class="article-hero-img" aria-hidden="true">🔡</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#camel-pascal">camelCase vs. PascalCase</a></li>
+          <li><a href="#snake-kebab">snake_case vs. kebab-case</a></li>
+          <li><a href="#by-context">Which One Each Context Expects</a></li>
+          <li><a href="#mixing">Why Mixing Conventions Causes Bugs</a></li>
+          <li><a href="#convert">Converting Between Them</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>Every programming naming convention is solving the same basic problem — separating words in an identifier that can't contain spaces — just with a different visual solution. Here's what each one is, and why the choice isn't arbitrary.</p>
+
+        <h2 id="camel-pascal">camelCase vs. PascalCase</h2>
+        <p>These two are nearly identical, differing only in the first letter: camelCase starts lowercase (<code>userName</code>), PascalCase starts with a capital (<code>UserAccount</code>). In many languages this isn't just stylistic — PascalCase is conventionally reserved for class and type names, while camelCase is used for variables and functions, giving a reader an instant visual cue about what kind of thing they're looking at.</p>
+
+        <h2 id="snake-kebab">snake_case vs. kebab-case</h2>
+        <p>Both separate words with a symbol instead of capitalization — snake_case uses an underscore (<code>user_name</code>), kebab-case uses a hyphen (<code>user-name</code>). The key practical difference: a hyphen isn't a valid character inside most programming language identifiers (variable and function names), so kebab-case is essentially never used for code — it's reserved for places like URLs and CSS class names, where hyphens are perfectly valid.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> If you're unsure which convention a codebase uses, check its existing files rather than guessing — consistency with the surrounding code matters more than which convention is "correct" in the abstract.
+        </div>
+
+        <h2 id="by-context">Which One Each Context Expects</h2>
+        <ul>
+          <li><strong>JavaScript variables/functions:</strong> camelCase</li>
+          <li><strong>JavaScript/Java/C# classes:</strong> PascalCase</li>
+          <li><strong>Python variables/functions:</strong> snake_case (per PEP 8)</li>
+          <li><strong>URL slugs:</strong> kebab-case</li>
+          <li><strong>CSS class names:</strong> kebab-case</li>
+          <li><strong>Environment variables/constants:</strong> CONSTANT_CASE (all caps with underscores)</li>
+        </ul>
+
+        <h2 id="mixing">Why Mixing Conventions Causes Bugs</h2>
+        <p>This isn't just a style issue — case and separators are literally part of an identifier's name to a computer. A variable defined as <code>userName</code> and later referenced as <code>username</code> or <code>user_name</code> isn't the same identifier at all in most languages, and will throw an undefined-variable error rather than silently working. Beyond outright breakage, inconsistent naming makes code noticeably harder to search and maintain.</p>
+
+        <h2 id="convert">Converting Between Them</h2>
+        <p>To quickly switch a piece of text between UPPERCASE, lowercase, Title Case, Sentence case, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, and more — and compare every variant at once — use our free <a href="../tools/text-case-converter">Text Case Converter</a>.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>Why does JavaScript use camelCase while Python typically uses snake_case?</strong> It's mostly historical convention rather than a technical requirement — both languages can technically parse either style. JavaScript's official style guides and its standard library (methods like getElementById) established camelCase early on, while Python's official style guide (PEP 8) explicitly recommends snake_case for functions and variables, and each ecosystem has followed its own convention ever since.</p>
+        <p><strong>What's the actual difference between camelCase and PascalCase?</strong> The only difference is the first letter. camelCase starts lowercase (myVariableName), while PascalCase starts with a capital letter (MyClassName). In many languages, this isn't just a style preference — PascalCase is conventionally reserved for class and type names, while camelCase is used for variables and function names, so the two conventions coexist as a way to distinguish what kind of thing is being named.</p>
+        <p><strong>Why do URLs typically use kebab-case instead of snake_case?</strong> Search engines have historically treated a hyphen as a word separator in a URL, but not always treated an underscore the same way — meaning "blue-widget" might be read as two separate words while "blue_widget" could be read as one combined word. Hyphens also render more clearly as visual gaps between words in a URL bar than underscores do, which is why kebab-case became the standard for URL slugs specifically.</p>
+        <p><strong>Does mixing naming conventions in the same codebase actually cause bugs?</strong> It can, directly — if a variable is defined as userName in one place and referenced as username or user_name elsewhere, most languages will throw an undefined-variable error rather than treating them as the same thing, since case and separators are literally part of the identifier. Beyond outright breakage, inconsistent naming also makes code meaningfully harder to search, read, and maintain.</p>
+
+        <div class="tip-box">
+          Need to switch a case style right now? Try the <a href="../tools/text-case-converter">free Text Case Converter</a> — every common style, side by side.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

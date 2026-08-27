@@ -633,6 +633,30 @@
   </url>
 
   <url>
+    <loc>https://fixoona.com/blog/naming-conventions-guide</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fixoona.com/blog/url-slug-guide</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fixoona.com/blog/lorem-ipsum-guide</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fixoona.com/blog/clean-text-lists-guide</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://fixoona.com/blog/basic-image-editing-guide</loc>
     <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
