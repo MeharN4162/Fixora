@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Is a Coin Flip Really 50/50? Randomness Explained | Fixoona</title>
+  <meta name="description" content="Why a physical coin flip isn't exactly 50/50, how a computer generates random numbers without flipping anything, and the real difference between a regular and cryptographically secure random generator." />
+  <meta name="keywords" content="is a coin flip 50/50, how do computers generate random numbers, pseudorandom vs true random, dice probability" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/true-randomness-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Is a Coin Flip Really 50/50? Randomness Explained" />
+  <meta property="og:description" content="Why a coin flip isn't exactly 50/50, and how computers generate randomness." />
+  <meta property="og:url" content="https://fixoona.com/blog/true-randomness-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Is a Coin Flip Really 50/50? Randomness Explained" />
+  <meta name="twitter:description" content="Why a coin flip isn't exactly 50/50, and how computers generate randomness." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Is a Coin Flip Really 50/50? Randomness Explained",
+    "description": "Why a coin flip isn't exactly 50/50, and how computers generate randomness.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-08-27",
+    "dateModified": "2026-08-27",
+    "mainEntityOfPage": "https://fixoona.com/blog/true-randomness-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/#guides" },
+      { "@type": "ListItem", "position": 3, "name": "True Randomness Guide", "item": "https://fixoona.com/blog/true-randomness-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is a real coin flip actually exactly 50/50?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Not perfectly. Physical studies of coin flips have found a very slight bias toward the side that started facing up, due to how the coin tumbles through the air — typically only about a 51% chance versus 49%, not a meaningful difference for practical purposes, but a real, measurable one under careful physical analysis." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does a computer generate a random number without anything physical to flip or roll?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Most everyday randomness on a computer comes from a pseudorandom number generator — a mathematical formula that produces a long sequence of numbers that looks statistically random, starting from an initial \"seed\" value. For purposes needing genuine unpredictability, like security, modern systems instead draw from real-world physical noise (timing jitter, hardware sensors) collected by the operating system." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between a regular random number generator and a cryptographically secure one?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A standard pseudorandom generator is fast and fine for games, simulations, or shuffling a playlist, but its output can sometimes be predicted if an attacker knows the algorithm and enough prior outputs. A cryptographically secure generator is specifically designed so its output can't be predicted even with that knowledge, making it the right choice for anything security-related, like generating a password or an encryption key." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do dice probabilities change so much between a d6 and a d20?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A standard six-sided die (d6) gives each outcome a 1-in-6 chance, roughly 16.7%. A twenty-sided die (d20) spreads that same total probability across 20 outcomes, giving each one only a 1-in-20 chance, 5%. More sides means a flatter, wider probability spread — useful in tabletop games specifically because it makes individual high or low rolls swingier and rarer." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#guides">Guides</a><span class="sep">/</span>
+        <span>True Randomness Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Everyday Guides · 5 min read · Updated August 2026</p>
+      <h1>Is a Coin Flip Really 50/50? Randomness Explained</h1>
+      <div class="article-hero-img" aria-hidden="true">🪙</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#coin-flip">Is a Coin Flip Really 50/50?</a></li>
+          <li><a href="#pseudorandom">How Computers Generate Randomness</a></li>
+          <li><a href="#crypto">Regular vs. Cryptographically Secure</a></li>
+          <li><a href="#dice">Dice Probability</a></li>
+          <li><a href="#try">Trying These Right Now</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>Coins, dice, and random number generators all feel like they should be simple — but the actual physics and math behind "random" is more interesting than it first appears.</p>
+
+        <h2 id="coin-flip">Is a Coin Flip Really 50/50?</h2>
+        <p>Close, but not exactly. Physical studies of coin flips have measured a slight bias toward the side that started facing up before the flip, caused by how the coin tumbles through the air rather than landing on a perfectly even random rotation. The effect is small — closer to 51/49 than a meaningful skew — and irrelevant for everyday use, but it's a real, measurable deviation from a perfect 50/50 under careful analysis.</p>
+
+        <h2 id="pseudorandom">How Computers Generate Randomness</h2>
+        <p>A computer has nothing physical to flip or roll, so most everyday randomness comes from a pseudorandom number generator: a mathematical formula that produces a long sequence of numbers that statistically behaves like randomness, starting from an initial "seed" value. Given the same seed, a pseudorandom generator always produces the exact same sequence — which is precisely why it's called "pseudo," not truly random, even though it passes most statistical randomness tests.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> Pseudorandomness is completely fine for games, shuffling, and simulations — the "not truly random" distinction only matters when something security-sensitive is at stake.
+        </div>
+
+        <h2 id="crypto">Regular vs. Cryptographically Secure</h2>
+        <p>A standard pseudorandom generator is fast and adequate for non-security uses, but its output can potentially be predicted by someone who knows the algorithm and enough previous outputs. A cryptographically secure random number generator is specifically designed to resist exactly that kind of prediction, typically by drawing from real-world physical noise the operating system collects (timing jitter, hardware sensors) rather than a pure mathematical formula. This is the right kind of randomness for anything security-related, like generating a password or encryption key.</p>
+
+        <h2 id="dice">Dice Probability</h2>
+        <p>A standard six-sided die gives each face a 1-in-6 chance, roughly 16.7%. A twenty-sided die spreads that same total probability across 20 faces instead, giving each one only a 1-in-20 chance, 5%. More sides means a flatter, wider spread of probability — which is exactly why tabletop games use different dice for different purposes: a d20 makes individual high or low rolls swingier and rarer than a d6 would.</p>
+
+        <h2 id="try">Trying These Right Now</h2>
+        <p>Generate random names with our free <a href="../tools/random-name-generator">Random Name Generator</a>, random numbers with the <a href="../tools/random-number-generator">Random Number Generator</a>, flip a virtual coin with <a href="../tools/coin-flip">Coin Flip</a>, or roll virtual dice with the <a href="../tools/dice-roller">Dice Roller</a> — all using your browser's cryptographically secure random source.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>Is a real coin flip actually exactly 50/50?</strong> Not perfectly. Physical studies of coin flips have found a very slight bias toward the side that started facing up, due to how the coin tumbles through the air — typically only about a 51% chance versus 49%, not a meaningful difference for practical purposes, but a real, measurable one under careful physical analysis.</p>
+        <p><strong>How does a computer generate a random number without anything physical to flip or roll?</strong> Most everyday randomness on a computer comes from a pseudorandom number generator — a mathematical formula that produces a long sequence of numbers that looks statistically random, starting from an initial "seed" value. For purposes needing genuine unpredictability, like security, modern systems instead draw from real-world physical noise (timing jitter, hardware sensors) collected by the operating system.</p>
+        <p><strong>What's the difference between a regular random number generator and a cryptographically secure one?</strong> A standard pseudorandom generator is fast and fine for games, simulations, or shuffling a playlist, but its output can sometimes be predicted if an attacker knows the algorithm and enough prior outputs. A cryptographically secure generator is specifically designed so its output can't be predicted even with that knowledge, making it the right choice for anything security-related, like generating a password or an encryption key.</p>
+        <p><strong>Why do dice probabilities change so much between a d6 and a d20?</strong> A standard six-sided die (d6) gives each outcome a 1-in-6 chance, roughly 16.7%. A twenty-sided die (d20) spreads that same total probability across 20 outcomes, giving each one only a 1-in-20 chance, 5%. More sides means a flatter, wider probability spread — useful in tabletop games specifically because it makes individual high or low rolls swingier and rarer.</p>
+
+        <div class="tip-box">
+          Want to try one right now? Use the free <a href="../tools/random-name-generator">Random Name Generator</a>, <a href="../tools/random-number-generator">Random Number Generator</a>, <a href="../tools/coin-flip">Coin Flip</a>, or <a href="../tools/dice-roller">Dice Roller</a> — no sign-up.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
