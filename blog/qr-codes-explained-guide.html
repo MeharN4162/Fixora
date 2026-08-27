@@ -38,7 +38,7 @@
     "author": { "@type": "Organization", "name": "Fixoona" },
     "publisher": { "@type": "Organization", "name": "Fixoona" },
     "datePublished": "2026-08-13",
-    "dateModified": "2026-08-13",
+    "dateModified": "2026-08-27",
     "mainEntityOfPage": "https://fixoona.com/blog/qr-codes-explained-guide"
   }
   </script>
@@ -129,6 +129,7 @@
           <li><a href="#capacity">Data Capacity and Why Long Links Sometimes Fail</a></li>
           <li><a href="#how-to">How to Make a QR Code That Scans Reliably</a></li>
           <li><a href="#uses">Practical Uses Beyond "Scan Me"</a></li>
+          <li><a href="#scanning">Scanning One from an Image</a></li>
           <li><a href="#faq">FAQ</a></li>
         </ul>
       </aside>
@@ -163,6 +164,9 @@
         <h2 id="uses">Practical Uses Beyond "Scan Me"</h2>
         <p>QR codes work for far more than sharing a website — WiFi credentials, contact details, plain text instructions, and short messages all encode the same way. Since the generator works entirely with plain text and links, anything you can type into the field can become a scannable code, as long as it fits within capacity.</p>
 
+        <h2 id="scanning">Scanning One from an Image</h2>
+        <p>You don't always need a phone's camera to read a QR code — a screenshot or a photo already on your device works too. A browser-based scanner can decode a code directly from an uploaded image, automatically recognizing when the content is a link, WiFi login, or contact card and formatting it accordingly, rather than just dumping raw text.</p>
+
         <h2 id="faq">FAQ</h2>
         <p><strong>What does error correction level actually change?</strong> QR codes embed redundant data so they can still scan correctly even if part of the code is dirty, torn, or partly covered by a logo. Low keeps the pattern as simple as possible, while High sacrifices some data density for much greater damage tolerance — Medium is a reasonable default for most links.</p>
         <p><strong>Why did my QR code fail to generate with a long piece of text?</strong> QR codes have a fixed data capacity that depends on the error-correction level chosen. Long text can exceed that capacity, so try shortening it or switching to a lower error-correction level, which frees up more usable data space.</p>
@@ -170,7 +174,7 @@
         <p><strong>What format does a generated QR code download as?</strong> The code is drawn onto an HTML canvas and exported as a PNG image, giving you a standard raster image you can drop into documents, print, or share anywhere an image works.</p>
 
         <div class="tip-box">
-          Ready to make one? Try the <a href="../tools/qr-code-generator">free QR Code Generator</a> — built entirely in your browser, no sign-up required.
+          Ready to make or read one? Try the <a href="../tools/qr-code-generator">free QR Code Generator</a> or <a href="../tools/qr-code-scanner">QR Code Scanner</a> — both built entirely in your browser, no sign-up required.
         </div>
       </article>
     </div>
