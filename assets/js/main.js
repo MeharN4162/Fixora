@@ -112,6 +112,7 @@ document.documentElement.setAttribute("data-js", "true");
     { name: "Passport Photo Maker", type: "Tool", icon: "🛂", cat: "image", href: "tools/passport-photo-maker" },
     { name: "Photo Collage Maker", type: "Tool", icon: "🖼️", cat: "image", href: "tools/photo-collage-maker" },
     { name: "GIF Maker", type: "Tool", icon: "🎞️", cat: "image", href: "tools/gif-maker" },
+    { name: "Background Remover", type: "Tool", icon: "🪄", cat: "image", href: "tools/background-remover" },
     { name: "Image Splitter", type: "Tool", icon: "✂️", cat: "image", href: "tools/image-splitter" },
     { name: "Image Blur Tool", type: "Tool", icon: "🌫️", cat: "image", href: "tools/image-blur-tool" },
     { name: "Signature Maker", type: "Tool", icon: "✍️", cat: "image", href: "tools/signature-maker" },

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Background Remover Online — AI, No Uploads | Fixoona</title>
+  <meta name="description" content="Remove the background from any photo online for free using an on-device AI model — nothing is ever uploaded to a server. Download a transparent PNG instantly." />
+  <meta name="keywords" content="remove background from image free, background remover online, transparent background image, ai background removal" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/background-remover" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Background Remover Online" />
+  <meta property="og:description" content="Remove a photo's background using an on-device AI model — nothing uploaded, ever." />
+  <meta property="og:url" content="https://fixoona.com/tools/background-remover" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Background Remover Online" />
+  <meta name="twitter:description" content="Remove a photo's background using an on-device AI model — nothing uploaded, ever." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Background Remover",
+    "url": "https://fixoona.com/tools/background-remover",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Background Remover", "item": "https://fixoona.com/tools/background-remover" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does this upload my photo anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. The AI model that removes the background is downloaded once to your browser, and every photo you process afterward runs entirely on your own device — no image is ever sent to a server. You can even disconnect from the internet after the model finishes loading and it will keep working." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the first photo take longer than the second one?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The AI model is roughly 16 MB and only needs to download once per visit — your browser caches it afterward. The first photo you process includes that download plus the time to initialize the model; every photo after that only pays the actual processing time, which is much faster." }
+      },
+      {
+        "@type": "Question",
+        "name": "What kind of photos does this work best on?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Photos with one clear subject against a reasonably distinct background — a product shot, a portrait, an object on a plain surface — work best. Fine detail like loose hair strands, fur, or a subject that blends closely into the background in color and lighting can come out less precise, since the model is estimating an edge rather than reading exact pixel boundaries." }
+      },
+      {
+        "@type": "Question",
+        "name": "What model does this actually use?",
+        "acceptedAnswer": { "@type": "Answer", "text": "U2-Net, an open-source neural network built specifically for this kind of salient object segmentation. It's the same well-established model behind several popular background-removal tools, running here through ONNX Runtime Web entirely inside your browser." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .bgr-checker,
+    .bgr-image {
+      position: absolute;
+      inset: 0;
+    }
+    .bgr-preview {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      aspect-ratio: 1 / 1;
+      margin: 18px auto 0;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+      display: none;
+    }
+    .bgr-checker {
+      background-image:
+        linear-gradient(45deg, #ccc 25%, transparent 25%),
+        linear-gradient(-45deg, #ccc 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #ccc 75%),
+        linear-gradient(-45deg, transparent 75%, #ccc 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+      background-color: #fff;
+    }
+    .bgr-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .bgr-progress-bar {
+      height: 6px;
+      border-radius: 999px;
+      background: var(--color-border);
+      overflow: hidden;
+      margin-top: 10px;
+      display: none;
+    }
+    .bgr-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--gradient-primary);
+      transition: width 0.2s ease;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Background Remover</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🪄</div>
+      <h1>Background Remover</h1>
+      <p>Remove a photo's background using an on-device AI model — your image never leaves your browser.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload a photo">
+          <div class="dz-icon" aria-hidden="true">📤</div>
+          <strong>Click to upload or drag a photo here</strong>
+          <small>Works best on a single clear subject — JPG, PNG, or WebP</small>
+          <input type="file" id="fileInput" accept="image/*" hidden />
+        </div>
+
+        <div class="bgr-progress-bar" id="progressBar"><div class="bgr-progress-fill" id="progressFill"></div></div>
+        <div class="output-box" id="statusBox"></div>
+
+        <div class="bgr-preview" id="previewWrap">
+          <div class="bgr-checker" aria-hidden="true"></div>
+          <img class="bgr-image" id="resultImage" alt="Photo with background removed" />
+        </div>
+
+        <div class="actions">
+          <a class="btn btn-primary" id="downloadBtn" style="display:none;" download="background-removed.png">Download PNG</a>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Remove a Background</h2>
+        <ol class="howto-steps">
+          <li>Upload a photo — the first time on this page, an AI model (~16 MB) downloads once.</li>
+          <li>Processing starts automatically once the model is ready.</li>
+          <li>Preview the result against the checkerboard, which shows the transparent areas.</li>
+          <li>Click "Download PNG" to save it with a transparent background.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Does this upload my photo anywhere?</summary>
+          <p>No. The AI model that removes the background is downloaded once to your browser, and every photo you process afterward runs entirely on your own device — no image is ever sent to a server. You can even disconnect from the internet after the model finishes loading and it will keep working.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why does the first photo take longer than the second one?</summary>
+          <p>The AI model is roughly 16 MB and only needs to download once per visit — your browser caches it afterward. The first photo you process includes that download plus the time to initialize the model; every photo after that only pays the actual processing time, which is much faster.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What kind of photos does this work best on?</summary>
+          <p>Photos with one clear subject against a reasonably distinct background — a product shot, a portrait, an object on a plain surface — work best. Fine detail like loose hair strands, fur, or a subject that blends closely into the background in color and lighting can come out less precise, since the model is estimating an edge rather than reading exact pixel boundaries.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What model does this actually use?</summary>
+          <p>U2-Net, an open-source neural network built specifically for this kind of salient object segmentation. It's the same well-established model behind several popular background-removal tools, running here through ONNX Runtime Web entirely inside your browser.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="image-cropper">
+            <span class="icon" aria-hidden="true">✂️</span>
+            <h3>Image Cropper</h3>
+            <p>Crop the result to just the subject.</p>
+          </a>
+          <a class="card" href="image-compressor">
+            <span class="icon" aria-hidden="true">🗜️</span>
+            <h3>Image Compressor</h3>
+            <p>Shrink the file size of your PNG.</p>
+          </a>
+          <a class="card" href="../blog/basic-image-editing-guide">
+            <span class="icon" aria-hidden="true">✂️</span>
+            <h3>Guide: Basic Image Editing</h3>
+            <p>Crop, rotate, flip, split, and watermark, explained.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/vendor/ort.min.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      ort.env.wasm.numThreads = 1;
+      ort.env.wasm.wasmPaths = "/assets/js/vendor/";
+
+      var MODEL_SIZE = 320;
+      var MEAN = [0.485, 0.456, 0.406];
+      var STD = [0.229, 0.224, 0.225];
+
+      var dropzone = document.getElementById("dropzone");
+      var fileInput = document.getElementById("fileInput");
+      var statusBox = document.getElementById("statusBox");
+      var progressBar = document.getElementById("progressBar");
+      var progressFill = document.getElementById("progressFill");
+      var previewWrap = document.getElementById("previewWrap");
+      var resultImage = document.getElementById("resultImage");
+      var downloadBtn = document.getElementById("downloadBtn");
+
+      var sessionPromise = null;
+      var lastUrl = null;
+
+      function setProgress(pct) {
+        progressBar.style.display = "block";
+        progressFill.style.width = pct + "%";
+      }
+
+      function getSession() {
+        if (!sessionPromise) {
+          statusBox.textContent = "Loading AI model (about 16 MB, one time only)…";
+          setProgress(10);
+          sessionPromise = ort.InferenceSession.create("../assets/js/vendor/u2netp.onnx", { executionProviders: ["wasm"] });
+        }
+        return sessionPromise;
+      }
+
+      function loadImageEl(file) {
+        return new Promise(function (resolve, reject) {
+          var url = URL.createObjectURL(file);
+          var img = new Image();
+          img.onload = function () { resolve(img); };
+          img.onerror = function () { reject(new Error("Couldn't read that image.")); };
+          img.src = url;
+        });
+      }
+
+      function handleFiles(files) {
+        var file = files[0];
+        if (!file || file.type.indexOf("image/") !== 0) {
+          statusBox.textContent = "Please choose an image file.";
+          return;
+        }
+        process(file);
+      }
+
+      async function process(file) {
+        previewWrap.style.display = "none";
+        downloadBtn.style.display = "none";
+        setProgress(5);
+
+        try {
+          var img = await loadImageEl(file);
+          var session = await getSession();
+          setProgress(55);
+          statusBox.textContent = "Analyzing image…";
+
+          var small = document.createElement("canvas");
+          small.width = MODEL_SIZE; small.height = MODEL_SIZE;
+          var sctx = small.getContext("2d");
+          sctx.drawImage(img, 0, 0, MODEL_SIZE, MODEL_SIZE);
+          var imgData = sctx.getImageData(0, 0, MODEL_SIZE, MODEL_SIZE).data;
+
+          var planeSize = MODEL_SIZE * MODEL_SIZE;
+          var chwData = new Float32Array(3 * planeSize);
+          for (var i = 0; i < planeSize; i++) {
+            var r = imgData[i * 4] / 255, g = imgData[i * 4 + 1] / 255, b = imgData[i * 4 + 2] / 255;
+            chwData[i] = (r - MEAN[0]) / STD[0];
+            chwData[planeSize + i] = (g - MEAN[1]) / STD[1];
+            chwData[planeSize * 2 + i] = (b - MEAN[2]) / STD[2];
+          }
+
+          setProgress(75);
+          var inputTensor = new ort.Tensor("float32", chwData, [1, 3, MODEL_SIZE, MODEL_SIZE]);
+          var results = await session.run({ "input.1": inputTensor });
+          var outputName = session.outputNames[0];
+          var d0 = results[outputName].data;
+
+          var mn = Infinity, mx = -Infinity;
+          for (var j = 0; j < d0.length; j++) {
+            if (d0[j] < mn) mn = d0[j];
+            if (d0[j] > mx) mx = d0[j];
+          }
+          var range = mx - mn || 1e-8;
+
+          var maskSmall = document.createElement("canvas");
+          maskSmall.width = MODEL_SIZE; maskSmall.height = MODEL_SIZE;
+          var mctx = maskSmall.getContext("2d");
+          var maskImgData = mctx.createImageData(MODEL_SIZE, MODEL_SIZE);
+          for (var k = 0; k < planeSize; k++) {
+            var v = Math.round(((d0[k] - mn) / range) * 255);
+            maskImgData.data[k * 4] = v;
+            maskImgData.data[k * 4 + 1] = v;
+            maskImgData.data[k * 4 + 2] = v;
+            maskImgData.data[k * 4 + 3] = 255;
+          }
+          mctx.putImageData(maskImgData, 0, 0);
+
+          setProgress(90);
+          var fullW = img.naturalWidth, fullH = img.naturalHeight;
+
+          var maskFullCanvas = document.createElement("canvas");
+          maskFullCanvas.width = fullW; maskFullCanvas.height = fullH;
+          var mfctx = maskFullCanvas.getContext("2d");
+          mfctx.drawImage(maskSmall, 0, 0, fullW, fullH);
+          var maskFull = mfctx.getImageData(0, 0, fullW, fullH).data;
+
+          var outCanvas = document.createElement("canvas");
+          outCanvas.width = fullW; outCanvas.height = fullH;
+          var octx = outCanvas.getContext("2d");
+          octx.drawImage(img, 0, 0, fullW, fullH);
+          var outData = octx.getImageData(0, 0, fullW, fullH);
+          for (var p = 0; p < fullW * fullH; p++) {
+            outData.data[p * 4 + 3] = maskFull[p * 4];
+          }
+          octx.putImageData(outData, 0, 0);
+
+          var blob = await new Promise(function (resolve) { outCanvas.toBlob(resolve, "image/png"); });
+          var url = URL.createObjectURL(blob);
+          if (lastUrl) URL.revokeObjectURL(lastUrl);
+          lastUrl = url;
+          resultImage.src = url;
+          previewWrap.style.display = "block";
+          downloadBtn.href = url;
+          downloadBtn.style.display = "inline-flex";
+
+          setProgress(100);
+          statusBox.textContent = "Done! Background removed.";
+          setTimeout(function () { progressBar.style.display = "none"; }, 600);
+        } catch (err) {
+          console.error(err);
+          statusBox.textContent = "Something went wrong processing that image. Please try a different photo.";
+          progressBar.style.display = "none";
+        }
+      }
+
+      Fixora.setupDropzone(dropzone, fileInput, handleFiles);
+      dropzone.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") fileInput.click();
+      });
+    })();
+  </script>
+</body>
+</html>
