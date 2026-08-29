@@ -56,6 +56,7 @@ document.documentElement.setAttribute("data-js", "true");
     { name: "PDF Signer", type: "Tool", icon: "✍️", cat: "pdf", href: "tools/pdf-signer" },
     { name: "Favicon Generator", type: "Tool", icon: "⭐", cat: "image", href: "tools/favicon-generator" },
     { name: "Unit Converter", type: "Tool", icon: "📏", cat: "calc", href: "tools/unit-converter" },
+    { name: "Currency Converter", type: "Tool", icon: "💱", cat: "calc", href: "tools/currency-converter" },
     { name: "BMI Calculator", type: "Tool", icon: "⚖️", cat: "calc", href: "tools/bmi-calculator" },
     { name: "Percentage Calculator", type: "Tool", icon: "💯", cat: "calc", href: "tools/percentage-calculator" },
     { name: "Color Converter", type: "Tool", icon: "🎨", cat: "calc", href: "tools/color-converter" },
