@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Meta Tag Generator Online — SEO, Open Graph, Twitter | Fixoona</title>
+  <meta name="description" content="Generate SEO title, meta description, Open Graph, and Twitter Card tags online for free, with a live Google search result and social share preview. No sign-up." />
+  <meta name="keywords" content="meta tag generator, seo meta tags, open graph generator, twitter card generator free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/meta-tag-generator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Meta Tag Generator Online" />
+  <meta property="og:description" content="Generate SEO, Open Graph, and Twitter Card tags with a live preview, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/meta-tag-generator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Meta Tag Generator Online" />
+  <meta name="twitter:description" content="Generate SEO, Open Graph, and Twitter Card tags with a live preview, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Meta Tag Generator",
+    "url": "https://fixoona.com/tools/meta-tag-generator",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Meta Tag Generator", "item": "https://fixoona.com/tools/meta-tag-generator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How long should a title tag and meta description be?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A title tag displays fully up to roughly 60 characters before Google truncates it with an ellipsis; a meta description has room for roughly 155-160 characters. Both limits are approximate, based on pixel width rather than a strict character count, which is why this tool shows a live counter rather than a hard cutoff." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between Open Graph tags and Twitter Card tags?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Open Graph tags (prefixed og:) were introduced by Facebook and are now the general standard most platforms read when generating a link preview. Twitter Card tags are Twitter/X's own separate tag set; Twitter falls back to Open Graph tags for any Twitter-specific tag that's missing, which is why sites often include both rather than just one." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need an og:image for the preview to show an image?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — without an og:image tag pointing to a real, accessible image URL, most platforms will show a link preview with no image at all, or fall back to a generic site icon. The image should be a direct URL to the actual image file, not a webpage." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will pasting these tags into my site guarantee good search rankings?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — these tags control how your page is described and previewed, not how it ranks. Good title tags and descriptions can improve click-through rate once your page already appears in results, but ranking itself depends on many other factors like content quality, backlinks, and site authority." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .mtg-preview {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      margin-top: 10px;
+    }
+    .mtg-google-title {
+      color: #1a0dab;
+      font-size: 1.15rem;
+      line-height: 1.3;
+      margin-bottom: 2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    :root[data-theme="dark"] .mtg-google-title,
+    @media (prefers-color-scheme: dark) {
+      .mtg-google-title { color: #8ab4f8; }
+    }
+    .mtg-google-url {
+      color: #006621;
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+    }
+    .mtg-google-desc {
+      color: var(--color-text-muted);
+      font-size: 0.88rem;
+      line-height: 1.4;
+    }
+    .mtg-card-preview {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      max-width: 360px;
+    }
+    .mtg-card-image {
+      width: 100%;
+      aspect-ratio: 1.91 / 1;
+      background: var(--color-bg-alt, #e5e7eb);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-muted);
+      font-size: 0.85rem;
+      overflow: hidden;
+    }
+    .mtg-card-image img { width: 100%; height: 100%; object-fit: cover; }
+    .mtg-card-body { padding: 10px 12px; }
+    .mtg-card-site { color: var(--color-text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; }
+    .mtg-card-title { font-weight: 700; margin: 3px 0; font-size: 0.95rem; }
+    .mtg-card-desc { color: var(--color-text-muted); font-size: 0.82rem; }
+    .mtg-counter { font-size: 0.78rem; color: var(--color-text-muted); text-align: right; }
+    .mtg-counter.over { color: #dc2626; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Meta Tag Generator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🏷️</div>
+      <h1>Meta Tag Generator</h1>
+      <p>Generate SEO, Open Graph, and Twitter Card tags with a live search and social preview.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="titleInput">Page Title</label>
+          <input type="text" id="titleInput" value="Free Online Tools & Guides" maxlength="200" />
+          <div class="mtg-counter" id="titleCounter"></div>
+        </div>
+        <div class="field">
+          <label for="descInput">Meta Description</label>
+          <textarea id="descInput" maxlength="400" style="min-height:80px;">Fast, free, browser-based tools and how-to guides for everyday tech problems. No sign-up required.</textarea>
+          <div class="mtg-counter" id="descCounter"></div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="urlInput">Page URL</label>
+            <input type="text" id="urlInput" value="https://example.com/page" />
+          </div>
+          <div class="field">
+            <label for="imageInput">Image URL (for social previews)</label>
+            <input type="text" id="imageInput" value="" placeholder="https://example.com/cover.jpg" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="siteNameInput">Site Name</label>
+            <input type="text" id="siteNameInput" value="My Website" />
+          </div>
+          <div class="field">
+            <label for="twitterHandleInput">Twitter/X Handle (optional)</label>
+            <input type="text" id="twitterHandleInput" value="" placeholder="@yourhandle" />
+          </div>
+        </div>
+
+        <h3 style="margin-top:24px;">Google Search Preview</h3>
+        <div class="mtg-preview">
+          <div class="mtg-google-title" id="previewGoogleTitle"></div>
+          <div class="mtg-google-url" id="previewGoogleUrl"></div>
+          <div class="mtg-google-desc" id="previewGoogleDesc"></div>
+        </div>
+
+        <h3 style="margin-top:20px;">Social Share Preview</h3>
+        <div class="mtg-card-preview">
+          <div class="mtg-card-image" id="previewCardImageWrap">No image set</div>
+          <div class="mtg-card-body">
+            <div class="mtg-card-site" id="previewCardSite"></div>
+            <div class="mtg-card-title" id="previewCardTitle"></div>
+            <div class="mtg-card-desc" id="previewCardDesc"></div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="copyBtn">Copy Meta Tags</button>
+        </div>
+        <div class="copy-note" id="copyNote"></div>
+
+        <div class="field" style="margin-top:16px;">
+          <label for="outputBox">Generated HTML</label>
+          <textarea id="outputBox" readonly style="min-height:260px;font-family:var(--font-mono,monospace);font-size:0.85rem;"></textarea>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Generate Meta Tags</h2>
+        <ol class="howto-steps">
+          <li>Fill in your page's title, description, URL, and image.</li>
+          <li>Check the live Google and social previews to see exactly how it'll look.</li>
+          <li>Click "Copy Meta Tags," then paste the result into your page's &lt;head&gt;.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How long should a title tag and meta description be?</summary>
+          <p>A title tag displays fully up to roughly 60 characters before Google truncates it with an ellipsis; a meta description has room for roughly 155-160 characters. Both limits are approximate, based on pixel width rather than a strict character count, which is why this tool shows a live counter rather than a hard cutoff.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What's the difference between Open Graph tags and Twitter Card tags?</summary>
+          <p>Open Graph tags (prefixed og:) were introduced by Facebook and are now the general standard most platforms read when generating a link preview. Twitter Card tags are Twitter/X's own separate tag set; Twitter falls back to Open Graph tags for any Twitter-specific tag that's missing, which is why sites often include both rather than just one.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Do I need an og:image for the preview to show an image?</summary>
+          <p>Yes — without an og:image tag pointing to a real, accessible image URL, most platforms will show a link preview with no image at all, or fall back to a generic site icon. The image should be a direct URL to the actual image file, not a webpage.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Will pasting these tags into my site guarantee good search rankings?</summary>
+          <p>No — these tags control how your page is described and previewed, not how it ranks. Good title tags and descriptions can improve click-through rate once your page already appears in results, but ranking itself depends on many other factors like content quality, backlinks, and site authority.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="character-counter">
+            <span class="icon" aria-hidden="true">🔤</span>
+            <h3>Character Counter</h3>
+            <p>Check text against exact platform limits.</p>
+          </a>
+          <a class="card" href="favicon-generator">
+            <span class="icon" aria-hidden="true">⭐</span>
+            <h3>Favicon Generator</h3>
+            <p>Create a favicon set to pair with your meta tags.</p>
+          </a>
+          <a class="card" href="url-parser">
+            <span class="icon" aria-hidden="true">🔗</span>
+            <h3>URL Parser</h3>
+            <p>Break down a URL into its parts.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var titleInput = document.getElementById("titleInput");
+      var descInput = document.getElementById("descInput");
+      var urlInput = document.getElementById("urlInput");
+      var imageInput = document.getElementById("imageInput");
+      var siteNameInput = document.getElementById("siteNameInput");
+      var twitterHandleInput = document.getElementById("twitterHandleInput");
+      var titleCounter = document.getElementById("titleCounter");
+      var descCounter = document.getElementById("descCounter");
+      var outputBox = document.getElementById("outputBox");
+      var copyBtn = document.getElementById("copyBtn");
+      var copyNote = document.getElementById("copyNote");
+
+      function escapeHtml(s) {
+        return (s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+      }
+
+      function updateCounter(el, value, limit) {
+        el.textContent = value.length + " / " + limit + " characters";
+        el.classList.toggle("over", value.length > limit);
+      }
+
+      function render() {
+        var title = titleInput.value;
+        var desc = descInput.value;
+        var url = urlInput.value;
+        var image = imageInput.value;
+        var siteName = siteNameInput.value;
+        var handle = twitterHandleInput.value;
+
+        updateCounter(titleCounter, title, 60);
+        updateCounter(descCounter, desc, 160);
+
+        document.getElementById("previewGoogleTitle").textContent = title || "Page Title";
+        document.getElementById("previewGoogleUrl").textContent = url || "https://example.com";
+        document.getElementById("previewGoogleDesc").textContent = desc || "Meta description preview…";
+
+        document.getElementById("previewCardSite").textContent = siteName || "example.com";
+        document.getElementById("previewCardTitle").textContent = title || "Page Title";
+        document.getElementById("previewCardDesc").textContent = desc || "Meta description preview…";
+
+        var imgWrap = document.getElementById("previewCardImageWrap");
+        if (image) {
+          imgWrap.innerHTML = '<img src="' + escapeHtml(image) + '" alt="" onerror="this.parentElement.textContent=\'Image failed to load\'" />';
+        } else {
+          imgWrap.textContent = "No image set";
+        }
+
+        var lines = [];
+        lines.push("<title>" + escapeHtml(title) + "</title>");
+        lines.push('<meta name="description" content="' + escapeHtml(desc) + '" />');
+        lines.push("");
+        lines.push('<meta property="og:type" content="website" />');
+        if (siteName) lines.push('<meta property="og:site_name" content="' + escapeHtml(siteName) + '" />');
+        lines.push('<meta property="og:title" content="' + escapeHtml(title) + '" />');
+        lines.push('<meta property="og:description" content="' + escapeHtml(desc) + '" />');
+        if (url) lines.push('<meta property="og:url" content="' + escapeHtml(url) + '" />');
+        if (image) lines.push('<meta property="og:image" content="' + escapeHtml(image) + '" />');
+        lines.push("");
+        lines.push('<meta name="twitter:card" content="' + (image ? "summary_large_image" : "summary") + '" />');
+        if (handle) lines.push('<meta name="twitter:site" content="' + escapeHtml(handle) + '" />');
+        lines.push('<meta name="twitter:title" content="' + escapeHtml(title) + '" />');
+        lines.push('<meta name="twitter:description" content="' + escapeHtml(desc) + '" />');
+        if (image) lines.push('<meta name="twitter:image" content="' + escapeHtml(image) + '" />');
+
+        outputBox.value = lines.join("\n");
+      }
+
+      [titleInput, descInput, urlInput, imageInput, siteNameInput, twitterHandleInput].forEach(function (el) {
+        el.addEventListener("input", render);
+      });
+
+      copyBtn.addEventListener("click", function () {
+        Fixora.copyText(outputBox.value, copyNote);
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

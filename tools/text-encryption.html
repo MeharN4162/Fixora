@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Text Encryption Online — AES-256, No Uploads | Fixoona</title>
+  <meta name="description" content="Encrypt or decrypt text with a password using real AES-256 encryption online for free, right in your browser. No sign-up, nothing ever sent to a server." />
+  <meta name="keywords" content="encrypt text online, aes encryption online free, text encryption tool, decrypt text with password" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/text-encryption" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Text Encryption Online (AES-256)" />
+  <meta property="og:description" content="Encrypt or decrypt text with a password, free, right in your browser." />
+  <meta property="og:url" content="https://fixoona.com/tools/text-encryption" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Text Encryption Online (AES-256)" />
+  <meta name="twitter:description" content="Encrypt or decrypt text with a password, free, right in your browser." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Text Encryption",
+    "url": "https://fixoona.com/tools/text-encryption",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Text Encryption", "item": "https://fixoona.com/tools/text-encryption" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is this real encryption, or something like ROT13 or Base64?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's real encryption — AES-256-GCM, a modern, widely trusted encryption standard, performed using your browser's built-in Web Crypto API. This is fundamentally different from ROT13 or Base64, which are simple, reversible encodings that provide no actual security and can be undone by anyone with no password required." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if I forget the password I encrypted something with?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The text can't be recovered. There's no password reset, backdoor, or master key — the encryption key is derived directly from your password and nothing else is stored anywhere. This is the intended, correct behavior of real encryption; losing the password means losing access to the data, by design." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my text or password ever sent to a server?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Encryption and decryption both happen entirely inside your browser using the Web Crypto API — neither your plain text, your password, nor the encrypted result is ever transmitted anywhere." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the encrypted output look different every time, even with the same text and password?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A new random salt and initialization vector (IV) are generated for every encryption, then bundled with the ciphertext in the output. This is a deliberate, standard security practice — it prevents identical plaintext from ever producing identical ciphertext, which would otherwise leak information to an observer." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Text Encryption</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🔒</div>
+      <h1>Text Encryption</h1>
+      <p>Encrypt or decrypt text with a password using real AES-256-GCM encryption.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="pill-row" id="modePills">
+          <button class="pill active" data-mode="encrypt" type="button">Encrypt</button>
+          <button class="pill" data-mode="decrypt" type="button">Decrypt</button>
+        </div>
+
+        <div class="field" style="margin-top:16px;">
+          <label for="inputBox" id="inputLabel">Text to Encrypt</label>
+          <textarea id="inputBox" placeholder="Type or paste your text here…" style="min-height:140px;"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="passwordInput">Password</label>
+          <input type="password" id="passwordInput" placeholder="Enter a password" />
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="runBtn">Encrypt</button>
+          <button class="btn btn-secondary" id="copyBtn">Copy Result</button>
+        </div>
+        <div class="copy-note" id="copyNote"></div>
+
+        <div class="output-box" id="statusBox"></div>
+
+        <div class="field" style="margin-top:16px;">
+          <label for="outputBox">Result</label>
+          <textarea id="outputBox" readonly style="min-height:140px;font-family:var(--font-mono,monospace);"></textarea>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Encrypt or Decrypt Text</h2>
+        <ol class="howto-steps">
+          <li>Choose "Encrypt" or "Decrypt" using the pills.</li>
+          <li>Paste your text (or, for decrypting, the encrypted output from before).</li>
+          <li>Enter the password to use.</li>
+          <li>Click the button, then copy the result.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Is this real encryption, or something like ROT13 or Base64?</summary>
+          <p>It's real encryption — AES-256-GCM, a modern, widely trusted encryption standard, performed using your browser's built-in Web Crypto API. This is fundamentally different from ROT13 or Base64, which are simple, reversible encodings that provide no actual security and can be undone by anyone with no password required.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What happens if I forget the password I encrypted something with?</summary>
+          <p>The text can't be recovered. There's no password reset, backdoor, or master key — the encryption key is derived directly from your password and nothing else is stored anywhere. This is the intended, correct behavior of real encryption; losing the password means losing access to the data, by design.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my text or password ever sent to a server?</summary>
+          <p>No. Encryption and decryption both happen entirely inside your browser using the Web Crypto API — neither your plain text, your password, nor the encrypted result is ever transmitted anywhere.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why does the encrypted output look different every time, even with the same text and password?</summary>
+          <p>A new random salt and initialization vector (IV) are generated for every encryption, then bundled with the ciphertext in the output. This is a deliberate, standard security practice — it prevents identical plaintext from ever producing identical ciphertext, which would otherwise leak information to an observer.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="password-generator">
+            <span class="icon" aria-hidden="true">🔐</span>
+            <h3>Password Generator</h3>
+            <p>Generate a strong password to encrypt with.</p>
+          </a>
+          <a class="card" href="hash-generator">
+            <span class="icon" aria-hidden="true">#️⃣</span>
+            <h3>Hash Generator</h3>
+            <p>Generate a one-way hash instead of reversible encryption.</p>
+          </a>
+          <a class="card" href="rot13-caesar-cipher">
+            <span class="icon" aria-hidden="true">🔐</span>
+            <h3>ROT13 / Caesar Cipher</h3>
+            <p>A classic (and completely insecure) cipher, for comparison.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var modePills = document.getElementById("modePills");
+      var inputBox = document.getElementById("inputBox");
+      var inputLabel = document.getElementById("inputLabel");
+      var passwordInput = document.getElementById("passwordInput");
+      var runBtn = document.getElementById("runBtn");
+      var copyBtn = document.getElementById("copyBtn");
+      var copyNote = document.getElementById("copyNote");
+      var statusBox = document.getElementById("statusBox");
+      var outputBox = document.getElementById("outputBox");
+
+      var mode = "encrypt";
+
+      modePills.addEventListener("click", function (e) {
+        var btn = e.target.closest(".pill");
+        if (!btn) return;
+        mode = btn.getAttribute("data-mode");
+        Array.prototype.forEach.call(modePills.querySelectorAll(".pill"), function (p) {
+          p.classList.toggle("active", p === btn);
+        });
+        inputLabel.textContent = mode === "encrypt" ? "Text to Encrypt" : "Encrypted Text to Decrypt";
+        runBtn.textContent = mode === "encrypt" ? "Encrypt" : "Decrypt";
+        outputBox.value = "";
+        statusBox.textContent = "";
+      });
+
+      function bufToBase64(buf) {
+        var bytes = new Uint8Array(buf);
+        var binary = "";
+        for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+        return btoa(binary);
+      }
+
+      function base64ToBuf(b64) {
+        var binary = atob(b64);
+        var bytes = new Uint8Array(binary.length);
+        for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+        return bytes;
+      }
+
+      async function deriveKey(password, salt) {
+        var baseKey = await crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveKey"]);
+        return crypto.subtle.deriveKey(
+          { name: "PBKDF2", salt: salt, iterations: 150000, hash: "SHA-256" },
+          baseKey,
+          { name: "AES-GCM", length: 256 },
+          false,
+          ["encrypt", "decrypt"]
+        );
+      }
+
+      async function encryptText(text, password) {
+        var salt = crypto.getRandomValues(new Uint8Array(16));
+        var iv = crypto.getRandomValues(new Uint8Array(12));
+        var key = await deriveKey(password, salt);
+        var ciphertext = await crypto.subtle.encrypt({ name: "AES-GCM", iv: iv }, key, new TextEncoder().encode(text));
+        var combined = new Uint8Array(salt.length + iv.length + ciphertext.byteLength);
+        combined.set(salt, 0);
+        combined.set(iv, salt.length);
+        combined.set(new Uint8Array(ciphertext), salt.length + iv.length);
+        return bufToBase64(combined);
+      }
+
+      async function decryptText(encoded, password) {
+        var combined = base64ToBuf(encoded);
+        var salt = combined.slice(0, 16);
+        var iv = combined.slice(16, 28);
+        var ciphertext = combined.slice(28);
+        var key = await deriveKey(password, salt);
+        var plainBuffer = await crypto.subtle.decrypt({ name: "AES-GCM", iv: iv }, key, ciphertext);
+        return new TextDecoder().decode(plainBuffer);
+      }
+
+      runBtn.addEventListener("click", async function () {
+        var text = inputBox.value;
+        var password = passwordInput.value;
+        if (!text) { statusBox.textContent = "Enter some text first."; return; }
+        if (!password) { statusBox.textContent = "Enter a password first."; return; }
+
+        outputBox.value = "";
+        statusBox.textContent = mode === "encrypt" ? "Encrypting…" : "Decrypting…";
+
+        try {
+          if (mode === "encrypt") {
+            outputBox.value = await encryptText(text, password);
+            statusBox.textContent = "Done! Copy the encrypted text below.";
+          } else {
+            outputBox.value = await decryptText(text.trim(), password);
+            statusBox.textContent = "Done! Decrypted successfully.";
+          }
+        } catch (err) {
+          statusBox.textContent = mode === "encrypt"
+            ? "Something went wrong encrypting that text."
+            : "Couldn't decrypt — check that the password is correct and the text wasn't altered.";
+        }
+      });
+
+      copyBtn.addEventListener("click", function () {
+        Fixora.copyText(outputBox.value, copyNote);
+      });
+    })();
+  </script>
+</body>
+</html>

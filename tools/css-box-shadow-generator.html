@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free CSS Box Shadow Generator Online — Live Preview | Fixoona</title>
+  <meta name="description" content="Create a CSS box-shadow online for free with a live preview and up to 3 layered shadows, then copy the ready-to-paste CSS code. No sign-up." />
+  <meta name="keywords" content="css box shadow generator, box shadow css code, multiple box shadow generator free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/css-box-shadow-generator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free CSS Box Shadow Generator" />
+  <meta property="og:description" content="Build a layered CSS box-shadow with a live preview, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/css-box-shadow-generator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free CSS Box Shadow Generator" />
+  <meta name="twitter:description" content="Build a layered CSS box-shadow with a live preview, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "CSS Box Shadow Generator",
+    "url": "https://fixoona.com/tools/css-box-shadow-generator",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "CSS Box Shadow Generator", "item": "https://fixoona.com/tools/css-box-shadow-generator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What do the X and Y offset values control?",
+        "acceptedAnswer": { "@type": "Answer", "text": "X offset shifts the shadow left (negative) or right (positive); Y offset shifts it up (negative) or down (positive). Together they control the direction the shadow appears to be cast in, simulating a light source from the opposite direction." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between blur and spread?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Blur softens the shadow's edges, spreading it into a gradient fade — higher blur looks softer and more diffuse. Spread instead grows or shrinks the shadow's actual size uniformly in every direction before any blur is applied, similar to how spread works on a light source's radius." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the \"inset\" option do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A normal box-shadow appears outside the element's edges, like a drop shadow. Inset flips it to render inside the element's boundary instead, creating a pressed-in or recessed look rather than a raised one." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I combine multiple shadows on one element?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — CSS box-shadow accepts a comma-separated list of shadow definitions, all rendered on the same element at once. This is commonly used to combine a soft, large ambient shadow with a tighter, sharper one for a more realistic layered depth effect." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .bs-preview-wrap {
+      background: var(--color-bg-alt, #f3f4f6);
+      border-radius: var(--radius-sm);
+      padding: 50px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 16px;
+    }
+    .bs-preview-box {
+      width: 140px;
+      height: 140px;
+      background: var(--color-surface);
+      border-radius: 12px;
+    }
+    .bs-layer {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>CSS Box Shadow Generator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🌓</div>
+      <h1>CSS Box Shadow Generator</h1>
+      <p>Build a layered box-shadow with a live preview, then copy the ready-to-paste CSS.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="bs-preview-wrap">
+          <div class="bs-preview-box" id="previewBox"></div>
+        </div>
+
+        <div id="layersArea"></div>
+
+        <div class="actions">
+          <button class="btn btn-secondary" id="addLayerBtn">+ Add Another Shadow</button>
+          <button class="btn btn-secondary" id="copyBtn">Copy CSS</button>
+        </div>
+        <div class="copy-note" id="copyNote"></div>
+
+        <div class="field" style="margin-top:16px;">
+          <label for="cssOutput">CSS Code</label>
+          <textarea id="cssOutput" readonly style="min-height:90px;font-family:var(--font-mono,monospace);"></textarea>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Build a Box Shadow</h2>
+        <ol class="howto-steps">
+          <li>Adjust the offset, blur, spread, color, and opacity sliders — the preview updates live.</li>
+          <li>Toggle "Inset" for a recessed, pressed-in look instead of a drop shadow.</li>
+          <li>Click "+ Add Another Shadow" to layer a second or third shadow on top.</li>
+          <li>Click "Copy CSS" to grab the finished code.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What do the X and Y offset values control?</summary>
+          <p>X offset shifts the shadow left (negative) or right (positive); Y offset shifts it up (negative) or down (positive). Together they control the direction the shadow appears to be cast in, simulating a light source from the opposite direction.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What's the difference between blur and spread?</summary>
+          <p>Blur softens the shadow's edges, spreading it into a gradient fade — higher blur looks softer and more diffuse. Spread instead grows or shrinks the shadow's actual size uniformly in every direction before any blur is applied, similar to how spread works on a light source's radius.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the "inset" option do?</summary>
+          <p>A normal box-shadow appears outside the element's edges, like a drop shadow. Inset flips it to render inside the element's boundary instead, creating a pressed-in or recessed look rather than a raised one.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I combine multiple shadows on one element?</summary>
+          <p>Yes — CSS box-shadow accepts a comma-separated list of shadow definitions, all rendered on the same element at once. This is commonly used to combine a soft, large ambient shadow with a tighter, sharper one for a more realistic layered depth effect.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="css-gradient-generator">
+            <span class="icon" aria-hidden="true">🎨</span>
+            <h3>CSS Gradient Generator</h3>
+            <p>Build linear, radial, and conic gradients.</p>
+          </a>
+          <a class="card" href="color-converter">
+            <span class="icon" aria-hidden="true">🎨</span>
+            <h3>Color Converter</h3>
+            <p>Convert between HEX, RGB, and HSL.</p>
+          </a>
+          <a class="card" href="../blog/css-gradients-guide">
+            <span class="icon" aria-hidden="true">🎨</span>
+            <h3>Guide: CSS Gradients Explained</h3>
+            <p>Linear, radial, and conic gradients, and color stops.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var layersArea = document.getElementById("layersArea");
+      var addLayerBtn = document.getElementById("addLayerBtn");
+      var copyBtn = document.getElementById("copyBtn");
+      var copyNote = document.getElementById("copyNote");
+      var cssOutput = document.getElementById("cssOutput");
+      var previewBox = document.getElementById("previewBox");
+
+      var layers = [
+        { x: 0, y: 10, blur: 20, spread: 0, color: "#000000", opacity: 25, inset: false }
+      ];
+
+      function hexToRgba(hex, opacityPct) {
+        var r = parseInt(hex.slice(1, 3), 16);
+        var g = parseInt(hex.slice(3, 5), 16);
+        var b = parseInt(hex.slice(5, 7), 16);
+        return "rgba(" + r + ", " + g + ", " + b + ", " + (opacityPct / 100) + ")";
+      }
+
+      function buildShadowValue(layer) {
+        return (layer.inset ? "inset " : "") + layer.x + "px " + layer.y + "px " + layer.blur + "px " + layer.spread + "px " + hexToRgba(layer.color, layer.opacity);
+      }
+
+      function render() {
+        var cssValue = layers.map(buildShadowValue).join(",\n  ");
+        previewBox.style.boxShadow = layers.map(buildShadowValue).join(", ");
+        cssOutput.value = "box-shadow:\n  " + cssValue + ";";
+
+        layersArea.innerHTML = "";
+        layers.forEach(function (layer, idx) {
+          var div = document.createElement("div");
+          div.className = "bs-layer";
+          div.innerHTML =
+            '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">' +
+            "<strong>Shadow " + (idx + 1) + "</strong>" +
+            (layers.length > 1 ? '<button type="button" class="btn btn-secondary" data-remove="' + idx + '" style="padding:4px 10px;font-size:0.8rem;">Remove</button>' : "") +
+            "</div>" +
+            '<div class="row">' +
+            '<div class="field"><label>X Offset: <span data-label="x">' + layer.x + "</span>px</label><input type=\"range\" min=\"-50\" max=\"50\" value=\"" + layer.x + "\" data-field=\"x\" data-idx=\"" + idx + "\" style=\"width:100%;\" /></div>" +
+            '<div class="field"><label>Y Offset: <span data-label="y">' + layer.y + "</span>px</label><input type=\"range\" min=\"-50\" max=\"50\" value=\"" + layer.y + "\" data-field=\"y\" data-idx=\"" + idx + "\" style=\"width:100%;\" /></div>" +
+            "</div>" +
+            '<div class="row">' +
+            '<div class="field"><label>Blur: <span data-label="blur">' + layer.blur + "</span>px</label><input type=\"range\" min=\"0\" max=\"100\" value=\"" + layer.blur + "\" data-field=\"blur\" data-idx=\"" + idx + "\" style=\"width:100%;\" /></div>" +
+            '<div class="field"><label>Spread: <span data-label="spread">' + layer.spread + "</span>px</label><input type=\"range\" min=\"-30\" max=\"30\" value=\"" + layer.spread + "\" data-field=\"spread\" data-idx=\"" + idx + "\" style=\"width:100%;\" /></div>" +
+            "</div>" +
+            '<div class="row">' +
+            '<div class="field"><label>Color</label><input type="color" value="' + layer.color + '" data-field="color" data-idx="' + idx + '" style="width:100%;height:40px;border:1px solid var(--color-border);border-radius:8px;cursor:pointer;" /></div>' +
+            '<div class="field"><label>Opacity: <span data-label="opacity">' + layer.opacity + '</span>%</label><input type="range" min="0" max="100" value="' + layer.opacity + '" data-field="opacity" data-idx="' + idx + '" style="width:100%;" /></div>' +
+            "</div>" +
+            '<label style="display:flex;align-items:center;gap:8px;font-weight:500;margin-top:8px;"><input type="checkbox" data-field="inset" data-idx="' + idx + '" style="width:auto;" ' + (layer.inset ? "checked" : "") + " /> Inset</label>";
+          layersArea.appendChild(div);
+        });
+      }
+
+      layersArea.addEventListener("input", function (e) {
+        var field = e.target.getAttribute("data-field");
+        var idx = e.target.getAttribute("data-idx");
+        if (field === null || idx === null) return;
+        idx = parseInt(idx, 10);
+        var value = e.target.type === "checkbox" ? e.target.checked : (e.target.type === "color" ? e.target.value : parseInt(e.target.value, 10));
+        layers[idx][field] = value;
+        var labelSpan = e.target.parentElement.querySelector('[data-label="' + field + '"]');
+        if (labelSpan) labelSpan.textContent = value;
+        render();
+      });
+
+      layersArea.addEventListener("click", function (e) {
+        var btn = e.target.closest("[data-remove]");
+        if (!btn) return;
+        layers.splice(parseInt(btn.getAttribute("data-remove"), 10), 1);
+        render();
+      });
+
+      addLayerBtn.addEventListener("click", function () {
+        if (layers.length >= 3) return;
+        layers.push({ x: 0, y: 4, blur: 12, spread: 0, color: "#000000", opacity: 15, inset: false });
+        render();
+      });
+
+      copyBtn.addEventListener("click", function () {
+        Fixora.copyText(cssOutput.value, copyNote);
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>
