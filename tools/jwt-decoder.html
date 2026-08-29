@@ -79,6 +79,52 @@
     ]
   }
   </script>
+
+  <style>
+    .jwt-segments {
+      font-family: var(--font-mono, monospace);
+      font-size: 0.82rem;
+      line-height: 1.7;
+      word-break: break-all;
+      background: var(--color-bg-alt);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      margin-top: 10px;
+    }
+    .jwt-seg-header { color: #ef4444; font-weight: 700; }
+    .jwt-seg-payload { color: var(--color-violet); font-weight: 700; }
+    .jwt-seg-signature { color: var(--color-accent); font-weight: 700; }
+    .jwt-seg-dot { color: var(--color-text-muted); }
+    .jwt-part-card { border-radius: var(--radius-sm); border: 1px solid var(--color-border); overflow: hidden; }
+    .jwt-part-head {
+      padding: 8px 12px;
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #fff;
+    }
+    .jwt-part-head.header { background: #ef4444; }
+    .jwt-part-head.payload { background: var(--color-violet); }
+    .jwt-part-card textarea {
+      border: none;
+      border-radius: 0;
+      margin: 0;
+    }
+    .jwt-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+    .jwt-status-badge.ok { background: rgba(22, 163, 74, 0.12); color: var(--color-success); }
+    .jwt-status-badge.warn { background: rgba(217, 119, 6, 0.12); color: #d97706; }
+    .jwt-status-badge.err { background: rgba(220, 38, 38, 0.12); color: var(--color-danger); }
+    .jwt-status-badge.neutral { background: var(--color-bg-alt); color: var(--color-text-muted); }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -126,6 +172,8 @@
           <textarea id="jwtInput" placeholder="Paste your JWT here, e.g. eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." style="min-height:100px;"></textarea>
         </div>
 
+        <div class="jwt-segments" id="tokenSegments" aria-hidden="true"></div>
+
         <div class="row">
           <div class="field">
             <label for="secretInput">HMAC Secret (optional, to verify signature)</label>
@@ -133,15 +181,15 @@
           </div>
         </div>
 
-        <div class="output-box" id="statusBox"></div>
+        <div class="jwt-status-badge neutral" id="statusBox"></div>
 
         <div class="row" style="margin-top:16px;">
-          <div class="field">
-            <label for="headerBox">Header</label>
+          <div class="field jwt-part-card">
+            <div class="jwt-part-head header">Header</div>
             <textarea id="headerBox" readonly style="min-height:140px;font-family:var(--font-mono,monospace);"></textarea>
           </div>
-          <div class="field">
-            <label for="payloadBox">Payload</label>
+          <div class="field jwt-part-card">
+            <div class="jwt-part-head payload">Payload</div>
             <textarea id="payloadBox" readonly style="min-height:140px;font-family:var(--font-mono,monospace);"></textarea>
           </div>
         </div>
@@ -259,6 +307,16 @@
       var headerBox = document.getElementById("headerBox");
       var payloadBox = document.getElementById("payloadBox");
       var expiryBox = document.getElementById("expiryBox");
+      var tokenSegments = document.getElementById("tokenSegments");
+
+      function escapeHtml(s) {
+        return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      }
+
+      function setStatus(text, level) {
+        statusBox.textContent = text;
+        statusBox.className = "jwt-status-badge " + (level || "neutral");
+      }
 
       function base64UrlDecode(str) {
         var padded = str.replace(/-/g, "+").replace(/_/g, "/");
@@ -310,22 +368,30 @@
         headerBox.value = "";
         payloadBox.value = "";
         expiryBox.textContent = "";
-        statusBox.textContent = "";
+        setStatus("", "neutral");
+        tokenSegments.innerHTML = "";
 
         if (!token) return;
 
         var parts = token.split(".");
         if (parts.length !== 3) {
-          statusBox.textContent = "That doesn't look like a valid JWT — expected 3 dot-separated parts (header.payload.signature).";
+          setStatus("That doesn't look like a valid JWT — expected 3 dot-separated parts (header.payload.signature).", "err");
           return;
         }
+
+        tokenSegments.innerHTML =
+          '<span class="jwt-seg-header">' + escapeHtml(parts[0]) + "</span>" +
+          '<span class="jwt-seg-dot">.</span>' +
+          '<span class="jwt-seg-payload">' + escapeHtml(parts[1]) + "</span>" +
+          '<span class="jwt-seg-dot">.</span>' +
+          '<span class="jwt-seg-signature">' + escapeHtml(parts[2]) + "</span>";
 
         var header, payload;
         try {
           header = JSON.parse(base64UrlDecode(parts[0]));
           payload = JSON.parse(base64UrlDecode(parts[1]));
         } catch (e) {
-          statusBox.textContent = "Couldn't decode that token — it may be malformed or not a real JWT.";
+          setStatus("Couldn't decode that token — it may be malformed or not a real JWT.", "err");
           return;
         }
 
@@ -345,14 +411,14 @@
           var signingInput = parts[0] + "." + parts[1];
           var result = await verifySignature(header.alg, secret, signingInput, parts[2]);
           if (!result.supported) {
-            statusBox.textContent = "Decoded successfully. Signature verification isn't supported for algorithm \"" + header.alg + "\" (only HS256/HS384/HS512 are supported).";
+            setStatus("Decoded successfully. Signature verification isn't supported for algorithm \"" + header.alg + "\" (only HS256/HS384/HS512 are supported).", "warn");
           } else if (result.valid) {
-            statusBox.textContent = "Decoded successfully. Signature is VALID for the secret provided.";
+            setStatus("Decoded successfully. Signature is VALID for the secret provided.", "ok");
           } else {
-            statusBox.textContent = "Decoded successfully. Signature does NOT match the secret provided.";
+            setStatus("Decoded successfully. Signature does NOT match the secret provided.", "err");
           }
         } else {
-          statusBox.textContent = "Decoded successfully. Enter the HMAC secret above to verify the signature.";
+          setStatus("Decoded successfully. Enter the HMAC secret above to verify the signature.", "neutral");
         }
       }
 

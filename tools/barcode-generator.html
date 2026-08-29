@@ -79,6 +79,20 @@
     ]
   }
   </script>
+
+  <style>
+    .bc-format-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+    .bc-preview-card {
+      background: #fff;
+      border-radius: var(--radius-sm);
+      padding: 24px 20px;
+      margin-top: 16px;
+      text-align: center;
+      overflow-x: auto;
+      box-shadow: var(--shadow-sm);
+      border: 1px dashed var(--color-border);
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -121,23 +135,22 @@
 
     <section class="container">
       <div class="tool-panel">
-        <div class="row">
-          <div class="field">
-            <label for="dataInput">Data to Encode</label>
-            <input type="text" id="dataInput" value="123456789012" />
-          </div>
-          <div class="field">
-            <label for="formatSelect">Format</label>
-            <select id="formatSelect">
-              <option value="CODE128">CODE128 (any text)</option>
-              <option value="EAN13">EAN-13 (13 digits)</option>
-              <option value="UPC">UPC-A (12 digits)</option>
-              <option value="CODE39">CODE39</option>
-              <option value="ITF14">ITF-14 (14 digits)</option>
-              <option value="MSI">MSI</option>
-              <option value="pharmacode">Pharmacode</option>
-              <option value="codabar">Codabar</option>
-            </select>
+        <div class="field">
+          <label for="dataInput">Data to Encode</label>
+          <input type="text" id="dataInput" value="123456789012" />
+        </div>
+
+        <div class="field">
+          <label id="formatGroupLabel">Format</label>
+          <div class="bc-format-row" id="formatPills" role="group" aria-labelledby="formatGroupLabel">
+            <button type="button" class="pill active" data-format="CODE128">CODE128</button>
+            <button type="button" class="pill" data-format="EAN13">EAN-13</button>
+            <button type="button" class="pill" data-format="UPC">UPC-A</button>
+            <button type="button" class="pill" data-format="CODE39">CODE39</button>
+            <button type="button" class="pill" data-format="ITF14">ITF-14</button>
+            <button type="button" class="pill" data-format="MSI">MSI</button>
+            <button type="button" class="pill" data-format="pharmacode">Pharmacode</button>
+            <button type="button" class="pill" data-format="codabar">Codabar</button>
           </div>
         </div>
 
@@ -151,7 +164,7 @@
           </div>
         </div>
 
-        <div style="background:#fff;padding:20px;border-radius:var(--radius-sm);margin-top:16px;text-align:center;overflow-x:auto;">
+        <div class="bc-preview-card">
           <canvas id="barcodeCanvas"></canvas>
         </div>
 
@@ -268,12 +281,13 @@
       "use strict";
 
       var dataInput = document.getElementById("dataInput");
-      var formatSelect = document.getElementById("formatSelect");
+      var formatPills = document.getElementById("formatPills");
       var showValueCheck = document.getElementById("showValueCheck");
       var barColor = document.getElementById("barColor");
       var canvas = document.getElementById("barcodeCanvas");
       var statusBox = document.getElementById("statusBox");
       var downloadBtn = document.getElementById("downloadBtn");
+      var currentFormat = "CODE128";
 
       function generate() {
         var value = dataInput.value;
@@ -285,7 +299,7 @@
         }
         try {
           JsBarcode(canvas, value, {
-            format: formatSelect.value,
+            format: currentFormat,
             displayValue: showValueCheck.checked,
             lineColor: barColor.value,
             background: "#ffffff",
@@ -301,14 +315,22 @@
           downloadBtn.style.pointerEvents = "auto";
           downloadBtn.style.opacity = "1";
         } catch (err) {
-          statusBox.textContent = "That value isn't valid for the " + formatSelect.value + " format — check the length and allowed characters.";
+          statusBox.textContent = "That value isn't valid for the " + currentFormat + " format — check the length and allowed characters.";
           downloadBtn.style.pointerEvents = "none";
           downloadBtn.style.opacity = "0.5";
         }
       }
 
       dataInput.addEventListener("input", generate);
-      formatSelect.addEventListener("change", generate);
+      formatPills.addEventListener("click", function (e) {
+        var btn = e.target.closest(".pill");
+        if (!btn) return;
+        currentFormat = btn.getAttribute("data-format");
+        Array.prototype.forEach.call(formatPills.querySelectorAll(".pill"), function (p) {
+          p.classList.toggle("active", p === btn);
+        });
+        generate();
+      });
       showValueCheck.addEventListener("change", generate);
       barColor.addEventListener("input", generate);
 

@@ -79,6 +79,18 @@
     ]
   }
   </script>
+
+  <style>
+    .te-icon { font-size: 2.4rem; text-align: center; margin-bottom: 8px; }
+    .te-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+    }
+    .te-status.ok { background: rgba(22, 163, 74, 0.12); color: var(--color-success); }
+    .te-status.err { background: rgba(220, 38, 38, 0.12); color: var(--color-danger); }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -121,6 +133,7 @@
 
     <section class="container">
       <div class="tool-panel">
+        <div class="te-icon" id="modeIcon" aria-hidden="true">🔒</div>
         <div class="pill-row" id="modePills">
           <button class="pill active" data-mode="encrypt" type="button">Encrypt</button>
           <button class="pill" data-mode="decrypt" type="button">Decrypt</button>
@@ -142,7 +155,7 @@
         </div>
         <div class="copy-note" id="copyNote"></div>
 
-        <div class="output-box" id="statusBox"></div>
+        <div class="output-box te-status" id="statusBox"></div>
 
         <div class="field" style="margin-top:16px;">
           <label for="outputBox">Result</label>
@@ -263,8 +276,14 @@
       var copyNote = document.getElementById("copyNote");
       var statusBox = document.getElementById("statusBox");
       var outputBox = document.getElementById("outputBox");
+      var modeIcon = document.getElementById("modeIcon");
 
       var mode = "encrypt";
+
+      function setStatus(text, level) {
+        statusBox.textContent = text;
+        statusBox.className = "output-box te-status" + (level ? " " + level : "");
+      }
 
       modePills.addEventListener("click", function (e) {
         var btn = e.target.closest(".pill");
@@ -275,8 +294,9 @@
         });
         inputLabel.textContent = mode === "encrypt" ? "Text to Encrypt" : "Encrypted Text to Decrypt";
         runBtn.textContent = mode === "encrypt" ? "Encrypt" : "Decrypt";
+        modeIcon.textContent = mode === "encrypt" ? "🔒" : "🔓";
         outputBox.value = "";
-        statusBox.textContent = "";
+        setStatus("", "");
       });
 
       function bufToBase64(buf) {
@@ -329,24 +349,24 @@
       runBtn.addEventListener("click", async function () {
         var text = inputBox.value;
         var password = passwordInput.value;
-        if (!text) { statusBox.textContent = "Enter some text first."; return; }
-        if (!password) { statusBox.textContent = "Enter a password first."; return; }
+        if (!text) { setStatus("Enter some text first.", ""); return; }
+        if (!password) { setStatus("Enter a password first.", ""); return; }
 
         outputBox.value = "";
-        statusBox.textContent = mode === "encrypt" ? "Encrypting…" : "Decrypting…";
+        setStatus(mode === "encrypt" ? "Encrypting…" : "Decrypting…", "");
 
         try {
           if (mode === "encrypt") {
             outputBox.value = await encryptText(text, password);
-            statusBox.textContent = "Done! Copy the encrypted text below.";
+            setStatus("Done! Copy the encrypted text below.", "ok");
           } else {
             outputBox.value = await decryptText(text.trim(), password);
-            statusBox.textContent = "Done! Decrypted successfully.";
+            setStatus("Done! Decrypted successfully.", "ok");
           }
         } catch (err) {
-          statusBox.textContent = mode === "encrypt"
+          setStatus(mode === "encrypt"
             ? "Something went wrong encrypting that text."
-            : "Couldn't decrypt — check that the password is correct and the text wasn't altered.";
+            : "Couldn't decrypt — check that the password is correct and the text wasn't altered.", "err");
         }
       });
 

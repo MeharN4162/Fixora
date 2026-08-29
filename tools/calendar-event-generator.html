@@ -79,6 +79,49 @@
     ]
   }
   </script>
+
+  <style>
+    .cal-preview-card {
+      display: flex;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      margin-top: 16px;
+    }
+    .cal-preview-date {
+      background: var(--gradient-primary);
+      color: #fff;
+      padding: 16px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 90px;
+      flex-shrink: 0;
+    }
+    .cal-preview-date .cal-month {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.9;
+    }
+    .cal-preview-date .cal-day {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+    .cal-preview-body { padding: 16px 18px; flex: 1; min-width: 0; }
+    .cal-preview-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 8px; word-break: break-word; }
+    .cal-preview-meta {
+      color: var(--color-text-muted);
+      font-size: 0.88rem;
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+      margin-bottom: 4px;
+      word-break: break-word;
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -145,6 +188,18 @@
         </div>
 
         <div class="output-box" id="statusBox"></div>
+
+        <div class="cal-preview-card" id="previewCard" style="display:none;">
+          <div class="cal-preview-date">
+            <div class="cal-month" id="previewMonth"></div>
+            <div class="cal-day" id="previewDay"></div>
+          </div>
+          <div class="cal-preview-body">
+            <div class="cal-preview-title" id="previewTitle"></div>
+            <div class="cal-preview-meta">🕐 <span id="previewTime"></span></div>
+            <div class="cal-preview-meta" id="previewLocationRow" style="display:none;">📍 <span id="previewLocation"></span></div>
+          </div>
+        </div>
 
         <div class="actions">
           <a class="btn btn-primary" id="downloadBtn" download="event.ics">Download .ics File</a>
@@ -261,7 +316,44 @@
       var descInput = document.getElementById("descInput");
       var statusBox = document.getElementById("statusBox");
       var downloadBtn = document.getElementById("downloadBtn");
+      var previewCard = document.getElementById("previewCard");
+      var previewMonth = document.getElementById("previewMonth");
+      var previewDay = document.getElementById("previewDay");
+      var previewTitle = document.getElementById("previewTitle");
+      var previewTime = document.getElementById("previewTime");
+      var previewLocationRow = document.getElementById("previewLocationRow");
+      var previewLocation = document.getElementById("previewLocation");
       var lastUrl = null;
+
+      var MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+      function formatClockTime(d) {
+        var h = d.getHours();
+        var m = d.getMinutes();
+        var ampm = h >= 12 ? "PM" : "AM";
+        h = h % 12 || 12;
+        return h + ":" + (m < 10 ? "0" + m : m) + " " + ampm;
+      }
+
+      function updatePreview(title, start, end, location) {
+        if (!title || !start || !end) {
+          previewCard.style.display = "none";
+          return;
+        }
+        var startDate = new Date(start);
+        var endDate = new Date(end);
+        previewCard.style.display = "flex";
+        previewMonth.textContent = MONTH_NAMES[startDate.getMonth()];
+        previewDay.textContent = startDate.getDate();
+        previewTitle.textContent = title;
+        previewTime.textContent = formatClockTime(startDate) + " – " + formatClockTime(endDate);
+        if (location) {
+          previewLocationRow.style.display = "flex";
+          previewLocation.textContent = location;
+        } else {
+          previewLocationRow.style.display = "none";
+        }
+      }
 
       function now() {
         var d = new Date();
@@ -328,6 +420,7 @@
 
       function updateDownload() {
         var ics = generate();
+        updatePreview(titleInput.value.trim(), startDate.value, endDate.value, locationInput.value.trim());
         if (!ics) {
           downloadBtn.removeAttribute("href");
           return;

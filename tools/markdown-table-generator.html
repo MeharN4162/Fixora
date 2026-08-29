@@ -79,6 +79,34 @@
     ]
   }
   </script>
+
+  <style>
+    .mdt-preview-card {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      margin-top: 16px;
+    }
+    .mdt-preview-label {
+      background: var(--color-bg-alt);
+      padding: 8px 14px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+    }
+    .mdt-preview-scroll { overflow-x: auto; }
+    .mdt-preview-table { width: 100%; border-collapse: collapse; }
+    .mdt-preview-table th, .mdt-preview-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+    .mdt-preview-table th { background: var(--color-surface-2); font-weight: 700; }
+    .mdt-preview-table tr:last-child td { border-bottom: none; }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -138,6 +166,11 @@
           <button class="btn btn-secondary" id="copyBtn">Copy Markdown</button>
         </div>
         <div class="copy-note" id="copyNote"></div>
+
+        <div class="mdt-preview-card">
+          <div class="mdt-preview-label">Live Preview</div>
+          <div class="mdt-preview-scroll"><table class="mdt-preview-table" id="previewTable"></table></div>
+        </div>
 
         <div class="field" style="margin-top:16px;">
           <label for="outputBox">Markdown Code</label>
@@ -255,6 +288,28 @@
       var outputBox = document.getElementById("outputBox");
       var copyBtn = document.getElementById("copyBtn");
       var copyNote = document.getElementById("copyNote");
+      var previewTable = document.getElementById("previewTable");
+
+      function escapeHtml(s) {
+        return (s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      }
+
+      function renderPreview() {
+        var html = "<thead><tr>";
+        headers.forEach(function (h, c) {
+          html += '<th style="text-align:' + aligns[c] + ';">' + escapeHtml(h) + "</th>";
+        });
+        html += "</tr></thead><tbody>";
+        data.forEach(function (row) {
+          html += "<tr>";
+          row.forEach(function (cell, c) {
+            html += '<td style="text-align:' + aligns[c] + ';">' + escapeHtml(cell) + "</td>";
+          });
+          html += "</tr>";
+        });
+        html += "</tbody>";
+        previewTable.innerHTML = html;
+      }
 
       var headers = ["Name", "Role", "Location"];
       var aligns = ["left", "left", "left"];
@@ -347,12 +402,14 @@
           data[parseInt(target.getAttribute("data-row"), 10)][parseInt(target.getAttribute("data-col"), 10)] = target.value;
         }
         buildMarkdown();
+        renderPreview();
       });
 
       gridArea.addEventListener("change", function (e) {
         if (e.target.hasAttribute("data-align")) {
           aligns[parseInt(e.target.getAttribute("data-align"), 10)] = e.target.value;
           buildMarkdown();
+          renderPreview();
         }
       });
 
@@ -364,6 +421,7 @@
 
       resize();
       buildMarkdown();
+      renderPreview();
     })();
   </script>
 </body>

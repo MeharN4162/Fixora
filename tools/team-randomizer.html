@@ -79,6 +79,49 @@
     ]
   }
   </script>
+
+  <style>
+    .tr-group-card {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      padding: 18px;
+      background: var(--color-surface);
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+    .tr-group-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--tr-accent, var(--color-primary));
+    }
+    .tr-group-title {
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .tr-group-title .tr-count { color: var(--color-text-muted); font-weight: 500; font-size: 0.85rem; }
+    .tr-member-list { display: flex; flex-direction: column; gap: 8px; }
+    .tr-member { display: flex; align-items: center; gap: 10px; }
+    .tr-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.78rem;
+      color: #fff;
+      flex-shrink: 0;
+      background: var(--tr-accent, var(--color-primary));
+    }
+    .tr-member-name { font-weight: 500; word-break: break-word; }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -279,6 +322,14 @@ Jamie</textarea>
         return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
       }
 
+      var ACCENT_COLORS = ["#2563eb", "#7c3aed", "#d946ef", "#06b6d4", "#16a34a", "#fb7185", "#d97706", "#0ea5e9"];
+
+      function initialsFor(name) {
+        var words = name.trim().split(/\s+/);
+        if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
+        return (words[0][0] + words[1][0]).toUpperCase();
+      }
+
       function randomize() {
         var names = namesInput.value.split("\n").map(function (s) { return s.trim(); }).filter(Boolean);
         var groupCount = parseInt(groupCountInput.value, 10);
@@ -317,10 +368,14 @@ Jamie</textarea>
 
         var html = '<div class="grid reveal-group">';
         groups.forEach(function (group, i) {
-          html += '<div class="card" style="cursor:default;">' +
-            "<h3>Group " + (i + 1) + " (" + group.length + ")</h3>" +
-            "<p>" + group.map(escapeHtml).join("<br>") + "</p>" +
-            "</div>";
+          var accent = ACCENT_COLORS[i % ACCENT_COLORS.length];
+          html += '<div class="tr-group-card" style="--tr-accent:' + accent + ';">' +
+            '<div class="tr-group-title">Group ' + (i + 1) + '<span class="tr-count">(' + group.length + ")</span></div>" +
+            '<div class="tr-member-list">' +
+            group.map(function (name) {
+              return '<div class="tr-member"><span class="tr-avatar">' + escapeHtml(initialsFor(name)) + '</span><span class="tr-member-name">' + escapeHtml(name) + "</span></div>";
+            }).join("") +
+            "</div></div>";
         });
         html += "</div>";
         resultsArea.innerHTML = html;

@@ -79,6 +79,38 @@
     ]
   }
   </script>
+
+  <style>
+    .pp-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      align-items: center;
+    }
+    .pp-chip {
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #fff;
+      line-height: 1.3;
+    }
+    .pp-sep { color: var(--color-text-muted); font-weight: 700; }
+    .pp-entropy-meter {
+      height: 8px;
+      border-radius: 999px;
+      background: var(--color-border);
+      overflow: hidden;
+      margin-top: 10px;
+    }
+    .pp-entropy-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: var(--gradient-primary);
+      transition: width 0.25s ease;
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -121,7 +153,9 @@
 
     <section class="container">
       <div class="tool-panel">
-        <div class="output-box" id="passphraseBox" style="font-size:1.3rem;font-weight:700;text-align:center;padding:24px;"></div>
+        <div class="output-box" style="padding:24px;">
+          <div class="pp-chips" id="passphraseBox"></div>
+        </div>
 
         <div class="row" style="margin-top:16px;">
           <div class="field">
@@ -143,7 +177,10 @@
           <label style="display:flex;align-items:center;gap:8px;font-weight:500;"><input type="checkbox" id="capitalizeCheck" style="width:auto;" /> Capitalize each word</label>
         </div>
 
-        <div class="output-box" id="entropyBox" style="font-size:0.85rem;"></div>
+        <div class="output-box" style="font-size:0.85rem;">
+          <div id="entropyBox"></div>
+          <div class="pp-entropy-meter"><div class="pp-entropy-fill" id="entropyFill"></div></div>
+        </div>
 
         <div class="actions">
           <button class="btn btn-primary" id="generateBtn">Generate New Passphrase</button>
@@ -266,9 +303,17 @@
       var capitalizeCheck = document.getElementById("capitalizeCheck");
       var passphraseBox = document.getElementById("passphraseBox");
       var entropyBox = document.getElementById("entropyBox");
+      var entropyFill = document.getElementById("entropyFill");
       var generateBtn = document.getElementById("generateBtn");
       var copyBtn = document.getElementById("copyBtn");
       var copyNote = document.getElementById("copyNote");
+      var currentPassphrase = "";
+
+      var CHIP_COLORS = ["#2563eb", "#7c3aed", "#d946ef", "#06b6d4", "#16a34a", "#fb7185", "#d97706", "#0ea5e9", "#9333ea", "#059669"];
+
+      function escapeHtml(s) {
+        return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      }
 
       function randomWordIndex() {
         // Rejection sampling against a Uint32 range so every one of the
@@ -292,11 +337,17 @@
           if (capitalizeCheck.checked) w = w.charAt(0).toUpperCase() + w.slice(1);
           words.push(w);
         }
-        passphraseBox.textContent = words.join(sep);
+        currentPassphrase = words.join(sep);
+
+        var sepDisplay = sep === "" ? "" : (sep === " " ? " " : sep);
+        passphraseBox.innerHTML = words.map(function (w, i) {
+          return '<span class="pp-chip" style="background:' + CHIP_COLORS[i % CHIP_COLORS.length] + ';">' + escapeHtml(w) + "</span>";
+        }).join(sepDisplay ? '<span class="pp-sep">' + escapeHtml(sepDisplay) + "</span>" : "");
 
         var bitsPerWord = Math.log2(WORDS.length);
         var totalBits = Math.round(bitsPerWord * count * 10) / 10;
         entropyBox.textContent = "≈ " + totalBits + " bits of entropy (" + count + " words × log₂(" + WORDS.length + ") ≈ " + Math.round(bitsPerWord * 10) / 10 + " bits each)";
+        entropyFill.style.width = Math.min(100, (totalBits / 100) * 100) + "%";
       }
 
       wordCountInput.addEventListener("input", function () {
@@ -307,7 +358,7 @@
       capitalizeCheck.addEventListener("change", generate);
       generateBtn.addEventListener("click", generate);
       copyBtn.addEventListener("click", function () {
-        Fixora.copyText(passphraseBox.textContent, copyNote);
+        Fixora.copyText(currentPassphrase, copyNote);
       });
 
       generate();
