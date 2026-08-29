@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Color Blindness Simulator Online | Fixoona</title>
+  <meta name="description" content="See how an image looks to someone with protanopia, deuteranopia, tritanopia, or full color blindness, online for free. No sign-up, nothing uploaded." />
+  <meta name="keywords" content="color blindness simulator, color blind test image, protanopia simulator, deuteranopia simulator free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/color-blindness-simulator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Color Blindness Simulator" />
+  <meta property="og:description" content="See how an image looks with different types of color blindness, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/color-blindness-simulator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Color Blindness Simulator" />
+  <meta name="twitter:description" content="See how an image looks with different types of color blindness, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Color Blindness Simulator",
+    "url": "https://fixoona.com/tools/color-blindness-simulator",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Color Blindness Simulator", "item": "https://fixoona.com/tools/color-blindness-simulator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What's the difference between protanopia, deuteranopia, and tritanopia?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Protanopia and deuteranopia both affect red-green distinction and together make up the vast majority of color blindness cases, differing in which retinal cone type is missing (long-wavelength for protanopia, medium-wavelength for deuteranopia). Tritanopia is much rarer and affects blue-yellow distinction instead, from a missing short-wavelength cone." }
+      },
+      {
+        "@type": "Question",
+        "name": "How accurate is this simulation?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It uses a published, peer-reviewed color transformation model (Machado, Oliveira, and Fairchild, 2009) applied in linear color space, which is a standard, scientifically grounded approach for simulating full dichromatic color vision. It's a close approximation of full color blindness, not a substitute for actual clinical vision testing." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the color need to be converted to \"linear\" before the transformation is applied?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Standard image colors are stored in sRGB, which applies a gamma curve for efficient storage and isn't linearly proportional to actual light intensity. Color vision transformations are defined in terms of real light intensity, so the colors are converted to linear space, transformed, and converted back to sRGB for accurate results — skipping this step produces a noticeably less accurate simulation." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my image uploaded anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the entire simulation runs on a canvas element directly in your browser, so the image is never sent to a server." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Color Blindness Simulator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">👁️</div>
+      <h1>Color Blindness Simulator</h1>
+      <p>See how an image looks with different types of color vision deficiency.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload a photo">
+          <div class="dz-icon" aria-hidden="true">📤</div>
+          <strong>Click to upload or drag a photo here</strong>
+          <small>JPG, PNG, or WebP</small>
+          <input type="file" id="fileInput" accept="image/*" hidden />
+        </div>
+
+        <div class="pill-row" id="typePills" style="margin-top:16px;">
+          <button class="pill active" data-type="normal" type="button">Normal Vision</button>
+          <button class="pill" data-type="protanopia" type="button">Protanopia</button>
+          <button class="pill" data-type="deuteranopia" type="button">Deuteranopia</button>
+          <button class="pill" data-type="tritanopia" type="button">Tritanopia</button>
+          <button class="pill" data-type="achromatopsia" type="button">Full (Achromatopsia)</button>
+        </div>
+
+        <canvas id="previewCanvas" style="max-width:100%;margin-top:16px;border-radius:var(--radius-sm);border:1px solid var(--color-border);display:none;"></canvas>
+
+        <div class="output-box" id="statusBox"></div>
+
+        <div class="actions">
+          <a class="btn btn-secondary" id="downloadBtn" style="display:none;" download="simulated.png">Download Result</a>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Use the Simulator</h2>
+        <ol class="howto-steps">
+          <li>Upload a photo or design mockup.</li>
+          <li>Click a color vision type to see the simulated result.</li>
+          <li>Download the simulated image if you'd like to save it.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What's the difference between protanopia, deuteranopia, and tritanopia?</summary>
+          <p>Protanopia and deuteranopia both affect red-green distinction and together make up the vast majority of color blindness cases, differing in which retinal cone type is missing (long-wavelength for protanopia, medium-wavelength for deuteranopia). Tritanopia is much rarer and affects blue-yellow distinction instead, from a missing short-wavelength cone.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How accurate is this simulation?</summary>
+          <p>It uses a published, peer-reviewed color transformation model (Machado, Oliveira, and Fairchild, 2009) applied in linear color space, which is a standard, scientifically grounded approach for simulating full dichromatic color vision. It's a close approximation of full color blindness, not a substitute for actual clinical vision testing.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why does the color need to be converted to "linear" before the transformation is applied?</summary>
+          <p>Standard image colors are stored in sRGB, which applies a gamma curve for efficient storage and isn't linearly proportional to actual light intensity. Color vision transformations are defined in terms of real light intensity, so the colors are converted to linear space, transformed, and converted back to sRGB for accurate results — skipping this step produces a noticeably less accurate simulation.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my image uploaded anywhere?</summary>
+          <p>No — the entire simulation runs on a canvas element directly in your browser, so the image is never sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="color-converter">
+            <span class="icon" aria-hidden="true">🎨</span>
+            <h3>Color Converter</h3>
+            <p>Convert between HEX, RGB, and HSL.</p>
+          </a>
+          <a class="card" href="image-color-picker">
+            <span class="icon" aria-hidden="true">🎨</span>
+            <h3>Image Color Picker</h3>
+            <p>Pick and identify exact colors from a photo.</p>
+          </a>
+          <a class="card" href="../blog/color-codes-guide">
+            <span class="icon" aria-hidden="true">🎨</span>
+            <h3>Guide: Hex, RGB, and HSL Explained</h3>
+            <p>What each color format means, and when to use it.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var dropzone = document.getElementById("dropzone");
+      var fileInput = document.getElementById("fileInput");
+      var typePills = document.getElementById("typePills");
+      var canvas = document.getElementById("previewCanvas");
+      var statusBox = document.getElementById("statusBox");
+      var downloadBtn = document.getElementById("downloadBtn");
+      var ctx = canvas.getContext("2d");
+
+      var currentImg = null;
+      var currentType = "normal";
+
+      // Machado, Oliveira & Fairchild (2009) full-severity dichromacy
+      // transformation matrices, applied in linear RGB space.
+      var MATRICES = {
+        protanopia: [
+          0.152286, 1.052583, -0.204868,
+          0.114503, 0.786281, 0.099216,
+          -0.003882, -0.048116, 1.051998
+        ],
+        deuteranopia: [
+          0.367322, 0.860646, -0.227968,
+          0.280085, 0.672501, 0.047413,
+          -0.011820, 0.042940, 0.968881
+        ],
+        tritanopia: [
+          1.255528, -0.076749, -0.178779,
+          -0.078411, 0.930809, 0.147602,
+          0.004733, 0.691367, 0.303900
+        ]
+      };
+
+      var srgbToLinearLUT = new Float32Array(256);
+      for (var i = 0; i < 256; i++) {
+        var c = i / 255;
+        srgbToLinearLUT[i] = c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+      }
+      function linearToSrgb(c) {
+        c = Math.max(0, Math.min(1, c));
+        var v = c <= 0.0031308 ? c * 12.92 : 1.055 * Math.pow(c, 1 / 2.4) - 0.055;
+        return Math.round(v * 255);
+      }
+
+      function applyFilter(type) {
+        if (!currentImg) return;
+        canvas.width = currentImg.naturalWidth;
+        canvas.height = currentImg.naturalHeight;
+        ctx.drawImage(currentImg, 0, 0);
+
+        if (type === "normal") return;
+
+        var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        var d = imgData.data;
+
+        if (type === "achromatopsia") {
+          for (var p = 0; p < d.length; p += 4) {
+            var lr = srgbToLinearLUT[d[p]], lg = srgbToLinearLUT[d[p + 1]], lb = srgbToLinearLUT[d[p + 2]];
+            var lum = 0.2126 * lr + 0.7152 * lg + 0.0722 * lb;
+            var gray = linearToSrgb(lum);
+            d[p] = d[p + 1] = d[p + 2] = gray;
+          }
+        } else {
+          var m = MATRICES[type];
+          for (var q = 0; q < d.length; q += 4) {
+            var r = srgbToLinearLUT[d[q]], g = srgbToLinearLUT[d[q + 1]], b = srgbToLinearLUT[d[q + 2]];
+            var nr = m[0] * r + m[1] * g + m[2] * b;
+            var ng = m[3] * r + m[4] * g + m[5] * b;
+            var nb = m[6] * r + m[7] * g + m[8] * b;
+            d[q] = linearToSrgb(nr);
+            d[q + 1] = linearToSrgb(ng);
+            d[q + 2] = linearToSrgb(nb);
+          }
+        }
+        ctx.putImageData(imgData, 0, 0);
+      }
+
+      function updateDownload() {
+        canvas.toBlob(function (blob) {
+          var url = URL.createObjectURL(blob);
+          downloadBtn.href = url;
+          downloadBtn.style.display = "inline-flex";
+        }, "image/png");
+      }
+
+      function handleFiles(files) {
+        var file = files[0];
+        if (!file || file.type.indexOf("image/") !== 0) {
+          statusBox.textContent = "Please choose an image file.";
+          return;
+        }
+        var url = URL.createObjectURL(file);
+        var img = new Image();
+        img.onload = function () {
+          currentImg = img;
+          canvas.style.display = "block";
+          applyFilter(currentType);
+          updateDownload();
+          statusBox.textContent = "";
+        };
+        img.onerror = function () {
+          statusBox.textContent = "Couldn't load that image.";
+        };
+        img.src = url;
+      }
+
+      typePills.addEventListener("click", function (e) {
+        var btn = e.target.closest(".pill");
+        if (!btn) return;
+        currentType = btn.getAttribute("data-type");
+        Array.prototype.forEach.call(typePills.querySelectorAll(".pill"), function (p) {
+          p.classList.toggle("active", p === btn);
+        });
+        applyFilter(currentType);
+        if (currentImg) updateDownload();
+      });
+
+      Fixora.setupDropzone(dropzone, fileInput, handleFiles);
+      dropzone.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") fileInput.click();
+      });
+    })();
+  </script>
+</body>
+</html>
