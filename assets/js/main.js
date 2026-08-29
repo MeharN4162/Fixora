@@ -50,6 +50,7 @@ document.documentElement.setAttribute("data-js", "true");
     { name: "Crop PDF", type: "Tool", icon: "✂️", cat: "pdf", href: "tools/pdf-crop" },
     { name: "PDF to Grayscale", type: "Tool", icon: "⚫", cat: "pdf", href: "tools/pdf-grayscale" },
     { name: "Word to PDF", type: "Tool", icon: "📄", cat: "pdf", href: "tools/word-to-pdf" },
+    { name: "PDF to Word", type: "Tool", icon: "📄", cat: "pdf", href: "tools/pdf-to-word" },
     { name: "Text to PDF", type: "Tool", icon: "📄", cat: "pdf", href: "tools/text-to-pdf" },
     { name: "Excel to PDF", type: "Tool", icon: "📄", cat: "pdf", href: "tools/excel-to-pdf" },
     { name: "PDF OCR", type: "Tool", icon: "🔎", cat: "pdf", href: "tools/pdf-ocr" },
