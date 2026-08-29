@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free GIF Maker Online — Turn Photos into an Animated GIF | Fixoona</title>
+  <meta name="description" content="Combine multiple photos into an animated GIF online for free, right in your browser. Reorder frames, set the delay and loop, and download instantly. No uploads, no sign-up." />
+  <meta name="keywords" content="gif maker, images to gif, photo to gif converter, animated gif maker free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/gif-maker" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free GIF Maker Online" />
+  <meta property="og:description" content="Combine multiple photos into an animated GIF, free, right in your browser." />
+  <meta property="og:url" content="https://fixoona.com/tools/gif-maker" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free GIF Maker Online" />
+  <meta name="twitter:description" content="Combine multiple photos into an animated GIF, free, right in your browser." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "GIF Maker",
+    "url": "https://fixoona.com/tools/gif-maker",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "GIF Maker", "item": "https://fixoona.com/tools/gif-maker" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What image formats can I combine into a GIF?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Any image format your browser can display — JPG, PNG, WebP, and more. Each image is drawn onto a canvas before being added as a frame, so the source formats can even be mixed within the same GIF." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is the GIF's final width and height decided?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The output canvas matches the dimensions of the first image you upload. Every other image is center-cropped to fill that same frame size without stretching or distorting it, the same way CSS object-fit: cover works." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does generating a GIF take a while, or produce a large file?",
+        "acceptedAnswer": { "@type": "Answer", "text": "GIF encoding is genuinely processor-intensive and runs entirely in your browser using a Web Worker, so nothing is uploaded anywhere. More frames, larger dimensions, or a higher quality setting all increase both the encoding time and the resulting file size." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the GIF loop forever, or play once?",
+        "acceptedAnswer": { "@type": "Answer", "text": "By default it loops forever, which is standard behavior for GIFs on the web. Turn off the loop toggle before generating if you want it to play through once and then stop on the final frame." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .gif-thumbs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .gif-thumb {
+      position: relative;
+      width: 84px;
+      height: 84px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      cursor: grab;
+      touch-action: none;
+      transition: opacity 0.12s ease, box-shadow 0.12s ease;
+    }
+    .gif-thumb:active { cursor: grabbing; }
+    .gif-thumb.fx-drag-source {
+      cursor: grabbing;
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-primary-light);
+    }
+    .gif-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      -webkit-user-drag: none;
+      user-select: none;
+      pointer-events: none;
+    }
+    .gif-thumb .thumb-remove {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(15, 23, 42, 0.72);
+      color: #fff;
+      font-size: 0.8rem;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .gif-thumb .drag-grip {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 23, 42, 0.55);
+      color: #fff;
+      pointer-events: none;
+    }
+    .gif-thumb .drag-grip svg { width: 11px; height: 11px; }
+    .gif-thumb .thumb-move {
+      position: absolute;
+      bottom: 3px;
+      left: 3px;
+      right: 3px;
+      display: flex;
+      gap: 3px;
+      z-index: 2;
+    }
+    .gif-thumb .thumb-move button {
+      flex: 1;
+      height: 17px;
+      border: none;
+      border-radius: 4px;
+      background: rgba(15, 23, 42, 0.6);
+      color: #fff;
+      font-size: 0.62rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .gif-thumb .thumb-move button:disabled { opacity: 0.3; cursor: not-allowed; }
+    body.fx-drag-active { cursor: grabbing; }
+    .fx-drag-ghost { border-radius: var(--radius-sm); }
+    #gifPreview {
+      max-width: 100%;
+      display: block;
+      margin: 18px auto 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>GIF Maker</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🎞️</div>
+      <h1>GIF Maker</h1>
+      <p>Combine your photos into an animated GIF — reorder frames, set the timing, and download.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload photos">
+          <div class="dz-icon" aria-hidden="true">🖼️</div>
+          <strong>Click to upload or drag photos here</strong>
+          <small>2 or more JPG, PNG, or WebP images — press and hold a thumbnail to reorder</small>
+          <input type="file" id="fileInput" accept="image/*" multiple hidden />
+        </div>
+
+        <div class="gif-thumbs" id="thumbs"></div>
+
+        <div class="row" style="margin-top:18px;">
+          <div class="field">
+            <label for="delayRange">Frame Delay: <span id="delayValue">500</span>ms</label>
+            <input type="range" id="delayRange" min="50" max="2000" step="50" value="500" style="width:100%;" />
+          </div>
+          <div class="field">
+            <label for="qualityRange">Quality (lower = better, slower): <span id="qualityValue">10</span></label>
+            <input type="range" id="qualityRange" min="1" max="20" step="1" value="10" style="width:100%;" />
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:8px;">
+          <label style="display:flex;align-items:center;gap:8px;font-weight:500;"><input type="checkbox" id="loopCheck" style="width:auto;" checked /> Loop forever</label>
+        </div>
+
+        <img id="gifPreview" style="display:none;" alt="Generated animated GIF preview" />
+
+        <div class="actions">
+          <button class="btn btn-primary" id="generateBtn" disabled>Generate GIF</button>
+          <a class="btn btn-secondary" id="downloadBtn" style="display:none;" download="animation.gif">Download GIF</a>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Make a GIF</h2>
+        <ol class="howto-steps">
+          <li>Click the upload area or drag in 2 or more photos.</li>
+          <li>Press and hold a thumbnail and drag it to reorder your frames.</li>
+          <li>Set the delay between frames and a quality level.</li>
+          <li>Click "Generate GIF," then "Download GIF" once it finishes.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What image formats can I combine into a GIF?</summary>
+          <p>Any image format your browser can display — JPG, PNG, WebP, and more. Each image is drawn onto a canvas before being added as a frame, so the source formats can even be mixed within the same GIF.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How is the GIF's final width and height decided?</summary>
+          <p>The output canvas matches the dimensions of the first image you upload. Every other image is center-cropped to fill that same frame size without stretching or distorting it, the same way CSS object-fit: cover works.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why does generating a GIF take a while, or produce a large file?</summary>
+          <p>GIF encoding is genuinely processor-intensive and runs entirely in your browser using a Web Worker, so nothing is uploaded anywhere. More frames, larger dimensions, or a higher quality setting all increase both the encoding time and the resulting file size.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does the GIF loop forever, or play once?</summary>
+          <p>By default it loops forever, which is standard behavior for GIFs on the web. Turn off the loop toggle before generating if you want it to play through once and then stop on the final frame.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="photo-collage-maker">
+            <span class="icon" aria-hidden="true">🖼️</span>
+            <h3>Photo Collage Maker</h3>
+            <p>Combine photos into one static image instead.</p>
+          </a>
+          <a class="card" href="image-resizer">
+            <span class="icon" aria-hidden="true">📐</span>
+            <h3>Image Resizer</h3>
+            <p>Resize photos before adding them to a GIF.</p>
+          </a>
+          <a class="card" href="../blog/basic-image-editing-guide">
+            <span class="icon" aria-hidden="true">✂️</span>
+            <h3>Guide: Basic Image Editing</h3>
+            <p>Crop, rotate, flip, split, and watermark, explained.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/reorder.js"></script>
+  <script src="../assets/js/vendor/gif.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var dropzone = document.getElementById("dropzone");
+      var fileInput = document.getElementById("fileInput");
+      var thumbsEl = document.getElementById("thumbs");
+      var delayRange = document.getElementById("delayRange");
+      var delayValue = document.getElementById("delayValue");
+      var qualityRange = document.getElementById("qualityRange");
+      var qualityValue = document.getElementById("qualityValue");
+      var loopCheck = document.getElementById("loopCheck");
+      var generateBtn = document.getElementById("generateBtn");
+      var downloadBtn = document.getElementById("downloadBtn");
+      var statusBox = document.getElementById("statusBox");
+      var gifPreview = document.getElementById("gifPreview");
+
+      var images = []; // { url, img (HTMLImageElement) }
+      var lastGifUrl = null;
+
+      function invalidateOutput() {
+        downloadBtn.style.display = "none";
+        gifPreview.style.display = "none";
+      }
+
+      function renderThumbs() {
+        invalidateOutput();
+        thumbsEl.innerHTML = "";
+        images.forEach(function (entry, i) {
+          var div = document.createElement("div");
+          div.className = "gif-thumb";
+          div.setAttribute("data-index", String(i));
+          div.innerHTML =
+            '<span class="drag-grip" aria-hidden="true">' + FixoonaReorder.gripSVG + "</span>" +
+            '<img src="' + entry.url + '" alt="Frame ' + (i + 1) + '" draggable="false" />' +
+            '<button type="button" class="thumb-remove" data-action="remove" data-index="' + i + '" aria-label="Remove frame">×</button>' +
+            '<span class="thumb-move">' +
+            '<button type="button" data-action="up" data-index="' + i + '" aria-label="Move frame earlier"' + (i === 0 ? " disabled" : "") + ">↑</button>" +
+            '<button type="button" data-action="down" data-index="' + i + '" aria-label="Move frame later"' + (i === images.length - 1 ? " disabled" : "") + ">↓</button>" +
+            "</span>";
+          thumbsEl.appendChild(div);
+        });
+        generateBtn.disabled = images.length < 2;
+      }
+
+      thumbsEl.addEventListener("click", function (e) {
+        var btn = e.target.closest("button");
+        if (!btn) return;
+        var index = parseInt(btn.getAttribute("data-index"), 10);
+        var action = btn.getAttribute("data-action");
+        if (action === "remove") {
+          URL.revokeObjectURL(images[index].url);
+          images.splice(index, 1);
+          renderThumbs();
+        } else if (action === "up" && index > 0) {
+          FixoonaReorder.moveItem(images, index, index - 1);
+          renderThumbs();
+        } else if (action === "down" && index < images.length - 1) {
+          FixoonaReorder.moveItem(images, index, index + 1);
+          renderThumbs();
+        }
+      });
+
+      FixoonaReorder.enable({
+        container: thumbsEl,
+        itemSelector: ".gif-thumb",
+        ignoreSelector: "button",
+        onMove: function (from, to) { return FixoonaReorder.moveItem(images, from, to); },
+        render: renderThumbs
+      });
+
+      function loadImage(file) {
+        return new Promise(function (resolve, reject) {
+          var url = URL.createObjectURL(file);
+          var img = new Image();
+          img.onload = function () { resolve({ url: url, img: img }); };
+          img.onerror = function () { URL.revokeObjectURL(url); reject(new Error("Couldn't load " + file.name)); };
+          img.src = url;
+        });
+      }
+
+      function handleFiles(files) {
+        var valid = Array.prototype.filter.call(files, function (f) { return f.type.indexOf("image/") === 0; });
+        if (!valid.length) {
+          statusBox.textContent = "Please choose image files.";
+          return;
+        }
+        statusBox.textContent = "Loading images…";
+        Promise.all(valid.map(loadImage)).then(function (loaded) {
+          images = images.concat(loaded);
+          statusBox.textContent = "";
+          renderThumbs();
+        }).catch(function (err) {
+          statusBox.textContent = err.message;
+        });
+      }
+
+      delayRange.addEventListener("input", function () { delayValue.textContent = delayRange.value; });
+      qualityRange.addEventListener("input", function () { qualityValue.textContent = qualityRange.value; });
+
+      generateBtn.addEventListener("click", function () {
+        if (images.length < 2) return;
+        invalidateOutput();
+        generateBtn.disabled = true;
+        statusBox.textContent = "Preparing frames…";
+
+        var targetW = images[0].img.naturalWidth;
+        var targetH = images[0].img.naturalHeight;
+        var canvas = document.createElement("canvas");
+        canvas.width = targetW;
+        canvas.height = targetH;
+        var ctx = canvas.getContext("2d");
+
+        var gif = new GIF({
+          workers: 2,
+          quality: parseInt(qualityRange.value, 10),
+          width: targetW,
+          height: targetH,
+          workerScript: "../assets/js/vendor/gif.worker.js",
+          repeat: loopCheck.checked ? 0 : -1
+        });
+
+        gif.on("progress", function (p) {
+          statusBox.textContent = "Encoding… " + Math.round(p * 100) + "%";
+        });
+
+        gif.on("finished", function (blob) {
+          var url = URL.createObjectURL(blob);
+          if (lastGifUrl) URL.revokeObjectURL(lastGifUrl);
+          lastGifUrl = url;
+          gifPreview.src = url;
+          gifPreview.style.display = "block";
+          downloadBtn.href = url;
+          downloadBtn.style.display = "inline-flex";
+          statusBox.textContent = "Done! " + images.length + " frames, " + Math.round(blob.size / 1024) + " KB.";
+          generateBtn.disabled = false;
+        });
+
+        var delay = parseInt(delayRange.value, 10);
+        images.forEach(function (entry) {
+          var iw = entry.img.naturalWidth, ih = entry.img.naturalHeight;
+          var scale = Math.max(targetW / iw, targetH / ih);
+          var drawW = iw * scale, drawH = ih * scale;
+          var dx = (targetW - drawW) / 2, dy = (targetH - drawH) / 2;
+          ctx.clearRect(0, 0, targetW, targetH);
+          ctx.drawImage(entry.img, dx, dy, drawW, drawH);
+          gif.addFrame(ctx, { copy: true, delay: delay });
+        });
+
+        gif.render();
+      });
+
+      Fixora.setupDropzone(dropzone, fileInput, handleFiles);
+      dropzone.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") fileInput.click();
+      });
+    })();
+  </script>
+</body>
+</html>
