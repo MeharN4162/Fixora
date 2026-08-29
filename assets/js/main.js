@@ -63,6 +63,10 @@ document.documentElement.setAttribute("data-js", "true");
     { name: "Color Converter", type: "Tool", icon: "🎨", cat: "calc", href: "tools/color-converter" },
     { name: "JSON Formatter", type: "Tool", icon: "{ }", cat: "dev", href: "tools/json-formatter" },
     { name: "QR Code Generator", type: "Tool", icon: "▦", cat: "dev", href: "tools/qr-code-generator" },
+    { name: "Barcode Generator", type: "Tool", icon: "▊", cat: "dev", href: "tools/barcode-generator" },
+    { name: "Voice Recorder", type: "Tool", icon: "🎙️", cat: "media", href: "tools/voice-recorder" },
+    { name: "Screen Recorder", type: "Tool", icon: "🖥️", cat: "media", href: "tools/screen-recorder" },
+    { name: "Speech to Text", type: "Tool", icon: "🎤", cat: "media", href: "tools/speech-to-text" },
     { name: "Base64 Converter", type: "Tool", icon: "🔣", cat: "dev", href: "tools/base64-converter" },
     { name: "URL Encoder/Decoder", type: "Tool", icon: "🔗", cat: "dev", href: "tools/url-encoder" },
     { name: "Text Diff Checker", type: "Tool", icon: "🔍", cat: "text", href: "tools/text-diff-checker" },
@@ -194,7 +198,8 @@ document.documentElement.setAttribute("data-js", "true");
     image: { name: "Image Tools", icon: "🖼️", anchor: "cat-image" },
     text: { name: "Text & Writing", icon: "🔤", anchor: "cat-text" },
     calc: { name: "Calculators & Converters", icon: "🧮", anchor: "cat-calc" },
-    dev: { name: "Developer Tools", icon: "💻", anchor: "cat-dev" }
+    dev: { name: "Developer Tools", icon: "💻", anchor: "cat-dev" },
+    media: { name: "Audio & Video Tools", icon: "🎙️", anchor: "cat-media" }
   };
 
   /* ---------- Category chip (quick jump to sibling tools) ---------- */

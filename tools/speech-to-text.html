@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Speech to Text Online — Voice Dictation | Fixoona</title>
+  <meta name="description" content="Turn spoken words into text online for free using your browser's built-in speech recognition. Dictate, edit, copy, or download the transcript. No sign-up required." />
+  <meta name="keywords" content="speech to text online free, voice dictation, voice typing online, speech recognition browser" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/speech-to-text" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Speech to Text Online" />
+  <meta property="og:description" content="Dictate and get a live text transcript, free, right in your browser." />
+  <meta property="og:url" content="https://fixoona.com/tools/speech-to-text" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Speech to Text Online" />
+  <meta name="twitter:description" content="Dictate and get a live text transcript, free, right in your browser." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Speech to Text",
+    "url": "https://fixoona.com/tools/speech-to-text",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Speech to Text", "item": "https://fixoona.com/tools/speech-to-text" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is my speech sent to a server, or does it stay on my device?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It depends on your browser, and it's worth being clear about: in Chrome and other Chromium-based browsers, the built-in speech recognition API sends your audio to Google's servers to be transcribed — it is not processed on-device. This is a limitation of the browser's own API, not something this tool controls or can avoid. If that matters for sensitive or private content, avoid dictating it here." }
+      },
+      {
+        "@type": "Question",
+        "name": "Which browsers support speech-to-text dictation?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Chrome, Edge, and other Chromium-based browsers support it well. Safari has partial, more limited support depending on version. Firefox does not currently support the Web Speech API's recognition feature at all — if the microphone button doesn't work, try Chrome or Edge instead." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I edit the transcript after dictating?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — the transcript appears in a normal editable text box, so you can click into it and fix any misheard words, punctuation, or formatting before copying or downloading it." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why did it mishear some of my words?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Speech recognition accuracy depends on microphone quality, background noise, speaking pace, and accent. Speaking clearly at a moderate pace in a quiet room generally gives the most accurate results; technical terms, names, and homophones are the most common source of mistakes." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .stt-mic-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 18px;
+      border-radius: var(--radius-sm);
+      border: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--gradient-primary);
+      color: #fff;
+    }
+    .stt-mic-btn.listening {
+      background: #dc2626;
+    }
+    .stt-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+    }
+    .stt-mic-btn.listening .stt-dot {
+      animation: sttPulse 1s ease-in-out infinite;
+    }
+    @keyframes sttPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Speech to Text</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🎤</div>
+      <h1>Speech to Text</h1>
+      <p>Dictate and get a live text transcript using your browser's built-in speech recognition.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="langSelect">Language</label>
+          <select id="langSelect">
+            <option value="en-US">English (US)</option>
+            <option value="en-GB">English (UK)</option>
+            <option value="es-ES">Spanish</option>
+            <option value="fr-FR">French</option>
+            <option value="de-DE">German</option>
+            <option value="pt-BR">Portuguese (Brazil)</option>
+            <option value="hi-IN">Hindi</option>
+            <option value="ja-JP">Japanese</option>
+            <option value="zh-CN">Chinese (Mandarin)</option>
+          </select>
+        </div>
+
+        <button class="stt-mic-btn" id="micBtn" type="button" style="margin-top:14px;">
+          <span class="stt-dot" aria-hidden="true"></span>
+          <span id="micBtnLabel">Start Dictating</span>
+        </button>
+
+        <div class="output-box" id="statusBox"></div>
+
+        <div class="field" style="margin-top:16px;">
+          <label for="transcriptBox">Transcript</label>
+          <textarea id="transcriptBox" placeholder="Your dictated text will appear here — you can edit it anytime." style="min-height:220px;"></textarea>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-secondary" id="clearBtn">Clear</button>
+          <button class="btn btn-secondary" id="copyBtn">Copy Text</button>
+          <a class="btn btn-secondary" id="downloadBtn" download="transcript.txt">Download .txt</a>
+        </div>
+        <div class="copy-note" id="copyNote"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Dictate Text</h2>
+        <ol class="howto-steps">
+          <li>Pick a language, then click "Start Dictating" and allow microphone access.</li>
+          <li>Speak — text appears live in the transcript box as you talk.</li>
+          <li>Click "Stop Dictating" when you're done, and edit the text if needed.</li>
+          <li>Copy it or download it as a .txt file.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Is my speech sent to a server, or does it stay on my device?</summary>
+          <p>It depends on your browser, and it's worth being clear about: in Chrome and other Chromium-based browsers, the built-in speech recognition API sends your audio to Google's servers to be transcribed — it is not processed on-device. This is a limitation of the browser's own API, not something this tool controls or can avoid. If that matters for sensitive or private content, avoid dictating it here.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Which browsers support speech-to-text dictation?</summary>
+          <p>Chrome, Edge, and other Chromium-based browsers support it well. Safari has partial, more limited support depending on version. Firefox does not currently support the Web Speech API's recognition feature at all — if the microphone button doesn't work, try Chrome or Edge instead.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I edit the transcript after dictating?</summary>
+          <p>Yes — the transcript appears in a normal editable text box, so you can click into it and fix any misheard words, punctuation, or formatting before copying or downloading it.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why did it mishear some of my words?</summary>
+          <p>Speech recognition accuracy depends on microphone quality, background noise, speaking pace, and accent. Speaking clearly at a moderate pace in a quiet room generally gives the most accurate results; technical terms, names, and homophones are the most common source of mistakes.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="text-to-speech">
+            <span class="icon" aria-hidden="true">🔊</span>
+            <h3>Text to Speech</h3>
+            <p>Go the other way — turn text into spoken audio.</p>
+          </a>
+          <a class="card" href="voice-recorder">
+            <span class="icon" aria-hidden="true">🎙️</span>
+            <h3>Voice Recorder</h3>
+            <p>Record and save raw audio from your microphone.</p>
+          </a>
+          <a class="card" href="word-counter">
+            <span class="icon" aria-hidden="true">🔤</span>
+            <h3>Word Counter</h3>
+            <p>Count words in your finished transcript.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var micBtn = document.getElementById("micBtn");
+      var micBtnLabel = document.getElementById("micBtnLabel");
+      var langSelect = document.getElementById("langSelect");
+      var statusBox = document.getElementById("statusBox");
+      var transcriptBox = document.getElementById("transcriptBox");
+      var clearBtn = document.getElementById("clearBtn");
+      var copyBtn = document.getElementById("copyBtn");
+      var copyNote = document.getElementById("copyNote");
+      var downloadBtn = document.getElementById("downloadBtn");
+
+      var SpeechRecognitionCtor = window.SpeechRecognition || window.webkitSpeechRecognition;
+      var recognition = null;
+      var isListening = false;
+      var finalTranscript = "";
+      var lastUrl = null;
+
+      if (!SpeechRecognitionCtor) {
+        statusBox.textContent = "Speech recognition isn't supported in this browser. Try Chrome or Edge instead.";
+        micBtn.disabled = true;
+      }
+
+      function updateDownloadHref() {
+        var blob = new Blob([transcriptBox.value], { type: "text/plain" });
+        var url = URL.createObjectURL(blob);
+        if (lastUrl) URL.revokeObjectURL(lastUrl);
+        lastUrl = url;
+        downloadBtn.href = url;
+      }
+
+      function startListening() {
+        recognition = new SpeechRecognitionCtor();
+        recognition.lang = langSelect.value;
+        recognition.continuous = true;
+        recognition.interimResults = true;
+
+        finalTranscript = transcriptBox.value ? transcriptBox.value + " " : "";
+
+        recognition.onresult = function (event) {
+          var interim = "";
+          for (var i = event.resultIndex; i < event.results.length; i++) {
+            var text = event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+              finalTranscript += text + " ";
+            } else {
+              interim += text;
+            }
+          }
+          transcriptBox.value = finalTranscript + interim;
+        };
+
+        recognition.onerror = function (event) {
+          if (event.error === "not-allowed" || event.error === "service-not-allowed") {
+            statusBox.textContent = "Microphone access was denied. Please allow microphone permission and try again.";
+          } else if (event.error === "no-speech") {
+            statusBox.textContent = "Didn't catch any speech — try again.";
+          } else {
+            statusBox.textContent = "Something went wrong with speech recognition. Please try again.";
+          }
+        };
+
+        recognition.onend = function () {
+          if (isListening) {
+            // Chrome's recognizer sometimes stops on its own after a pause;
+            // restart automatically while the user still wants to dictate.
+            try { recognition.start(); } catch (e) {}
+          }
+        };
+
+        recognition.start();
+        isListening = true;
+        micBtn.classList.add("listening");
+        micBtnLabel.textContent = "Stop Dictating";
+        statusBox.textContent = "Listening…";
+      }
+
+      function stopListening() {
+        isListening = false;
+        if (recognition) recognition.stop();
+        micBtn.classList.remove("listening");
+        micBtnLabel.textContent = "Start Dictating";
+        statusBox.textContent = "Stopped.";
+        updateDownloadHref();
+      }
+
+      micBtn.addEventListener("click", function () {
+        if (isListening) {
+          stopListening();
+        } else {
+          startListening();
+        }
+      });
+
+      clearBtn.addEventListener("click", function () {
+        transcriptBox.value = "";
+        finalTranscript = "";
+        updateDownloadHref();
+      });
+
+      copyBtn.addEventListener("click", function () {
+        Fixora.copyText(transcriptBox.value, copyNote);
+      });
+
+      downloadBtn.addEventListener("click", function () {
+        updateDownloadHref();
+      });
+
+      updateDownloadHref();
+    })();
+  </script>
+</body>
+</html>

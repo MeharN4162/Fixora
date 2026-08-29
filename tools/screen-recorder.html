@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Online Screen Recorder — No Sign-Up, No Upload | Fixoona</title>
+  <meta name="description" content="Record your screen, a window, or a browser tab online for free, right in your browser. Play back and download the recording instantly — nothing is ever uploaded to a server." />
+  <meta name="keywords" content="online screen recorder, free screen recorder, record screen browser, screen capture online free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/screen-recorder" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Online Screen Recorder" />
+  <meta property="og:description" content="Record your screen, window, or tab, free, right in your browser." />
+  <meta property="og:url" content="https://fixoona.com/tools/screen-recorder" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Online Screen Recorder" />
+  <meta name="twitter:description" content="Record your screen, window, or tab, free, right in your browser." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Screen Recorder",
+    "url": "https://fixoona.com/tools/screen-recorder",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Screen Recorder", "item": "https://fixoona.com/tools/screen-recorder" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does this upload my recording anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. The recording is captured and saved entirely using your browser's own screen-capture and recording APIs — nothing is ever sent to a server. It only leaves your device if and when you choose to download or share the file yourself." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why doesn't it record system or tab audio?",
+        "acceptedAnswer": { "@type": "Answer", "text": "This depends on your browser and what you choose to share. Chrome and Edge can capture a shared browser tab's audio if you tick the \"share audio\" option in the picker, but capturing full system audio while sharing your entire screen isn't supported by every browser — this is a browser-level limitation, not something this tool controls." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I record just one window or browser tab instead of my whole screen?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — when you click \"Start Recording,\" your browser's own native picker lets you choose between your entire screen, a specific application window, or a specific browser tab before recording begins." }
+      },
+      {
+        "@type": "Question",
+        "name": "What video format does the recording save as?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It depends on your browser. Chrome and Firefox typically record in WebM with VP9 or VP8 video; other browsers may use a different supported format. The tool automatically uses whichever format your browser supports and downloads the file with the matching extension." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .sr-timer {
+      font-family: var(--font-mono, monospace);
+      font-size: 2.4rem;
+      font-weight: 700;
+      text-align: center;
+      margin: 18px 0;
+      color: var(--color-text);
+      font-variant-numeric: tabular-nums;
+    }
+    .sr-record-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 18px;
+      border-radius: var(--radius-sm);
+      border: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--gradient-primary);
+      color: #fff;
+    }
+    .sr-record-btn.recording {
+      background: #dc2626;
+    }
+    .sr-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+    }
+    .sr-record-btn.recording .sr-dot {
+      animation: srPulse 1s ease-in-out infinite;
+    }
+    @keyframes srPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+    #srPlayer {
+      width: 100%;
+      max-width: 100%;
+      margin-top: 18px;
+      border-radius: var(--radius-sm);
+      display: none;
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Screen Recorder</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🖥️</div>
+      <h1>Screen Recorder</h1>
+      <p>Record your screen, a window, or a browser tab — nothing ever leaves your browser.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="sr-timer" id="srTimer">00:00</div>
+
+        <button class="sr-record-btn" id="recordBtn" type="button">
+          <span class="sr-dot" aria-hidden="true"></span>
+          <span id="recordBtnLabel">Start Recording</span>
+        </button>
+
+        <video id="srPlayer" controls></video>
+
+        <div class="actions" id="srActions" style="display:none;">
+          <a class="btn btn-secondary" id="downloadBtn" download="screen-recording">Download Recording</a>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Record Your Screen</h2>
+        <ol class="howto-steps">
+          <li>Click "Start Recording" — your browser's native picker opens.</li>
+          <li>Choose your entire screen, a window, or a browser tab, and confirm.</li>
+          <li>Click "Stop Recording" when you're done (or use the browser's own "Stop sharing" control).</li>
+          <li>Play back the result, then click "Download Recording" to save it.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Does this upload my recording anywhere?</summary>
+          <p>No. The recording is captured and saved entirely using your browser's own screen-capture and recording APIs — nothing is ever sent to a server. It only leaves your device if and when you choose to download or share the file yourself.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why doesn't it record system or tab audio?</summary>
+          <p>This depends on your browser and what you choose to share. Chrome and Edge can capture a shared browser tab's audio if you tick the "share audio" option in the picker, but capturing full system audio while sharing your entire screen isn't supported by every browser — this is a browser-level limitation, not something this tool controls.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I record just one window or browser tab instead of my whole screen?</summary>
+          <p>Yes — when you click "Start Recording," your browser's own native picker lets you choose between your entire screen, a specific application window, or a specific browser tab before recording begins.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What video format does the recording save as?</summary>
+          <p>It depends on your browser. Chrome and Firefox typically record in WebM with VP9 or VP8 video; other browsers may use a different supported format. The tool automatically uses whichever format your browser supports and downloads the file with the matching extension.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="voice-recorder">
+            <span class="icon" aria-hidden="true">🎙️</span>
+            <h3>Voice Recorder</h3>
+            <p>Record just audio from your microphone.</p>
+          </a>
+          <a class="card" href="gif-maker">
+            <span class="icon" aria-hidden="true">🎞️</span>
+            <h3>GIF Maker</h3>
+            <p>Turn a series of photos into an animated GIF.</p>
+          </a>
+          <a class="card" href="speech-to-text">
+            <span class="icon" aria-hidden="true">📝</span>
+            <h3>Speech to Text</h3>
+            <p>Turn spoken words into a written transcript.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var recordBtn = document.getElementById("recordBtn");
+      var recordBtnLabel = document.getElementById("recordBtnLabel");
+      var srTimer = document.getElementById("srTimer");
+      var srPlayer = document.getElementById("srPlayer");
+      var srActions = document.getElementById("srActions");
+      var downloadBtn = document.getElementById("downloadBtn");
+      var statusBox = document.getElementById("statusBox");
+
+      var mediaRecorder = null;
+      var displayStream = null;
+      var chunks = [];
+      var startTime = 0;
+      var timerInterval = null;
+      var lastUrl = null;
+      var isRecording = false;
+
+      function pickMimeType() {
+        var candidates = [
+          "video/webm;codecs=vp9,opus",
+          "video/webm;codecs=vp8,opus",
+          "video/webm",
+          "video/mp4"
+        ];
+        for (var i = 0; i < candidates.length; i++) {
+          if (window.MediaRecorder && MediaRecorder.isTypeSupported(candidates[i])) return candidates[i];
+        }
+        return "";
+      }
+
+      function extForMime(mime) {
+        if (mime.indexOf("webm") !== -1) return "webm";
+        if (mime.indexOf("mp4") !== -1) return "mp4";
+        return "webm";
+      }
+
+      function formatTime(ms) {
+        var totalSec = Math.floor(ms / 1000);
+        var mm = Math.floor(totalSec / 60);
+        var ss = totalSec % 60;
+        return (mm < 10 ? "0" + mm : mm) + ":" + (ss < 10 ? "0" + ss : ss);
+      }
+
+      function updateTimer() {
+        srTimer.textContent = formatTime(Date.now() - startTime);
+      }
+
+      function cleanupStream() {
+        if (displayStream) {
+          displayStream.getTracks().forEach(function (t) { t.stop(); });
+          displayStream = null;
+        }
+      }
+
+      async function startRecording() {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
+          statusBox.textContent = "Your browser doesn't support screen recording.";
+          return;
+        }
+        try {
+          displayStream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true });
+        } catch (err) {
+          statusBox.textContent = "Screen recording was cancelled or unavailable.";
+          return;
+        }
+
+        srPlayer.srcObject = displayStream;
+        srPlayer.muted = true;
+        srPlayer.style.display = "block";
+        srPlayer.play().catch(function () {});
+
+        var mimeType = pickMimeType();
+        chunks = [];
+        try {
+          mediaRecorder = mimeType ? new MediaRecorder(displayStream, { mimeType: mimeType }) : new MediaRecorder(displayStream);
+        } catch (err) {
+          statusBox.textContent = "Couldn't start recording on this browser.";
+          cleanupStream();
+          return;
+        }
+
+        mediaRecorder.ondataavailable = function (e) {
+          if (e.data && e.data.size > 0) chunks.push(e.data);
+        };
+
+        mediaRecorder.onstop = function () {
+          var finalMime = mediaRecorder.mimeType || mimeType || "video/webm";
+          var blob = new Blob(chunks, { type: finalMime });
+          var url = URL.createObjectURL(blob);
+          if (lastUrl) URL.revokeObjectURL(lastUrl);
+          lastUrl = url;
+          srPlayer.srcObject = null;
+          srPlayer.muted = false;
+          srPlayer.src = url;
+          srPlayer.controls = true;
+          downloadBtn.href = url;
+          downloadBtn.download = "screen-recording." + extForMime(finalMime);
+          srActions.style.display = "flex";
+          statusBox.textContent = "Recording saved. Play it back or download it below.";
+          cleanupStream();
+        };
+
+        // If the user stops sharing via the browser's own UI (not our button),
+        // treat that the same as clicking "Stop Recording".
+        displayStream.getVideoTracks()[0].addEventListener("ended", function () {
+          if (isRecording) stopRecording();
+        });
+
+        mediaRecorder.start();
+        isRecording = true;
+        startTime = Date.now();
+        timerInterval = setInterval(updateTimer, 250);
+        recordBtn.classList.add("recording");
+        recordBtnLabel.textContent = "Stop Recording";
+        statusBox.textContent = "Recording…";
+        srActions.style.display = "none";
+      }
+
+      function stopRecording() {
+        if (mediaRecorder && mediaRecorder.state !== "inactive") {
+          mediaRecorder.stop();
+        }
+        isRecording = false;
+        clearInterval(timerInterval);
+        recordBtn.classList.remove("recording");
+        recordBtnLabel.textContent = "Start Recording";
+      }
+
+      recordBtn.addEventListener("click", function () {
+        if (isRecording) {
+          stopRecording();
+        } else {
+          srTimer.textContent = "00:00";
+          startRecording();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

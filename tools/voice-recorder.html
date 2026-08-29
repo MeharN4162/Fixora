@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Online Voice Recorder — No Sign-Up, No Upload | Fixoona</title>
+  <meta name="description" content="Record your microphone online for free, right in your browser. Play back and download the recording instantly — nothing is ever uploaded to a server." />
+  <meta name="keywords" content="online voice recorder, free audio recorder, record microphone online, browser voice recorder" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/voice-recorder" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Online Voice Recorder" />
+  <meta property="og:description" content="Record, play back, and download audio from your microphone, free, right in your browser." />
+  <meta property="og:url" content="https://fixoona.com/tools/voice-recorder" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Online Voice Recorder" />
+  <meta name="twitter:description" content="Record, play back, and download audio from your microphone, free, right in your browser." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Voice Recorder",
+    "url": "https://fixoona.com/tools/voice-recorder",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Voice Recorder", "item": "https://fixoona.com/tools/voice-recorder" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does this upload my recording anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Recording, playback, and downloading all happen using your browser's own built-in microphone and audio APIs — the audio never leaves your device or gets sent to a server." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does my browser ask for microphone permission?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Browsers require explicit permission before any website can access your microphone, as a security and privacy protection. You'll see this prompt the first time you click record; allowing it only grants access to this tab, not permanently or to other sites." }
+      },
+      {
+        "@type": "Question",
+        "name": "What audio format does the recording save as?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It depends on your browser. Chrome and Firefox typically record in WebM with Opus audio; Safari typically uses MP4 with AAC audio. The tool automatically uses whichever format your browser supports and downloads the file with the matching extension." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I re-record if I make a mistake?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — click the record button again at any time. Starting a new recording replaces the previous one in the player, so download anything you want to keep before recording again." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .vr-timer {
+      font-family: var(--font-mono, monospace);
+      font-size: 2.4rem;
+      font-weight: 700;
+      text-align: center;
+      margin: 18px 0;
+      color: var(--color-text);
+      font-variant-numeric: tabular-nums;
+    }
+    .vr-record-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 18px;
+      border-radius: var(--radius-sm);
+      border: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--gradient-primary);
+      color: #fff;
+    }
+    .vr-record-btn.recording {
+      background: #dc2626;
+    }
+    .vr-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+    }
+    .vr-record-btn.recording .vr-dot {
+      animation: vrPulse 1s ease-in-out infinite;
+    }
+    @keyframes vrPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+    #vrPlayer {
+      width: 100%;
+      margin-top: 18px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Voice Recorder</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🎙️</div>
+      <h1>Voice Recorder</h1>
+      <p>Record, play back, and download audio from your microphone — nothing ever leaves your browser.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="vr-timer" id="vrTimer">00:00</div>
+
+        <button class="vr-record-btn" id="recordBtn" type="button">
+          <span class="vr-dot" aria-hidden="true"></span>
+          <span id="recordBtnLabel">Start Recording</span>
+        </button>
+
+        <audio id="vrPlayer" controls></audio>
+
+        <div class="actions" id="vrActions" style="display:none;">
+          <a class="btn btn-secondary" id="downloadBtn" download="recording">Download Recording</a>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Record Audio</h2>
+        <ol class="howto-steps">
+          <li>Click "Start Recording" and allow microphone access when your browser asks.</li>
+          <li>Speak — the timer counts up while recording is active.</li>
+          <li>Click "Stop Recording" when you're done.</li>
+          <li>Play back the result, then click "Download Recording" to save it.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Does this upload my recording anywhere?</summary>
+          <p>No. Recording, playback, and downloading all happen using your browser's own built-in microphone and audio APIs — the audio never leaves your device or gets sent to a server.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why does my browser ask for microphone permission?</summary>
+          <p>Browsers require explicit permission before any website can access your microphone, as a security and privacy protection. You'll see this prompt the first time you click record; allowing it only grants access to this tab, not permanently or to other sites.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What audio format does the recording save as?</summary>
+          <p>It depends on your browser. Chrome and Firefox typically record in WebM with Opus audio; Safari typically uses MP4 with AAC audio. The tool automatically uses whichever format your browser supports and downloads the file with the matching extension.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I re-record if I make a mistake?</summary>
+          <p>Yes — click the record button again at any time. Starting a new recording replaces the previous one in the player, so download anything you want to keep before recording again.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="screen-recorder">
+            <span class="icon" aria-hidden="true">🖥️</span>
+            <h3>Screen Recorder</h3>
+            <p>Record your screen instead of just audio.</p>
+          </a>
+          <a class="card" href="text-to-speech">
+            <span class="icon" aria-hidden="true">🔊</span>
+            <h3>Text to Speech</h3>
+            <p>Go the other way — turn text into spoken audio.</p>
+          </a>
+          <a class="card" href="speech-to-text">
+            <span class="icon" aria-hidden="true">📝</span>
+            <h3>Speech to Text</h3>
+            <p>Turn spoken words into a written transcript.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var recordBtn = document.getElementById("recordBtn");
+      var recordBtnLabel = document.getElementById("recordBtnLabel");
+      var vrTimer = document.getElementById("vrTimer");
+      var vrPlayer = document.getElementById("vrPlayer");
+      var vrActions = document.getElementById("vrActions");
+      var downloadBtn = document.getElementById("downloadBtn");
+      var statusBox = document.getElementById("statusBox");
+
+      var mediaRecorder = null;
+      var stream = null;
+      var chunks = [];
+      var startTime = 0;
+      var timerInterval = null;
+      var lastUrl = null;
+      var isRecording = false;
+
+      function pickMimeType() {
+        var candidates = [
+          "audio/webm;codecs=opus",
+          "audio/webm",
+          "audio/mp4",
+          "audio/ogg;codecs=opus"
+        ];
+        for (var i = 0; i < candidates.length; i++) {
+          if (window.MediaRecorder && MediaRecorder.isTypeSupported(candidates[i])) return candidates[i];
+        }
+        return "";
+      }
+
+      function extForMime(mime) {
+        if (mime.indexOf("webm") !== -1) return "webm";
+        if (mime.indexOf("mp4") !== -1) return "m4a";
+        if (mime.indexOf("ogg") !== -1) return "ogg";
+        return "webm";
+      }
+
+      function formatTime(ms) {
+        var totalSec = Math.floor(ms / 1000);
+        var mm = Math.floor(totalSec / 60);
+        var ss = totalSec % 60;
+        return (mm < 10 ? "0" + mm : mm) + ":" + (ss < 10 ? "0" + ss : ss);
+      }
+
+      function updateTimer() {
+        vrTimer.textContent = formatTime(Date.now() - startTime);
+      }
+
+      async function startRecording() {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          statusBox.textContent = "Your browser doesn't support microphone recording.";
+          return;
+        }
+        try {
+          stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        } catch (err) {
+          statusBox.textContent = "Microphone access was denied or unavailable. Please allow microphone permission and try again.";
+          return;
+        }
+
+        var mimeType = pickMimeType();
+        chunks = [];
+        try {
+          mediaRecorder = mimeType ? new MediaRecorder(stream, { mimeType: mimeType }) : new MediaRecorder(stream);
+        } catch (err) {
+          statusBox.textContent = "Couldn't start recording on this browser.";
+          stream.getTracks().forEach(function (t) { t.stop(); });
+          return;
+        }
+
+        mediaRecorder.ondataavailable = function (e) {
+          if (e.data && e.data.size > 0) chunks.push(e.data);
+        };
+
+        mediaRecorder.onstop = function () {
+          var finalMime = mediaRecorder.mimeType || mimeType || "audio/webm";
+          var blob = new Blob(chunks, { type: finalMime });
+          var url = URL.createObjectURL(blob);
+          if (lastUrl) URL.revokeObjectURL(lastUrl);
+          lastUrl = url;
+          vrPlayer.src = url;
+          vrPlayer.style.display = "block";
+          downloadBtn.href = url;
+          downloadBtn.download = "recording." + extForMime(finalMime);
+          vrActions.style.display = "flex";
+          statusBox.textContent = "Recording saved. Play it back or download it below.";
+          stream.getTracks().forEach(function (t) { t.stop(); });
+        };
+
+        mediaRecorder.start();
+        isRecording = true;
+        startTime = Date.now();
+        timerInterval = setInterval(updateTimer, 250);
+        recordBtn.classList.add("recording");
+        recordBtnLabel.textContent = "Stop Recording";
+        statusBox.textContent = "Recording…";
+        vrActions.style.display = "none";
+        vrPlayer.style.display = "none";
+      }
+
+      function stopRecording() {
+        if (mediaRecorder && isRecording) {
+          mediaRecorder.stop();
+        }
+        isRecording = false;
+        clearInterval(timerInterval);
+        recordBtn.classList.remove("recording");
+        recordBtnLabel.textContent = "Start Recording";
+      }
+
+      recordBtn.addEventListener("click", function () {
+        if (isRecording) {
+          stopRecording();
+        } else {
+          vrTimer.textContent = "00:00";
+          startRecording();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
