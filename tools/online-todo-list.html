@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Online To-Do List — No Sign-Up | Fixoona</title>
+  <meta name="description" content="A free online to-do list that saves your tasks right in your browser — no sign-up, no account, nothing uploaded to a server." />
+  <meta name="keywords" content="online to do list, free todo list no sign up, simple task list online" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/online-todo-list" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Online To-Do List" />
+  <meta property="og:description" content="A to-do list that saves your tasks locally, no sign-up." />
+  <meta property="og:url" content="https://fixoona.com/tools/online-todo-list" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Online To-Do List" />
+  <meta name="twitter:description" content="A to-do list that saves your tasks locally, no sign-up." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Online To-Do List",
+    "url": "https://fixoona.com/tools/online-todo-list",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Online To-Do List", "item": "https://fixoona.com/tools/online-todo-list" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where are my tasks actually stored?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Your tasks are saved in your browser's local storage on your own device — not on a server or account. That means they'll still be there next time you visit this page in the same browser, but they won't sync to another device or browser." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will my list disappear if I clear my browser data?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — since the list lives in your browser's local storage, clearing your browsing data, using a private/incognito window, or switching browsers will not carry your saved tasks with it." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a limit to how many tasks I can add?",
+        "acceptedAnswer": { "@type": "Answer", "text": "There's no hard limit built into this tool, though browsers generally cap local storage at several megabytes per site, which is far more than enough for a practical task list." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my task list ever sent to a server?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — everything is stored and managed entirely in your browser using JavaScript and local storage. Nothing you type is ever transmitted anywhere." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .todo-input-row { display: flex; gap: 8px; }
+    .todo-input-row input { flex: 1; }
+    .todo-list { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+    .todo-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      background: var(--color-bg-alt);
+      border-radius: var(--radius-sm);
+    }
+    .todo-item input[type="checkbox"] { width: 18px; height: 18px; flex-shrink: 0; cursor: pointer; }
+    .todo-text { flex: 1; word-break: break-word; }
+    .todo-item.done .todo-text { text-decoration: line-through; color: var(--color-text-muted); }
+    .todo-delete {
+      background: none;
+      border: none;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 2px 6px;
+      flex-shrink: 0;
+    }
+    .todo-delete:hover { color: var(--color-danger); }
+    .todo-empty { text-align: center; color: var(--color-text-muted); padding: 20px 0; }
+    .todo-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; flex-wrap: wrap; gap: 10px; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Online To-Do List</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">✅</div>
+      <h1>Online To-Do List</h1>
+      <p>A simple to-do list that saves your tasks right in your browser. No sign-up.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="todo-input-row">
+          <input type="text" id="taskInput" placeholder="Add a task…" />
+          <button class="btn btn-primary" id="addBtn">Add</button>
+        </div>
+
+        <ul class="todo-list" id="taskList"></ul>
+        <div class="todo-empty" id="emptyState" style="display:none;">No tasks yet — add one above.</div>
+
+        <div class="todo-footer">
+          <span id="countDisplay" class="copy-note" style="display:block;"></span>
+          <button class="btn btn-secondary" id="clearCompletedBtn">Clear Completed</button>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Use the To-Do List</h2>
+        <ol class="howto-steps">
+          <li>Type a task and press Enter or click "Add."</li>
+          <li>Check a task off when it's done.</li>
+          <li>Click "✕" to delete a task, or "Clear Completed" to remove all finished ones.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Where are my tasks actually stored?</summary>
+          <p>Your tasks are saved in your browser's local storage on your own device — not on a server or account. That means they'll still be there next time you visit this page in the same browser, but they won't sync to another device or browser.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Will my list disappear if I clear my browser data?</summary>
+          <p>Yes — since the list lives in your browser's local storage, clearing your browsing data, using a private/incognito window, or switching browsers will not carry your saved tasks with it.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is there a limit to how many tasks I can add?</summary>
+          <p>There's no hard limit built into this tool, though browsers generally cap local storage at several megabytes per site, which is far more than enough for a practical task list.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my task list ever sent to a server?</summary>
+          <p>No — everything is stored and managed entirely in your browser using JavaScript and local storage. Nothing you type is ever transmitted anywhere.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="sticky-notes">
+            <span class="icon" aria-hidden="true">🗒️</span>
+            <h3>Sticky Notes</h3>
+            <p>Freeform colored notes saved in your browser.</p>
+          </a>
+          <a class="card" href="pomodoro-timer">
+            <span class="icon" aria-hidden="true">🍅</span>
+            <h3>Pomodoro Timer</h3>
+            <p>Run focused work sessions with breaks.</p>
+          </a>
+          <a class="card" href="markdown-table-generator">
+            <span class="icon" aria-hidden="true">📊</span>
+            <h3>Markdown Table Generator</h3>
+            <p>Build a table visually and get Markdown code.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var STORAGE_KEY = "fixora_todo_list";
+      var taskInput = document.getElementById("taskInput");
+      var addBtn = document.getElementById("addBtn");
+      var taskList = document.getElementById("taskList");
+      var emptyState = document.getElementById("emptyState");
+      var countDisplay = document.getElementById("countDisplay");
+      var clearCompletedBtn = document.getElementById("clearCompletedBtn");
+
+      var tasks = [];
+
+      function load() {
+        try {
+          var raw = localStorage.getItem(STORAGE_KEY);
+          tasks = raw ? JSON.parse(raw) : [];
+        } catch (e) {
+          tasks = [];
+        }
+      }
+
+      function save() {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks)); } catch (e) {}
+      }
+
+      function escapeHtml(s) {
+        return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      }
+
+      function render() {
+        if (tasks.length === 0) {
+          taskList.innerHTML = "";
+          emptyState.style.display = "block";
+        } else {
+          emptyState.style.display = "none";
+          taskList.innerHTML = tasks.map(function (t) {
+            return '<li class="todo-item' + (t.done ? " done" : "") + '" data-id="' + t.id + '">' +
+              '<input type="checkbox" data-action="toggle"' + (t.done ? " checked" : "") + " />" +
+              '<span class="todo-text">' + escapeHtml(t.text) + "</span>" +
+              '<button type="button" class="todo-delete" data-action="delete" aria-label="Delete task">✕</button>' +
+              "</li>";
+          }).join("");
+        }
+        var remaining = tasks.filter(function (t) { return !t.done; }).length;
+        countDisplay.textContent = tasks.length === 0 ? "" : remaining + " of " + tasks.length + " remaining";
+      }
+
+      function addTask() {
+        var text = taskInput.value.trim();
+        if (!text) return;
+        tasks.push({ id: Date.now() + Math.random(), text: text, done: false });
+        taskInput.value = "";
+        save();
+        render();
+      }
+
+      addBtn.addEventListener("click", addTask);
+      taskInput.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") addTask();
+      });
+
+      taskList.addEventListener("click", function (e) {
+        var li = e.target.closest("[data-id]");
+        if (!li) return;
+        var id = parseFloat(li.getAttribute("data-id"));
+        var action = e.target.getAttribute("data-action");
+        if (action === "delete") {
+          tasks = tasks.filter(function (t) { return t.id !== id; });
+          save();
+          render();
+        } else if (action === "toggle") {
+          var task = tasks.filter(function (t) { return t.id === id; })[0];
+          if (task) { task.done = e.target.checked; save(); render(); }
+        }
+      });
+
+      clearCompletedBtn.addEventListener("click", function () {
+        tasks = tasks.filter(function (t) { return !t.done; });
+        save();
+        render();
+      });
+
+      load();
+      render();
+    })();
+  </script>
+</body>
+</html>

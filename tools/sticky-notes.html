@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Sticky Notes Online — No Sign-Up | Fixoona</title>
+  <meta name="description" content="Free online sticky notes that save right in your browser — no sign-up, no account, nothing uploaded to a server." />
+  <meta name="keywords" content="online sticky notes, free sticky notes no sign up, digital sticky notes" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/sticky-notes" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Online Sticky Notes" />
+  <meta property="og:description" content="Colored sticky notes that save locally, no sign-up." />
+  <meta property="og:url" content="https://fixoona.com/tools/sticky-notes" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Online Sticky Notes" />
+  <meta name="twitter:description" content="Colored sticky notes that save locally, no sign-up." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Sticky Notes",
+    "url": "https://fixoona.com/tools/sticky-notes",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Sticky Notes", "item": "https://fixoona.com/tools/sticky-notes" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where are my notes actually stored?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Your notes are saved in your browser's local storage on your own device, not on a server or account. They'll still be there next time you visit in the same browser, but won't sync to another device or browser." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do notes save automatically as I type?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — every keystroke is saved to local storage immediately, so there's no separate save button and no risk of losing what you just typed if you navigate away." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will my notes disappear if I clear my browser data?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — since notes live in your browser's local storage, clearing your browsing data, using a private/incognito window, or switching browsers or devices will not carry your saved notes with it." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are my notes ever sent to a server?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — everything is stored and managed entirely in your browser using JavaScript and local storage. Nothing you type is ever transmitted anywhere." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .note-card {
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      min-height: 160px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+    .note-textarea {
+      flex: 1;
+      resize: none;
+      border: none;
+      background: transparent;
+      color: #1f2937;
+      font-family: var(--font-main, sans-serif);
+      font-size: 0.95rem;
+      padding: 0;
+      min-height: 120px;
+    }
+    .note-textarea:focus { outline: none; }
+    .note-delete {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      background: none;
+      border: none;
+      color: rgba(31, 41, 55, 0.5);
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .note-delete:hover { color: #1f2937; }
+    .notes-empty { text-align: center; color: var(--color-text-muted); padding: 30px 0; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Sticky Notes</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🗒️</div>
+      <h1>Sticky Notes</h1>
+      <p>Freeform colored notes that save automatically right in your browser. No sign-up.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="actions">
+          <button class="btn btn-primary" id="addNoteBtn">+ Add Note</button>
+        </div>
+
+        <div class="notes-grid" id="notesGrid"></div>
+        <div class="notes-empty" id="emptyState" style="display:none;">No notes yet — click "+ Add Note" to create one.</div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Use Sticky Notes</h2>
+        <ol class="howto-steps">
+          <li>Click "+ Add Note" to create a new colored note.</li>
+          <li>Click into a note and start typing — it saves automatically.</li>
+          <li>Click the "✕" on a note to delete it.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Where are my notes actually stored?</summary>
+          <p>Your notes are saved in your browser's local storage on your own device, not on a server or account. They'll still be there next time you visit in the same browser, but won't sync to another device or browser.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Do notes save automatically as I type?</summary>
+          <p>Yes — every keystroke is saved to local storage immediately, so there's no separate save button and no risk of losing what you just typed if you navigate away.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Will my notes disappear if I clear my browser data?</summary>
+          <p>Yes — since notes live in your browser's local storage, clearing your browsing data, using a private/incognito window, or switching browsers or devices will not carry your saved notes with it.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Are my notes ever sent to a server?</summary>
+          <p>No — everything is stored and managed entirely in your browser using JavaScript and local storage. Nothing you type is ever transmitted anywhere.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="online-todo-list">
+            <span class="icon" aria-hidden="true">✅</span>
+            <h3>Online To-Do List</h3>
+            <p>A simple task list that saves in your browser.</p>
+          </a>
+          <a class="card" href="markdown-table-generator">
+            <span class="icon" aria-hidden="true">📊</span>
+            <h3>Markdown Table Generator</h3>
+            <p>Build a table visually and get Markdown code.</p>
+          </a>
+          <a class="card" href="word-counter">
+            <span class="icon" aria-hidden="true">📝</span>
+            <h3>Word Counter</h3>
+            <p>Count words, characters, and reading time.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var STORAGE_KEY = "fixora_sticky_notes";
+      var COLORS = ["#fef08a", "#bbf7d0", "#bfdbfe", "#fbcfe8", "#fed7aa", "#ddd6fe"];
+      var notesGrid = document.getElementById("notesGrid");
+      var emptyState = document.getElementById("emptyState");
+      var addNoteBtn = document.getElementById("addNoteBtn");
+
+      var notes = [];
+      var colorCounter = 0;
+
+      function load() {
+        try {
+          var raw = localStorage.getItem(STORAGE_KEY);
+          notes = raw ? JSON.parse(raw) : [];
+        } catch (e) {
+          notes = [];
+        }
+      }
+
+      function save() {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(notes)); } catch (e) {}
+      }
+
+      function escapeHtml(s) {
+        return (s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      }
+
+      function render() {
+        if (notes.length === 0) {
+          notesGrid.innerHTML = "";
+          emptyState.style.display = "block";
+          return;
+        }
+        emptyState.style.display = "none";
+        notesGrid.innerHTML = notes.map(function (n) {
+          return '<div class="note-card" style="background:' + n.color + ';" data-id="' + n.id + '">' +
+            '<button type="button" class="note-delete" data-action="delete" aria-label="Delete note">✕</button>' +
+            '<textarea class="note-textarea" data-action="edit" placeholder="Type a note…">' + escapeHtml(n.content) + "</textarea>" +
+            "</div>";
+        }).join("");
+      }
+
+      function addNote() {
+        var color = COLORS[colorCounter % COLORS.length];
+        colorCounter++;
+        notes.unshift({ id: Date.now() + Math.random(), content: "", color: color });
+        save();
+        render();
+        var firstTextarea = notesGrid.querySelector(".note-textarea");
+        if (firstTextarea) firstTextarea.focus();
+      }
+
+      addNoteBtn.addEventListener("click", addNote);
+
+      notesGrid.addEventListener("click", function (e) {
+        if (e.target.getAttribute("data-action") !== "delete") return;
+        var card = e.target.closest("[data-id]");
+        var id = parseFloat(card.getAttribute("data-id"));
+        notes = notes.filter(function (n) { return n.id !== id; });
+        save();
+        render();
+      });
+
+      notesGrid.addEventListener("input", function (e) {
+        if (e.target.getAttribute("data-action") !== "edit") return;
+        var card = e.target.closest("[data-id]");
+        var id = parseFloat(card.getAttribute("data-id"));
+        var note = notes.filter(function (n) { return n.id === id; })[0];
+        if (note) { note.content = e.target.value; save(); }
+      });
+
+      load();
+      render();
+    })();
+  </script>
+</body>
+</html>

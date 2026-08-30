@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free YouTube Thumbnail Downloader Online | Fixoona</title>
+  <meta name="description" content="Download any YouTube video's thumbnail in every available resolution, free, right in your browser. No sign-up, uses YouTube's own public thumbnail images." />
+  <meta name="keywords" content="youtube thumbnail downloader, download youtube thumbnail free, youtube thumbnail grabber" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/youtube-thumbnail-downloader" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free YouTube Thumbnail Downloader" />
+  <meta property="og:description" content="Download any YouTube video's thumbnail in every resolution, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/youtube-thumbnail-downloader" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free YouTube Thumbnail Downloader" />
+  <meta name="twitter:description" content="Download any YouTube video's thumbnail in every resolution, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "YouTube Thumbnail Downloader",
+    "url": "https://fixoona.com/tools/youtube-thumbnail-downloader",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "YouTube Thumbnail Downloader", "item": "https://fixoona.com/tools/youtube-thumbnail-downloader" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where do these thumbnail images actually come from?",
+        "acceptedAnswer": { "@type": "Answer", "text": "They're fetched directly from YouTube's own public image CDN (img.youtube.com), which hosts a thumbnail for every uploaded video at several fixed resolutions. This tool just constructs the correct URL from the video ID and lets you download the image — it doesn't generate or modify anything." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is the highest resolution sometimes missing?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The 1280×720 \"maxresdefault\" thumbnail is only generated for videos uploaded in HD (720p or higher). Older or lower-resolution uploads may not have one, in which case this tool automatically hides that option rather than showing a broken or placeholder image." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I download the thumbnail from any YouTube video?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, for any public video — just paste the full video URL (including youtu.be short links and Shorts links) or the 11-character video ID directly." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is anything I enter sent anywhere besides YouTube's own servers?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the video ID is extracted entirely in your browser, and the only request made is directly to YouTube's public thumbnail CDN to fetch the image itself. Nothing is sent to Fixoona's own servers, because Fixoona doesn't have any." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .yt-thumbs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin-top: 16px; }
+    .yt-thumb-card { border: 1px solid var(--color-border); border-radius: var(--radius-sm); overflow: hidden; display: none; }
+    .yt-thumb-card.available { display: block; }
+    .yt-thumb-card img { width: 100%; display: block; background: var(--color-bg-alt); }
+    .yt-thumb-meta { padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .yt-thumb-label { font-weight: 700; font-size: 0.9rem; }
+    .yt-thumb-dims { font-size: 0.78rem; color: var(--color-text-muted); }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>YouTube Thumbnail Downloader</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">▶️</div>
+      <h1>YouTube Thumbnail Downloader</h1>
+      <p>Download any YouTube video's thumbnail in every resolution it's actually available in.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="urlInput">YouTube Video URL or ID</label>
+          <input type="text" id="urlInput" placeholder="https://www.youtube.com/watch?v=..." value="https://www.youtube.com/watch?v=dQw4w9WgXcQ" />
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+
+        <div class="yt-thumbs-grid" id="thumbsGrid"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Download a YouTube Thumbnail</h2>
+        <ol class="howto-steps">
+          <li>Paste a YouTube video URL (or just its video ID).</li>
+          <li>Every resolution actually available for that video appears below.</li>
+          <li>Click "Download" under the size you want.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Where do these thumbnail images actually come from?</summary>
+          <p>They're fetched directly from YouTube's own public image CDN (img.youtube.com), which hosts a thumbnail for every uploaded video at several fixed resolutions. This tool just constructs the correct URL from the video ID and lets you download the image — it doesn't generate or modify anything.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why is the highest resolution sometimes missing?</summary>
+          <p>The 1280×720 "maxresdefault" thumbnail is only generated for videos uploaded in HD (720p or higher). Older or lower-resolution uploads may not have one, in which case this tool automatically hides that option rather than showing a broken or placeholder image.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I download the thumbnail from any YouTube video?</summary>
+          <p>Yes, for any public video — just paste the full video URL (including youtu.be short links and Shorts links) or the 11-character video ID directly.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is anything I enter sent anywhere besides YouTube's own servers?</summary>
+          <p>No — the video ID is extracted entirely in your browser, and the only request made is directly to YouTube's public thumbnail CDN to fetch the image itself. Nothing is sent to Fixoona's own servers, because Fixoona doesn't have any.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="qr-code-generator">
+            <span class="icon" aria-hidden="true">▦</span>
+            <h3>QR Code Generator</h3>
+            <p>Generate a scannable QR code.</p>
+          </a>
+          <a class="card" href="image-resizer">
+            <span class="icon" aria-hidden="true">📐</span>
+            <h3>Image Resizer</h3>
+            <p>Resize the downloaded thumbnail if needed.</p>
+          </a>
+          <a class="card" href="meta-tag-generator">
+            <span class="icon" aria-hidden="true">🏷️</span>
+            <h3>Meta Tag Generator</h3>
+            <p>Generate social preview tags for your own content.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var urlInput = document.getElementById("urlInput");
+      var statusBox = document.getElementById("statusBox");
+      var thumbsGrid = document.getElementById("thumbsGrid");
+
+      var QUALITIES = [
+        { key: "maxresdefault", label: "Max Resolution", dims: "1280×720", checkPlaceholder: true },
+        { key: "sddefault", label: "Standard", dims: "640×480", checkPlaceholder: true },
+        { key: "hqdefault", label: "High Quality", dims: "480×360", checkPlaceholder: false },
+        { key: "mqdefault", label: "Medium Quality", dims: "320×180", checkPlaceholder: false },
+        { key: "default", label: "Default", dims: "120×90", checkPlaceholder: false }
+      ];
+
+      function extractVideoId(input) {
+        input = input.trim();
+        var m = input.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+        if (m) return m[1];
+        if (/^[a-zA-Z0-9_-]{11}$/.test(input)) return input;
+        return null;
+      }
+
+      function buildCard(videoId, quality) {
+        var card = document.createElement("div");
+        card.className = "yt-thumb-card";
+        var url = "https://img.youtube.com/vi/" + videoId + "/" + quality.key + ".jpg";
+
+        var img = new Image();
+        img.alt = quality.label + " thumbnail";
+        img.addEventListener("load", function () {
+          if (quality.checkPlaceholder && img.naturalWidth === 120 && img.naturalHeight === 90) {
+            return; // this size isn't actually available for this video
+          }
+          card.classList.add("available");
+        });
+        img.src = url;
+
+        var meta = document.createElement("div");
+        meta.className = "yt-thumb-meta";
+        meta.innerHTML = '<div><div class="yt-thumb-label">' + quality.label + '</div><div class="yt-thumb-dims">' + quality.dims + "</div></div>";
+
+        var downloadBtn = document.createElement("button");
+        downloadBtn.type = "button";
+        downloadBtn.className = "btn btn-secondary";
+        downloadBtn.textContent = "Download";
+        downloadBtn.addEventListener("click", function () {
+          fetch(url).then(function (res) { return res.blob(); }).then(function (blob) {
+            var blobUrl = URL.createObjectURL(blob);
+            var a = document.createElement("a");
+            a.href = blobUrl;
+            a.download = videoId + "-" + quality.key + ".jpg";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(function () { URL.revokeObjectURL(blobUrl); }, 4000);
+          });
+        });
+        meta.appendChild(downloadBtn);
+
+        card.appendChild(img);
+        card.appendChild(meta);
+        return card;
+      }
+
+      function run() {
+        var videoId = extractVideoId(urlInput.value);
+        thumbsGrid.innerHTML = "";
+        if (!videoId) {
+          statusBox.textContent = "Enter a valid YouTube video URL or 11-character video ID.";
+          return;
+        }
+        statusBox.textContent = "";
+        QUALITIES.forEach(function (quality) {
+          thumbsGrid.appendChild(buildCard(videoId, quality));
+        });
+      }
+
+      urlInput.addEventListener("input", run);
+      run();
+    })();
+  </script>
+</body>
+</html>
