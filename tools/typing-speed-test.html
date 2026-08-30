@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Typing Speed Test Online — WPM & Accuracy | Fixoona</title>
+  <meta name="description" content="Test your typing speed online for free — get live words-per-minute and accuracy as you type a random passage. No sign-up, nothing uploaded." />
+  <meta name="keywords" content="typing speed test, wpm test online free, typing test accuracy" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/typing-speed-test" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Typing Speed Test (WPM)" />
+  <meta property="og:description" content="Test your typing speed and accuracy, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/typing-speed-test" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Typing Speed Test (WPM)" />
+  <meta name="twitter:description" content="Test your typing speed and accuracy, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Typing Speed Test",
+    "url": "https://fixoona.com/tools/typing-speed-test",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Typing Speed Test", "item": "https://fixoona.com/tools/typing-speed-test" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How is WPM (words per minute) calculated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "This tool uses the standard typing-test convention of treating every 5 characters typed (including spaces) as one \"word,\" then divides that by the time elapsed in minutes. This is the same method used by most typing test sites, so results are comparable." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is accuracy calculated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Accuracy is the percentage of characters you typed correctly compared to the target passage, checked position by position. Typing a wrong character lowers accuracy even if you don't go back and fix it." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why can't I paste the passage instead of typing it?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Pasting is disabled on purpose — the entire point of a typing test is measuring how fast you can actually type, so allowing a paste shortcut would make the result meaningless." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is anything I type saved or sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the timer, comparison, and scoring all happen entirely in your browser using JavaScript. Nothing you type is stored or sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .tt-passage {
+      font-family: var(--font-mono, monospace);
+      font-size: 1.15rem;
+      line-height: 1.8;
+      background: var(--color-bg-alt);
+      border-radius: var(--radius-sm);
+      padding: 16px 18px;
+      user-select: none;
+    }
+    .tt-passage span.correct { color: var(--color-success); }
+    .tt-passage span.incorrect { color: var(--color-danger); text-decoration: underline; }
+    .tt-passage span.current { background: var(--color-primary); color: #fff; border-radius: 2px; }
+    .tt-stats { display: flex; gap: 24px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+    .tt-stat { text-align: center; }
+    .tt-stat-value { font-family: var(--font-display, sans-serif); font-size: 2rem; font-weight: 800; }
+    .tt-stat-label { font-size: 0.8rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Typing Speed Test</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">⌨️</div>
+      <h1>Typing Speed Test</h1>
+      <p>Type the passage below to measure your words-per-minute and accuracy.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="tt-passage" id="passageDisplay"></div>
+
+        <div class="field" style="margin-top:16px;">
+          <label for="typingInput">Type here</label>
+          <input type="text" id="typingInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+        </div>
+
+        <div class="tt-stats">
+          <div class="tt-stat"><div class="tt-stat-value" id="wpmDisplay">0</div><div class="tt-stat-label">WPM</div></div>
+          <div class="tt-stat"><div class="tt-stat-value" id="accuracyDisplay">100%</div><div class="tt-stat-label">Accuracy</div></div>
+          <div class="tt-stat"><div class="tt-stat-value" id="timeDisplay">0.0s</div><div class="tt-stat-label">Time</div></div>
+        </div>
+
+        <div class="actions" style="justify-content:center;">
+          <button class="btn btn-secondary" id="restartBtn">New Passage</button>
+        </div>
+        <div class="output-box" id="statusBox"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Use the Typing Test</h2>
+        <ol class="howto-steps">
+          <li>Click into the input box and start typing the passage shown.</li>
+          <li>The timer starts on your first keystroke.</li>
+          <li>Finish typing the whole passage to see your final WPM and accuracy.</li>
+          <li>Click "New Passage" to try again with a different passage.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How is WPM (words per minute) calculated?</summary>
+          <p>This tool uses the standard typing-test convention of treating every 5 characters typed (including spaces) as one "word," then divides that by the time elapsed in minutes. This is the same method used by most typing test sites, so results are comparable.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How is accuracy calculated?</summary>
+          <p>Accuracy is the percentage of characters you typed correctly compared to the target passage, checked position by position. Typing a wrong character lowers accuracy even if you don't go back and fix it.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why can't I paste the passage instead of typing it?</summary>
+          <p>Pasting is disabled on purpose — the entire point of a typing test is measuring how fast you can actually type, so allowing a paste shortcut would make the result meaningless.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is anything I type saved or sent anywhere?</summary>
+          <p>No — the timer, comparison, and scoring all happen entirely in your browser using JavaScript. Nothing you type is stored or sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="reaction-time-test">
+            <span class="icon" aria-hidden="true">⚡</span>
+            <h3>Reaction Time Test</h3>
+            <p>Test how fast you can react to a visual cue.</p>
+          </a>
+          <a class="card" href="word-counter">
+            <span class="icon" aria-hidden="true">📝</span>
+            <h3>Word Counter</h3>
+            <p>Count words, characters, and reading time.</p>
+          </a>
+          <a class="card" href="text-case-converter">
+            <span class="icon" aria-hidden="true">🔠</span>
+            <h3>Text Case Converter</h3>
+            <p>Convert text between different cases.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var PASSAGES = [
+        "The quick brown fox jumps over the lazy dog while the sun sets slowly behind the hills.",
+        "Typing quickly and accurately is a skill that improves the more consistently you practice it.",
+        "A journey of a thousand miles begins with a single step, no matter how small it may seem.",
+        "Good habits are hard to build but easy to live with, while bad habits are the opposite.",
+        "The best way to predict the future is to create it yourself, one small decision at a time.",
+        "Coffee tastes better in the morning when the house is quiet and the world hasn't woken up yet.",
+        "Programming is the art of telling another human what one wants the computer to do.",
+        "Success usually comes to those who are too busy looking for it to notice whether they have it.",
+        "The only way to do great work is to love what you do and keep learning along the way.",
+        "Simplicity is the ultimate sophistication, especially when designing something people will use daily.",
+        "Reading a little every single day adds up to a surprising amount of knowledge over the years.",
+        "Practice does not make perfect, but consistent, deliberate practice makes lasting improvement.",
+        "A calm sea never made a skilled sailor, and easy days rarely build real strength or patience.",
+        "Small, steady progress beats occasional bursts of effort followed by long stretches of nothing.",
+        "The keyboard is the bridge between a thought in your head and words on the screen in front of you."
+      ];
+
+      var passageDisplay = document.getElementById("passageDisplay");
+      var typingInput = document.getElementById("typingInput");
+      var wpmDisplay = document.getElementById("wpmDisplay");
+      var accuracyDisplay = document.getElementById("accuracyDisplay");
+      var timeDisplay = document.getElementById("timeDisplay");
+      var restartBtn = document.getElementById("restartBtn");
+      var statusBox = document.getElementById("statusBox");
+
+      var currentPassage = "";
+      var startTime = null;
+      var finished = false;
+      var liveInterval = null;
+
+      function escapeHtml(s) {
+        return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      }
+
+      function renderPassage() {
+        passageDisplay.innerHTML = currentPassage.split("").map(function (ch) {
+          return "<span>" + escapeHtml(ch) + "</span>";
+        }).join("");
+      }
+
+      function updateHighlight(typed) {
+        var spans = passageDisplay.children;
+        for (var i = 0; i < spans.length; i++) {
+          spans[i].className = "";
+          if (i < typed.length) {
+            spans[i].className = typed[i] === currentPassage[i] ? "correct" : "incorrect";
+          } else if (i === typed.length) {
+            spans[i].className = "current";
+          }
+        }
+      }
+
+      function computeStats(typed, elapsedMs) {
+        var minutes = elapsedMs / 60000;
+        var wpm = minutes > 0 ? Math.round((typed.length / 5) / minutes) : 0;
+        var correct = 0;
+        for (var i = 0; i < typed.length; i++) {
+          if (typed[i] === currentPassage[i]) correct++;
+        }
+        var accuracy = typed.length > 0 ? Math.round((correct / typed.length) * 100) : 100;
+        return { wpm: wpm, accuracy: accuracy };
+      }
+
+      function liveUpdate() {
+        if (!startTime || finished) return;
+        var elapsed = Date.now() - startTime;
+        var stats = computeStats(typingInput.value, elapsed);
+        wpmDisplay.textContent = stats.wpm;
+        accuracyDisplay.textContent = stats.accuracy + "%";
+        timeDisplay.textContent = (elapsed / 1000).toFixed(1) + "s";
+      }
+
+      function onInput() {
+        var typed = typingInput.value;
+        if (typed.length > currentPassage.length) {
+          typingInput.value = typed.slice(0, currentPassage.length);
+          typed = typingInput.value;
+        }
+        if (!startTime && typed.length > 0) {
+          startTime = Date.now();
+          liveInterval = setInterval(liveUpdate, 200);
+        }
+        updateHighlight(typed);
+
+        if (typed.length === currentPassage.length && !finished) {
+          finished = true;
+          clearInterval(liveInterval);
+          var elapsed = Date.now() - startTime;
+          var stats = computeStats(typed, elapsed);
+          wpmDisplay.textContent = stats.wpm;
+          accuracyDisplay.textContent = stats.accuracy + "%";
+          timeDisplay.textContent = (elapsed / 1000).toFixed(1) + "s";
+          statusBox.textContent = "Done! " + stats.wpm + " WPM at " + stats.accuracy + "% accuracy.";
+          typingInput.disabled = true;
+        }
+      }
+
+      function restart() {
+        clearInterval(liveInterval);
+        currentPassage = PASSAGES[Math.floor(Math.random() * PASSAGES.length)];
+        renderPassage();
+        updateHighlight("");
+        typingInput.value = "";
+        typingInput.disabled = false;
+        typingInput.focus();
+        startTime = null;
+        finished = false;
+        wpmDisplay.textContent = "0";
+        accuracyDisplay.textContent = "100%";
+        timeDisplay.textContent = "0.0s";
+        statusBox.textContent = "";
+      }
+
+      typingInput.addEventListener("input", onInput);
+      typingInput.addEventListener("paste", function (e) { e.preventDefault(); });
+      restartBtn.addEventListener("click", restart);
+
+      restart();
+    })();
+  </script>
+</body>
+</html>

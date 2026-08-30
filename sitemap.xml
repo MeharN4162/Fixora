@@ -470,6 +470,42 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://fixoona.com/tools/typing-speed-test</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://fixoona.com/tools/reaction-time-test</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://fixoona.com/tools/ip-subnet-calculator</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://fixoona.com/tools/user-agent-parser</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://fixoona.com/tools/yaml-json-converter</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://fixoona.com/tools/xml-formatter</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://fixoona.com/tools/image-to-base64</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>monthly</changefreq>

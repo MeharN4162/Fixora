@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free User Agent Parser Online | Fixoona</title>
+  <meta name="description" content="Parse any browser user agent string into browser, OS, engine, and device info online for free, right in your browser. No sign-up, nothing uploaded." />
+  <meta name="keywords" content="user agent parser, ua string parser online free, what is my user agent" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/user-agent-parser" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free User Agent Parser" />
+  <meta property="og:description" content="Parse any user agent string into browser, OS, and device info, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/user-agent-parser" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free User Agent Parser" />
+  <meta name="twitter:description" content="Parse any user agent string into browser, OS, and device info, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "User Agent Parser",
+    "url": "https://fixoona.com/tools/user-agent-parser",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "User Agent Parser", "item": "https://fixoona.com/tools/user-agent-parser" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a user agent string?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's a piece of text every browser sends with its requests that identifies the browser, its version, the operating system, and the device — websites use it to serve appropriately formatted pages or gather basic analytics." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does my browser's user agent mention other browsers, like Safari or Gecko?",
+        "acceptedAnswer": { "@type": "Answer", "text": "For historical compatibility reasons, browsers include references to older or competing browser engines in their user agent strings so that websites built to check for those tokens still work correctly — this is why Chrome's user agent string actually contains the word \"Safari.\"" }
+      },
+      {
+        "@type": "Question",
+        "name": "How accurate is user agent parsing?",
+        "acceptedAnswer": { "@type": "Answer", "text": "This tool uses UAParser.js, a widely used open-source parsing library, which handles the vast majority of real-world browsers and devices correctly. That said, user agent strings can be spoofed or customized, so parsing them is never a guaranteed way to identify a browser with total certainty." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the user agent string sent anywhere when I use this?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the parsing happens entirely in your browser using JavaScript, so nothing you enter (or your own detected user agent) is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .ua-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 16px; }
+    .ua-part { background: var(--color-bg-alt); border-radius: var(--radius-sm); padding: 12px 14px; }
+    .ua-part-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); font-weight: 700; margin-bottom: 4px; }
+    .ua-part-value { font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>User Agent Parser</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🕵️</div>
+      <h1>User Agent Parser</h1>
+      <p>Parse any user agent string into browser, engine, OS, and device details.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="uaInput">User Agent String</label>
+          <textarea id="uaInput" style="min-height:90px;font-family:var(--font-mono,monospace);font-size:0.85rem;"></textarea>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-secondary" id="useMyUaBtn">Use My Browser's User Agent</button>
+        </div>
+
+        <div class="ua-results" id="resultsArea"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Parse a User Agent String</h2>
+        <ol class="howto-steps">
+          <li>Paste any user agent string, or click "Use My Browser's User Agent."</li>
+          <li>The browser, engine, OS, and device details appear instantly.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What is a user agent string?</summary>
+          <p>It's a piece of text every browser sends with its requests that identifies the browser, its version, the operating system, and the device — websites use it to serve appropriately formatted pages or gather basic analytics.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why does my browser's user agent mention other browsers, like Safari or Gecko?</summary>
+          <p>For historical compatibility reasons, browsers include references to older or competing browser engines in their user agent strings so that websites built to check for those tokens still work correctly — this is why Chrome's user agent string actually contains the word "Safari."</p>
+        </details>
+        <details class="faq-item">
+          <summary>How accurate is user agent parsing?</summary>
+          <p>This tool uses UAParser.js, a widely used open-source parsing library, which handles the vast majority of real-world browsers and devices correctly. That said, user agent strings can be spoofed or customized, so parsing them is never a guaranteed way to identify a browser with total certainty.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is the user agent string sent anywhere when I use this?</summary>
+          <p>No — the parsing happens entirely in your browser using JavaScript, so nothing you enter (or your own detected user agent) is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="ip-subnet-calculator">
+            <span class="icon" aria-hidden="true">🌐</span>
+            <h3>IP Subnet Calculator</h3>
+            <p>Calculate network, broadcast, and host range.</p>
+          </a>
+          <a class="card" href="url-parser">
+            <span class="icon" aria-hidden="true">🔗</span>
+            <h3>URL Parser</h3>
+            <p>Break any URL down into its parts.</p>
+          </a>
+          <a class="card" href="jwt-decoder">
+            <span class="icon" aria-hidden="true">🔑</span>
+            <h3>JWT Decoder</h3>
+            <p>Decode a JSON Web Token's header and payload.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/vendor/ua-parser.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var uaInput = document.getElementById("uaInput");
+      var useMyUaBtn = document.getElementById("useMyUaBtn");
+      var resultsArea = document.getElementById("resultsArea");
+
+      function escapeHtml(s) {
+        return (s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      }
+
+      function part(label, value) {
+        return '<div class="ua-part"><div class="ua-part-label">' + label + '</div><div class="ua-part-value">' + escapeHtml(value || "Unknown") + "</div></div>";
+      }
+
+      function parse() {
+        var ua = uaInput.value.trim();
+        resultsArea.innerHTML = "";
+        if (!ua) return;
+
+        var parser = new UAParser(ua);
+        var result = parser.getResult();
+
+        var html = "";
+        html += part("Browser", (result.browser.name || "Unknown") + (result.browser.version ? " " + result.browser.version : ""));
+        html += part("Rendering Engine", (result.engine.name || "Unknown") + (result.engine.version ? " " + result.engine.version : ""));
+        html += part("Operating System", (result.os.name || "Unknown") + (result.os.version ? " " + result.os.version : ""));
+        html += part("Device Type", result.device.type || "Desktop");
+        html += part("Device Vendor", result.device.vendor);
+        html += part("Device Model", result.device.model);
+        html += part("CPU Architecture", result.cpu.architecture);
+        resultsArea.innerHTML = html;
+      }
+
+      uaInput.addEventListener("input", parse);
+      useMyUaBtn.addEventListener("click", function () {
+        uaInput.value = navigator.userAgent;
+        parse();
+      });
+
+      uaInput.value = navigator.userAgent;
+      parse();
+    })();
+  </script>
+</body>
+</html>
