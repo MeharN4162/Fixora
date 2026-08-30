@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Color Contrast Checker Online — WCAG AA/AAA | Fixoona</title>
+  <meta name="description" content="Check the WCAG contrast ratio between two colors online for free — see live AA and AAA pass/fail results with a real text preview. No sign-up." />
+  <meta name="keywords" content="color contrast checker, wcag contrast ratio calculator, accessibility contrast checker free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/contrast-ratio-checker" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free WCAG Color Contrast Checker" />
+  <meta property="og:description" content="Check WCAG AA/AAA contrast between two colors, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/contrast-ratio-checker" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free WCAG Color Contrast Checker" />
+  <meta name="twitter:description" content="Check WCAG AA/AAA contrast between two colors, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Color Contrast Checker",
+    "url": "https://fixoona.com/tools/contrast-ratio-checker",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Color Contrast Checker", "item": "https://fixoona.com/tools/contrast-ratio-checker" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How is the contrast ratio calculated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It follows the official WCAG 2.x formula exactly: each color's relative luminance is calculated from its linearized sRGB channels, and the ratio is (lighter luminance + 0.05) divided by (darker luminance + 0.05), producing a value from 1:1 (identical colors) up to 21:1 (pure black on pure white)." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between the AA and AAA thresholds?",
+        "acceptedAnswer": { "@type": "Answer", "text": "WCAG AA is the standard accessibility requirement: at least 4.5:1 for normal text and 3:1 for large text (18pt+, or 14pt+ bold). AAA is a stricter, enhanced level requiring at least 7:1 for normal text and 4.5:1 for large text." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why can two colors that look fine to me still fail?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Human perception of contrast doesn't map linearly to WCAG's math, and many people underestimate how much luminance difference is actually needed for text to stay readable for users with low vision or color vision differences — which is exactly why an objective formula, not a visual guess, is used for accessibility compliance." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are the colors I pick sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the entire calculation happens locally in your browser using JavaScript, so nothing is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .contrast-preview-box {
+      border-radius: var(--radius-md);
+      padding: 40px 24px;
+      text-align: center;
+      margin-top: 16px;
+    }
+    .contrast-preview-box .large-text { font-size: 1.8rem; font-weight: 700; margin-bottom: 8px; }
+    .contrast-preview-box .normal-text { font-size: 1rem; }
+    .contrast-ratio-display { text-align: center; margin: 16px 0; }
+    .contrast-ratio-value { font-family: var(--font-display, sans-serif); font-size: 2.4rem; font-weight: 800; }
+    .contrast-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
+    .contrast-badge { padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 0.85rem; }
+    .contrast-badge.pass { background: rgba(22, 163, 74, 0.12); color: var(--color-success); }
+    .contrast-badge.fail { background: rgba(220, 38, 38, 0.12); color: var(--color-danger); }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Color Contrast Checker</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🔲</div>
+      <h1>Color Contrast Checker</h1>
+      <p>Check the WCAG contrast ratio between two colors, with live AA and AAA pass/fail results.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="row">
+          <div class="field">
+            <label for="fgColor">Text Color</label>
+            <input type="color" id="fgColor" value="#1f2937" style="width:100%;height:44px;border:1px solid var(--color-border);border-radius:8px;cursor:pointer;" />
+          </div>
+          <div class="field">
+            <label for="bgColor">Background Color</label>
+            <input type="color" id="bgColor" value="#ffffff" style="width:100%;height:44px;border:1px solid var(--color-border);border-radius:8px;cursor:pointer;" />
+          </div>
+        </div>
+
+        <div class="contrast-ratio-display">
+          <div class="contrast-ratio-value" id="ratioDisplay">21.00:1</div>
+          <div class="contrast-badges" id="badgesArea"></div>
+        </div>
+
+        <div class="contrast-preview-box" id="previewBox">
+          <div class="large-text">Large Text Preview (18pt+)</div>
+          <div class="normal-text">Normal text preview at a typical reading size, to see how it actually looks.</div>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Check Color Contrast</h2>
+        <ol class="howto-steps">
+          <li>Pick a text color and a background color.</li>
+          <li>The contrast ratio and WCAG AA/AAA pass/fail badges update instantly.</li>
+          <li>Use the preview box to see how the combination actually looks.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How is the contrast ratio calculated?</summary>
+          <p>It follows the official WCAG 2.x formula exactly: each color's relative luminance is calculated from its linearized sRGB channels, and the ratio is (lighter luminance + 0.05) divided by (darker luminance + 0.05), producing a value from 1:1 (identical colors) up to 21:1 (pure black on pure white).</p>
+        </details>
+        <details class="faq-item">
+          <summary>What's the difference between the AA and AAA thresholds?</summary>
+          <p>WCAG AA is the standard accessibility requirement: at least 4.5:1 for normal text and 3:1 for large text (18pt+, or 14pt+ bold). AAA is a stricter, enhanced level requiring at least 7:1 for normal text and 4.5:1 for large text.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why can two colors that look fine to me still fail?</summary>
+          <p>Human perception of contrast doesn't map linearly to WCAG's math, and many people underestimate how much luminance difference is actually needed for text to stay readable for users with low vision or color vision differences — which is exactly why an objective formula, not a visual guess, is used for accessibility compliance.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Are the colors I pick sent anywhere?</summary>
+          <p>No — the entire calculation happens locally in your browser using JavaScript, so nothing is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="color-blindness-simulator">
+            <span class="icon" aria-hidden="true">👁️</span>
+            <h3>Color Blindness Simulator</h3>
+            <p>See how an image looks under color vision differences.</p>
+          </a>
+          <a class="card" href="color-converter">
+            <span class="icon" aria-hidden="true">🎨</span>
+            <h3>Color Converter</h3>
+            <p>Convert between HEX, RGB, and HSL.</p>
+          </a>
+          <a class="card" href="color-palette-generator">
+            <span class="icon" aria-hidden="true">🎨</span>
+            <h3>Color Palette Generator</h3>
+            <p>Generate a matching color palette.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 130+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var fgColor = document.getElementById("fgColor");
+      var bgColor = document.getElementById("bgColor");
+      var ratioDisplay = document.getElementById("ratioDisplay");
+      var badgesArea = document.getElementById("badgesArea");
+      var previewBox = document.getElementById("previewBox");
+
+      function hexToRgb(hex) {
+        hex = hex.replace("#", "");
+        return [parseInt(hex.slice(0, 2), 16), parseInt(hex.slice(2, 4), 16), parseInt(hex.slice(4, 6), 16)];
+      }
+
+      function relativeLuminance(rgb) {
+        var srgb = rgb.map(function (v) {
+          var c = v / 255;
+          return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+        });
+        return 0.2126 * srgb[0] + 0.7152 * srgb[1] + 0.0722 * srgb[2];
+      }
+
+      function contrastRatio(hex1, hex2) {
+        var l1 = relativeLuminance(hexToRgb(hex1));
+        var l2 = relativeLuminance(hexToRgb(hex2));
+        var lighter = Math.max(l1, l2);
+        var darker = Math.min(l1, l2);
+        return (lighter + 0.05) / (darker + 0.05);
+      }
+
+      function badge(label, pass) {
+        return '<span class="contrast-badge ' + (pass ? "pass" : "fail") + '">' + label + " " + (pass ? "Pass" : "Fail") + "</span>";
+      }
+
+      function update() {
+        var ratio = contrastRatio(fgColor.value, bgColor.value);
+        ratioDisplay.textContent = ratio.toFixed(2) + ":1";
+
+        badgesArea.innerHTML =
+          badge("AA Normal Text (4.5:1)", ratio >= 4.5) +
+          badge("AA Large Text (3:1)", ratio >= 3) +
+          badge("AAA Normal Text (7:1)", ratio >= 7) +
+          badge("AAA Large Text (4.5:1)", ratio >= 4.5);
+
+        previewBox.style.background = bgColor.value;
+        previewBox.style.color = fgColor.value;
+      }
+
+      fgColor.addEventListener("input", update);
+      bgColor.addEventListener("input", update);
+      update();
+    })();
+  </script>
+</body>
+</html>

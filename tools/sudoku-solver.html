@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Sudoku Solver Online | Fixoona</title>
+  <meta name="description" content="Solve any valid Sudoku puzzle online for free — enter the given numbers and get the full solution instantly, right in your browser. No sign-up." />
+  <meta name="keywords" content="sudoku solver, solve sudoku online free, sudoku puzzle solver" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/sudoku-solver" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Sudoku Solver" />
+  <meta property="og:description" content="Solve any valid Sudoku puzzle instantly, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/sudoku-solver" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Sudoku Solver" />
+  <meta name="twitter:description" content="Solve any valid Sudoku puzzle instantly, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Sudoku Solver",
+    "url": "https://fixoona.com/tools/sudoku-solver",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Sudoku Solver", "item": "https://fixoona.com/tools/sudoku-solver" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does the solver actually work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It uses a backtracking algorithm — it tries placing valid numbers in the emptiest, most constrained cells first, and backtracks whenever it hits a dead end, until every cell is filled correctly. This is a standard, well-understood way to solve any valid Sudoku puzzle." }
+      },
+      {
+        "@type": "Question",
+        "name": "What if the puzzle I entered isn't valid?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The solver first checks that your given numbers don't already break the rules (no repeated number in any row, column, or 3×3 box). If they do, it tells you the puzzle is invalid instead of attempting to solve it." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can every valid-looking Sudoku puzzle be solved?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — a puzzle can be validly entered (no rule violations yet) but still have no possible solution, or have more than one valid solution if too few numbers were given. This solver will report if no solution exists for what you entered." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my puzzle sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — solving happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .sudoku-grid {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      max-width: 450px;
+      margin: 0 auto;
+      border: 2px solid var(--color-text);
+    }
+    .sudoku-cell {
+      width: 100%;
+      aspect-ratio: 1;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border: 1px solid var(--color-border);
+      border-radius: 0;
+      padding: 0;
+      background: var(--color-surface);
+      color: var(--color-text);
+    }
+    .sudoku-cell.given { color: var(--color-primary); }
+    .sudoku-cell.solved { color: var(--color-success); }
+    .sudoku-cell:nth-child(3n) { border-right: 2px solid var(--color-text); }
+    .sudoku-cell:nth-child(9n+1) { border-left: 2px solid var(--color-text); }
+    .sudoku-row-3n { }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Sudoku Solver</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🧩</div>
+      <h1>Sudoku Solver</h1>
+      <p>Enter the given numbers from any valid Sudoku puzzle and get the full solution instantly.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="sudoku-grid" id="sudokuGrid"></div>
+
+        <div class="output-box" id="statusBox" style="margin-top:16px;"></div>
+
+        <div class="actions" style="justify-content:center;">
+          <button class="btn btn-primary" id="solveBtn">Solve</button>
+          <button class="btn btn-secondary" id="exampleBtn">Load Example</button>
+          <button class="btn btn-secondary" id="clearBtn">Clear</button>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Use the Sudoku Solver</h2>
+        <ol class="howto-steps">
+          <li>Enter the known numbers into the grid (leave the rest blank).</li>
+          <li>Click "Solve."</li>
+          <li>The full solution fills in, with solved cells shown in a different color.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How does the solver actually work?</summary>
+          <p>It uses a backtracking algorithm — it tries placing valid numbers in the emptiest, most constrained cells first, and backtracks whenever it hits a dead end, until every cell is filled correctly. This is a standard, well-understood way to solve any valid Sudoku puzzle.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What if the puzzle I entered isn't valid?</summary>
+          <p>The solver first checks that your given numbers don't already break the rules (no repeated number in any row, column, or 3×3 box). If they do, it tells you the puzzle is invalid instead of attempting to solve it.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can every valid-looking Sudoku puzzle be solved?</summary>
+          <p>No — a puzzle can be validly entered (no rule violations yet) but still have no possible solution, or have more than one valid solution if too few numbers were given. This solver will report if no solution exists for what you entered.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my puzzle sent anywhere?</summary>
+          <p>No — solving happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="random-decision-wheel">
+            <span class="icon" aria-hidden="true">🎡</span>
+            <h3>Random Decision Wheel</h3>
+            <p>Spin a wheel to make a random pick.</p>
+          </a>
+          <a class="card" href="dice-roller">
+            <span class="icon" aria-hidden="true">🎲</span>
+            <h3>Dice Roller</h3>
+            <p>Roll one or more virtual dice.</p>
+          </a>
+          <a class="card" href="typing-speed-test">
+            <span class="icon" aria-hidden="true">⌨️</span>
+            <h3>Typing Speed Test</h3>
+            <p>Measure your typing speed and accuracy.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 130+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var sudokuGrid = document.getElementById("sudokuGrid");
+      var solveBtn = document.getElementById("solveBtn");
+      var exampleBtn = document.getElementById("exampleBtn");
+      var clearBtn = document.getElementById("clearBtn");
+      var statusBox = document.getElementById("statusBox");
+
+      var EXAMPLE = [
+        [5,3,0,0,7,0,0,0,0],
+        [6,0,0,1,9,5,0,0,0],
+        [0,9,8,0,0,0,0,6,0],
+        [8,0,0,0,6,0,0,0,3],
+        [4,0,0,8,0,3,0,0,1],
+        [7,0,0,0,2,0,0,0,6],
+        [0,6,0,0,0,0,2,8,0],
+        [0,0,0,4,1,9,0,0,5],
+        [0,0,0,0,8,0,0,7,9]
+      ];
+
+      var cells = [];
+      for (var r = 0; r < 9; r++) {
+        for (var c = 0; c < 9; c++) {
+          var input = document.createElement("input");
+          input.type = "text";
+          input.className = "sudoku-cell";
+          input.maxLength = 1;
+          input.setAttribute("inputmode", "numeric");
+          input.setAttribute("data-r", r);
+          input.setAttribute("data-c", c);
+          input.addEventListener("input", function (e) {
+            e.target.value = e.target.value.replace(/[^1-9]/g, "");
+            e.target.classList.remove("given", "solved");
+          });
+          sudokuGrid.appendChild(input);
+          cells.push(input);
+        }
+      }
+
+      function getCell(r, c) {
+        return cells[r * 9 + c];
+      }
+
+      function readBoard() {
+        var board = [];
+        for (var r = 0; r < 9; r++) {
+          var row = [];
+          for (var c = 0; c < 9; c++) {
+            var v = getCell(r, c).value;
+            row.push(v ? parseInt(v, 10) : 0);
+          }
+          board.push(row);
+        }
+        return board;
+      }
+
+      function writeBoard(board, markSolved) {
+        for (var r = 0; r < 9; r++) {
+          for (var c = 0; c < 9; c++) {
+            var cell = getCell(r, c);
+            var wasEmpty = !cell.value;
+            cell.value = board[r][c] || "";
+            if (markSolved && wasEmpty && board[r][c]) {
+              cell.classList.add("solved");
+            }
+          }
+        }
+      }
+
+      function getCandidates(board, r, c) {
+        var used = {};
+        for (var i = 0; i < 9; i++) { used[board[r][i]] = true; used[board[i][c]] = true; }
+        var br = Math.floor(r / 3) * 3, bc = Math.floor(c / 3) * 3;
+        for (var i = 0; i < 3; i++) for (var j = 0; j < 3; j++) used[board[br + i][bc + j]] = true;
+        var out = [];
+        for (var n = 1; n <= 9; n++) if (!used[n]) out.push(n);
+        return out;
+      }
+
+      function findBestCell(board) {
+        var best = null, bestCount = 10;
+        for (var r = 0; r < 9; r++) for (var c = 0; c < 9; c++) {
+          if (board[r][c] === 0) {
+            var cands = getCandidates(board, r, c);
+            if (cands.length < bestCount) {
+              bestCount = cands.length;
+              best = { r: r, c: c };
+              if (bestCount === 0) return best;
+            }
+          }
+        }
+        return best;
+      }
+
+      function solve(board) {
+        var cell = findBestCell(board);
+        if (!cell) return true;
+        var candidates = getCandidates(board, cell.r, cell.c);
+        for (var i = 0; i < candidates.length; i++) {
+          board[cell.r][cell.c] = candidates[i];
+          if (solve(board)) return true;
+          board[cell.r][cell.c] = 0;
+        }
+        return false;
+      }
+
+      function isValidGiven(board) {
+        for (var r = 0; r < 9; r++) for (var c = 0; c < 9; c++) {
+          if (board[r][c] !== 0) {
+            var v = board[r][c];
+            board[r][c] = 0;
+            var cands = getCandidates(board, r, c);
+            board[r][c] = v;
+            if (cands.indexOf(v) === -1) return false;
+          }
+        }
+        return true;
+      }
+
+      solveBtn.addEventListener("click", function () {
+        var board = readBoard();
+        if (!isValidGiven(board)) {
+          statusBox.textContent = "That puzzle isn't valid — a number repeats in a row, column, or 3×3 box.";
+          return;
+        }
+        var solvable = solve(board);
+        if (!solvable) {
+          statusBox.textContent = "No solution exists for this puzzle.";
+          return;
+        }
+        cells.forEach(function (cell) { if (cell.value) cell.classList.add("given"); });
+        writeBoard(board, true);
+        statusBox.textContent = "Solved!";
+      });
+
+      exampleBtn.addEventListener("click", function () {
+        cells.forEach(function (cell) { cell.classList.remove("given", "solved"); });
+        writeBoard(EXAMPLE, false);
+        cells.forEach(function (cell) { if (cell.value) cell.classList.add("given"); });
+        statusBox.textContent = "";
+      });
+
+      clearBtn.addEventListener("click", function () {
+        cells.forEach(function (cell) {
+          cell.value = "";
+          cell.classList.remove("given", "solved");
+        });
+        statusBox.textContent = "";
+      });
+    })();
+  </script>
+</body>
+</html>

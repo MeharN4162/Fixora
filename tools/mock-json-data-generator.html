@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Mock JSON Data Generator Online | Fixoona</title>
+  <meta name="description" content="Generate realistic fake JSON test data online for free — build a custom schema with names, emails, dates, and more, right in your browser. No sign-up." />
+  <meta name="keywords" content="mock json data generator, fake data generator online free, test data generator json" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/mock-json-data-generator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Mock JSON Data Generator" />
+  <meta property="og:description" content="Generate realistic fake JSON test data with a custom schema, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/mock-json-data-generator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Mock JSON Data Generator" />
+  <meta name="twitter:description" content="Generate realistic fake JSON test data with a custom schema, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Mock JSON Data Generator",
+    "url": "https://fixoona.com/tools/mock-json-data-generator",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Mock JSON Data Generator", "item": "https://fixoona.com/tools/mock-json-data-generator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is this real, usable-looking data or obviously fake placeholders?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's randomly assembled from real first names, last names, cities, and sentence fragments, so it looks like plausible, realistic test data rather than generic placeholders like \"test1,\" \"test2\" — useful for populating a UI or testing how your code handles varied input." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are the generated UUIDs valid?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — they're real, correctly formatted UUID version 4 values, generated using your browser's cryptographically secure random number generator with the proper version and variant bits set." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I customize which fields are generated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — add as many fields as you need, name each one whatever you'd like, and choose its data type from the dropdown. The schema you build is used to generate every record." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is any of this data real or does it come from a real person?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — every value is randomly assembled from generic word lists built into this page. Names, emails, and other fields are not tied to any real individual, and everything is generated locally in your browser." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .mock-field-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; margin-bottom: 8px; align-items: center; }
+    .mock-field-remove { background: none; border: none; color: var(--color-text-muted); cursor: pointer; font-size: 1.1rem; padding: 4px 8px; }
+    .mock-field-remove:hover { color: var(--color-danger); }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Mock JSON Data Generator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🧬</div>
+      <h1>Mock JSON Data Generator</h1>
+      <p>Build a schema and generate realistic fake JSON test data instantly.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div id="fieldsArea"></div>
+        <div class="actions">
+          <button class="btn btn-secondary" id="addFieldBtn">+ Add Field</button>
+        </div>
+
+        <div class="field" style="margin-top:16px;">
+          <label for="countInput">Number of Records</label>
+          <input type="number" id="countInput" value="5" min="1" max="500" />
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="generateBtn">Generate JSON</button>
+          <button class="btn btn-secondary" id="copyBtn">Copy Result</button>
+        </div>
+        <div class="copy-note" id="copyNote"></div>
+
+        <div class="field" style="margin-top:16px;">
+          <label for="outputBox">Generated JSON</label>
+          <textarea id="outputBox" readonly style="min-height:260px;font-family:var(--font-mono,monospace);"></textarea>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Generate Mock Data</h2>
+        <ol class="howto-steps">
+          <li>Name each field and pick its data type.</li>
+          <li>Add as many fields as you need.</li>
+          <li>Set how many records to generate, then click "Generate JSON."</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Is this real, usable-looking data or obviously fake placeholders?</summary>
+          <p>It's randomly assembled from real first names, last names, cities, and sentence fragments, so it looks like plausible, realistic test data rather than generic placeholders like "test1," "test2" — useful for populating a UI or testing how your code handles varied input.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Are the generated UUIDs valid?</summary>
+          <p>Yes — they're real, correctly formatted UUID version 4 values, generated using your browser's cryptographically secure random number generator with the proper version and variant bits set.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I customize which fields are generated?</summary>
+          <p>Yes — add as many fields as you need, name each one whatever you'd like, and choose its data type from the dropdown. The schema you build is used to generate every record.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is any of this data real or does it come from a real person?</summary>
+          <p>No — every value is randomly assembled from generic word lists built into this page. Names, emails, and other fields are not tied to any real individual, and everything is generated locally in your browser.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="uuid-generator">
+            <span class="icon" aria-hidden="true">🆔</span>
+            <h3>UUID Generator</h3>
+            <p>Generate standalone UUIDs.</p>
+          </a>
+          <a class="card" href="json-formatter">
+            <span class="icon" aria-hidden="true">{ }</span>
+            <h3>JSON Formatter</h3>
+            <p>Beautify, minify, and validate JSON.</p>
+          </a>
+          <a class="card" href="csv-json-converter">
+            <span class="icon" aria-hidden="true">🔀</span>
+            <h3>CSV to JSON Converter</h3>
+            <p>Convert spreadsheet data to JSON.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 130+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var FIRST_NAMES = ["James","Mary","John","Patricia","Robert","Jennifer","Michael","Linda","William","Elizabeth","David","Barbara","Richard","Susan","Joseph","Jessica","Thomas","Sarah","Charles","Karen","Ava","Noah","Emma","Liam","Olivia","Mia","Sophia","Lucas","Isabella","Ethan"];
+      var LAST_NAMES = ["Smith","Johnson","Williams","Brown","Jones","Garcia","Miller","Davis","Rodriguez","Martinez","Hernandez","Lopez","Gonzalez","Wilson","Anderson","Thomas","Taylor","Moore","Jackson","Martin","Lee","Perez","Thompson","White","Harris","Sanchez","Clark","Ramirez","Lewis","Robinson"];
+      var CITIES = ["Austin","Denver","Seattle","Chicago","Boston","Miami","Portland","Nashville","Atlanta","Phoenix","Dallas","Detroit","Orlando","Sacramento","Columbus"];
+      var COMPANY_WORDS = ["Global","Dynamic","Prime","Nexus","Vertex","Summit","Bright","Northstar","Bluewave","Ironclad","Crestline","Silverline","Pioneer","Vantage","Redwood"];
+      var COMPANY_SUFFIX = ["Inc.","LLC","Group","Solutions","Labs","Co.","Partners"];
+      var SENTENCE_WORDS = ["the","quick","system","process","team","project","update","data","review","design","plan","result","market","product","user","feature","release","goal","report","idea","value","insight","growth","launch","feedback"];
+      var EMAIL_DOMAINS = ["gmail.com","yahoo.com","outlook.com","example.com","mail.com"];
+
+      var FIELD_TYPES = [
+        { key: "fullName", label: "Full Name" },
+        { key: "email", label: "Email" },
+        { key: "phone", label: "Phone Number" },
+        { key: "boolean", label: "Boolean" },
+        { key: "number", label: "Number (1–1000)" },
+        { key: "uuid", label: "UUID" },
+        { key: "date", label: "Date (past year)" },
+        { key: "sentence", label: "Sentence" },
+        { key: "city", label: "City" },
+        { key: "company", label: "Company Name" }
+      ];
+
+      var fieldsArea = document.getElementById("fieldsArea");
+      var addFieldBtn = document.getElementById("addFieldBtn");
+      var countInput = document.getElementById("countInput");
+      var generateBtn = document.getElementById("generateBtn");
+      var copyBtn = document.getElementById("copyBtn");
+      var copyNote = document.getElementById("copyNote");
+      var outputBox = document.getElementById("outputBox");
+
+      var fields = [
+        { name: "id", type: "uuid" },
+        { name: "name", type: "fullName" },
+        { name: "email", type: "email" },
+        { name: "city", type: "city" }
+      ];
+
+      function renderFields() {
+        fieldsArea.innerHTML = fields.map(function (f, idx) {
+          var options = FIELD_TYPES.map(function (t) {
+            return '<option value="' + t.key + '"' + (t.key === f.type ? " selected" : "") + ">" + t.label + "</option>";
+          }).join("");
+          return '<div class="mock-field-row" data-idx="' + idx + '">' +
+            '<input type="text" data-action="name" value="' + f.name.replace(/"/g, "&quot;") + '" placeholder="Field name" />' +
+            '<select data-action="type">' + options + "</select>" +
+            '<button type="button" class="mock-field-remove" data-action="remove" aria-label="Remove field">✕</button>' +
+            "</div>";
+        }).join("");
+      }
+
+      fieldsArea.addEventListener("input", function (e) {
+        var row = e.target.closest("[data-idx]");
+        if (!row) return;
+        var idx = parseInt(row.getAttribute("data-idx"), 10);
+        if (e.target.getAttribute("data-action") === "name") fields[idx].name = e.target.value;
+      });
+      fieldsArea.addEventListener("change", function (e) {
+        var row = e.target.closest("[data-idx]");
+        if (!row) return;
+        var idx = parseInt(row.getAttribute("data-idx"), 10);
+        if (e.target.getAttribute("data-action") === "type") fields[idx].type = e.target.value;
+      });
+      fieldsArea.addEventListener("click", function (e) {
+        if (e.target.getAttribute("data-action") !== "remove") return;
+        var row = e.target.closest("[data-idx]");
+        var idx = parseInt(row.getAttribute("data-idx"), 10);
+        fields.splice(idx, 1);
+        renderFields();
+      });
+
+      addFieldBtn.addEventListener("click", function () {
+        fields.push({ name: "field" + (fields.length + 1), type: "sentence" });
+        renderFields();
+      });
+
+      function randomUint32() {
+        var arr = new Uint32Array(1);
+        crypto.getRandomValues(arr);
+        return arr[0];
+      }
+      function randomInt(max) {
+        var maxUint32 = 4294967296;
+        var limit = maxUint32 - (maxUint32 % max);
+        var v;
+        do { v = randomUint32(); } while (v >= limit);
+        return v % max;
+      }
+      function pick(arr) { return arr[randomInt(arr.length)]; }
+
+      function uuidv4() {
+        var bytes = new Uint8Array(16);
+        crypto.getRandomValues(bytes);
+        bytes[6] = (bytes[6] & 0x0f) | 0x40;
+        bytes[8] = (bytes[8] & 0x3f) | 0x80;
+        var hex = Array.prototype.map.call(bytes, function (b) { return b.toString(16).padStart(2, "0"); }).join("");
+        return hex.slice(0, 8) + "-" + hex.slice(8, 12) + "-" + hex.slice(12, 16) + "-" + hex.slice(16, 20) + "-" + hex.slice(20);
+      }
+
+      function genValue(type) {
+        switch (type) {
+          case "fullName": return pick(FIRST_NAMES) + " " + pick(LAST_NAMES);
+          case "email": return (pick(FIRST_NAMES) + "." + pick(LAST_NAMES)).toLowerCase() + "@" + pick(EMAIL_DOMAINS);
+          case "phone": return "(" + (200 + randomInt(800)) + ") " + (100 + randomInt(900)) + "-" + (1000 + randomInt(9000));
+          case "boolean": return randomInt(2) === 0;
+          case "number": return 1 + randomInt(1000);
+          case "uuid": return uuidv4();
+          case "date": {
+            var daysAgo = randomInt(365);
+            var d = new Date(Date.now() - daysAgo * 86400000);
+            return d.toISOString().slice(0, 10);
+          }
+          case "sentence": {
+            var len = 6 + randomInt(5);
+            var words = [];
+            for (var i = 0; i < len; i++) words.push(pick(SENTENCE_WORDS));
+            var s = words.join(" ");
+            return s.charAt(0).toUpperCase() + s.slice(1) + ".";
+          }
+          case "city": return pick(CITIES);
+          case "company": return pick(COMPANY_WORDS) + " " + pick(COMPANY_SUFFIX);
+          default: return null;
+        }
+      }
+
+      function generate() {
+        var count = Math.min(500, Math.max(1, parseInt(countInput.value, 10) || 1));
+        var records = [];
+        for (var i = 0; i < count; i++) {
+          var record = {};
+          fields.forEach(function (f) {
+            record[f.name || "field"] = genValue(f.type);
+          });
+          records.push(record);
+        }
+        outputBox.value = JSON.stringify(records, null, 2);
+      }
+
+      generateBtn.addEventListener("click", generate);
+      copyBtn.addEventListener("click", function () { Fixora.copyText(outputBox.value, copyNote); });
+
+      renderFields();
+      generate();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Morse Code Translator Online | Fixoona</title>
+  <meta name="description" content="Translate text to Morse code and Morse code back to text online for free, with an option to actually hear it played back. No sign-up, nothing uploaded." />
+  <meta name="keywords" content="morse code translator, text to morse code, morse code decoder free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/morse-code-translator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Morse Code Translator" />
+  <meta property="og:description" content="Translate text to Morse code and back, with playback, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/morse-code-translator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Morse Code Translator" />
+  <meta name="twitter:description" content="Translate text to Morse code and back, with playback, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Morse Code Translator",
+    "url": "https://fixoona.com/tools/morse-code-translator",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Morse Code Translator", "item": "https://fixoona.com/tools/morse-code-translator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How are letters separated from words in the Morse output?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Each letter's dots and dashes are separated by a single space, and a forward slash ( / ) marks the gap between whole words — this is the standard written convention for Morse code." }
+      },
+      {
+        "@type": "Question",
+        "name": "What characters does this support?",
+        "acceptedAnswer": { "@type": "Answer", "text": "All 26 letters, the digits 0–9, and the most common punctuation marks (period, comma, question mark, apostrophe, and a few others) using the standard International Morse Code chart." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the playback actually work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It uses your browser's Web Audio API to generate a real tone, switching it on and off for durations matching standard Morse timing ratios — a dash lasts three times as long as a dot, with proportionally longer gaps between letters and words." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my text sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — translation and playback both happen entirely in your browser using JavaScript, so nothing you type is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Morse Code Translator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">📡</div>
+      <h1>Morse Code Translator</h1>
+      <p>Translate text to Morse code and back, and actually hear it played back.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="pill-row" id="modePills">
+          <button class="pill active" data-mode="text2morse" type="button">Text → Morse</button>
+          <button class="pill" data-mode="morse2text" type="button">Morse → Text</button>
+        </div>
+
+        <div class="field" style="margin-top:16px;">
+          <label for="inputBox" id="inputLabel">Text</label>
+          <textarea id="inputBox" style="min-height:100px;">SOS HELLO WORLD</textarea>
+        </div>
+
+        <div class="field">
+          <label for="outputBox" id="outputLabel">Morse Code</label>
+          <textarea id="outputBox" readonly style="min-height:100px;font-family:var(--font-mono,monospace);"></textarea>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-secondary" id="copyBtn">Copy Result</button>
+          <button class="btn btn-secondary" id="playBtn">▶ Play Morse Audio</button>
+        </div>
+        <div class="copy-note" id="copyNote"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Translate Morse Code</h2>
+        <ol class="howto-steps">
+          <li>Choose a direction with the pills.</li>
+          <li>Type your text or Morse code into the input box.</li>
+          <li>The translated result appears instantly.</li>
+          <li>Click "▶ Play Morse Audio" to hear it as real Morse code beeps.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How are letters separated from words in the Morse output?</summary>
+          <p>Each letter's dots and dashes are separated by a single space, and a forward slash ( / ) marks the gap between whole words — this is the standard written convention for Morse code.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What characters does this support?</summary>
+          <p>All 26 letters, the digits 0–9, and the most common punctuation marks (period, comma, question mark, apostrophe, and a few others) using the standard International Morse Code chart.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does the playback actually work?</summary>
+          <p>It uses your browser's Web Audio API to generate a real tone, switching it on and off for durations matching standard Morse timing ratios — a dash lasts three times as long as a dot, with proportionally longer gaps between letters and words.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my text sent anywhere?</summary>
+          <p>No — translation and playback both happen entirely in your browser using JavaScript, so nothing you type is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="rot13-caesar-cipher">
+            <span class="icon" aria-hidden="true">🔐</span>
+            <h3>ROT13 / Caesar Cipher</h3>
+            <p>A classic letter-substitution cipher.</p>
+          </a>
+          <a class="card" href="text-encryption">
+            <span class="icon" aria-hidden="true">🔒</span>
+            <h3>Text Encryption</h3>
+            <p>Real AES-256 encryption for text.</p>
+          </a>
+          <a class="card" href="base64-converter">
+            <span class="icon" aria-hidden="true">🔣</span>
+            <h3>Base64 Converter</h3>
+            <p>Encode or decode Base64 text.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 130+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var MORSE_MAP = {
+        A: ".-", B: "-...", C: "-.-.", D: "-..", E: ".", F: "..-.", G: "--.", H: "....",
+        I: "..", J: ".---", K: "-.-", L: ".-..", M: "--", N: "-.", O: "---", P: ".--.",
+        Q: "--.-", R: ".-.", S: "...", T: "-", U: "..-", V: "...-", W: ".--", X: "-..-",
+        Y: "-.--", Z: "--..",
+        "0": "-----", "1": ".----", "2": "..---", "3": "...--", "4": "....-",
+        "5": ".....", "6": "-....", "7": "--...", "8": "---..", "9": "----.",
+        ".": ".-.-.-", ",": "--..--", "?": "..--..", "'": ".----.", "!": "-.-.--",
+        "/": "-..-.", "(": "-.--.", ")": "-.--.-", "&": ".-...", ":": "---...",
+        ";": "-.-.-.", "=": "-...-", "+": ".-.-.", "-": "-....-", "_": "..--.-", '"': ".-..-.", "@": ".--.-."
+      };
+      var REVERSE_MAP = {};
+      Object.keys(MORSE_MAP).forEach(function (k) { REVERSE_MAP[MORSE_MAP[k]] = k; });
+
+      var modePills = document.getElementById("modePills");
+      var inputBox = document.getElementById("inputBox");
+      var inputLabel = document.getElementById("inputLabel");
+      var outputLabel = document.getElementById("outputLabel");
+      var outputBox = document.getElementById("outputBox");
+      var copyBtn = document.getElementById("copyBtn");
+      var copyNote = document.getElementById("copyNote");
+      var playBtn = document.getElementById("playBtn");
+
+      var mode = "text2morse";
+
+      function textToMorse(text) {
+        return text.toUpperCase().trim().split(/\s+/).map(function (word) {
+          return word.split("").map(function (ch) { return MORSE_MAP[ch] || ""; }).filter(Boolean).join(" ");
+        }).join(" / ");
+      }
+
+      function morseToText(morse) {
+        return morse.trim().split("/").map(function (word) {
+          return word.trim().split(/\s+/).map(function (code) { return REVERSE_MAP[code] || ""; }).join("");
+        }).join(" ");
+      }
+
+      function convert() {
+        var raw = inputBox.value;
+        outputBox.value = mode === "text2morse" ? textToMorse(raw) : morseToText(raw);
+      }
+
+      modePills.addEventListener("click", function (e) {
+        var btn = e.target.closest(".pill");
+        if (!btn) return;
+        mode = btn.getAttribute("data-mode");
+        Array.prototype.forEach.call(modePills.querySelectorAll(".pill"), function (p) { p.classList.toggle("active", p === btn); });
+        if (mode === "text2morse") {
+          inputLabel.textContent = "Text";
+          outputLabel.textContent = "Morse Code";
+          inputBox.value = "SOS HELLO WORLD";
+        } else {
+          inputLabel.textContent = "Morse Code";
+          outputLabel.textContent = "Text";
+          inputBox.value = "... --- ... / .... . .-.. .-.. --- / .-- --- .-. .-.. -..";
+        }
+        convert();
+      });
+
+      inputBox.addEventListener("input", convert);
+      copyBtn.addEventListener("click", function () { Fixora.copyText(outputBox.value, copyNote); });
+
+      playBtn.addEventListener("click", function () {
+        var morse = mode === "text2morse" ? outputBox.value : inputBox.value;
+        if (!morse.trim()) return;
+        var ctx = new (window.AudioContext || window.webkitAudioContext)();
+        var unit = 0.08;
+        var t = ctx.currentTime + 0.1;
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.frequency.value = 600;
+        gain.gain.value = 0;
+        osc.connect(gain).connect(ctx.destination);
+        osc.start();
+
+        for (var i = 0; i < morse.length; i++) {
+          var ch = morse[i];
+          if (ch === ".") {
+            gain.gain.setValueAtTime(0.2, t);
+            gain.gain.setValueAtTime(0, t + unit);
+            t += unit * 2;
+          } else if (ch === "-") {
+            gain.gain.setValueAtTime(0.2, t);
+            gain.gain.setValueAtTime(0, t + unit * 3);
+            t += unit * 4;
+          } else if (ch === "/") {
+            t += unit * 6;
+          } else if (ch === " ") {
+            t += unit * 2;
+          }
+        }
+        osc.stop(t + 0.1);
+      });
+
+      convert();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Aspect Ratio Calculator Online | Fixoona</title>
+  <meta name="description" content="Calculate an aspect ratio from width and height, or find a missing dimension from a known ratio, online for free, right in your browser. No sign-up." />
+  <meta name="keywords" content="aspect ratio calculator, image aspect ratio, video ratio calculator free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/aspect-ratio-calculator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Aspect Ratio Calculator" />
+  <meta property="og:description" content="Calculate aspect ratios and missing dimensions, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/aspect-ratio-calculator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Aspect Ratio Calculator" />
+  <meta name="twitter:description" content="Calculate aspect ratios and missing dimensions, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Aspect Ratio Calculator",
+    "url": "https://fixoona.com/tools/aspect-ratio-calculator",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Aspect Ratio Calculator", "item": "https://fixoona.com/tools/aspect-ratio-calculator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How is the simplified ratio calculated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The width and height are both divided by their greatest common divisor (GCD), which reduces them to the smallest whole numbers that keep the same proportion — for example, 1920×1080 reduces to 16:9." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why would I need to calculate a missing dimension from a ratio?",
+        "acceptedAnswer": { "@type": "Answer", "text": "This comes up constantly when resizing images or video — if you know you need a 16:9 video that's 1280 pixels wide, you need the height to come out to exactly 720 pixels to avoid stretching or distorting the image." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this work for any ratio, not just common video sizes?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — enter any width and height ratio, standard (like 4:3 or 16:9) or completely custom, and the missing-dimension calculator will scale to it." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the data I enter sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — all the math happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Aspect Ratio Calculator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">📐</div>
+      <h1>Aspect Ratio Calculator</h1>
+      <p>Find a simplified ratio from dimensions, or calculate a missing dimension from a known ratio.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <h3 style="margin-top:0;">Find the Ratio</h3>
+        <div class="row">
+          <div class="field">
+            <label for="widthInput">Width</label>
+            <input type="number" id="widthInput" value="1920" min="1" />
+          </div>
+          <div class="field">
+            <label for="heightInput">Height</label>
+            <input type="number" id="heightInput" value="1080" min="1" />
+          </div>
+        </div>
+        <div class="output-box" id="ratioBox"></div>
+
+        <h3>Find a Missing Dimension</h3>
+        <div class="row">
+          <div class="field">
+            <label for="ratioWInput">Ratio Width</label>
+            <input type="number" id="ratioWInput" value="16" min="1" />
+          </div>
+          <div class="field">
+            <label for="ratioHInput">Ratio Height</label>
+            <input type="number" id="ratioHInput" value="9" min="1" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="knownWidthInput">If Width Is…</label>
+            <input type="number" id="knownWidthInput" value="1280" min="1" />
+          </div>
+          <div class="field">
+            <label for="knownHeightInput">If Height Is…</label>
+            <input type="number" id="knownHeightInput" value="1080" min="1" />
+          </div>
+        </div>
+        <div class="output-box" id="dimensionBox"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Use the Aspect Ratio Calculator</h2>
+        <ol class="howto-steps">
+          <li>Enter a width and height to find the simplified ratio.</li>
+          <li>Or enter a ratio and a known width or height to find the matching missing dimension.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How is the simplified ratio calculated?</summary>
+          <p>The width and height are both divided by their greatest common divisor (GCD), which reduces them to the smallest whole numbers that keep the same proportion — for example, 1920×1080 reduces to 16:9.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why would I need to calculate a missing dimension from a ratio?</summary>
+          <p>This comes up constantly when resizing images or video — if you know you need a 16:9 video that's 1280 pixels wide, you need the height to come out to exactly 720 pixels to avoid stretching or distorting the image.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this work for any ratio, not just common video sizes?</summary>
+          <p>Yes — enter any width and height ratio, standard (like 4:3 or 16:9) or completely custom, and the missing-dimension calculator will scale to it.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is the data I enter sent anywhere?</summary>
+          <p>No — all the math happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="image-resizer">
+            <span class="icon" aria-hidden="true">📐</span>
+            <h3>Image Resizer</h3>
+            <p>Resize an image to exact dimensions.</p>
+          </a>
+          <a class="card" href="unit-converter">
+            <span class="icon" aria-hidden="true">📏</span>
+            <h3>Unit Converter</h3>
+            <p>Convert between everyday units of measure.</p>
+          </a>
+          <a class="card" href="number-base-converter">
+            <span class="icon" aria-hidden="true">🔢</span>
+            <h3>Number Base Converter</h3>
+            <p>Convert between binary, decimal, and hex.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 130+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var widthInput = document.getElementById("widthInput");
+      var heightInput = document.getElementById("heightInput");
+      var ratioBox = document.getElementById("ratioBox");
+      var ratioWInput = document.getElementById("ratioWInput");
+      var ratioHInput = document.getElementById("ratioHInput");
+      var knownWidthInput = document.getElementById("knownWidthInput");
+      var knownHeightInput = document.getElementById("knownHeightInput");
+      var dimensionBox = document.getElementById("dimensionBox");
+
+      function gcd(a, b) {
+        return b === 0 ? a : gcd(b, a % b);
+      }
+
+      function updateRatio() {
+        var w = parseFloat(widthInput.value);
+        var h = parseFloat(heightInput.value);
+        if (!w || !h || w <= 0 || h <= 0) { ratioBox.textContent = "Enter a positive width and height."; return; }
+        var d = gcd(Math.round(w), Math.round(h));
+        ratioBox.textContent = w + " × " + h + " simplifies to a ratio of " + Math.round(w / d) + ":" + Math.round(h / d);
+      }
+
+      function updateDimensions() {
+        var rw = parseFloat(ratioWInput.value);
+        var rh = parseFloat(ratioHInput.value);
+        if (!rw || !rh || rw <= 0 || rh <= 0) { dimensionBox.textContent = "Enter a positive ratio."; return; }
+
+        var lines = [];
+        var kw = parseFloat(knownWidthInput.value);
+        if (kw > 0) {
+          var computedHeight = (kw * rh) / rw;
+          lines.push("Width " + kw + " → Height " + (Math.round(computedHeight * 100) / 100));
+        }
+        var kh = parseFloat(knownHeightInput.value);
+        if (kh > 0) {
+          var computedWidth = (kh * rw) / rh;
+          lines.push("Height " + kh + " → Width " + (Math.round(computedWidth * 100) / 100));
+        }
+        dimensionBox.textContent = lines.length ? lines.join("  |  ") : "Enter a known width or height.";
+      }
+
+      [widthInput, heightInput].forEach(function (el) { el.addEventListener("input", updateRatio); });
+      [ratioWInput, ratioHInput, knownWidthInput, knownHeightInput].forEach(function (el) { el.addEventListener("input", updateDimensions); });
+
+      updateRatio();
+      updateDimensions();
+    })();
+  </script>
+</body>
+</html>
