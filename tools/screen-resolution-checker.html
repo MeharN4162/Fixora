@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What Is My Screen Resolution? — Free Checker | Fixoona</title>
+  <meta name="description" content="See your screen resolution, browser viewport size, device pixel ratio, and color depth instantly, free, right in your browser. No sign-up." />
+  <meta name="keywords" content="what is my screen resolution, screen resolution checker, viewport size test free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/screen-resolution-checker" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="What Is My Screen Resolution?" />
+  <meta property="og:description" content="See your screen resolution and viewport size instantly, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/screen-resolution-checker" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="What Is My Screen Resolution?" />
+  <meta name="twitter:description" content="See your screen resolution and viewport size instantly, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Screen Resolution Checker",
+    "url": "https://fixoona.com/tools/screen-resolution-checker",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Screen Resolution Checker", "item": "https://fixoona.com/tools/screen-resolution-checker" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What's the difference between screen resolution and viewport size?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Screen resolution is your entire monitor or display's total pixel dimensions. Viewport size is just the visible browser window area actually available for a webpage, which is smaller once you subtract the browser's toolbars, tabs, and any other chrome around the page." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the device pixel ratio mean?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's the ratio between physical device pixels and CSS pixels. A ratio of 2, common on high-density \"Retina\"-style displays, means the screen packs 2×2 real pixels into the space of what a webpage treats as a single CSS pixel, producing sharper text and images." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do these numbers update if I resize my browser window?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The viewport size specifically reflects your current browser window, so it updates live as you resize the window — this is useful for testing how a responsive website design behaves at different widths." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is any of this sent to a server?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — every value shown is read directly from your own browser using JavaScript, and none of it is ever sent anywhere." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .res-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 8px; }
+    .res-part { background: var(--color-bg-alt); border-radius: var(--radius-sm); padding: 16px; text-align: center; }
+    .res-part-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); font-weight: 700; margin-bottom: 6px; }
+    .res-part-value { font-family: var(--font-mono, monospace); font-size: 1.4rem; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Screen Resolution Checker</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🖥️</div>
+      <h1>What Is My Screen Resolution?</h1>
+      <p>Your screen resolution, browser viewport, and pixel density — updates live as you resize.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="res-grid" id="resGrid"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Use This</h2>
+        <ol class="howto-steps">
+          <li>The values above are read automatically — nothing to click.</li>
+          <li>Resize your browser window to see the viewport size update live.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What's the difference between screen resolution and viewport size?</summary>
+          <p>Screen resolution is your entire monitor or display's total pixel dimensions. Viewport size is just the visible browser window area actually available for a webpage, which is smaller once you subtract the browser's toolbars, tabs, and any other chrome around the page.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the device pixel ratio mean?</summary>
+          <p>It's the ratio between physical device pixels and CSS pixels. A ratio of 2, common on high-density "Retina"-style displays, means the screen packs 2×2 real pixels into the space of what a webpage treats as a single CSS pixel, producing sharper text and images.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why do these numbers update if I resize my browser window?</summary>
+          <p>The viewport size specifically reflects your current browser window, so it updates live as you resize the window — this is useful for testing how a responsive website design behaves at different widths.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is any of this sent to a server?</summary>
+          <p>No — every value shown is read directly from your own browser using JavaScript, and none of it is ever sent anywhere.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="what-is-my-ip">
+            <span class="icon" aria-hidden="true">🌍</span>
+            <h3>What Is My IP Address?</h3>
+            <p>See your public IP and browser info.</p>
+          </a>
+          <a class="card" href="user-agent-parser">
+            <span class="icon" aria-hidden="true">🕵️</span>
+            <h3>User Agent Parser</h3>
+            <p>Parse any browser's user agent string.</p>
+          </a>
+          <a class="card" href="aspect-ratio-calculator">
+            <span class="icon" aria-hidden="true">📐</span>
+            <h3>Aspect Ratio Calculator</h3>
+            <p>Find a ratio or a missing dimension.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 130+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var resGrid = document.getElementById("resGrid");
+
+      function part(label, value) {
+        return '<div class="res-part"><div class="res-part-label">' + label + '</div><div class="res-part-value">' + value + "</div></div>";
+      }
+
+      function render() {
+        var html = "";
+        html += part("Screen Resolution", screen.width + " × " + screen.height);
+        html += part("Available Screen Size", screen.availWidth + " × " + screen.availHeight);
+        html += part("Browser Viewport", window.innerWidth + " × " + window.innerHeight);
+        html += part("Device Pixel Ratio", window.devicePixelRatio || 1);
+        html += part("Color Depth", (screen.colorDepth || "Unknown") + "-bit");
+        html += part("Orientation", (screen.orientation && screen.orientation.type) || "Unknown");
+        resGrid.innerHTML = html;
+      }
+
+      window.addEventListener("resize", render);
+      render();
+    })();
+  </script>
+</body>
+</html>

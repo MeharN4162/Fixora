@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Scientific Calculator Online | Fixoona</title>
+  <meta name="description" content="A free online scientific calculator with trig functions, logarithms, powers, factorials, and full operator precedence, right in your browser. No sign-up." />
+  <meta name="keywords" content="scientific calculator online free, online calculator with sin cos tan, math calculator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/scientific-calculator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Scientific Calculator" />
+  <meta property="og:description" content="Trig, logs, powers, and factorials with correct operator precedence, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/scientific-calculator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Scientific Calculator" />
+  <meta name="twitter:description" content="Trig, logs, powers, and factorials with correct operator precedence, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Scientific Calculator",
+    "url": "https://fixoona.com/tools/scientific-calculator",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Scientific Calculator", "item": "https://fixoona.com/tools/scientific-calculator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does this respect the correct order of operations?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — it uses a proper expression parser (not a naive left-to-right evaluation), so multiplication and division happen before addition and subtraction, exponents are evaluated right-to-left as they should be, and parentheses always take priority." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are the trig functions in degrees or radians?",
+        "acceptedAnswer": { "@type": "Answer", "text": "You can switch between them with the Deg/Rad toggle. In degree mode, sin(90) correctly returns 1; in radian mode, the same functions expect and interpret angles in radians instead." }
+      },
+      {
+        "@type": "Question",
+        "name": "What functions and constants are supported?",
+        "acceptedAnswer": { "@type": "Answer", "text": "sin, cos, tan, sqrt, log (base 10), ln (natural log), and abs, plus the constants π and e, factorials with !, and standard +, −, ×, ÷, and ^ for powers." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is anything I calculate sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — every calculation is evaluated entirely in your browser using JavaScript, so nothing you enter is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .calc-display {
+      background: var(--color-bg-alt);
+      border-radius: var(--radius-sm);
+      padding: 20px 16px;
+      text-align: right;
+      font-family: var(--font-mono, monospace);
+      margin-bottom: 12px;
+    }
+    .calc-expression { font-size: 1rem; color: var(--color-text-muted); min-height: 1.3em; word-break: break-all; }
+    .calc-result { font-size: 2rem; font-weight: 700; margin-top: 4px; word-break: break-all; }
+    .calc-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+    .calc-btn {
+      padding: 14px 0;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      color: var(--color-text);
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .calc-btn:hover { background: var(--color-bg-alt); }
+    .calc-btn.op { color: var(--color-primary); }
+    .calc-btn.equals { background: var(--gradient-primary); color: #fff; border: none; grid-column: span 2; }
+    .calc-btn.clear { color: var(--color-danger); }
+    .calc-mode-toggle { display: flex; gap: 8px; margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Scientific Calculator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🧮</div>
+      <h1>Scientific Calculator</h1>
+      <p>Trig functions, logarithms, powers, and factorials, with correct operator precedence.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel" style="max-width:420px;margin:0 auto;">
+        <div class="calc-mode-toggle">
+          <div class="pill-row" id="modePills">
+            <button class="pill active" data-mode="deg" type="button">Deg</button>
+            <button class="pill" data-mode="rad" type="button">Rad</button>
+          </div>
+        </div>
+
+        <div class="calc-display">
+          <div class="calc-expression" id="exprDisplay">&nbsp;</div>
+          <div class="calc-result" id="resultDisplay">0</div>
+        </div>
+
+        <div class="calc-grid" id="calcGrid">
+          <button class="calc-btn clear" data-action="clear">C</button>
+          <button class="calc-btn" data-action="backspace">⌫</button>
+          <button class="calc-btn" data-insert="(">(</button>
+          <button class="calc-btn" data-insert=")">)</button>
+          <button class="calc-btn op" data-insert="/">÷</button>
+
+          <button class="calc-btn" data-insert="sin(">sin</button>
+          <button class="calc-btn" data-insert="cos(">cos</button>
+          <button class="calc-btn" data-insert="tan(">tan</button>
+          <button class="calc-btn" data-insert="^">x^y</button>
+          <button class="calc-btn op" data-insert="*">×</button>
+
+          <button class="calc-btn" data-insert="log(">log</button>
+          <button class="calc-btn" data-insert="ln(">ln</button>
+          <button class="calc-btn" data-insert="sqrt(">√</button>
+          <button class="calc-btn" data-insert="!">n!</button>
+          <button class="calc-btn op" data-insert="-">−</button>
+
+          <button class="calc-btn" data-insert="7">7</button>
+          <button class="calc-btn" data-insert="8">8</button>
+          <button class="calc-btn" data-insert="9">9</button>
+          <button class="calc-btn" data-insert="pi">π</button>
+          <button class="calc-btn op" data-insert="+">+</button>
+
+          <button class="calc-btn" data-insert="4">4</button>
+          <button class="calc-btn" data-insert="5">5</button>
+          <button class="calc-btn" data-insert="6">6</button>
+          <button class="calc-btn" data-insert="e">e</button>
+          <button class="calc-btn equals" data-action="equals" style="grid-row: span 2;">=</button>
+
+          <button class="calc-btn" data-insert="1">1</button>
+          <button class="calc-btn" data-insert="2">2</button>
+          <button class="calc-btn" data-insert="3">3</button>
+          <button class="calc-btn" data-insert="0">0</button>
+
+          <button class="calc-btn" data-insert="." style="grid-column: span 4;">.</button>
+        </div>
+
+        <div class="output-box" id="statusBox" style="margin-top:12px;"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Use the Scientific Calculator</h2>
+        <ol class="howto-steps">
+          <li>Build an expression using the buttons.</li>
+          <li>Switch between Deg and Rad for trig functions.</li>
+          <li>Click "=" to evaluate.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Does this respect the correct order of operations?</summary>
+          <p>Yes — it uses a proper expression parser (not a naive left-to-right evaluation), so multiplication and division happen before addition and subtraction, exponents are evaluated right-to-left as they should be, and parentheses always take priority.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Are the trig functions in degrees or radians?</summary>
+          <p>You can switch between them with the Deg/Rad toggle. In degree mode, sin(90) correctly returns 1; in radian mode, the same functions expect and interpret angles in radians instead.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What functions and constants are supported?</summary>
+          <p>sin, cos, tan, sqrt, log (base 10), ln (natural log), and abs, plus the constants π and e, factorials with !, and standard +, −, ×, ÷, and ^ for powers.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is anything I calculate sent anywhere?</summary>
+          <p>No — every calculation is evaluated entirely in your browser using JavaScript, so nothing you enter is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="unit-converter">
+            <span class="icon" aria-hidden="true">📐</span>
+            <h3>Unit Converter</h3>
+            <p>Convert between everyday units of measure.</p>
+          </a>
+          <a class="card" href="number-base-converter">
+            <span class="icon" aria-hidden="true">🔢</span>
+            <h3>Number Base Converter</h3>
+            <p>Convert between binary, decimal, and hex.</p>
+          </a>
+          <a class="card" href="percentage-calculator">
+            <span class="icon" aria-hidden="true">%</span>
+            <h3>Percentage Calculator</h3>
+            <p>Calculate percentages, increases, and decreases.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 130+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var modePills = document.getElementById("modePills");
+      var exprDisplay = document.getElementById("exprDisplay");
+      var resultDisplay = document.getElementById("resultDisplay");
+      var calcGrid = document.getElementById("calcGrid");
+      var statusBox = document.getElementById("statusBox");
+
+      var degMode = true;
+      var expression = "";
+
+      function tokenize(input) {
+        var tokens = [];
+        var i = 0;
+        while (i < input.length) {
+          var ch = input[i];
+          if (/\s/.test(ch)) { i++; continue; }
+          if (/[0-9.]/.test(ch)) {
+            var j = i;
+            while (j < input.length && /[0-9.]/.test(input[j])) j++;
+            tokens.push({ type: "num", value: parseFloat(input.slice(i, j)) });
+            i = j;
+            continue;
+          }
+          if (/[a-zA-Z]/.test(ch)) {
+            var j = i;
+            while (j < input.length && /[a-zA-Z]/.test(input[j])) j++;
+            tokens.push({ type: "ident", value: input.slice(i, j) });
+            i = j;
+            continue;
+          }
+          if ("+-*/^()!".indexOf(ch) !== -1) {
+            tokens.push({ type: "op", value: ch });
+            i++;
+            continue;
+          }
+          throw new Error("Unexpected character: " + ch);
+        }
+        return tokens;
+      }
+
+      var CONSTANTS = { pi: Math.PI, e: Math.E };
+
+      function evaluate(input) {
+        var deg = degMode;
+        var FUNCTIONS = {
+          sin: function (x) { return Math.sin(deg ? x * Math.PI / 180 : x); },
+          cos: function (x) { return Math.cos(deg ? x * Math.PI / 180 : x); },
+          tan: function (x) { return Math.tan(deg ? x * Math.PI / 180 : x); },
+          sqrt: function (x) { return Math.sqrt(x); },
+          log: function (x) { return Math.log10(x); },
+          ln: function (x) { return Math.log(x); },
+          abs: function (x) { return Math.abs(x); }
+        };
+        var tokens = tokenize(input);
+        var pos = 0;
+        function peek() { return tokens[pos]; }
+        function next() { return tokens[pos++]; }
+
+        function parseExpression() {
+          var left = parseTerm();
+          while (peek() && peek().type === "op" && (peek().value === "+" || peek().value === "-")) {
+            var op = next().value;
+            var right = parseTerm();
+            left = op === "+" ? left + right : left - right;
+          }
+          return left;
+        }
+        function parseTerm() {
+          var left = parseFactor();
+          while (peek() && peek().type === "op" && (peek().value === "*" || peek().value === "/")) {
+            var op = next().value;
+            var right = parseFactor();
+            left = op === "*" ? left * right : left / right;
+          }
+          return left;
+        }
+        function parseFactor() {
+          var left = parseUnary();
+          if (peek() && peek().type === "op" && peek().value === "^") {
+            next();
+            var right = parseFactor();
+            return Math.pow(left, right);
+          }
+          return left;
+        }
+        function parseUnary() {
+          if (peek() && peek().type === "op" && peek().value === "-") {
+            next();
+            return -parseUnary();
+          }
+          return parsePostfix();
+        }
+        function parsePostfix() {
+          var val = parsePrimary();
+          while (peek() && peek().type === "op" && peek().value === "!") {
+            next();
+            if (val < 0 || Math.floor(val) !== val) throw new Error("Factorial requires a non-negative integer");
+            var result = 1;
+            for (var i = 2; i <= val; i++) result *= i;
+            val = result;
+          }
+          return val;
+        }
+        function parsePrimary() {
+          var tok = peek();
+          if (!tok) throw new Error("Unexpected end of expression");
+          if (tok.type === "num") { next(); return tok.value; }
+          if (tok.type === "op" && tok.value === "(") {
+            next();
+            var val = parseExpression();
+            if (!peek() || peek().value !== ")") throw new Error("Expected closing parenthesis");
+            next();
+            return val;
+          }
+          if (tok.type === "ident") {
+            next();
+            var name = tok.value.toLowerCase();
+            if (CONSTANTS.hasOwnProperty(name)) return CONSTANTS[name];
+            if (FUNCTIONS.hasOwnProperty(name)) {
+              if (!peek() || peek().value !== "(") throw new Error("Expected ( after function name");
+              next();
+              var arg = parseExpression();
+              if (!peek() || peek().value !== ")") throw new Error("Expected closing parenthesis");
+              next();
+              return FUNCTIONS[name](arg);
+            }
+            throw new Error("Unknown identifier: " + tok.value);
+          }
+          throw new Error("Unexpected token: " + tok.value);
+        }
+
+        var result = parseExpression();
+        if (pos !== tokens.length) throw new Error("Unexpected trailing input");
+        return result;
+      }
+
+      function updateDisplay() {
+        exprDisplay.textContent = expression || " ";
+      }
+
+      calcGrid.addEventListener("click", function (e) {
+        var btn = e.target.closest(".calc-btn");
+        if (!btn) return;
+        var insert = btn.getAttribute("data-insert");
+        var action = btn.getAttribute("data-action");
+
+        if (insert !== null) {
+          expression += insert;
+          statusBox.textContent = "";
+          updateDisplay();
+        } else if (action === "clear") {
+          expression = "";
+          resultDisplay.textContent = "0";
+          statusBox.textContent = "";
+          updateDisplay();
+        } else if (action === "backspace") {
+          expression = expression.slice(0, -1);
+          statusBox.textContent = "";
+          updateDisplay();
+        } else if (action === "equals") {
+          try {
+            var result = evaluate(expression);
+            if (!isFinite(result)) throw new Error("Result is not a finite number");
+            resultDisplay.textContent = String(Math.round(result * 1e10) / 1e10);
+            statusBox.textContent = "";
+          } catch (err) {
+            statusBox.textContent = "Error: " + err.message;
+          }
+        }
+      });
+
+      modePills.addEventListener("click", function (e) {
+        var btn = e.target.closest(".pill");
+        if (!btn) return;
+        degMode = btn.getAttribute("data-mode") === "deg";
+        Array.prototype.forEach.call(modePills.querySelectorAll(".pill"), function (p) { p.classList.toggle("active", p === btn); });
+      });
+
+      updateDisplay();
+    })();
+  </script>
+</body>
+</html>

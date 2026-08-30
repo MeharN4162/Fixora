@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free World Clock Online — Live Times Worldwide | Fixoona</title>
+  <meta name="description" content="See the current live time in major cities around the world at once, free — add or remove cities and it remembers your list. No sign-up." />
+  <meta name="keywords" content="world clock, current time in cities, live world time free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/world-clock" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free World Clock" />
+  <meta property="og:description" content="See live current time in major cities worldwide, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/world-clock" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free World Clock" />
+  <meta name="twitter:description" content="See live current time in major cities worldwide, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "World Clock",
+    "url": "https://fixoona.com/tools/world-clock",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "World Clock", "item": "https://fixoona.com/tools/world-clock" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does this stay accurate through daylight saving changes?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It uses your browser's built-in time zone database (the same one operating systems use), which already knows every region's daylight saving rules and switch dates — so the displayed time and UTC offset automatically adjust on the correct dates without this tool needing any manual updates." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I customize which cities are shown?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — remove any city with its \"✕\" button, and add others from the dropdown. Your customized list is saved in your browser's local storage, so it's still there the next time you visit." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this the same as the Time Zone Converter tool?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the Time Zone Converter is for converting one specific time from one zone to another (like scheduling a meeting). This World Clock instead shows the current, continuously updating time in several places at once." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is any of this sent to a server?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — all the time calculations happen entirely in your browser, and your customized city list is only saved locally on your own device." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .clocks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin-top: 16px; }
+    .clock-card { background: var(--color-bg-alt); border-radius: var(--radius-sm); padding: 16px; position: relative; }
+    .clock-city { font-weight: 700; font-size: 1.05rem; margin-bottom: 4px; }
+    .clock-time { font-family: var(--font-mono, monospace); font-size: 1.6rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .clock-date { color: var(--color-text-muted); font-size: 0.82rem; margin-top: 4px; }
+    .clock-offset { color: var(--color-text-muted); font-size: 0.78rem; margin-top: 2px; }
+    .clock-remove { position: absolute; top: 10px; right: 10px; background: none; border: none; color: var(--color-text-muted); cursor: pointer; font-size: 1rem; }
+    .clock-remove:hover { color: var(--color-danger); }
+    .clock-add-row { display: flex; gap: 8px; margin-top: 16px; }
+    .clock-add-row select { flex: 1; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>World Clock</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🕐</div>
+      <h1>World Clock</h1>
+      <p>See the current, live time in major cities around the world at once.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="clocks-grid" id="clocksGrid"></div>
+
+        <div class="clock-add-row">
+          <select id="addCitySelect"></select>
+          <button class="btn btn-secondary" id="addCityBtn">+ Add City</button>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Use the World Clock</h2>
+        <ol class="howto-steps">
+          <li>The default cities update live, every second.</li>
+          <li>Remove any city with its "✕" button.</li>
+          <li>Add another city from the dropdown — your list is remembered for next time.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How does this stay accurate through daylight saving changes?</summary>
+          <p>It uses your browser's built-in time zone database (the same one operating systems use), which already knows every region's daylight saving rules and switch dates — so the displayed time and UTC offset automatically adjust on the correct dates without this tool needing any manual updates.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I customize which cities are shown?</summary>
+          <p>Yes — remove any city with its "✕" button, and add others from the dropdown. Your customized list is saved in your browser's local storage, so it's still there the next time you visit.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is this the same as the Time Zone Converter tool?</summary>
+          <p>No — the Time Zone Converter is for converting one specific time from one zone to another (like scheduling a meeting). This World Clock instead shows the current, continuously updating time in several places at once.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is any of this sent to a server?</summary>
+          <p>No — all the time calculations happen entirely in your browser, and your customized city list is only saved locally on your own device.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="time-zone-converter">
+            <span class="icon" aria-hidden="true">🌍</span>
+            <h3>Time Zone Converter</h3>
+            <p>Convert a specific time between time zones.</p>
+          </a>
+          <a class="card" href="countdown-timer">
+            <span class="icon" aria-hidden="true">⏱️</span>
+            <h3>Countdown Timer & Stopwatch</h3>
+            <p>Count down to a specific date live.</p>
+          </a>
+          <a class="card" href="calendar-event-generator">
+            <span class="icon" aria-hidden="true">📆</span>
+            <h3>Calendar Event Generator</h3>
+            <p>Create a downloadable .ics calendar file.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 130+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var STORAGE_KEY = "fixora_world_clock_cities";
+      var ALL_CITIES = [
+        { name: "New York", tz: "America/New_York" },
+        { name: "Los Angeles", tz: "America/Los_Angeles" },
+        { name: "Toronto", tz: "America/Toronto" },
+        { name: "Mexico City", tz: "America/Mexico_City" },
+        { name: "São Paulo", tz: "America/Sao_Paulo" },
+        { name: "London", tz: "Europe/London" },
+        { name: "Paris", tz: "Europe/Paris" },
+        { name: "Berlin", tz: "Europe/Berlin" },
+        { name: "Moscow", tz: "Europe/Moscow" },
+        { name: "Cairo", tz: "Africa/Cairo" },
+        { name: "Johannesburg", tz: "Africa/Johannesburg" },
+        { name: "Dubai", tz: "Asia/Dubai" },
+        { name: "Mumbai", tz: "Asia/Kolkata" },
+        { name: "Singapore", tz: "Asia/Singapore" },
+        { name: "Beijing", tz: "Asia/Shanghai" },
+        { name: "Tokyo", tz: "Asia/Tokyo" },
+        { name: "Sydney", tz: "Australia/Sydney" },
+        { name: "Auckland", tz: "Pacific/Auckland" }
+      ];
+      var DEFAULT_TZS = ["America/New_York", "Europe/London", "Asia/Dubai", "Asia/Kolkata", "Asia/Tokyo", "Australia/Sydney"];
+
+      var clocksGrid = document.getElementById("clocksGrid");
+      var addCitySelect = document.getElementById("addCitySelect");
+      var addCityBtn = document.getElementById("addCityBtn");
+
+      var activeTzs = [];
+
+      function load() {
+        try {
+          var raw = localStorage.getItem(STORAGE_KEY);
+          activeTzs = raw ? JSON.parse(raw) : DEFAULT_TZS.slice();
+        } catch (e) {
+          activeTzs = DEFAULT_TZS.slice();
+        }
+      }
+      function save() {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(activeTzs)); } catch (e) {}
+      }
+
+      function cityByTz(tz) {
+        return ALL_CITIES.filter(function (c) { return c.tz === tz; })[0];
+      }
+
+      function renderSelect() {
+        var available = ALL_CITIES.filter(function (c) { return activeTzs.indexOf(c.tz) === -1; });
+        addCitySelect.innerHTML = available.map(function (c) {
+          return '<option value="' + c.tz + '">' + c.name + "</option>";
+        }).join("");
+        addCityBtn.disabled = available.length === 0;
+      }
+
+      function renderCards() {
+        clocksGrid.innerHTML = activeTzs.map(function (tz) {
+          var city = cityByTz(tz) || { name: tz, tz: tz };
+          return '<div class="clock-card" data-tz="' + tz + '">' +
+            '<button type="button" class="clock-remove" data-action="remove" aria-label="Remove city">✕</button>' +
+            '<div class="clock-city">' + city.name + '</div>' +
+            '<div class="clock-time" data-field="time">--:--:--</div>' +
+            '<div class="clock-date" data-field="date"></div>' +
+            '<div class="clock-offset" data-field="offset"></div>' +
+            "</div>";
+        }).join("");
+      }
+
+      function tick() {
+        var now = new Date();
+        Array.prototype.forEach.call(clocksGrid.querySelectorAll(".clock-card"), function (card) {
+          var tz = card.getAttribute("data-tz");
+          var timeFmt = new Intl.DateTimeFormat("en-US", { timeZone: tz, hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true });
+          var dateFmt = new Intl.DateTimeFormat("en-US", { timeZone: tz, weekday: "short", month: "short", day: "numeric" });
+          var offsetFmt = new Intl.DateTimeFormat("en-US", { timeZone: tz, timeZoneName: "shortOffset" });
+          var offsetPart = offsetFmt.formatToParts(now).filter(function (p) { return p.type === "timeZoneName"; })[0];
+          card.querySelector('[data-field="time"]').textContent = timeFmt.format(now);
+          card.querySelector('[data-field="date"]').textContent = dateFmt.format(now);
+          card.querySelector('[data-field="offset"]').textContent = offsetPart ? offsetPart.value : "";
+        });
+      }
+
+      clocksGrid.addEventListener("click", function (e) {
+        if (e.target.getAttribute("data-action") !== "remove") return;
+        var card = e.target.closest("[data-tz]");
+        var tz = card.getAttribute("data-tz");
+        activeTzs = activeTzs.filter(function (t) { return t !== tz; });
+        save();
+        renderCards();
+        renderSelect();
+        tick();
+      });
+
+      addCityBtn.addEventListener("click", function () {
+        var tz = addCitySelect.value;
+        if (!tz || activeTzs.indexOf(tz) !== -1) return;
+        activeTzs.push(tz);
+        save();
+        renderCards();
+        renderSelect();
+        tick();
+      });
+
+      load();
+      renderCards();
+      renderSelect();
+      tick();
+      setInterval(tick, 1000);
+    })();
+  </script>
+</body>
+</html>
