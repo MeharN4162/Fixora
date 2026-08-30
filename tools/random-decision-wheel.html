@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Random Decision Wheel Online — Spin the Wheel | Fixoona</title>
+  <meta name="description" content="Spin a random decision wheel online for free — enter any list of options and let a fair, animated spinning wheel pick one. No sign-up, nothing uploaded." />
+  <meta name="keywords" content="random decision wheel, spin the wheel online free, random picker wheel" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/random-decision-wheel" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Random Decision Wheel" />
+  <meta property="og:description" content="Spin an animated wheel to make a fair random pick, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/random-decision-wheel" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Random Decision Wheel" />
+  <meta name="twitter:description" content="Spin an animated wheel to make a fair random pick, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Random Decision Wheel",
+    "url": "https://fixoona.com/tools/random-decision-wheel",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Random Decision Wheel", "item": "https://fixoona.com/tools/random-decision-wheel" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is the spin actually fair and random?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — the winning slice is chosen using your browser's cryptographically secure random number generator (the same kind used for passwords) with rejection sampling, which guarantees every option has an exactly equal chance of being picked, regardless of how many options there are." }
+      },
+      {
+        "@type": "Question",
+        "name": "How many options can I add?",
+        "acceptedAnswer": { "@type": "Answer", "text": "There's no hard limit, but the wheel stays easiest to read with somewhere between 2 and 20 options — beyond that, the slices and labels get quite small." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the spinning animation just for show, or does it affect the result?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The winning option is determined the instant you click \"Spin\" — the animation is purely a visual reveal of that already-decided result, not something that influences which option wins." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my list of options sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — everything happens entirely in your browser using JavaScript, so the list you enter is never sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .wheel-wrap { display: flex; flex-direction: column; align-items: center; padding: 12px 0; }
+    .wheel-stage { position: relative; width: min(360px, 90vw); height: min(360px, 90vw); }
+    .wheel-canvas {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      box-shadow: var(--shadow-md);
+      transition: transform 4.5s cubic-bezier(0.15, 0.65, 0.1, 1);
+    }
+    .wheel-pointer {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 14px solid transparent;
+      border-right: 14px solid transparent;
+      border-top: 24px solid var(--color-primary-dark);
+      z-index: 2;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.25));
+    }
+    .wheel-winner {
+      text-align: center;
+      font-family: var(--font-display, sans-serif);
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-top: 18px;
+      min-height: 2.2rem;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Random Decision Wheel</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🎡</div>
+      <h1>Random Decision Wheel</h1>
+      <p>Enter any list of options and spin a fair, animated wheel to pick one.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="optionsInput">Options (one per line)</label>
+          <textarea id="optionsInput" style="min-height:140px;">Pizza
+Tacos
+Sushi
+Burgers
+Salad</textarea>
+        </div>
+
+        <div class="wheel-wrap">
+          <div class="wheel-stage">
+            <div class="wheel-pointer" aria-hidden="true"></div>
+            <canvas id="wheelCanvas" class="wheel-canvas" width="400" height="400"></canvas>
+          </div>
+          <div class="wheel-winner" id="winnerDisplay"></div>
+          <div class="actions">
+            <button class="btn btn-primary" id="spinBtn">Spin the Wheel</button>
+          </div>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Use the Decision Wheel</h2>
+        <ol class="howto-steps">
+          <li>Type your list of options, one per line.</li>
+          <li>Click "Spin the Wheel."</li>
+          <li>Watch it spin and land on your randomly picked option.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Is the spin actually fair and random?</summary>
+          <p>Yes — the winning slice is chosen using your browser's cryptographically secure random number generator (the same kind used for passwords) with rejection sampling, which guarantees every option has an exactly equal chance of being picked, regardless of how many options there are.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How many options can I add?</summary>
+          <p>There's no hard limit, but the wheel stays easiest to read with somewhere between 2 and 20 options — beyond that, the slices and labels get quite small.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is the spinning animation just for show, or does it affect the result?</summary>
+          <p>The winning option is determined the instant you click "Spin" — the animation is purely a visual reveal of that already-decided result, not something that influences which option wins.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my list of options sent anywhere?</summary>
+          <p>No — everything happens entirely in your browser using JavaScript, so the list you enter is never sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="coin-flip">
+            <span class="icon" aria-hidden="true">🪙</span>
+            <h3>Coin Flip</h3>
+            <p>Flip a virtual coin for a quick decision.</p>
+          </a>
+          <a class="card" href="dice-roller">
+            <span class="icon" aria-hidden="true">🎲</span>
+            <h3>Dice Roller</h3>
+            <p>Roll one or more virtual dice.</p>
+          </a>
+          <a class="card" href="team-randomizer">
+            <span class="icon" aria-hidden="true">👥</span>
+            <h3>Team Randomizer</h3>
+            <p>Split a list of names into random groups.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var optionsInput = document.getElementById("optionsInput");
+      var canvas = document.getElementById("wheelCanvas");
+      var ctx = canvas.getContext("2d");
+      var spinBtn = document.getElementById("spinBtn");
+      var winnerDisplay = document.getElementById("winnerDisplay");
+      var statusBox = document.getElementById("statusBox");
+
+      var COLORS = ["#2563eb", "#7c3aed", "#d946ef", "#06b6d4", "#16a34a", "#fb7185", "#d97706", "#0ea5e9", "#9333ea", "#059669", "#e11d48", "#65a30d"];
+      var currentRotation = 0;
+      var spinning = false;
+
+      function getOptions() {
+        return optionsInput.value.split("\n").map(function (s) { return s.trim(); }).filter(Boolean);
+      }
+
+      function drawWheel(options) {
+        var size = canvas.width;
+        var cx = size / 2, cy = size / 2, radius = size / 2 - 4;
+        var n = options.length;
+        ctx.clearRect(0, 0, size, size);
+        if (n === 0) return;
+        var segAngle = (2 * Math.PI) / n;
+
+        for (var i = 0; i < n; i++) {
+          var startAngle = i * segAngle;
+          var endAngle = (i + 1) * segAngle;
+          ctx.beginPath();
+          ctx.moveTo(cx, cy);
+          ctx.arc(cx, cy, radius, startAngle, endAngle);
+          ctx.closePath();
+          ctx.fillStyle = COLORS[i % COLORS.length];
+          ctx.fill();
+          ctx.strokeStyle = "#ffffff";
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          ctx.save();
+          ctx.translate(cx, cy);
+          ctx.rotate(startAngle + segAngle / 2);
+          ctx.textAlign = "right";
+          ctx.textBaseline = "middle";
+          ctx.fillStyle = "#ffffff";
+          ctx.font = "bold 15px Inter, sans-serif";
+          var label = options[i];
+          if (label.length > 16) label = label.slice(0, 15) + "…";
+          ctx.fillText(label, radius - 14, 0);
+          ctx.restore();
+        }
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, 24, 0, 2 * Math.PI);
+        ctx.fillStyle = "#ffffff";
+        ctx.fill();
+        ctx.strokeStyle = "#e2e8f0";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+
+      function randomUint32() {
+        var arr = new Uint32Array(1);
+        crypto.getRandomValues(arr);
+        return arr[0];
+      }
+
+      function randomInt(max) {
+        var maxUint32 = 4294967296;
+        var limit = maxUint32 - (maxUint32 % max);
+        var v;
+        do { v = randomUint32(); } while (v >= limit);
+        return v % max;
+      }
+
+      function randomFloat01() {
+        return randomUint32() / 4294967296;
+      }
+
+      function spin() {
+        var options = getOptions();
+        if (options.length < 2) {
+          statusBox.textContent = "Enter at least 2 options.";
+          return;
+        }
+        if (spinning) return;
+        spinning = true;
+        spinBtn.disabled = true;
+        winnerDisplay.textContent = "";
+        statusBox.textContent = "";
+
+        var n = options.length;
+        var segAngleDeg = 360 / n;
+        var winnerIndex = randomInt(n);
+        var centerAngle = (winnerIndex + 0.5) * segAngleDeg;
+        var jitter = (randomFloat01() - 0.5) * segAngleDeg * 0.7;
+        var targetMod = (270 - centerAngle + jitter + 360) % 360;
+        var currentMod = ((currentRotation % 360) + 360) % 360;
+        var deltaToTarget = (targetMod - currentMod + 360) % 360;
+        var extraSpins = 5 + randomInt(4);
+        currentRotation += extraSpins * 360 + deltaToTarget;
+
+        canvas.style.transform = "rotate(" + currentRotation + "deg)";
+
+        setTimeout(function () {
+          spinning = false;
+          spinBtn.disabled = false;
+          winnerDisplay.textContent = "🎉 " + options[winnerIndex];
+        }, 4600);
+      }
+
+      optionsInput.addEventListener("input", function () {
+        drawWheel(getOptions());
+      });
+      spinBtn.addEventListener("click", spin);
+
+      drawWheel(getOptions());
+    })();
+  </script>
+</body>
+</html>

@@ -28,6 +28,12 @@ document.documentElement.setAttribute("data-js", "true");
     { name: "Image Flip", type: "Tool", icon: "🔁", cat: "image", href: "tools/image-flip" },
     { name: "Image Color Picker", type: "Tool", icon: "🎨", cat: "image", href: "tools/image-color-picker" },
     { name: "Color Blindness Simulator", type: "Tool", icon: "👁️", cat: "image", href: "tools/color-blindness-simulator" },
+    { name: "Love Calculator", type: "Tool", icon: "💘", cat: "fun", href: "tools/love-calculator" },
+    { name: "Zodiac Sign Calculator", type: "Tool", icon: "♈", cat: "fun", href: "tools/zodiac-sign-calculator" },
+    { name: "Chinese Zodiac Calculator", type: "Tool", icon: "🐉", cat: "fun", href: "tools/chinese-zodiac-calculator" },
+    { name: "Random Decision Wheel", type: "Tool", icon: "🎡", cat: "fun", href: "tools/random-decision-wheel" },
+    { name: "Roman Numeral Converter", type: "Tool", icon: "Ⅻ", cat: "calc", href: "tools/roman-numeral-converter" },
+    { name: "Number to Words Converter", type: "Tool", icon: "🔤", cat: "calc", href: "tools/number-to-words-converter" },
     { name: "Image to Base64", type: "Tool", icon: "🔣", cat: "image", href: "tools/image-to-base64" },
     { name: "Photo Filters", type: "Tool", icon: "🎛️", cat: "image", href: "tools/photo-filters" },
     { name: "Image Metadata Viewer", type: "Tool", icon: "🔎", cat: "image", href: "tools/image-metadata-viewer" },
@@ -210,7 +216,8 @@ document.documentElement.setAttribute("data-js", "true");
     text: { name: "Text & Writing", icon: "🔤", anchor: "cat-text" },
     calc: { name: "Calculators & Converters", icon: "🧮", anchor: "cat-calc" },
     dev: { name: "Developer Tools", icon: "💻", anchor: "cat-dev" },
-    media: { name: "Audio & Video Tools", icon: "🎙️", anchor: "cat-media" }
+    media: { name: "Audio & Video Tools", icon: "🎙️", anchor: "cat-media" },
+    fun: { name: "Fun & Games", icon: "🎉", anchor: "cat-fun" }
   };
 
   /* ---------- Category chip (quick jump to sibling tools) ---------- */

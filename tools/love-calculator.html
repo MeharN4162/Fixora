@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Love Calculator Online — Just for Fun | Fixoona</title>
+  <meta name="description" content="Enter two names and get a fun, shareable love compatibility percentage, free, right in your browser. For entertainment only. No sign-up, nothing uploaded." />
+  <meta name="keywords" content="love calculator, love percentage calculator, name compatibility calculator free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/love-calculator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Love Calculator Online" />
+  <meta property="og:description" content="Enter two names and get a fun compatibility percentage, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/love-calculator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Love Calculator Online" />
+  <meta name="twitter:description" content="Enter two names and get a fun compatibility percentage, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Love Calculator",
+    "url": "https://fixoona.com/tools/love-calculator",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Love Calculator", "item": "https://fixoona.com/tools/love-calculator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does this calculator actually work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It combines the two names you enter and runs them through a simple hashing formula to produce a number between 0 and 100. It's a fun, lighthearted novelty, not a measurement of anything real about a relationship." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will I get the same result every time with the same two names?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — the result is deterministic, meaning the exact same pair of names will always produce the exact same percentage. There's no randomness involved, just a formula based on the letters in the names." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the order I enter the names in matter?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the two names are sorted before being combined, so entering \"Alex and Sam\" gives the exact same result as \"Sam and Alex.\"" }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this based on real relationship science?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No, not at all. This is purely for entertainment — a name-based novelty calculator, not a psychological or scientific compatibility test of any kind." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .lc-hearts { font-size: 2.2rem; text-align: center; margin-bottom: 4px; }
+    .lc-result-wrap { text-align: center; padding: 20px 0; }
+    .lc-percent {
+      font-family: var(--font-display, sans-serif);
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1;
+    }
+    .lc-bar { height: 14px; border-radius: 999px; background: var(--color-border); overflow: hidden; margin: 14px auto; max-width: 320px; }
+    .lc-bar-fill { height: 100%; border-radius: 999px; background: var(--gradient-primary); transition: width 0.6s ease; width: 0%; }
+    .lc-message { font-weight: 700; font-size: 1.1rem; margin-top: 4px; }
+    .lc-names { color: var(--color-text-muted); }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Love Calculator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">💘</div>
+      <h1>Love Calculator</h1>
+      <p>Enter two names and get a fun, shareable compatibility percentage. Just for fun!</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="row">
+          <div class="field">
+            <label for="name1Input">Your Name</label>
+            <input type="text" id="name1Input" placeholder="e.g. Alex" value="Alex" />
+          </div>
+          <div class="field">
+            <label for="name2Input">Their Name</label>
+            <input type="text" id="name2Input" placeholder="e.g. Sam" value="Sam" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="calcBtn">Calculate Love %</button>
+        </div>
+
+        <div class="lc-result-wrap" id="resultWrap" style="display:none;">
+          <div class="lc-hearts" aria-hidden="true">💕</div>
+          <div class="lc-percent" id="percentDisplay">0%</div>
+          <div class="lc-bar"><div class="lc-bar-fill" id="barFill"></div></div>
+          <div class="lc-message" id="messageDisplay"></div>
+          <div class="lc-names" id="namesDisplay"></div>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Use the Love Calculator</h2>
+        <ol class="howto-steps">
+          <li>Enter your name and their name.</li>
+          <li>Click "Calculate Love %."</li>
+          <li>Get a fun, shareable percentage — remember, it's just for entertainment!</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How does this calculator actually work?</summary>
+          <p>It combines the two names you enter and runs them through a simple hashing formula to produce a number between 0 and 100. It's a fun, lighthearted novelty, not a measurement of anything real about a relationship.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Will I get the same result every time with the same two names?</summary>
+          <p>Yes — the result is deterministic, meaning the exact same pair of names will always produce the exact same percentage. There's no randomness involved, just a formula based on the letters in the names.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does the order I enter the names in matter?</summary>
+          <p>No — the two names are sorted before being combined, so entering "Alex and Sam" gives the exact same result as "Sam and Alex."</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is this based on real relationship science?</summary>
+          <p>No, not at all. This is purely for entertainment — a name-based novelty calculator, not a psychological or scientific compatibility test of any kind.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="zodiac-sign-calculator">
+            <span class="icon" aria-hidden="true">♈</span>
+            <h3>Zodiac Sign Calculator</h3>
+            <p>Find a zodiac sign from a birth date.</p>
+          </a>
+          <a class="card" href="random-decision-wheel">
+            <span class="icon" aria-hidden="true">🎡</span>
+            <h3>Random Decision Wheel</h3>
+            <p>Spin a wheel to make a random pick.</p>
+          </a>
+          <a class="card" href="random-name-generator">
+            <span class="icon" aria-hidden="true">🎲</span>
+            <h3>Random Name Generator</h3>
+            <p>Generate random names for anything.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 100+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var name1Input = document.getElementById("name1Input");
+      var name2Input = document.getElementById("name2Input");
+      var calcBtn = document.getElementById("calcBtn");
+      var resultWrap = document.getElementById("resultWrap");
+      var percentDisplay = document.getElementById("percentDisplay");
+      var barFill = document.getElementById("barFill");
+      var messageDisplay = document.getElementById("messageDisplay");
+      var namesDisplay = document.getElementById("namesDisplay");
+
+      function hashString(s) {
+        var hash = 5381;
+        for (var i = 0; i < s.length; i++) {
+          hash = ((hash << 5) + hash) + s.charCodeAt(i);
+          hash = hash & hash;
+        }
+        return Math.abs(hash);
+      }
+
+      function messageFor(pct) {
+        if (pct <= 20) return "Not much in common right now.";
+        if (pct <= 40) return "There could be some potential.";
+        if (pct <= 60) return "A decent connection!";
+        if (pct <= 80) return "Great chemistry!";
+        return "A perfect match!";
+      }
+
+      function calculate() {
+        var n1 = name1Input.value.trim();
+        var n2 = name2Input.value.trim();
+        if (!n1 || !n2) return;
+
+        var sorted = [n1.toLowerCase(), n2.toLowerCase()].sort();
+        var combined = sorted.join("+");
+        var pct = hashString(combined) % 101;
+
+        resultWrap.style.display = "block";
+        percentDisplay.textContent = pct + "%";
+        barFill.style.width = pct + "%";
+        messageDisplay.textContent = messageFor(pct);
+        namesDisplay.textContent = n1 + " + " + n2;
+      }
+
+      calcBtn.addEventListener("click", calculate);
+      calculate();
+    })();
+  </script>
+</body>
+</html>
