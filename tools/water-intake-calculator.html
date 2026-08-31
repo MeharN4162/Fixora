@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Water Intake Calculator Online — Daily Hydration | Fixoona</title>
+  <meta name="description" content="Estimate how much water to drink per day based on your weight, activity level, and climate, in liters, milliliters, cups, or ounces. Free, no sign-up." />
+  <meta name="keywords" content="water intake calculator, how much water should i drink, daily water intake calculator, hydration calculator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/water-intake-calculator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Water Intake Calculator" />
+  <meta property="og:description" content="Estimate your daily water intake based on weight and activity, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/water-intake-calculator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Water Intake Calculator" />
+  <meta name="twitter:description" content="Estimate your daily water intake based on weight and activity, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Water Intake Calculator",
+    "url": "https://fixoona.com/tools/water-intake-calculator",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Water Intake Calculator", "item": "https://fixoona.com/tools/water-intake-calculator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What formula does this water intake calculator use?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It starts from a commonly cited baseline of about 33 mL of water per kilogram of body weight per day, then adds roughly 350 mL for each 30 minutes of exercise, and applies a small upward adjustment for hot climates. It's a widely used general guideline, not a personalized medical calculation." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this count water from food and other drinks?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — this estimates total plain water intake specifically. In practice, food and other beverages also contribute meaningfully to daily hydration, so your total fluid needs from all sources may already be partly met before you account for water alone." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this medical advice?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. This is a general wellness estimate, not medical guidance. Actual hydration needs vary by individual health conditions, medications, pregnancy, and climate — consult a doctor for advice specific to you, especially if you have a kidney, heart, or other condition affected by fluid intake." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the estimate is calculated entirely in your browser using JavaScript, so nothing you enter is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .water-result {
+      text-align: center;
+      padding: 26px 20px;
+      border-radius: var(--radius-md, 12px);
+      background: rgba(14, 165, 233, 0.1);
+      margin-top: 18px;
+    }
+    .water-result strong { display: block; font-size: 2.2rem; font-family: "Space Grotesk", sans-serif; color: #0ea5e9; }
+    .water-result span { font-size: 0.85rem; color: var(--color-text-muted); }
+    .water-alt-units { display: flex; justify-content: center; gap: 18px; margin-top: 10px; flex-wrap: wrap; font-size: 0.88rem; color: var(--color-text-muted); }
+    .water-radio-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 6px; }
+    .water-radio-row label { display: flex; align-items: center; gap: 6px; font-weight: 500; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Water Intake Calculator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">💧</div>
+      <h1>Water Intake Calculator</h1>
+      <p>Estimate your daily water intake based on your weight, activity, and climate.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="row">
+          <div class="field">
+            <label for="weightInput">Weight</label>
+            <input type="number" id="weightInput" value="70" min="1" />
+          </div>
+          <div class="field">
+            <label for="unitSelect">Units</label>
+            <select id="unitSelect">
+              <option value="kg">Kilograms</option>
+              <option value="lb">Pounds</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="exerciseInput">Exercise (minutes per day)</label>
+          <input type="number" id="exerciseInput" value="30" min="0" />
+        </div>
+
+        <div class="field">
+          <label>Climate</label>
+          <div class="water-radio-row">
+            <label><input type="radio" name="climate" value="normal" checked /> Normal</label>
+            <label><input type="radio" name="climate" value="hot" /> Hot / Humid</label>
+          </div>
+        </div>
+
+        <div class="water-result">
+          <strong id="litersResult">-</strong>
+          <span>Liters per day</span>
+          <div class="water-alt-units" id="altUnits"></div>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Estimate Your Water Intake</h2>
+        <ol class="howto-steps">
+          <li>Enter your weight and choose kilograms or pounds.</li>
+          <li>Enter how many minutes you exercise on a typical day.</li>
+          <li>Select your climate — hot or humid conditions increase fluid loss.</li>
+          <li>Your estimated daily water intake updates instantly, in liters, milliliters, cups, and ounces.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What formula does this water intake calculator use?</summary>
+          <p>It starts from a commonly cited baseline of about 33 mL of water per kilogram of body weight per day, then adds roughly 350 mL for each 30 minutes of exercise, and applies a small upward adjustment for hot climates. It's a widely used general guideline, not a personalized medical calculation.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this count water from food and other drinks?</summary>
+          <p>No — this estimates total plain water intake specifically. In practice, food and other beverages also contribute meaningfully to daily hydration, so your total fluid needs from all sources may already be partly met before you account for water alone.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is this medical advice?</summary>
+          <p>No. This is a general wellness estimate, not medical guidance. Actual hydration needs vary by individual health conditions, medications, pregnancy, and climate — consult a doctor for advice specific to you, especially if you have a kidney, heart, or other condition affected by fluid intake.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my data sent anywhere?</summary>
+          <p>No — the estimate is calculated entirely in your browser using JavaScript, so nothing you enter is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="calorie-calculator">
+            <span class="icon" aria-hidden="true">🔥</span>
+            <h3>Calorie Calculator</h3>
+            <p>Calculate daily calorie needs and macros.</p>
+          </a>
+          <a class="card" href="bmi-calculator">
+            <span class="icon" aria-hidden="true">⚖️</span>
+            <h3>BMI Calculator</h3>
+            <p>Calculate your Body Mass Index.</p>
+          </a>
+          <a class="card" href="sleep-cycle-calculator">
+            <span class="icon" aria-hidden="true">😴</span>
+            <h3>Sleep Cycle Calculator</h3>
+            <p>Find the best bedtime or wake-up time.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 173 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var weightInput = document.getElementById("weightInput");
+      var unitSelect = document.getElementById("unitSelect");
+      var exerciseInput = document.getElementById("exerciseInput");
+      var litersResult = document.getElementById("litersResult");
+      var altUnits = document.getElementById("altUnits");
+
+      function calculate() {
+        var weight = parseFloat(weightInput.value);
+        var exerciseMin = parseFloat(exerciseInput.value) || 0;
+        var climate = document.querySelector('input[name="climate"]:checked').value;
+
+        if (isNaN(weight) || weight <= 0) {
+          litersResult.textContent = "-";
+          altUnits.textContent = "Enter a valid weight.";
+          return;
+        }
+
+        var weightKg = unitSelect.value === "lb" ? weight * 0.453592 : weight;
+        var baseMl = weightKg * 33;
+        var exerciseMl = (exerciseMin / 30) * 350;
+        var climateMl = climate === "hot" ? baseMl * 0.1 : 0;
+        var totalMl = baseMl + exerciseMl + climateMl;
+        var liters = totalMl / 1000;
+
+        litersResult.textContent = liters.toFixed(2) + " L";
+        var cups = totalMl / 236.588;
+        var ounces = totalMl / 29.5735;
+        altUnits.innerHTML = "<span>" + Math.round(totalMl) + " mL</span><span>" + cups.toFixed(1) + " cups</span><span>" + ounces.toFixed(1) + " fl oz</span>";
+      }
+
+      weightInput.addEventListener("input", calculate);
+      unitSelect.addEventListener("change", calculate);
+      exerciseInput.addEventListener("input", calculate);
+      document.querySelectorAll('input[name="climate"]').forEach(function (r) { r.addEventListener("change", calculate); });
+
+      calculate();
+    })();
+  </script>
+</body>
+</html>

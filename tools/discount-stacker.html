@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Discount Stacker Online — Multiple Discounts Calculator | Fixoona</title>
+  <meta name="description" content="Apply multiple percentage or dollar discounts to a price in sequence and see the true final price — stacked discounts never simply add up. Free, no sign-up." />
+  <meta name="keywords" content="discount stacker, multiple discounts calculator, stacked coupon calculator, sequential discount calculator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/discount-stacker" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Discount Stacker" />
+  <meta property="og:description" content="Apply multiple discounts in sequence and see the true final price, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/discount-stacker" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Discount Stacker" />
+  <meta name="twitter:description" content="Apply multiple discounts in sequence and see the true final price, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Discount Stacker",
+    "url": "https://fixoona.com/tools/discount-stacker",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Discount Stacker", "item": "https://fixoona.com/tools/discount-stacker" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why don't two 20% discounts just add up to 40% off?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Because each discount is applied to the price that's already been reduced by the previous one, not to the original price. Two successive 20% discounts multiply the price by 0.8 twice (0.8 × 0.8 = 0.64), which is a 36% total discount — not 40%. Stacked percentage discounts are always weaker than simply adding their percentages together." }
+      },
+      {
+        "@type": "Question",
+        "name": "What order should I enter the discounts in?",
+        "acceptedAnswer": { "@type": "Answer", "text": "For percentage-only discounts, the order doesn't change the final price at all, since multiplication is commutative. It only matters when you mix a flat dollar-amount discount with percentage discounts — a $10-off coupon applied before a 20% discount saves you an extra 20% of that $10, whereas applying it after the percentage discount doesn't." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does \"equivalent single discount\" mean?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's the one flat percentage that, if applied by itself, would produce the exact same final price as all your stacked discounts combined — useful for quickly comparing a multi-coupon deal against a single stated \"X% off everything\" sale." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — every calculation happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .ds-row { display: grid; grid-template-columns: 100px 1fr 32px; gap: 8px; margin-bottom: 8px; align-items: center; }
+    .ds-row select, .ds-row input { padding: 8px 10px; border-radius: 8px; border: 1px solid var(--color-border); font-family: var(--font-main); font-size: 0.9rem; min-width: 0; }
+    .ds-remove { background: var(--color-bg-alt); border: none; border-radius: 6px; width: 32px; height: 32px; cursor: pointer; color: var(--color-danger); flex-shrink: 0; }
+    @media (max-width: 480px) {
+      .ds-row { grid-template-columns: 100px 1fr; }
+      .ds-remove { grid-column: 1 / -1; justify-self: end; }
+    }
+    .ds-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 18px; }
+    .ds-stat { background: var(--color-bg-alt); border-radius: var(--radius-md, 10px); padding: 14px; text-align: center; }
+    .ds-stat strong { display: block; font-size: 1.3rem; font-family: "Space Grotesk", sans-serif; color: var(--color-primary); }
+    .ds-stat span { font-size: 0.78rem; color: var(--color-text-muted); }
+    .ds-stat.savings strong { color: #10a34a; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Discount Stacker</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🧾</div>
+      <h1>Discount Stacker</h1>
+      <p>Apply multiple discounts to a price in sequence and see the true final price.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="priceInput">Original Price ($)</label>
+          <input type="number" id="priceInput" value="100" min="0" step="0.01" />
+        </div>
+
+        <label style="font-weight:600;font-size:0.9rem;">Discounts (applied in order)</label>
+        <div id="discountsContainer" style="margin-top:8px;"></div>
+        <button class="btn btn-secondary" id="addDiscountBtn" type="button">+ Add Discount</button>
+
+        <div class="ds-summary">
+          <div class="ds-stat"><strong id="statFinal">-</strong><span>Final Price</span></div>
+          <div class="ds-stat savings"><strong id="statSaved">-</strong><span>Total Saved</span></div>
+          <div class="ds-stat"><strong id="statEquivalent">-</strong><span>Equivalent Single Discount</span></div>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Stack Discounts</h2>
+        <ol class="howto-steps">
+          <li>Enter the original price.</li>
+          <li>Add each discount — percentage off or a flat dollar amount off — in the order they'd be applied.</li>
+          <li>See the true final price, total saved, and the equivalent single discount percentage, all updated instantly.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Why don't two 20% discounts just add up to 40% off?</summary>
+          <p>Because each discount is applied to the price that's already been reduced by the previous one, not to the original price. Two successive 20% discounts multiply the price by 0.8 twice (0.8 × 0.8 = 0.64), which is a 36% total discount — not 40%. Stacked percentage discounts are always weaker than simply adding their percentages together.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What order should I enter the discounts in?</summary>
+          <p>For percentage-only discounts, the order doesn't change the final price at all, since multiplication is commutative. It only matters when you mix a flat dollar-amount discount with percentage discounts — a $10-off coupon applied before a 20% discount saves you an extra 20% of that $10, whereas applying it after the percentage discount doesn't.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does "equivalent single discount" mean?</summary>
+          <p>It's the one flat percentage that, if applied by itself, would produce the exact same final price as all your stacked discounts combined — useful for quickly comparing a multi-coupon deal against a single stated "X% off everything" sale.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my data sent anywhere?</summary>
+          <p>No — every calculation happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="discount-calculator">
+            <span class="icon" aria-hidden="true">🏷️</span>
+            <h3>Discount Calculator</h3>
+            <p>Calculate sale prices and savings.</p>
+          </a>
+          <a class="card" href="price-per-unit-calculator">
+            <span class="icon" aria-hidden="true">🏷️</span>
+            <h3>Price Per Unit Calculator</h3>
+            <p>Compare products to find the better deal.</p>
+          </a>
+          <a class="card" href="sales-tax-calculator">
+            <span class="icon" aria-hidden="true">🧮</span>
+            <h3>Sales Tax Calculator</h3>
+            <p>Calculate sales tax and total price.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 173 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var priceInput = document.getElementById("priceInput");
+      var discountsContainer = document.getElementById("discountsContainer");
+      var addDiscountBtn = document.getElementById("addDiscountBtn");
+
+      function addDiscount(type, value) {
+        var row = document.createElement("div");
+        row.className = "ds-row";
+        row.innerHTML =
+          '<select class="d-type">' +
+            '<option value="percent"' + (type !== "flat" ? " selected" : "") + '>% off</option>' +
+            '<option value="flat"' + (type === "flat" ? " selected" : "") + '>$ off</option>' +
+          '</select>' +
+          '<input type="number" class="d-value" min="0" step="0.01" value="' + (value || "") + '" placeholder="e.g. 20" />' +
+          '<button type="button" class="ds-remove" aria-label="Remove discount">✕</button>';
+        discountsContainer.appendChild(row);
+        row.querySelectorAll("select, input").forEach(function (el) { el.addEventListener("input", calculate); el.addEventListener("change", calculate); });
+        row.querySelector(".ds-remove").addEventListener("click", function () {
+          row.remove();
+          calculate();
+        });
+        calculate();
+      }
+
+      function calculate() {
+        var original = parseFloat(priceInput.value);
+        if (isNaN(original) || original < 0) original = 0;
+
+        var price = original;
+        discountsContainer.querySelectorAll(".ds-row").forEach(function (row) {
+          var type = row.querySelector(".d-type").value;
+          var value = parseFloat(row.querySelector(".d-value").value);
+          if (isNaN(value) || value <= 0) return;
+          if (type === "percent") {
+            price = price * (1 - Math.min(value, 100) / 100);
+          } else {
+            price = Math.max(0, price - value);
+          }
+        });
+
+        var saved = original - price;
+        var equivalentPct = original > 0 ? (saved / original) * 100 : 0;
+
+        document.getElementById("statFinal").textContent = "$" + price.toFixed(2);
+        document.getElementById("statSaved").textContent = "$" + saved.toFixed(2);
+        document.getElementById("statEquivalent").textContent = equivalentPct.toFixed(2) + "%";
+      }
+
+      priceInput.addEventListener("input", calculate);
+      addDiscountBtn.addEventListener("click", function () { addDiscount(); });
+
+      addDiscount("percent", "20");
+      addDiscount("percent", "10");
+    })();
+  </script>
+</body>
+</html>

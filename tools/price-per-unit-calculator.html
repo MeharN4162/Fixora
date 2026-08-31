@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Price Per Unit Calculator Online — Compare Deals | Fixoona</title>
+  <meta name="description" content="Compare the price per unit of two or more products to find the better deal — works with any unit like oz, lb, g, kg, or count. Free, no sign-up." />
+  <meta name="keywords" content="price per unit calculator, unit price calculator, cost per ounce calculator, compare grocery prices" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/price-per-unit-calculator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Price Per Unit Calculator" />
+  <meta property="og:description" content="Compare unit prices across products to find the better deal, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/price-per-unit-calculator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Price Per Unit Calculator" />
+  <meta name="twitter:description" content="Compare unit prices across products to find the better deal, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Price Per Unit Calculator",
+    "url": "https://fixoona.com/tools/price-per-unit-calculator",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Price Per Unit Calculator", "item": "https://fixoona.com/tools/price-per-unit-calculator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do the two products need to use the same unit of measurement?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the unit label next to each product's size is just a label for display; the tool simply divides price by size for each product independently, so you can compare a price-per-ounce product against a price-per-count product as long as you understand what each unit means for your decision." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I compare more than two products?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — click \"Add Product\" to add as many as you want to compare at once; the cheapest price per unit is highlighted automatically." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this account for quality or bulk-buying tradeoffs?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — it purely compares price per unit of size. A lower price per unit doesn't automatically mean the best choice if you don't need that much quantity, or if quality genuinely differs between the products being compared." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — every calculation happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .ppu-row { display: grid; grid-template-columns: 1fr 90px 90px 32px; gap: 8px; margin-bottom: 8px; align-items: center; }
+    .ppu-row input { padding: 8px 10px; border-radius: 8px; border: 1px solid var(--color-border); font-family: var(--font-main); font-size: 0.9rem; }
+    .ppu-header { display: grid; grid-template-columns: 1fr 90px 90px 32px; gap: 8px; font-size: 0.75rem; font-weight: 600; color: var(--color-text-muted); text-transform: uppercase; margin-bottom: 8px; }
+    .ppu-remove { background: var(--color-bg-alt); border: none; border-radius: 6px; width: 32px; height: 32px; cursor: pointer; color: var(--color-danger); }
+    .ppu-results { display: flex; flex-direction: column; gap: 8px; margin-top: 18px; }
+    .ppu-result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: var(--color-bg-alt);
+      border-radius: var(--radius-md, 10px);
+    }
+    .ppu-result-row.best { box-shadow: 0 0 0 2px #10a34a; background: rgba(16, 163, 74, 0.08); }
+    .ppu-result-row strong { font-family: "Space Grotesk", sans-serif; }
+    .ppu-best-badge { background: #10a34a; color: #fff; font-size: 0.72rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; margin-left: 8px; }
+    .ppu-field { display: contents; }
+    .ppu-field-label { display: none; }
+    @media (max-width: 640px) {
+      .ppu-header { display: none; }
+      .ppu-row {
+        display: flex; flex-direction: column; align-items: stretch; gap: 10px;
+        background: var(--color-bg-alt); border-radius: var(--radius-md, 10px); padding: 14px; position: relative;
+      }
+      .ppu-field { display: flex; flex-direction: column; align-items: stretch; gap: 4px; }
+      .ppu-field-label { display: block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; color: var(--color-text-muted); }
+      .ppu-row input { width: 100%; }
+      .ppu-remove { position: absolute; top: 14px; right: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Price Per Unit Calculator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🏷️</div>
+      <h1>Price Per Unit Calculator</h1>
+      <p>Compare products by price per unit to find the better deal.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="ppu-header">
+          <span>Product</span><span>Price ($)</span><span>Size / Qty</span><span></span>
+        </div>
+        <div id="productsContainer"></div>
+        <button class="btn btn-secondary" id="addProductBtn" type="button">+ Add Product</button>
+
+        <div class="ppu-results" id="resultsContainer"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Compare Unit Prices</h2>
+        <ol class="howto-steps">
+          <li>Enter each product's name (optional), total price, and size or quantity.</li>
+          <li>The price per unit for each product is calculated instantly.</li>
+          <li>The cheapest option is highlighted in green.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Do the two products need to use the same unit of measurement?</summary>
+          <p>No — the unit label next to each product's size is just a label for display; the tool simply divides price by size for each product independently, so you can compare a price-per-ounce product against a price-per-count product as long as you understand what each unit means for your decision.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I compare more than two products?</summary>
+          <p>Yes — click "Add Product" to add as many as you want to compare at once; the cheapest price per unit is highlighted automatically.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this account for quality or bulk-buying tradeoffs?</summary>
+          <p>No — it purely compares price per unit of size. A lower price per unit doesn't automatically mean the best choice if you don't need that much quantity, or if quality genuinely differs between the products being compared.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my data sent anywhere?</summary>
+          <p>No — every calculation happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="discount-calculator">
+            <span class="icon" aria-hidden="true">🏷️</span>
+            <h3>Discount Calculator</h3>
+            <p>Calculate sale prices and savings.</p>
+          </a>
+          <a class="card" href="discount-stacker">
+            <span class="icon" aria-hidden="true">🧾</span>
+            <h3>Discount Stacker</h3>
+            <p>Apply multiple discounts to a price in sequence.</p>
+          </a>
+          <a class="card" href="sales-tax-calculator">
+            <span class="icon" aria-hidden="true">🧮</span>
+            <h3>Sales Tax Calculator</h3>
+            <p>Calculate sales tax and total price.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 173 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var productsContainer = document.getElementById("productsContainer");
+      var addProductBtn = document.getElementById("addProductBtn");
+      var resultsContainer = document.getElementById("resultsContainer");
+
+      function addProduct(name, price, size) {
+        var row = document.createElement("div");
+        row.className = "ppu-row";
+        row.innerHTML =
+          '<label class="ppu-field"><span class="ppu-field-label">Product</span><input type="text" class="p-name" placeholder="e.g. Brand A" value="' + (name || "") + '" /></label>' +
+          '<label class="ppu-field"><span class="ppu-field-label">Price ($)</span><input type="number" class="p-price" placeholder="4.99" step="0.01" min="0" value="' + (price || "") + '" /></label>' +
+          '<label class="ppu-field"><span class="ppu-field-label">Size / Qty</span><input type="number" class="p-size" placeholder="12" step="0.01" min="0" value="' + (size || "") + '" /></label>' +
+          '<button type="button" class="ppu-remove" aria-label="Remove product">✕</button>';
+        productsContainer.appendChild(row);
+        row.querySelectorAll("input").forEach(function (el) { el.addEventListener("input", calculate); });
+        row.querySelector(".ppu-remove").addEventListener("click", function () {
+          row.remove();
+          calculate();
+        });
+        calculate();
+      }
+
+      function calculate() {
+        var rows = productsContainer.querySelectorAll(".ppu-row");
+        var results = [];
+        rows.forEach(function (row, idx) {
+          var name = row.querySelector(".p-name").value.trim() || "Product " + (idx + 1);
+          var price = parseFloat(row.querySelector(".p-price").value);
+          var size = parseFloat(row.querySelector(".p-size").value);
+          if (!isNaN(price) && !isNaN(size) && size > 0) {
+            results.push({ name: name, perUnit: price / size });
+          }
+        });
+
+        if (results.length === 0) {
+          resultsContainer.innerHTML = "";
+          return;
+        }
+
+        var minVal = Math.min.apply(null, results.map(function (r) { return r.perUnit; }));
+        resultsContainer.innerHTML = results.map(function (r) {
+          var isBest = Math.abs(r.perUnit - minVal) < 0.0000001;
+          return '<div class="ppu-result-row' + (isBest ? " best" : "") + '">' +
+            "<span>" + r.name + (isBest ? '<span class="ppu-best-badge">Best Value</span>' : "") + "</span>" +
+            "<strong>$" + r.perUnit.toFixed(4) + " / unit</strong></div>";
+        }).join("");
+      }
+
+      addProductBtn.addEventListener("click", function () { addProduct(); });
+
+      addProduct("Brand A (12 oz)", "4.99", "12");
+      addProduct("Brand B (20 oz)", "7.49", "20");
+    })();
+  </script>
+</body>
+</html>

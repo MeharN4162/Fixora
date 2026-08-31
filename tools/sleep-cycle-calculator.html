@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Sleep Cycle Calculator Online — Best Bedtime & Wake Time | Fixoona</title>
+  <meta name="description" content="Find the best bedtime or wake-up time based on 90-minute sleep cycles, so you wake up between cycles instead of mid-cycle. Free, no sign-up." />
+  <meta name="keywords" content="sleep calculator, sleep cycle calculator, best time to wake up, what time should i go to bed" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/sleep-cycle-calculator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Sleep Cycle Calculator" />
+  <meta property="og:description" content="Find the best bedtime or wake-up time based on 90-minute sleep cycles, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/sleep-cycle-calculator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Sleep Cycle Calculator" />
+  <meta name="twitter:description" content="Find the best bedtime or wake-up time based on 90-minute sleep cycles, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Sleep Cycle Calculator",
+    "url": "https://fixoona.com/tools/sleep-cycle-calculator",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Sleep Cycle Calculator", "item": "https://fixoona.com/tools/sleep-cycle-calculator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why 90 minutes for a sleep cycle?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A full sleep cycle — moving through light sleep, deep sleep, and REM sleep — takes about 90 minutes on average, though it genuinely varies from about 70 to 120 minutes between individuals and even between cycles in the same night. 90 minutes is the commonly used average that sleep calculators are built around." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does waking up between cycles matter?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Waking up in the middle of a deep sleep stage tends to cause grogginess (\"sleep inertia\"), while waking up at the boundary between cycles, during lighter sleep, tends to feel more natural and alert. Timing your sleep in full 90-minute cycles aims to land your wake-up at one of those lighter boundaries." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the 14-minute buffer for?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It accounts for the average time it takes a person to actually fall asleep after getting into bed, so the cycle math starts from when you're likely asleep rather than from when you lie down." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this a substitute for medical sleep advice?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — this is a general guideline based on average cycle length, not a personalized or medical sleep assessment. If you have ongoing sleep problems, consult a doctor or sleep specialist." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .sleep-mode-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+    .sleep-mode-tabs button {
+      flex: 1;
+      padding: 10px;
+      border-radius: var(--radius-sm, 8px);
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .sleep-mode-tabs button.active { background: var(--gradient-primary); color: #fff; border-color: transparent; }
+    .sleep-times-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 18px; }
+    .sleep-time-card {
+      background: var(--color-bg-alt);
+      border-radius: var(--radius-md, 10px);
+      padding: 16px;
+      text-align: center;
+    }
+    .sleep-time-card strong { display: block; font-size: 1.5rem; font-family: "Space Grotesk", sans-serif; color: var(--color-primary); }
+    .sleep-time-card span { font-size: 0.78rem; color: var(--color-text-muted); }
+    .sleep-time-card.recommended { box-shadow: 0 0 0 2px var(--color-primary); }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Sleep Cycle Calculator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">😴</div>
+      <h1>Sleep Cycle Calculator</h1>
+      <p>Find the best bedtime or wake-up time based on 90-minute sleep cycles.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="sleep-mode-tabs">
+          <button type="button" id="wakeModeBtn" class="active">I want to wake up at…</button>
+          <button type="button" id="bedModeBtn">I'm going to bed at…</button>
+        </div>
+
+        <div class="field">
+          <label for="timeInput" id="timeLabel">Wake-up time</label>
+          <input type="time" id="timeInput" value="07:00" />
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+        <div class="sleep-times-grid" id="timesGrid"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Use the Sleep Cycle Calculator</h2>
+        <ol class="howto-steps">
+          <li>Choose whether you want to plan around a wake-up time or a bedtime.</li>
+          <li>Enter that time.</li>
+          <li>You'll see several options, each a whole number of 90-minute sleep cycles apart, so you wake up between cycles instead of mid-cycle.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Why 90 minutes for a sleep cycle?</summary>
+          <p>A full sleep cycle — moving through light sleep, deep sleep, and REM sleep — takes about 90 minutes on average, though it genuinely varies from about 70 to 120 minutes between individuals and even between cycles in the same night. 90 minutes is the commonly used average that sleep calculators are built around.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why does waking up between cycles matter?</summary>
+          <p>Waking up in the middle of a deep sleep stage tends to cause grogginess ("sleep inertia"), while waking up at the boundary between cycles, during lighter sleep, tends to feel more natural and alert. Timing your sleep in full 90-minute cycles aims to land your wake-up at one of those lighter boundaries.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What's the 14-minute buffer for?</summary>
+          <p>It accounts for the average time it takes a person to actually fall asleep after getting into bed, so the cycle math starts from when you're likely asleep rather than from when you lie down.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is this a substitute for medical sleep advice?</summary>
+          <p>No — this is a general guideline based on average cycle length, not a personalized or medical sleep assessment. If you have ongoing sleep problems, consult a doctor or sleep specialist.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="water-intake-calculator">
+            <span class="icon" aria-hidden="true">💧</span>
+            <h3>Water Intake Calculator</h3>
+            <p>Estimate your daily water intake.</p>
+          </a>
+          <a class="card" href="pomodoro-timer">
+            <span class="icon" aria-hidden="true">🍅</span>
+            <h3>Pomodoro Timer</h3>
+            <p>Stay focused with timed work sessions.</p>
+          </a>
+          <a class="card" href="time-duration-calculator">
+            <span class="icon" aria-hidden="true">⏱️</span>
+            <h3>Time Duration Calculator</h3>
+            <p>Calculate the time between two clock times.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 173 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var wakeModeBtn = document.getElementById("wakeModeBtn");
+      var bedModeBtn = document.getElementById("bedModeBtn");
+      var timeInput = document.getElementById("timeInput");
+      var timeLabel = document.getElementById("timeLabel");
+      var statusBox = document.getElementById("statusBox");
+      var timesGrid = document.getElementById("timesGrid");
+
+      var mode = "wake";
+      var CYCLE_MIN = 90;
+      var FALL_ASLEEP_MIN = 14;
+
+      function fmtTime(totalMinutes) {
+        totalMinutes = ((totalMinutes % 1440) + 1440) % 1440;
+        var h = Math.floor(totalMinutes / 60);
+        var m = totalMinutes % 60;
+        var period = h >= 12 ? "PM" : "AM";
+        var h12 = h % 12; if (h12 === 0) h12 = 12;
+        return h12 + ":" + (m < 10 ? "0" : "") + m + " " + period;
+      }
+
+      function calculate() {
+        var parts = timeInput.value.split(":");
+        if (parts.length !== 2) return;
+        var inputMinutes = parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+
+        var cycles = [6, 5, 4, 3];
+        timesGrid.innerHTML = "";
+
+        if (mode === "wake") {
+          statusBox.textContent = "To wake up at " + fmtTime(inputMinutes) + ", try going to bed at one of these times:";
+          timesGrid.innerHTML = cycles.map(function (n, idx) {
+            var bedMinutes = inputMinutes - (n * CYCLE_MIN) - FALL_ASLEEP_MIN;
+            var hours = (n * CYCLE_MIN / 60).toFixed(1);
+            return '<div class="sleep-time-card' + (idx === 1 ? " recommended" : "") + '"><strong>' + fmtTime(bedMinutes) + '</strong><span>' + n + ' cycles (' + hours + ' hrs sleep)</span></div>';
+          }).join("");
+        } else {
+          statusBox.textContent = "If you go to bed at " + fmtTime(inputMinutes) + ", try waking up at one of these times:";
+          timesGrid.innerHTML = cycles.map(function (n, idx) {
+            var wakeMinutes = inputMinutes + FALL_ASLEEP_MIN + (n * CYCLE_MIN);
+            var hours = (n * CYCLE_MIN / 60).toFixed(1);
+            return '<div class="sleep-time-card' + (idx === 1 ? " recommended" : "") + '"><strong>' + fmtTime(wakeMinutes) + '</strong><span>' + n + ' cycles (' + hours + ' hrs sleep)</span></div>';
+          }).join("");
+        }
+      }
+
+      wakeModeBtn.addEventListener("click", function () {
+        mode = "wake";
+        wakeModeBtn.classList.add("active");
+        bedModeBtn.classList.remove("active");
+        timeLabel.textContent = "Wake-up time";
+        calculate();
+      });
+      bedModeBtn.addEventListener("click", function () {
+        mode = "bed";
+        bedModeBtn.classList.add("active");
+        wakeModeBtn.classList.remove("active");
+        timeLabel.textContent = "Bedtime";
+        calculate();
+      });
+      timeInput.addEventListener("input", calculate);
+
+      calculate();
+    })();
+  </script>
+</body>
+</html>

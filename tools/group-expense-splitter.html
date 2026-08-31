@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Group Expense Splitter Online — Who Owes Who | Fixoona</title>
+  <meta name="description" content="Split group expenses when everyone paid different amounts — enter what each person paid and get the minimum set of payments needed to settle up. Free, no sign-up." />
+  <meta name="keywords" content="group expense splitter, split expenses calculator, who owes who calculator, trip expense splitter" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/group-expense-splitter" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Group Expense Splitter" />
+  <meta property="og:description" content="Split group expenses and find who owes who, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/group-expense-splitter" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Group Expense Splitter" />
+  <meta name="twitter:description" content="Split group expenses and find who owes who, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Group Expense Splitter",
+    "url": "https://fixoona.com/tools/group-expense-splitter",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Group Expense Splitter", "item": "https://fixoona.com/tools/group-expense-splitter" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How is this different from the Tip Calculator's bill split?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The Tip Calculator splits one bill equally among a number of people. This tool is for when different people paid different amounts across possibly multiple expenses, and you need to work out the minimum set of payments so everyone ends up having paid an equal fair share." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does it calculate who pays who?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It computes each person's net balance (what they paid minus their equal fair share of the total), then repeatedly matches whoever is owed the most money with whoever owes the most money until every balance reaches zero. This greedy settle-up approach minimizes the total number of payments needed." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does everyone have to split the total equally?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — this tool assumes an equal split of the total among everyone listed. If people should owe different shares (like one person only attending part of a trip), you'd need to adjust the numbers manually." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — every calculation happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .ges-row { display: grid; grid-template-columns: 1fr 110px 32px; gap: 8px; margin-bottom: 8px; align-items: center; }
+    .ges-row input { padding: 8px 10px; border-radius: 8px; border: 1px solid var(--color-border); font-family: var(--font-main); font-size: 0.9rem; }
+    .ges-header { display: grid; grid-template-columns: 1fr 110px 32px; gap: 8px; font-size: 0.75rem; font-weight: 600; color: var(--color-text-muted); text-transform: uppercase; margin-bottom: 8px; }
+    .ges-remove { background: var(--color-bg-alt); border: none; border-radius: 6px; width: 32px; height: 32px; cursor: pointer; color: var(--color-danger); }
+    .ges-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 18px; }
+    .ges-stat { background: var(--color-bg-alt); border-radius: var(--radius-md, 10px); padding: 14px; text-align: center; }
+    .ges-stat strong { display: block; font-size: 1.2rem; font-family: "Space Grotesk", sans-serif; color: var(--color-primary); }
+    .ges-stat span { font-size: 0.78rem; color: var(--color-text-muted); }
+    .ges-transactions { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+    .ges-transaction {
+      display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+      background: var(--color-bg-alt); border-radius: var(--radius-md, 10px); font-weight: 600;
+    }
+    .ges-transaction .arrow { color: var(--color-primary); }
+    .ges-field { display: contents; }
+    .ges-field-label { display: none; }
+    @media (max-width: 560px) {
+      .ges-header { display: none; }
+      .ges-row {
+        display: flex; flex-direction: column; align-items: stretch; gap: 10px;
+        background: var(--color-bg-alt); border-radius: var(--radius-md, 10px); padding: 14px; position: relative;
+      }
+      .ges-field { display: flex; flex-direction: column; align-items: stretch; gap: 4px; }
+      .ges-field-label { display: block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; color: var(--color-text-muted); }
+      .ges-row input { width: 100%; }
+      .ges-remove { position: absolute; top: 14px; right: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Group Expense Splitter</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🧾</div>
+      <h1>Group Expense Splitter</h1>
+      <p>Enter what each person paid, and find the simplest way to settle up.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="ges-header">
+          <span>Name</span><span>Amount Paid ($)</span><span></span>
+        </div>
+        <div id="peopleContainer"></div>
+        <button class="btn btn-secondary" id="addPersonBtn" type="button">+ Add Person</button>
+
+        <div class="ges-summary" id="summaryGrid" style="display:none;">
+          <div class="ges-stat"><strong id="statTotal">-</strong><span>Total Spent</span></div>
+          <div class="ges-stat"><strong id="statPerPerson">-</strong><span>Fair Share Each</span></div>
+          <div class="ges-stat"><strong id="statCount">-</strong><span>People</span></div>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+        <div class="ges-transactions" id="transactionsList"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Split Group Expenses</h2>
+        <ol class="howto-steps">
+          <li>Add each person and how much they personally paid toward the group's total expenses.</li>
+          <li>The tool calculates each person's fair share and net balance.</li>
+          <li>You'll see the simplest possible set of payments to settle every balance to zero.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How is this different from the Tip Calculator's bill split?</summary>
+          <p>The Tip Calculator splits one bill equally among a number of people. This tool is for when different people paid different amounts across possibly multiple expenses, and you need to work out the minimum set of payments so everyone ends up having paid an equal fair share.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does it calculate who pays who?</summary>
+          <p>It computes each person's net balance (what they paid minus their equal fair share of the total), then repeatedly matches whoever is owed the most money with whoever owes the most money until every balance reaches zero. This greedy settle-up approach minimizes the total number of payments needed.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does everyone have to split the total equally?</summary>
+          <p>Yes — this tool assumes an equal split of the total among everyone listed. If people should owe different shares (like one person only attending part of a trip), you'd need to adjust the numbers manually.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my data sent anywhere?</summary>
+          <p>No — every calculation happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="tip-calculator">
+            <span class="icon" aria-hidden="true">💵</span>
+            <h3>Tip Calculator</h3>
+            <p>Calculate a tip and split one bill equally.</p>
+          </a>
+          <a class="card" href="savings-goal-calculator">
+            <span class="icon" aria-hidden="true">🎯</span>
+            <h3>Savings Goal Calculator</h3>
+            <p>Plan how much to save to reach a goal.</p>
+          </a>
+          <a class="card" href="statistics-calculator">
+            <span class="icon" aria-hidden="true">📊</span>
+            <h3>Statistics Calculator</h3>
+            <p>Mean, median, mode, and standard deviation.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 173 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var peopleContainer = document.getElementById("peopleContainer");
+      var addPersonBtn = document.getElementById("addPersonBtn");
+      var summaryGrid = document.getElementById("summaryGrid");
+      var statusBox = document.getElementById("statusBox");
+      var transactionsList = document.getElementById("transactionsList");
+
+      function addPerson(name, amount) {
+        var row = document.createElement("div");
+        row.className = "ges-row";
+        row.innerHTML =
+          '<label class="ges-field"><span class="ges-field-label">Name</span><input type="text" class="p-name" placeholder="e.g. Alex" value="' + (name || "") + '" /></label>' +
+          '<label class="ges-field"><span class="ges-field-label">Amount Paid ($)</span><input type="number" class="p-amount" placeholder="0.00" step="0.01" min="0" value="' + (amount || "") + '" /></label>' +
+          '<button type="button" class="ges-remove" aria-label="Remove person">✕</button>';
+        peopleContainer.appendChild(row);
+        row.querySelectorAll("input").forEach(function (el) { el.addEventListener("input", calculate); });
+        row.querySelector(".ges-remove").addEventListener("click", function () {
+          row.remove();
+          calculate();
+        });
+        calculate();
+      }
+
+      function calculate() {
+        var rows = peopleContainer.querySelectorAll(".ges-row");
+        var people = [];
+        rows.forEach(function (row, idx) {
+          var name = row.querySelector(".p-name").value.trim() || "Person " + (idx + 1);
+          var amount = parseFloat(row.querySelector(".p-amount").value);
+          people.push({ name: name, paid: isNaN(amount) ? 0 : amount });
+        });
+
+        if (people.length < 2) {
+          summaryGrid.style.display = "none";
+          statusBox.textContent = "Add at least two people.";
+          transactionsList.innerHTML = "";
+          return;
+        }
+
+        var total = people.reduce(function (sum, p) { return sum + p.paid; }, 0);
+        var share = total / people.length;
+
+        document.getElementById("statTotal").textContent = "$" + total.toFixed(2);
+        document.getElementById("statPerPerson").textContent = "$" + share.toFixed(2);
+        document.getElementById("statCount").textContent = people.length;
+        summaryGrid.style.display = "grid";
+
+        var creditors = [];
+        var debtors = [];
+        people.forEach(function (p) {
+          var net = Math.round((p.paid - share) * 100) / 100;
+          if (net > 0.005) creditors.push({ name: p.name, amt: net });
+          else if (net < -0.005) debtors.push({ name: p.name, amt: -net });
+        });
+        creditors.sort(function (a, b) { return b.amt - a.amt; });
+        debtors.sort(function (a, b) { return b.amt - a.amt; });
+
+        var transactions = [];
+        var i = 0, j = 0;
+        while (i < debtors.length && j < creditors.length) {
+          var pay = Math.min(debtors[i].amt, creditors[j].amt);
+          transactions.push({ from: debtors[i].name, to: creditors[j].name, amount: pay });
+          debtors[i].amt -= pay;
+          creditors[j].amt -= pay;
+          if (debtors[i].amt < 0.005) i++;
+          if (creditors[j].amt < 0.005) j++;
+        }
+
+        if (transactions.length === 0) {
+          statusBox.textContent = "Everyone already paid an equal share — nobody owes anything.";
+          transactionsList.innerHTML = "";
+        } else {
+          statusBox.textContent = "Here's the simplest way to settle up:";
+          transactionsList.innerHTML = transactions.map(function (t) {
+            return '<div class="ges-transaction">' + t.from + '<span class="arrow">→</span>' + t.to + '<span style="margin-left:auto;">$' + t.amount.toFixed(2) + "</span></div>";
+          }).join("");
+        }
+      }
+
+      addPersonBtn.addEventListener("click", function () { addPerson(); });
+
+      addPerson("Alice", "90");
+      addPerson("Bob", "30");
+      addPerson("Carol", "0");
+    })();
+  </script>
+</body>
+</html>
