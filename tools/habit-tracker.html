@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Habit Tracker Online — No Sign-Up | Fixoona</title>
+  <meta name="description" content="A free daily habit tracker that saves your progress right in your browser — track streaks for any habit, no sign-up, no account." />
+  <meta name="keywords" content="habit tracker online free, daily habit tracker no sign up, streak tracker" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/habit-tracker" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Habit Tracker" />
+  <meta property="og:description" content="Track daily habits and streaks, saved locally, no sign-up." />
+  <meta property="og:url" content="https://fixoona.com/tools/habit-tracker" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Habit Tracker" />
+  <meta name="twitter:description" content="Track daily habits and streaks, saved locally, no sign-up." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Habit Tracker",
+    "url": "https://fixoona.com/tools/habit-tracker",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Habit Tracker", "item": "https://fixoona.com/tools/habit-tracker" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How is the streak calculated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It counts consecutive days, working backward from today, that are marked complete. As soon as a day is found that isn't checked off, the streak count stops there." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I mark a past day as complete if I forgot to check in?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — the last 7 days are all clickable, not just today, so you can retroactively fill in a day you missed logging." }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is my habit data stored?",
+        "acceptedAnswer": { "@type": "Answer", "text": "In your browser's local storage on your own device — not on a server or account. It will still be there next time you visit in the same browser, but won't sync to another device." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data ever sent to a server?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — everything is stored and managed entirely in your browser using JavaScript and local storage." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .habit-add-row { display: flex; gap: 8px; }
+    .habit-add-row input { flex: 1; }
+    .habit-list { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+    .habit-card { background: var(--color-bg-alt); border-radius: var(--radius-sm); padding: 14px 16px; }
+    .habit-card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .habit-name { font-weight: 700; }
+    .habit-streak { font-size: 0.82rem; color: var(--color-primary); font-weight: 600; }
+    .habit-delete { background: none; border: none; color: var(--color-text-muted); cursor: pointer; font-size: 1rem; }
+    .habit-delete:hover { color: var(--color-danger); }
+    .habit-days { display: flex; gap: 6px; }
+    .habit-day {
+      flex: 1;
+      text-align: center;
+      padding: 8px 0;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      cursor: pointer;
+      font-size: 0.78rem;
+    }
+    .habit-day.done { background: var(--gradient-primary); color: #fff; border-color: transparent; }
+    .habit-empty { text-align: center; color: var(--color-text-muted); padding: 20px 0; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Habit Tracker</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🔥</div>
+      <h1>Habit Tracker</h1>
+      <p>Track daily habits and streaks, saved right in your browser. No sign-up.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="habit-add-row">
+          <input type="text" id="habitInput" placeholder="Add a habit, e.g. Drink water" />
+          <button class="btn btn-primary" id="addBtn">Add</button>
+        </div>
+
+        <div class="habit-list" id="habitList"></div>
+        <div class="habit-empty" id="emptyState" style="display:none;">No habits yet — add one above.</div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Use the Habit Tracker</h2>
+        <ol class="howto-steps">
+          <li>Add a habit you want to track.</li>
+          <li>Click any of the last 7 days to mark it complete.</li>
+          <li>Your current streak updates automatically.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How is the streak calculated?</summary>
+          <p>It counts consecutive days, working backward from today, that are marked complete. As soon as a day is found that isn't checked off, the streak count stops there.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I mark a past day as complete if I forgot to check in?</summary>
+          <p>Yes — the last 7 days are all clickable, not just today, so you can retroactively fill in a day you missed logging.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Where is my habit data stored?</summary>
+          <p>In your browser's local storage on your own device — not on a server or account. It will still be there next time you visit in the same browser, but won't sync to another device.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my data ever sent to a server?</summary>
+          <p>No — everything is stored and managed entirely in your browser using JavaScript and local storage.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="online-todo-list">
+            <span class="icon" aria-hidden="true">✅</span>
+            <h3>Online To-Do List</h3>
+            <p>A simple task list that saves in your browser.</p>
+          </a>
+          <a class="card" href="pomodoro-timer">
+            <span class="icon" aria-hidden="true">🍅</span>
+            <h3>Pomodoro Timer</h3>
+            <p>Run focused work sessions with breaks.</p>
+          </a>
+          <a class="card" href="sticky-notes">
+            <span class="icon" aria-hidden="true">🗒️</span>
+            <h3>Sticky Notes</h3>
+            <p>Freeform colored notes saved in your browser.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 150+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var STORAGE_KEY = "fixora_habit_tracker";
+      var habitInput = document.getElementById("habitInput");
+      var addBtn = document.getElementById("addBtn");
+      var habitList = document.getElementById("habitList");
+      var emptyState = document.getElementById("emptyState");
+
+      var habits = [];
+
+      function load() {
+        try {
+          var raw = localStorage.getItem(STORAGE_KEY);
+          habits = raw ? JSON.parse(raw) : [];
+        } catch (e) {
+          habits = [];
+        }
+      }
+      function save() {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(habits)); } catch (e) {}
+      }
+
+      function escapeHtml(s) {
+        return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      }
+
+      function dateKey(d) {
+        return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+      }
+
+      function last7Days() {
+        var days = [];
+        for (var i = 6; i >= 0; i--) {
+          var d = new Date();
+          d.setDate(d.getDate() - i);
+          days.push(d);
+        }
+        return days;
+      }
+
+      function computeStreak(completedDates) {
+        var set = {};
+        completedDates.forEach(function (d) { set[d] = true; });
+        var streak = 0;
+        var d = new Date();
+        while (set[dateKey(d)]) {
+          streak++;
+          d.setDate(d.getDate() - 1);
+        }
+        return streak;
+      }
+
+      function render() {
+        if (habits.length === 0) {
+          habitList.innerHTML = "";
+          emptyState.style.display = "block";
+          return;
+        }
+        emptyState.style.display = "none";
+        var days = last7Days();
+        var dayLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+        habitList.innerHTML = habits.map(function (habit) {
+          var streak = computeStreak(habit.completedDates || []);
+          var dayButtons = days.map(function (d) {
+            var key = dateKey(d);
+            var done = (habit.completedDates || []).indexOf(key) !== -1;
+            return '<div class="habit-day' + (done ? " done" : "") + '" data-date="' + key + '" data-id="' + habit.id + '">' + dayLabels[d.getDay()] + "<br>" + d.getDate() + "</div>";
+          }).join("");
+          return '<div class="habit-card">' +
+            '<div class="habit-card-head"><span class="habit-name">' + escapeHtml(habit.name) + '</span>' +
+            '<span><span class="habit-streak">🔥 ' + streak + " day" + (streak === 1 ? "" : "s") + '</span> ' +
+            '<button type="button" class="habit-delete" data-action="delete" data-id="' + habit.id + '" aria-label="Delete habit">✕</button></span></div>' +
+            '<div class="habit-days">' + dayButtons + "</div></div>";
+        }).join("");
+      }
+
+      function addHabit() {
+        var name = habitInput.value.trim();
+        if (!name) return;
+        habits.push({ id: Date.now() + Math.random(), name: name, completedDates: [] });
+        habitInput.value = "";
+        save();
+        render();
+      }
+
+      addBtn.addEventListener("click", addHabit);
+      habitInput.addEventListener("keydown", function (e) { if (e.key === "Enter") addHabit(); });
+
+      habitList.addEventListener("click", function (e) {
+        var dayEl = e.target.closest(".habit-day");
+        var deleteBtn = e.target.closest("[data-action='delete']");
+        if (dayEl) {
+          var id = parseFloat(dayEl.getAttribute("data-id"));
+          var date = dayEl.getAttribute("data-date");
+          var habit = habits.filter(function (h) { return h.id === id; })[0];
+          if (!habit) return;
+          habit.completedDates = habit.completedDates || [];
+          var idx = habit.completedDates.indexOf(date);
+          if (idx === -1) habit.completedDates.push(date);
+          else habit.completedDates.splice(idx, 1);
+          save();
+          render();
+        } else if (deleteBtn) {
+          var delId = parseFloat(deleteBtn.getAttribute("data-id"));
+          habits = habits.filter(function (h) { return h.id !== delId; });
+          save();
+          render();
+        }
+      });
+
+      load();
+      render();
+    })();
+  </script>
+</body>
+</html>

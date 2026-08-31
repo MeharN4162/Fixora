@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Word Frequency Counter Online | Fixoona</title>
+  <meta name="description" content="Find the most frequently used words in any text online for free, with an option to ignore common filler words. No sign-up, nothing uploaded." />
+  <meta name="keywords" content="word frequency counter, most used words in text, keyword frequency tool free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/word-frequency-counter" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Word Frequency Counter" />
+  <meta property="og:description" content="Find the most frequently used words in any text, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/word-frequency-counter" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Word Frequency Counter" />
+  <meta name="twitter:description" content="Find the most frequently used words in any text, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Word Frequency Counter",
+    "url": "https://fixoona.com/tools/word-frequency-counter",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Word Frequency Counter", "item": "https://fixoona.com/tools/word-frequency-counter" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What counts as a \"word\" for this tool?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Any run of letters and apostrophes, compared case-insensitively — so \"The\" and \"the\" are counted as the same word, and punctuation attached to a word is stripped before counting." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the \"ignore common words\" option do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It filters out very common filler words like \"the,\" \"a,\" \"is,\" and \"and\" so the results highlight the more meaningful, topic-specific words in your text instead of words that appear frequently in almost any writing." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is this useful for?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Spotting overused words in your own writing, getting a quick sense of a document's main topics, or checking keyword usage and repetition for SEO content." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my text sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the analysis happens entirely in your browser using JavaScript, so nothing you paste in is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .freq-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+    .freq-table th { text-align: left; padding: 10px 12px; background: var(--color-bg-alt); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted); }
+    .freq-table td { padding: 8px 12px; border-bottom: 1px solid var(--color-border); }
+    .freq-bar-wrap { background: var(--color-border); border-radius: 999px; height: 8px; width: 100%; overflow: hidden; }
+    .freq-bar { background: var(--gradient-primary); height: 100%; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Word Frequency Counter</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">📊</div>
+      <h1>Word Frequency Counter</h1>
+      <p>Find the most frequently used words in any text, with an option to ignore filler words.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="textInput">Text</label>
+          <textarea id="textInput" style="min-height:160px;">The quick brown fox jumps over the lazy dog. The dog barks at the fox, but the fox is too quick for the lazy dog to catch.</textarea>
+        </div>
+
+        <div class="field">
+          <label style="display:flex;align-items:center;gap:8px;font-weight:500;"><input type="checkbox" id="ignoreCommonCheck" style="width:auto;" checked /> Ignore common filler words (the, a, is, and...)</label>
+        </div>
+
+        <div id="resultsArea"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Use the Word Frequency Counter</h2>
+        <ol class="howto-steps">
+          <li>Paste or type your text.</li>
+          <li>The top 20 most frequent words appear instantly, ranked by count.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What counts as a "word" for this tool?</summary>
+          <p>Any run of letters and apostrophes, compared case-insensitively — so "The" and "the" are counted as the same word, and punctuation attached to a word is stripped before counting.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does the "ignore common words" option do?</summary>
+          <p>It filters out very common filler words like "the," "a," "is," and "and" so the results highlight the more meaningful, topic-specific words in your text instead of words that appear frequently in almost any writing.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is this useful for?</summary>
+          <p>Spotting overused words in your own writing, getting a quick sense of a document's main topics, or checking keyword usage and repetition for SEO content.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my text sent anywhere?</summary>
+          <p>No — the analysis happens entirely in your browser using JavaScript, so nothing you paste in is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="readability-score-checker">
+            <span class="icon" aria-hidden="true">📖</span>
+            <h3>Readability Score Checker</h3>
+            <p>Check Flesch Reading Ease and Grade Level.</p>
+          </a>
+          <a class="card" href="word-counter">
+            <span class="icon" aria-hidden="true">📝</span>
+            <h3>Word Counter</h3>
+            <p>Count words, characters, and reading time.</p>
+          </a>
+          <a class="card" href="remove-duplicate-lines">
+            <span class="icon" aria-hidden="true">🧹</span>
+            <h3>Remove Duplicate Lines</h3>
+            <p>Clean up a list by removing duplicates.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 150+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var textInput = document.getElementById("textInput");
+      var ignoreCommonCheck = document.getElementById("ignoreCommonCheck");
+      var resultsArea = document.getElementById("resultsArea");
+
+      var STOP_WORDS = ["the", "a", "an", "and", "or", "but", "is", "are", "was", "were", "be", "been", "being",
+        "to", "of", "in", "on", "at", "for", "with", "as", "by", "that", "this", "it", "its", "from", "he", "she",
+        "they", "we", "you", "i", "his", "her", "their", "our", "your", "my", "not", "so", "if", "then", "than",
+        "too", "very", "can", "will", "just", "do", "does", "did", "has", "have", "had", "but"];
+
+      function analyze() {
+        var text = textInput.value;
+        var ignoreCommon = ignoreCommonCheck.checked;
+        var words = (text.match(/[A-Za-z']+/g) || []).map(function (w) { return w.toLowerCase(); });
+
+        var counts = {};
+        words.forEach(function (w) {
+          if (ignoreCommon && STOP_WORDS.indexOf(w) !== -1) return;
+          counts[w] = (counts[w] || 0) + 1;
+        });
+
+        var entries = Object.keys(counts).map(function (w) { return [w, counts[w]]; });
+        entries.sort(function (a, b) { return b[1] - a[1]; });
+        entries = entries.slice(0, 20);
+
+        if (entries.length === 0) {
+          resultsArea.innerHTML = "<p style=\"color:var(--color-text-muted);\">No words found.</p>";
+          return;
+        }
+
+        var maxCount = entries[0][1];
+        var html = '<table class="freq-table"><thead><tr><th>Word</th><th>Count</th><th></th></tr></thead><tbody>';
+        entries.forEach(function (entry) {
+          var pct = Math.round((entry[1] / maxCount) * 100);
+          html += "<tr><td>" + entry[0] + "</td><td>" + entry[1] + '</td><td><div class="freq-bar-wrap"><div class="freq-bar" style="width:' + pct + '%;"></div></div></td></tr>';
+        });
+        html += "</tbody></table>";
+        resultsArea.innerHTML = html;
+      }
+
+      textInput.addEventListener("input", analyze);
+      ignoreCommonCheck.addEventListener("change", analyze);
+      analyze();
+    })();
+  </script>
+</body>
+</html>

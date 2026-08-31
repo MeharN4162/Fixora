@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Readability Score Checker Online | Fixoona</title>
+  <meta name="description" content="Check your text's Flesch Reading Ease and Flesch-Kincaid Grade Level online for free, right in your browser. No sign-up, nothing uploaded." />
+  <meta name="keywords" content="readability score checker, flesch kincaid calculator, reading level checker free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/readability-score-checker" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Readability Score Checker" />
+  <meta property="og:description" content="Check Flesch Reading Ease and Grade Level, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/readability-score-checker" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Readability Score Checker" />
+  <meta name="twitter:description" content="Check Flesch Reading Ease and Grade Level, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Readability Score Checker",
+    "url": "https://fixoona.com/tools/readability-score-checker",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Readability Score Checker", "item": "https://fixoona.com/tools/readability-score-checker" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What do the Flesch Reading Ease and Grade Level scores mean?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Flesch Reading Ease runs from 0 to 100, where higher means easier to read (90+ is very easy, below 30 is very difficult). The Flesch-Kincaid Grade Level instead estimates the U.S. school grade a reader would need to easily understand the text, like 8.0 meaning eighth-grade level." }
+      },
+      {
+        "@type": "Question",
+        "name": "How accurate is the syllable counting?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It uses a standard vowel-group counting heuristic, the same approach most readability tools use, which is a close approximation rather than a perfect dictionary-based count — it can be off by one syllable on some irregular words, but averages out well across a full piece of text." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's a good target score for general web content?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Most style guides for general audiences (like newspapers) aim for a Flesch Reading Ease of roughly 60–70, corresponding to an 8th–9th grade reading level — easy enough for a broad audience without feeling oversimplified." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my text sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the entire analysis happens locally in your browser using JavaScript, so nothing you paste in is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .read-scores { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 8px; }
+    .read-score-card { background: var(--color-bg-alt); border-radius: var(--radius-sm); padding: 16px; text-align: center; }
+    .read-score-value { font-family: var(--font-display, sans-serif); font-size: 2rem; font-weight: 800; }
+    .read-score-label { font-size: 0.78rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
+    .read-score-desc { font-size: 0.85rem; margin-top: 6px; color: var(--color-text-muted); }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Readability Score Checker</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">📖</div>
+      <h1>Readability Score Checker</h1>
+      <p>Check your text's Flesch Reading Ease and Flesch-Kincaid Grade Level.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="textInput">Text</label>
+          <textarea id="textInput" style="min-height:180px;">The quick brown fox jumps over the lazy dog. This sentence is often used to test typefaces and keyboards because it contains every letter of the alphabet at least once.</textarea>
+        </div>
+
+        <div class="read-scores" id="scoresArea"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Check Readability</h2>
+        <ol class="howto-steps">
+          <li>Paste or type your text.</li>
+          <li>Scores update instantly as you type.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What do the Flesch Reading Ease and Grade Level scores mean?</summary>
+          <p>Flesch Reading Ease runs from 0 to 100, where higher means easier to read (90+ is very easy, below 30 is very difficult). The Flesch-Kincaid Grade Level instead estimates the U.S. school grade a reader would need to easily understand the text, like 8.0 meaning eighth-grade level.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How accurate is the syllable counting?</summary>
+          <p>It uses a standard vowel-group counting heuristic, the same approach most readability tools use, which is a close approximation rather than a perfect dictionary-based count — it can be off by one syllable on some irregular words, but averages out well across a full piece of text.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What's a good target score for general web content?</summary>
+          <p>Most style guides for general audiences (like newspapers) aim for a Flesch Reading Ease of roughly 60–70, corresponding to an 8th–9th grade reading level — easy enough for a broad audience without feeling oversimplified.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my text sent anywhere?</summary>
+          <p>No — the entire analysis happens locally in your browser using JavaScript, so nothing you paste in is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="word-counter">
+            <span class="icon" aria-hidden="true">📝</span>
+            <h3>Word Counter</h3>
+            <p>Count words, characters, and reading time.</p>
+          </a>
+          <a class="card" href="word-frequency-counter">
+            <span class="icon" aria-hidden="true">📊</span>
+            <h3>Word Frequency Counter</h3>
+            <p>Find the most frequently used words in text.</p>
+          </a>
+          <a class="card" href="text-diff-checker">
+            <span class="icon" aria-hidden="true">📑</span>
+            <h3>Text Diff Checker</h3>
+            <p>Compare two blocks of text side by side.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 150+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var textInput = document.getElementById("textInput");
+      var scoresArea = document.getElementById("scoresArea");
+
+      function countSyllables(word) {
+        word = word.toLowerCase().replace(/[^a-z]/g, "");
+        if (!word) return 0;
+        if (word.length <= 3) return 1;
+        word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, "");
+        word = word.replace(/^y/, "");
+        var matches = word.match(/[aeiouy]{1,2}/g);
+        return matches ? matches.length : 1;
+      }
+
+      function scoreCard(value, label, desc) {
+        return '<div class="read-score-card"><div class="read-score-value">' + value + '</div><div class="read-score-label">' + label + '</div><div class="read-score-desc">' + desc + "</div></div>";
+      }
+
+      function easeDescription(score) {
+        if (score >= 90) return "Very easy (5th grade)";
+        if (score >= 80) return "Easy";
+        if (score >= 70) return "Fairly easy";
+        if (score >= 60) return "Standard (8th–9th grade)";
+        if (score >= 50) return "Fairly difficult";
+        if (score >= 30) return "Difficult";
+        return "Very difficult (college graduate)";
+      }
+
+      function analyze() {
+        var text = textInput.value.trim();
+        if (!text) { scoresArea.innerHTML = ""; return; }
+
+        var sentences = text.split(/[.!?]+/).filter(function (s) { return s.trim().length > 0; });
+        var words = text.match(/[A-Za-z']+/g) || [];
+        var sentenceCount = Math.max(1, sentences.length);
+        var wordCount = Math.max(1, words.length);
+        var syllableCount = words.reduce(function (sum, w) { return sum + countSyllables(w); }, 0);
+
+        var wordsPerSentence = wordCount / sentenceCount;
+        var syllablesPerWord = syllableCount / wordCount;
+
+        var ease = 206.835 - 1.015 * wordsPerSentence - 84.6 * syllablesPerWord;
+        var grade = 0.39 * wordsPerSentence + 11.8 * syllablesPerWord - 15.59;
+
+        ease = Math.round(ease * 10) / 10;
+        grade = Math.max(0, Math.round(grade * 10) / 10);
+
+        var html = "";
+        html += scoreCard(ease, "Flesch Reading Ease", easeDescription(ease));
+        html += scoreCard(grade, "Flesch-Kincaid Grade Level", "≈ grade " + grade + " reading level");
+        html += scoreCard(wordCount, "Words", sentenceCount + " sentences");
+        html += scoreCard(Math.round(wordsPerSentence * 10) / 10, "Avg Words / Sentence", Math.round(syllablesPerWord * 100) / 100 + " syllables/word");
+        scoresArea.innerHTML = html;
+      }
+
+      textInput.addEventListener("input", analyze);
+      analyze();
+    })();
+  </script>
+</body>
+</html>
