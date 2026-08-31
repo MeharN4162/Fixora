@@ -112,6 +112,29 @@
       flex-shrink: 0;
     }
     .grade-row .remove-row-btn:hover { color: var(--color-danger, #dc2626); }
+    .grade-field { display: contents; }
+    .grade-field-label { display: none; }
+    @media (max-width: 640px) {
+      .grade-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        background: var(--color-bg-alt);
+        border-radius: var(--radius-md, 10px);
+        padding: 14px;
+        position: relative;
+      }
+      .grade-field { display: flex; flex-direction: column; align-items: stretch; gap: 4px; }
+      .grade-field-label {
+        display: block;
+        font-size: 0.72rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+      }
+      .grade-row input.score-input, .grade-row input.weight-input { max-width: none; width: 100%; }
+      .grade-row .remove-row-btn { position: absolute; top: 14px; right: 14px; }
+    }
   </style>
 </head>
 <body>
@@ -332,9 +355,9 @@
       var row = document.createElement("div");
       row.className = "grade-row";
       row.innerHTML =
-        '<input type="text" class="name-input" placeholder="Assignment name" value="' + (name || "") + '" />' +
-        '<input type="number" class="score-input" placeholder="Score %" step="0.1" value="' + (score || "") + '" />' +
-        '<input type="number" class="weight-input" placeholder="Weight %" step="0.1" value="' + (weight || "") + '" />' +
+        '<label class="grade-field"><span class="grade-field-label">Assignment</span><input type="text" class="name-input" placeholder="Assignment name" value="' + (name || "") + '" /></label>' +
+        '<label class="grade-field"><span class="grade-field-label">Score %</span><input type="number" class="score-input" placeholder="Score %" step="0.1" value="' + (score || "") + '" /></label>' +
+        '<label class="grade-field"><span class="grade-field-label">Weight %</span><input type="number" class="weight-input" placeholder="Weight %" step="0.1" value="' + (weight || "") + '" /></label>' +
         '<button type="button" class="remove-row-btn" aria-label="Remove row">✕</button>';
       gradeRows.appendChild(row);
 
