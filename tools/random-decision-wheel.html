@@ -118,6 +118,18 @@
       margin-top: 18px;
       min-height: 2.2rem;
     }
+    .wheel-winner.placeholder {
+      font-size: 1rem;
+      font-weight: 500;
+      font-family: var(--font-main, sans-serif);
+      color: var(--color-text-muted);
+    }
+    .wheel-winner.error {
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: var(--font-main, sans-serif);
+      color: var(--color-danger);
+    }
   </style>
 </head>
 <body>
@@ -175,13 +187,11 @@ Salad</textarea>
             <div class="wheel-pointer" aria-hidden="true"></div>
             <canvas id="wheelCanvas" class="wheel-canvas" width="400" height="400"></canvas>
           </div>
-          <div class="wheel-winner" id="winnerDisplay"></div>
+          <div class="wheel-winner placeholder" id="winnerDisplay">Click "Spin the Wheel" to pick an option</div>
           <div class="actions">
             <button class="btn btn-primary" id="spinBtn">Spin the Wheel</button>
           </div>
         </div>
-
-        <div class="output-box" id="statusBox"></div>
       </div>
 
       <div class="howto">
@@ -292,7 +302,6 @@ Salad</textarea>
       var ctx = canvas.getContext("2d");
       var spinBtn = document.getElementById("spinBtn");
       var winnerDisplay = document.getElementById("winnerDisplay");
-      var statusBox = document.getElementById("statusBox");
 
       var COLORS = ["#2563eb", "#7c3aed", "#d946ef", "#06b6d4", "#16a34a", "#fb7185", "#d97706", "#0ea5e9", "#9333ea", "#059669", "#e11d48", "#65a30d"];
       var currentRotation = 0;
@@ -366,14 +375,15 @@ Salad</textarea>
       function spin() {
         var options = getOptions();
         if (options.length < 2) {
-          statusBox.textContent = "Enter at least 2 options.";
+          winnerDisplay.textContent = "Enter at least 2 options.";
+          winnerDisplay.className = "wheel-winner error";
           return;
         }
         if (spinning) return;
         spinning = true;
         spinBtn.disabled = true;
-        winnerDisplay.textContent = "";
-        statusBox.textContent = "";
+        winnerDisplay.textContent = "Spinning…";
+        winnerDisplay.className = "wheel-winner placeholder";
 
         var n = options.length;
         var segAngleDeg = 360 / n;
@@ -392,11 +402,16 @@ Salad</textarea>
           spinning = false;
           spinBtn.disabled = false;
           winnerDisplay.textContent = "🎉 " + options[winnerIndex];
+          winnerDisplay.className = "wheel-winner";
         }, 4600);
       }
 
       optionsInput.addEventListener("input", function () {
         drawWheel(getOptions());
+        if (!spinning) {
+          winnerDisplay.textContent = "Click \"Spin the Wheel\" to pick an option";
+          winnerDisplay.className = "wheel-winner placeholder";
+        }
       });
       spinBtn.addEventListener("click", spin);
 

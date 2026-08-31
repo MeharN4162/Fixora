@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Prime Number Checker & Generator | Fixoona</title>
+  <meta name="description" content="Check if a number is prime and find its factors, or generate a list of prime numbers up to a limit, online for free. No sign-up." />
+  <meta name="keywords" content="prime number checker, is this number prime, list of prime numbers free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/prime-number-checker" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Prime Number Checker & Generator" />
+  <meta property="og:description" content="Check if a number is prime or generate a list of primes, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/prime-number-checker" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Prime Number Checker & Generator" />
+  <meta name="twitter:description" content="Check if a number is prime or generate a list of primes, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Prime Number Checker",
+    "url": "https://fixoona.com/tools/prime-number-checker",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Prime Number Checker", "item": "https://fixoona.com/tools/prime-number-checker" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does the checker actually verify primality?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It uses trial division, testing whether any whole number from 2 up to the square root of your number divides it evenly — if none do, the number is prime. This is a genuinely correct method, not an approximation, though it becomes slower for extremely large numbers." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are 0 and 1 prime numbers?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — by definition, a prime number must be greater than 1. Neither 0 nor 1 counts as prime or composite; 1 is a special case sometimes called a \"unit.\"" }
+      },
+      {
+        "@type": "Question",
+        "name": "How high can the prime list generator go?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's capped at 1,000,000 to keep the calculation fast and avoid generating an unreasonably long list for your browser to render." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — all calculations happen entirely in your browser using JavaScript, so nothing you enter is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Prime Number Checker</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🔢</div>
+      <h1>Prime Number Checker & Generator</h1>
+      <p>Check if a number is prime and see its factors, or generate a list of primes up to a limit.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <h3 style="margin-top:0;">Check a Number</h3>
+        <div class="field">
+          <label for="checkInput">Number</label>
+          <input type="number" id="checkInput" value="97" min="0" />
+        </div>
+        <div class="output-box" id="checkBox"></div>
+
+        <h3>Generate a List of Primes</h3>
+        <div class="field">
+          <label for="limitInput">Up to</label>
+          <input type="number" id="limitInput" value="100" min="2" max="1000000" />
+        </div>
+        <div class="output-box" id="listBox" style="word-break:break-word;"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Use the Prime Number Tool</h2>
+        <ol class="howto-steps">
+          <li>Enter a number to check whether it's prime, with its factors if not.</li>
+          <li>Enter a limit to generate every prime number up to that value.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How does the checker actually verify primality?</summary>
+          <p>It uses trial division, testing whether any whole number from 2 up to the square root of your number divides it evenly — if none do, the number is prime. This is a genuinely correct method, not an approximation, though it becomes slower for extremely large numbers.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Are 0 and 1 prime numbers?</summary>
+          <p>No — by definition, a prime number must be greater than 1. Neither 0 nor 1 counts as prime or composite; 1 is a special case sometimes called a "unit."</p>
+        </details>
+        <details class="faq-item">
+          <summary>How high can the prime list generator go?</summary>
+          <p>It's capped at 1,000,000 to keep the calculation fast and avoid generating an unreasonably long list for your browser to render.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my data sent anywhere?</summary>
+          <p>No — all calculations happen entirely in your browser using JavaScript, so nothing you enter is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="gcd-lcm-calculator">
+            <span class="icon" aria-hidden="true">➗</span>
+            <h3>GCD & LCM Calculator</h3>
+            <p>Find the greatest common divisor and least common multiple.</p>
+          </a>
+          <a class="card" href="quadratic-equation-solver">
+            <span class="icon" aria-hidden="true">📐</span>
+            <h3>Quadratic Equation Solver</h3>
+            <p>Solve for x in any quadratic equation.</p>
+          </a>
+          <a class="card" href="number-base-converter">
+            <span class="icon" aria-hidden="true">🔢</span>
+            <h3>Number Base Converter</h3>
+            <p>Convert between binary, decimal, and hex.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 150+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var checkInput = document.getElementById("checkInput");
+      var checkBox = document.getElementById("checkBox");
+      var limitInput = document.getElementById("limitInput");
+      var listBox = document.getElementById("listBox");
+
+      function factorsOf(n) {
+        var factors = [];
+        for (var i = 1; i <= n; i++) if (n % i === 0) factors.push(i);
+        return factors;
+      }
+
+      function isPrime(n) {
+        if (n < 2 || !Number.isInteger(n)) return false;
+        if (n === 2) return true;
+        if (n % 2 === 0) return false;
+        for (var i = 3; i * i <= n; i += 2) {
+          if (n % i === 0) return false;
+        }
+        return true;
+      }
+
+      function updateCheck() {
+        var n = parseInt(checkInput.value, 10);
+        if (isNaN(n) || checkInput.value.trim() === "") { checkBox.textContent = "Enter a number."; return; }
+        if (!Number.isInteger(parseFloat(checkInput.value))) { checkBox.textContent = "Enter a whole number."; return; }
+        if (isPrime(n)) {
+          checkBox.textContent = n + " is a prime number.";
+        } else if (n < 2) {
+          checkBox.textContent = n + " is not a prime number (primes must be greater than 1).";
+        } else {
+          var factors = n <= 1000000 ? factorsOf(n) : null;
+          checkBox.textContent = n + " is not prime." + (factors ? " Factors: " + factors.join(", ") : "");
+        }
+      }
+
+      function sieve(limit) {
+        var isComposite = new Uint8Array(limit + 1);
+        var primes = [];
+        for (var i = 2; i <= limit; i++) {
+          if (!isComposite[i]) {
+            primes.push(i);
+            for (var j = i * i; j <= limit; j += i) isComposite[j] = 1;
+          }
+        }
+        return primes;
+      }
+
+      function updateList() {
+        var limit = Math.min(1000000, Math.max(2, parseInt(limitInput.value, 10) || 2));
+        var primes = sieve(limit);
+        listBox.textContent = primes.length + " primes up to " + limit + ": " + primes.slice(0, 500).join(", ") + (primes.length > 500 ? "… (showing first 500)" : "");
+      }
+
+      checkInput.addEventListener("input", updateCheck);
+      limitInput.addEventListener("input", updateList);
+
+      updateCheck();
+      updateList();
+    })();
+  </script>
+</body>
+</html>

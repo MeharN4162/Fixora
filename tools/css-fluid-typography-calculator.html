@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free CSS Fluid Typography (clamp) Calculator | Fixoona</title>
+  <meta name="description" content="Generate a CSS clamp() value for fluid, responsive typography that scales smoothly between a minimum and maximum viewport width, free. No sign-up." />
+  <meta name="keywords" content="css clamp calculator, fluid typography generator, responsive font size css free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/css-fluid-typography-calculator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free CSS Fluid Typography Calculator" />
+  <meta property="og:description" content="Generate a CSS clamp() value for responsive font sizing, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/css-fluid-typography-calculator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free CSS Fluid Typography Calculator" />
+  <meta name="twitter:description" content="Generate a CSS clamp() value for responsive font sizing, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "CSS Fluid Typography Calculator",
+    "url": "https://fixoona.com/tools/css-fluid-typography-calculator",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "CSS Fluid Typography Calculator", "item": "https://fixoona.com/tools/css-fluid-typography-calculator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does the CSS clamp() function work here?",
+        "acceptedAnswer": { "@type": "Answer", "text": "clamp(MIN, PREFERRED, MAX) locks the value to MIN below the minimum viewport width, to MAX above the maximum viewport width, and linearly interpolates between them in the middle — the PREFERRED value is a calc() expression using vw units that this tool derives for you." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why use this instead of a media query breakpoint?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A media query jumps the font size in a sudden step at one specific width. A fluid clamp() value scales smoothly and continuously across every viewport size in between, avoiding an abrupt visual jump." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why are the values in rem instead of pixels?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Using rem keeps the font size responsive to the user's browser font-size setting (for accessibility), while the calculation itself still works the same way regardless of unit — this tool assumes the standard 16px root font size to convert your pixel inputs to rem." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the calculation happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .fluid-preview { padding: 30px 20px; background: var(--color-bg-alt); border-radius: var(--radius-sm); text-align: center; margin-top: 12px; overflow: hidden; }
+    .fluid-preview-text { font-weight: 800; line-height: 1.2; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>CSS Fluid Typography Calculator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🔠</div>
+      <h1>CSS Fluid Typography Calculator</h1>
+      <p>Generate a clamp() value that scales font size smoothly between two viewport widths.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="row">
+          <div class="field">
+            <label for="minSizeInput">Min Font Size (px)</label>
+            <input type="number" id="minSizeInput" value="16" min="1" />
+          </div>
+          <div class="field">
+            <label for="maxSizeInput">Max Font Size (px)</label>
+            <input type="number" id="maxSizeInput" value="32" min="1" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="minWidthInput">Min Viewport Width (px)</label>
+            <input type="number" id="minWidthInput" value="320" min="1" />
+          </div>
+          <div class="field">
+            <label for="maxWidthInput">Max Viewport Width (px)</label>
+            <input type="number" id="maxWidthInput" value="1200" min="1" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="outputBox">CSS</label>
+          <textarea id="outputBox" readonly style="min-height:60px;font-family:var(--font-mono,monospace);"></textarea>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-secondary" id="copyBtn">Copy</button>
+        </div>
+        <div class="copy-note" id="copyNote"></div>
+
+        <div class="fluid-preview">
+          <div class="fluid-preview-text" id="previewText">Resize your browser to see this scale</div>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Use the Fluid Typography Calculator</h2>
+        <ol class="howto-steps">
+          <li>Enter your minimum and maximum font sizes.</li>
+          <li>Enter the viewport width range you want it to scale across.</li>
+          <li>Copy the generated CSS and use it as a font-size value.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How does the CSS clamp() function work here?</summary>
+          <p>clamp(MIN, PREFERRED, MAX) locks the value to MIN below the minimum viewport width, to MAX above the maximum viewport width, and linearly interpolates between them in the middle — the PREFERRED value is a calc() expression using vw units that this tool derives for you.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why use this instead of a media query breakpoint?</summary>
+          <p>A media query jumps the font size in a sudden step at one specific width. A fluid clamp() value scales smoothly and continuously across every viewport size in between, avoiding an abrupt visual jump.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why are the values in rem instead of pixels?</summary>
+          <p>Using rem keeps the font size responsive to the user's browser font-size setting (for accessibility), while the calculation itself still works the same way regardless of unit — this tool assumes the standard 16px root font size to convert your pixel inputs to rem.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my data sent anywhere?</summary>
+          <p>No — the calculation happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="css-gradient-generator">
+            <span class="icon" aria-hidden="true">🎨</span>
+            <h3>CSS Gradient Generator</h3>
+            <p>Build linear, radial, and conic gradients.</p>
+          </a>
+          <a class="card" href="css-box-shadow-generator">
+            <span class="icon" aria-hidden="true">🌓</span>
+            <h3>CSS Box Shadow Generator</h3>
+            <p>Build a layered box-shadow with a live preview.</p>
+          </a>
+          <a class="card" href="aspect-ratio-calculator">
+            <span class="icon" aria-hidden="true">📐</span>
+            <h3>Aspect Ratio Calculator</h3>
+            <p>Find a ratio or a missing dimension.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 150+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var minSizeInput = document.getElementById("minSizeInput");
+      var maxSizeInput = document.getElementById("maxSizeInput");
+      var minWidthInput = document.getElementById("minWidthInput");
+      var maxWidthInput = document.getElementById("maxWidthInput");
+      var outputBox = document.getElementById("outputBox");
+      var copyBtn = document.getElementById("copyBtn");
+      var copyNote = document.getElementById("copyNote");
+      var previewText = document.getElementById("previewText");
+
+      function update() {
+        var minSizePx = parseFloat(minSizeInput.value);
+        var maxSizePx = parseFloat(maxSizeInput.value);
+        var minWidthPx = parseFloat(minWidthInput.value);
+        var maxWidthPx = parseFloat(maxWidthInput.value);
+
+        if (!minSizePx || !maxSizePx || !minWidthPx || !maxWidthPx || maxWidthPx <= minWidthPx) {
+          outputBox.value = "Enter valid values (max width must be greater than min width).";
+          return;
+        }
+
+        var minSizeRem = minSizePx / 16;
+        var maxSizeRem = maxSizePx / 16;
+        var minWidthRem = minWidthPx / 16;
+        var maxWidthRem = maxWidthPx / 16;
+
+        var slope = (maxSizeRem - minSizeRem) / (maxWidthRem - minWidthRem);
+        var yIntersection = -minWidthRem * slope + minSizeRem;
+        var slopeVw = slope * 100;
+
+        var clampValue = "clamp(" + minSizeRem.toFixed(4) + "rem, " + yIntersection.toFixed(4) + "rem + " + slopeVw.toFixed(4) + "vw, " + maxSizeRem.toFixed(4) + "rem)";
+        outputBox.value = "font-size: " + clampValue + ";";
+
+        previewText.style.fontSize = clampValue;
+      }
+
+      [minSizeInput, maxSizeInput, minWidthInput, maxWidthInput].forEach(function (el) { el.addEventListener("input", update); });
+      copyBtn.addEventListener("click", function () { Fixora.copyText(outputBox.value, copyNote); });
+
+      update();
+    })();
+  </script>
+</body>
+</html>
