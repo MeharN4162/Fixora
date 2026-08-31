@@ -137,8 +137,30 @@
       text-transform: uppercase;
       margin-bottom: 8px;
     }
+    .item-field { display: contents; }
+    .item-field-label { display: none; }
     @media (max-width: 640px) {
-      .invoice-item-row, .invoice-item-header { grid-template-columns: 1fr; }
+      .invoice-item-header { display: none; }
+      .invoice-item-row {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        background: var(--color-bg-alt);
+        border-radius: var(--radius-md, 10px);
+        padding: 14px;
+        position: relative;
+      }
+      .item-field { display: flex; flex-direction: column; align-items: stretch; gap: 4px; }
+      .item-field-label {
+        display: block;
+        font-size: 0.72rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+      }
+      .invoice-item-row input { width: 100%; }
+      .invoice-item-row .item-remove { position: absolute; top: 14px; right: 14px; }
     }
   </style>
 </head>
@@ -399,10 +421,10 @@
       var row = document.createElement("div");
       row.className = "invoice-item-row";
       row.innerHTML =
-        '<input type="text" class="item-desc" placeholder="Design services" value="' + (desc || "") + '" />' +
-        '<input type="number" class="item-qty" placeholder="1" value="' + (qty || 1) + '" min="0" step="0.01" />' +
-        '<input type="number" class="item-price" placeholder="0.00" value="' + (price || "") + '" min="0" step="0.01" />' +
-        '<input type="text" class="item-amount" readonly value="0.00" />' +
+        '<label class="item-field"><span class="item-field-label">Description</span><input type="text" class="item-desc" placeholder="Design services" value="' + (desc || "") + '" /></label>' +
+        '<label class="item-field"><span class="item-field-label">Qty</span><input type="number" class="item-qty" placeholder="1" value="' + (qty || 1) + '" min="0" step="0.01" /></label>' +
+        '<label class="item-field"><span class="item-field-label">Unit Price</span><input type="number" class="item-price" placeholder="0.00" value="' + (price || "") + '" min="0" step="0.01" /></label>' +
+        '<label class="item-field"><span class="item-field-label">Amount</span><input type="text" class="item-amount" readonly value="0.00" /></label>' +
         '<button type="button" class="item-remove" aria-label="Remove item">✕</button>';
       itemsContainer.appendChild(row);
       row.querySelectorAll("input").forEach(function (inp) { inp.addEventListener("input", updateTotals); });
