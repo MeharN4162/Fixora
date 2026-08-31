@@ -92,13 +92,12 @@
     .word-chip {
       background: var(--color-bg-alt);
       border-radius: 999px;
-      padding: 6px 12px 6px 14px;
+      padding: 6px 14px;
       font-weight: 600;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      cursor: default;
     }
-    .word-chip .pts { background: var(--color-primary); color: #fff; border-radius: 999px; font-size: 0.72rem; font-weight: 700; padding: 2px 7px; }
     .word-group-label { font-weight: 700; margin-top: 16px; margin-bottom: 4px; }
     .word-group-label:first-child { margin-top: 0; }
   </style>
@@ -164,7 +163,7 @@
         <ol class="howto-steps">
           <li>Type the letters you want to unscramble.</li>
           <li>Results appear instantly, grouped by word length, with full anagrams shown first.</li>
-          <li>Each word shows its Scrabble point value.</li>
+          <li>Hover any word to see its Scrabble point value.</li>
         </ol>
       </div>
 
@@ -294,7 +293,7 @@
       }
 
       function chip(word) {
-        return '<span class="word-chip">' + word.toUpperCase() + '<span class="pts">' + scrabbleScore(word) + "</span></span>";
+        return '<span class="word-chip" title="' + scrabbleScore(word) + ' Scrabble point' + (scrabbleScore(word) === 1 ? "" : "s") + '">' + word.toUpperCase() + "</span>";
       }
 
       function find() {
