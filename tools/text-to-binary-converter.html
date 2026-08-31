@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Text to Binary Converter Online | Fixoona</title>
+  <meta name="description" content="Convert text to binary (and binary back to text) online for free, using proper UTF-8 byte encoding that correctly handles accents, symbols, and emoji. No sign-up." />
+  <meta name="keywords" content="text to binary converter, binary to text converter, ascii to binary, convert text to binary online" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/text-to-binary-converter" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Text to Binary Converter" />
+  <meta property="og:description" content="Convert text to binary and back, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/text-to-binary-converter" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Text to Binary Converter" />
+  <meta name="twitter:description" content="Convert text to binary and back, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Text to Binary Converter",
+    "url": "https://fixoona.com/tools/text-to-binary-converter",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Text to Binary Converter", "item": "https://fixoona.com/tools/text-to-binary-converter" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why is each group of binary digits 8 characters long?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Text is converted to its UTF-8 byte representation first, and a byte is always exactly 8 bits, so each binary group represents one byte — padded with leading zeros when the number itself is shorter than 8 bits." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this handle accented letters, symbols, and emoji correctly?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — it uses proper UTF-8 encoding rather than a simplistic one-character-per-byte approach, so characters like é or emoji (which take up more than one byte in UTF-8) convert to multiple 8-bit groups and decode back to the exact original text, not garbled output." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why doesn't binary-to-text conversion work on any random string of 0s and 1s?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The binary needs to represent valid UTF-8 byte sequences — an arbitrary bit pattern (like a random binary string not derived from real text) may not decode into any consistent characters, so the tool expects binary that was actually produced from encoding text, typically pasted from this same tool or a compatible one." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — all conversion happens entirely in your browser using JavaScript, so nothing you type is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .tb-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+    .tb-tabs button { flex: 1; padding: 10px; border-radius: var(--radius-sm, 8px); border: 1px solid var(--color-border); background: var(--color-surface); cursor: pointer; font-weight: 600; }
+    .tb-tabs button.active { background: var(--gradient-primary); color: #fff; border-color: transparent; }
+    .tb-footer-row { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; flex-wrap: wrap; gap: 8px; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Text to Binary Converter</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">01</div>
+      <h1>Text to Binary Converter</h1>
+      <p>Convert text to binary, or binary back to text, with proper UTF-8 handling.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="tb-tabs">
+          <button type="button" id="toBinaryBtn" class="active">Text → Binary</button>
+          <button type="button" id="toTextBtn">Binary → Text</button>
+        </div>
+
+        <div class="field">
+          <label for="inputBox" id="inputLabel">Text</label>
+          <textarea id="inputBox" style="min-height:120px;">Hello, World! 👋</textarea>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+
+        <div class="field" style="margin-top:14px;">
+          <label for="outputBox" id="outputLabel">Binary</label>
+          <textarea id="outputBox" readonly style="min-height:120px;font-family:monospace;"></textarea>
+        </div>
+
+        <div class="tb-footer-row">
+          <span></span>
+          <span style="display:flex;align-items:center;gap:10px;">
+            <span class="copy-note" id="copyNote"></span>
+            <button class="btn btn-secondary" id="copyBtn">Copy Result</button>
+          </span>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Convert Text to Binary</h2>
+        <ol class="howto-steps">
+          <li>Choose "Text → Binary" or "Binary → Text" with the tabs.</li>
+          <li>Type or paste your input.</li>
+          <li>The result updates instantly below.</li>
+          <li>Copy the result with the "Copy Result" button.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Why is each group of binary digits 8 characters long?</summary>
+          <p>Text is converted to its UTF-8 byte representation first, and a byte is always exactly 8 bits, so each binary group represents one byte — padded with leading zeros when the number itself is shorter than 8 bits.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this handle accented letters, symbols, and emoji correctly?</summary>
+          <p>Yes — it uses proper UTF-8 encoding rather than a simplistic one-character-per-byte approach, so characters like é or emoji (which take up more than one byte in UTF-8) convert to multiple 8-bit groups and decode back to the exact original text, not garbled output.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why doesn't binary-to-text conversion work on any random string of 0s and 1s?</summary>
+          <p>The binary needs to represent valid UTF-8 byte sequences — an arbitrary bit pattern (like a random binary string not derived from real text) may not decode into any consistent characters, so the tool expects binary that was actually produced from encoding text, typically pasted from this same tool or a compatible one.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my data sent anywhere?</summary>
+          <p>No — all conversion happens entirely in your browser using JavaScript, so nothing you type is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="base64-converter">
+            <span class="icon" aria-hidden="true">🔣</span>
+            <h3>Base64 Converter</h3>
+            <p>Encode and decode Base64 text and data.</p>
+          </a>
+          <a class="card" href="number-base-converter">
+            <span class="icon" aria-hidden="true">🔢</span>
+            <h3>Number Base Converter</h3>
+            <p>Convert numbers between binary, hex, and more.</p>
+          </a>
+          <a class="card" href="morse-code-translator">
+            <span class="icon" aria-hidden="true">📡</span>
+            <h3>Morse Code Translator</h3>
+            <p>Translate text to and from Morse code.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 173 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var toBinaryBtn = document.getElementById("toBinaryBtn");
+      var toTextBtn = document.getElementById("toTextBtn");
+      var inputBox = document.getElementById("inputBox");
+      var outputBox = document.getElementById("outputBox");
+      var inputLabel = document.getElementById("inputLabel");
+      var outputLabel = document.getElementById("outputLabel");
+      var statusBox = document.getElementById("statusBox");
+      var copyBtn = document.getElementById("copyBtn");
+      var copyNote = document.getElementById("copyNote");
+
+      var mode = "toBinary";
+
+      function textToBinary(text) {
+        var bytes = new TextEncoder().encode(text);
+        return Array.prototype.map.call(bytes, function (b) {
+          return b.toString(2).padStart(8, "0");
+        }).join(" ");
+      }
+
+      function binaryToText(binary) {
+        var clean = binary.trim().replace(/[^01\s]/g, "");
+        var groups = clean.split(/\s+/).filter(Boolean);
+        if (groups.some(function (g) { return g.length !== 8; })) {
+          throw new Error("Each binary group must be exactly 8 digits (0s and 1s), separated by spaces.");
+        }
+        var bytes = groups.map(function (g) { return parseInt(g, 2); });
+        return new TextDecoder("utf-8", { fatal: true }).decode(new Uint8Array(bytes));
+      }
+
+      function convert() {
+        var input = inputBox.value;
+        if (!input) {
+          outputBox.value = "";
+          statusBox.textContent = "";
+          return;
+        }
+        try {
+          if (mode === "toBinary") {
+            outputBox.value = textToBinary(input);
+          } else {
+            outputBox.value = binaryToText(input);
+          }
+          statusBox.textContent = "";
+        } catch (e) {
+          outputBox.value = "";
+          statusBox.textContent = "Couldn't decode: " + e.message;
+        }
+      }
+
+      toBinaryBtn.addEventListener("click", function () {
+        mode = "toBinary";
+        toBinaryBtn.classList.add("active");
+        toTextBtn.classList.remove("active");
+        inputLabel.textContent = "Text";
+        outputLabel.textContent = "Binary";
+        inputBox.value = "Hello, World! 👋";
+        convert();
+      });
+      toTextBtn.addEventListener("click", function () {
+        mode = "toText";
+        toTextBtn.classList.add("active");
+        toBinaryBtn.classList.remove("active");
+        inputLabel.textContent = "Binary";
+        outputLabel.textContent = "Text";
+        inputBox.value = textToBinary("Hello!");
+        convert();
+      });
+      inputBox.addEventListener("input", convert);
+      copyBtn.addEventListener("click", function () {
+        Fixora.copyText(outputBox.value, copyNote);
+      });
+
+      convert();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Paint Calculator Online — How Much Paint Do I Need? | Fixoona</title>
+  <meta name="description" content="Calculate how much paint you need for a room based on wall dimensions, doors, windows, and number of coats, in gallons or liters. Free, no sign-up." />
+  <meta name="keywords" content="paint calculator, how much paint do i need, paint coverage calculator, gallons of paint calculator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/paint-calculator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Paint Calculator" />
+  <meta property="og:description" content="Calculate how much paint you need for any room, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/paint-calculator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Paint Calculator" />
+  <meta name="twitter:description" content="Calculate how much paint you need for any room, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Paint Calculator",
+    "url": "https://fixoona.com/tools/paint-calculator",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Paint Calculator", "item": "https://fixoona.com/tools/paint-calculator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much wall area does a gallon of paint cover?",
+        "acceptedAnswer": { "@type": "Answer", "text": "This calculator assumes about 350 square feet per gallon (roughly 32.5 square meters, or about 10 square meters per liter), a commonly cited average for one coat of standard interior paint. Actual coverage varies by paint brand, wall texture, and application method — check your specific paint can for its stated coverage." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does it subtract doors and windows?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Doors and windows aren't painted the same as walls, so their area is subtracted from the total wall area before calculating how much paint you need — otherwise you'd overestimate and could overbuy." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why would I need more than one coat?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A single coat often doesn't fully hide the previous wall color, especially with a big color change (like going from dark to light) — two coats is standard practice for full, even coverage, which is why the tool multiplies your paint needed by the number of coats you select." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the calculation happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .paint-result {
+      text-align: center;
+      padding: 26px 20px;
+      border-radius: var(--radius-md, 12px);
+      background: rgba(139, 92, 246, 0.1);
+      margin-top: 18px;
+    }
+    .paint-result strong { display: block; font-size: 2.2rem; font-family: "Space Grotesk", sans-serif; color: #8b5cf6; }
+    .paint-result span { font-size: 0.85rem; color: var(--color-text-muted); }
+    .paint-breakdown { display: flex; justify-content: center; gap: 18px; margin-top: 10px; flex-wrap: wrap; font-size: 0.85rem; color: var(--color-text-muted); }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Paint Calculator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🎨</div>
+      <h1>Paint Calculator</h1>
+      <p>Find out how much paint you need for a room.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="unitSelect">Units</label>
+          <select id="unitSelect">
+            <option value="ft">Feet</option>
+            <option value="m">Meters</option>
+          </select>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="roomLength">Room Length</label>
+            <input type="number" id="roomLength" value="12" min="0" />
+          </div>
+          <div class="field">
+            <label for="roomWidth">Room Width</label>
+            <input type="number" id="roomWidth" value="10" min="0" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="wallHeight">Wall Height</label>
+          <input type="number" id="wallHeight" value="8" min="0" />
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="doorsCount">Doors (each ~21 sq ft / 2 m²)</label>
+            <input type="number" id="doorsCount" value="1" min="0" />
+          </div>
+          <div class="field">
+            <label for="windowsCount">Windows (each ~15 sq ft / 1.4 m²)</label>
+            <input type="number" id="windowsCount" value="2" min="0" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="coatsInput">Number of Coats</label>
+          <input type="number" id="coatsInput" value="2" min="1" max="5" />
+        </div>
+
+        <div class="paint-result">
+          <strong id="paintResult">-</strong>
+          <span id="paintUnitLabel">Gallons needed</span>
+          <div class="paint-breakdown" id="paintBreakdown"></div>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Calculate How Much Paint You Need</h2>
+        <ol class="howto-steps">
+          <li>Enter your room's length, width, and wall height.</li>
+          <li>Enter how many doors and windows are on the walls (their area is subtracted automatically).</li>
+          <li>Choose how many coats of paint you plan to apply.</li>
+          <li>See the total paint needed in gallons or liters, updated instantly.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How much wall area does a gallon of paint cover?</summary>
+          <p>This calculator assumes about 350 square feet per gallon (roughly 32.5 square meters, or about 10 square meters per liter), a commonly cited average for one coat of standard interior paint. Actual coverage varies by paint brand, wall texture, and application method — check your specific paint can for its stated coverage.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why does it subtract doors and windows?</summary>
+          <p>Doors and windows aren't painted the same as walls, so their area is subtracted from the total wall area before calculating how much paint you need — otherwise you'd overestimate and could overbuy.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why would I need more than one coat?</summary>
+          <p>A single coat often doesn't fully hide the previous wall color, especially with a big color change (like going from dark to light) — two coats is standard practice for full, even coverage, which is why the tool multiplies your paint needed by the number of coats you select.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my data sent anywhere?</summary>
+          <p>No — the calculation happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="tile-flooring-calculator">
+            <span class="icon" aria-hidden="true">🧱</span>
+            <h3>Tile & Flooring Calculator</h3>
+            <p>Calculate tiles or flooring needed for a room.</p>
+          </a>
+          <a class="card" href="unit-converter">
+            <span class="icon" aria-hidden="true">📐</span>
+            <h3>Unit Converter</h3>
+            <p>Convert between length, area, and more.</p>
+          </a>
+          <a class="card" href="discount-stacker">
+            <span class="icon" aria-hidden="true">🧾</span>
+            <h3>Discount Stacker</h3>
+            <p>Apply multiple discounts to a price.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 173 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var unitSelect = document.getElementById("unitSelect");
+      var roomLength = document.getElementById("roomLength");
+      var roomWidth = document.getElementById("roomWidth");
+      var wallHeight = document.getElementById("wallHeight");
+      var doorsCount = document.getElementById("doorsCount");
+      var windowsCount = document.getElementById("windowsCount");
+      var coatsInput = document.getElementById("coatsInput");
+      var paintResult = document.getElementById("paintResult");
+      var paintUnitLabel = document.getElementById("paintUnitLabel");
+      var paintBreakdown = document.getElementById("paintBreakdown");
+
+      function calculate() {
+        var length = parseFloat(roomLength.value);
+        var width = parseFloat(roomWidth.value);
+        var height = parseFloat(wallHeight.value);
+        var doors = parseFloat(doorsCount.value) || 0;
+        var windows = parseFloat(windowsCount.value) || 0;
+        var coats = parseFloat(coatsInput.value) || 1;
+        var isMetric = unitSelect.value === "m";
+
+        if (isNaN(length) || isNaN(width) || isNaN(height) || length <= 0 || width <= 0 || height <= 0) {
+          paintResult.textContent = "-";
+          paintBreakdown.textContent = "Enter valid room dimensions.";
+          return;
+        }
+
+        var perimeter = 2 * (length + width);
+        var grossArea = perimeter * height;
+        var doorArea = isMetric ? 2 : 21;
+        var windowArea = isMetric ? 1.4 : 15;
+        var netArea = Math.max(0, grossArea - (doors * doorArea) - (windows * windowArea));
+        var totalAreaToPaint = netArea * coats;
+
+        var coveragePerUnit = isMetric ? 10 : 350;
+        var amountNeeded = totalAreaToPaint / coveragePerUnit;
+
+        paintResult.textContent = amountNeeded.toFixed(2) + (isMetric ? " L" : " gal");
+        paintUnitLabel.textContent = (isMetric ? "Liters" : "Gallons") + " needed";
+        paintBreakdown.innerHTML =
+          "<span>Wall area: " + netArea.toFixed(1) + (isMetric ? " m²" : " sq ft") + "</span>" +
+          "<span>Total to paint (" + coats + " coat" + (coats === 1 ? "" : "s") + "): " + totalAreaToPaint.toFixed(1) + (isMetric ? " m²" : " sq ft") + "</span>";
+      }
+
+      [roomLength, roomWidth, wallHeight, doorsCount, windowsCount, coatsInput].forEach(function (el) {
+        el.addEventListener("input", calculate);
+      });
+      unitSelect.addEventListener("change", function () {
+        if (unitSelect.value === "m") {
+          roomLength.value = 3.7; roomWidth.value = 3.0; wallHeight.value = 2.4;
+        } else {
+          roomLength.value = 12; roomWidth.value = 10; wallHeight.value = 8;
+        }
+        calculate();
+      });
+
+      calculate();
+    })();
+  </script>
+</body>
+</html>

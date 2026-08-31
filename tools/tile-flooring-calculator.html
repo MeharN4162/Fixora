@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Tile & Flooring Calculator Online | Fixoona</title>
+  <meta name="description" content="Calculate how many tiles or how much flooring you need for a room, including a waste allowance and how many boxes to buy. Free, no sign-up." />
+  <meta name="keywords" content="tile calculator, flooring calculator, how many tiles do i need, tile boxes needed calculator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/tile-flooring-calculator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Tile & Flooring Calculator" />
+  <meta property="og:description" content="Calculate how many tiles or flooring boxes you need for a room, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/tile-flooring-calculator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Tile & Flooring Calculator" />
+  <meta name="twitter:description" content="Calculate how many tiles or flooring boxes you need for a room, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Tile & Flooring Calculator",
+    "url": "https://fixoona.com/tools/tile-flooring-calculator",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Tile & Flooring Calculator", "item": "https://fixoona.com/tools/tile-flooring-calculator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why add a waste allowance?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Some tiles will need to be cut to fit room edges, corners, and obstacles, and cutting inevitably wastes material or breaks pieces — a 10% allowance is standard for simple rectangular rooms, while more complex layouts (diagonal patterns, lots of corners) often call for 15–20%." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does this figure out how many boxes to buy?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It divides your total tiles needed (including the waste allowance) by how many tiles come in each box, then rounds up — since you can only buy whole boxes, and rounding down would leave you short." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this account for grout lines between tiles?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — it treats each tile as covering its full stated size. Grout lines take up a small amount of additional space between tiles, which very slightly increases the true number of tiles needed for a perfectly precise calculation, but this is a minor effect the waste allowance comfortably covers in practice." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the calculation happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .tile-result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 18px; }
+    .tile-stat { background: var(--color-bg-alt); border-radius: var(--radius-md, 10px); padding: 14px; text-align: center; }
+    .tile-stat strong { display: block; font-size: 1.3rem; font-family: "Space Grotesk", sans-serif; color: var(--color-primary); }
+    .tile-stat span { font-size: 0.78rem; color: var(--color-text-muted); }
+    .tile-stat.highlight { background: rgba(139, 92, 246, 0.12); }
+    .tile-stat.highlight strong { color: #8b5cf6; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Tile & Flooring Calculator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🧱</div>
+      <h1>Tile & Flooring Calculator</h1>
+      <p>Find out how many tiles and boxes you need for a room.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="unitSelect">Units</label>
+          <select id="unitSelect">
+            <option value="ft-in">Feet (room) / Inches (tile)</option>
+            <option value="m-cm">Meters (room) / Centimeters (tile)</option>
+          </select>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="roomLength">Room Length</label>
+            <input type="number" id="roomLength" value="12" min="0" />
+          </div>
+          <div class="field">
+            <label for="roomWidth">Room Width</label>
+            <input type="number" id="roomWidth" value="10" min="0" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="tileLength">Tile Length</label>
+            <input type="number" id="tileLength" value="12" min="0.1" />
+          </div>
+          <div class="field">
+            <label for="tileWidth">Tile Width</label>
+            <input type="number" id="tileWidth" value="12" min="0.1" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="wasteInput">Waste Allowance (%)</label>
+            <input type="number" id="wasteInput" value="10" min="0" max="50" />
+          </div>
+          <div class="field">
+            <label for="tilesPerBox">Tiles Per Box</label>
+            <input type="number" id="tilesPerBox" value="10" min="1" />
+          </div>
+        </div>
+
+        <div class="tile-result-grid">
+          <div class="tile-stat"><strong id="statFloorArea">-</strong><span>Floor Area</span></div>
+          <div class="tile-stat"><strong id="statTilesRaw">-</strong><span>Tiles Needed (no waste)</span></div>
+          <div class="tile-stat highlight"><strong id="statTilesWaste">-</strong><span>Tiles Needed (with waste)</span></div>
+          <div class="tile-stat highlight"><strong id="statBoxes">-</strong><span>Boxes to Buy</span></div>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Calculate Tiles Needed</h2>
+        <ol class="howto-steps">
+          <li>Enter your room's length and width, and your tile's length and width.</li>
+          <li>Set a waste allowance percentage (10% is typical for simple layouts).</li>
+          <li>Enter how many tiles come in one box.</li>
+          <li>See the floor area, tiles needed, and boxes to buy — all updated instantly.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Why add a waste allowance?</summary>
+          <p>Some tiles will need to be cut to fit room edges, corners, and obstacles, and cutting inevitably wastes material or breaks pieces — a 10% allowance is standard for simple rectangular rooms, while more complex layouts (diagonal patterns, lots of corners) often call for 15–20%.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does this figure out how many boxes to buy?</summary>
+          <p>It divides your total tiles needed (including the waste allowance) by how many tiles come in each box, then rounds up — since you can only buy whole boxes, and rounding down would leave you short.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this account for grout lines between tiles?</summary>
+          <p>No — it treats each tile as covering its full stated size. Grout lines take up a small amount of additional space between tiles, which very slightly increases the true number of tiles needed for a perfectly precise calculation, but this is a minor effect the waste allowance comfortably covers in practice.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my data sent anywhere?</summary>
+          <p>No — the calculation happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="paint-calculator">
+            <span class="icon" aria-hidden="true">🎨</span>
+            <h3>Paint Calculator</h3>
+            <p>Calculate how much paint you need for a room.</p>
+          </a>
+          <a class="card" href="unit-converter">
+            <span class="icon" aria-hidden="true">📐</span>
+            <h3>Unit Converter</h3>
+            <p>Convert between length, area, and more.</p>
+          </a>
+          <a class="card" href="aspect-ratio-calculator">
+            <span class="icon" aria-hidden="true">🖼️</span>
+            <h3>Aspect Ratio Calculator</h3>
+            <p>Calculate and scale aspect ratios.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 173 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var unitSelect = document.getElementById("unitSelect");
+      var roomLength = document.getElementById("roomLength");
+      var roomWidth = document.getElementById("roomWidth");
+      var tileLength = document.getElementById("tileLength");
+      var tileWidth = document.getElementById("tileWidth");
+      var wasteInput = document.getElementById("wasteInput");
+      var tilesPerBox = document.getElementById("tilesPerBox");
+
+      function calculate() {
+        var rl = parseFloat(roomLength.value);
+        var rw = parseFloat(roomWidth.value);
+        var tl = parseFloat(tileLength.value);
+        var tw = parseFloat(tileWidth.value);
+        var waste = parseFloat(wasteInput.value) || 0;
+        var perBox = parseFloat(tilesPerBox.value) || 1;
+        var isMetric = unitSelect.value === "m-cm";
+
+        if ([rl, rw, tl, tw].some(function (n) { return isNaN(n) || n <= 0; })) {
+          document.getElementById("statFloorArea").textContent = "-";
+          document.getElementById("statTilesRaw").textContent = "-";
+          document.getElementById("statTilesWaste").textContent = "-";
+          document.getElementById("statBoxes").textContent = "-";
+          return;
+        }
+
+        var roomAreaUnit = isMetric ? "m²" : "sq ft";
+        var floorArea = rl * rw;
+
+        var tileAreaSameUnit = isMetric ? (tl / 100) * (tw / 100) : (tl / 12) * (tw / 12);
+        var tilesRaw = floorArea / tileAreaSameUnit;
+        var tilesWithWaste = tilesRaw * (1 + waste / 100);
+        var boxes = Math.ceil(tilesWithWaste / perBox);
+
+        document.getElementById("statFloorArea").textContent = floorArea.toFixed(1) + " " + roomAreaUnit;
+        document.getElementById("statTilesRaw").textContent = Math.ceil(tilesRaw);
+        document.getElementById("statTilesWaste").textContent = Math.ceil(tilesWithWaste);
+        document.getElementById("statBoxes").textContent = boxes;
+      }
+
+      [roomLength, roomWidth, tileLength, tileWidth, wasteInput, tilesPerBox].forEach(function (el) {
+        el.addEventListener("input", calculate);
+      });
+      unitSelect.addEventListener("change", function () {
+        if (unitSelect.value === "m-cm") {
+          roomLength.value = 3.7; roomWidth.value = 3.0; tileLength.value = 30; tileWidth.value = 30;
+        } else {
+          roomLength.value = 12; roomWidth.value = 10; tileLength.value = 12; tileWidth.value = 12;
+        }
+        calculate();
+      });
+
+      calculate();
+    })();
+  </script>
+</body>
+</html>

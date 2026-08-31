@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Lottery Number Generator Online | Fixoona</title>
+  <meta name="description" content="Generate random lottery numbers for Powerball, Mega Millions, EuroMillions, or a fully custom number range and count. Powered by cryptographically secure randomness. Free, no sign-up." />
+  <meta name="keywords" content="lottery number generator, powerball number generator, mega millions number generator, random lottery numbers" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/lottery-number-generator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Lottery Number Generator" />
+  <meta property="og:description" content="Generate random lottery numbers for popular formats or a custom range, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/lottery-number-generator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Lottery Number Generator" />
+  <meta name="twitter:description" content="Generate random lottery numbers for popular formats or a custom range, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Lottery Number Generator",
+    "url": "https://fixoona.com/tools/lottery-number-generator",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Lottery Number Generator", "item": "https://fixoona.com/tools/lottery-number-generator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does this improve my odds of winning?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — every combination of numbers has exactly the same odds regardless of how it's chosen. This tool doesn't predict or influence real lottery draws in any way; it just gives you a genuinely random, unbiased pick instead of numbers you might otherwise choose non-randomly (like birthdays, which cluster many players onto the same popular numbers)." }
+      },
+      {
+        "@type": "Question",
+        "name": "How random are these numbers, really?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Numbers are generated using the Web Crypto API's crypto.getRandomValues() with rejection sampling, so every number in range has an exactly equal chance of being picked, with no bias — the same quality of randomness used for cryptographic keys, not the weaker Math.random()." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do the presets match the real official number ranges?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, as of when this tool was built — Powerball draws 5 numbers from 1–69 plus 1 Powerball from 1–26, Mega Millions draws 5 from 1–70 plus 1 Mega Ball from 1–25, and EuroMillions draws 5 from 1–50 plus 2 Lucky Stars from 1–12. Official rules occasionally change, so double-check against the current official rules before treating a preset as authoritative." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — every number is generated entirely in your browser using JavaScript, so nothing is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .lotto-presets { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .lotto-presets button {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .lotto-presets button.active { background: var(--gradient-primary); color: #fff; border-color: transparent; }
+    .lotto-balls { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 22px; }
+    .lotto-ball {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--gradient-primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      font-family: "Space Grotesk", sans-serif;
+      box-shadow: var(--shadow-sm);
+    }
+    .lotto-ball.bonus { background: #f59e0b; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Lottery Number Generator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🎱</div>
+      <h1>Lottery Number Generator</h1>
+      <p>Generate random lottery numbers for popular formats or a custom range.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="lotto-presets" id="presetsRow">
+          <button type="button" class="active" data-preset="powerball">Powerball</button>
+          <button type="button" data-preset="megamillions">Mega Millions</button>
+          <button type="button" data-preset="euromillions">EuroMillions</button>
+          <button type="button" data-preset="custom">Custom</button>
+        </div>
+
+        <div class="row" id="customFields" style="display:none;">
+          <div class="field">
+            <label for="mainCount">Numbers to pick</label>
+            <input type="number" id="mainCount" value="6" min="1" max="20" />
+          </div>
+          <div class="field">
+            <label for="mainMax">From range 1 to</label>
+            <input type="number" id="mainMax" value="49" min="1" max="1000" />
+          </div>
+          <div class="field">
+            <label for="bonusMax">Bonus number 1 to (0 = none)</label>
+            <input type="number" id="bonusMax" value="0" min="0" max="100" />
+          </div>
+        </div>
+
+        <div class="lotto-balls" id="ballsDisplay"></div>
+
+        <div style="text-align:center;margin-top:22px;">
+          <button class="btn btn-primary" id="generateBtn">🎲 Generate Numbers</button>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Generate Lottery Numbers</h2>
+        <ol class="howto-steps">
+          <li>Pick a preset (Powerball, Mega Millions, EuroMillions) or choose Custom for any range and count.</li>
+          <li>Click "Generate Numbers" for a fresh, genuinely random set anytime.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Does this improve my odds of winning?</summary>
+          <p>No — every combination of numbers has exactly the same odds regardless of how it's chosen. This tool doesn't predict or influence real lottery draws in any way; it just gives you a genuinely random, unbiased pick instead of numbers you might otherwise choose non-randomly (like birthdays, which cluster many players onto the same popular numbers).</p>
+        </details>
+        <details class="faq-item">
+          <summary>How random are these numbers, really?</summary>
+          <p>Numbers are generated using the Web Crypto API's crypto.getRandomValues() with rejection sampling, so every number in range has an exactly equal chance of being picked, with no bias — the same quality of randomness used for cryptographic keys, not the weaker Math.random().</p>
+        </details>
+        <details class="faq-item">
+          <summary>Do the presets match the real official number ranges?</summary>
+          <p>Yes, as of when this tool was built — Powerball draws 5 numbers from 1–69 plus 1 Powerball from 1–26, Mega Millions draws 5 from 1–70 plus 1 Mega Ball from 1–25, and EuroMillions draws 5 from 1–50 plus 2 Lucky Stars from 1–12. Official rules occasionally change, so double-check against the current official rules before treating a preset as authoritative.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my data sent anywhere?</summary>
+          <p>No — every number is generated entirely in your browser using JavaScript, so nothing is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="random-number-generator">
+            <span class="icon" aria-hidden="true">🔢</span>
+            <h3>Random Number Generator</h3>
+            <p>Generate random numbers in any range.</p>
+          </a>
+          <a class="card" href="dice-roller">
+            <span class="icon" aria-hidden="true">🎲</span>
+            <h3>Dice Roller</h3>
+            <p>Roll virtual dice online.</p>
+          </a>
+          <a class="card" href="coin-flip">
+            <span class="icon" aria-hidden="true">🪙</span>
+            <h3>Coin Flip</h3>
+            <p>Flip a virtual coin instantly.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 173 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var PRESETS = {
+        powerball: { count: 5, max: 69, bonusMax: 26, bonusLabel: "Powerball" },
+        megamillions: { count: 5, max: 70, bonusMax: 25, bonusLabel: "Mega Ball" },
+        euromillions: { count: 5, max: 50, bonusMax: 12, bonusCount: 2, bonusLabel: "Lucky Star" },
+        custom: { count: 6, max: 49, bonusMax: 0 }
+      };
+
+      var presetsRow = document.getElementById("presetsRow");
+      var customFields = document.getElementById("customFields");
+      var mainCount = document.getElementById("mainCount");
+      var mainMax = document.getElementById("mainMax");
+      var bonusMax = document.getElementById("bonusMax");
+      var ballsDisplay = document.getElementById("ballsDisplay");
+      var generateBtn = document.getElementById("generateBtn");
+
+      var currentPreset = "powerball";
+
+      function secureRandomInt(maxExclusive) {
+        var arr = new Uint32Array(1);
+        var limit = Math.floor(4294967296 / maxExclusive) * maxExclusive;
+        var val;
+        do { crypto.getRandomValues(arr); val = arr[0]; } while (val >= limit);
+        return val % maxExclusive;
+      }
+
+      function pickUnique(count, max) {
+        var pool = [];
+        for (var i = 1; i <= max; i++) pool.push(i);
+        var result = [];
+        for (var k = 0; k < count && pool.length > 0; k++) {
+          var idx = secureRandomInt(pool.length);
+          result.push(pool[idx]);
+          pool.splice(idx, 1);
+        }
+        return result.sort(function (a, b) { return a - b; });
+      }
+
+      function generate() {
+        var count, max, bMax, bCount, bLabel;
+        if (currentPreset === "custom") {
+          count = Math.max(1, parseInt(mainCount.value, 10) || 1);
+          max = Math.max(count, parseInt(mainMax.value, 10) || count);
+          bMax = Math.max(0, parseInt(bonusMax.value, 10) || 0);
+          bCount = 1;
+          bLabel = "Bonus";
+        } else {
+          var p = PRESETS[currentPreset];
+          count = p.count; max = p.max; bMax = p.bonusMax; bCount = p.bonusCount || 1; bLabel = p.bonusLabel;
+        }
+
+        var mainNumbers = pickUnique(count, max);
+        var html = mainNumbers.map(function (n) { return '<div class="lotto-ball">' + n + "</div>"; }).join("");
+
+        if (bMax > 0) {
+          var bonusNumbers = pickUnique(bCount, bMax);
+          html += bonusNumbers.map(function (n) { return '<div class="lotto-ball bonus" title="' + bLabel + '">' + n + "</div>"; }).join("");
+        }
+
+        ballsDisplay.innerHTML = html;
+      }
+
+      presetsRow.querySelectorAll("button").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          presetsRow.querySelectorAll("button").forEach(function (b) { b.classList.remove("active"); });
+          btn.classList.add("active");
+          currentPreset = btn.getAttribute("data-preset");
+          customFields.style.display = currentPreset === "custom" ? "grid" : "none";
+          generate();
+        });
+      });
+
+      [mainCount, mainMax, bonusMax].forEach(function (el) {
+        el.addEventListener("input", function () { if (currentPreset === "custom") generate(); });
+      });
+      generateBtn.addEventListener("click", generate);
+
+      generate();
+    })();
+  </script>
+</body>
+</html>
