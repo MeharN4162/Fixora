@@ -13,7 +13,7 @@
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Typing Speed Test Online — WPM & Accuracy | Fixoona</title>
-  <meta name="description" content="Test your typing speed online for free — get live words-per-minute and accuracy as you type a random passage. No sign-up, nothing uploaded." />
+  <meta name="description" content="Test your typing speed online for free with a real 10-second, 30-second, 1-minute, or 2-minute countdown — see live WPM, accuracy, and typo count. No sign-up." />
   <meta name="keywords" content="typing speed test, wpm test online free, typing test accuracy" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fixoona.com/tools/typing-speed-test" />
@@ -66,17 +66,17 @@
       {
         "@type": "Question",
         "name": "How is WPM (words per minute) calculated?",
-        "acceptedAnswer": { "@type": "Answer", "text": "This tool uses the standard typing-test convention of treating every 5 characters typed (including spaces) as one \"word,\" then divides that by the time elapsed in minutes. This is the same method used by most typing test sites, so results are comparable." }
+        "acceptedAnswer": { "@type": "Answer", "text": "It's based only on characters you typed correctly — every 5 correct characters counts as one \"word,\" divided by the fixed test duration you selected (10 seconds, 30 seconds, 1 minute, or 2 minutes). Typos don't count toward your WPM, only toward your typo count and accuracy." }
       },
       {
         "@type": "Question",
-        "name": "How is accuracy calculated?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Accuracy is the percentage of characters you typed correctly compared to the target passage, checked position by position. Typing a wrong character lowers accuracy even if you don't go back and fix it." }
+        "name": "What counts as a typo?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Any character you type that doesn't match the target text at that exact position, checked live as you go. Typos lower your accuracy percentage and aren't counted in your WPM, even if you don't go back and fix them." }
       },
       {
         "@type": "Question",
-        "name": "Why can't I paste the passage instead of typing it?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Pasting is disabled on purpose — the entire point of a typing test is measuring how fast you can actually type, so allowing a paste shortcut would make the result meaningless." }
+        "name": "Can I choose how long the test runs?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — pick 10 seconds, 30 seconds, 1 minute, or 2 minutes before you start typing. The countdown begins the moment you type your first character, and the test ends automatically when time runs out, scoring exactly what you typed up to that point." }
       },
       {
         "@type": "Question",
@@ -104,6 +104,16 @@
     .tt-stat { text-align: center; }
     .tt-stat-value { font-family: var(--font-display, sans-serif); font-size: 2rem; font-weight: 800; }
     .tt-stat-label { font-size: 0.8rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .tt-timer {
+      text-align: center;
+      font-family: var(--font-mono, monospace);
+      font-size: 2.4rem;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 12px;
+      color: var(--color-primary);
+    }
+    .tt-timer.low { color: var(--color-danger); }
   </style>
 </head>
 <body>
@@ -142,11 +152,20 @@
     <section class="tool-page-head container">
       <div class="icon-lg" aria-hidden="true">⌨️</div>
       <h1>Typing Speed Test</h1>
-      <p>Type the passage below to measure your words-per-minute and accuracy.</p>
+      <p>Pick a time limit and type as much as you can before the countdown ends.</p>
     </section>
 
     <section class="container">
       <div class="tool-panel">
+        <div class="pill-row" id="modePills">
+          <button class="pill" data-duration="10" type="button">10 sec</button>
+          <button class="pill" data-duration="30" type="button">30 sec</button>
+          <button class="pill active" data-duration="60" type="button">1 min</button>
+          <button class="pill" data-duration="120" type="button">2 min</button>
+        </div>
+
+        <div class="tt-timer" id="timerDisplay" style="margin-top:16px;">1:00</div>
+
         <div class="tt-passage" id="passageDisplay"></div>
 
         <div class="field" style="margin-top:16px;">
@@ -157,11 +176,12 @@
         <div class="tt-stats">
           <div class="tt-stat"><div class="tt-stat-value" id="wpmDisplay">0</div><div class="tt-stat-label">WPM</div></div>
           <div class="tt-stat"><div class="tt-stat-value" id="accuracyDisplay">100%</div><div class="tt-stat-label">Accuracy</div></div>
-          <div class="tt-stat"><div class="tt-stat-value" id="timeDisplay">0.0s</div><div class="tt-stat-label">Time</div></div>
+          <div class="tt-stat"><div class="tt-stat-value" id="correctDisplay">0</div><div class="tt-stat-label">Correct Chars</div></div>
+          <div class="tt-stat"><div class="tt-stat-value" id="typosDisplay">0</div><div class="tt-stat-label">Typos</div></div>
         </div>
 
         <div class="actions" style="justify-content:center;">
-          <button class="btn btn-secondary" id="restartBtn">New Passage</button>
+          <button class="btn btn-secondary" id="restartBtn">Restart</button>
         </div>
         <div class="output-box" id="statusBox"></div>
       </div>
@@ -169,10 +189,10 @@
       <div class="howto">
         <h2>How to Use the Typing Test</h2>
         <ol class="howto-steps">
-          <li>Click into the input box and start typing the passage shown.</li>
-          <li>The timer starts on your first keystroke.</li>
-          <li>Finish typing the whole passage to see your final WPM and accuracy.</li>
-          <li>Click "New Passage" to try again with a different passage.</li>
+          <li>Pick a test length: 10 seconds, 30 seconds, 1 minute, or 2 minutes.</li>
+          <li>Click into the input box and start typing — the countdown starts on your first keystroke.</li>
+          <li>Keep typing until time runs out to see your final WPM, accuracy, and typo count.</li>
+          <li>Click "Restart" to try again with a fresh passage.</li>
         </ol>
       </div>
 
@@ -180,15 +200,15 @@
         <h2>Frequently Asked Questions</h2>
         <details class="faq-item">
           <summary>How is WPM (words per minute) calculated?</summary>
-          <p>This tool uses the standard typing-test convention of treating every 5 characters typed (including spaces) as one "word," then divides that by the time elapsed in minutes. This is the same method used by most typing test sites, so results are comparable.</p>
+          <p>It's based only on characters you typed correctly — every 5 correct characters counts as one "word," divided by the fixed test duration you selected (10 seconds, 30 seconds, 1 minute, or 2 minutes). Typos don't count toward your WPM, only toward your typo count and accuracy.</p>
         </details>
         <details class="faq-item">
-          <summary>How is accuracy calculated?</summary>
-          <p>Accuracy is the percentage of characters you typed correctly compared to the target passage, checked position by position. Typing a wrong character lowers accuracy even if you don't go back and fix it.</p>
+          <summary>What counts as a typo?</summary>
+          <p>Any character you type that doesn't match the target text at that exact position, checked live as you go. Typos lower your accuracy percentage and aren't counted in your WPM, even if you don't go back and fix them.</p>
         </details>
         <details class="faq-item">
-          <summary>Why can't I paste the passage instead of typing it?</summary>
-          <p>Pasting is disabled on purpose — the entire point of a typing test is measuring how fast you can actually type, so allowing a paste shortcut would make the result meaningless.</p>
+          <summary>Can I choose how long the test runs?</summary>
+          <p>Yes — pick 10 seconds, 30 seconds, 1 minute, or 2 minutes before you start typing. The countdown begins the moment you type your first character, and the test ends automatically when time runs out, scoring exactly what you typed up to that point.</p>
         </details>
         <details class="faq-item">
           <summary>Is anything I type saved or sent anywhere?</summary>
@@ -237,7 +257,7 @@
             <li><a href="image-resizer">Image Resizer</a></li>
             <li><a href="word-counter">Word Counter</a></li>
             <li><a href="password-generator">Password Generator</a></li>
-            <li><a href="../all-tools">See All 150+ Tools →</a></li>
+            <li><a href="../all-tools">See All 174 Tools →</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -288,21 +308,41 @@
         "The keyboard is the bridge between a thought in your head and words on the screen in front of you."
       ];
 
+      var modePills = document.getElementById("modePills");
+      var timerDisplay = document.getElementById("timerDisplay");
       var passageDisplay = document.getElementById("passageDisplay");
       var typingInput = document.getElementById("typingInput");
       var wpmDisplay = document.getElementById("wpmDisplay");
       var accuracyDisplay = document.getElementById("accuracyDisplay");
-      var timeDisplay = document.getElementById("timeDisplay");
+      var correctDisplay = document.getElementById("correctDisplay");
+      var typosDisplay = document.getElementById("typosDisplay");
       var restartBtn = document.getElementById("restartBtn");
       var statusBox = document.getElementById("statusBox");
 
+      var duration = 60;
       var currentPassage = "";
       var startTime = null;
+      var endTime = null;
+      var running = false;
       var finished = false;
-      var liveInterval = null;
+      var tickInterval = null;
 
       function escapeHtml(s) {
         return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      }
+
+      function shuffle(arr) {
+        var copy = arr.slice();
+        for (var i = copy.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var t = copy[i]; copy[i] = copy[j]; copy[j] = t;
+        }
+        return copy;
+      }
+
+      function buildLongText() {
+        // Enough words for a very fast typist (150+ WPM) across the longest mode (2 minutes).
+        return shuffle(PASSAGES).concat(shuffle(PASSAGES)).join(" ");
       }
 
       function renderPassage() {
@@ -325,70 +365,110 @@
 
       function computeStats(typed, elapsedMs) {
         var minutes = elapsedMs / 60000;
-        var wpm = minutes > 0 ? Math.round((typed.length / 5) / minutes) : 0;
         var correct = 0;
         for (var i = 0; i < typed.length; i++) {
           if (typed[i] === currentPassage[i]) correct++;
         }
+        var typos = typed.length - correct;
         var accuracy = typed.length > 0 ? Math.round((correct / typed.length) * 100) : 100;
-        return { wpm: wpm, accuracy: accuracy };
+        var wpm = minutes > 0 ? Math.round((correct / 5) / minutes) : 0;
+        return { wpm: wpm, accuracy: accuracy, correct: correct, typos: typos };
       }
 
-      function liveUpdate() {
-        if (!startTime || finished) return;
-        var elapsed = Date.now() - startTime;
-        var stats = computeStats(typingInput.value, elapsed);
+      function formatCountdown(ms) {
+        var totalSec = Math.max(0, Math.ceil(ms / 1000));
+        var m = Math.floor(totalSec / 60);
+        var s = totalSec % 60;
+        return m + ":" + (s < 10 ? "0" + s : s);
+      }
+
+      function updateStatsDisplay(stats) {
         wpmDisplay.textContent = stats.wpm;
         accuracyDisplay.textContent = stats.accuracy + "%";
-        timeDisplay.textContent = (elapsed / 1000).toFixed(1) + "s";
+        correctDisplay.textContent = stats.correct;
+        typosDisplay.textContent = stats.typos;
+      }
+
+      function finish() {
+        running = false;
+        finished = true;
+        clearInterval(tickInterval);
+        typingInput.disabled = true;
+        var stats = computeStats(typingInput.value, duration * 1000);
+        updateStatsDisplay(stats);
+        timerDisplay.textContent = "0:00";
+        statusBox.textContent = "Time's up! " + stats.wpm + " WPM, " + stats.accuracy + "% accuracy, " + stats.typos + " typo" + (stats.typos === 1 ? "" : "s") + ".";
+      }
+
+      function tick() {
+        var remaining = endTime - Date.now();
+        if (remaining <= 0) {
+          finish();
+          return;
+        }
+        timerDisplay.classList.toggle("low", remaining <= 10000);
+        timerDisplay.textContent = formatCountdown(remaining);
+        var stats = computeStats(typingInput.value, Date.now() - startTime);
+        updateStatsDisplay(stats);
       }
 
       function onInput() {
+        if (finished) return;
         var typed = typingInput.value;
         if (typed.length > currentPassage.length) {
           typingInput.value = typed.slice(0, currentPassage.length);
           typed = typingInput.value;
         }
-        if (!startTime && typed.length > 0) {
+        if (!running && typed.length > 0) {
+          running = true;
           startTime = Date.now();
-          liveInterval = setInterval(liveUpdate, 200);
+          endTime = startTime + duration * 1000;
+          tickInterval = setInterval(tick, 150);
         }
         updateHighlight(typed);
 
-        if (typed.length === currentPassage.length && !finished) {
-          finished = true;
-          clearInterval(liveInterval);
-          var elapsed = Date.now() - startTime;
-          var stats = computeStats(typed, elapsed);
-          wpmDisplay.textContent = stats.wpm;
-          accuracyDisplay.textContent = stats.accuracy + "%";
-          timeDisplay.textContent = (elapsed / 1000).toFixed(1) + "s";
-          statusBox.textContent = "Done! " + stats.wpm + " WPM at " + stats.accuracy + "% accuracy.";
-          typingInput.disabled = true;
+        if (typed.length === currentPassage.length && running) {
+          finish();
         }
       }
 
-      function restart() {
-        clearInterval(liveInterval);
-        currentPassage = PASSAGES[Math.floor(Math.random() * PASSAGES.length)];
+      function resetTest() {
+        clearInterval(tickInterval);
+        currentPassage = buildLongText();
         renderPassage();
         updateHighlight("");
         typingInput.value = "";
         typingInput.disabled = false;
-        typingInput.focus();
-        startTime = null;
+        running = false;
         finished = false;
+        startTime = null;
+        endTime = null;
+        timerDisplay.classList.remove("low");
+        timerDisplay.textContent = formatCountdown(duration * 1000);
         wpmDisplay.textContent = "0";
         accuracyDisplay.textContent = "100%";
-        timeDisplay.textContent = "0.0s";
+        correctDisplay.textContent = "0";
+        typosDisplay.textContent = "0";
         statusBox.textContent = "";
       }
 
+      modePills.addEventListener("click", function (e) {
+        var btn = e.target.closest(".pill");
+        if (!btn) return;
+        duration = parseInt(btn.getAttribute("data-duration"), 10);
+        Array.prototype.forEach.call(modePills.querySelectorAll(".pill"), function (p) { p.classList.toggle("active", p === btn); });
+        resetTest();
+        typingInput.focus();
+      });
+
       typingInput.addEventListener("input", onInput);
       typingInput.addEventListener("paste", function (e) { e.preventDefault(); });
-      restartBtn.addEventListener("click", restart);
+      restartBtn.addEventListener("click", function () {
+        resetTest();
+        typingInput.focus();
+      });
 
-      restart();
+      resetTest();
     })();
   </script>
 </body>
