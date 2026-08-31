@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Text Byte Size Calculator Online — UTF-8 Byte Length | Fixoona</title>
+  <meta name="description" content="Find the real UTF-8 byte size of any text, not just its character count — useful for API payload limits, database column sizes, and SMS/tweet limits. Free, no sign-up." />
+  <meta name="keywords" content="text byte size calculator, utf-8 byte length, string byte size online, character vs byte count" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/text-byte-size-calculator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Text Byte Size Calculator" />
+  <meta property="og:description" content="Find the real UTF-8 byte size of any text, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/text-byte-size-calculator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Text Byte Size Calculator" />
+  <meta name="twitter:description" content="Find the real UTF-8 byte size of any text, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Text Byte Size Calculator",
+    "url": "https://fixoona.com/tools/text-byte-size-calculator",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Text Byte Size Calculator", "item": "https://fixoona.com/tools/text-byte-size-calculator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why is byte size different from character count?",
+        "acceptedAnswer": { "@type": "Answer", "text": "In UTF-8, plain English letters and basic punctuation each take exactly 1 byte, but accented letters, most non-Latin scripts, and symbols often take 2 or 3 bytes, and emoji typically take 4 bytes. So a string can have far more bytes than characters once it includes anything beyond basic ASCII text." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does this matter for real use cases?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Many systems enforce limits in bytes, not characters — database column sizes, API request/response payload caps, and some legacy SMS or messaging limits all commonly count bytes. A string that looks short in character count can still exceed a byte-based limit if it uses multi-byte characters." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this count the byte order mark (BOM) or line ending style?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — it measures only the exact text you typed, encoded as UTF-8, with no BOM added and no line-ending conversion. If a file you're comparing against adds a BOM or uses different line endings (like CRLF vs LF), its actual byte size on disk may differ slightly from what's shown here." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the calculation happens entirely in your browser using JavaScript, so nothing you type is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .bs-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 18px; }
+    .bs-stat { background: var(--color-bg-alt); border-radius: var(--radius-md, 10px); padding: 14px; text-align: center; }
+    .bs-stat strong { display: block; font-size: 1.3rem; font-family: "Space Grotesk", sans-serif; color: var(--color-primary); }
+    .bs-stat span { font-size: 0.78rem; color: var(--color-text-muted); }
+    .bs-stat.highlight { background: rgba(139, 92, 246, 0.12); }
+    .bs-stat.highlight strong { color: #8b5cf6; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Text Byte Size Calculator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">💾</div>
+      <h1>Text Byte Size Calculator</h1>
+      <p>Find the real UTF-8 byte size of any text, not just its character count.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="inputBox">Your Text</label>
+          <textarea id="inputBox" style="min-height:160px;">Hello, World! café 😀</textarea>
+        </div>
+
+        <div class="bs-stats-grid">
+          <div class="bs-stat"><strong id="statChars">-</strong><span>Characters</span></div>
+          <div class="bs-stat highlight"><strong id="statBytes">-</strong><span>UTF-8 Bytes</span></div>
+          <div class="bs-stat"><strong id="statKb">-</strong><span>Kilobytes (KB)</span></div>
+          <div class="bs-stat"><strong id="statMb">-</strong><span>Megabytes (MB)</span></div>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Check Text Byte Size</h2>
+        <ol class="howto-steps">
+          <li>Type or paste your text.</li>
+          <li>See its character count alongside its real UTF-8 byte size, updated instantly.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Why is byte size different from character count?</summary>
+          <p>In UTF-8, plain English letters and basic punctuation each take exactly 1 byte, but accented letters, most non-Latin scripts, and symbols often take 2 or 3 bytes, and emoji typically take 4 bytes. So a string can have far more bytes than characters once it includes anything beyond basic ASCII text.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why does this matter for real use cases?</summary>
+          <p>Many systems enforce limits in bytes, not characters — database column sizes, API request/response payload caps, and some legacy SMS or messaging limits all commonly count bytes. A string that looks short in character count can still exceed a byte-based limit if it uses multi-byte characters.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this count the byte order mark (BOM) or line ending style?</summary>
+          <p>No — it measures only the exact text you typed, encoded as UTF-8, with no BOM added and no line-ending conversion. If a file you're comparing against adds a BOM or uses different line endings (like CRLF vs LF), its actual byte size on disk may differ slightly from what's shown here.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my data sent anywhere?</summary>
+          <p>No — the calculation happens entirely in your browser using JavaScript, so nothing you type is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="word-counter">
+            <span class="icon" aria-hidden="true">🔤</span>
+            <h3>Word Counter</h3>
+            <p>Count words, characters, and reading time.</p>
+          </a>
+          <a class="card" href="character-counter">
+            <span class="icon" aria-hidden="true">🔡</span>
+            <h3>Character Counter</h3>
+            <p>Count characters with live limits.</p>
+          </a>
+          <a class="card" href="file-size-converter">
+            <span class="icon" aria-hidden="true">💾</span>
+            <h3>File Size Converter</h3>
+            <p>Convert between bytes, KB, MB, GB, and more.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var inputBox = document.getElementById("inputBox");
+
+      function calculate() {
+        var text = inputBox.value;
+        var chars = Array.from(text).length;
+        var bytes = new TextEncoder().encode(text).length;
+
+        document.getElementById("statChars").textContent = chars;
+        document.getElementById("statBytes").textContent = bytes;
+        document.getElementById("statKb").textContent = (bytes / 1024).toFixed(4);
+        document.getElementById("statMb").textContent = (bytes / (1024 * 1024)).toFixed(6);
+      }
+
+      inputBox.addEventListener("input", calculate);
+      calculate();
+    })();
+  </script>
+</body>
+</html>

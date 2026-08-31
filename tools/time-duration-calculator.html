@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Time Duration Calculator Online | Fixoona</title>
+  <meta name="description" content="Calculate the exact duration between two clock times, including overnight spans, in hours, minutes, and decimal hours for timesheets. Free, no sign-up." />
+  <meta name="keywords" content="time duration calculator, hours between two times, time difference calculator, elapsed time calculator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/time-duration-calculator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Time Duration Calculator" />
+  <meta property="og:description" content="Calculate the exact duration between two clock times, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/time-duration-calculator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Time Duration Calculator" />
+  <meta name="twitter:description" content="Calculate the exact duration between two clock times, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Time Duration Calculator",
+    "url": "https://fixoona.com/tools/time-duration-calculator",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Time Duration Calculator", "item": "https://fixoona.com/tools/time-duration-calculator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does this handle a shift that crosses midnight?",
+        "acceptedAnswer": { "@type": "Answer", "text": "If the end time is earlier than the start time, the calculator assumes the end time falls on the next day — so a start of 10:00 PM and an end of 6:00 AM correctly gives 8 hours, not a negative duration." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is \"decimal hours\" used for?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It expresses the duration as a single decimal number (like 7.5 instead of 7 hours 30 minutes), which is the format most timesheet and payroll systems expect for calculating pay from hours worked." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I calculate a span longer than 24 hours?",
+        "acceptedAnswer": { "@type": "Answer", "text": "This tool is built for a single start and end clock time within a day (or overnight into the next day) — for spans of multiple full days, use the Date Difference Calculator instead, which handles calendar dates directly." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the calculation happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .td-result {
+      text-align: center;
+      padding: 26px 20px;
+      border-radius: var(--radius-md, 12px);
+      background: rgba(59, 130, 246, 0.1);
+      margin-top: 18px;
+    }
+    .td-result strong { display: block; font-size: 2rem; font-family: "Space Grotesk", sans-serif; color: #3b82f6; }
+    .td-result span { font-size: 0.85rem; color: var(--color-text-muted); }
+    .td-note { text-align: center; margin-top: 10px; font-size: 0.85rem; color: var(--color-text-muted); }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Time Duration Calculator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">⏱️</div>
+      <h1>Time Duration Calculator</h1>
+      <p>Calculate the exact duration between two clock times.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="row">
+          <div class="field">
+            <label for="startTime">Start Time</label>
+            <input type="time" id="startTime" value="09:00" />
+          </div>
+          <div class="field">
+            <label for="endTime">End Time</label>
+            <input type="time" id="endTime" value="17:30" />
+          </div>
+        </div>
+
+        <div class="td-result">
+          <strong id="durationResult">-</strong>
+          <span>Duration</span>
+        </div>
+        <div class="td-note" id="overnightNote"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Calculate Time Duration</h2>
+        <ol class="howto-steps">
+          <li>Enter a start time and an end time.</li>
+          <li>The duration between them updates instantly, in hours and minutes plus decimal hours.</li>
+          <li>If the end time is earlier than the start time, it's assumed to be the next day.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How does this handle a shift that crosses midnight?</summary>
+          <p>If the end time is earlier than the start time, the calculator assumes the end time falls on the next day — so a start of 10:00 PM and an end of 6:00 AM correctly gives 8 hours, not a negative duration.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is "decimal hours" used for?</summary>
+          <p>It expresses the duration as a single decimal number (like 7.5 instead of 7 hours 30 minutes), which is the format most timesheet and payroll systems expect for calculating pay from hours worked.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I calculate a span longer than 24 hours?</summary>
+          <p>This tool is built for a single start and end clock time within a day (or overnight into the next day) — for spans of multiple full days, use the Date Difference Calculator instead, which handles calendar dates directly.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my data sent anywhere?</summary>
+          <p>No — the calculation happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="date-difference-calculator">
+            <span class="icon" aria-hidden="true">📆</span>
+            <h3>Date Difference Calculator</h3>
+            <p>Calculate the days between two dates.</p>
+          </a>
+          <a class="card" href="time-zone-converter">
+            <span class="icon" aria-hidden="true">🌐</span>
+            <h3>Time Zone Converter</h3>
+            <p>Convert a time between time zones.</p>
+          </a>
+          <a class="card" href="salary-hourly-converter">
+            <span class="icon" aria-hidden="true">💵</span>
+            <h3>Salary to Hourly Converter</h3>
+            <p>Convert between annual salary and hourly pay.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var startTime = document.getElementById("startTime");
+      var endTime = document.getElementById("endTime");
+      var durationResult = document.getElementById("durationResult");
+      var overnightNote = document.getElementById("overnightNote");
+
+      function toMinutes(value) {
+        var parts = value.split(":");
+        return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+      }
+
+      function calculate() {
+        if (!startTime.value || !endTime.value) {
+          durationResult.textContent = "-";
+          overnightNote.textContent = "";
+          return;
+        }
+        var start = toMinutes(startTime.value);
+        var end = toMinutes(endTime.value);
+        var diff = end - start;
+        var overnight = diff < 0;
+        if (overnight) diff += 1440;
+
+        var hours = Math.floor(diff / 60);
+        var minutes = diff % 60;
+        var decimalHours = (diff / 60).toFixed(2);
+
+        durationResult.textContent = hours + "h " + minutes + "m (" + decimalHours + " decimal hours)";
+        overnightNote.textContent = overnight ? "End time is treated as the next day." : "";
+      }
+
+      startTime.addEventListener("input", calculate);
+      endTime.addEventListener("input", calculate);
+
+      calculate();
+    })();
+  </script>
+</body>
+</html>

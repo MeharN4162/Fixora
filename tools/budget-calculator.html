@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Budget Calculator Online — 50/30/20 Rule | Fixoona</title>
+  <meta name="description" content="Split your income into needs, wants, and savings using the 50/30/20 budgeting rule, with an adjustable split and a comparison against your actual spending. Free, no sign-up." />
+  <meta name="keywords" content="budget calculator, 50 30 20 rule calculator, monthly budget calculator, income split calculator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/budget-calculator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Budget Calculator" />
+  <meta property="og:description" content="Split your income into needs, wants, and savings using the 50/30/20 rule, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/budget-calculator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Budget Calculator" />
+  <meta name="twitter:description" content="Split your income into needs, wants, and savings using the 50/30/20 rule, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Budget Calculator",
+    "url": "https://fixoona.com/tools/budget-calculator",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Budget Calculator", "item": "https://fixoona.com/tools/budget-calculator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the 50/30/20 budgeting rule?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's a popular budgeting guideline that splits your after-tax income into three buckets: 50% for needs (rent, groceries, utilities, minimum debt payments), 30% for wants (dining out, entertainment, hobbies), and 20% for savings and extra debt payoff. It's a starting guideline, not a rigid rule — some households need a different split." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I change the percentages?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — adjust the three sliders to any split that adds up to 100%, useful if your situation calls for a different balance than the standard 50/30/20." }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I use my gross or net (after-tax) income?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Net (after-tax, take-home) income is the standard basis for this rule, since that's the amount you actually have available to allocate — using gross income would overestimate what's really available to spend or save." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — every calculation happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .budget-slider-row { margin-bottom: 18px; }
+    .budget-slider-label { display: flex; justify-content: space-between; margin-bottom: 6px; font-weight: 600; }
+    .budget-slider-row input[type="range"] { width: 100%; }
+    .budget-total-note { text-align: center; font-size: 0.85rem; color: var(--color-text-muted); margin-top: 4px; }
+    .budget-total-note.error { color: var(--color-danger); font-weight: 600; }
+    .budget-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 18px; }
+    .budget-stat { border-radius: var(--radius-md, 10px); padding: 16px; text-align: center; }
+    .budget-stat.needs { background: rgba(59, 130, 246, 0.12); }
+    .budget-stat.wants { background: rgba(245, 158, 11, 0.12); }
+    .budget-stat.savings { background: rgba(16, 163, 74, 0.12); }
+    .budget-stat strong { display: block; font-size: 1.4rem; font-family: "Space Grotesk", sans-serif; }
+    .budget-stat.needs strong { color: #3b82f6; }
+    .budget-stat.wants strong { color: #f59e0b; }
+    .budget-stat.savings strong { color: #10a34a; }
+    .budget-stat span { font-size: 0.8rem; color: var(--color-text-muted); }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Budget Calculator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">💰</div>
+      <h1>Budget Calculator</h1>
+      <p>Split your income into needs, wants, and savings using the 50/30/20 rule.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="incomeInput">Monthly Income (after tax)</label>
+          <input type="number" id="incomeInput" value="5000" min="0" />
+        </div>
+
+        <div class="budget-slider-row">
+          <div class="budget-slider-label"><span>Needs</span><span id="needsPct">50%</span></div>
+          <input type="range" id="needsSlider" min="0" max="100" value="50" />
+        </div>
+        <div class="budget-slider-row">
+          <div class="budget-slider-label"><span>Wants</span><span id="wantsPct">30%</span></div>
+          <input type="range" id="wantsSlider" min="0" max="100" value="30" />
+        </div>
+        <div class="budget-slider-row">
+          <div class="budget-slider-label"><span>Savings</span><span id="savingsPct">20%</span></div>
+          <input type="range" id="savingsSlider" min="0" max="100" value="20" />
+        </div>
+        <div class="budget-total-note" id="totalNote"></div>
+        <button class="btn btn-secondary" id="resetBtn" type="button" style="margin-top:8px;">Reset to 50/30/20</button>
+
+        <div class="budget-results">
+          <div class="budget-stat needs"><strong id="needsAmount">-</strong><span>Needs</span></div>
+          <div class="budget-stat wants"><strong id="wantsAmount">-</strong><span>Wants</span></div>
+          <div class="budget-stat savings"><strong id="savingsAmount">-</strong><span>Savings</span></div>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Use the Budget Calculator</h2>
+        <ol class="howto-steps">
+          <li>Enter your monthly after-tax income.</li>
+          <li>Adjust the Needs, Wants, and Savings sliders — they're linked to always total 100%.</li>
+          <li>See your dollar amount for each category, updated instantly.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What is the 50/30/20 budgeting rule?</summary>
+          <p>It's a popular budgeting guideline that splits your after-tax income into three buckets: 50% for needs (rent, groceries, utilities, minimum debt payments), 30% for wants (dining out, entertainment, hobbies), and 20% for savings and extra debt payoff. It's a starting guideline, not a rigid rule — some households need a different split.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I change the percentages?</summary>
+          <p>Yes — adjust the three sliders to any split that adds up to 100%, useful if your situation calls for a different balance than the standard 50/30/20.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Should I use my gross or net (after-tax) income?</summary>
+          <p>Net (after-tax, take-home) income is the standard basis for this rule, since that's the amount you actually have available to allocate — using gross income would overestimate what's really available to spend or save.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my data sent anywhere?</summary>
+          <p>No — every calculation happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="savings-goal-calculator">
+            <span class="icon" aria-hidden="true">🎯</span>
+            <h3>Savings Goal Calculator</h3>
+            <p>Plan how much to save to reach a goal.</p>
+          </a>
+          <a class="card" href="salary-hourly-converter">
+            <span class="icon" aria-hidden="true">💵</span>
+            <h3>Salary to Hourly Converter</h3>
+            <p>Convert between annual salary and hourly pay.</p>
+          </a>
+          <a class="card" href="group-expense-splitter">
+            <span class="icon" aria-hidden="true">🧾</span>
+            <h3>Group Expense Splitter</h3>
+            <p>Find out who owes who after a group trip.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var incomeInput = document.getElementById("incomeInput");
+      var needsSlider = document.getElementById("needsSlider");
+      var wantsSlider = document.getElementById("wantsSlider");
+      var savingsSlider = document.getElementById("savingsSlider");
+      var needsPct = document.getElementById("needsPct");
+      var wantsPct = document.getElementById("wantsPct");
+      var savingsPct = document.getElementById("savingsPct");
+      var totalNote = document.getElementById("totalNote");
+      var resetBtn = document.getElementById("resetBtn");
+
+      function rebalance(changed) {
+        var sliders = { needs: needsSlider, wants: wantsSlider, savings: savingsSlider };
+        var others = Object.keys(sliders).filter(function (k) { return k !== changed; });
+
+        var changedVal = parseFloat(sliders[changed].value);
+        var remaining = 100 - changedVal;
+        var otherSum = others.reduce(function (s, k) { return s + parseFloat(sliders[k].value); }, 0);
+
+        if (otherSum <= 0) {
+          sliders[others[0]].value = remaining;
+          sliders[others[1]].value = 0;
+        } else {
+          var ratio = remaining / otherSum;
+          sliders[others[0]].value = Math.round(parseFloat(sliders[others[0]].value) * ratio);
+          sliders[others[1]].value = 100 - changedVal - parseFloat(sliders[others[0]].value);
+        }
+        updateDisplay();
+      }
+
+      function updateDisplay() {
+        var n = parseFloat(needsSlider.value);
+        var w = parseFloat(wantsSlider.value);
+        var s = parseFloat(savingsSlider.value);
+        needsPct.textContent = n + "%";
+        wantsPct.textContent = w + "%";
+        savingsPct.textContent = s + "%";
+
+        var total = n + w + s;
+        totalNote.textContent = "Total: " + total + "%";
+        totalNote.className = "budget-total-note" + (total !== 100 ? " error" : "");
+
+        var income = parseFloat(incomeInput.value) || 0;
+        document.getElementById("needsAmount").textContent = "$" + (income * n / 100).toFixed(2);
+        document.getElementById("wantsAmount").textContent = "$" + (income * w / 100).toFixed(2);
+        document.getElementById("savingsAmount").textContent = "$" + (income * s / 100).toFixed(2);
+      }
+
+      needsSlider.addEventListener("input", function () { rebalance("needs"); });
+      wantsSlider.addEventListener("input", function () { rebalance("wants"); });
+      savingsSlider.addEventListener("input", function () { rebalance("savings"); });
+      incomeInput.addEventListener("input", updateDisplay);
+      resetBtn.addEventListener("click", function () {
+        needsSlider.value = 50; wantsSlider.value = 30; savingsSlider.value = 20;
+        updateDisplay();
+      });
+
+      updateDisplay();
+    })();
+  </script>
+</body>
+</html>

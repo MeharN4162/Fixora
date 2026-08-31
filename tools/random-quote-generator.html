@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Random Quote Generator Online | Fixoona</title>
+  <meta name="description" content="Generate a random inspirational, motivational, or funny quote, filterable by category, with one click to copy. Free, no sign-up." />
+  <meta name="keywords" content="random quote generator, inspirational quote generator, motivational quotes online" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/random-quote-generator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Random Quote Generator" />
+  <meta property="og:description" content="Generate a random inspirational, motivational, or funny quote, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/random-quote-generator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Random Quote Generator" />
+  <meta name="twitter:description" content="Generate a random inspirational, motivational, or funny quote, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Random Quote Generator",
+    "url": "https://fixoona.com/tools/random-quote-generator",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Random Quote Generator", "item": "https://fixoona.com/tools/random-quote-generator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where do these quotes come from?",
+        "acceptedAnswer": { "@type": "Answer", "text": "They're a hand-picked, fixed collection of well-known quotes built directly into this page, organized into Motivational, Wisdom, and Funny categories — not pulled from a live external API." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I get a quote from a specific category?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — use the category buttons to restrict random quotes to Motivational, Wisdom, or Funny, or leave it on \"All\" to draw from every category." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will I see the same quote twice in a row?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The generator avoids repeating the exact same quote you just saw (as long as more than one quote is available in the current category), so clicking \"New Quote\" reliably gives you something different each time." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — quote selection happens entirely in your browser using JavaScript, so nothing is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .quote-card {
+      background: var(--color-bg-alt);
+      border-radius: var(--radius-md, 14px);
+      padding: 32px 26px;
+      text-align: center;
+      min-height: 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .quote-text { font-size: 1.4rem; font-weight: 600; font-family: "Space Grotesk", sans-serif; line-height: 1.4; }
+    .quote-author { margin-top: 14px; color: var(--color-text-muted); font-size: 0.95rem; }
+    .quote-categories { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .quote-categories button {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .quote-categories button.active { background: var(--gradient-primary); color: #fff; border-color: transparent; }
+    .quote-actions { display: flex; gap: 10px; margin-top: 18px; justify-content: center; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Random Quote Generator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">💬</div>
+      <h1>Random Quote Generator</h1>
+      <p>Get a random motivational, wisdom, or funny quote.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="quote-categories" id="categoriesRow">
+          <button type="button" class="active" data-cat="all">All</button>
+          <button type="button" data-cat="motivational">Motivational</button>
+          <button type="button" data-cat="wisdom">Wisdom</button>
+          <button type="button" data-cat="funny">Funny</button>
+        </div>
+
+        <div class="quote-card">
+          <div class="quote-text" id="quoteText"></div>
+          <div class="quote-author" id="quoteAuthor"></div>
+        </div>
+
+        <div class="quote-actions">
+          <button class="btn btn-primary" id="newQuoteBtn">🔀 New Quote</button>
+          <button class="btn btn-secondary" id="copyBtn">Copy Quote</button>
+        </div>
+        <div class="copy-note" id="copyNote" style="text-align:center;margin-top:8px;"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Use the Random Quote Generator</h2>
+        <ol class="howto-steps">
+          <li>Optionally pick a category — Motivational, Wisdom, or Funny.</li>
+          <li>Click "New Quote" for a fresh random quote anytime.</li>
+          <li>Click "Copy Quote" to copy it with its author.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Where do these quotes come from?</summary>
+          <p>They're a hand-picked, fixed collection of well-known quotes built directly into this page, organized into Motivational, Wisdom, and Funny categories — not pulled from a live external API.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I get a quote from a specific category?</summary>
+          <p>Yes — use the category buttons to restrict random quotes to Motivational, Wisdom, or Funny, or leave it on "All" to draw from every category.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Will I see the same quote twice in a row?</summary>
+          <p>The generator avoids repeating the exact same quote you just saw (as long as more than one quote is available in the current category), so clicking "New Quote" reliably gives you something different each time.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my data sent anywhere?</summary>
+          <p>No — quote selection happens entirely in your browser using JavaScript, so nothing is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="random-dad-joke-generator">
+            <span class="icon" aria-hidden="true">😂</span>
+            <h3>Random Dad Joke Generator</h3>
+            <p>Get a random clean, corny dad joke.</p>
+          </a>
+          <a class="card" href="fancy-text-generator">
+            <span class="icon" aria-hidden="true">✨</span>
+            <h3>Fancy Text Generator</h3>
+            <p>Turn text into bold, italic, and other cool fonts.</p>
+          </a>
+          <a class="card" href="random-decision-wheel">
+            <span class="icon" aria-hidden="true">🎡</span>
+            <h3>Random Decision Wheel</h3>
+            <p>Spin an animated wheel to make a fair random pick.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var QUOTES = [
+        { text: "The only way to do great work is to love what you do.", author: "Steve Jobs", cat: "motivational" },
+        { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill", cat: "motivational" },
+        { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt", cat: "motivational" },
+        { text: "It always seems impossible until it's done.", author: "Nelson Mandela", cat: "motivational" },
+        { text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt", cat: "motivational" },
+        { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson", cat: "motivational" },
+        { text: "Everything you've ever wanted is on the other side of fear.", author: "George Addair", cat: "motivational" },
+        { text: "Hardships often prepare ordinary people for an extraordinary destiny.", author: "C.S. Lewis", cat: "motivational" },
+        { text: "The secret of getting ahead is getting started.", author: "Mark Twain", cat: "motivational" },
+        { text: "Your limitation—it's only your imagination.", author: "Unknown", cat: "motivational" },
+        { text: "The unexamined life is not worth living.", author: "Socrates", cat: "wisdom" },
+        { text: "That which does not kill us makes us stronger.", author: "Friedrich Nietzsche", cat: "wisdom" },
+        { text: "The only true wisdom is in knowing you know nothing.", author: "Socrates", cat: "wisdom" },
+        { text: "In the middle of difficulty lies opportunity.", author: "Albert Einstein", cat: "wisdom" },
+        { text: "He who has a why to live can bear almost any how.", author: "Friedrich Nietzsche", cat: "wisdom" },
+        { text: "Turn your wounds into wisdom.", author: "Oprah Winfrey", cat: "wisdom" },
+        { text: "Patience is bitter, but its fruit is sweet.", author: "Aristotle", cat: "wisdom" },
+        { text: "The journey of a thousand miles begins with one step.", author: "Lao Tzu", cat: "wisdom" },
+        { text: "Knowing yourself is the beginning of all wisdom.", author: "Aristotle", cat: "wisdom" },
+        { text: "What we think, we become.", author: "Buddha", cat: "wisdom" },
+        { text: "I'm not lazy, I'm on energy-saving mode.", author: "Unknown", cat: "funny" },
+        { text: "I told my computer I needed a break, and now it won't stop sending me KitKat ads.", author: "Unknown", cat: "funny" },
+        { text: "The road to success is always under construction.", author: "Lily Tomlin", cat: "funny" },
+        { text: "I'm on a seafood diet. I see food and I eat it.", author: "Unknown", cat: "funny" },
+        { text: "Behind every great person is a substantial amount of coffee.", author: "Unknown", cat: "funny" },
+        { text: "I used to think I was indecisive, but now I'm not so sure.", author: "Unknown", cat: "funny" },
+        { text: "My bed is a magical place where I suddenly remember everything I forgot to do.", author: "Unknown", cat: "funny" },
+        { text: "I'm not arguing, I'm just explaining why I'm right.", author: "Unknown", cat: "funny" },
+        { text: "Common sense is not so common.", author: "Voltaire", cat: "funny" },
+        { text: "Procrastination is the art of keeping up with yesterday.", author: "Don Marquis", cat: "funny" }
+      ];
+
+      var categoriesRow = document.getElementById("categoriesRow");
+      var quoteText = document.getElementById("quoteText");
+      var quoteAuthor = document.getElementById("quoteAuthor");
+      var newQuoteBtn = document.getElementById("newQuoteBtn");
+      var copyBtn = document.getElementById("copyBtn");
+      var copyNote = document.getElementById("copyNote");
+
+      var currentCat = "all";
+      var lastIndex = -1;
+
+      function secureRandomInt(maxExclusive) {
+        var arr = new Uint32Array(1);
+        var limit = Math.floor(4294967296 / maxExclusive) * maxExclusive;
+        var val;
+        do { crypto.getRandomValues(arr); val = arr[0]; } while (val >= limit);
+        return val % maxExclusive;
+      }
+
+      function pool() {
+        return currentCat === "all" ? QUOTES : QUOTES.filter(function (q) { return q.cat === currentCat; });
+      }
+
+      function showQuote() {
+        var list = pool();
+        var idx = secureRandomInt(list.length);
+        if (list.length > 1) {
+          while (idx === lastIndex) idx = secureRandomInt(list.length);
+        }
+        lastIndex = idx;
+        var q = list[idx];
+        quoteText.textContent = "“" + q.text + "”";
+        quoteAuthor.textContent = "— " + q.author;
+        copyNote.textContent = "";
+      }
+
+      categoriesRow.querySelectorAll("button").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          categoriesRow.querySelectorAll("button").forEach(function (b) { b.classList.remove("active"); });
+          btn.classList.add("active");
+          currentCat = btn.getAttribute("data-cat");
+          lastIndex = -1;
+          showQuote();
+        });
+      });
+
+      newQuoteBtn.addEventListener("click", showQuote);
+      copyBtn.addEventListener("click", function () {
+        Fixora.copyText(quoteText.textContent + " " + quoteAuthor.textContent, copyNote);
+      });
+
+      showQuote();
+    })();
+  </script>
+</body>
+</html>
