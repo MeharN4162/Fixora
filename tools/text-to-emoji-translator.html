@@ -80,6 +80,16 @@
       },
       {
         "@type": "Question",
+        "name": "Does it handle plurals, like \"babies\" or \"cats\"?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — plural forms (including irregular ones like \"mice\" or \"wolves\") are recognized and matched to the same emoji as their singular form, so \"baby\" and \"babies\" both become 👶." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if I write a number before a word, like \"3 cars\"?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The emoji is repeated that many times instead of appearing once — \"3 cars\" becomes 🚗🚗🚗. This is capped at 20 repeats per number to keep the output readable, and \"0 (word)\" removes the word entirely rather than showing a misleading single emoji for a zero count." }
+      },
+      {
+        "@type": "Question",
         "name": "Is my text sent anywhere?",
         "acceptedAnswer": { "@type": "Answer", "text": "No — the translation happens entirely in your browser using JavaScript, so your text is never sent to a server." }
       }
@@ -176,6 +186,14 @@
         <details class="faq-item">
           <summary>Does it match parts of words, like "cat" inside "category"?</summary>
           <p>No — it only matches whole words, so "category" stays as plain text even though it contains "cat," avoiding the kind of accidental partial-word replacements that would otherwise mangle unrelated words.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does it handle plurals, like "babies" or "cats"?</summary>
+          <p>Yes — plural forms (including irregular ones like "mice" or "wolves") are recognized and matched to the same emoji as their singular form, so "baby" and "babies" both become 👶.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What happens if I write a number before a word, like "3 cars"?</summary>
+          <p>The emoji is repeated that many times instead of appearing once — "3 cars" becomes 🚗🚗🚗. This is capped at 20 repeats per number to keep the output readable, and "0 (word)" removes the word entirely rather than showing a misleading single emoji for a zero count.</p>
         </details>
         <details class="faq-item">
           <summary>Is my text sent anywhere?</summary>
@@ -292,12 +310,11 @@
         game: "🎮", trophy: "🏆", medal: "🏅",
         sun2: "🌞", king: "👑", crown: "👑", queen: "👸", baby: "👶", boy: "👦", girl: "👧",
         man: "👨", woman: "👩", family: "👨‍👩‍👧‍👦",
-        yes: "✅", no: "❌", ok: "👌", good: "👍", bad: "👎", thumbsup: "👍", thumbsdown: "👎",
-        hello: "👋", bye: "👋", wave: "👋", clap: "👏", pray: "🙏", hug: "🤗", hi: "👋",
+        thumbsup: "👍", thumbsdown: "👎",
+        hello: "👋", hi: "👋", bye: "👋", wave: "👋", clap: "👏", pray: "🙏", hug: "🤗",
         world: "🌍", earth2: "🌎", globe: "🌐",
         idea: "💡", warning: "⚠️", danger: "☠️", question: "❓", exclamation: "❗",
-        check: "✔️", cross: "❌", plus: "➕", minus: "➖",
-        time: "⏰", alarm: "⏰", calendar: "📅", map: "🗺️", pin: "📍", location: "📍",
+        alarm: "⏰", calendar: "📅", map: "🗺️", pin: "📍", location: "📍",
         bomb: "💣", gun: "🔫", knife: "🔪", sword: "⚔️", shield: "🛡️", target: "🎯",
         diamond: "💎", ring: "💍", crystal: "🔮", magic: "✨"
       };
@@ -308,6 +325,34 @@
       var copyBtn = document.getElementById("copyBtn");
       var copyNote = document.getElementById("copyNote");
 
+      var IRREGULAR_SINGULARS = {
+        mice: "mouse", geese: "goose", men: "man", women: "woman",
+        children: "child", people: "person", feet: "foot", teeth: "tooth"
+      };
+
+      var MAX_REPEAT = 20;
+
+      function lookupEmoji(word) {
+        var key = word.toLowerCase();
+        if (Object.prototype.hasOwnProperty.call(EMOJI_MAP, key)) return EMOJI_MAP[key];
+        if (Object.prototype.hasOwnProperty.call(IRREGULAR_SINGULARS, key)) {
+          var irregularBase = IRREGULAR_SINGULARS[key];
+          if (Object.prototype.hasOwnProperty.call(EMOJI_MAP, irregularBase)) return EMOJI_MAP[irregularBase];
+        }
+        var candidates = [];
+        if (key.length > 3 && key.slice(-3) === "ies") candidates.push(key.slice(0, -3) + "y");
+        if (key.length > 3 && key.slice(-3) === "ves") {
+          candidates.push(key.slice(0, -3) + "f");
+          candidates.push(key.slice(0, -3) + "fe");
+        }
+        if (key.length > 2 && key.slice(-2) === "es") candidates.push(key.slice(0, -2));
+        if (key.length > 1 && key.slice(-1) === "s" && key.slice(-2) !== "ss") candidates.push(key.slice(0, -1));
+        for (var i = 0; i < candidates.length; i++) {
+          if (Object.prototype.hasOwnProperty.call(EMOJI_MAP, candidates[i])) return EMOJI_MAP[candidates[i]];
+        }
+        return null;
+      }
+
       function translate() {
         var text = inputBox.value;
         if (!text) {
@@ -316,14 +361,24 @@
           return;
         }
         var count = 0;
-        var result = text.replace(/[A-Za-z']+/g, function (word) {
-          var key = word.toLowerCase();
-          if (Object.prototype.hasOwnProperty.call(EMOJI_MAP, key)) {
-            count++;
-            return EMOJI_MAP[key];
-          }
+
+        // Pass 1: "<number> <word>" -> the emoji repeated that many times (e.g. "3 cars" -> car emoji x3).
+        var afterNumbers = text.replace(/\b(\d{1,3})\s+([A-Za-z']+)\b/g, function (whole, numStr, word) {
+          var emoji = lookupEmoji(word);
+          if (!emoji) return whole;
+          var n = Math.min(parseInt(numStr, 10), MAX_REPEAT);
+          if (n === 0) return numStr;
+          count++;
+          return new Array(n + 1).join(emoji);
+        });
+
+        // Pass 2: any remaining standalone word (singular or plural) -> a single matching emoji.
+        var result = afterNumbers.replace(/[A-Za-z']+/g, function (word) {
+          var emoji = lookupEmoji(word);
+          if (emoji) { count++; return emoji; }
           return word;
         });
+
         outputBox.value = result;
         statusBox.textContent = count === 0 ? "No matching words found in the dictionary." : count + " word" + (count === 1 ? "" : "s") + " translated.";
       }
