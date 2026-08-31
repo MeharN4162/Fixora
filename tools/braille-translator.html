@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Braille Translator Online | Fixoona</title>
+  <meta name="description" content="Translate text to Grade 1 (uncontracted) Braille online for free, using standard Unicode Braille patterns. No sign-up, nothing uploaded." />
+  <meta name="keywords" content="braille translator, text to braille online free, braille alphabet converter" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/braille-translator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Braille Translator" />
+  <meta property="og:description" content="Translate text to Grade 1 Braille instantly, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/braille-translator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Braille Translator" />
+  <meta name="twitter:description" content="Translate text to Grade 1 Braille instantly, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Braille Translator",
+    "url": "https://fixoona.com/tools/braille-translator",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Braille Translator", "item": "https://fixoona.com/tools/braille-translator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Grade 1 Braille?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Grade 1 (uncontracted) Braille spells out every letter individually, unlike Grade 2 Braille, which uses special contractions and abbreviations for common letter combinations and whole words to save space — this tool produces the simpler, letter-by-letter Grade 1 form." }
+      },
+      {
+        "@type": "Question",
+        "name": "How are numbers represented?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A special \"number sign\" character comes before a run of digits, and the digits 1–9 and 0 reuse the same dot patterns as the letters A–J — this is exactly how real numbers work in the Braille system." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I actually read the output on screen?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The output uses the real Unicode Braille Patterns block, so it displays as raised-dot-style characters in any modern browser or font that supports Unicode — the same characters used in real Braille-related software and documents." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my text sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the translation happens entirely in your browser using JavaScript, so nothing you type is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    #brailleOutput { font-size: 1.8rem; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Braille Translator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">⠃</div>
+      <h1>Braille Translator</h1>
+      <p>Translate text into Grade 1 (uncontracted) Braille using real Unicode Braille patterns.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="textInput">Text</label>
+          <input type="text" id="textInput" value="Hello, World! 123" />
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+
+        <div class="field">
+          <label for="brailleOutputBox">Braille</label>
+          <textarea id="brailleOutputBox" readonly style="min-height:80px;"></textarea>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-secondary" id="copyBtn">Copy</button>
+        </div>
+        <div class="copy-note" id="copyNote"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Use the Braille Translator</h2>
+        <ol class="howto-steps">
+          <li>Type any text with letters, numbers, and common punctuation.</li>
+          <li>The Braille translation appears instantly.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What is Grade 1 Braille?</summary>
+          <p>Grade 1 (uncontracted) Braille spells out every letter individually, unlike Grade 2 Braille, which uses special contractions and abbreviations for common letter combinations and whole words to save space — this tool produces the simpler, letter-by-letter Grade 1 form.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How are numbers represented?</summary>
+          <p>A special "number sign" character comes before a run of digits, and the digits 1–9 and 0 reuse the same dot patterns as the letters A–J — this is exactly how real numbers work in the Braille system.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I actually read the output on screen?</summary>
+          <p>The output uses the real Unicode Braille Patterns block, so it displays as raised-dot-style characters in any modern browser or font that supports Unicode — the same characters used in real Braille-related software and documents.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my text sent anywhere?</summary>
+          <p>No — the translation happens entirely in your browser using JavaScript, so nothing you type is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="morse-code-translator">
+            <span class="icon" aria-hidden="true">📡</span>
+            <h3>Morse Code Translator</h3>
+            <p>Translate text to Morse code, with audio.</p>
+          </a>
+          <a class="card" href="nato-phonetic-alphabet-converter">
+            <span class="icon" aria-hidden="true">📻</span>
+            <h3>NATO Phonetic Alphabet Converter</h3>
+            <p>Convert text to Alpha, Bravo, Charlie...</p>
+          </a>
+          <a class="card" href="contrast-ratio-checker">
+            <span class="icon" aria-hidden="true">🔲</span>
+            <h3>Color Contrast Checker</h3>
+            <p>Check WCAG AA/AAA contrast for accessibility.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 150+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var DOT_BIT = { 1: 1, 2: 2, 3: 4, 4: 8, 5: 16, 6: 32 };
+      function toBraille(dots) {
+        var code = 0x2800;
+        dots.forEach(function (d) { code += DOT_BIT[d]; });
+        return String.fromCodePoint(code);
+      }
+
+      var LETTER_DOTS = {
+        a: [1], b: [1, 2], c: [1, 4], d: [1, 4, 5], e: [1, 5], f: [1, 2, 4], g: [1, 2, 4, 5], h: [1, 2, 5], i: [2, 4], j: [2, 4, 5],
+        k: [1, 3], l: [1, 2, 3], m: [1, 3, 4], n: [1, 3, 4, 5], o: [1, 3, 5], p: [1, 2, 3, 4], q: [1, 2, 3, 4, 5], r: [1, 2, 3, 5], s: [2, 3, 4], t: [2, 3, 4, 5],
+        u: [1, 3, 6], v: [1, 2, 3, 6], w: [2, 4, 5, 6], x: [1, 3, 4, 6], y: [1, 3, 4, 5, 6], z: [1, 3, 5, 6]
+      };
+      var DIGIT_LETTER = { "1": "a", "2": "b", "3": "c", "4": "d", "5": "e", "6": "f", "7": "g", "8": "h", "9": "i", "0": "j" };
+      var NUMBER_SIGN = toBraille([3, 4, 5, 6]);
+      var PUNCT_DOTS = {
+        ".": [2, 5, 6], ",": [2], "?": [2, 3, 6], "!": [2, 3, 5], "'": [3], "-": [3, 6], ";": [2, 3], ":": [2, 5]
+      };
+
+      var LETTER_MAP = {};
+      Object.keys(LETTER_DOTS).forEach(function (l) { LETTER_MAP[l] = toBraille(LETTER_DOTS[l]); });
+      var PUNCT_MAP = {};
+      Object.keys(PUNCT_DOTS).forEach(function (p) { PUNCT_MAP[p] = toBraille(PUNCT_DOTS[p]); });
+
+      var textInput = document.getElementById("textInput");
+      var brailleOutputBox = document.getElementById("brailleOutputBox");
+      var statusBox = document.getElementById("statusBox");
+      var copyBtn = document.getElementById("copyBtn");
+      var copyNote = document.getElementById("copyNote");
+
+      function translate(text) {
+        var output = "";
+        var inNumber = false;
+        var unsupported = [];
+        for (var i = 0; i < text.length; i++) {
+          var ch = text[i];
+          var lower = ch.toLowerCase();
+          if (/[0-9]/.test(ch)) {
+            if (!inNumber) { output += NUMBER_SIGN; inNumber = true; }
+            output += LETTER_MAP[DIGIT_LETTER[ch]];
+          } else if (LETTER_MAP[lower]) {
+            inNumber = false;
+            output += LETTER_MAP[lower];
+          } else if (ch === " ") {
+            inNumber = false;
+            output += " ";
+          } else if (PUNCT_MAP[ch]) {
+            inNumber = false;
+            output += PUNCT_MAP[ch];
+          } else {
+            inNumber = false;
+            output += ch;
+            if (ch.trim()) unsupported.push(ch);
+          }
+        }
+        return { output: output, unsupported: unsupported };
+      }
+
+      function convert() {
+        var text = textInput.value;
+        if (!text) { brailleOutputBox.value = ""; statusBox.textContent = ""; return; }
+        var result = translate(text);
+        brailleOutputBox.value = result.output;
+        var uniqueUnsupported = Array.from(new Set(result.unsupported));
+        statusBox.textContent = uniqueUnsupported.length
+          ? "Note: " + uniqueUnsupported.join(" ") + " isn't supported and was left as-is."
+          : "";
+      }
+
+      textInput.addEventListener("input", convert);
+      copyBtn.addEventListener("click", function () { Fixora.copyText(brailleOutputBox.value, copyNote); });
+
+      convert();
+    })();
+  </script>
+</body>
+</html>

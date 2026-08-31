@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Running Pace Calculator Online | Fixoona</title>
+  <meta name="description" content="Calculate your running pace per mile or kilometer from distance and time, or predict a finish time from your pace, online for free. No sign-up." />
+  <meta name="keywords" content="running pace calculator, pace per mile calculator, race time predictor free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/running-pace-calculator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Running Pace Calculator" />
+  <meta property="og:description" content="Calculate pace per mile/km, or predict a finish time, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/running-pace-calculator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Running Pace Calculator" />
+  <meta name="twitter:description" content="Calculate pace per mile/km, or predict a finish time, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Running Pace Calculator",
+    "url": "https://fixoona.com/tools/running-pace-calculator",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Running Pace Calculator", "item": "https://fixoona.com/tools/running-pace-calculator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How is pace different from speed?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Speed is distance covered per unit of time (like miles per hour), while pace is the inverse — time taken per unit of distance (like minutes per mile). Runners typically think in pace since it directly answers \"how long will each mile take.\"" }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I predict my finish time for a race distance using my pace?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — enter your pace and the target race distance in the second section, and it multiplies your per-mile or per-kilometer pace by the total distance to estimate a finish time." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this account for pacing changes during a race, like fatigue?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — this assumes a perfectly even pace throughout, which is a simplification. Real race performance often varies due to terrain, fatigue, and pacing strategy, so treat the prediction as a rough estimate rather than a guarantee." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — all calculations happen entirely in your browser using JavaScript, so nothing you enter is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Running Pace Calculator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🏃</div>
+      <h1>Running Pace Calculator</h1>
+      <p>Calculate your pace from a distance and time, or predict a finish time for a race.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <h3 style="margin-top:0;">Find Your Pace</h3>
+        <div class="row">
+          <div class="field">
+            <label for="distanceInput">Distance</label>
+            <input type="number" id="distanceInput" value="5" min="0" step="0.01" />
+          </div>
+          <div class="field">
+            <label for="distanceUnit">Unit</label>
+            <select id="distanceUnit">
+              <option value="mi">Miles</option>
+              <option value="km">Kilometers</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="hoursInput">Hours</label>
+            <input type="number" id="hoursInput" value="0" min="0" />
+          </div>
+          <div class="field">
+            <label for="minutesInput">Minutes</label>
+            <input type="number" id="minutesInput" value="45" min="0" max="59" />
+          </div>
+          <div class="field">
+            <label for="secondsInput">Seconds</label>
+            <input type="number" id="secondsInput" value="0" min="0" max="59" />
+          </div>
+        </div>
+        <div class="output-box" id="paceBox" style="font-size:1.05rem;"></div>
+
+        <h3>Predict a Finish Time</h3>
+        <div class="row">
+          <div class="field">
+            <label for="raceDistanceInput">Race Distance</label>
+            <input type="number" id="raceDistanceInput" value="26.2" min="0" step="0.01" />
+          </div>
+          <div class="field">
+            <label for="raceDistanceUnit">Unit</label>
+            <select id="raceDistanceUnit">
+              <option value="mi">Miles</option>
+              <option value="km">Kilometers</option>
+            </select>
+          </div>
+        </div>
+        <div class="output-box" id="predictBox" style="font-size:1.05rem;"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Use the Pace Calculator</h2>
+        <ol class="howto-steps">
+          <li>Enter a distance and time to find your pace per mile and per kilometer.</li>
+          <li>Enter a race distance to predict a finish time at that same pace.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How is pace different from speed?</summary>
+          <p>Speed is distance covered per unit of time (like miles per hour), while pace is the inverse — time taken per unit of distance (like minutes per mile). Runners typically think in pace since it directly answers "how long will each mile take."</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I predict my finish time for a race distance using my pace?</summary>
+          <p>Yes — enter your pace and the target race distance in the second section, and it multiplies your per-mile or per-kilometer pace by the total distance to estimate a finish time.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this account for pacing changes during a race, like fatigue?</summary>
+          <p>No — this assumes a perfectly even pace throughout, which is a simplification. Real race performance often varies due to terrain, fatigue, and pacing strategy, so treat the prediction as a rough estimate rather than a guarantee.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my data sent anywhere?</summary>
+          <p>No — all calculations happen entirely in your browser using JavaScript, so nothing you enter is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="calorie-calculator">
+            <span class="icon" aria-hidden="true">🍎</span>
+            <h3>Calorie Calculator</h3>
+            <p>Estimate your daily calorie needs.</p>
+          </a>
+          <a class="card" href="unit-converter">
+            <span class="icon" aria-hidden="true">📐</span>
+            <h3>Unit Converter</h3>
+            <p>Convert between everyday units of measure.</p>
+          </a>
+          <a class="card" href="countdown-timer">
+            <span class="icon" aria-hidden="true">⏱️</span>
+            <h3>Countdown Timer & Stopwatch</h3>
+            <p>Time your next run.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 150+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var distanceInput = document.getElementById("distanceInput");
+      var distanceUnit = document.getElementById("distanceUnit");
+      var hoursInput = document.getElementById("hoursInput");
+      var minutesInput = document.getElementById("minutesInput");
+      var secondsInput = document.getElementById("secondsInput");
+      var paceBox = document.getElementById("paceBox");
+      var raceDistanceInput = document.getElementById("raceDistanceInput");
+      var raceDistanceUnit = document.getElementById("raceDistanceUnit");
+      var predictBox = document.getElementById("predictBox");
+
+      var MI_PER_KM = 0.621371;
+
+      function formatPace(secondsPerUnit) {
+        var m = Math.floor(secondsPerUnit / 60);
+        var s = Math.round(secondsPerUnit % 60);
+        if (s === 60) { m++; s = 0; }
+        return m + ":" + (s < 10 ? "0" + s : s);
+      }
+
+      function formatDuration(totalSeconds) {
+        totalSeconds = Math.round(totalSeconds);
+        var h = Math.floor(totalSeconds / 3600);
+        var m = Math.floor((totalSeconds % 3600) / 60);
+        var s = totalSeconds % 60;
+        return (h > 0 ? h + "h " : "") + m + "m " + s + "s";
+      }
+
+      var paceSecPerMile = null;
+
+      function updatePace() {
+        var distance = parseFloat(distanceInput.value);
+        var totalSeconds = (parseInt(hoursInput.value, 10) || 0) * 3600 + (parseInt(minutesInput.value, 10) || 0) * 60 + (parseInt(secondsInput.value, 10) || 0);
+        if (!distance || distance <= 0 || totalSeconds <= 0) {
+          paceBox.textContent = "Enter a distance and time.";
+          paceSecPerMile = null;
+          return;
+        }
+        var distanceMiles = distanceUnit.value === "km" ? distance * MI_PER_KM : distance;
+        var distanceKm = distanceUnit.value === "mi" ? distance / MI_PER_KM : distance;
+
+        var secPerMile = totalSeconds / distanceMiles;
+        var secPerKm = totalSeconds / distanceKm;
+        paceSecPerMile = secPerMile;
+
+        var mph = distanceMiles / (totalSeconds / 3600);
+        var kph = distanceKm / (totalSeconds / 3600);
+
+        paceBox.textContent = formatPace(secPerMile) + " min/mile (" + formatPace(secPerKm) + " min/km) — " + mph.toFixed(2) + " mph (" + kph.toFixed(2) + " km/h)";
+        updatePredict();
+      }
+
+      function updatePredict() {
+        if (!paceSecPerMile) { predictBox.textContent = "Enter your pace above first."; return; }
+        var raceDistance = parseFloat(raceDistanceInput.value);
+        if (!raceDistance || raceDistance <= 0) { predictBox.textContent = "Enter a race distance."; return; }
+        var raceMiles = raceDistanceUnit.value === "km" ? raceDistance * MI_PER_KM : raceDistance;
+        var finishSeconds = raceMiles * paceSecPerMile;
+        predictBox.textContent = "Estimated finish time: " + formatDuration(finishSeconds);
+      }
+
+      [distanceInput, distanceUnit, hoursInput, minutesInput, secondsInput].forEach(function (el) {
+        el.addEventListener("input", updatePace);
+        el.addEventListener("change", updatePace);
+      });
+      [raceDistanceInput, raceDistanceUnit].forEach(function (el) {
+        el.addEventListener("input", updatePredict);
+        el.addEventListener("change", updatePredict);
+      });
+
+      updatePace();
+    })();
+  </script>
+</body>
+</html>
