@@ -180,7 +180,6 @@ document.documentElement.setAttribute("data-js", "true");
     { name: "Signature Maker", type: "Tool", icon: "✍️", cat: "image", href: "tools/signature-maker" },
     { name: "PDF Redactor", type: "Tool", icon: "⬛", cat: "pdf", href: "tools/pdf-redactor" },
     { name: "Fancy Text Generator", type: "Tool", icon: "✨", cat: "text", href: "tools/fancy-text-generator" },
-    { name: "Invisible Character Generator", type: "Tool", icon: "⬜", cat: "text", href: "tools/invisible-character-generator" },
     { name: "ASCII Text Art Generator", type: "Tool", icon: "🔠", cat: "text", href: "tools/ascii-text-art-generator" },
     { name: "Color Palette Generator", type: "Tool", icon: "🌈", cat: "dev", href: "tools/color-palette-generator" },
     { name: "HTML Entity Encoder/Decoder", type: "Tool", icon: "🔤", cat: "dev", href: "tools/html-entity-encoder" },
