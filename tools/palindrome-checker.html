@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Palindrome Checker Online | Fixoona</title>
+  <meta name="description" content="Check if a word, phrase, or number is a palindrome online for free — ignores spaces, punctuation, and capitalization automatically. No sign-up." />
+  <meta name="keywords" content="palindrome checker, is this a palindrome, palindrome tester free" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/palindrome-checker" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Palindrome Checker" />
+  <meta property="og:description" content="Check if a word or phrase is a palindrome, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/palindrome-checker" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Palindrome Checker" />
+  <meta name="twitter:description" content="Check if a word or phrase is a palindrome, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Palindrome Checker",
+    "url": "https://fixoona.com/tools/palindrome-checker",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Palindrome Checker", "item": "https://fixoona.com/tools/palindrome-checker" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What counts as a palindrome here?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Any text that reads the same forwards and backwards once spaces, punctuation, and capitalization are ignored — so \"A man, a plan, a canal: Panama\" counts as a palindrome, the same way it would if you were checking it by hand." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it work for numbers too?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — a number like 12321 is checked the same way, digit by digit, since digits are treated just like letters for this comparison." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why are spaces and punctuation ignored?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Classic palindrome phrases are traditionally judged on their letters alone — \"Never odd or even\" is considered a palindrome even though the spaces themselves obviously aren't symmetric, only the letters are." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my text sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the check happens entirely in your browser using JavaScript, so nothing you type is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .pal-result { text-align: center; padding: 20px; }
+    .pal-result-icon { font-size: 2.5rem; }
+    .pal-result-text { font-family: var(--font-display, sans-serif); font-size: 1.4rem; font-weight: 800; margin-top: 6px; }
+    .pal-cleaned { font-family: var(--font-mono, monospace); color: var(--color-text-muted); margin-top: 8px; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Palindrome Checker</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🔁</div>
+      <h1>Palindrome Checker</h1>
+      <p>Check if a word, phrase, or number reads the same forwards and backwards.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="textInput">Text</label>
+          <input type="text" id="textInput" value="A man, a plan, a canal: Panama" />
+        </div>
+
+        <div class="pal-result" id="resultWrap">
+          <div class="pal-result-icon" id="resultIcon"></div>
+          <div class="pal-result-text" id="resultText"></div>
+          <div class="pal-cleaned" id="cleanedText"></div>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Check a Palindrome</h2>
+        <ol class="howto-steps">
+          <li>Type any word, phrase, or number.</li>
+          <li>The result appears instantly, ignoring spaces, punctuation, and case.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What counts as a palindrome here?</summary>
+          <p>Any text that reads the same forwards and backwards once spaces, punctuation, and capitalization are ignored — so "A man, a plan, a canal: Panama" counts as a palindrome, the same way it would if you were checking it by hand.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does it work for numbers too?</summary>
+          <p>Yes — a number like 12321 is checked the same way, digit by digit, since digits are treated just like letters for this comparison.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why are spaces and punctuation ignored?</summary>
+          <p>Classic palindrome phrases are traditionally judged on their letters alone — "Never odd or even" is considered a palindrome even though the spaces themselves obviously aren't symmetric, only the letters are.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my text sent anywhere?</summary>
+          <p>No — the check happens entirely in your browser using JavaScript, so nothing you type is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="word-unscrambler">
+            <span class="icon" aria-hidden="true">🔤</span>
+            <h3>Word Unscrambler & Anagram Solver</h3>
+            <p>Unscramble letters into real words.</p>
+          </a>
+          <a class="card" href="text-case-converter">
+            <span class="icon" aria-hidden="true">🔠</span>
+            <h3>Text Case Converter</h3>
+            <p>Convert text between different cases.</p>
+          </a>
+          <a class="card" href="character-counter">
+            <span class="icon" aria-hidden="true">🔢</span>
+            <h3>Character Counter</h3>
+            <p>Count characters in your text.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 150+ Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var textInput = document.getElementById("textInput");
+      var resultIcon = document.getElementById("resultIcon");
+      var resultText = document.getElementById("resultText");
+      var cleanedText = document.getElementById("cleanedText");
+
+      function check() {
+        var raw = textInput.value;
+        if (!raw.trim()) {
+          resultIcon.textContent = "";
+          resultText.textContent = "";
+          cleanedText.textContent = "";
+          return;
+        }
+        var cleaned = raw.toLowerCase().replace(/[^a-z0-9]/g, "");
+        var reversed = cleaned.split("").reverse().join("");
+        var isPalindrome = cleaned.length > 0 && cleaned === reversed;
+
+        resultIcon.textContent = isPalindrome ? "✅" : "❌";
+        resultText.textContent = isPalindrome ? "Yes, that's a palindrome!" : "No, that's not a palindrome.";
+        cleanedText.textContent = "Compared as: \"" + cleaned + "\"";
+      }
+
+      textInput.addEventListener("input", check);
+      check();
+    })();
+  </script>
+</body>
+</html>
