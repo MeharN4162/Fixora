@@ -286,14 +286,84 @@
         "Why did the tomato turn red? Because it saw the salad dressing.",
         "What's orange and sounds like a parrot? A carrot.",
         "Why can't you trust stairs? They're always up to something.",
-        "I told my wife she was drawing her eyebrows too high. She looked surprised."
+        "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+        "What do you call a factory that makes okay products? A satisfactory.",
+        "Why did the invisible man turn down the job offer? He couldn't see himself doing it.",
+        "What do you call a can opener that doesn't work? A can't opener.",
+        "Why did the picture go to jail? It was framed.",
+        "I'm reading a horror story in Braille. Something bad is about to happen, I can feel it.",
+        "What do you call a sleeping dinosaur? A dino-snore.",
+        "Why did the stadium get hot after the game? All of the fans left.",
+        "What do you call a pig that does karate? A pork chop.",
+        "I used to play piano by ear, but now I use my hands.",
+        "Why don't oysters donate to charity? Because they're shellfish.",
+        "What do you call a group of disorganized cats? A cat-astrophe.",
+        "Why did the scarecrow become a motivational speaker? He was outstanding in his field, too.",
+        "What do you call a fish wearing a bowtie? So-fish-ticated.",
+        "Why did the man put his money in the freezer? He wanted cold, hard cash.",
+        "I have a fear of speed bumps, but I'm slowly getting over it.",
+        "What do you call an alligator in a vest? An investigator.",
+        "Why did the belt get arrested? For holding up a pair of pants.",
+        "What do you call a lazy kangaroo? A pouch potato.",
+        "I used to be addicted to the hokey pokey, but I turned myself around.",
+        "Why did the cookie go to the doctor? Because it felt crummy.",
+        "What do you call a dog that can do magic? A labracadabrador.",
+        "Why don't skeletons ever go trick-or-treating? They have no body to go with.",
+        "What do you call a can of soup that doesn't work? Stock broken.",
+        "I bought some shoes from a drug dealer. I don't know what he laced them with, but I've been tripping all day.",
+        "Why did the golfer bring an extra pair of socks? In case he got a hole in one.",
+        "What do you call a boomerang that doesn't come back? A stick.",
+        "Why did the man run around his bed? He was trying to catch up on his sleep.",
+        "What do you call a fish with two knees? A two-knee fish.",
+        "Why don't melons get married? Because they cantaloupe.",
+        "What do you call a snowman with a six-pack? An abdominal snowman.",
+        "I told my doctor I broke my arm in two places. He told me to stop going to those places.",
+        "Why did the barber win the race? He knew a shortcut.",
+        "What do you call a very small valentine? A valen-tiny.",
+        "Why did the tree go to the dentist? It needed a root canal.",
+        "What do you call a droid that takes the long way around? R2 detour.",
+        "Why do bees have sticky hair? Because they use honeycombs.",
+        "What do you call a computer that sings? A Dell.",
+        "I was going to tell a time-traveling joke, but you guys didn't like it.",
+        "Why did the crab never share? Because he's shellfish.",
+        "What do you call a nervous javelin thrower? Shakespeare.",
+        "Why did the football coach go to the bank? To get his quarterback.",
+        "What do you call a cow with no legs? Ground beef.",
+        "I only know one joke about a pizza, but it's a little cheesy.",
+        "Why did the orange stop rolling down the hill? It ran out of juice.",
+        "What do you call a magician's dog? A labracadabrador.",
+        "Why did the student eat his homework? Because the teacher said it was a piece of cake.",
+        "What do you call a fake noodle? An impasta, again.",
+        "Why did the bike stand up by itself? It was two tired to fall over.",
+        "What do you call an elephant that doesn't matter? An irrelephant.",
+        "Why did the gym close down? It just didn't work out.",
+        "What do you call a duck that gets all A's? A wise quacker.",
+        "I'm on a roll this week. I've already eaten three of them.",
+        "Why did the smartphone go to therapy? It lost its contacts.",
+        "What do you call a pile of cats? A meow-ntain.",
+        "Why did the baker stop making donuts? He was tired of the hole business.",
+        "What do you call two octopuses that look the same? Itenticle.",
+        "Why don't seagulls fly over the bay? Because then they'd be bagels.",
+        "What do you call a dinosaur with an extensive vocabulary? A thesaurus.",
+        "I used to work at a calendar factory, but I got fired for taking a day off.",
+        "Why did the man name his dogs Rolex and Timex? Because they were watch dogs.",
+        "What do you call a sad cup of coffee? A depresso.",
+        "Why did the light bulb fail school? It wasn't very bright.",
+        "What do you call a group of musical whales? An orca-stra.",
+        "Why did the banana go to the doctor? It wasn't peeling well.",
+        "What do you call a bear caught in the rain? A drizzly bear.",
+        "I couldn't figure out how the seatbelt worked, then it just clicked.",
+        "Why did the pony get sent to its room? It wouldn't stop horsing around.",
+        "What do you call a fish that needs help with music? Auto-tuna.",
+        "Why did the calendar feel confident? Its days were numbered, but it made every one count."
       ];
 
       var jokeText = document.getElementById("jokeText");
       var newJokeBtn = document.getElementById("newJokeBtn");
       var copyBtn = document.getElementById("copyBtn");
       var copyNote = document.getElementById("copyNote");
-      var lastIndex = -1;
+      var bag = [];
+      var lastShown = -1;
 
       function secureRandomInt(maxExclusive) {
         var arr = new Uint32Array(1);
@@ -303,10 +373,22 @@
         return val % maxExclusive;
       }
 
+      function refillBag() {
+        bag = JOKES.map(function (_, i) { return i; });
+        for (var i = bag.length - 1; i > 0; i--) {
+          var j = secureRandomInt(i + 1);
+          var tmp = bag[i]; bag[i] = bag[j]; bag[j] = tmp;
+        }
+        if (bag.length > 1 && bag[0] === lastShown) {
+          var swapWith = 1 + secureRandomInt(bag.length - 1);
+          var t = bag[0]; bag[0] = bag[swapWith]; bag[swapWith] = t;
+        }
+      }
+
       function showJoke() {
-        var idx = secureRandomInt(JOKES.length);
-        while (idx === lastIndex) idx = secureRandomInt(JOKES.length);
-        lastIndex = idx;
+        if (bag.length === 0) refillBag();
+        var idx = bag.shift();
+        lastShown = idx;
         jokeText.textContent = JOKES[idx];
         copyNote.textContent = "";
       }
