@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Statistics Calculator Online — Mean, Median, Mode, Std Dev | Fixoona</title>
+  <meta name="description" content="Calculate mean, median, mode, range, variance, and standard deviation from a list of numbers online for free — both population and sample statistics. No sign-up." />
+  <meta name="keywords" content="statistics calculator, standard deviation calculator, mean median mode calculator, variance calculator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/statistics-calculator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Statistics Calculator" />
+  <meta property="og:description" content="Calculate mean, median, mode, variance, and standard deviation from a list of numbers, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/statistics-calculator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Statistics Calculator" />
+  <meta name="twitter:description" content="Calculate mean, median, mode, variance, and standard deviation from a list of numbers, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Statistics Calculator",
+    "url": "https://fixoona.com/tools/statistics-calculator",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Statistics Calculator", "item": "https://fixoona.com/tools/statistics-calculator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What's the difference between population and sample standard deviation?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Population standard deviation divides the sum of squared differences from the mean by the total count (n), and is correct when your numbers are the entire group you care about. Sample standard deviation divides by n−1 instead, which corrects for the bias that comes from estimating a larger population from just a sample of it — use this one if your numbers are a sample drawn from a bigger group." }
+      },
+      {
+        "@type": "Question",
+        "name": "What if there's more than one mode, or no mode at all?",
+        "acceptedAnswer": { "@type": "Answer", "text": "If two or more values are tied for the highest frequency, all of them are shown as the mode (a \"multimodal\" dataset). If every value appears exactly once, there is no meaningful mode and the tool shows \"No mode.\"" }
+      },
+      {
+        "@type": "Question",
+        "name": "How is the median calculated for an even number of values?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The numbers are sorted, and for an even count the median is the average of the two middle values; for an odd count it's simply the single middle value after sorting." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — every calculation happens entirely in your browser using JavaScript, so the numbers you enter are never sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 18px; }
+    .stats-stat { background: var(--color-bg-alt); border-radius: var(--radius-md, 10px); padding: 14px; text-align: center; }
+    .stats-stat strong { display: block; font-size: 1.3rem; font-family: "Space Grotesk", sans-serif; color: var(--color-primary); }
+    .stats-stat span { font-size: 0.78rem; color: var(--color-text-muted); }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Statistics Calculator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">📊</div>
+      <h1>Statistics Calculator</h1>
+      <p>Find the mean, median, mode, range, variance, and standard deviation of any list of numbers.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="numbersInput">Numbers (comma, space, or newline separated)</label>
+          <textarea id="numbersInput" style="min-height:110px;">2, 4, 4, 4, 5, 5, 7, 9</textarea>
+        </div>
+
+        <div class="output-box" id="statusBox"></div>
+
+        <div class="stats-grid" id="statsGrid" style="display:none;">
+          <div class="stats-stat"><strong id="statCount">-</strong><span>Count</span></div>
+          <div class="stats-stat"><strong id="statSum">-</strong><span>Sum</span></div>
+          <div class="stats-stat"><strong id="statMean">-</strong><span>Mean</span></div>
+          <div class="stats-stat"><strong id="statMedian">-</strong><span>Median</span></div>
+          <div class="stats-stat"><strong id="statMode">-</strong><span>Mode</span></div>
+          <div class="stats-stat"><strong id="statMin">-</strong><span>Min</span></div>
+          <div class="stats-stat"><strong id="statMax">-</strong><span>Max</span></div>
+          <div class="stats-stat"><strong id="statRange">-</strong><span>Range</span></div>
+          <div class="stats-stat"><strong id="statPopVar">-</strong><span>Population Variance</span></div>
+          <div class="stats-stat"><strong id="statPopStd">-</strong><span>Population Std Dev</span></div>
+          <div class="stats-stat"><strong id="statSampleVar">-</strong><span>Sample Variance</span></div>
+          <div class="stats-stat"><strong id="statSampleStd">-</strong><span>Sample Std Dev</span></div>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Use the Statistics Calculator</h2>
+        <ol class="howto-steps">
+          <li>Enter your numbers, separated by commas, spaces, or line breaks.</li>
+          <li>Every statistic updates instantly as you type.</li>
+          <li>Use population statistics if your numbers are the whole group; use sample statistics if they're a sample from a larger group.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What's the difference between population and sample standard deviation?</summary>
+          <p>Population standard deviation divides the sum of squared differences from the mean by the total count (n), and is correct when your numbers are the entire group you care about. Sample standard deviation divides by n−1 instead, which corrects for the bias that comes from estimating a larger population from just a sample of it — use this one if your numbers are a sample drawn from a bigger group.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What if there's more than one mode, or no mode at all?</summary>
+          <p>If two or more values are tied for the highest frequency, all of them are shown as the mode (a "multimodal" dataset). If every value appears exactly once, there is no meaningful mode and the tool shows "No mode."</p>
+        </details>
+        <details class="faq-item">
+          <summary>How is the median calculated for an even number of values?</summary>
+          <p>The numbers are sorted, and for an even count the median is the average of the two middle values; for an odd count it's simply the single middle value after sorting.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my data sent anywhere?</summary>
+          <p>No — every calculation happens entirely in your browser using JavaScript, so the numbers you enter are never sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="percentage-calculator">
+            <span class="icon" aria-hidden="true">💯</span>
+            <h3>Percentage Calculator</h3>
+            <p>Calculate percentages, increases, and decreases.</p>
+          </a>
+          <a class="card" href="gpa-calculator">
+            <span class="icon" aria-hidden="true">🎓</span>
+            <h3>GPA Calculator</h3>
+            <p>Calculate your weighted GPA from your grades.</p>
+          </a>
+          <a class="card" href="random-number-generator">
+            <span class="icon" aria-hidden="true">🔢</span>
+            <h3>Random Number Generator</h3>
+            <p>Generate random numbers in any range.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 173 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var numbersInput = document.getElementById("numbersInput");
+      var statusBox = document.getElementById("statusBox");
+      var statsGrid = document.getElementById("statsGrid");
+
+      function fmt(n) {
+        var rounded = Math.round(n * 10000) / 10000;
+        return String(rounded);
+      }
+
+      function calculate() {
+        var parts = numbersInput.value.split(/[\s,]+/).map(function (s) { return s.trim(); }).filter(Boolean);
+        var numbers = parts.map(Number);
+
+        if (numbers.length === 0 || numbers.some(isNaN)) {
+          statusBox.textContent = "Enter a list of numbers to see statistics.";
+          statsGrid.style.display = "none";
+          return;
+        }
+
+        var n = numbers.length;
+        var sum = numbers.reduce(function (a, b) { return a + b; }, 0);
+        var mean = sum / n;
+        var sorted = numbers.slice().sort(function (a, b) { return a - b; });
+        var median = n % 2 === 0 ? (sorted[n / 2 - 1] + sorted[n / 2]) / 2 : sorted[(n - 1) / 2];
+        var min = sorted[0];
+        var max = sorted[n - 1];
+        var range = max - min;
+
+        var freq = {};
+        numbers.forEach(function (v) { freq[v] = (freq[v] || 0) + 1; });
+        var maxFreq = Math.max.apply(null, Object.keys(freq).map(function (k) { return freq[k]; }));
+        var modes = Object.keys(freq).filter(function (k) { return freq[k] === maxFreq; }).map(Number).sort(function (a, b) { return a - b; });
+        var modeText = maxFreq === 1 ? "No mode" : modes.join(", ");
+
+        var sqDiffSum = numbers.reduce(function (a, b) { return a + Math.pow(b - mean, 2); }, 0);
+        var popVariance = sqDiffSum / n;
+        var popStd = Math.sqrt(popVariance);
+        var sampleVariance = n > 1 ? sqDiffSum / (n - 1) : 0;
+        var sampleStd = Math.sqrt(sampleVariance);
+
+        document.getElementById("statCount").textContent = n;
+        document.getElementById("statSum").textContent = fmt(sum);
+        document.getElementById("statMean").textContent = fmt(mean);
+        document.getElementById("statMedian").textContent = fmt(median);
+        document.getElementById("statMode").textContent = modeText;
+        document.getElementById("statMin").textContent = fmt(min);
+        document.getElementById("statMax").textContent = fmt(max);
+        document.getElementById("statRange").textContent = fmt(range);
+        document.getElementById("statPopVar").textContent = fmt(popVariance);
+        document.getElementById("statPopStd").textContent = fmt(popStd);
+        document.getElementById("statSampleVar").textContent = n > 1 ? fmt(sampleVariance) : "n/a";
+        document.getElementById("statSampleStd").textContent = n > 1 ? fmt(sampleStd) : "n/a";
+
+        statusBox.textContent = "";
+        statsGrid.style.display = "grid";
+      }
+
+      numbersInput.addEventListener("input", calculate);
+      calculate();
+    })();
+  </script>
+</body>
+</html>

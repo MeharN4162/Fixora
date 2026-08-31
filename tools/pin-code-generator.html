@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free PIN Code Generator Online — Secure Random PINs | Fixoona</title>
+  <meta name="description" content="Generate secure, truly random numeric PIN codes online for free — pick a length from 4 to 12 digits, optionally avoid repeating or sequential digits. No sign-up." />
+  <meta name="keywords" content="pin generator, random pin code generator, 4 digit pin generator, 6 digit pin generator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/pin-code-generator" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free PIN Code Generator" />
+  <meta property="og:description" content="Generate secure, random numeric PIN codes of any length, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/pin-code-generator" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free PIN Code Generator" />
+  <meta name="twitter:description" content="Generate secure, random numeric PIN codes of any length, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PIN Code Generator",
+    "url": "https://fixoona.com/tools/pin-code-generator",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "PIN Code Generator", "item": "https://fixoona.com/tools/pin-code-generator" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is this PIN generator actually secure?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — every digit is produced with the Web Crypto API's crypto.getRandomValues(), the same cryptographically secure random source browsers use for security-sensitive code, using rejection sampling so every digit 0–9 is equally likely with no bias. Nothing is generated with Math.random(), which is not designed to be unpredictable." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does \"avoid repeating digits\" do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It regenerates the PIN if any single digit repeats anywhere in it — useful if you want a PIN that's easier to enter correctly without hitting the same key twice in a row's exact digit, though it does slightly reduce the total possible combinations." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does \"avoid sequential digits\" do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It rejects PINs containing an ascending or descending run of 3 or more digits in a row (like 123 or 987), since sequences like these are among the first patterns attackers try when guessing PINs." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my PIN sent anywhere or stored?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — generation happens entirely in your browser using JavaScript, and nothing is saved or transmitted. Closing or refreshing the page discards it completely." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .pin-display {
+      font-family: "Space Grotesk", monospace;
+      font-size: 2.6rem;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-align: center;
+      padding: 28px 20px;
+      background: var(--color-bg-alt);
+      border-radius: var(--radius-md, 12px);
+      color: var(--color-primary);
+      word-break: break-all;
+    }
+    .pin-controls { display: flex; flex-direction: column; gap: 14px; margin-top: 18px; }
+    .pin-length-row { display: flex; align-items: center; gap: 12px; }
+    .pin-length-row input[type="range"] { flex: 1; }
+    .pin-length-value {
+      min-width: 44px;
+      text-align: center;
+      font-weight: 700;
+      background: var(--color-bg-alt);
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+    .pin-check-row { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
+    .pin-actions { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+    .pin-actions .btn { flex: 1; min-width: 140px; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>PIN Code Generator</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🔢</div>
+      <h1>PIN Code Generator</h1>
+      <p>Generate a secure, truly random numeric PIN code of any length.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="pin-display" id="pinDisplay">----</div>
+
+        <div class="pin-controls">
+          <div class="pin-length-row">
+            <label for="lengthRange" style="min-width:70px;">Length</label>
+            <input type="range" id="lengthRange" min="4" max="12" value="6" />
+            <span class="pin-length-value" id="lengthValue">6</span>
+          </div>
+          <label class="pin-check-row"><input type="checkbox" id="noRepeat" /> Avoid repeating digits <span id="noRepeatHint" class="copy-note" style="display:none;">(only possible up to 10 digits)</span></label>
+          <label class="pin-check-row"><input type="checkbox" id="noSequential" /> Avoid sequential digits (like 123 or 987)</label>
+        </div>
+
+        <div class="pin-actions">
+          <button class="btn btn-primary" id="generateBtn">🎲 Generate New PIN</button>
+          <button class="btn btn-secondary" id="copyBtn">Copy PIN</button>
+        </div>
+        <div class="copy-note" id="copyNote"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Generate a PIN Code</h2>
+        <ol class="howto-steps">
+          <li>Choose your PIN length with the slider, from 4 to 12 digits.</li>
+          <li>Optionally turn on "Avoid repeating digits" or "Avoid sequential digits" for stricter rules.</li>
+          <li>Click "Generate New PIN" for a fresh one anytime, or "Copy PIN" to copy it.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>Is this PIN generator actually secure?</summary>
+          <p>Yes — every digit is produced with the Web Crypto API's crypto.getRandomValues(), the same cryptographically secure random source browsers use for security-sensitive code, using rejection sampling so every digit 0–9 is equally likely with no bias. Nothing is generated with Math.random(), which is not designed to be unpredictable.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does "avoid repeating digits" do?</summary>
+          <p>It regenerates the PIN if any single digit repeats anywhere in it — useful if you want a PIN that's easier to enter correctly without hitting the same key twice in a row's exact digit, though it does slightly reduce the total possible combinations.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does "avoid sequential digits" do?</summary>
+          <p>It rejects PINs containing an ascending or descending run of 3 or more digits in a row (like 123 or 987), since sequences like these are among the first patterns attackers try when guessing PINs.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my PIN sent anywhere or stored?</summary>
+          <p>No — generation happens entirely in your browser using JavaScript, and nothing is saved or transmitted. Closing or refreshing the page discards it completely.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="password-generator">
+            <span class="icon" aria-hidden="true">🔐</span>
+            <h3>Password Generator</h3>
+            <p>Create strong, random passwords instantly.</p>
+          </a>
+          <a class="card" href="passphrase-generator">
+            <span class="icon" aria-hidden="true">🎲</span>
+            <h3>Passphrase Generator</h3>
+            <p>Generate memorable, secure word-based passphrases.</p>
+          </a>
+          <a class="card" href="uuid-generator">
+            <span class="icon" aria-hidden="true">🆔</span>
+            <h3>UUID Generator</h3>
+            <p>Generate unique identifiers (UUID v4).</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 173 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var pinDisplay = document.getElementById("pinDisplay");
+      var lengthRange = document.getElementById("lengthRange");
+      var lengthValue = document.getElementById("lengthValue");
+      var noRepeat = document.getElementById("noRepeat");
+      var noSequential = document.getElementById("noSequential");
+      var generateBtn = document.getElementById("generateBtn");
+      var copyBtn = document.getElementById("copyBtn");
+      var copyNote = document.getElementById("copyNote");
+      var noRepeatHint = document.getElementById("noRepeatHint");
+
+      function secureDigit() {
+        var arr = new Uint32Array(1);
+        var max = Math.floor(4294967296 / 10) * 10;
+        var val;
+        do { crypto.getRandomValues(arr); val = arr[0]; } while (val >= max);
+        return val % 10;
+      }
+
+      function hasRepeat(digits) {
+        return new Set(digits).size !== digits.length;
+      }
+
+      function hasSequential(digits) {
+        for (var i = 0; i < digits.length - 2; i++) {
+          var a = digits[i], b = digits[i + 1], c = digits[i + 2];
+          if ((b === a + 1 && c === b + 1) || (b === a - 1 && c === b - 1)) return true;
+        }
+        return false;
+      }
+
+      function generate() {
+        var length = parseInt(lengthRange.value, 10);
+        var effectiveNoRepeat = noRepeat.checked && length <= 10;
+        var digits, attempts = 0;
+        do {
+          digits = [];
+          for (var i = 0; i < length; i++) digits.push(secureDigit());
+          attempts++;
+        } while (attempts < 500 && ((effectiveNoRepeat && hasRepeat(digits)) || (noSequential.checked && hasSequential(digits))));
+
+        pinDisplay.textContent = digits.join("");
+        copyNote.textContent = "";
+      }
+
+      function syncNoRepeatAvailability() {
+        var length = parseInt(lengthRange.value, 10);
+        var tooLong = length > 10;
+        noRepeat.disabled = tooLong;
+        noRepeatHint.style.display = tooLong ? "inline" : "none";
+      }
+
+      lengthRange.addEventListener("input", function () {
+        lengthValue.textContent = lengthRange.value;
+        syncNoRepeatAvailability();
+        generate();
+      });
+      noRepeat.addEventListener("change", generate);
+      noSequential.addEventListener("change", generate);
+      generateBtn.addEventListener("click", generate);
+      copyBtn.addEventListener("click", function () {
+        Fixora.copyText(pinDisplay.textContent, copyNote);
+      });
+
+      syncNoRepeatAvailability();
+      generate();
+    })();
+  </script>
+</body>
+</html>

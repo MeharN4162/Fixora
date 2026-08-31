@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Line Sorter & Randomizer Online | Fixoona</title>
+  <meta name="description" content="Sort lines of text alphabetically, by length, or numerically, shuffle them randomly, or remove duplicates and blank lines — all online for free. No sign-up." />
+  <meta name="keywords" content="line sorter, sort lines alphabetically, randomize lines online, text list sorter" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/line-sorter" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Line Sorter & Randomizer" />
+  <meta property="og:description" content="Sort, shuffle, or de-duplicate lines of text, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/line-sorter" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Line Sorter & Randomizer" />
+  <meta name="twitter:description" content="Sort, shuffle, or de-duplicate lines of text, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Line Sorter & Randomizer",
+    "url": "https://fixoona.com/tools/line-sorter",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Line Sorter & Randomizer", "item": "https://fixoona.com/tools/line-sorter" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does the numeric sort work if my lines aren't all numbers?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Lines are compared by the first number found at the start of each line; lines with no leading number are treated as the lowest value and sorted to the top. This is useful for lists like \"12 apples\" or \"3. Item three\" where you want numeric rather than alphabetical order (which would otherwise put \"10\" before \"2\")." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is shuffling actually randomized?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It uses the Fisher-Yates shuffle algorithm, which produces a genuinely uniform random permutation, powered by the Web Crypto API's crypto.getRandomValues() rather than Math.random() for better randomness quality." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is removing duplicates case-sensitive?",
+        "acceptedAnswer": { "@type": "Answer", "text": "By default yes — \"Apple\" and \"apple\" are treated as different lines. Turn on \"Ignore case\" to treat them as duplicates regardless of capitalization, keeping only the first occurrence." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my text sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — all sorting, shuffling, and de-duplication happens entirely in your browser using JavaScript, so your text is never sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .ls-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .ls-actions .btn { flex: 1; min-width: 140px; }
+    .ls-options { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 14px; font-size: 0.9rem; }
+    .ls-options label { display: flex; align-items: center; gap: 6px; }
+    .ls-footer-row { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; flex-wrap: wrap; gap: 8px; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Line Sorter & Randomizer</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">🔀</div>
+      <h1>Line Sorter & Randomizer</h1>
+      <p>Sort, shuffle, or de-duplicate a list of lines instantly.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="inputText">Text (one item per line)</label>
+          <textarea id="inputText" style="min-height:180px;">Banana
+apple
+Cherry
+apple
+10 Grapes
+2 Mangoes</textarea>
+        </div>
+
+        <div class="ls-options">
+          <label><input type="checkbox" id="ignoreCase" /> Ignore case when sorting/dedupe</label>
+          <label><input type="checkbox" id="trimBlank" checked /> Remove blank lines</label>
+        </div>
+
+        <div class="ls-actions">
+          <button class="btn btn-primary" id="sortAzBtn">Sort A → Z</button>
+          <button class="btn btn-primary" id="sortZaBtn">Sort Z → A</button>
+          <button class="btn btn-secondary" id="sortLenBtn">Sort by Length</button>
+          <button class="btn btn-secondary" id="sortNumBtn">Sort Numerically</button>
+          <button class="btn btn-secondary" id="shuffleBtn">🎲 Shuffle</button>
+          <button class="btn btn-secondary" id="dedupeBtn">Remove Duplicates</button>
+          <button class="btn btn-secondary" id="reverseBtn">Reverse Order</button>
+        </div>
+
+        <div class="ls-footer-row">
+          <span class="copy-note" id="lineCount"></span>
+          <span style="display:flex;align-items:center;gap:10px;">
+            <span class="copy-note" id="copyNote"></span>
+            <button class="btn btn-secondary" id="copyBtn">Copy Result</button>
+          </span>
+        </div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Sort or Randomize Lines</h2>
+        <ol class="howto-steps">
+          <li>Paste your list, one item per line, into the box.</li>
+          <li>Click any button to sort alphabetically, by length, numerically, shuffle randomly, remove duplicates, or reverse the order.</li>
+          <li>Copy the result with the "Copy Result" button.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>How does the numeric sort work if my lines aren't all numbers?</summary>
+          <p>Lines are compared by the first number found at the start of each line; lines with no leading number are treated as the lowest value and sorted to the top. This is useful for lists like "12 apples" or "3. Item three" where you want numeric rather than alphabetical order (which would otherwise put "10" before "2").</p>
+        </details>
+        <details class="faq-item">
+          <summary>How is shuffling actually randomized?</summary>
+          <p>It uses the Fisher-Yates shuffle algorithm, which produces a genuinely uniform random permutation, powered by the Web Crypto API's crypto.getRandomValues() rather than Math.random() for better randomness quality.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is removing duplicates case-sensitive?</summary>
+          <p>By default yes — "Apple" and "apple" are treated as different lines. Turn on "Ignore case" to treat them as duplicates regardless of capitalization, keeping only the first occurrence.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my text sent anywhere?</summary>
+          <p>No — all sorting, shuffling, and de-duplication happens entirely in your browser using JavaScript, so your text is never sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="remove-duplicate-lines">
+            <span class="icon" aria-hidden="true">🧹</span>
+            <h3>Duplicate Line Remover</h3>
+            <p>Remove duplicate lines from a text list.</p>
+          </a>
+          <a class="card" href="text-diff-checker">
+            <span class="icon" aria-hidden="true">🔍</span>
+            <h3>Text Diff Checker</h3>
+            <p>Compare two blocks of text and see differences.</p>
+          </a>
+          <a class="card" href="find-and-replace">
+            <span class="icon" aria-hidden="true">🔎</span>
+            <h3>Find and Replace Text Tool</h3>
+            <p>Bulk find and replace text, with regex support.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 173 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var inputText = document.getElementById("inputText");
+      var ignoreCase = document.getElementById("ignoreCase");
+      var trimBlank = document.getElementById("trimBlank");
+      var lineCount = document.getElementById("lineCount");
+      var copyBtn = document.getElementById("copyBtn");
+      var copyNote = document.getElementById("copyNote");
+
+      function getLines() {
+        var lines = inputText.value.split("\n");
+        if (trimBlank.checked) lines = lines.filter(function (l) { return l.trim() !== ""; });
+        return lines;
+      }
+
+      function setLines(lines) {
+        inputText.value = lines.join("\n");
+        updateCount();
+      }
+
+      function updateCount() {
+        var lines = inputText.value.split("\n").filter(function (l) { return l.trim() !== ""; });
+        lineCount.textContent = lines.length + " line" + (lines.length === 1 ? "" : "s") + ".";
+      }
+
+      function cmp(a, b) {
+        var x = ignoreCase.checked ? a.toLowerCase() : a;
+        var y = ignoreCase.checked ? b.toLowerCase() : b;
+        return x < y ? -1 : x > y ? 1 : 0;
+      }
+
+      function secureRandomInt(max) {
+        var arr = new Uint32Array(1);
+        var limit = Math.floor(4294967296 / max) * max;
+        var val;
+        do { crypto.getRandomValues(arr); val = arr[0]; } while (val >= limit);
+        return val % max;
+      }
+
+      document.getElementById("sortAzBtn").addEventListener("click", function () {
+        setLines(getLines().sort(cmp));
+      });
+      document.getElementById("sortZaBtn").addEventListener("click", function () {
+        setLines(getLines().sort(cmp).reverse());
+      });
+      document.getElementById("sortLenBtn").addEventListener("click", function () {
+        setLines(getLines().sort(function (a, b) { return a.length - b.length; }));
+      });
+      function firstNumber(s) {
+        var m = s.match(/-?\d+(\.\d+)?/);
+        return m ? parseFloat(m[0]) : -Infinity;
+      }
+      document.getElementById("sortNumBtn").addEventListener("click", function () {
+        setLines(getLines().sort(function (a, b) { return firstNumber(a) - firstNumber(b); }));
+      });
+      document.getElementById("shuffleBtn").addEventListener("click", function () {
+        var lines = getLines();
+        for (var i = lines.length - 1; i > 0; i--) {
+          var j = secureRandomInt(i + 1);
+          var tmp = lines[i]; lines[i] = lines[j]; lines[j] = tmp;
+        }
+        setLines(lines);
+      });
+      document.getElementById("dedupeBtn").addEventListener("click", function () {
+        var lines = getLines();
+        var seen = {};
+        var result = [];
+        lines.forEach(function (l) {
+          var key = ignoreCase.checked ? l.toLowerCase() : l;
+          if (!seen[key]) { seen[key] = true; result.push(l); }
+        });
+        setLines(result);
+      });
+      document.getElementById("reverseBtn").addEventListener("click", function () {
+        setLines(getLines().reverse());
+      });
+      copyBtn.addEventListener("click", function () {
+        Fixora.copyText(inputText.value, copyNote);
+      });
+
+      inputText.addEventListener("input", updateCount);
+      updateCount();
+    })();
+  </script>
+</body>
+</html>

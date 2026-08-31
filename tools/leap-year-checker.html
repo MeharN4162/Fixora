@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Leap Year Checker Online — Is It a Leap Year? | Fixoona</title>
+  <meta name="description" content="Check if any year is a leap year, and list every leap year in a range, using the exact Gregorian calendar rule. Free, no sign-up." />
+  <meta name="keywords" content="leap year checker, is this a leap year, leap year calculator, list of leap years" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/tools/leap-year-checker" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Free Leap Year Checker" />
+  <meta property="og:description" content="Check if a year is a leap year and list leap years in any range, free." />
+  <meta property="og:url" content="https://fixoona.com/tools/leap-year-checker" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Leap Year Checker" />
+  <meta name="twitter:description" content="Check if a year is a leap year and list leap years in any range, free." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Leap Year Checker",
+    "url": "https://fixoona.com/tools/leap-year-checker",
+    "applicationCategory": "Utility",
+    "operatingSystem": "Any (Web Browser)",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://fixoona.com/#tools" },
+      { "@type": "ListItem", "position": 3, "name": "Leap Year Checker", "item": "https://fixoona.com/tools/leap-year-checker" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the exact rule for a leap year?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A year is a leap year if it's divisible by 4, unless it's also divisible by 100 — in which case it's only a leap year if it's also divisible by 400. This is why 2000 was a leap year but 1900 and 2100 are not, even though all three are divisible by 4." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do we need leap years at all?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Earth's orbit around the sun takes about 365.2422 days, not exactly 365. Adding a leap day roughly every 4 years keeps the calendar synced with the seasons; the extra 100/400-year exceptions correct for that 365.2422 figure being slightly less than 365.25, so leap years aren't added quite as often as a simple \"every 4 years\" rule would suggest." }
+      },
+      {
+        "@type": "Question",
+        "name": "How many days are in February during a leap year?",
+        "acceptedAnswer": { "@type": "Answer", "text": "29 days instead of the usual 28 — that extra day, February 29th, is the leap day itself." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the check runs entirely in your browser using JavaScript, so nothing you enter is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .leap-result {
+      text-align: center;
+      padding: 24px 20px;
+      border-radius: var(--radius-md, 12px);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-top: 16px;
+    }
+    .leap-result.is-leap { background: rgba(16, 163, 74, 0.12); color: #10a34a; }
+    .leap-result.not-leap { background: var(--color-bg-alt); color: var(--color-text-muted); }
+    .leap-result span.leap-sub { display: block; font-size: 0.85rem; font-weight: 500; margin-top: 6px; opacity: 0.85; }
+    .leap-range-row { display: flex; gap: 12px; align-items: end; margin-top: 22px; flex-wrap: wrap; }
+    .leap-range-row .field { flex: 1; min-width: 120px; margin: 0; }
+    .leap-years-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .leap-years-list span {
+      background: var(--color-bg-alt);
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: "Space Grotesk", sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../index#guides">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../index#tools">Tools</a><span class="sep">/</span>
+        <span>Leap Year Checker</span>
+      </nav>
+    </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">📅</div>
+      <h1>Leap Year Checker</h1>
+      <p>Check if any year is a leap year, or list every leap year in a range.</p>
+    </section>
+
+    <section class="container">
+      <div class="tool-panel">
+        <div class="field">
+          <label for="yearInput">Year</label>
+          <input type="number" id="yearInput" value="2026" step="1" />
+        </div>
+        <div class="leap-result" id="leapResult"></div>
+
+        <div class="leap-range-row">
+          <div class="field">
+            <label for="rangeStart">List leap years from</label>
+            <input type="number" id="rangeStart" value="2020" step="1" />
+          </div>
+          <div class="field">
+            <label for="rangeEnd">to</label>
+            <input type="number" id="rangeEnd" value="2040" step="1" />
+          </div>
+        </div>
+        <div class="output-box" id="rangeStatus"></div>
+        <div class="leap-years-list" id="rangeList"></div>
+      </div>
+
+      <div class="howto">
+        <h2>How to Check a Leap Year</h2>
+        <ol class="howto-steps">
+          <li>Enter any year to instantly see if it's a leap year.</li>
+          <li>Enter a start and end year to list every leap year in that range.</li>
+        </ol>
+      </div>
+
+      <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <details class="faq-item">
+          <summary>What is the exact rule for a leap year?</summary>
+          <p>A year is a leap year if it's divisible by 4, unless it's also divisible by 100 — in which case it's only a leap year if it's also divisible by 400. This is why 2000 was a leap year but 1900 and 2100 are not, even though all three are divisible by 4.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why do we need leap years at all?</summary>
+          <p>Earth's orbit around the sun takes about 365.2422 days, not exactly 365. Adding a leap day roughly every 4 years keeps the calendar synced with the seasons; the extra 100/400-year exceptions correct for that 365.2422 figure being slightly less than 365.25, so leap years aren't added quite as often as a simple "every 4 years" rule would suggest.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How many days are in February during a leap year?</summary>
+          <p>29 days instead of the usual 28 — that extra day, February 29th, is the leap day itself.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my data sent anywhere?</summary>
+          <p>No — the check runs entirely in your browser using JavaScript, so nothing you enter is ever sent to a server.</p>
+        </details>
+      </div>
+
+      <div class="related">
+        <div class="section-head">
+          <div><h2>Related Tools & Guides</h2></div>
+        </div>
+        <div class="grid reveal-group">
+          <a class="card" href="date-difference-calculator">
+            <span class="icon" aria-hidden="true">📆</span>
+            <h3>Date Difference Calculator</h3>
+            <p>Calculate the days between two dates.</p>
+          </a>
+          <a class="card" href="business-days-calculator">
+            <span class="icon" aria-hidden="true">📈</span>
+            <h3>Business Days Calculator</h3>
+            <p>Count business days between two dates.</p>
+          </a>
+          <a class="card" href="age-calculator">
+            <span class="icon" aria-hidden="true">🎂</span>
+            <h3>Age Calculator</h3>
+            <p>Calculate exact age from a birth date.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="pdf-compressor">PDF Compressor</a></li>
+            <li><a href="image-resizer">Image Resizer</a></li>
+            <li><a href="word-counter">Word Counter</a></li>
+            <li><a href="password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 173 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="../blog/compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="../blog/image-format-guide">Image Formats</a></li>
+            <li><a href="../blog/strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../index#guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var yearInput = document.getElementById("yearInput");
+      var leapResult = document.getElementById("leapResult");
+      var rangeStart = document.getElementById("rangeStart");
+      var rangeEnd = document.getElementById("rangeEnd");
+      var rangeStatus = document.getElementById("rangeStatus");
+      var rangeList = document.getElementById("rangeList");
+
+      function isLeap(y) {
+        return (y % 4 === 0 && y % 100 !== 0) || (y % 400 === 0);
+      }
+
+      function checkYear() {
+        var y = parseInt(yearInput.value, 10);
+        if (isNaN(y)) {
+          leapResult.className = "leap-result not-leap";
+          leapResult.textContent = "Enter a valid year.";
+          return;
+        }
+        var leap = isLeap(y);
+        leapResult.className = "leap-result " + (leap ? "is-leap" : "not-leap");
+        leapResult.innerHTML = y + (leap ? " is a leap year 🎉" : " is not a leap year") +
+          '<span class="leap-sub">February has ' + (leap ? "29" : "28") + " days in " + y + ".</span>";
+      }
+
+      function checkRange() {
+        var start = parseInt(rangeStart.value, 10);
+        var end = parseInt(rangeEnd.value, 10);
+        if (isNaN(start) || isNaN(end)) {
+          rangeStatus.textContent = "Enter a valid start and end year.";
+          rangeList.innerHTML = "";
+          return;
+        }
+        if (start > end) { var tmp = start; start = end; end = tmp; }
+        if (end - start > 1000) {
+          rangeStatus.textContent = "Please keep the range to 1000 years or fewer.";
+          rangeList.innerHTML = "";
+          return;
+        }
+        var years = [];
+        for (var y = start; y <= end; y++) if (isLeap(y)) years.push(y);
+        rangeStatus.textContent = years.length + " leap year" + (years.length === 1 ? "" : "s") + " between " + start + " and " + end + ".";
+        rangeList.innerHTML = years.map(function (y) { return "<span>" + y + "</span>"; }).join("");
+      }
+
+      yearInput.addEventListener("input", checkYear);
+      rangeStart.addEventListener("input", checkRange);
+      rangeEnd.addEventListener("input", checkRange);
+
+      checkYear();
+      checkRange();
+    })();
+  </script>
+</body>
+</html>
