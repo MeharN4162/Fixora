@@ -373,7 +373,24 @@
         idea: "💡", warning: "⚠️", danger: "☠️", question: "❓", exclamation: "❗",
         alarm: "⏰", calendar: "📅", map: "🗺️", pin: "📍", location: "📍",
         bomb: "💣", gun: "🔫", knife: "🔪", sword: "⚔️", shield: "🛡️", target: "🎯",
-        diamond: "💎", ring: "💍", crystal: "🔮", magic: "✨"
+        diamond: "💎", ring: "💍", crystal: "🔮", magic: "✨",
+        // Colors
+        black: "⚫", white: "⚪", red: "🔴", blue: "🔵", green: "🟢", yellow: "🟡",
+        purple: "🟣", brown: "🟤", pink: "🩷", gray: "🩶", grey: "🩶",
+        // Body parts
+        eye: "👁️", eyes: "👀", nose: "👃", ear: "👂", ears: "👂", mouth: "👄",
+        hand: "✋", hands: "🙌", foot: "🦶", leg: "🦵", brain: "🧠",
+        // Irregular-plural singular bases (referenced by IRREGULAR_SINGULARS below)
+        goose: "🪿", child: "🧒", person: "🧑", tooth: "🦷",
+        // Common informal verbs
+        fart: "💨", farting: "💨", sneeze: "🤧", yawn: "🥱", wink: "😉", burp: "🤢",
+        kiss: "💋", punch: "👊", kick: "🦵", cheer: "📣",
+        // Common compound nouns (kept as explicit whole-word entries rather
+        // than generic suffix-matching, since naive suffix stripping creates
+        // false positives — e.g. "scar" ends in "car" but isn't one).
+        sportscar: "🏎️", racecar: "🏎️", taxicab: "🚕", policeman: "👮", policewoman: "👮",
+        snowman: "⛄", sunglasses: "🕶️", hat: "🎩", shirt: "👕", shoe: "👟", shoes: "👟",
+        wallet: "👛", backpack: "🎒", suitcase: "🧳"
       };
 
       // Words in EMOJI_MAP that describe (not name) something — when a number
@@ -387,7 +404,9 @@
         pretty: 1, beautiful: 1, strong: 1, weak: 1, brave: 1, loud: 1, quiet: 1,
         hungry: 1, little: 1, tiny: 1, small: 1, big: 1, huge: 1, giant: 1, large: 1,
         tall: 1, fast: 1, quick: 1, slow: 1, hot: 1, cold: 1, warm: 1, sweet: 1, sour: 1,
-        spicy: 1, bright: 1, dark: 1, colorful: 1, shiny: 1, wild: 1, rich: 1, poor: 1, round: 1
+        spicy: 1, bright: 1, dark: 1, colorful: 1, shiny: 1, wild: 1, rich: 1, poor: 1, round: 1,
+        black: 1, white: 1, red: 1, blue: 1, green: 1, yellow: 1, purple: 1, brown: 1,
+        pink: 1, gray: 1, grey: 1
       };
 
       var inputBox = document.getElementById("inputBox");
