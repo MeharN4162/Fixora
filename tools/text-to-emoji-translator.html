@@ -90,6 +90,11 @@
       },
       {
         "@type": "Question",
+        "name": "Does it handle possessives, like \"monkey's\"?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — \"monkey's\" correctly shows one monkey emoji (it's still grammatically singular, just possessive), while \"monkeys'\" shows two, matching the plural-without-a-number rule used everywhere else." }
+      },
+      {
+        "@type": "Question",
         "name": "What happens if I write a number before a word, like \"3 cars\"?",
         "acceptedAnswer": { "@type": "Answer", "text": "The emoji is repeated that many times instead of appearing once — \"3 cars\" becomes 🚗🚗🚗. This is capped at 20 repeats per number to keep the output readable, and \"0 (word)\" removes the word entirely rather than showing a misleading single emoji for a zero count. It also looks past descriptive words in between, so \"5 little monkeys\" becomes a single \"little\" emoji followed by five monkey emoji, rather than getting stuck on \"little\" and only translating one monkey." }
       },
@@ -201,6 +206,10 @@
           <p>Yes — number words from "zero" through "twenty" work exactly like typing the digit, including with descriptive words in between, so "five little monkeys" and "5 little monkeys" produce the same result.</p>
         </details>
         <details class="faq-item">
+          <summary>Does it handle possessives, like "monkey's"?</summary>
+          <p>Yes — "monkey's" correctly shows one monkey emoji (it's still grammatically singular, just possessive), while "monkeys'" shows two, matching the plural-without-a-number rule used everywhere else.</p>
+        </details>
+        <details class="faq-item">
           <summary>What happens if I write a number before a word, like "3 cars"?</summary>
           <p>The emoji is repeated that many times instead of appearing once — "3 cars" becomes 🚗🚗🚗. This is capped at 20 repeats per number to keep the output readable, and "0 (word)" removes the word entirely rather than showing a misleading single emoji for a zero count. It also looks past descriptive words in between, so "5 little monkeys" becomes a single "little" emoji followed by five monkey emoji, rather than getting stuck on "little" and only translating one monkey.</p>
         </details>
@@ -295,7 +304,8 @@
         disgusted: "🤢", ugly: "🤢", hurt: "🤕", cute: "🥰", pretty: "😍", beautiful: "😍",
         strong: "💪", weak: "😩", brave: "🦸", loud: "📢", quiet: "🤫", hungry: "🤤",
         // Size / quality adjectives
-        little: "🤏", tiny: "🤏", small: "🤏", big: "🐘", huge: "🐘", giant: "🐘", large: "🐘",
+        little: "🤏", tiny: "🤏", small: "🤏", big: "🤲", huge: "🤲", giant: "🤲",
+        large: "🤲", massive: "🤲", enormous: "🤲", gigantic: "🤲",
         tall: "🦒", fast: "💨", quick: "💨", slow: "🐌", hot: "🥵", cold: "🥶", warm: "♨️",
         sweet: "🍬", sour: "🍋", spicy: "🌶️", bright: "🔆", dark: "🌑", colorful: "🌈",
         shiny: "✨", wild: "🐆", rich: "🤑", poor: "💸", round: "⚪",
@@ -469,6 +479,7 @@
         excited: 1, worried: 1, lonely: 1, disgusted: 1, ugly: 1, hurt: 1, cute: 1,
         pretty: 1, beautiful: 1, strong: 1, weak: 1, brave: 1, loud: 1, quiet: 1,
         hungry: 1, little: 1, tiny: 1, small: 1, big: 1, huge: 1, giant: 1, large: 1,
+        massive: 1, enormous: 1, gigantic: 1,
         tall: 1, fast: 1, quick: 1, slow: 1, hot: 1, cold: 1, warm: 1, sweet: 1, sour: 1,
         spicy: 1, bright: 1, dark: 1, colorful: 1, shiny: 1, wild: 1, rich: 1, poor: 1, round: 1,
         black: 1, white: 1, red: 1, blue: 1, green: 1, yellow: 1, purple: 1, brown: 1,
@@ -491,6 +502,15 @@
       // Returns the dictionary key that resolved (singular form), or null.
       function resolveKey(word) {
         var key = word.toLowerCase();
+
+        // Possessives: "monkey's" -> "monkey", "cats'" -> "cats" (which then
+        // resolves as an ordinary plural on the next recursive call). This is
+        // its own rule rather than falling through to the generic trailing-s
+        // stripping below, since that rule requires the letter right before
+        // the "s" to still be part of a real word — an apostrophe breaks that.
+        if (key.length > 2 && key.slice(-2) === "'s") return resolveKey(key.slice(0, -2));
+        if (key.length > 1 && key.slice(-1) === "'") return resolveKey(key.slice(0, -1));
+
         if (Object.prototype.hasOwnProperty.call(EMOJI_MAP, key)) return key;
         if (Object.prototype.hasOwnProperty.call(IRREGULAR_SINGULARS, key)) {
           var irregularBase = IRREGULAR_SINGULARS[key];
@@ -618,7 +638,13 @@
               // two emoji instead of one, as a visual "more than one" cue —
               // an explicit number ("3 kids") always overrides this via the
               // lookahead branch above, which runs before we ever get here.
-              var typedPlural = resolved !== t.toLowerCase() && !Object.prototype.hasOwnProperty.call(MODIFIER_WORDS, resolved);
+              // Possessives are compared after stripping just the 's/s' marker
+              // (not full plural resolution), so "monkey's" reads as singular
+              // (one emoji) while "monkeys'" still reads as plural (two).
+              var baseForPluralCheck = t.toLowerCase();
+              if (baseForPluralCheck.slice(-2) === "'s") baseForPluralCheck = baseForPluralCheck.slice(0, -2);
+              else if (baseForPluralCheck.slice(-1) === "'") baseForPluralCheck = baseForPluralCheck.slice(0, -1);
+              var typedPlural = resolved !== baseForPluralCheck && !Object.prototype.hasOwnProperty.call(MODIFIER_WORDS, resolved);
               output.push(typedPlural ? wordEmoji + wordEmoji : wordEmoji);
             } else {
               output.push(t);
