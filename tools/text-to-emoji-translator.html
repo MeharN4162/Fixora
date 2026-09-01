@@ -86,7 +86,7 @@
       {
         "@type": "Question",
         "name": "What happens if I write a number before a word, like \"3 cars\"?",
-        "acceptedAnswer": { "@type": "Answer", "text": "The emoji is repeated that many times instead of appearing once — \"3 cars\" becomes 🚗🚗🚗. This is capped at 20 repeats per number to keep the output readable, and \"0 (word)\" removes the word entirely rather than showing a misleading single emoji for a zero count." }
+        "acceptedAnswer": { "@type": "Answer", "text": "The emoji is repeated that many times instead of appearing once — \"3 cars\" becomes 🚗🚗🚗. This is capped at 20 repeats per number to keep the output readable, and \"0 (word)\" removes the word entirely rather than showing a misleading single emoji for a zero count. It also looks past descriptive words in between, so \"5 little monkeys\" becomes a single \"little\" emoji followed by five monkey emoji, rather than getting stuck on \"little\" and only translating one monkey." }
       },
       {
         "@type": "Question",
@@ -193,7 +193,7 @@
         </details>
         <details class="faq-item">
           <summary>What happens if I write a number before a word, like "3 cars"?</summary>
-          <p>The emoji is repeated that many times instead of appearing once — "3 cars" becomes 🚗🚗🚗. This is capped at 20 repeats per number to keep the output readable, and "0 (word)" removes the word entirely rather than showing a misleading single emoji for a zero count.</p>
+          <p>The emoji is repeated that many times instead of appearing once — "3 cars" becomes 🚗🚗🚗. This is capped at 20 repeats per number to keep the output readable, and "0 (word)" removes the word entirely rather than showing a misleading single emoji for a zero count. It also looks past descriptive words in between, so "5 little monkeys" becomes a single "little" emoji followed by five monkey emoji, rather than getting stuck on "little" and only translating one monkey.</p>
         </details>
         <details class="faq-item">
           <summary>Is my text sent anywhere?</summary>
@@ -276,39 +276,96 @@
       "use strict";
 
       var EMOJI_MAP = {
-        love: "❤️", heart: "❤️", happy: "😊", sad: "😢", angry: "😠", laugh: "😂", cry: "😭",
-        smile: "😊", cool: "😎", wow: "😮", surprised: "😮", tired: "😴", sleep: "😴", sleepy: "😴",
-        sick: "🤒", scared: "😱", crazy: "🤪", think: "🤔", thinking: "🤔",
+        // Emotions / states
+        love: "❤️", heart: "❤️", happy: "😊", sad: "😢", angry: "😠", mad: "😠", laugh: "😂",
+        funny: "😂", cry: "😭", smile: "😊", cool: "😎", confident: "😎", wow: "😮",
+        surprised: "😮", tired: "😴", sleep: "😴", sleepy: "😴", sick: "🤒", scared: "😱",
+        afraid: "😱", crazy: "🤪", think: "🤔", thinking: "🤔", curious: "🤔", confused: "😕",
+        bored: "😐", shy: "😳", embarrassed: "😳", proud: "😌", relaxed: "😌", calm: "😌",
+        jealous: "😒", nervous: "😬", excited: "🤩", worried: "😟", lonely: "😔",
+        disgusted: "🤢", ugly: "🤢", hurt: "🤕", cute: "🥰", pretty: "😍", beautiful: "😍",
+        strong: "💪", weak: "😩", brave: "🦸", loud: "📢", quiet: "🤫", hungry: "🤤",
+        // Size / quality adjectives
+        little: "🤏", tiny: "🤏", small: "🤏", big: "🐘", huge: "🐘", giant: "🐘", large: "🐘",
+        tall: "🦒", fast: "💨", quick: "💨", slow: "🐌", hot: "🥵", cold: "🥶", warm: "♨️",
+        sweet: "🍬", sour: "🍋", spicy: "🌶️", bright: "🔆", dark: "🌑", colorful: "🌈",
+        shiny: "✨", wild: "🐆", rich: "🤑", poor: "💸", round: "⚪",
+        // Animals
         dog: "🐶", cat: "🐱", puppy: "🐶", kitten: "🐱", mouse: "🐭", rabbit: "🐰", bear: "🐻",
         panda: "🐼", lion: "🦁", tiger: "🐯", cow: "🐮", pig: "🐷", frog: "🐸", monkey: "🐵",
         chicken: "🐔", penguin: "🐧", bird: "🐦", fish: "🐟", whale: "🐳", dolphin: "🐬",
         horse: "🐴", unicorn: "🦄", bee: "🐝", butterfly: "🦋", snail: "🐌", snake: "🐍",
         spider: "🕷️", turtle: "🐢", owl: "🦉", wolf: "🐺", fox: "🦊",
+        elephant: "🐘", giraffe: "🦒", zebra: "🦓", deer: "🦌", squirrel: "🐿️", hedgehog: "🦔",
+        bat: "🦇", kangaroo: "🦘", koala: "🐨", sheep: "🐑", goat: "🐐", duck: "🦆", eagle: "🦅",
+        parrot: "🦜", swan: "🦢", crocodile: "🐊", lizard: "🦎", octopus: "🐙", squid: "🦑",
+        crab: "🦀", lobster: "🦞", shrimp: "🦐", shark: "🦈", camel: "🐫", llama: "🦙",
+        rat: "🐀", sloth: "🦥", otter: "🦦", skunk: "🦨", hippo: "🦛", rhino: "🦏",
+        gorilla: "🦍", chimpanzee: "🦧", peacock: "🦚", flamingo: "🦩", dove: "🕊️",
+        chick: "🐤", rooster: "🐓", turkey: "🦃", seal: "🦭", scorpion: "🦂", ladybug: "🐞",
+        mosquito: "🦟", worm: "🪱", caterpillar: "🐛", cockroach: "🪳", dinosaur: "🦕",
+        trex: "🦖", dragon: "🐉", ox: "🐂", buffalo: "🐃", boar: "🐗", poodle: "🐩",
+        // Food
         pizza: "🍕", burger: "🍔", hamburger: "🍔", fries: "🍟", hotdog: "🌭", taco: "🌮",
         burrito: "🌯", sandwich: "🥪", sushi: "🍣", ramen: "🍜", noodles: "🍜", rice: "🍚",
-        bread: "🍞", cheese: "🧀", egg: "🥚", bacon: "🥓", steak: "🥩", chicken2: "🍗",
+        bread: "🍞", cheese: "🧀", egg: "🥚", bacon: "🥓", steak: "🥩", meat: "🍖",
         apple: "🍎", banana: "🍌", grapes: "🍇", orange: "🍊", lemon: "🍋", strawberry: "🍓",
         watermelon: "🍉", pineapple: "🍍", peach: "🍑", cherry: "🍒", mango: "🥭",
         coconut: "🥥", avocado: "🥑", carrot: "🥕", corn: "🌽", potato: "🥔", tomato: "🍅",
+        croissant: "🥐", baguette: "🥖", waffle: "🧇", pancakes: "🥞", friedegg: "🍳",
+        chilipepper: "🌶️", cucumber: "🥒", lettuce: "🥬", broccoli: "🥦", garlic: "🧄",
+        onion: "🧅", mushroom: "🍄", peanuts: "🥜", honey: "🍯", butter: "🧈", salad: "🥗",
+        popcorn: "🍿", salt: "🧂", bento: "🍱", riceball: "🍙", ricecracker: "🍘",
+        curry: "🍛", spaghetti: "🍝", pasta: "🍝", dumpling: "🥟", fortunecookie: "🥠",
+        takeout: "🥡", pie: "🥧", custard: "🍮", lollipop: "🍭", mooncake: "🥮",
+        fishcake: "🍥", kabob: "🍢", pretzel: "🥨", bagel: "🥯",
         coffee: "☕", tea: "🍵", beer: "🍺", wine: "🍷", cocktail: "🍸", juice: "🧃",
         water: "💧", milk: "🥛", soda: "🥤", cake: "🍰", cupcake: "🧁", cookie: "🍪",
-        chocolate: "🍫", candy: "🍬", donut: "🍩", icecream: "🍦",
+        chocolate: "🍫", candy: "🍬", donut: "🍩", icecream: "🍦", champagne: "🍾",
+        cheers: "🥂", sake: "🍶",
+        // Sky / nature / weather
         sun: "☀️", moon: "🌙", star: "⭐", stars: "✨", cloud: "☁️", rain: "🌧️", rainy: "🌧️",
         snow: "❄️", snowy: "❄️", storm: "⛈️", rainbow: "🌈", fire: "🔥", ice: "🧊",
         wind: "💨", lightning: "⚡", earth: "🌍", ocean: "🌊", beach: "🏖️", mountain: "⛰️",
-        tree: "🌳", flower: "🌸", rose: "🌹", leaf: "🍃",
+        tree: "🌳", flower: "🌸", rose: "🌹", leaf: "🍃", volcano: "🌋", desert: "🏜️",
+        island: "🏝️", tornado: "🌪️", fog: "🌫️", comet: "☄️", galaxy: "🌌", planet: "🪐",
+        cactus: "🌵", palmtree: "🌴", evergreen: "🌲", herb: "🌿", seedling: "🌱",
+        sunflower: "🌻", tulip: "🌷", hibiscus: "🌺", fallenleaf: "🍂", mapleleaf: "🍁",
+        fourleafclover: "🍀", umbrella: "☂️", umbrellarain: "☔",
+        // Vehicles / places
         car: "🚗", taxi: "🚕", bus: "🚌", train: "🚆", plane: "✈️", airplane: "✈️",
         rocket: "🚀", boat: "⛵", bike: "🚲", bicycle: "🚲", motorcycle: "🏍️",
-        house: "🏠", home: "🏠", building: "🏢", school: "🏫", hospital: "🏥", church: "⛪",
-        castle: "🏰", tent: "⛺",
+        house: "🏠", home: "🏠", building: "🏢", office: "🏢", school: "🏫", hospital: "🏥",
+        church: "⛪", castle: "🏰", tent: "⛺", truck: "🚚", ambulance: "🚑",
+        firetruck: "🚒", policecar: "🚓", tractor: "🚜", ship: "🚢", helicopter: "🚁",
+        subway: "🚇", tram: "🚊", scooter: "🛵", canoe: "🛶", anchor: "⚓", fuelpump: "⛽",
+        trafficlight: "🚦", bridge: "🌉", tower: "🗼", stadium: "🏟️", factory: "🏭",
+        bank: "🏦", hotel: "🏨", store: "🏪", park: "🏞️", mosque: "🕌", temple: "🛕",
+        synagogue: "🕍", fountain: "⛲", ferriswheel: "🎡", rollercoaster: "🎢",
+        carousel: "🎠",
+        // Objects / tech
         phone: "📱", computer: "💻", laptop: "💻", camera: "📷", tv: "📺", television: "📺",
         clock: "🕐", watch: "⌚", key: "🔑", lock: "🔒", money: "💰", cash: "💵",
-        gift: "🎁", present: "🎁", present2: "🎁", balloon: "🎈", party: "🎉", birthday: "🎂",
+        gift: "🎁", present: "🎁", balloon: "🎈", party: "🎉", birthday: "🎂",
         music: "🎵", song: "🎵", guitar: "🎸", microphone: "🎤",
         book: "📚", pencil: "✏️", pen: "🖊️", letter: "✉️", email: "📧",
+        keyboard: "⌨️", printer: "🖨️", disk: "💾", battery: "🔋", plug: "🔌",
+        flashlight: "🔦", candle: "🕯️", scissors: "✂️", hammer: "🔨", wrench: "🔧",
+        screwdriver: "🪛", toolbox: "🧰", magnet: "🧲", gear: "⚙️", chain: "⛓️",
+        rope: "🪢", ladder: "🪜", broom: "🧹", bucket: "🪣", sponge: "🧽", soap: "🧼",
+        mirror: "🪞", door: "🚪", bed: "🛏️", couch: "🛋️", bathtub: "🛁", shower: "🚿",
+        razor: "🪒", notebook: "📓", folder: "📁", pushpin: "📌", paperclip: "📎",
+        ruler: "📏", package: "📦", mailbox: "📫", newspaper: "📰", bookmark: "🔖",
+        label: "🏷️", ticket: "🎫", receipt: "🧾",
+        // Sports / activities
         soccer: "⚽", football: "🏈", basketball: "🏀", baseball: "⚾", tennis: "🎾",
-        game: "🎮", trophy: "🏆", medal: "🏅",
-        sun2: "🌞", king: "👑", crown: "👑", queen: "👸", baby: "👶", boy: "👦", girl: "👧",
+        game: "🎮", trophy: "🏆", medal: "🏅", volleyball: "🏐", rugby: "🏉", golf: "⛳",
+        bowling: "🎳", hockey: "🏒", cricket: "🏏", tabletennis: "🏓", badminton: "🏸",
+        boxing: "🥊", martialarts: "🥋", skateboard: "🛹", ski: "⛷️", snowboard: "🏂",
+        iceskate: "⛸️", fishing: "🎣", archery: "🏹", weightlifting: "🏋️", yoga: "🧘",
+        swim: "🏊", run: "🏃", walk: "🚶", climb: "🧗", dance: "💃",
+        // People / greetings / symbols
+        king: "👑", crown: "👑", queen: "👸", baby: "👶", boy: "👦", girl: "👧",
         man: "👨", woman: "👩", family: "👨‍👩‍👧‍👦",
         thumbsup: "👍", thumbsdown: "👎",
         hello: "👋", hi: "👋", bye: "👋", wave: "👋", clap: "👏", pray: "🙏", hug: "🤗",
@@ -317,6 +374,20 @@
         alarm: "⏰", calendar: "📅", map: "🗺️", pin: "📍", location: "📍",
         bomb: "💣", gun: "🔫", knife: "🔪", sword: "⚔️", shield: "🛡️", target: "🎯",
         diamond: "💎", ring: "💍", crystal: "🔮", magic: "✨"
+      };
+
+      // Words in EMOJI_MAP that describe (not name) something — when a number
+      // precedes one of these, keep looking for the actual noun to multiply
+      // instead of repeating the descriptor itself (e.g. "5 little monkeys").
+      var MODIFIER_WORDS = {
+        happy: 1, sad: 1, angry: 1, mad: 1, sleepy: 1, tired: 1, sick: 1, scared: 1,
+        afraid: 1, crazy: 1, cool: 1, confident: 1, surprised: 1, confused: 1, bored: 1,
+        shy: 1, embarrassed: 1, proud: 1, relaxed: 1, calm: 1, jealous: 1, nervous: 1,
+        excited: 1, worried: 1, lonely: 1, disgusted: 1, ugly: 1, hurt: 1, cute: 1,
+        pretty: 1, beautiful: 1, strong: 1, weak: 1, brave: 1, loud: 1, quiet: 1,
+        hungry: 1, little: 1, tiny: 1, small: 1, big: 1, huge: 1, giant: 1, large: 1,
+        tall: 1, fast: 1, quick: 1, slow: 1, hot: 1, cold: 1, warm: 1, sweet: 1, sour: 1,
+        spicy: 1, bright: 1, dark: 1, colorful: 1, shiny: 1, wild: 1, rich: 1, poor: 1, round: 1
       };
 
       var inputBox = document.getElementById("inputBox");
@@ -332,26 +403,46 @@
 
       var MAX_REPEAT = 20;
 
-      function lookupEmoji(word) {
+      // Returns the dictionary key that resolved (singular form), or null.
+      function resolveKey(word) {
         var key = word.toLowerCase();
-        if (Object.prototype.hasOwnProperty.call(EMOJI_MAP, key)) return EMOJI_MAP[key];
+        if (Object.prototype.hasOwnProperty.call(EMOJI_MAP, key)) return key;
         if (Object.prototype.hasOwnProperty.call(IRREGULAR_SINGULARS, key)) {
           var irregularBase = IRREGULAR_SINGULARS[key];
-          if (Object.prototype.hasOwnProperty.call(EMOJI_MAP, irregularBase)) return EMOJI_MAP[irregularBase];
+          if (Object.prototype.hasOwnProperty.call(EMOJI_MAP, irregularBase)) return irregularBase;
         }
+        // Only attempt to strip a plural suffix for words long enough that the
+        // result can't collide with an unrelated short word (this is exactly
+        // the bug that turned "his" into "hi" — stripping a trailing "s" from
+        // a 3-letter word is too aggressive to be safe).
+        if (key.length < 4) return null;
         var candidates = [];
-        if (key.length > 3 && key.slice(-3) === "ies") candidates.push(key.slice(0, -3) + "y");
-        if (key.length > 3 && key.slice(-3) === "ves") {
+        if (key.slice(-3) === "ies") candidates.push(key.slice(0, -3) + "y");
+        if (key.slice(-3) === "ves") {
           candidates.push(key.slice(0, -3) + "f");
           candidates.push(key.slice(0, -3) + "fe");
         }
-        if (key.length > 2 && key.slice(-2) === "es") candidates.push(key.slice(0, -2));
-        if (key.length > 1 && key.slice(-1) === "s" && key.slice(-2) !== "ss") candidates.push(key.slice(0, -1));
+        if (key.slice(-2) === "es") candidates.push(key.slice(0, -2));
+        if (key.slice(-1) === "s" && key.slice(-2) !== "ss") candidates.push(key.slice(0, -1));
         for (var i = 0; i < candidates.length; i++) {
-          if (Object.prototype.hasOwnProperty.call(EMOJI_MAP, candidates[i])) return EMOJI_MAP[candidates[i]];
+          if (Object.prototype.hasOwnProperty.call(EMOJI_MAP, candidates[i])) return candidates[i];
         }
         return null;
       }
+
+      function lookupEmoji(word) {
+        var key = resolveKey(word);
+        return key === null ? null : EMOJI_MAP[key];
+      }
+
+      function isModifier(word) {
+        var key = resolveKey(word);
+        return key !== null && Object.prototype.hasOwnProperty.call(MODIFIER_WORDS, key);
+      }
+
+      var WORD_RE = /^[A-Za-z']+$/;
+      var NUMBER_RE = /^\d+$/;
+      var SPACE_RE = /^\s+$/;
 
       function translate() {
         var text = inputBox.value;
@@ -361,25 +452,71 @@
           return;
         }
         var count = 0;
+        var tokens = text.match(/[A-Za-z']+|\d+|\s+|[^\sA-Za-z'\d]+/g) || [];
+        var output = [];
+        var i = 0;
 
-        // Pass 1: "<number> <word>" -> the emoji repeated that many times (e.g. "3 cars" -> car emoji x3).
-        var afterNumbers = text.replace(/\b(\d{1,3})\s+([A-Za-z']+)\b/g, function (whole, numStr, word) {
-          var emoji = lookupEmoji(word);
-          if (!emoji) return whole;
-          var n = Math.min(parseInt(numStr, 10), MAX_REPEAT);
-          if (n === 0) return numStr;
-          count++;
-          return new Array(n + 1).join(emoji);
-        });
+        while (i < tokens.length) {
+          var t = tokens[i];
 
-        // Pass 2: any remaining standalone word (singular or plural) -> a single matching emoji.
-        var result = afterNumbers.replace(/[A-Za-z']+/g, function (word) {
-          var emoji = lookupEmoji(word);
-          if (emoji) { count++; return emoji; }
-          return word;
-        });
+          if (NUMBER_RE.test(t)) {
+            // Look ahead past any modifier words (e.g. "little", "happy") for
+            // the noun the number actually quantifies, so "5 little monkeys"
+            // repeats the monkey emoji 5 times instead of stalling on "little".
+            var modifierEmoji = [];
+            var nounEmoji = null;
+            var j = i + 1;
+            var modifiersSeen = 0;
 
-        outputBox.value = result;
+            while (j < tokens.length && modifiersSeen < 4) {
+              var tj = tokens[j];
+              if (SPACE_RE.test(tj)) { j++; continue; }
+              if (!WORD_RE.test(tj)) break;
+              var emojiJ = lookupEmoji(tj);
+              if (!emojiJ) break;
+              if (isModifier(tj)) {
+                modifierEmoji.push(emojiJ);
+                modifiersSeen++;
+                j++;
+              } else {
+                nounEmoji = emojiJ;
+                j++;
+                break;
+              }
+            }
+
+            if (nounEmoji) {
+              var n = Math.min(parseInt(t, 10), MAX_REPEAT);
+              if (n === 0) {
+                output.push(t);
+              } else {
+                count += 1 + modifierEmoji.length;
+                output.push(modifierEmoji.join(""));
+                output.push(new Array(n + 1).join(nounEmoji));
+              }
+              i = j;
+              continue;
+            }
+            // No noun found within the lookahead — leave the number as plain
+            // text; the modifier words (if any) still get evaluated normally
+            // as standalone words on the next iterations.
+            output.push(t);
+            i++;
+            continue;
+          }
+
+          if (WORD_RE.test(t)) {
+            var emoji = lookupEmoji(t);
+            if (emoji) { count++; output.push(emoji); } else { output.push(t); }
+            i++;
+            continue;
+          }
+
+          output.push(t);
+          i++;
+        }
+
+        outputBox.value = output.join("");
         statusBox.textContent = count === 0 ? "No matching words found in the dictionary." : count + " word" + (count === 1 ? "" : "s") + " translated.";
       }
 
