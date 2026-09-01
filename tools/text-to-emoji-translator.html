@@ -81,7 +81,12 @@
       {
         "@type": "Question",
         "name": "Does it handle plurals, like \"babies\" or \"cats\"?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes — plural forms (including irregular ones like \"mice\" or \"wolves\") are recognized and matched to the same emoji as their singular form, so \"baby\" and \"babies\" both become 👶." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — plural forms (including irregular ones like \"mice\" or \"wolves\") are recognized and matched to the same emoji as their singular form. A plural typed without a number shows two of that emoji as a \"more than one\" visual cue, so \"cats\" becomes 🐱🐱 — writing an actual number always takes priority, so \"3 cats\" still shows exactly three." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it understand spelled-out numbers, like \"three cats\" instead of \"3 cats\"?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — number words from \"zero\" through \"twenty\" work exactly like typing the digit, including with descriptive words in between, so \"five little monkeys\" and \"5 little monkeys\" produce the same result." }
       },
       {
         "@type": "Question",
@@ -189,7 +194,11 @@
         </details>
         <details class="faq-item">
           <summary>Does it handle plurals, like "babies" or "cats"?</summary>
-          <p>Yes — plural forms (including irregular ones like "mice" or "wolves") are recognized and matched to the same emoji as their singular form, so "baby" and "babies" both become 👶.</p>
+          <p>Yes — plural forms (including irregular ones like "mice" or "wolves") are recognized and matched to the same emoji as their singular form. A plural typed without a number shows two of that emoji as a "more than one" visual cue, so "cats" becomes 🐱🐱 — writing an actual number always takes priority, so "3 cats" still shows exactly three.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does it understand spelled-out numbers, like "three cats" instead of "3 cats"?</summary>
+          <p>Yes — number words from "zero" through "twenty" work exactly like typing the digit, including with descriptive words in between, so "five little monkeys" and "5 little monkeys" produce the same result.</p>
         </details>
         <details class="faq-item">
           <summary>What happens if I write a number before a word, like "3 cars"?</summary>
@@ -390,7 +399,32 @@
         // false positives — e.g. "scar" ends in "car" but isn't one).
         sportscar: "🏎️", racecar: "🏎️", taxicab: "🚕", policeman: "👮", policewoman: "👮",
         snowman: "⛄", sunglasses: "🕶️", hat: "🎩", shirt: "👕", shoe: "👟", shoes: "👟",
-        wallet: "👛", backpack: "🎒", suitcase: "🧳"
+        wallet: "👛", backpack: "🎒", suitcase: "🧳",
+        // A few concrete words explicitly requested despite being a bit more
+        // abstract than most entries here — kept because they have one clear,
+        // widely-understood emoji convention, unlike "no"/"time"/"good" etc.
+        // which were removed for being too generic and everywhere.
+        kid: "🧒", prefer: "❤️", head: "🗣️", problem: "❗", gas: "💨",
+        // Professions / characters
+        doctor: "🧑‍⚕️", teacher: "🧑‍🏫", chef: "🧑‍🍳", farmer: "🧑‍🌾",
+        pilot: "🧑‍✈️", astronaut: "🧑‍🚀", scientist: "🧑‍🔬", mechanic: "🧑‍🔧",
+        artist: "🧑‍🎨", ninja: "🥷", superhero: "🦸", vampire: "🧛", zombie: "🧟",
+        ghost: "👻", alien: "👽", robot: "🤖", angel: "😇", devil: "😈",
+        wizard: "🧙", mermaid: "🧜", fairy: "🧚", genie: "🧞", clown: "🤡",
+        // Instruments
+        piano: "🎹", drum: "🥁", violin: "🎻", trumpet: "🎺", saxophone: "🎷",
+        banjo: "🪕",
+        // Clothing
+        dress: "👗", jacket: "🧥", tie: "👔", socks: "🧦", gloves: "🧤",
+        scarf: "🧣", glasses: "👓",
+        // More nature
+        waterfall: "💦", cave: "🕳️", forest: "🌲", river: "🏞️", lake: "🏞️",
+        sunrise: "🌅", sunset: "🌇", moonlight: "🌜",
+        // More food & drink
+        pancake: "🥞", shishkebab: "🍢", teapot: "🫖", icecube: "🧊",
+        // More animals
+        cheetah: "🐆", jaguar: "🐆", panther: "🐈‍⬛", raccoon: "🦝", moose: "🫎",
+        jellyfish: "🪼", clam: "🦪"
       };
 
       // Words in EMOJI_MAP that describe (not name) something — when a number
@@ -463,6 +497,24 @@
       var NUMBER_RE = /^\d+$/;
       var SPACE_RE = /^\s+$/;
 
+      var WORD_NUMBERS = {
+        zero: 0, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7,
+        eight: 8, nine: 9, ten: 10, eleven: 11, twelve: 12, thirteen: 13,
+        fourteen: 14, fifteen: 15, sixteen: 16, seventeen: 17, eighteen: 18,
+        nineteen: 19, twenty: 20
+      };
+
+      // Returns the numeric value of a token if it's a digit string ("5") or
+      // a spelled-out number word ("five"), so "three cats" and "3 cats"
+      // both trigger the same quantity logic. Returns null otherwise.
+      function numericValueOf(token) {
+        if (NUMBER_RE.test(token)) return parseInt(token, 10);
+        if (WORD_RE.test(token) && Object.prototype.hasOwnProperty.call(WORD_NUMBERS, token.toLowerCase())) {
+          return WORD_NUMBERS[token.toLowerCase()];
+        }
+        return null;
+      }
+
       function translate() {
         var text = inputBox.value;
         if (!text) {
@@ -477,8 +529,9 @@
 
         while (i < tokens.length) {
           var t = tokens[i];
+          var numVal = numericValueOf(t);
 
-          if (NUMBER_RE.test(t)) {
+          if (numVal !== null) {
             // Look ahead past any modifier words (e.g. "little", "happy") for
             // the noun the number actually quantifies, so "5 little monkeys"
             // repeats the monkey emoji 5 times instead of stalling on "little".
@@ -505,7 +558,7 @@
             }
 
             if (nounEmoji) {
-              var n = Math.min(parseInt(t, 10), MAX_REPEAT);
+              var n = Math.min(numVal, MAX_REPEAT);
               if (n === 0) {
                 output.push(t);
               } else {
@@ -525,8 +578,19 @@
           }
 
           if (WORD_RE.test(t)) {
-            var emoji = lookupEmoji(t);
-            if (emoji) { count++; output.push(emoji); } else { output.push(t); }
+            var resolved = resolveKey(t);
+            if (resolved !== null) {
+              count++;
+              var wordEmoji = EMOJI_MAP[resolved];
+              // A plural typed with no number in front ("kids", "cats") shows
+              // two emoji instead of one, as a visual "more than one" cue —
+              // an explicit number ("3 kids") always overrides this via the
+              // lookahead branch above, which runs before we ever get here.
+              var typedPlural = resolved !== t.toLowerCase() && !Object.prototype.hasOwnProperty.call(MODIFIER_WORDS, resolved);
+              output.push(typedPlural ? wordEmoji + wordEmoji : wordEmoji);
+            } else {
+              output.push(t);
+            }
             i++;
             continue;
           }
