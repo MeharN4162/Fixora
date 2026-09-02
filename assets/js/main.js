@@ -944,6 +944,122 @@ document.documentElement.setAttribute("data-js", "true");
     if (count > 0) section.style.display = "block";
   }
 
+  /* ---------- Favorites (localStorage) ---------- */
+  var FAVORITES_KEY = "fixora_favorites";
+
+  function readFavorites() {
+    try {
+      return JSON.parse(localStorage.getItem(FAVORITES_KEY)) || [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function isFavorite(href) {
+    return readFavorites().indexOf(href) !== -1;
+  }
+
+  function toggleFavorite(href) {
+    var favs = readFavorites();
+    var idx = favs.indexOf(href);
+    var nowFavorite;
+    if (idx === -1) {
+      favs.unshift(href);
+      nowFavorite = true;
+    } else {
+      favs.splice(idx, 1);
+      nowFavorite = false;
+    }
+    try { localStorage.setItem(FAVORITES_KEY, JSON.stringify(favs)); } catch (e) { /* ignore */ }
+    return nowFavorite;
+  }
+
+  // Every .card link on the site (homepage grids, related-tools sections,
+  // all-tools listing) gets a star toggle injected onto it. One function
+  // handles every page rather than hand-editing hundreds of card blocks.
+  function initFavoriteStars() {
+    var cards = document.querySelectorAll("a.card[href]");
+    cards.forEach(function (card) {
+      if (card.querySelector(".card-fav-btn")) return;
+      var rawHref = card.getAttribute("href");
+      // Card hrefs are written relative to whatever page they're on — a
+      // homepage card says "tools/pdf-to-jpg", but the same tool's card in
+      // a sibling tool page's "Related Tools" section just says
+      // "pdf-to-jpg". Resolving against the real page URL (rather than
+      // guessing at a prefix to strip) turns either form into the same
+      // canonical "tools/pdf-to-jpg" that SITE_INDEX uses as its key.
+      var normalizedHref = new URL(rawHref, window.location.href).pathname.replace(/^\//, "");
+
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "card-fav-btn";
+      var favored = isFavorite(normalizedHref);
+      btn.classList.toggle("is-favorite", favored);
+      btn.setAttribute("aria-label", favored ? "Remove from favorites" : "Add to favorites");
+      btn.innerHTML = "★";
+
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var nowFavorite = toggleFavorite(normalizedHref);
+        btn.classList.toggle("is-favorite", nowFavorite);
+        btn.setAttribute("aria-label", nowFavorite ? "Remove from favorites" : "Add to favorites");
+        showToast(nowFavorite ? "Added to favorites" : "Removed from favorites");
+        renderFavorites();
+      });
+
+      card.style.position = "relative";
+      card.appendChild(btn);
+    });
+  }
+
+  function renderFavorites() {
+    var section = document.getElementById("favoritesSection");
+    if (!section) return;
+
+    var hrefs = readFavorites();
+    var grid = section.querySelector(".grid");
+    if (!grid) return;
+    grid.innerHTML = "";
+
+    if (!hrefs.length) {
+      section.style.display = "none";
+      return;
+    }
+
+    var basePrefix = getBasePrefix();
+    var count = 0;
+    hrefs.forEach(function (href) {
+      var entry = SITE_INDEX.filter(function (item) { return item.href === href; })[0];
+      if (!entry) return;
+      var card = document.createElement("a");
+      card.className = "card";
+      card.href = basePrefix + entry.href;
+      card.innerHTML =
+        '<span class="icon" aria-hidden="true">' + entry.icon + '</span>' +
+        '<h3>' + entry.name + '</h3>' +
+        '<span class="card-cta">Open ' + (entry.type === "Guide" ? "guide" : "tool") + ' →</span>';
+      grid.appendChild(card);
+      count++;
+    });
+
+    section.style.display = count > 0 ? "block" : "none";
+    if (count > 0) initFavoriteStars();
+  }
+
+  /* ---------- Floating feedback widget ---------- */
+  function initFeedbackWidget() {
+    if (document.querySelector(".fab-feedback")) return;
+    var basePrefix = getBasePrefix();
+    var link = document.createElement("a");
+    link.className = "fab-feedback";
+    link.href = basePrefix + "contact";
+    link.setAttribute("aria-label", "Report a bug or request a tool");
+    link.title = "Report a bug or request a tool";
+    link.innerHTML = "<span aria-hidden=\"true\">💬</span>";
+    document.body.appendChild(link);
+  }
+
   /* ---------- Category pill filters (optional, tool cards) ---------- */
   function initPillFilters() {
     var pills = document.querySelectorAll("[data-filter-pill]");
@@ -1055,6 +1171,21 @@ document.documentElement.setAttribute("data-js", "true");
       }
     },
 
+    /* Opens the native share sheet (mobile browsers, some desktop browsers)
+       with the tool's result text and this page's URL. Falls back to a
+       plain clipboard copy on browsers without the Web Share API, so the
+       button always does something useful either way. */
+    shareText: function (text, noteEl) {
+      if (!text) return;
+      if (navigator.share) {
+        navigator.share({ text: text, url: window.location.href }).catch(function () {
+          // User cancelled the share sheet, or it failed silently — no-op.
+        });
+        return;
+      }
+      Fixora.copyText(text, noteEl);
+    },
+
     /* Copies both plain text and monospace-styled HTML, so apps with rich
        paste (Google Docs, Word, Gmail) render fixed-width ASCII/character
        grids correctly instead of collapsing under a proportional font. */
@@ -1159,5 +1290,8 @@ document.documentElement.setAttribute("data-js", "true");
     initMascot();
     recordRecentVisit();
     renderRecentlyUsed();
+    renderFavorites();
+    initFavoriteStars();
+    initFeedbackWidget();
   });
 })();
