@@ -177,34 +177,6 @@
     </div>
   </footer>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    var toggle = document.querySelector(".nav-toggle");
-    var navLinks = document.querySelector(".nav-links");
-    if (toggle && navLinks) {
-      toggle.addEventListener("click", function () {
-        var open = navLinks.classList.toggle("open");
-        toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      });
-    }
-
-    var themeBtn = document.querySelector(".theme-toggle");
-    if (themeBtn) {
-      var currentTheme = function () {
-        var stored = null;
-        try { stored = localStorage.getItem("fixora_theme"); } catch (e) {}
-        if (stored === "light" || stored === "dark") return stored;
-        return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-      };
-      themeBtn.setAttribute("aria-pressed", currentTheme() === "dark" ? "true" : "false");
-      themeBtn.addEventListener("click", function () {
-        var next = currentTheme() === "dark" ? "light" : "dark";
-        document.documentElement.setAttribute("data-theme", next);
-        themeBtn.setAttribute("aria-pressed", next === "dark" ? "true" : "false");
-        try { localStorage.setItem("fixora_theme", next); } catch (e) {}
-      });
-    }
-  </script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

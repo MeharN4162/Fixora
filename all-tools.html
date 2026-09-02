@@ -192,7 +192,8 @@
     var siteIndex = window.Fixora.siteIndex || [];
     var categories = window.Fixora.categories || {};
 
-    var tools = siteIndex.filter(function (item) { return item.type === "Tool"; });
+    var tools = siteIndex.filter(function (item) { return item.type === "Tool"; })
+      .sort(function (a, b) { return a.name.localeCompare(b.name); });
     var guides = siteIndex.filter(function (item) { return item.type === "Guide"; });
 
     toolCountSub.textContent = "Every free Fixoona tool in one place (" + tools.length + " and counting) — all running right in your browser.";

@@ -1047,6 +1047,24 @@ document.documentElement.setAttribute("data-js", "true");
     if (count > 0) initFavoriteStars();
   }
 
+  /* ---------- GA4 event tracking (which tools/guides get clicked) ---------- */
+  // One delegated listener on document.body covers every card link on every
+  // page — homepage grids, All Tools, related-tools sections — without
+  // needing per-tool changes. Fires a real GA4 event, not just a pageview,
+  // so which tools people actually click (vs just land on) is visible in
+  // Analytics.
+  function initCardClickTracking() {
+    document.body.addEventListener("click", function (e) {
+      var card = e.target.closest("a.card[href]");
+      if (!card || typeof gtag !== "function") return;
+      var label = card.querySelector("h3");
+      gtag("event", "tool_card_click", {
+        tool_name: label ? label.textContent : card.getAttribute("href"),
+        link_url: card.getAttribute("href")
+      });
+    });
+  }
+
   /* ---------- Floating feedback widget ---------- */
   function initFeedbackWidget() {
     if (document.querySelector(".fab-feedback")) return;
@@ -1293,5 +1311,6 @@ document.documentElement.setAttribute("data-js", "true");
     renderFavorites();
     initFavoriteStars();
     initFeedbackWidget();
+    initCardClickTracking();
   });
 })();
