@@ -105,6 +105,16 @@
       },
       {
         "@type": "Question",
+        "name": "Does it recognize comparative and superlative words, like \"bigger\" or \"cutest\"?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — \"-er\" and \"-est\" endings resolve to the same emoji as the base word, including spelling changes like \"happier\" -> \"happy\" and \"bigger\" -> \"big\"." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does \"good luck\" work but bare \"good\" doesn't?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A short list of fixed phrases (happy birthday, good morning, good night, good luck, thank you, merry christmas, i love you, and a few others) are matched as a whole unit before any single-word lookup runs. This safely brings back a word like \"good\" only inside specific, unambiguous idioms — bare \"good\" was removed entirely because it appears constantly with unrelated meanings (\"that's good\", \"good point\") that would otherwise get mistranslated." }
+      },
+      {
+        "@type": "Question",
         "name": "What happens if I write a number before a word, like \"3 cars\"?",
         "acceptedAnswer": { "@type": "Answer", "text": "The emoji is repeated that many times instead of appearing once — \"3 cars\" becomes 🚗🚗🚗. This is capped at 20 repeats per number to keep the output readable, and \"0 (word)\" removes the word entirely rather than showing a misleading single emoji for a zero count. It also looks past descriptive words in between, so \"5 little monkeys\" becomes a single \"little\" emoji followed by five monkey emoji, rather than getting stuck on \"little\" and only translating one monkey." }
       },
@@ -226,6 +236,14 @@
         <details class="faq-item">
           <summary>Does it handle different verb forms, like "running" or "danced"?</summary>
           <p>Yes — regular conjugations (running, walked, hugging, danced) and a handful of common irregular past-tense forms (ran, swam, slept, thought) all resolve to the same emoji as the base verb. Unlike plural nouns, a conjugated verb always shows a single emoji rather than two, since "running" doesn't mean "two runs."</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does it recognize comparative and superlative words, like "bigger" or "cutest"?</summary>
+          <p>Yes — "-er" and "-est" endings resolve to the same emoji as the base word, including spelling changes like "happier" -> "happy" and "bigger" -> "big".</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why does "good luck" work but bare "good" doesn't?</summary>
+          <p>A short list of fixed phrases (happy birthday, good morning, good night, good luck, thank you, merry christmas, i love you, and a few others) are matched as a whole unit before any single-word lookup runs. This safely brings back a word like "good" only inside specific, unambiguous idioms — bare "good" was removed entirely because it appears constantly with unrelated meanings ("that's good", "good point") that would otherwise get mistranslated.</p>
         </details>
         <details class="faq-item">
           <summary>What happens if I write a number before a word, like "3 cars"?</summary>
@@ -485,7 +503,14 @@
         // More transportation / places
         speedboat: "🚤", monorail: "🚝", minibus: "🚐", cityscape: "🏙️",
         fullmoon: "🌕", halfmoon: "🌗", hurricane: "🌀", thermometer: "🌡️",
-        toy: "🧸", amazing: "🤩", build: "🔨", built: "🔨", construction: "🔨"
+        toy: "🧸", amazing: "🤩", build: "🔨", built: "🔨", construction: "🔨",
+        // Ordinal numbers (only 1st-3rd have a natural, unambiguous emoji)
+        first: "🥇", second: "🥈", third: "🥉",
+        // Family
+        mom: "👩", mother: "👩", dad: "👨", father: "👨", grandma: "👵",
+        grandmother: "👵", grandpa: "👴", grandfather: "👴", sister: "👧",
+        brother: "👦", aunt: "👩", uncle: "👨", cousin: "🧑",
+        congratulations: "🎉", bouquet: "💐"
       };
 
       // Words in EMOJI_MAP that describe (not name) something — when a number
@@ -586,6 +611,26 @@
           }
         }
 
+        // Comparative / superlative adjectives: "bigger"/"biggest" -> "big".
+        if (key.length >= 5 && key.slice(-2) === "er") {
+          var erStem = key.slice(0, -2);
+          candidates.push(erStem);
+          candidates.push(erStem + "e"); // cuter -> cut -> cute
+          if (erStem.length > 2 && erStem.slice(-1) === erStem.slice(-2, -1)) {
+            candidates.push(erStem.slice(0, -1)); // bigger -> bigg -> big
+          }
+          if (erStem.slice(-1) === "i") candidates.push(erStem.slice(0, -1) + "y"); // happier -> happi -> happy
+        }
+        if (key.length >= 6 && key.slice(-3) === "est") {
+          var estStem = key.slice(0, -3);
+          candidates.push(estStem);
+          candidates.push(estStem + "e"); // cutest -> cut -> cute
+          if (estStem.length > 2 && estStem.slice(-1) === estStem.slice(-2, -1)) {
+            candidates.push(estStem.slice(0, -1)); // biggest -> bigg -> big
+          }
+          if (estStem.slice(-1) === "i") candidates.push(estStem.slice(0, -1) + "y"); // happiest -> happi -> happy
+        }
+
         for (var i = 0; i < candidates.length; i++) {
           if (Object.prototype.hasOwnProperty.call(EMOJI_MAP, candidates[i])) return candidates[i];
         }
@@ -647,6 +692,45 @@
         "weren't": 1, "don't": 1, "doesn't": 1, "didn't": 1, "can't": 1,
         "won't": 1, "wouldn't": 1, "couldn't": 1, "shouldn't": 1
       };
+
+      // Fixed multi-word expressions checked as a unit before any single-word
+      // lookup runs. This is the safe way to bring back a word like "good" —
+      // bare "good" was removed entirely for being too generic ("that's
+      // good", "good point"), but "good luck" and "good morning" are
+      // specific, unambiguous idioms that can't misfire the way the bare
+      // word did.
+      var PHRASES = [
+        { words: ["happy", "birthday"], emoji: "🎂🎉" },
+        { words: ["happy", "new", "year"], emoji: "🎊🎉" },
+        { words: ["happy", "halloween"], emoji: "🎃" },
+        { words: ["merry", "christmas"], emoji: "🎄🎁" },
+        { words: ["good", "morning"], emoji: "☀️👋" },
+        { words: ["good", "night"], emoji: "🌙👋" },
+        { words: ["good", "luck"], emoji: "🍀" },
+        { words: ["thank", "you"], emoji: "🙏" },
+        { words: ["i", "love", "you"], emoji: "❤️" },
+        { words: ["get", "well", "soon"], emoji: "🙏💐" }
+      ].sort(function (a, b) { return b.words.length - a.words.length; });
+
+      // If a known phrase starts at tokens[startIndex], returns the token
+      // index right after it and the emoji to emit; otherwise returns null.
+      function tryMatchPhrase(tokens, startIndex) {
+        for (var p = 0; p < PHRASES.length; p++) {
+          var words = PHRASES[p].words;
+          var idx = startIndex;
+          var matched = true;
+          for (var w = 0; w < words.length; w++) {
+            while (idx < tokens.length && SPACE_RE.test(tokens[idx])) idx++;
+            if (idx >= tokens.length || !WORD_RE.test(tokens[idx]) || tokens[idx].toLowerCase() !== words[w]) {
+              matched = false;
+              break;
+            }
+            idx++;
+          }
+          if (matched) return { endIndex: idx, emoji: PHRASES[p].emoji };
+        }
+        return null;
+      }
 
       function translate() {
         var text = inputBox.value;
@@ -712,6 +796,14 @@
           }
 
           if (WORD_RE.test(t)) {
+            var phraseMatch = tryMatchPhrase(tokens, i);
+            if (phraseMatch) {
+              count++;
+              output.push(phraseMatch.emoji);
+              i = phraseMatch.endIndex;
+              continue;
+            }
+
             if (Object.prototype.hasOwnProperty.call(NEGATION_WORDS, t.toLowerCase())) {
               output.push(t);
               negatePending = true;
