@@ -110,8 +110,13 @@
       },
       {
         "@type": "Question",
-        "name": "Why does \"good luck\" work but bare \"good\" doesn't?",
-        "acceptedAnswer": { "@type": "Answer", "text": "A short list of fixed phrases (happy birthday, good morning, good night, good luck, thank you, merry christmas, i love you, and a few others) are matched as a whole unit before any single-word lookup runs. This safely brings back a word like \"good\" only inside specific, unambiguous idioms — bare \"good\" was removed entirely because it appears constantly with unrelated meanings (\"that's good\", \"good point\") that would otherwise get mistranslated." }
+        "name": "Why does \"good morning\" show a sun and a wave instead of a thumbs up?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A short list of fixed phrases (happy birthday, good morning, good night, good luck, thank you, merry christmas, i love you, and a few others) are checked as a whole unit before any single-word lookup runs. \"Good morning\" is a greeting, not really an evaluation of quality, so it gets its own specific combination — 👍 wouldn't fit — while bare \"good\" elsewhere (\"that's good\", \"good point\") correctly shows a plain thumbs up." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does an intensifier like \"so\" or \"very\" do, as in \"so happy\"?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It doubles the following description's emoji as an intensity cue, the same visual convention already used for unquantified plurals — \"so happy\" becomes 😊😊, \"very tired\" becomes 😴😴. Words like \"so\", \"very\", \"really\", \"super\", and \"extremely\" only have this effect when followed by a describable word; on their own (\"so, I went...\") they're left as plain text." }
       },
       {
         "@type": "Question",
@@ -242,8 +247,12 @@
           <p>Yes — "-er" and "-est" endings resolve to the same emoji as the base word, including spelling changes like "happier" -> "happy" and "bigger" -> "big".</p>
         </details>
         <details class="faq-item">
-          <summary>Why does "good luck" work but bare "good" doesn't?</summary>
-          <p>A short list of fixed phrases (happy birthday, good morning, good night, good luck, thank you, merry christmas, i love you, and a few others) are matched as a whole unit before any single-word lookup runs. This safely brings back a word like "good" only inside specific, unambiguous idioms — bare "good" was removed entirely because it appears constantly with unrelated meanings ("that's good", "good point") that would otherwise get mistranslated.</p>
+          <summary>Why does "good morning" show a sun and a wave instead of a thumbs up?</summary>
+          <p>A short list of fixed phrases (happy birthday, good morning, good night, good luck, thank you, merry christmas, i love you, and a few others) are checked as a whole unit before any single-word lookup runs. "Good morning" is a greeting, not really an evaluation of quality, so it gets its own specific combination — 👍 wouldn't fit — while bare "good" elsewhere ("that's good", "good point") correctly shows a plain thumbs up.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does an intensifier like "so" or "very" do, as in "so happy"?</summary>
+          <p>It doubles the following description's emoji as an intensity cue, the same visual convention already used for unquantified plurals — "so happy" becomes 😊😊, "very tired" becomes 😴😴. Words like "so", "very", "really", "super", and "extremely" only have this effect when followed by a describable word; on their own ("so, I went...") they're left as plain text.</p>
         </details>
         <details class="faq-item">
           <summary>What happens if I write a number before a word, like "3 cars"?</summary>
@@ -510,7 +519,13 @@
         mom: "👩", mother: "👩", dad: "👨", father: "👨", grandma: "👵",
         grandmother: "👵", grandpa: "👴", grandfather: "👴", sister: "👧",
         brother: "👦", aunt: "👩", uncle: "👨", cousin: "🧑",
-        congratulations: "🎉", bouquet: "💐"
+        congratulations: "🎉", bouquet: "💐",
+        // "good"/"bad" were excluded from the original dictionary alongside
+        // "no"/"yes"/"time"/"check" for looking too generic, but on reflection
+        // they're a different case: "no"/"yes" flip meaning depending on the
+        // idiom ("no problem" isn't negative), while "good"/"bad" carry the
+        // same sentiment in nearly every real sentence they appear in.
+        good: "👍", bad: "👎", point: "👉"
       };
 
       // Words in EMOJI_MAP that describe (not name) something — when a number
@@ -526,7 +541,7 @@
         massive: 1, enormous: 1, gigantic: 1,
         tall: 1, fast: 1, quick: 1, slow: 1, hot: 1, cold: 1, warm: 1, sweet: 1, sour: 1,
         spicy: 1, bright: 1, dark: 1, colorful: 1, shiny: 1, rich: 1, poor: 1, round: 1,
-        amazing: 1,
+        amazing: 1, good: 1, bad: 1,
         black: 1, white: 1, red: 1, blue: 1, green: 1, yellow: 1, purple: 1, brown: 1,
         pink: 1, gray: 1, grey: 1
       };
@@ -693,6 +708,12 @@
         "won't": 1, "wouldn't": 1, "couldn't": 1, "shouldn't": 1
       };
 
+      // "so happy" / "very tired" -> the description's emoji shown twice, the
+      // same visual intensity cue already used for unquantified plurals —
+      // this is what "combining words changes the output" looks like for
+      // intensifiers instead of counts.
+      var INTENSIFIER_WORDS = { so: 1, very: 1, really: 1, super: 1, extremely: 1 };
+
       // Fixed multi-word expressions checked as a unit before any single-word
       // lookup runs. This is the safe way to bring back a word like "good" —
       // bare "good" was removed entirely for being too generic ("that's
@@ -709,7 +730,13 @@
         { words: ["good", "luck"], emoji: "🍀" },
         { words: ["thank", "you"], emoji: "🙏" },
         { words: ["i", "love", "you"], emoji: "❤️" },
-        { words: ["get", "well", "soon"], emoji: "🙏💐" }
+        { words: ["get", "well", "soon"], emoji: "🙏💐" },
+        { words: ["see", "you", "later"], emoji: "👋" },
+        { words: ["see", "you", "soon"], emoji: "👋" },
+        { words: ["take", "care"], emoji: "🤗" },
+        { words: ["well", "done"], emoji: "👏" },
+        { words: ["nice", "job"], emoji: "👏" },
+        { words: ["good", "job"], emoji: "👏" }
       ].sort(function (a, b) { return b.words.length - a.words.length; });
 
       // If a known phrase starts at tokens[startIndex], returns the token
@@ -801,6 +828,25 @@
               count++;
               output.push(phraseMatch.emoji);
               i = phraseMatch.endIndex;
+              continue;
+            }
+
+            if (Object.prototype.hasOwnProperty.call(INTENSIFIER_WORDS, t.toLowerCase())) {
+              var afterIntensifier = i + 1;
+              while (afterIntensifier < tokens.length && SPACE_RE.test(tokens[afterIntensifier])) afterIntensifier++;
+              var intensifiedKey = afterIntensifier < tokens.length && WORD_RE.test(tokens[afterIntensifier])
+                ? resolveKey(tokens[afterIntensifier]) : null;
+              if (intensifiedKey !== null && Object.prototype.hasOwnProperty.call(MODIFIER_WORDS, intensifiedKey)) {
+                count++;
+                var intensifiedEmoji = EMOJI_MAP[intensifiedKey];
+                output.push(intensifiedEmoji + intensifiedEmoji);
+                i = afterIntensifier + 1;
+                continue;
+              }
+              // Not followed by a describable word ("so, I went...") — the
+              // intensifier itself has no emoji, so just leave it as text.
+              output.push(t);
+              i++;
               continue;
             }
 
