@@ -95,6 +95,16 @@
       },
       {
         "@type": "Question",
+        "name": "What happens when I negate a word, like \"not happy\"?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's left as plain text rather than translated. Showing 😊 right next to the word \"not\" would be actively misleading — it looks like it means happy, when the sentence says the opposite — so words like \"not\", \"never\", \"isn't\", and \"can't\" suppress translation of the very next descriptive word instead of guessing at an \"opposite\" emoji." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it handle different verb forms, like \"running\" or \"danced\"?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — regular conjugations (running, walked, hugging, danced) and a handful of common irregular past-tense forms (ran, swam, slept, thought) all resolve to the same emoji as the base verb. Unlike plural nouns, a conjugated verb always shows a single emoji rather than two, since \"running\" doesn't mean \"two runs.\"" }
+      },
+      {
+        "@type": "Question",
         "name": "What happens if I write a number before a word, like \"3 cars\"?",
         "acceptedAnswer": { "@type": "Answer", "text": "The emoji is repeated that many times instead of appearing once — \"3 cars\" becomes 🚗🚗🚗. This is capped at 20 repeats per number to keep the output readable, and \"0 (word)\" removes the word entirely rather than showing a misleading single emoji for a zero count. It also looks past descriptive words in between, so \"5 little monkeys\" becomes a single \"little\" emoji followed by five monkey emoji, rather than getting stuck on \"little\" and only translating one monkey." }
       },
@@ -208,6 +218,14 @@
         <details class="faq-item">
           <summary>Does it handle possessives, like "monkey's"?</summary>
           <p>Yes — "monkey's" correctly shows one monkey emoji (it's still grammatically singular, just possessive), while "monkeys'" shows two, matching the plural-without-a-number rule used everywhere else.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What happens when I negate a word, like "not happy"?</summary>
+          <p>It's left as plain text rather than translated. Showing 😊 right next to the word "not" would be actively misleading — it looks like it means happy, when the sentence says the opposite — so words like "not", "never", "isn't", and "can't" suppress translation of the very next descriptive word instead of guessing at an "opposite" emoji.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does it handle different verb forms, like "running" or "danced"?</summary>
+          <p>Yes — regular conjugations (running, walked, hugging, danced) and a handful of common irregular past-tense forms (ran, swam, slept, thought) all resolve to the same emoji as the base verb. Unlike plural nouns, a conjugated verb always shows a single emoji rather than two, since "running" doesn't mean "two runs."</p>
         </details>
         <details class="faq-item">
           <summary>What happens if I write a number before a word, like "3 cars"?</summary>
@@ -466,7 +484,8 @@
         recycle: "♻️", biohazard: "☣️", radioactive: "☢️",
         // More transportation / places
         speedboat: "🚤", monorail: "🚝", minibus: "🚐", cityscape: "🏙️",
-        fullmoon: "🌕", halfmoon: "🌗", hurricane: "🌀", thermometer: "🌡️"
+        fullmoon: "🌕", halfmoon: "🌗", hurricane: "🌀", thermometer: "🌡️",
+        toy: "🧸", amazing: "🤩", build: "🔨", built: "🔨", construction: "🔨"
       };
 
       // Words in EMOJI_MAP that describe (not name) something — when a number
@@ -482,6 +501,7 @@
         massive: 1, enormous: 1, gigantic: 1,
         tall: 1, fast: 1, quick: 1, slow: 1, hot: 1, cold: 1, warm: 1, sweet: 1, sour: 1,
         spicy: 1, bright: 1, dark: 1, colorful: 1, shiny: 1, rich: 1, poor: 1, round: 1,
+        amazing: 1,
         black: 1, white: 1, red: 1, blue: 1, green: 1, yellow: 1, purple: 1, brown: 1,
         pink: 1, gray: 1, grey: 1
       };
@@ -495,6 +515,14 @@
       var IRREGULAR_SINGULARS = {
         mice: "mouse", geese: "goose", men: "man", women: "woman",
         children: "child", people: "person", feet: "foot", teeth: "tooth"
+      };
+
+      // Irregular past-tense verb forms for the verbs in EMOJI_MAP — English
+      // past tense has far more exceptions than plural nouns do (ran, not
+      // "runned"), so these can't be derived by any suffix-stripping rule and
+      // need to be listed explicitly, the same way IRREGULAR_SINGULARS is.
+      var IRREGULAR_VERB_PAST = {
+        ran: "run", swam: "swim", thought: "think", slept: "sleep"
       };
 
       var MAX_REPEAT = 20;
@@ -516,6 +544,10 @@
           var irregularBase = IRREGULAR_SINGULARS[key];
           if (Object.prototype.hasOwnProperty.call(EMOJI_MAP, irregularBase)) return irregularBase;
         }
+        if (Object.prototype.hasOwnProperty.call(IRREGULAR_VERB_PAST, key)) {
+          var irregularVerb = IRREGULAR_VERB_PAST[key];
+          if (Object.prototype.hasOwnProperty.call(EMOJI_MAP, irregularVerb)) return irregularVerb;
+        }
         // Only attempt to strip a plural suffix for words long enough that the
         // result can't collide with an unrelated short word (this is exactly
         // the bug that turned "his" into "hi" — stripping a trailing "s" from
@@ -529,10 +561,49 @@
         }
         if (key.slice(-2) === "es") candidates.push(key.slice(0, -2));
         if (key.slice(-1) === "s" && key.slice(-2) !== "ss") candidates.push(key.slice(0, -1));
+
+        // Regular verb conjugation: "walking"/"walked" -> "walk". Requires a
+        // slightly longer minimum length than the plural rules above since
+        // these suffixes are 2-3 characters — a short word losing "ed"/"ing"
+        // has more room to accidentally land on an unrelated dictionary word.
+        if (key.length >= 5 && key.slice(-3) === "ied") {
+          candidates.push(key.slice(0, -3) + "y"); // cried -> cry
+        }
+        if (key.length >= 6 && key.slice(-3) === "ing") {
+          var ingStem = key.slice(0, -3); // walking -> walk
+          candidates.push(ingStem);
+          candidates.push(ingStem + "e"); // smiling -> smile
+          if (ingStem.length > 2 && ingStem.slice(-1) === ingStem.slice(-2, -1)) {
+            candidates.push(ingStem.slice(0, -1)); // hugging -> hugg -> hug
+          }
+        }
+        if (key.length >= 6 && key.slice(-2) === "ed" && key.slice(-3) !== "ied") {
+          var edStem = key.slice(0, -2); // walked -> walk, kissed -> kiss
+          candidates.push(edStem);
+          candidates.push(edStem + "e"); // danced -> dance
+          if (edStem.length > 2 && edStem.slice(-1) === edStem.slice(-2, -1)) {
+            candidates.push(edStem.slice(0, -1)); // hugged -> hugg -> hug
+          }
+        }
+
         for (var i = 0; i < candidates.length; i++) {
           if (Object.prototype.hasOwnProperty.call(EMOJI_MAP, candidates[i])) return candidates[i];
         }
         return null;
+      }
+
+      // Checks specifically for a plural-NOUN suffix pattern — deliberately
+      // narrower than "does resolveKey give back something different", since
+      // that blunt check would also fire for verb conjugations ("running" ->
+      // "run" differ too, but "running" doesn't mean "two runs").
+      function looksLikePlural(lowerWord) {
+        if (lowerWord.length < 4) return false;
+        if (Object.prototype.hasOwnProperty.call(IRREGULAR_SINGULARS, lowerWord)) return true;
+        if (lowerWord.slice(-3) === "ies") return true;
+        if (lowerWord.slice(-3) === "ves") return true;
+        if (lowerWord.slice(-2) === "es") return true;
+        if (lowerWord.slice(-1) === "s" && lowerWord.slice(-2) !== "ss") return true;
+        return false;
       }
 
       function lookupEmoji(word) {
@@ -567,6 +638,16 @@
         return null;
       }
 
+      // Words that negate whatever description follows. Translating "not
+      // happy" as "not 😊" is actively backwards (it shows the emoji for the
+      // exact opposite of what's true) — safer to suppress translation for
+      // the very next descriptive word than to guess at an "opposite" emoji.
+      var NEGATION_WORDS = {
+        "not": 1, "never": 1, "cannot": 1, "isn't": 1, "wasn't": 1, "aren't": 1,
+        "weren't": 1, "don't": 1, "doesn't": 1, "didn't": 1, "can't": 1,
+        "won't": 1, "wouldn't": 1, "couldn't": 1, "shouldn't": 1
+      };
+
       function translate() {
         var text = inputBox.value;
         if (!text) {
@@ -578,6 +659,7 @@
         var tokens = text.match(/[A-Za-z']+|\d+|\s+|[^\sA-Za-z'\d]+/g) || [];
         var output = [];
         var i = 0;
+        var negatePending = false;
 
         while (i < tokens.length) {
           var t = tokens[i];
@@ -630,7 +712,27 @@
           }
 
           if (WORD_RE.test(t)) {
+            if (Object.prototype.hasOwnProperty.call(NEGATION_WORDS, t.toLowerCase())) {
+              output.push(t);
+              negatePending = true;
+              i++;
+              continue;
+            }
+
             var resolved = resolveKey(t);
+
+            if (negatePending) {
+              negatePending = false;
+              if (resolved !== null && Object.prototype.hasOwnProperty.call(MODIFIER_WORDS, resolved)) {
+                // "not happy" would otherwise show 😊 right next to the word
+                // "not" — leave the description as plain text instead of
+                // showing an emoji that means the opposite of what was typed.
+                output.push(t);
+                i++;
+                continue;
+              }
+            }
+
             if (resolved !== null) {
               count++;
               var wordEmoji = EMOJI_MAP[resolved];
@@ -644,7 +746,7 @@
               var baseForPluralCheck = t.toLowerCase();
               if (baseForPluralCheck.slice(-2) === "'s") baseForPluralCheck = baseForPluralCheck.slice(0, -2);
               else if (baseForPluralCheck.slice(-1) === "'") baseForPluralCheck = baseForPluralCheck.slice(0, -1);
-              var typedPlural = resolved !== baseForPluralCheck && !Object.prototype.hasOwnProperty.call(MODIFIER_WORDS, resolved);
+              var typedPlural = looksLikePlural(baseForPluralCheck) && !Object.prototype.hasOwnProperty.call(MODIFIER_WORDS, resolved);
               output.push(typedPlural ? wordEmoji + wordEmoji : wordEmoji);
             } else {
               output.push(t);
