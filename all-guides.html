@@ -12,17 +12,23 @@
   <meta charset="UTF-8" />
   <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Fixoona</title>
-  <meta name="description" content="Fixoona builds free, fast, browser-based tools and practical how-to guides. Learn what we do, how our tools work, and why they're free." />
+  <title>All How-To Guides | Fixoona</title>
+  <meta name="description" content="Browse every free Fixoona how-to guide in one place — practical explainers for PDFs, images, text, calculators, and everyday tech problems." />
+  <meta name="keywords" content="how to guides, tech explainers, free tech tutorials" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://fixoona.com/about" />
+  <meta name="author" content="Fixoona" />
+  <link rel="canonical" href="https://fixoona.com/all-guides" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fixoona" />
-  <meta property="og:title" content="About Fixoona" />
-  <meta property="og:description" content="Free, fast, browser-based tools and practical how-to guides." />
-  <meta property="og:url" content="https://fixoona.com/about" />
+  <meta property="og:title" content="All How-To Guides | Fixoona" />
+  <meta property="og:description" content="Browse every free Fixoona how-to guide in one place." />
+  <meta property="og:url" content="https://fixoona.com/all-guides" />
   <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="All How-To Guides | Fixoona" />
+  <meta name="twitter:description" content="Browse every free Fixoona how-to guide in one place." />
 
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
 
@@ -30,6 +36,30 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "All Guides", "item": "https://fixoona.com/all-guides" }
+    ]
+  }
+  </script>
+
+  <style>
+    .at-search {
+      max-width: 480px;
+      margin: 20px auto 0;
+    }
+    .at-empty {
+      text-align: center;
+      color: var(--color-text-muted);
+      padding: 40px 20px;
+      display: none;
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -43,8 +73,8 @@
         <ul class="nav-links">
           <li><a href="index">Home</a></li>
           <li><a href="all-tools">All Tools</a></li>
-          <li><a href="all-guides">Guides</a></li>
-          <li><a href="about" class="active">About</a></li>
+          <li><a href="all-guides" class="active">Guides</a></li>
+          <li><a href="about">About</a></li>
           <li><a href="contact">Contact</a></li>
         </ul>
         <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
@@ -56,34 +86,27 @@
   </header>
 
   <main id="main">
-    <div class="page-content">
-      <nav class="breadcrumb" aria-label="Breadcrumb" style="padding:0 0 20px;">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="index">Home</a><span class="sep">/</span>
-        <span>About</span>
+        <span>All Guides</span>
       </nav>
-
-      <h1>About Fixoona</h1>
-      <p>Fixoona was built around a simple idea: everyday tech tasks — compressing a file, resizing a photo, generating a password — shouldn't require an account, a download, or a subscription. They should just work, instantly, for free.</p>
-
-      <h2>What We Build</h2>
-      <p>We build two things: lightweight, browser-based utilities that solve one specific problem really well, and clear, practical how-to guides that pair with those tools. Every tool on this site runs entirely in your browser — files you upload are never sent to a server, which means faster results and better privacy by default.</p>
-
-      <h2>How Our Tools Work</h2>
-      <p>Modern browsers are powerful enough to handle image processing, file conversion, and text manipulation without needing a backend server. We take advantage of that: when you use our PDF Compressor, Image Resizer, or Password Generator, all of the processing happens locally on your device using standard web technologies.</p>
-
-      <h2>Why It's Free</h2>
-      <p>Fixoona is supported by minimal, non-intrusive advertising, which lets us keep every tool free with no usage limits and no account requirement. We don't sell your data — because we never receive it in the first place.</p>
-
-      <h2>Our Commitment</h2>
-      <ul>
-        <li>No sign-up or account required for any tool</li>
-        <li>No file uploads to external servers — everything processes in your browser</li>
-        <li>No artificial usage limits or paywalls on core functionality</li>
-        <li>Clear, jargon-free guides written to actually solve your problem</li>
-      </ul>
-
-      <p>Have a tool idea or found something that doesn't work as expected? We'd love to hear from you on our <a href="contact">Contact page</a>.</p>
     </div>
+
+    <section class="tool-page-head container">
+      <div class="icon-lg" aria-hidden="true">📖</div>
+      <h1>All Guides</h1>
+      <p id="guideCountSub">Every free Fixoona how-to guide in one place.</p>
+    </section>
+
+    <section class="container">
+      <div class="field at-search">
+        <input type="text" id="guideSearch" placeholder="Search guides…" aria-label="Search guides" />
+      </div>
+
+      <div class="grid reveal-group" id="guideGrid" style="margin-top:28px;"></div>
+      <div class="at-empty" id="emptyState">No guides match your search. Try a different term.</div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -131,5 +154,44 @@
   </footer>
 
   <script src="assets/js/main.js"></script>
+  <script>
+    var guideGrid = document.getElementById("guideGrid");
+    var guideSearch = document.getElementById("guideSearch");
+    var emptyState = document.getElementById("emptyState");
+    var guideCountSub = document.getElementById("guideCountSub");
+
+    var siteIndex = window.Fixora.siteIndex || [];
+    var guides = siteIndex.filter(function (item) { return item.type === "Guide"; })
+      .sort(function (a, b) { return a.name.localeCompare(b.name); });
+
+    guideCountSub.textContent = "Every free Fixoona how-to guide in one place (" + guides.length + " and counting).";
+
+    guides.forEach(function (guide) {
+      var card = document.createElement("a");
+      card.className = "card";
+      card.href = guide.href;
+      card.innerHTML =
+        '<span class="icon" aria-hidden="true">' + guide.icon + '</span>' +
+        '<h3>' + guide.name + '</h3>' +
+        '<span class="card-cta">Read guide →</span>';
+      guideGrid.appendChild(card);
+    });
+
+    function applySearch() {
+      var q = guideSearch.value.trim().toLowerCase();
+      var visibleCount = 0;
+
+      Array.prototype.forEach.call(guideGrid.querySelectorAll(".card"), function (card) {
+        var name = card.querySelector("h3").textContent.toLowerCase();
+        var visible = !q || name.indexOf(q) !== -1;
+        card.hidden = !visible;
+        if (visible) visibleCount++;
+      });
+
+      emptyState.style.display = visibleCount === 0 ? "block" : "none";
+    }
+
+    guideSearch.addEventListener("input", applySearch);
+  </script>
 </body>
 </html>
