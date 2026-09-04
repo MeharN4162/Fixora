@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JWTs Explained: Decoding vs. Verifying, and What's Actually Inside | Fixoona</title>
+  <meta name="description" content="What the three parts of a JWT actually are, why decoding a token isn't the same as verifying it, what the standard claims mean, and how expiry checking works." />
+  <meta name="keywords" content="how do jwts work, jwt decode vs verify, jwt claims explained, jwt hmac vs rsa signature" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/jwt-decoder-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="JWTs Explained: Decoding vs. Verifying, and What's Actually Inside" />
+  <meta property="og:description" content="What's inside a JWT, and why decoding it isn't the same as verifying it's genuine." />
+  <meta property="og:url" content="https://fixoona.com/blog/jwt-decoder-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="JWTs Explained: Decoding vs. Verifying, and What's Actually Inside" />
+  <meta name="twitter:description" content="What's inside a JWT, and why decoding it isn't the same as verifying it's genuine." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "JWTs Explained: Decoding vs. Verifying, and What's Actually Inside",
+    "description": "What's inside a JWT, and why decoding it isn't the same as verifying it's genuine.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/jwt-decoder-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "JWT Decoder Guide", "item": "https://fixoona.com/blog/jwt-decoder-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is decoding a JWT the same as verifying it's genuine?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. The header and payload of a JWT are only base64url-encoded, not encrypted, so anyone can decode and read them without any secret. Verifying that a token is genuine and untampered requires checking its signature against the secret or public key that issued it, which is a separate step this tool only performs if you provide the correct HMAC secret." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my token sent anywhere when I paste it in?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — decoding and signature verification both happen entirely in your browser using standard JavaScript and the Web Crypto API. Nothing about your token, including any secret you enter for verification, is ever sent to a server." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the signature verification only work for HMAC (HS256/HS384/HS512) tokens?",
+        "acceptedAnswer": { "@type": "Answer", "text": "HMAC algorithms use a single shared secret for both signing and verifying, which this tool can check directly once you provide that secret. RSA and ECDSA algorithms (RS256, ES256, and similar) use a public/private key pair instead — verifying those would require the issuer's public key, which is a more involved setup this simple tool doesn't currently support." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the \"exp\" field in the payload mean?",
+        "acceptedAnswer": { "@type": "Answer", "text": "exp stands for \"expiration time\" — a Unix timestamp after which the token should no longer be considered valid. This tool converts it to a readable date and flags whether the token has already expired relative to your current system clock." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>JWT Decoder Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Developer Guides · 6 min read · Updated September 2026</p>
+      <h1>JWTs Explained: Decoding vs. Verifying, and What's Actually Inside</h1>
+      <div class="article-hero-img" aria-hidden="true">🔑</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#three-parts">The Three Parts of a JWT</a></li>
+          <li><a href="#decode-vs-verify">Decoding Is Not the Same as Verifying</a></li>
+          <li><a href="#claims">Standard Claims: exp, iat, sub</a></li>
+          <li><a href="#hmac-vs-asymmetric">Why HMAC and RSA/ECDSA Differ</a></li>
+          <li><a href="#expiry">How Expiry Actually Gets Checked</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>JWTs show up everywhere in modern authentication, but the gap between "I can read what's inside this token" and "I can trust what's inside this token" trips up a surprising number of people working with them for the first time.</p>
+
+        <h2 id="three-parts">The Three Parts of a JWT</h2>
+        <p>A JWT is three base64url-encoded segments joined by periods: a header, a payload, and a signature. The header typically identifies the signing algorithm and token type. The payload holds the actual claims — the data the token is asserting, like a user ID or an expiration time. The signature is a cryptographic value computed over the header and payload together, and it's the only part of the three that actually requires a secret or private key to produce.</p>
+
+        <h2 id="decode-vs-verify">Decoding Is Not the Same as Verifying</h2>
+        <p>This is the single most common misunderstanding about JWTs: the header and payload are only encoded, not encrypted. Base64url encoding is fully reversible by anyone with no key required — it's a way of representing binary-safe data as text, not a way of hiding it. Anyone who intercepts a JWT can decode and read its payload instantly. What they can't do without the right secret or private key is prove the token is genuine and hasn't been tampered with — that's what the signature is actually for, and checking it is a separate, deliberate step called verification.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> Never put anything genuinely secret (a password, a raw credit card number) inside a JWT payload — since it's just encoded, not encrypted, anyone holding the token can read it without needing the signing key at all.
+        </div>
+
+        <h2 id="claims">Standard Claims: exp, iat, sub</h2>
+        <p>The JWT spec defines a handful of standard (but optional) claim names that most systems use consistently. exp is the expiration time — a Unix timestamp after which the token should be rejected. iat is "issued at," recording when the token was created. sub identifies the subject the token is about, usually a user ID. None of these are enforced by the token format itself; they're conventions that the system reading the token has to actually check and act on — a JWT with an expired exp claim doesn't stop working on its own, it just contains data that a properly written verifier should reject.</p>
+
+        <h2 id="hmac-vs-asymmetric">Why HMAC and RSA/ECDSA Differ</h2>
+        <p>JWT signatures come in two structurally different families. HMAC algorithms (HS256, HS384, HS512) use a single shared secret for both signing and verifying — whoever holds that secret can do either. RSA and ECDSA algorithms (RS256, ES256, and similar) use an asymmetric key pair instead: a private key signs the token, and a separate public key verifies it, without the public key ever being able to forge a new signature. Asymmetric signing is what lets one service issue tokens while many other services verify them without ever holding the actual signing secret — a shared HMAC secret would have to be distributed to every verifier, which is a much bigger security exposure at scale.</p>
+
+        <h2 id="expiry">How Expiry Actually Gets Checked</h2>
+        <p>Checking expiry is simple arithmetic once you understand the exp claim: it's a Unix timestamp (seconds since January 1, 1970 UTC), and a token is considered expired the moment the current time passes that value. There's nothing enforcing this at the token level — it's purely a comparison the verifying system has to perform itself, using its own system clock. This is also why clock drift between systems occasionally causes confusing edge cases: a token can appear valid or expired slightly earlier or later depending on whose clock is being trusted at the moment of the check.</p>
+
+        <h2 id="try-it">Try It Instantly</h2>
+        <p>Decode a JWT's header and payload, check its expiry, and optionally verify an HMAC signature with our free <a href="../tools/jwt-decoder">JWT Decoder</a> — everything runs locally in your browser, nothing is sent anywhere.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>Is decoding a JWT the same as verifying it's genuine?</strong> No. The header and payload of a JWT are only base64url-encoded, not encrypted, so anyone can decode and read them without any secret. Verifying that a token is genuine and untampered requires checking its signature against the secret or public key that issued it, which is a separate step this tool only performs if you provide the correct HMAC secret.</p>
+        <p><strong>Is my token sent anywhere when I paste it in?</strong> No — decoding and signature verification both happen entirely in your browser using standard JavaScript and the Web Crypto API. Nothing about your token, including any secret you enter for verification, is ever sent to a server.</p>
+        <p><strong>Why does the signature verification only work for HMAC (HS256/HS384/HS512) tokens?</strong> HMAC algorithms use a single shared secret for both signing and verifying, which this tool can check directly once you provide that secret. RSA and ECDSA algorithms (RS256, ES256, and similar) use a public/private key pair instead — verifying those would require the issuer's public key, which is a more involved setup this simple tool doesn't currently support.</p>
+        <p><strong>What does the "exp" field in the payload mean?</strong> exp stands for "expiration time" — a Unix timestamp after which the token should no longer be considered valid. This tool converts it to a readable date and flags whether the token has already expired relative to your current system clock.</p>
+
+        <div class="tip-box">
+          Have a token to inspect? Try the free <a href="../tools/jwt-decoder">JWT Decoder</a> — decode instantly, verify HMAC signatures, no sign-up.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

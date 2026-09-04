@@ -150,6 +150,7 @@ h1, h2, h3, h4 {
   margin: 0 0 0.6em;
   font-weight: 700;
   letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 
 p {
@@ -640,7 +641,7 @@ p {
     grid-template-columns: 30px 1fr;
     column-gap: 8px;
     row-gap: 2px;
-    padding: 11px 10px;
+    padding: 11px 40px 11px 10px;
     height: 56px;
   }
 
@@ -757,7 +758,7 @@ p {
     "cta  cta";
   column-gap: 14px;
   row-gap: 3px;
-  padding: 16px 18px;
+  padding: 16px 44px 16px 18px;
   align-items: start;
   height: 112px;
 }
@@ -820,7 +821,7 @@ p {
 
 .card-expand-toggle {
   position: absolute;
-  top: 10px;
+  bottom: 10px;
   right: 10px;
   width: 22px;
   height: 22px;

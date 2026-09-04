@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Browser Screen Recording Works Without an App | Fixoona</title>
+  <meta name="description" content="How a browser can record your screen without installing software, why it always asks permission first, and why nothing is ever uploaded to a server in the process." />
+  <meta name="keywords" content="how does browser screen recording work, screen capture api explained, is browser screen recording private" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/screen-recorder-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="How Browser Screen Recording Works Without an App" />
+  <meta property="og:description" content="How a browser can record your screen without installing software." />
+  <meta property="og:url" content="https://fixoona.com/blog/screen-recorder-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How Browser Screen Recording Works Without an App" />
+  <meta name="twitter:description" content="How a browser can record your screen without installing software." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How Browser Screen Recording Works Without an App",
+    "description": "How a browser can record your screen without installing software.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/screen-recorder-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Screen Recorder Guide", "item": "https://fixoona.com/blog/screen-recorder-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does a browser record the screen without installed software?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Modern browsers include a built-in Screen Capture API that lets a webpage request a live video stream of your screen, a specific window, or a browser tab. Once you grant permission and pick what to share, the browser hands that video stream to the page, which can then record it directly using another built-in browser feature, without any separate recording software involved." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does it always ask which screen, window, or tab to share?",
+        "acceptedAnswer": { "@type": "Answer", "text": "This permission prompt is a browser security feature, not something a website can skip or pre-select. It exists specifically so a page can never silently start recording your screen in the background — you always have to explicitly choose what's being shared, every single time, before any capture can begin." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the recorded video ever sent to a server?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No, not with a tool built to run entirely client-side. The video stream is captured and encoded directly in your browser, and the resulting file is generated locally on your own device — it never needs to leave your computer unless you choose to download or share it yourself." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Screen Recorder Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Developer Guides · 4 min read · Updated September 2026</p>
+      <h1>How Browser Screen Recording Works Without an App</h1>
+      <div class="article-hero-img" aria-hidden="true">🖥️</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#capture-api">The Built-In Screen Capture API</a></li>
+          <li><a href="#permission">Why It Always Asks Permission First</a></li>
+          <li><a href="#privacy">Where the Recorded Video Actually Goes</a></li>
+          <li><a href="#try">Record Your Screen</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>It seems like it should require a dedicated app — but modern browsers can capture your screen, a window, or a tab entirely on their own, using capabilities that have quietly become standard over the past several years.</p>
+
+        <h2 id="capture-api">The Built-In Screen Capture API</h2>
+        <p>Browsers expose a Screen Capture API that any webpage can call to request a live video stream of your screen. When called, the browser shows its own native picker — letting you choose your entire screen, a specific application window, or a single browser tab — and once you confirm, that video feed is handed to the page as a standard media stream. From there, a second built-in feature (a media recorder) can encode that stream directly into a downloadable video file, all without any third-party recording software.</p>
+
+        <h2 id="permission">Why It Always Asks Permission First</h2>
+        <p>The permission prompt and screen picker aren't something a website can bypass, pre-fill, or trigger silently — they're enforced by the browser itself as a core security boundary. This exists specifically to prevent any page from secretly capturing your screen in the background. Every single recording session requires you to explicitly pick what's being shared, with a visible browser indicator confirming that sharing is active for as long as it continues.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> If you only need to show a single application, choose "window" rather than your entire screen in the picker — it avoids accidentally capturing notifications, other open tabs, or anything else visible on your desktop.
+        </div>
+
+        <h2 id="privacy">Where the Recorded Video Actually Goes</h2>
+        <p>When a screen recorder tool runs entirely client-side, the captured video stream is processed and encoded directly inside your browser, and the finished file is generated locally on your own device. Nothing about that process requires uploading the footage anywhere — the video only leaves your computer if and when you choose to download or share it, which is a meaningfully different privacy model than a cloud-based recording service.</p>
+
+        <h2 id="try">Record Your Screen</h2>
+        <p>Start a recording of your screen, a window, or a tab with the free <a href="../tools/screen-recorder">Screen Recorder</a> — play it back and download it instantly, with nothing ever uploaded.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>How does a browser record the screen without installed software?</strong> Modern browsers include a built-in Screen Capture API that lets a webpage request a live video stream of your screen, a specific window, or a browser tab. Once you grant permission and pick what to share, the browser hands that video stream to the page, which can then record it directly using another built-in browser feature, without any separate recording software involved.</p>
+        <p><strong>Why does it always ask which screen, window, or tab to share?</strong> This permission prompt is a browser security feature, not something a website can skip or pre-select. It exists specifically so a page can never silently start recording your screen in the background — you always have to explicitly choose what's being shared, every single time, before any capture can begin.</p>
+        <p><strong>Is the recorded video ever sent to a server?</strong> No, not with a tool built to run entirely client-side. The video stream is captured and encoded directly in your browser, and the resulting file is generated locally on your own device — it never needs to leave your computer unless you choose to download or share it yourself.</p>
+
+        <div class="tip-box">
+          Need to record your screen? Try the free <a href="../tools/screen-recorder">Screen Recorder</a> — nothing uploaded, ever.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

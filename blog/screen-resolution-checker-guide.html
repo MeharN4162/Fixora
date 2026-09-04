@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Screen Resolution vs. Viewport vs. Pixel Ratio, Explained | Fixoona</title>
+  <meta name="description" content="The real difference between screen resolution, browser viewport, and device pixel ratio, and why a CSS pixel isn't the same as a physical device pixel." />
+  <meta name="keywords" content="screen resolution vs viewport, what is device pixel ratio, css pixel vs physical pixel, responsive design breakpoints" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/screen-resolution-checker-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Screen Resolution vs. Viewport vs. Pixel Ratio, Explained" />
+  <meta property="og:description" content="The real difference between screen resolution, viewport, and device pixel ratio." />
+  <meta property="og:url" content="https://fixoona.com/blog/screen-resolution-checker-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Screen Resolution vs. Viewport vs. Pixel Ratio, Explained" />
+  <meta name="twitter:description" content="The real difference between screen resolution, viewport, and device pixel ratio." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Screen Resolution vs. Viewport vs. Pixel Ratio, Explained",
+    "description": "The real difference between screen resolution, viewport, and device pixel ratio.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/screen-resolution-checker-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Resolution vs. Viewport", "item": "https://fixoona.com/blog/screen-resolution-checker-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What's the difference between screen resolution and viewport size?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Screen resolution is your entire monitor or display's total pixel dimensions. Viewport size is just the visible browser window area actually available for a webpage, which is smaller once you subtract the browser's toolbars, tabs, and any other chrome around the page." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the device pixel ratio mean?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's the ratio between physical device pixels and CSS pixels. A ratio of 2, common on high-density \"Retina\"-style displays, means the screen packs 2×2 real pixels into the space of what a webpage treats as a single CSS pixel, producing sharper text and images." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do these numbers update if I resize my browser window?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The viewport size specifically reflects your current browser window, so it updates live as you resize the window — this is useful for testing how a responsive website design behaves at different widths." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is any of this sent to a server?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — every value shown is read directly from your own browser using JavaScript, and none of it is ever sent anywhere." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Resolution vs. Viewport</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Developer Guides · 5 min read · Updated September 2026</p>
+      <h1>Screen Resolution vs. Viewport vs. Pixel Ratio, Explained</h1>
+      <div class="article-hero-img" aria-hidden="true">🖥️</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#resolution-vs-viewport">Screen Resolution Isn't What a Webpage Sees</a></li>
+          <li><a href="#pixel-ratio">What Device Pixel Ratio Actually Measures</a></li>
+          <li><a href="#css-pixels">Why a "Pixel" in CSS Isn't a Real Pixel</a></li>
+          <li><a href="#responsive-testing">Using Viewport Size to Test Responsive Design</a></li>
+          <li><a href="#check">Check Your Own Numbers</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>"What resolution is my screen" and "how big is the space a webpage actually has to work with" sound like the same question, but they're measuring two genuinely different things — and a third number, pixel ratio, complicates it even further.</p>
+
+        <h2 id="resolution-vs-viewport">Screen Resolution Isn't What a Webpage Sees</h2>
+        <p>Screen resolution describes your entire physical display's total pixel dimensions — the whole monitor or laptop screen, regardless of how many windows or browser tabs are open. The browser viewport, by contrast, is only the portion of that screen actually available for a webpage to render into, after subtracting the browser's own toolbars, tabs, bookmarks bar, and window chrome. A 1920×1080 screen might only give a maximized browser window a viewport closer to 1920×950 once all that surrounding interface is subtracted — and it shrinks further if the browser isn't maximized at all.</p>
+
+        <h2 id="pixel-ratio">What Device Pixel Ratio Actually Measures</h2>
+        <p>Device pixel ratio (DPR) is the relationship between physical pixels on the actual display hardware and the "CSS pixels" a webpage's code refers to. A ratio of 1 means one physical pixel per CSS pixel — a direct match. A ratio of 2, common on high-density "Retina"-style displays, means the screen physically packs a 2×2 grid of real pixels into the space treated as a single CSS pixel, which is what makes text and images render so much sharper on those displays without any extra effort from a website's code.</p>
+
+        <h2 id="css-pixels">Why a "Pixel" in CSS Isn't a Real Pixel</h2>
+        <p>This is the part that surprises a lot of people: when a stylesheet says an element is "16px" wide, that's a CSS pixel — a fixed reference unit standardized to look a consistent physical size across devices, not a literal single dot on the screen. On a high-DPR display, that same "16px" is actually rendered using many more physical pixels than 16. This abstraction exists specifically so that text and layouts look a comparable size on both an old low-density monitor and a modern high-density laptop screen, rather than shrinking to an unreadable size on denser displays.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> If a screenshot or exported image looks blurry on a high-DPR display, check whether it was exported at the CSS pixel size or the true physical pixel size (CSS size × device pixel ratio) — exporting at the smaller CSS size is a common cause of unexpectedly soft-looking images on Retina-class screens.
+        </div>
+
+        <h2 id="responsive-testing">Using Viewport Size to Test Responsive Design</h2>
+        <p>Because the viewport size updates live as you resize a browser window, it's a genuinely useful way to sanity-check a responsive website's layout breakpoints without needing dedicated device-testing software. Watching the viewport width tick down while a page's layout is supposed to switch from a multi-column to single-column view, for instance, tells you exactly what width that breakpoint actually triggers at in your current browser.</p>
+
+        <h2 id="check">Check Your Own Numbers</h2>
+        <p>See your screen resolution, browser viewport, device pixel ratio, and color depth instantly — updating live as you resize — with the free <a href="../tools/screen-resolution-checker">Screen Resolution Checker</a>. No sign-up, and nothing is sent to a server.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>What's the difference between screen resolution and viewport size?</strong> Screen resolution is your entire monitor or display's total pixel dimensions. Viewport size is just the visible browser window area actually available for a webpage, which is smaller once you subtract the browser's toolbars, tabs, and any other chrome around the page.</p>
+        <p><strong>What does the device pixel ratio mean?</strong> It's the ratio between physical device pixels and CSS pixels. A ratio of 2, common on high-density "Retina"-style displays, means the screen packs 2×2 real pixels into the space of what a webpage treats as a single CSS pixel, producing sharper text and images.</p>
+        <p><strong>Why do these numbers update if I resize my browser window?</strong> The viewport size specifically reflects your current browser window, so it updates live as you resize the window — this is useful for testing how a responsive website design behaves at different widths.</p>
+        <p><strong>Is any of this sent to a server?</strong> No — every value shown is read directly from your own browser using JavaScript, and none of it is ever sent anywhere.</p>
+
+        <div class="tip-box">
+          Want to check your resolution and viewport right now? Try the free <a href="../tools/screen-resolution-checker">Screen Resolution Checker</a> — no sign-up.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

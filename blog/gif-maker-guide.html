@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Animated GIFs Actually Work: Frames, Delay, and Palette Limits | Fixoona</title>
+  <meta name="description" content="Why GIFs are limited to 256 colors, how frame delay and cropping actually work, and why GIF files get large so quickly compared to video." />
+  <meta name="keywords" content="how do gifs work, gif 256 color limit, gif frame delay explained, why are gif files so large" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/gif-maker-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="How Animated GIFs Actually Work: Frames, Delay, and Palette Limits" />
+  <meta property="og:description" content="Why GIFs are limited to 256 colors, and how frame delay and cropping actually work." />
+  <meta property="og:url" content="https://fixoona.com/blog/gif-maker-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How Animated GIFs Actually Work: Frames, Delay, and Palette Limits" />
+  <meta name="twitter:description" content="Why GIFs are limited to 256 colors, and how frame delay and cropping actually work." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How Animated GIFs Actually Work: Frames, Delay, and Palette Limits",
+    "description": "Why GIFs are limited to 256 colors, and how frame delay and cropping actually work.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/gif-maker-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "GIF Maker Guide", "item": "https://fixoona.com/blog/gif-maker-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why can GIFs only display 256 colors at once?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The GIF format stores each frame using an indexed color palette capped at 256 colors, a limitation baked into the original 1987 GIF89a specification. This is why photos with smooth gradients or lots of color often show visible banding or dithering in a GIF, while flat-color graphics and screenshots tend to look nearly identical to the source." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is GIF frame delay usually described in hundredths of a second?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The GIF format's timing field was originally defined in centiseconds (hundredths of a second) rather than milliseconds, a holdover from the original specification. Most modern GIF tools, including this one, let you set the delay in the more intuitive milliseconds and convert it internally, but that's the reason you'll sometimes see GIF delay values that look oddly rounded." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does a GIF maker handle photos that aren't all the same size?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The output canvas is set to match the dimensions of the first image, and every other frame is center-cropped to fill that same size without stretching or distorting it — the same behavior as CSS's object-fit: cover. Anything outside the frame's edges is simply cropped away rather than squeezed to fit." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do GIFs take a while to generate and produce such large files compared to a video?",
+        "acceptedAnswer": { "@type": "Answer", "text": "GIF encoding — converting each frame to an indexed palette and assembling the timing data — is genuinely processor-intensive, and unlike a video codec, GIF doesn't compress between frames based on what changed, so file size scales fairly directly with frame count, dimensions, and color complexity." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>GIF Maker Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Image Guides · 6 min read · Updated September 2026</p>
+      <h1>How Animated GIFs Actually Work: Frames, Delay, and Palette Limits</h1>
+      <div class="article-hero-img" aria-hidden="true">🎞️</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#frame-based">GIFs Are Just a Sequence of Frames</a></li>
+          <li><a href="#256-color">The 256-Color Limit</a></li>
+          <li><a href="#delay-vs-fps">Frame Delay vs. Frame Rate</a></li>
+          <li><a href="#cropping">How Mismatched Photo Sizes Get Reconciled</a></li>
+          <li><a href="#file-size">Why GIFs Get Big Fast</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>The GIF is one of the oldest image formats still in everyday use online, and its quirks — the color banding, the choppy motion, the surprisingly large file sizes — all trace back to decisions made in a format designed decades before anyone was making animated reaction images out of it.</p>
+
+        <h2 id="frame-based">GIFs Are Just a Sequence of Frames</h2>
+        <p>An animated GIF isn't really "video" in any technical sense — it's a container holding a sequence of separate still images (frames), each with its own timing value, played back in order and looped according to a repeat setting. There's no motion compression or interpolation between frames the way a video codec does it; each frame is a complete, independent image that just happens to be shown right after the last one.</p>
+
+        <h2 id="256-color">The 256-Color Limit</h2>
+        <p>Every GIF frame is stored using an indexed color palette capped at 256 colors total — a hard limit written into the original 1987 GIF89a specification, long before anyone was routinely working with millions of colors on screen. When a source photo has more distinct colors than that, the encoder has to approximate: nearby colors get mapped to the closest available palette entry, or dithered (mixed in a pattern) to simulate a color that isn't actually available. This is exactly why a GIF of a photo with a smooth sky gradient often shows visible banding, while a GIF of a simple screenshot or flat-color graphic looks nearly identical to the source — it never needed more than 256 colors to begin with.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> If a GIF you're making looks banded or blotchy, it's almost always the 256-color limit at work on a photo with smooth gradients — flatter, higher-contrast source images will always convert more cleanly.
+        </div>
+
+        <h2 id="delay-vs-fps">Frame Delay vs. Frame Rate</h2>
+        <p>GIFs don't use a frame rate the way video does — instead, each individual frame carries its own delay value specifying how long it should stay on screen before advancing. That timing field in the GIF spec was originally defined in centiseconds (hundredths of a second), a detail left over from the format's original design. Most modern GIF-making tools let you set delay in the more familiar milliseconds and convert it internally, which is also why some GIF delay values you'll see in the wild look oddly rounded — they're really multiples of 10ms under the hood.</p>
+
+        <h2 id="cropping">How Mismatched Photo Sizes Get Reconciled</h2>
+        <p>Every frame in a GIF has to share the same canvas dimensions, so when source photos come in different sizes, something has to give. A common approach is to lock the output size to the first image and then center-crop every other image to fill that same frame without stretching or distorting it — the same behavior as CSS's object-fit: cover. The tradeoff is that anything outside the target frame gets cropped away rather than squeezed to fit, so photos with very different aspect ratios from the first one can lose parts of the edges.</p>
+
+        <h2 id="file-size">Why GIFs Get Big Fast</h2>
+        <p>Encoding a GIF — converting each frame to its indexed palette and assembling the frame timing data — is genuinely processor-intensive work. It's also inherently less efficient than modern video compression: video codecs typically only store what changed between frames, while GIF frames are largely independent, so file size scales fairly directly with the number of frames, their dimensions, and how much color detail each one contains. More frames or a higher quality setting both push the file size and encoding time up together.</p>
+
+        <h2 id="try-it">Try It Instantly</h2>
+        <p>Turn a set of photos into an animated GIF with our free <a href="../tools/gif-maker">GIF Maker</a> — reorder frames, set the delay and loop, and everything runs right in your browser with nothing uploaded.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>Why can GIFs only display 256 colors at once?</strong> The GIF format stores each frame using an indexed color palette capped at 256 colors, a limitation baked into the original 1987 GIF89a specification. This is why photos with smooth gradients or lots of color often show visible banding or dithering in a GIF, while flat-color graphics and screenshots tend to look nearly identical to the source.</p>
+        <p><strong>Why is GIF frame delay usually described in hundredths of a second?</strong> The GIF format's timing field was originally defined in centiseconds (hundredths of a second) rather than milliseconds, a holdover from the original specification. Most modern GIF tools, including this one, let you set the delay in the more intuitive milliseconds and convert it internally, but that's the reason you'll sometimes see GIF delay values that look oddly rounded.</p>
+        <p><strong>How does a GIF maker handle photos that aren't all the same size?</strong> The output canvas is set to match the dimensions of the first image, and every other frame is center-cropped to fill that same size without stretching or distorting it — the same behavior as CSS's object-fit: cover. Anything outside the frame's edges is simply cropped away rather than squeezed to fit.</p>
+        <p><strong>Why do GIFs take a while to generate and produce such large files compared to a video?</strong> GIF encoding — converting each frame to an indexed palette and assembling the timing data — is genuinely processor-intensive, and unlike a video codec, GIF doesn't compress between frames based on what changed, so file size scales fairly directly with frame count, dimensions, and color complexity.</p>
+
+        <div class="tip-box">
+          Ready to make a GIF? Try the free <a href="../tools/gif-maker">GIF Maker</a> — upload photos, reorder them, and download the result in seconds.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

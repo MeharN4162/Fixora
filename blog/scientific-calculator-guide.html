@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order of Operations: Why Calculators Disagree on the Same Expression | Fixoona</title>
+  <meta name="description" content="Why order of operations trips people up, why exponents evaluate right to left, degrees vs. radians for trig, and why 0.1 + 0.2 isn't exactly 0.3." />
+  <meta name="keywords" content="order of operations explained, pemdas mistakes, degrees vs radians, floating point rounding error" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/scientific-calculator-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Order of Operations: Why Calculators Disagree on the Same Expression" />
+  <meta property="og:description" content="Why order of operations trips people up, and why 0.1 + 0.2 isn't exactly 0.3." />
+  <meta property="og:url" content="https://fixoona.com/blog/scientific-calculator-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Order of Operations: Why Calculators Disagree on the Same Expression" />
+  <meta name="twitter:description" content="Why order of operations trips people up, and why 0.1 + 0.2 isn't exactly 0.3." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Order of Operations: Why Calculators Disagree on the Same Expression",
+    "description": "Why order of operations trips people up, and why 0.1 + 0.2 isn't exactly 0.3.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/scientific-calculator-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Order of Operations Explained", "item": "https://fixoona.com/blog/scientific-calculator-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does this calculator respect the correct order of operations?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — it uses a proper expression parser (not a naive left-to-right evaluation), so multiplication and division happen before addition and subtraction, exponents are evaluated right-to-left as they should be, and parentheses always take priority." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are the trig functions in degrees or radians?",
+        "acceptedAnswer": { "@type": "Answer", "text": "You can switch between them with the Deg/Rad toggle. In degree mode, sin(90) correctly returns 1; in radian mode, the same functions expect and interpret angles in radians instead." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does 2^3^2 equal 512 and not 64?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Exponentiation is evaluated right to left, so 2^3^2 is actually 2^(3^2) = 2^9 = 512, not (2^3)^2 = 64 — this right-associative rule is the mathematical convention, even though it can look ambiguous written on one line without parentheses." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is anything I calculate sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — every calculation is evaluated entirely in your browser using JavaScript, so nothing you enter is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Order of Operations Explained</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Math Guides · 5 min read · Updated September 2026</p>
+      <h1>Order of Operations: Why Calculators Disagree on the Same Expression</h1>
+      <div class="article-hero-img" aria-hidden="true">🧮</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#pemdas">PEMDAS, and Where It Actually Trips People Up</a></li>
+          <li><a href="#exponent-direction">Why Exponents Evaluate Right to Left</a></li>
+          <li><a href="#deg-vs-rad">Degrees vs. Radians: The Most Common Trig Mistake</a></li>
+          <li><a href="#floating-point">Why 0.1 + 0.2 Doesn't Always Equal 0.3</a></li>
+          <li><a href="#calculate">Try the Full Calculator</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>Type the exact same expression into two different calculators and you can genuinely get two different answers — not because either one is broken, but because of specific, well-defined rules about evaluation order that a lot of people never learned precisely.</p>
+
+        <h2 id="pemdas">PEMDAS, and Where It Actually Trips People Up</h2>
+        <p>Parentheses, Exponents, Multiplication and Division (left to right), Addition and Subtraction (left to right) — that's the standard order. The part people misremember most often: multiplication doesn't universally happen before division, and addition doesn't universally happen before subtraction. Within each of those pairs, you work strictly left to right. 10 − 3 + 2 is 9, not 5, because subtraction and addition share equal priority and are resolved left to right, not subtraction-first.</p>
+
+        <h2 id="exponent-direction">Why Exponents Evaluate Right to Left</h2>
+        <p>Multiplication and addition are read left to right, but exponentiation is the odd one out — it's evaluated right to left. That means 2^3^2 isn't (2^3)^2 = 64; it's 2^(3^2) = 2^9 = 512. This right-associative rule is the actual mathematical convention (not a calculator quirk), and it's exactly why stacked exponents without explicit parentheses can look ambiguous even though there's only one mathematically correct reading.</p>
+
+        <h2 id="deg-vs-rad">Degrees vs. Radians: The Most Common Trig Mistake</h2>
+        <p>sin(90) should equal 1 — but only if your calculator is in degree mode. In radian mode, the same input, 90, is interpreted as 90 radians (a huge angle, many full rotations around the circle), producing a completely different result. This single mode setting is responsible for more "my calculator is broken" confusion than almost anything else in trigonometry — always check which mode you're in before trusting a trig result that looks wrong.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> If a trig result looks obviously wrong (like a sine or cosine value outside the -1 to 1 range, which is mathematically impossible for those two functions), the very first thing to check is whether you're in the wrong degree/radian mode — it's the single most common cause.
+        </div>
+
+        <h2 id="floating-point">Why 0.1 + 0.2 Doesn't Always Equal 0.3</h2>
+        <p>Computers store decimal numbers in binary, and just like 1/3 can't be written exactly as a finite decimal, many ordinary decimals like 0.1 can't be represented exactly in binary floating point. The stored value is an extremely close approximation, not the exact number — so adding two of these approximations together can produce a result like 0.30000000000000004 instead of a clean 0.3. This isn't a bug; it's an inherent, well-understood limitation of how floating-point numbers work in virtually every programming language and calculator, and well-built tools round the displayed result to hide it in ordinary use.</p>
+
+        <h2 id="calculate">Try the Full Calculator</h2>
+        <p>Build an expression with trig functions, logarithms, powers, and factorials — with correct operator precedence and a Deg/Rad toggle — using the free <a href="../tools/scientific-calculator">Scientific Calculator</a>. No sign-up, and nothing you enter leaves your browser.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>Does this calculator respect the correct order of operations?</strong> Yes — it uses a proper expression parser (not a naive left-to-right evaluation), so multiplication and division happen before addition and subtraction, exponents are evaluated right-to-left as they should be, and parentheses always take priority.</p>
+        <p><strong>Are the trig functions in degrees or radians?</strong> You can switch between them with the Deg/Rad toggle. In degree mode, sin(90) correctly returns 1; in radian mode, the same functions expect and interpret angles in radians instead.</p>
+        <p><strong>Why does 2^3^2 equal 512 and not 64?</strong> Exponentiation is evaluated right to left, so 2^3^2 is actually 2^(3^2) = 2^9 = 512, not (2^3)^2 = 64 — this right-associative rule is the mathematical convention, even though it can look ambiguous written on one line without parentheses.</p>
+        <p><strong>Is anything I calculate sent anywhere?</strong> No — every calculation is evaluated entirely in your browser using JavaScript, so nothing you enter is ever sent to a server.</p>
+
+        <div class="tip-box">
+          Want to try trig, logs, and powers with correct precedence right now? Try the free <a href="../tools/scientific-calculator">Scientific Calculator</a> — no sign-up.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

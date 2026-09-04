@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Anatomy of a URL, Explained | Fixoona</title>
+  <meta name="description" content="Every part of a URL — protocol, host, path, query string, and fragment — actually means something specific. Here's what each piece does and why it's separated that way." />
+  <meta name="keywords" content="parts of a url explained, what is a query parameter, url fragment vs query string" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/url-parser-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="The Anatomy of a URL, Explained" />
+  <meta property="og:description" content="What each part of a URL actually means and does." />
+  <meta property="og:url" content="https://fixoona.com/blog/url-parser-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Anatomy of a URL, Explained" />
+  <meta name="twitter:description" content="What each part of a URL actually means and does." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "The Anatomy of a URL, Explained",
+    "description": "What each part of a URL actually means and does.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/url-parser-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "URL Parser Guide", "item": "https://fixoona.com/blog/url-parser-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What's the difference between the path and the query string?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The path (everything after the host, before a \"?\") typically identifies a specific resource or page, structured like a folder hierarchy. The query string (everything after the \"?\") holds key-value parameters that modify or filter that resource — like a search term, a page number, or a sort order — without changing which underlying resource is being requested." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the fragment (the part after #) actually do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The fragment identifies a specific location within the page itself, most commonly used to jump to a particular heading or section. Unlike the rest of the URL, the fragment is never sent to the server as part of the request — it's handled entirely by the browser after the full page has already loaded." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do some URLs have %20 or other percent signs in them?",
+        "acceptedAnswer": { "@type": "Answer", "text": "URLs can only safely contain a limited set of characters, so anything else — a space, an ampersand, a non-English character — has to be percent-encoded: converted into a % followed by its hexadecimal code. A space becomes %20, for example. This ensures the URL is transmitted correctly regardless of what characters the original text contained." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>URL Parser Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Developer Guides · 5 min read · Updated September 2026</p>
+      <h1>The Anatomy of a URL, Explained</h1>
+      <div class="article-hero-img" aria-hidden="true">🔗</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#path-query">Path vs. Query String</a></li>
+          <li><a href="#fragment">What the Fragment Actually Does</a></li>
+          <li><a href="#encoding">Why URLs Sometimes Have %20 in Them</a></li>
+          <li><a href="#try">Break Down a URL Instantly</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>A URL looks like one continuous string, but it's actually a tightly structured format where every section has a specific, well-defined job — and once you can read the structure, a long, messy-looking link stops being intimidating.</p>
+
+        <h2 id="path-query">Path vs. Query String</h2>
+        <p>The path is the part right after the domain, structured like a folder hierarchy (<code>/blog/url-parser-guide</code>), and it usually identifies which specific resource or page is being requested. The query string comes after a <code>?</code> and holds key-value pairs separated by <code>&amp;</code>, used to modify or filter that resource — a search term, a page number, a sort order — without changing which underlying page is actually being loaded. The same path can be requested with countless different query strings, each producing a different view of the same resource.</p>
+
+        <h2 id="fragment">What the Fragment Actually Does</h2>
+        <p>Everything after a <code>#</code> is the fragment, and it works differently from the rest of the URL: it's never transmitted to the server as part of the request at all. Instead, the browser loads the full page normally and then uses the fragment locally to scroll to a matching element on the page — most commonly a heading with a matching ID, which is exactly how a table-of-contents link jumps straight to a section.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> Because the fragment never reaches the server, it can't be used to pass information a server-side script needs to act on — anything the backend needs to see has to go in the path or the query string instead.
+        </div>
+
+        <h2 id="encoding">Why URLs Sometimes Have %20 in Them</h2>
+        <p>URLs are restricted to a specific, limited set of safe characters. Anything outside that set — a space, an ampersand inside a value, accented or non-Latin characters — has to be percent-encoded: replaced with a <code>%</code> followed by the character's hexadecimal byte code. A space becomes <code>%20</code>, for instance. This guarantees the URL survives being copied, pasted, and transmitted correctly no matter what the original text contained, since every character in the encoded result is guaranteed to be URL-safe.</p>
+
+        <h2 id="try">Break Down a URL Instantly</h2>
+        <p>Paste any URL into the free <a href="../tools/url-parser">URL Parser</a> to see its protocol, host, path, query parameters, and fragment broken out individually.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>What's the difference between the path and the query string?</strong> The path (everything after the host, before a "?") typically identifies a specific resource or page, structured like a folder hierarchy. The query string (everything after the "?") holds key-value parameters that modify or filter that resource — like a search term, a page number, or a sort order — without changing which underlying resource is being requested.</p>
+        <p><strong>What does the fragment (the part after #) actually do?</strong> The fragment identifies a specific location within the page itself, most commonly used to jump to a particular heading or section. Unlike the rest of the URL, the fragment is never sent to the server as part of the request — it's handled entirely by the browser after the full page has already loaded.</p>
+        <p><strong>Why do some URLs have %20 or other percent signs in them?</strong> URLs can only safely contain a limited set of characters, so anything else — a space, an ampersand, a non-English character — has to be percent-encoded: converted into a % followed by its hexadecimal code. A space becomes %20, for example. This ensures the URL is transmitted correctly regardless of what characters the original text contained.</p>
+
+        <div class="tip-box">
+          Need to break down a URL? Try the free <a href="../tools/url-parser">URL Parser</a> — every component, instantly.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

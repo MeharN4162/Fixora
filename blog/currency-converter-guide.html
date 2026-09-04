@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exchange Rates: Reference Rates vs. What You Actually Pay | Fixoona</title>
+  <meta name="description" content="What a mid-market exchange rate actually is, why your bank's rate is always a bit worse, and why exchange rates update daily instead of every second." />
+  <meta name="keywords" content="mid market exchange rate explained, why is my bank rate different, currency conversion markup, how exchange rates update" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/currency-converter-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Exchange Rates: Reference Rates vs. What You Actually Pay" />
+  <meta property="og:description" content="What a mid-market rate is, and why your bank's rate is always a bit worse." />
+  <meta property="og:url" content="https://fixoona.com/blog/currency-converter-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Exchange Rates: Reference Rates vs. What You Actually Pay" />
+  <meta name="twitter:description" content="What a mid-market rate is, and why your bank's rate is always a bit worse." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Exchange Rates: Reference Rates vs. What You Actually Pay",
+    "description": "What a mid-market rate is, and why your bank's rate is always a bit worse.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/currency-converter-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Exchange Rates Explained Guide", "item": "https://fixoona.com/blog/currency-converter-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How often are exchange rates updated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Once a day. Rates are pulled from a free, publicly available exchange rate service and cached in your browser for up to 12 hours before checking for a fresh set, so most visits use an already-cached rate rather than making a new request every time." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are these real-time, live trading rates?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — these are daily reference rates, not second-by-second interbank trading rates. Actual currency markets move continuously throughout the day, so a rate shown here can differ slightly from what you'd see on a live trading platform at that exact moment." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is the rate my bank or card gave me different from a reference rate?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Banks, card networks, and money transfer services typically add their own markup on top of the market exchange rate, plus sometimes a separate foreign transaction fee. A reference rate is the underlying market rate, not what any specific bank or provider will actually charge you." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does it mean when a currency pair is quoted \"via USD\"?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Most currency data providers publish rates against a single base currency (commonly USD) rather than every possible pair directly. Converting between two other currencies, like EUR to GBP, is done by first converting EUR to USD and then USD to GBP — a cross rate — which is mathematically equivalent to a direct rate but relies on the base currency as an intermediate step." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Exchange Rates Explained Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Finance Guides · 6 min read · Updated September 2026</p>
+      <h1>Exchange Rates: Reference Rates vs. What You Actually Pay</h1>
+      <div class="article-hero-img" aria-hidden="true">💱</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#reference-rate">What a Reference Rate Actually Is</a></li>
+          <li><a href="#bank-markup">Why Your Bank's Rate Is Always Worse</a></li>
+          <li><a href="#update-frequency">Why Rates Update Daily, Not Every Second</a></li>
+          <li><a href="#cross-rate">Reading a Cross Rate</a></li>
+          <li><a href="#convert">Converting Instantly</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>Look up a currency conversion online, then check what your bank or card statement actually charged for the same transaction, and the two numbers rarely match. That gap isn't an error in either source — it comes down to which specific exchange rate each one is quoting.</p>
+
+        <h2 id="reference-rate">What a Reference Rate Actually Is</h2>
+        <p>The rate you see on a general currency converter is typically a mid-market (or "interbank") reference rate — the midpoint between the buy and sell prices that banks and financial institutions actually trade currency at with each other, in enormous volumes, with no markup added. It's the closest thing to a neutral, objective "true" exchange rate at a given moment. No individual person or business can usually access that exact rate for their own transaction, though — it's a benchmark, not a retail offer.</p>
+
+        <h2 id="bank-markup">Why Your Bank's Rate Is Always Worse</h2>
+        <p>Banks, card networks, and currency exchange services build a profit margin into every conversion, which shows up as a markup on top of the mid-market rate rather than as a separate visible fee. A wide markup means the rate they give you is noticeably worse than the mid-market reference rate; some providers also charge an additional flat foreign transaction fee on top. This is standard across the industry — the mid-market rate is a useful baseline for judging how good or bad a specific deal is, not a rate you should expect to receive yourself.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> When comparing two currency exchange options, compare the actual rate you'd receive against the mid-market reference rate at that moment, rather than comparing advertised "0% commission" claims — a wide markup baked into the rate itself can cost more than an upfront fee would have.
+        </div>
+
+        <h2 id="update-frequency">Why Rates Update Daily, Not Every Second</h2>
+        <p>Actual currency markets trade continuously and rates shift by the second, but most free, publicly available exchange rate data isn't refreshed that often — daily updates are the common standard for reference-rate services, since continuous live-market data feeds are typically a paid product reserved for financial institutions and trading platforms. A daily rate is accurate enough for everyday conversions and budgeting, but it isn't a live trading quote, and shouldn't be treated as one for anything time-sensitive like an actual trade.</p>
+
+        <h2 id="cross-rate">Reading a Cross Rate</h2>
+        <p>Currency data is usually published against one base currency — commonly the US dollar — rather than as a direct rate for every possible pair of currencies. Converting between two non-USD currencies, say Euros to British Pounds, typically happens in two steps behind the scenes: Euros to Dollars, then Dollars to Pounds. This two-step conversion is called a cross rate, and it's mathematically identical to a direct rate — it just relies on the base currency as a common intermediate rather than every currency pair being tracked independently.</p>
+
+        <h2 id="convert">Converting Instantly</h2>
+        <p>Convert between 160+ world currencies using daily-updated reference rates with the free <a href="../tools/currency-converter">Currency Converter</a> — the exact rate used and when it was last updated are shown right below the result.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>How often are exchange rates updated?</strong> Once a day. Rates are pulled from a free, publicly available exchange rate service and cached in your browser for up to 12 hours before checking for a fresh set, so most visits use an already-cached rate rather than making a new request every time.</p>
+        <p><strong>Are these real-time, live trading rates?</strong> No — these are daily reference rates, not second-by-second interbank trading rates. Actual currency markets move continuously throughout the day, so a rate shown here can differ slightly from what you'd see on a live trading platform at that exact moment.</p>
+        <p><strong>Why is the rate my bank or card gave me different from a reference rate?</strong> Banks, card networks, and money transfer services typically add their own markup on top of the market exchange rate, plus sometimes a separate foreign transaction fee. A reference rate is the underlying market rate, not what any specific bank or provider will actually charge you.</p>
+        <p><strong>What does it mean when a currency pair is quoted "via USD"?</strong> Most currency data providers publish rates against a single base currency (commonly USD) rather than every possible pair directly. Converting between two other currencies, like EUR to GBP, is done by first converting EUR to USD and then USD to GBP — a cross rate — which is mathematically equivalent to a direct rate but relies on the base currency as an intermediate step.</p>
+
+        <div class="tip-box">
+          Need a quick conversion right now? Try the free <a href="../tools/currency-converter">Currency Converter</a> — 160+ currencies, updated live as you type.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

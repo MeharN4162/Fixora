@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Public vs. Private IP Addresses: What "My IP" Actually Means | Fixoona</title>
+  <meta name="description" content="The real difference between a public and private IP address, how a website even sees your IP, and why IPv4 and IPv6 both still exist side by side." />
+  <meta name="keywords" content="public vs private ip address, what is my ip explained, ipv4 vs ipv6, how does a website see my ip" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/what-is-my-ip-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Public vs. Private IP Addresses: What &quot;My IP&quot; Actually Means" />
+  <meta property="og:description" content="The real difference between a public and private IP, and how a website sees your IP." />
+  <meta property="og:url" content="https://fixoona.com/blog/what-is-my-ip-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Public vs. Private IP Addresses: What &quot;My IP&quot; Actually Means" />
+  <meta name="twitter:description" content="The real difference between a public and private IP, and how a website sees your IP." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Public vs. Private IP Addresses: What \"My IP\" Actually Means",
+    "description": "The real difference between a public and private IP, and how a website sees your IP.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/what-is-my-ip-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Public vs. Private IP Addresses", "item": "https://fixoona.com/blog/what-is-my-ip-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where does a \"what's my IP\" page actually get the address from?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Fixoona has no backend server of its own, so this page asks a well-known public IP-lookup service (ipify.org) directly from your browser, and that service reports back the IP address it sees your request coming from — the same way any website you visit sees your IP." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my public IP the same as my private home network IP?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — this is your public IP address, the one your router or ISP presents to the outside internet. If multiple devices share one internet connection (like everyone on the same home Wi-Fi), they'll typically all show the same public IP, even though each device also has its own separate private IP on the local network." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do IPv4 and IPv6 addresses look so different?",
+        "acceptedAnswer": { "@type": "Answer", "text": "IPv4 addresses are written as four numbers separated by dots (like 203.0.113.42) and only allow about 4.3 billion unique addresses, which the internet has essentially run out of; IPv6 uses a much longer format written in hexadecimal groups separated by colons, providing a vastly larger address space, and many networks now assign both at once." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why might my IP look different than it did an hour ago, or different from another site's lookup?",
+        "acceptedAnswer": { "@type": "Answer", "text": "If you're using a VPN, proxy, or your ISP just rotated your assigned address, different lookup services can briefly disagree, or you might see a different result minutes apart. This is normal and reflects real, dynamic changes in how you're routed to the internet, not an error." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Public vs. Private IP Addresses</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Developer Guides · 5 min read · Updated September 2026</p>
+      <h1>Public vs. Private IP Addresses: What "My IP" Actually Means</h1>
+      <div class="article-hero-img" aria-hidden="true">🌍</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#public-vs-private">Public vs. Private IP Addresses</a></li>
+          <li><a href="#how-lookup">How a Website Even Knows Your IP</a></li>
+          <li><a href="#ipv4-ipv6">IPv4 vs. IPv6, and Why Both Still Exist</a></li>
+          <li><a href="#why-changes">Why Your IP Can Change (or Look Different)</a></li>
+          <li><a href="#check">Check Your IP Right Now</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>"What's my IP" sounds like it should have one simple answer, but a single device actually has more than one IP address at once, and which one a tool reports back depends entirely on where in the network that tool is looking from.</p>
+
+        <h2 id="public-vs-private">Public vs. Private IP Addresses</h2>
+        <p>Your private IP address is assigned by your router to identify your device on your own local network — it's typically something like 192.168.1.42, and it's meaningless outside your home or office network. Your public IP address is the one your router or ISP presents to the wider internet on your behalf. Every device on the same home Wi-Fi shares that one public IP even though each device has its own distinct private IP — this is why "what's my IP" tools report one shared number for an entire household, not a separate one per device.</p>
+
+        <h2 id="how-lookup">How a Website Even Knows Your IP</h2>
+        <p>Every request your browser sends across the internet has to include a return address so the response can find its way back — that return address is your public IP, visible to literally every website you visit, not just dedicated "what's my IP" tools. A page displaying your IP isn't doing anything special or invasive; it's simply showing you the address that was already attached to your own request the moment it left your network.</p>
+
+        <h2 id="ipv4-ipv6">IPv4 vs. IPv6, and Why Both Still Exist</h2>
+        <p>IPv4, the older and still more common format, is written as four numbers separated by dots (like 203.0.113.42), and it only has room for about 4.3 billion unique addresses — a number the internet has already technically exhausted, worked around mostly through address sharing techniques like NAT. IPv6 was designed to fix that shortage with a vastly larger address space, written as longer hexadecimal groups separated by colons. Because the transition has been gradual, most networks and devices today support both, and which one you're assigned can depend on your specific ISP and router configuration.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> If your public IP shown here doesn't match what a different "what's my IP" site reports at the exact same moment, try both again after a few minutes rather than assuming something's broken — brief disagreements between lookup services are common and usually resolve on their own.
+        </div>
+
+        <h2 id="why-changes">Why Your IP Can Change (or Look Different)</h2>
+        <p>Most home internet connections use a "dynamic" IP that your ISP can reassign periodically — restarting your router is a common trigger. Using a VPN or proxy also changes what any website sees, since your traffic appears to originate from the VPN server's IP rather than your own. None of this indicates a problem; it's simply how IP addressing works when you're not paying for a fixed, "static" IP specifically.</p>
+
+        <h2 id="check">Check Your IP Right Now</h2>
+        <p>See your public IP address instantly, plus your browser, operating system, screen size, and time zone, with the free <a href="../tools/what-is-my-ip">What Is My IP Address</a> tool — no sign-up, and your IP isn't logged by Fixoona.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>Where does a "what's my IP" page actually get the address from?</strong> Fixoona has no backend server of its own, so this page asks a well-known public IP-lookup service (ipify.org) directly from your browser, and that service reports back the IP address it sees your request coming from — the same way any website you visit sees your IP.</p>
+        <p><strong>Is my public IP the same as my private home network IP?</strong> No — this is your public IP address, the one your router or ISP presents to the outside internet. If multiple devices share one internet connection (like everyone on the same home Wi-Fi), they'll typically all show the same public IP, even though each device also has its own separate private IP on the local network.</p>
+        <p><strong>Why do IPv4 and IPv6 addresses look so different?</strong> IPv4 addresses are written as four numbers separated by dots (like 203.0.113.42) and only allow about 4.3 billion unique addresses, which the internet has essentially run out of; IPv6 uses a much longer format written in hexadecimal groups separated by colons, providing a vastly larger address space, and many networks now assign both at once.</p>
+        <p><strong>Why might my IP look different than it did an hour ago, or different from another site's lookup?</strong> If you're using a VPN, proxy, or your ISP just rotated your assigned address, different lookup services can briefly disagree, or you might see a different result minutes apart. This is normal and reflects real, dynamic changes in how you're routed to the internet, not an error.</p>
+
+        <div class="tip-box">
+          Want to check your public IP right now? Try the free <a href="../tools/what-is-my-ip">What Is My IP Address</a> tool — no sign-up.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

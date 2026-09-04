@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barcode Formats Explained: CODE128, EAN-13, UPC-A, and More | Fixoona</title>
+  <meta name="description" content="The real difference between a barcode and a QR code, how a scanner actually reads a series of bars as data, and why retail barcodes need officially registered numbers." />
+  <meta name="keywords" content="barcode vs qr code, how do barcode scanners work, ean13 vs upc-a, gs1 barcode number registration" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/barcode-generator-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Barcode Formats Explained: CODE128, EAN-13, UPC-A, and More" />
+  <meta property="og:description" content="How a barcode scanner reads bars as data, and why retail codes need registered numbers." />
+  <meta property="og:url" content="https://fixoona.com/blog/barcode-generator-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Barcode Formats Explained: CODE128, EAN-13, UPC-A, and More" />
+  <meta name="twitter:description" content="How a barcode scanner reads bars as data, and why retail codes need registered numbers." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Barcode Formats Explained: CODE128, EAN-13, UPC-A, and More",
+    "description": "How a barcode scanner reads bars as data, and why retail codes need registered numbers.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/barcode-generator-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Barcode Formats Guide", "item": "https://fixoona.com/blog/barcode-generator-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What's the difference between a barcode and a QR code?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A traditional barcode is one-dimensional — a series of parallel lines that a scanner reads along a single horizontal pass — and typically stores a short numeric or alphanumeric code. A QR code is two-dimensional, storing far more data in a square grid, and can be scanned from any angle by a camera, not just a laser scanner." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does a scanner actually turn a series of bars into data?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Each barcode format defines a set of precise bar-and-space width patterns that correspond to specific characters or digits, plus start and stop patterns marking where the code begins and ends. A scanner measures the exact widths of the bars and gaps it detects, looks up which characters those widths correspond to, and reconstructs the encoded value — most formats also include a checksum digit calculated from the other digits, so the scanner can detect a misread instead of silently returning the wrong value." }
+      },
+      {
+        "@type": "Question",
+        "name": "Which barcode format should I use?",
+        "acceptedAnswer": { "@type": "Answer", "text": "CODE128 is the most flexible default, encoding any letters, numbers, and most symbols, which makes it a safe general-purpose choice. UPC-A and EAN-13 are the standard formats for retail products but require an officially registered number and an exact digit count to be genuinely scannable at a real point of sale — don't use them for made-up numbers on products you intend to sell through retail systems." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I encode any text in any format?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — each format has its own rules. CODE128 and CODE39 accept a wide range of letters and symbols. EAN-13 requires exactly 12 or 13 digits, UPC-A requires exactly 11 or 12 digits, and ITF-14 requires an even number of digits. Entering the wrong length or an unsupported character for a given format will show an error instead of a barcode." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Barcode Formats Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Developer Guides · 6 min read · Updated September 2026</p>
+      <h1>Barcode Formats Explained: CODE128, EAN-13, UPC-A, and More</h1>
+      <div class="article-hero-img" aria-hidden="true">▊</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#1d-vs-2d">Barcode vs. QR Code</a></li>
+          <li><a href="#how-scanning-works">How a Scanner Reads the Bars</a></li>
+          <li><a href="#registered-numbers">Why Retail Barcodes Need Registered Numbers</a></li>
+          <li><a href="#choosing-format">Choosing the Right Format</a></li>
+          <li><a href="#generate">Generating One Instantly</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>"Barcode" gets used loosely to mean any scannable code, but there are actually several distinct standards under that umbrella, each with its own rules about what it can encode and where it's used — and picking the wrong one is the most common reason a generated barcode doesn't actually work as intended.</p>
+
+        <h2 id="1d-vs-2d">Barcode vs. QR Code</h2>
+        <p>A traditional barcode is one-dimensional: a series of parallel lines of varying widths that a scanner reads along a single horizontal pass, typically storing a short numeric or alphanumeric string. A QR code is two-dimensional, arranging data in a square grid instead of a line, which lets it hold far more information and be read by a camera from any angle, not just a laser passing straight across it. Traditional barcodes remain the standard for retail point-of-sale systems specifically because that infrastructure was built around them; QR codes tend to be used where more data or camera-based scanning (like from a phone) matters more.</p>
+
+        <h2 id="how-scanning-works">How a Scanner Reads the Bars</h2>
+        <p>Each barcode format defines an exact table mapping specific widths of bars and spaces to specific characters, along with a start pattern and stop pattern marking where the encoded data begins and ends. A scanner's sensor measures the precise width of each bar and gap it passes over, matches those widths against the format's table, and reconstructs the original value character by character. Most formats also embed a checksum — a digit calculated from all the other digits using a fixed formula — so a scanner can verify the read was correct rather than silently accepting a smudged or misread scan.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> If a generated barcode looks correct on screen but fails to scan in practice, check the print size first — barcodes have a minimum readable bar width, and scaling one down too far (especially in a document or label template) can make individual bars too thin for a scanner to distinguish.
+        </div>
+
+        <h2 id="registered-numbers">Why Retail Barcodes Need Registered Numbers</h2>
+        <p>UPC-A and EAN-13 are the barcode formats used on virtually all retail packaging, and for genuine retail use, the number itself isn't arbitrary — it needs to come from an officially registered range, typically issued through GS1, the organization that coordinates global product numbering so that no two products anywhere end up with the same code. A barcode generator can technically produce a scannable UPC-A or EAN-13 image from any correctly formatted number, but if that number wasn't actually registered, it won't correspond to your product in any retail point-of-sale or inventory system — it'll just be a barcode that scans to the wrong thing, or nothing at all.</p>
+
+        <h2 id="choosing-format">Choosing the Right Format</h2>
+        <p>For anything that isn't going into a retail supply chain — internal inventory tracking, event tickets, asset tags, library systems — CODE128 is usually the most practical choice, since it encodes a wide range of letters, numbers, and symbols without the strict digit-count and registration requirements that retail formats carry. CODE39 is an older but still common alternative, particularly in some industrial and logistics settings. ITF-14 is specifically used for shipping cartons and pallets rather than individual retail units. Matching the format to its intended use case avoids the most common source of "why doesn't this scan" problems.</p>
+
+        <h2 id="generate">Generating One Instantly</h2>
+        <p>Generate a scannable barcode in CODE128, EAN-13, UPC-A, CODE39, ITF-14, and more, with a live preview, using the free <a href="../tools/barcode-generator">Barcode Generator</a>.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>What's the difference between a barcode and a QR code?</strong> A traditional barcode is one-dimensional — a series of parallel lines that a scanner reads along a single horizontal pass — and typically stores a short numeric or alphanumeric code. A QR code is two-dimensional, storing far more data in a square grid, and can be scanned from any angle by a camera, not just a laser scanner.</p>
+        <p><strong>How does a scanner actually turn a series of bars into data?</strong> Each barcode format defines a set of precise bar-and-space width patterns that correspond to specific characters or digits, plus start and stop patterns marking where the code begins and ends. A scanner measures the exact widths of the bars and gaps it detects, looks up which characters those widths correspond to, and reconstructs the encoded value — most formats also include a checksum digit calculated from the other digits, so the scanner can detect a misread instead of silently returning the wrong value.</p>
+        <p><strong>Which barcode format should I use?</strong> CODE128 is the most flexible default, encoding any letters, numbers, and most symbols, which makes it a safe general-purpose choice. UPC-A and EAN-13 are the standard formats for retail products but require an officially registered number and an exact digit count to be genuinely scannable at a real point of sale — don't use them for made-up numbers on products you intend to sell through retail systems.</p>
+        <p><strong>Can I encode any text in any format?</strong> No — each format has its own rules. CODE128 and CODE39 accept a wide range of letters and symbols. EAN-13 requires exactly 12 or 13 digits, UPC-A requires exactly 11 or 12 digits, and ITF-14 requires an even number of digits. Entering the wrong length or an unsupported character for a given format will show an error instead of a barcode.</p>
+
+        <div class="tip-box">
+          Need a scannable barcode right now? Try the free <a href="../tools/barcode-generator">Barcode Generator</a> — live preview, instant PNG download.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

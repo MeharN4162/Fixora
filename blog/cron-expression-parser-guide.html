@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Cron Field Everyone Gets Wrong | Fixoona</title>
+  <meta name="description" content="Why combining day-of-month and day-of-week in a cron expression works as OR instead of AND, and how to read cron's five fields correctly." />
+  <meta name="keywords" content="cron day of week day of month or, how to read cron expression, cron syntax explained" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/cron-expression-parser-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="The Cron Field Everyone Gets Wrong" />
+  <meta property="og:description" content="Why combining day-of-month and day-of-week in a cron expression works as OR instead of AND." />
+  <meta property="og:url" content="https://fixoona.com/blog/cron-expression-parser-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Cron Field Everyone Gets Wrong" />
+  <meta name="twitter:description" content="Why combining day-of-month and day-of-week in a cron expression works as OR instead of AND." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "The Cron Field Everyone Gets Wrong",
+    "description": "Why combining day-of-month and day-of-week in a cron expression works as OR instead of AND, and how to read cron's five fields correctly.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/cron-expression-parser-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Cron Expression Parser Guide", "item": "https://fixoona.com/blog/cron-expression-parser-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What do the 5 fields in a cron expression mean?",
+        "acceptedAnswer": { "@type": "Answer", "text": "In order: minute (0–59), hour (0–23), day of month (1–31), month (1–12), and day of week (0–6, where 0 is Sunday). Each field can be a specific value, a *, a range like 1-5, a list like 1,3,5, or a step like */15." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens when both day-of-month and day-of-week are restricted?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Standard cron treats this as an OR — the job runs if either condition is true, not only when both match. This matches the behavior of cron on Linux and most job schedulers." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are the next run times shown in my local time zone?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — they're calculated using your browser's local clock and time zone. If the actual server running this cron job is in a different time zone, its real run times will differ accordingly." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my cron expression sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — parsing and the next-run calculation both happen entirely in your browser using JavaScript, so nothing you enter is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Cron Expression Parser Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Developer Guides · 6 min read · Updated September 2026</p>
+      <h1>The Cron Field Everyone Gets Wrong</h1>
+      <div class="article-hero-img" aria-hidden="true">⏲️</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#five-fields">The Five Fields, In Order</a></li>
+          <li><a href="#or-not-and">Why Day-of-Month and Day-of-Week Combine as OR</a></li>
+          <li><a href="#step-values">Ranges, Lists, and Step Values</a></li>
+          <li><a href="#timezone">The Time Zone Trap</a></li>
+          <li><a href="#parse">Parse Your Expression Instantly</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>Cron expressions look cryptic at a glance but follow a strict, learnable structure — five fields, each with its own rules for wildcards and ranges. The single most common source of confusion, though, isn't the syntax within a field; it's how two of the fields interact with each other.</p>
+
+        <h2 id="five-fields">The Five Fields, In Order</h2>
+        <p>A standard cron expression has exactly five space-separated fields, always in this order: minute (0–59), hour (0–23), day of month (1–31), month (1–12), and day of week (0–6, where 0 means Sunday). Each field independently restricts when the job runs — a job only fires at a moment when every field's condition is satisfied simultaneously, with one important exception covered below.</p>
+
+        <h2 id="or-not-and">Why Day-of-Month and Day-of-Week Combine as OR</h2>
+        <p>Every other pair of cron fields is combined with AND logic — the minute and hour fields both have to match for the job to run at that moment. But day-of-month and day-of-week are the one exception: if both fields are restricted (neither is left as a wildcard *), standard cron treats them as an OR instead. An expression like <code>0 9 15 * 1</code> (9 AM on the 15th of the month, or on Mondays) runs on both the 15th of every month AND every Monday — not only on days that happen to be both the 15th and a Monday. This OR behavior is easy to miss and is the single most common source of "why did my cron job run on a day I didn't expect" confusion.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> If you actually want an AND relationship between day-of-month and day-of-week — say, "only the 15th, and only if it's a Monday" — cron's standard five-field syntax can't express that directly. You'd need to leave one of those fields as a wildcard and add extra logic in the job itself to check the other condition.
+        </div>
+
+        <h2 id="step-values">Ranges, Lists, and Step Values</h2>
+        <p>Beyond a plain wildcard or specific number, each field supports a few shorthand patterns: a range like <code>9-17</code> means every value from 9 through 17 inclusive, a list like <code>1,3,5</code> means exactly those three values, and a step like <code>*/15</code> means every 15th value starting from the field's minimum (so <code>*/15</code> in the minute field means :00, :15, :30, :45). These can combine — <code>*/15 9-17 * * 1-5</code> means every 15 minutes, during the 9 AM–5 PM hour range, Monday through Friday.</p>
+
+        <h2 id="timezone">The Time Zone Trap</h2>
+        <p>Cron itself has no built-in concept of time zone — it simply runs against whatever clock the system executing the job is set to. This becomes a real problem when a job is written and tested on a laptop in one time zone but deployed to a server in another; the "9 AM" the expression describes is 9 AM server time, not 9 AM in the time zone where it was written. Always confirm which time zone the actual execution environment uses before trusting an expression's intended schedule.</p>
+
+        <h2 id="parse">Parse Your Expression Instantly</h2>
+        <p>Type any 5-field cron expression and see a field-by-field breakdown plus the next several run times with our free <a href="../tools/cron-expression-parser">Cron Expression Parser</a> — a fast way to sanity-check a schedule before deploying it.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>What do the 5 fields in a cron expression mean?</strong> In order: minute (0–59), hour (0–23), day of month (1–31), month (1–12), and day of week (0–6, where 0 is Sunday). Each field can be a specific value, a *, a range like 1-5, a list like 1,3,5, or a step like */15.</p>
+        <p><strong>What happens when both day-of-month and day-of-week are restricted?</strong> Standard cron treats this as an OR — the job runs if either condition is true, not only when both match. This matches the behavior of cron on Linux and most job schedulers.</p>
+        <p><strong>Are the next run times shown in my local time zone?</strong> Yes — they're calculated using your browser's local clock and time zone. If the actual server running this cron job is in a different time zone, its real run times will differ accordingly.</p>
+        <p><strong>Is my cron expression sent anywhere?</strong> No — parsing and the next-run calculation both happen entirely in your browser using JavaScript, so nothing you enter is ever sent to a server.</p>
+
+        <div class="tip-box">
+          Need to check a schedule right now? Try the free <a href="../tools/cron-expression-parser">Cron Expression Parser</a> — instant breakdown, no sign-up.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

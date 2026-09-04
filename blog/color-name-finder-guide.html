@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Browsers Match Colors to Names | Fixoona</title>
+  <meta name="description" content="Where the 147 CSS named colors actually come from, how nearest-color matching works in RGB space, and why two mathematically 'close' colors can look surprisingly different." />
+  <meta name="keywords" content="css named colors list, rgb color distance, nearest color matching, css color keywords explained" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/color-name-finder-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="How Browsers Match Colors to Names" />
+  <meta property="og:description" content="Where CSS named colors come from, and how nearest-color matching actually works." />
+  <meta property="og:url" content="https://fixoona.com/blog/color-name-finder-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How Browsers Match Colors to Names" />
+  <meta name="twitter:description" content="Where CSS named colors come from, and how nearest-color matching actually works." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How Browsers Match Colors to Names",
+    "description": "Where CSS named colors come from, and how nearest-color matching actually works.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/color-name-finder-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Color Name Matching Guide", "item": "https://fixoona.com/blog/color-name-finder-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where does the list of color names come from?",
+        "acceptedAnswer": { "@type": "Answer", "text": "All 147 official CSS extended color keywords, like \"CornflowerBlue\" and \"MediumSeaGreen\" — the exact same standardized named colors browsers recognize when used directly in CSS." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is the \"nearest\" match determined?",
+        "acceptedAnswer": { "@type": "Answer", "text": "By the straight-line (Euclidean) distance between your color and each named color in RGB space — the named color with the smallest distance is shown as the closest match. This is a simple, common approach, though it doesn't perfectly account for how the human eye perceives color differences." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why can two colors with a similar RGB distance look very different to the eye?",
+        "acceptedAnswer": { "@type": "Answer", "text": "RGB space isn't perceptually uniform — the human eye is far more sensitive to small changes in some hues (especially greens) than others, so a numerically small RGB distance in one part of the color space can look far more noticeable than the same-sized distance elsewhere." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will the exact color I enter always have a matching name?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Only if it's one of the 147 named colors exactly — for any other color, this tool finds and shows the closest named color along with exactly how different it is." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Color Name Matching Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Developer Guides · 5 min read · Updated September 2026</p>
+      <h1>How Browsers Match Colors to Names</h1>
+      <div class="article-hero-img" aria-hidden="true">🎨</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#named-colors">Where the 147 Names Come From</a></li>
+          <li><a href="#nearest-match">How "Nearest" Matching Works</a></li>
+          <li><a href="#perception">Why "Close" Colors Can Look Different</a></li>
+          <li><a href="#naming">Naming Colors Consistently in Code</a></li>
+          <li><a href="#find">Finding a Color Name Instantly</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>Every browser can turn a CSS declaration like <code>color: tomato;</code> into an exact pixel value, which raises an obvious question: where did "tomato" get assigned to that specific shade of red-orange, and what happens when you pick a color that isn't on the list at all?</p>
+
+        <h2 id="named-colors">Where the 147 Names Come From</h2>
+        <p>CSS's named colors aren't a marketing invention — they're a formal part of the CSS Color specification, sometimes called the "extended color keywords." The list of 147 names, including familiar ones like Tomato and CornflowerBlue, was standardized so that developers could reference common colors by a memorable word instead of a six-digit hex code, and so that every browser renders "MediumSeaGreen" as the exact same RGB value. It's a fixed, finite list — no browser lets you invent a new named color on the fly.</p>
+
+        <h2 id="nearest-match">How "Nearest" Matching Works</h2>
+        <p>When a color doesn't exactly match one of the 147 names, finding the "closest" one requires a way to measure distance between colors. The straightforward approach treats each color as a point in three-dimensional space, with red, green, and blue as the three axes, and calculates the plain Euclidean (straight-line) distance between your color and every named color. Whichever named color has the smallest distance wins. It's simple to compute and easy to reason about, which is why it's a common default approach.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> If a "nearest match" result looks off to your eye, don't assume the tool is broken — RGB distance is a mathematical approximation of similarity, not a measurement of human color perception, so occasional mismatches between "closest number" and "closest looking" are expected.
+        </div>
+
+        <h2 id="perception">Why "Close" Colors Can Look Different</h2>
+        <p>Plain RGB distance has a known limitation: it isn't perceptually uniform. The human eye doesn't perceive equal-sized numeric changes in R, G, and B as equally noticeable — it's markedly more sensitive to small shifts in green than to similar-sized shifts in blue, for instance. That means two colors that are mathematically the same distance apart in RGB space can look nearly identical in one part of the color spectrum and clearly distinguishable in another. Color spaces designed specifically to model human perception (like CIELAB) correct for this, at the cost of more complex math — RGB distance is the simpler, faster trade-off most lightweight color tools make.</p>
+
+        <h2 id="naming">Naming Colors Consistently in Code</h2>
+        <p>Named colors are most useful for quick prototyping, debugging, or anywhere readability matters more than exact brand-color precision — writing <code>border: 1px solid tomato;</code> is more legible at a glance than a hex code. For production design systems, though, most teams still define their own custom hex or HSL values rather than relying on the standard 147, since brand colors rarely land exactly on one of the predefined names.</p>
+
+        <h2 id="find">Finding a Color Name Instantly</h2>
+        <p>Pick or paste any color and instantly see which of the 147 standard CSS names it's closest to, and by how much, with the free <a href="../tools/color-name-finder">Color Name Finder</a>.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>Where does the list of color names come from?</strong> All 147 official CSS extended color keywords, like "CornflowerBlue" and "MediumSeaGreen" — the exact same standardized named colors browsers recognize when used directly in CSS.</p>
+        <p><strong>How is the "nearest" match determined?</strong> By the straight-line (Euclidean) distance between your color and each named color in RGB space — the named color with the smallest distance is shown as the closest match. This is a simple, common approach, though it doesn't perfectly account for how the human eye perceives color differences.</p>
+        <p><strong>Why can two colors with a similar RGB distance look very different to the eye?</strong> RGB space isn't perceptually uniform — the human eye is far more sensitive to small changes in some hues (especially greens) than others, so a numerically small RGB distance in one part of the color space can look far more noticeable than the same-sized distance elsewhere.</p>
+        <p><strong>Will the exact color I enter always have a matching name?</strong> Only if it's one of the 147 named colors exactly — for any other color, this tool finds and shows the closest named color along with exactly how different it is.</p>
+
+        <div class="tip-box">
+          Curious what your color is closest to? Try the free <a href="../tools/color-name-finder">Color Name Finder</a> — pick a color, get the nearest standard name instantly.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

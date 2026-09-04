@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aspect Ratios Explained: Ratios, Rounding, and Common Sizes | Fixoona</title>
+  <meta name="description" content="How aspect ratios are simplified, why 16:9 and 16:10 aren't interchangeable, and why scaling an image by a ratio can produce fractional pixels." />
+  <meta name="keywords" content="aspect ratio explained, 16:9 vs 16:10, how to simplify a ratio, image aspect ratio math" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/aspect-ratio-calculator-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Aspect Ratios Explained: Ratios, Rounding, and Common Sizes" />
+  <meta property="og:description" content="How aspect ratios are simplified, and why scaling by a ratio can produce fractional pixels." />
+  <meta property="og:url" content="https://fixoona.com/blog/aspect-ratio-calculator-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Aspect Ratios Explained: Ratios, Rounding, and Common Sizes" />
+  <meta name="twitter:description" content="How aspect ratios are simplified, and why scaling by a ratio can produce fractional pixels." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Aspect Ratios Explained: Ratios, Rounding, and Common Sizes",
+    "description": "How aspect ratios are simplified, and why scaling by a ratio can produce fractional pixels.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/aspect-ratio-calculator-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Aspect Ratios Explained", "item": "https://fixoona.com/blog/aspect-ratio-calculator-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why do 1920×1080 and 1280×720 have the same aspect ratio?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Because both reduce to 16:9 when divided by their greatest common divisor — 1920/120 = 16, 1080/120 = 9, and 1280/80 = 16, 720/80 = 9. Same proportion, different pixel counts." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between 16:9 and 16:10?",
+        "acceptedAnswer": { "@type": "Answer", "text": "They look similar but aren't interchangeable — 16:9 is standard for widescreen video and most TVs, while 16:10 is slightly taller (common on some laptop and monitor displays), and stretching content built for one to fit the other distorts it." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does scaling by a ratio sometimes give a fractional pixel value?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Because dimensions can scale to non-integer results — for example, a 1000px width at 16:9 gives a height of 562.5. Any real image or video needs whole pixels, so that value has to be rounded, which introduces a tiny proportion error." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the data I enter sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — all the math happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Aspect Ratios Explained</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Math Guides · 5 min read · Updated September 2026</p>
+      <h1>Aspect Ratios Explained: Ratios, Rounding, and Common Sizes</h1>
+      <div class="article-hero-img" aria-hidden="true">📐</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#what-is">What an Aspect Ratio Actually Means</a></li>
+          <li><a href="#simplifying">How a Ratio Gets Simplified</a></li>
+          <li><a href="#common-ratios">Common Ratios You'll Run Into</a></li>
+          <li><a href="#rounding">Why Rounding Can Distort an Image</a></li>
+          <li><a href="#calculate">Find Your Ratio Instantly</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>An aspect ratio looks like a simple pair of numbers, but the way it's calculated — and the rounding that happens when you scale by it — explains a lot of confusing image and video sizing problems.</p>
+
+        <h2 id="what-is">What an Aspect Ratio Actually Means</h2>
+        <p>An aspect ratio describes the proportional relationship between a width and a height, not their actual size. A 16:9 ratio just means the width is always 16 units for every 9 units of height — it says nothing about whether that's 1920×1080 pixels or 160×90 pixels. Two images can look completely different in physical size while sharing the exact same ratio and, therefore, the exact same shape.</p>
+
+        <h2 id="simplifying">How a Ratio Gets Simplified</h2>
+        <p>To go from raw dimensions like 1920×1080 to a clean ratio like 16:9, both numbers are divided by their greatest common divisor (GCD) — the largest number that divides evenly into both. 1920 and 1080 share a GCD of 120, so dividing both by 120 gives 16 and 9. This is the same simplification process used for reducing any fraction, just applied to two dimensions instead of a numerator and denominator.</p>
+
+        <h2 id="common-ratios">Common Ratios You'll Run Into</h2>
+        <p>16:9 is the standard for widescreen video, most TVs, and YouTube uploads. 4:3 was the old standard-definition TV and early computer monitor shape, boxier than modern screens. 1:1 (square) is common for social media profile photos and some Instagram posts. 9:16 is vertical video — the shape of Reels, TikTok, and Stories. 21:9 is ultrawide, used for cinematic video and some gaming monitors. Picking the wrong one for a platform is a common reason uploaded video or images get cropped or letterboxed unexpectedly.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> Before resizing an image or video for a specific platform, check that platform's expected ratio first (many publish exact pixel dimensions) rather than assuming a "close enough" ratio will avoid cropping — even a small mismatch, like 16:9 versus 16:10, gets cropped or padded by the platform automatically.
+        </div>
+
+        <h2 id="rounding">Why Rounding Can Distort an Image</h2>
+        <p>When you know a ratio and one dimension, the matching dimension is found with simple cross-multiplication — but the result isn't always a whole number. Scaling a 16:9 video to a 1000px width, for example, gives a height of exactly 562.5 pixels, which doesn't exist as a physical pixel. Whatever software does the resizing has to round that to 562 or 563, which technically shifts the actual ratio by a tiny, usually invisible amount. This is normal and unavoidable at odd widths — it's only a real problem when a chain of multiple rounding steps compounds into a noticeably stretched result.</p>
+
+        <h2 id="calculate">Find Your Ratio Instantly</h2>
+        <p>Enter a width and height to get the simplified ratio, or enter a ratio plus one known dimension to calculate the matching missing dimension, with the free <a href="../tools/aspect-ratio-calculator">Aspect Ratio Calculator</a> — no sign-up, and nothing you enter leaves your browser.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>Why do 1920×1080 and 1280×720 have the same aspect ratio?</strong> Because both reduce to 16:9 when divided by their greatest common divisor — 1920/120 = 16, 1080/120 = 9, and 1280/80 = 16, 720/80 = 9. Same proportion, different pixel counts.</p>
+        <p><strong>What's the difference between 16:9 and 16:10?</strong> They look similar but aren't interchangeable — 16:9 is standard for widescreen video and most TVs, while 16:10 is slightly taller (common on some laptop and monitor displays), and stretching content built for one to fit the other distorts it.</p>
+        <p><strong>Why does scaling by a ratio sometimes give a fractional pixel value?</strong> Because dimensions can scale to non-integer results — for example, a 1000px width at 16:9 gives a height of 562.5. Any real image or video needs whole pixels, so that value has to be rounded, which introduces a tiny proportion error.</p>
+        <p><strong>Is the data I enter sent anywhere?</strong> No — all the math happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server.</p>
+
+        <div class="tip-box">
+          Need to find a ratio or a missing dimension right now? Try the free <a href="../tools/aspect-ratio-calculator">Aspect Ratio Calculator</a> — no sign-up.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

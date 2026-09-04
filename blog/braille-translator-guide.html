@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Grade 1 Braille Actually Encodes Text | Fixoona</title>
+  <meta name="description" content="How Braille's six-dot cell system represents letters and numbers, why Grade 1 differs from Grade 2, and how the raised-dot patterns actually display on a normal screen." />
+  <meta name="keywords" content="how does braille work, grade 1 vs grade 2 braille, unicode braille patterns" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/braille-translator-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="How Grade 1 Braille Actually Encodes Text" />
+  <meta property="og:description" content="How Braille's six-dot cell system represents letters and numbers." />
+  <meta property="og:url" content="https://fixoona.com/blog/braille-translator-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How Grade 1 Braille Actually Encodes Text" />
+  <meta name="twitter:description" content="How Braille's six-dot cell system represents letters and numbers." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How Grade 1 Braille Actually Encodes Text",
+    "description": "How Braille's six-dot cell system represents letters and numbers, why Grade 1 differs from Grade 2, and how the raised-dot patterns actually display on a normal screen.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/braille-translator-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Braille Translator Guide", "item": "https://fixoona.com/blog/braille-translator-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Grade 1 Braille?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Grade 1 (uncontracted) Braille spells out every letter individually, unlike Grade 2 Braille, which uses special contractions and abbreviations for common letter combinations and whole words to save space — this tool produces the simpler, letter-by-letter Grade 1 form." }
+      },
+      {
+        "@type": "Question",
+        "name": "How are numbers represented?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A special \"number sign\" character comes before a run of digits, and the digits 1–9 and 0 reuse the same dot patterns as the letters A–J — this is exactly how real numbers work in the Braille system." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I actually read the output on screen?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The output uses the real Unicode Braille Patterns block, so it displays as raised-dot-style characters in any modern browser or font that supports Unicode — the same characters used in real Braille-related software and documents." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my text sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the translation happens entirely in your browser using JavaScript, so nothing you type is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Braille Translator Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Developer Guides · 5 min read · Updated September 2026</p>
+      <h1>How Grade 1 Braille Actually Encodes Text</h1>
+      <div class="article-hero-img" aria-hidden="true">⠃</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#six-dot-cell">The Six-Dot Cell: How Braille Encodes Letters</a></li>
+          <li><a href="#grade1-vs-grade2">Grade 1 vs. Grade 2 Braille</a></li>
+          <li><a href="#numbers">How Numbers Work in Braille</a></li>
+          <li><a href="#unicode">Why You Can Actually See This on a Screen</a></li>
+          <li><a href="#try-it">Translate Text Instantly</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>Braille isn't a font or a stylistic substitution for letters — it's a full writing system built on a tiny fixed grid, where every character is defined entirely by which of six possible dots are raised. Once that grid clicks, the whole system stops looking arbitrary.</p>
+
+        <h2 id="six-dot-cell">The Six-Dot Cell: How Braille Encodes Letters</h2>
+        <p>Every Braille character lives inside a "cell" of six possible dot positions, arranged in two columns of three: dots 1, 2, and 3 down the left column from top to bottom, and dots 4, 5, and 6 down the right column from top to bottom. A letter is defined purely by which of those six positions are raised — the letter "a" is just dot 1 by itself, "b" is dots 1 and 2, and so on, building up to more complex combinations for later letters. With six positions each either raised or not, the cell can represent up to 63 distinct non-blank combinations from that one small physical space.</p>
+
+        <h2 id="grade1-vs-grade2">Grade 1 vs. Grade 2 Braille</h2>
+        <p>Grade 1 Braille, also called uncontracted Braille, spells out every single letter individually — a direct, one-to-one translation of ordinary print text. Grade 2 Braille adds contractions: special dot patterns that stand in for common letter groups or entire frequently used words, similar in spirit to shorthand, which makes Grade 2 text more compact but requires learning many additional symbol meanings beyond the basic alphabet. Most digital Braille translation tools, including straightforward text-to-Braille converters, produce the simpler Grade 1 form rather than attempting the much more complex contraction rules of Grade 2.</p>
+
+        <h2 id="numbers">How Numbers Work in Braille</h2>
+        <p>Braille doesn't have ten separate symbols for digits. Instead, a dedicated "number sign" character is placed immediately before a run of digits, and the digits 1 through 9 and 0 simply reuse the exact same dot patterns as the letters A through J. The number sign is what tells a reader "the following characters should be read as digits, not letters" — remove that leading signal and the same dot pattern would just be read back as ordinary letters.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> If translated Braille shows up as boxes or blank cells instead of visible dot patterns, it usually means your device's current font doesn't include the Unicode Braille Patterns block — try viewing it with a standard modern system font rather than assuming the translation itself failed.
+        </div>
+
+        <h2 id="unicode">Why You Can Actually See This on a Screen</h2>
+        <p>Real Braille dot patterns have official digital equivalents in Unicode, in a dedicated block called Braille Patterns, starting at code point U+2800. Each of the 64 possible dot combinations (including a blank cell) maps to its own Unicode character, which is why translated Braille can be typed, copied, pasted, and displayed as ordinary text in any modern browser — no special image or embedded font is required, just standard Unicode support.</p>
+
+        <h2 id="try-it">Translate Text Instantly</h2>
+        <p>Type any text with letters, numbers, and common punctuation and see the Grade 1 Braille translation appear instantly with our free <a href="../tools/braille-translator">Braille Translator</a>.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>What is Grade 1 Braille?</strong> Grade 1 (uncontracted) Braille spells out every letter individually, unlike Grade 2 Braille, which uses special contractions and abbreviations for common letter combinations and whole words to save space — this tool produces the simpler, letter-by-letter Grade 1 form.</p>
+        <p><strong>How are numbers represented?</strong> A special "number sign" character comes before a run of digits, and the digits 1–9 and 0 reuse the same dot patterns as the letters A–J — this is exactly how real numbers work in the Braille system.</p>
+        <p><strong>Can I actually read the output on screen?</strong> The output uses the real Unicode Braille Patterns block, so it displays as raised-dot-style characters in any modern browser or font that supports Unicode — the same characters used in real Braille-related software and documents.</p>
+        <p><strong>Is my text sent anywhere?</strong> No — the translation happens entirely in your browser using JavaScript, so nothing you type is ever sent to a server.</p>
+
+        <div class="tip-box">
+          Want to translate your own text to Braille right now? Try the free <a href="../tools/braille-translator">Braille Translator</a> — no sign-up.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

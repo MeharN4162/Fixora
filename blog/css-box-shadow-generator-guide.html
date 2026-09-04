@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why box-shadow Has Five Confusing Values | Fixoona</title>
+  <meta name="description" content="What each of the five values in a CSS box-shadow actually controls, why layering multiple shadows creates more realistic depth, and the difference from a filter drop-shadow." />
+  <meta name="keywords" content="css box-shadow values explained, box-shadow vs drop-shadow, layered box shadow" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/css-box-shadow-generator-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Why box-shadow Has Five Confusing Values" />
+  <meta property="og:description" content="What each of the five values in a CSS box-shadow controls." />
+  <meta property="og:url" content="https://fixoona.com/blog/css-box-shadow-generator-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Why box-shadow Has Five Confusing Values" />
+  <meta name="twitter:description" content="What each of the five values in a CSS box-shadow controls." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Why box-shadow Has Five Confusing Values",
+    "description": "What each of the five values in a CSS box-shadow controls.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/css-box-shadow-generator-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "CSS Box Shadow Guide", "item": "https://fixoona.com/blog/css-box-shadow-generator-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What do the numbers in box-shadow actually mean?",
+        "acceptedAnswer": { "@type": "Answer", "text": "In order, box-shadow takes: horizontal offset (positive moves the shadow right, negative left), vertical offset (positive moves it down, negative up), blur radius (how soft the shadow's edge is — 0 is a hard edge), spread radius (how much the shadow grows or shrinks beyond the element's size), and a color." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do designers layer multiple box-shadows on one element?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A single light source in real life actually produces two distinct shadow effects — a soft, spread-out ambient shadow and a tighter, sharper direct shadow close to the object. Layering two or three box-shadow values (separated by commas) recreates that combination, which is why professionally designed shadows almost always use more than one layer instead of a single flat one." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between box-shadow and filter: drop-shadow()?",
+        "acceptedAnswer": { "@type": "Answer", "text": "box-shadow always follows the exact rectangular (or rounded-rectangle) shape of the element's box, including any transparent corners cut by border-radius. drop-shadow() instead follows the actual visible, non-transparent shape of the element's content — which matters most for a shadow behind a PNG icon or an irregularly shaped SVG, where box-shadow would incorrectly show a rectangular shadow around transparent pixels." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>CSS Box Shadow Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Design Guides · 4 min read · Updated September 2026</p>
+      <h1>Why box-shadow Has Five Confusing Values</h1>
+      <div class="article-hero-img" aria-hidden="true">🌓</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#five-values">The Five Values, In Order</a></li>
+          <li><a href="#layering">Why Designers Layer Multiple Shadows</a></li>
+          <li><a href="#drop-shadow">box-shadow vs. filter: drop-shadow()</a></li>
+          <li><a href="#try">Build Your Own Shadow</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>A flat-looking card and a card that feels like it's floating above the page are often separated by nothing more than a well-tuned box-shadow — but getting there means understanding what each number in that property is actually doing.</p>
+
+        <h2 id="five-values">The Five Values, In Order</h2>
+        <p>A box-shadow declaration reads, in order: horizontal offset, vertical offset, blur radius, spread radius, and color. The horizontal and vertical offsets move the shadow left/right and up/down relative to the element. Blur radius controls how soft or hard the shadow's edge looks — zero produces a crisp, hard-edged shadow, while larger values fade it out gradually. Spread radius expands or contracts the shadow's size independently of the element itself, before blur is applied — a positive spread makes the shadow bigger than the element, a negative one shrinks it.</p>
+
+        <h2 id="layering">Why Designers Layer Multiple Shadows</h2>
+        <p>In real lighting, a single object usually casts two visually distinct kinds of shadow at once: a tight, sharper shadow close to the object where light is most blocked, and a softer, more diffuse ambient shadow that spreads further out. A single box-shadow value can only approximate one of these at a time. Layering two or three comma-separated box-shadow values — one tight and dark, one soft and light — recreates that natural combination, which is why shadows in professional design systems are almost always layered rather than a single flat value.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> Keep shadow color close to black but never pure black, and keep opacity relatively low (often under 20%) — a shadow that's too dark or too saturated tends to look like a heavy outline rather than actual depth.
+        </div>
+
+        <h2 id="drop-shadow">box-shadow vs. filter: drop-shadow()</h2>
+        <p>box-shadow always traces the element's rectangular box — including any corners cut away by border-radius, but not the actual visible pixels inside it. This becomes a problem for a transparent PNG icon or an oddly-shaped SVG: box-shadow would draw a rectangular shadow around the transparent parts too. filter: drop-shadow() solves this by following the real, non-transparent silhouette of the rendered content instead, which is why it's the better choice specifically for shadows behind icons, logos, and irregular shapes.</p>
+
+        <h2 id="try">Build Your Own Shadow</h2>
+        <p>Adjust offset, blur, spread, and color with a live preview in the free <a href="../tools/css-box-shadow-generator">CSS Box Shadow Generator</a>, then copy the ready-to-paste CSS.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>What do the numbers in box-shadow actually mean?</strong> In order, box-shadow takes: horizontal offset (positive moves the shadow right, negative left), vertical offset (positive moves it down, negative up), blur radius (how soft the shadow's edge is — 0 is a hard edge), spread radius (how much the shadow grows or shrinks beyond the element's size), and a color.</p>
+        <p><strong>Why do designers layer multiple box-shadows on one element?</strong> A single light source in real life actually produces two distinct shadow effects — a soft, spread-out ambient shadow and a tighter, sharper direct shadow close to the object. Layering two or three box-shadow values (separated by commas) recreates that combination, which is why professionally designed shadows almost always use more than one layer instead of a single flat one.</p>
+        <p><strong>What's the difference between box-shadow and filter: drop-shadow()?</strong> box-shadow always follows the exact rectangular (or rounded-rectangle) shape of the element's box, including any transparent corners cut by border-radius. drop-shadow() instead follows the actual visible, non-transparent shape of the element's content — which matters most for a shadow behind a PNG icon or an irregularly shaped SVG, where box-shadow would incorrectly show a rectangular shadow around transparent pixels.</p>
+
+        <div class="tip-box">
+          Need a shadow for a card or button? Try the free <a href="../tools/css-box-shadow-generator">CSS Box Shadow Generator</a> — live preview, ready-to-paste CSS.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Decimal vs. Binary File Sizes: Why Your Drive "Loses" Storage | Fixoona</title>
+  <meta name="description" content="Why a 1 TB drive shows up as fewer GB in your operating system, the real difference between KB and KiB, and why internet speed and file size use different units." />
+  <meta name="keywords" content="why does my hard drive show less storage, kb vs kib difference, bits vs bytes explained" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/file-size-converter-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Decimal vs. Binary File Sizes: Why Your Drive &quot;Loses&quot; Storage" />
+  <meta property="og:description" content="The real difference between KB and KiB, and why drives show less storage than advertised." />
+  <meta property="og:url" content="https://fixoona.com/blog/file-size-converter-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Decimal vs. Binary File Sizes: Why Your Drive &quot;Loses&quot; Storage" />
+  <meta name="twitter:description" content="The real difference between KB and KiB, and why drives show less storage than advertised." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Decimal vs. Binary File Sizes: Why Your Drive \"Loses\" Storage",
+    "description": "Why a 1 TB drive shows up as fewer GB in your operating system, the real difference between KB and KiB, and why internet speed and file size use different units.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/file-size-converter-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "File Size Converter Guide", "item": "https://fixoona.com/blog/file-size-converter-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What's the difference between the decimal and binary standards?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The decimal standard (used by storage manufacturers) defines 1 KB as 1,000 bytes, 1 MB as 1,000 KB, and so on. The binary standard (how operating systems and file browsers usually calculate size) defines 1 KiB as 1,024 bytes — the same prefixes, but a meaningfully different number." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does my hard drive show less storage than advertised?",
+        "acceptedAnswer": { "@type": "Answer", "text": "This is exactly the decimal-vs-binary difference — a drive advertised as 1 TB (1,000,000,000,000 bytes, the decimal definition) shows up as roughly 931 GiB in an operating system that reports size using the binary (1,024-based) standard." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between a bit and a byte?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A byte is 8 bits. Internet speeds are usually advertised in bits per second (like Mbps), while file sizes are usually shown in bytes — which is why a \"100 Mbps\" connection downloads at roughly 12.5 megabytes per second, not 100." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do KB and KiB use the same abbreviation in casual conversation?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Mostly historical habit — the binary-based meaning of \"KB\" predates the formal KiB naming convention that was introduced specifically to distinguish it from the decimal definition, and many operating systems and casual conversations never fully switched over to the more precise KiB/MiB/GiB terms." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>File Size Converter Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Developer Guides · 5 min read · Updated September 2026</p>
+      <h1>Decimal vs. Binary File Sizes: Why Your Drive "Loses" Storage</h1>
+      <div class="article-hero-img" aria-hidden="true">💾</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#decimal-vs-binary">The Decimal vs. Binary Standard</a></li>
+          <li><a href="#vanishing-storage">Why Your Hard Drive "Loses" Storage</a></li>
+          <li><a href="#bits-vs-bytes">Bits vs. Bytes: Why Speed Math Feels Off</a></li>
+          <li><a href="#which-one">Which Standard Actually Gets Used Where</a></li>
+          <li><a href="#try-it">Convert File Sizes Instantly</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>Buy a drive labeled 1 TB, plug it in, and your computer reports something noticeably smaller. That's not a manufacturing shortfall or a scam — it's two entirely different, both technically correct, definitions of what a kilobyte actually is.</p>
+
+        <h2 id="decimal-vs-binary">The Decimal vs. Binary Standard</h2>
+        <p>The decimal standard — the one storage manufacturers use on product labels — defines 1 KB as exactly 1,000 bytes, 1 MB as 1,000 KB, and so on, following the same base-10 pattern as every other metric prefix (a kilometer is 1,000 meters, after all). The binary standard, which is how most operating systems and file browsers actually calculate the sizes they display, instead defines 1 KiB as 1,024 bytes, because computers work natively in powers of two. Same prefix family, same general idea, genuinely different numbers.</p>
+
+        <h2 id="vanishing-storage">Why Your Hard Drive "Loses" Storage</h2>
+        <p>This is exactly the decimal-vs-binary gap in action. A drive advertised as 1 TB is sized using the decimal definition — 1,000,000,000,000 bytes. But an operating system reporting that same drive's capacity using the binary standard divides by 1,024 at every step instead of 1,000, and 1,000,000,000,000 bytes works out to roughly 931 GiB under that binary math. Nothing was actually lost — the same number of bytes is present either way — it's purely a difference in which counting system is doing the reporting.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> When comparing a file size reported by two different tools and the numbers don't quite match, check whether one is using KB/MB/GB (decimal) and the other KiB/MiB/GiB (binary) before assuming there's a real discrepancy in the underlying file.
+        </div>
+
+        <h2 id="bits-vs-bytes">Bits vs. Bytes: Why Speed Math Feels Off</h2>
+        <p>A byte is made up of 8 bits. Internet connection speeds are conventionally advertised in bits per second (like 100 Mbps), while file sizes on your computer are conventionally shown in bytes. That mismatch in units is why a "100 Mbps" connection downloads at roughly 12.5 megabytes per second rather than 100 — dividing by 8 to convert from bits to bytes, not a sign that the connection is somehow underperforming its advertised speed.</p>
+
+        <h2 id="which-one">Which Standard Actually Gets Used Where</h2>
+        <p>Different platforms and contexts have made different choices about which standard to display, and not always consistently even within the same ecosystem. This is part of why the exact same physical file or drive can show a noticeably different number depending on which operating system's file browser, download manager, or command-line tool you happen to be checking it with — worth keeping in mind any time file sizes from two different sources don't quite line up.</p>
+
+        <h2 id="try-it">Convert File Sizes Instantly</h2>
+        <p>Convert between bits, bytes, KB, KiB, MB, MiB, GB, GiB, TB, and TiB using both standards side by side with our free <a href="../tools/file-size-converter">File Size Converter</a>.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>What's the difference between the decimal and binary standards?</strong> The decimal standard (used by storage manufacturers) defines 1 KB as 1,000 bytes, 1 MB as 1,000 KB, and so on. The binary standard (how operating systems and file browsers usually calculate size) defines 1 KiB as 1,024 bytes — the same prefixes, but a meaningfully different number.</p>
+        <p><strong>Why does my hard drive show less storage than advertised?</strong> This is exactly the decimal-vs-binary difference — a drive advertised as 1 TB (1,000,000,000,000 bytes, the decimal definition) shows up as roughly 931 GiB in an operating system that reports size using the binary (1,024-based) standard.</p>
+        <p><strong>What's the difference between a bit and a byte?</strong> A byte is 8 bits. Internet speeds are usually advertised in bits per second (like Mbps), while file sizes are usually shown in bytes — which is why a "100 Mbps" connection downloads at roughly 12.5 megabytes per second, not 100.</p>
+        <p><strong>Why do KB and KiB use the same abbreviation in casual conversation?</strong> Mostly historical habit — the binary-based meaning of "KB" predates the formal KiB naming convention that was introduced specifically to distinguish it from the decimal definition, and many operating systems and casual conversations never fully switched over to the more precise KiB/MiB/GiB terms.</p>
+
+        <div class="tip-box">
+          Need to convert a file size right now? Try the free <a href="../tools/file-size-converter">File Size Converter</a> — no sign-up.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

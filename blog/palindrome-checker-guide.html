@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What Actually Counts as a Palindrome | Fixoona</title>
+  <meta name="description" content="Why palindrome checking ignores spaces and punctuation, how it works for numbers, and the logic behind comparing text forwards and backwards." />
+  <meta name="keywords" content="what counts as a palindrome, palindrome rules explained, how palindrome checking works" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/palindrome-checker-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="What Actually Counts as a Palindrome" />
+  <meta property="og:description" content="Why palindrome checking ignores spaces and punctuation, and how the comparison logic works." />
+  <meta property="og:url" content="https://fixoona.com/blog/palindrome-checker-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="What Actually Counts as a Palindrome" />
+  <meta name="twitter:description" content="Why palindrome checking ignores spaces and punctuation, and how the comparison logic works." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "What Actually Counts as a Palindrome",
+    "description": "Why palindrome checking ignores spaces and punctuation, how it works for numbers, and the logic behind comparing text forwards and backwards.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/palindrome-checker-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Palindrome Checker Guide", "item": "https://fixoona.com/blog/palindrome-checker-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What counts as a palindrome here?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Any text that reads the same forwards and backwards once spaces, punctuation, and capitalization are ignored — so \"A man, a plan, a canal: Panama\" counts as a palindrome, the same way it would if you were checking it by hand." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it work for numbers too?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — a number like 12321 is checked the same way, digit by digit, since digits are treated just like letters for this comparison." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why are spaces and punctuation ignored?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Classic palindrome phrases are traditionally judged on their letters alone — \"Never odd or even\" is considered a palindrome even though the spaces themselves obviously aren't symmetric, only the letters are." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my text sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the check happens entirely in your browser using JavaScript, so nothing you type is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Palindrome Checker Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Text Guides · 4 min read · Updated September 2026</p>
+      <h1>What Actually Counts as a Palindrome</h1>
+      <div class="article-hero-img" aria-hidden="true">🔁</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#definition">The Real Definition, Not the Naive One</a></li>
+          <li><a href="#cleaning">Why Cleaning the Text Comes First</a></li>
+          <li><a href="#numbers">Numbers Are Palindromes Too</a></li>
+          <li><a href="#famous">Why Famous Palindromes Feel Like Cheating</a></li>
+          <li><a href="#check">Check One Instantly</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>A palindrome sounds like a simple idea — text that reads the same forwards and backwards — but a strict character-by-character comparison would reject almost every classic example. The trick is in what gets compared, not just how.</p>
+
+        <h2 id="definition">The Real Definition, Not the Naive One</h2>
+        <p>If you compared "A man, a plan, a canal: Panama" character for character including spaces, capitalization, and punctuation, it would fail instantly — the letter case alone breaks a literal comparison, since "A" and "a" aren't the same character. The actual, accepted definition of a palindrome strips all of that away first and compares only the sequence of letters and digits, case-insensitively. That's not a workaround — it's the standard definition used everywhere palindromes are discussed, from wordplay puzzles to computer science interview questions.</p>
+
+        <h2 id="cleaning">Why Cleaning the Text Comes First</h2>
+        <p>The actual algorithm behind any palindrome checker has two steps: first strip everything that isn't a letter or digit and lowercase what remains, then compare that cleaned string to its own reverse. If they match, it's a palindrome. This two-step process is why "Never odd or even" and "Was it a car or a cat I saw?" both count — once you remove the spaces and punctuation and lowercase everything, each one really does read identically in both directions.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> If you're testing whether your own writing has an unintentional palindrome hidden in it, try checking shorter substrings too — a phrase can contain a genuine palindrome (like "level" or "racecar") in the middle of a much longer, non-palindromic sentence.
+        </div>
+
+        <h2 id="numbers">Numbers Are Palindromes Too</h2>
+        <p>Numeric palindromes work by the exact same logic, just without letters to worry about — 12321, 909, and 1001 all read the same forwards and backwards digit by digit. Palindromic numbers show up in recreational math (some number theory problems specifically study which numbers become palindromes when you reverse and add them repeatedly), but for a simple checker, a digit is treated exactly like a letter: just another character to compare against its mirror position.</p>
+
+        <h2 id="famous">Why Famous Palindromes Feel Like Cheating</h2>
+        <p>Well-known palindrome phrases were specifically constructed by someone working backward from the constraint, which is why they often read a little awkwardly as sentences — "A man, a plan, a canal: Panama" isn't natural English, it's a phrase engineered to satisfy the palindrome property while still sort of making sense. That's not a flaw in the checking logic; it's just genuinely difficult to write a long, natural-sounding sentence that happens to be symmetric, so constructed examples tend to feel a bit forced by necessity.</p>
+
+        <h2 id="check">Check One Instantly</h2>
+        <p>Type any word, phrase, or number and see whether it's a palindrome instantly with our free <a href="../tools/palindrome-checker">Palindrome Checker</a> — it automatically ignores spaces, punctuation, and capitalization just like the accepted definition requires.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>What counts as a palindrome here?</strong> Any text that reads the same forwards and backwards once spaces, punctuation, and capitalization are ignored — so "A man, a plan, a canal: Panama" counts as a palindrome, the same way it would if you were checking it by hand.</p>
+        <p><strong>Does it work for numbers too?</strong> Yes — a number like 12321 is checked the same way, digit by digit, since digits are treated just like letters for this comparison.</p>
+        <p><strong>Why are spaces and punctuation ignored?</strong> Classic palindrome phrases are traditionally judged on their letters alone — "Never odd or even" is considered a palindrome even though the spaces themselves obviously aren't symmetric, only the letters are.</p>
+        <p><strong>Is my text sent anywhere?</strong> No — the check happens entirely in your browser using JavaScript, so nothing you type is ever sent to a server.</p>
+
+        <div class="tip-box">
+          Curious if your phrase is a palindrome? Try the free <a href="../tools/palindrome-checker">Palindrome Checker</a> — instant results, no sign-up.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

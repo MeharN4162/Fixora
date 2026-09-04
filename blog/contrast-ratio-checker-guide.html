@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WCAG Contrast Ratios Explained | Fixoona</title>
+  <meta name="description" content="What the WCAG AA and AAA contrast thresholds actually mean, how the ratio itself is calculated, and why large text gets an easier pass bar than body text." />
+  <meta name="keywords" content="wcag contrast ratio explained, aa vs aaa contrast, what is a good contrast ratio, accessible text color" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/contrast-ratio-checker-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="WCAG Contrast Ratios Explained" />
+  <meta property="og:description" content="What the AA and AAA contrast thresholds mean, and how the ratio is calculated." />
+  <meta property="og:url" content="https://fixoona.com/blog/contrast-ratio-checker-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="WCAG Contrast Ratios Explained" />
+  <meta name="twitter:description" content="What the AA and AAA contrast thresholds mean, and how the ratio is calculated." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "WCAG Contrast Ratios Explained",
+    "description": "What the AA and AAA contrast thresholds mean, and how the ratio is calculated.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/contrast-ratio-checker-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Contrast Ratio Checker Guide", "item": "https://fixoona.com/blog/contrast-ratio-checker-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What's the difference between the AA and AAA thresholds?",
+        "acceptedAnswer": { "@type": "Answer", "text": "WCAG AA is the standard accessibility requirement: at least 4.5:1 for normal text and 3:1 for large text (18pt+, or 14pt+ bold). AAA is a stricter, enhanced level requiring at least 7:1 for normal text and 4.5:1 for large text." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is a contrast ratio actually calculated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's based on the relative luminance of each color — a measure of how much light it reflects, calculated from its red, green, and blue values with a formula that weights each channel differently, since the human eye is more sensitive to green than to blue or red. The ratio between the lighter color's luminance and the darker color's luminance (plus a small constant) produces a number from 1:1 (identical colors) up to 21:1 (pure black on pure white)." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does large text get a lower contrast requirement than body text?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Larger, bolder text is inherently easier to read at lower contrast because its strokes are wider and its shapes are more distinguishable even with less color separation from the background. WCAG accounts for this by setting a lower bar (3:1 for AA) for text at 18pt or larger, or 14pt and bold, compared to the 4.5:1 required for standard body text." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does passing a contrast check guarantee text is readable for everyone?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It guarantees the color combination meets a specific, well-tested mathematical threshold correlated with readability for people with low vision or color vision deficiencies, but it doesn't account for every factor — font choice, letter spacing, and screen glare can all still affect real-world readability even at a passing contrast ratio." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Contrast Ratio Checker Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Design Guides · 5 min read · Updated September 2026</p>
+      <h1>WCAG Contrast Ratios Explained</h1>
+      <div class="article-hero-img" aria-hidden="true">🔲</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#aa-aaa">AA vs. AAA: What the Numbers Mean</a></li>
+          <li><a href="#luminance">How a Contrast Ratio Is Actually Calculated</a></li>
+          <li><a href="#large-text">Why Large Text Gets an Easier Bar</a></li>
+          <li><a href="#not-everything">What Passing a Check Doesn't Guarantee</a></li>
+          <li><a href="#try">Check Your Colors</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>Contrast ratio is one of the few accessibility metrics that's fully objective — a single number, calculated the same way every time, with clear pass/fail thresholds. That precision is exactly what makes it worth understanding rather than just glancing at a green checkmark.</p>
+
+        <h2 id="aa-aaa">AA vs. AAA: What the Numbers Mean</h2>
+        <p>WCAG AA is the baseline, legally-referenced accessibility standard most sites aim for: at least 4.5:1 contrast for normal text, and a relaxed 3:1 for large text (18pt and up, or 14pt bold and up). WCAG AAA is a stricter, "enhanced" level aimed at content for users with more significant visual impairments — 7:1 for normal text and 4.5:1 for large text. Most design systems target AA as the practical minimum and treat AAA as a stretch goal for critical text.</p>
+
+        <h2 id="luminance">How a Contrast Ratio Is Actually Calculated</h2>
+        <p>The ratio comes from each color's relative luminance — a calculated measure of how bright it is, derived from its red, green, and blue channel values using a formula that weights green more heavily than red or blue, matching how human vision actually perceives brightness. The lighter color's luminance is divided by the darker color's luminance (with a small constant added to both), producing a ratio from 1:1 (no contrast at all, identical colors) up to a theoretical maximum of 21:1 (pure black against pure white).</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> Don't rely on visual judgment alone — two colors can look reasonably different on screen while still measuring below 3:1, especially with mid-tone grays or muted brand colors. Always check the actual calculated ratio for body text and UI labels.
+        </div>
+
+        <h2 id="large-text">Why Large Text Gets an Easier Bar</h2>
+        <p>Bigger, bolder letterforms are inherently more legible at lower contrast — their strokes are wide enough, and their overall shape distinctive enough, to be recognized even with less color separation from the background. That's why WCAG sets the large-text threshold lower (3:1 for AA) than the standard body-text threshold (4.5:1): the size itself is already doing some of the readability work that contrast would otherwise need to provide.</p>
+
+        <h2 id="not-everything">What Passing a Check Doesn't Guarantee</h2>
+        <p>A passing contrast ratio confirms the color combination clears a specific, research-backed mathematical bar correlated with readability for people with low vision or common color vision deficiencies. It doesn't account for everything that affects real-world legibility, though — thin or unusual fonts, tight letter spacing, and glare on a bright screen can all still make technically-compliant text harder to read in practice.</p>
+
+        <h2 id="try">Check Your Colors</h2>
+        <p>Enter any two colors into the free <a href="../tools/contrast-ratio-checker">Color Contrast Checker</a> to see the exact ratio along with live AA and AAA pass/fail results.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>What's the difference between the AA and AAA thresholds?</strong> WCAG AA is the standard accessibility requirement: at least 4.5:1 for normal text and 3:1 for large text (18pt+, or 14pt+ bold). AAA is a stricter, enhanced level requiring at least 7:1 for normal text and 4.5:1 for large text.</p>
+        <p><strong>How is a contrast ratio actually calculated?</strong> It's based on the relative luminance of each color — a measure of how much light it reflects, calculated from its red, green, and blue values with a formula that weights each channel differently, since the human eye is more sensitive to green than to blue or red. The ratio between the lighter color's luminance and the darker color's luminance (plus a small constant) produces a number from 1:1 (identical colors) up to 21:1 (pure black on pure white).</p>
+        <p><strong>Why does large text get a lower contrast requirement than body text?</strong> Larger, bolder text is inherently easier to read at lower contrast because its strokes are wider and its shapes are more distinguishable even with less color separation from the background. WCAG accounts for this by setting a lower bar (3:1 for AA) for text at 18pt or larger, or 14pt and bold, compared to the 4.5:1 required for standard body text.</p>
+        <p><strong>Does passing a contrast check guarantee text is readable for everyone?</strong> It guarantees the color combination meets a specific, well-tested mathematical threshold correlated with readability for people with low vision or color vision deficiencies, but it doesn't account for every factor — font choice, letter spacing, and screen glare can all still affect real-world readability even at a passing contrast ratio.</p>
+
+        <div class="tip-box">
+          Checking a color pairing for a design? Try the free <a href="../tools/contrast-ratio-checker">Color Contrast Checker</a> — instant AA/AAA results.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

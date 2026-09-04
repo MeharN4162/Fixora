@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Time Zones Explained: UTC, DST, and Odd Offsets | Fixoona</title>
+  <meta name="description" content="The real difference between UTC and GMT, how daylight saving time shifts a clock, and why a few time zones use 30- or 45-minute offsets instead of a full hour." />
+  <meta name="keywords" content="utc vs gmt, how does daylight saving time work, time zone offsets explained, why is india utc+5:30" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/world-clock-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Time Zones Explained: UTC, DST, and Odd Offsets" />
+  <meta property="og:description" content="The real difference between UTC and GMT, and why some time zones use odd offsets." />
+  <meta property="og:url" content="https://fixoona.com/blog/world-clock-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Time Zones Explained: UTC, DST, and Odd Offsets" />
+  <meta name="twitter:description" content="The real difference between UTC and GMT, and why some time zones use odd offsets." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Time Zones Explained: UTC, DST, and Odd Offsets",
+    "description": "The real difference between UTC and GMT, and why some time zones use odd offsets.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/world-clock-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Time Zones Explained", "item": "https://fixoona.com/blog/world-clock-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What's the difference between UTC and GMT?",
+        "acceptedAnswer": { "@type": "Answer", "text": "For practical purposes they're the same time, but UTC (Coordinated Universal Time) is the precise scientific standard maintained by atomic clocks, while GMT (Greenwich Mean Time) is technically a specific time zone that happens to match UTC when the UK isn't observing daylight saving time." }
+      },
+      {
+        "@type": "Question",
+        "name": "How does daylight saving time affect the displayed offset?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It uses your browser's built-in time zone database (the same one operating systems use), which already knows every region's daylight saving rules and switch dates — so the displayed time and UTC offset automatically adjust on the correct dates without this tool needing any manual updates." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why are some time zones offset by 30 or 45 minutes instead of a whole hour?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A handful of regions, like India (UTC+5:30) and parts of Australia, deliberately chose a half-hour or 45-minute offset rather than a whole hour, usually to sit roughly in the middle between neighboring zones or align better with the sun's position at that longitude — it's a real, intentional choice, not a display quirk." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is any of this sent to a server?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — all the time calculations happen entirely in your browser, and your customized city list is only saved locally on your own device." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Time Zones Explained</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Everyday Guides · 5 min read · Updated September 2026</p>
+      <h1>Time Zones Explained: UTC, DST, and Odd Offsets</h1>
+      <div class="article-hero-img" aria-hidden="true">🕐</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#utc-vs-local">UTC vs. Local Time vs. GMT</a></li>
+          <li><a href="#dst">How Daylight Saving Time Actually Shifts the Clock</a></li>
+          <li><a href="#odd-offsets">Why Some Time Zones Are Off by 30 or 45 Minutes</a></li>
+          <li><a href="#tz-database">The Database Behind Every Correct Conversion</a></li>
+          <li><a href="#view">See Live Times Across Cities</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>Time zones seem like they should just be "hour offsets from a center point," but the real rules — daylight saving, half-hour offsets, and a database that has to track every region's historical and future changes — are more tangled than most people realize.</p>
+
+        <h2 id="utc-vs-local">UTC vs. Local Time vs. GMT</h2>
+        <p>UTC (Coordinated Universal Time) is the precise, unchanging reference point every time zone is defined relative to — it's maintained by atomic clocks and never observes daylight saving. GMT (Greenwich Mean Time) is often used interchangeably with UTC, but it's technically a specific time zone (the UK's standard time) that happens to align with UTC only when the UK isn't in daylight saving time. Every "local time" you see anywhere in the world is really just UTC plus or minus a defined offset for that region.</p>
+
+        <h2 id="dst">How Daylight Saving Time Actually Shifts the Clock</h2>
+        <p>Daylight saving time doesn't change a region's underlying UTC offset permanently — it temporarily shifts the local clock forward (usually by one hour) for part of the year, then shifts it back. This is why a city's UTC offset can appear to change twice a year even though nothing about its geographic position changed. Not every country observes DST, and the ones that do don't all switch on the same dates, which is exactly why a naive "just add hours" approach to time zone math breaks down for anything involving a DST-observing region.</p>
+
+        <h2 id="odd-offsets">Why Some Time Zones Are Off by 30 or 45 Minutes</h2>
+        <p>Most time zones are whole-hour offsets from UTC, but a handful deliberately aren't. India uses UTC+5:30 for the entire country, splitting the difference so the whole nation shares one time rather than spanning two standard zones. Parts of Australia use UTC+9:30, and Nepal famously uses UTC+5:45. These aren't errors or rounding artifacts — they're intentional political and practical choices about how a region wants its clock to align with both its neighbors and the sun.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> When scheduling a meeting across time zones, always double-check the date on both ends, not just the time — because of offset differences, "3 PM Tuesday" in one zone can land on Wednesday morning in another, especially near the international date line.
+        </div>
+
+        <h2 id="tz-database">The Database Behind Every Correct Conversion</h2>
+        <p>Every operating system and browser ships with a copy of the IANA Time Zone Database (often called "tz data"), a continuously maintained record of every region's historical and current UTC offset, plus every DST rule and the exact dates it takes effect. This is what actually makes accurate time zone conversion possible — instead of a tool hardcoding "UTC+5:30 for India," it looks up the current rule for that specific region from an up-to-date, regularly patched database.</p>
+
+        <h2 id="view">See Live Times Across Cities</h2>
+        <p>See the current, live time in major cities around the world at once — customized to your own list — with the free <a href="../tools/world-clock">World Clock</a>. Need to convert one specific time between zones instead, like for scheduling a meeting? Try the <a href="../tools/time-zone-converter">Time Zone Converter</a>.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>What's the difference between UTC and GMT?</strong> For practical purposes they're the same time, but UTC (Coordinated Universal Time) is the precise scientific standard maintained by atomic clocks, while GMT (Greenwich Mean Time) is technically a specific time zone that happens to match UTC when the UK isn't observing daylight saving time.</p>
+        <p><strong>How does daylight saving time affect the displayed offset?</strong> It uses your browser's built-in time zone database (the same one operating systems use), which already knows every region's daylight saving rules and switch dates — so the displayed time and UTC offset automatically adjust on the correct dates without this tool needing any manual updates.</p>
+        <p><strong>Why are some time zones offset by 30 or 45 minutes instead of a whole hour?</strong> A handful of regions, like India (UTC+5:30) and parts of Australia, deliberately chose a half-hour or 45-minute offset rather than a whole hour, usually to sit roughly in the middle between neighboring zones or align better with the sun's position at that longitude — it's a real, intentional choice, not a display quirk.</p>
+        <p><strong>Is any of this sent to a server?</strong> No — all the time calculations happen entirely in your browser, and your customized city list is only saved locally on your own device.</p>
+
+        <div class="tip-box">
+          Want to see live time across cities right now? Try the free <a href="../tools/world-clock">World Clock</a> — no sign-up.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

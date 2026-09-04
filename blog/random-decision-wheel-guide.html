@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What Makes a Decision Wheel Actually Fair | Fixoona</title>
+  <meta name="description" content="What &quot;random&quot; really means for a spinning decision wheel, why naive randomness introduces bias, and how rejection sampling and cryptographic randomness fix it." />
+  <meta name="keywords" content="is a random wheel actually fair, modulo bias explained, cryptographically secure random number, how random pickers work" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/random-decision-wheel-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="What Makes a Decision Wheel Actually Fair" />
+  <meta property="og:description" content="Why naive randomness introduces bias, and how a fair spinning wheel avoids it." />
+  <meta property="og:url" content="https://fixoona.com/blog/random-decision-wheel-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="What Makes a Decision Wheel Actually Fair" />
+  <meta name="twitter:description" content="Why naive randomness introduces bias, and how a fair spinning wheel avoids it." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "What Makes a Decision Wheel Actually Fair",
+    "description": "Why naive randomness introduces bias, and how a fair spinning wheel avoids it.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/random-decision-wheel-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Random Decision Wheel Guide", "item": "https://fixoona.com/blog/random-decision-wheel-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is the spin actually fair and random?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — the winning slice is chosen using your browser's cryptographically secure random number generator (the same kind used for passwords) with rejection sampling, which guarantees every option has an exactly equal chance of being picked, regardless of how many options there are." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is \"modulo bias\" and why does it matter for random pickers?",
+        "acceptedAnswer": { "@type": "Answer", "text": "If you generate a large random number and reduce it to a smaller range using the modulo (remainder) operator, some remainders end up very slightly more likely than others whenever the range doesn't divide the total number of possible values evenly. It's a small effect, but it means a naive implementation isn't perfectly fair — which is exactly the bias that rejection sampling is designed to eliminate." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does \"rejection sampling\" actually do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It discards and re-rolls any generated number that falls in the small leftover range that would otherwise cause modulo bias, only accepting numbers that divide evenly into the desired range. The result is a selection where every option has a mathematically exact, equal probability, at the cost of very occasionally generating a number twice." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the spinning animation just for show, or does it affect the result?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The winning option is determined the instant you click \"Spin\" — the animation is purely a visual reveal of that already-decided result, not something that influences which option wins." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Random Decision Wheel Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Everyday Guides · 5 min read · Updated September 2026</p>
+      <h1>What Makes a Decision Wheel Actually Fair</h1>
+      <div class="article-hero-img" aria-hidden="true">🎡</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#modulo-bias">The Hidden Bias in Naive Randomness</a></li>
+          <li><a href="#rejection">How Rejection Sampling Fixes It</a></li>
+          <li><a href="#crypto">Why Cryptographic Randomness, Specifically</a></li>
+          <li><a href="#animation">Why the Animation Doesn't Affect the Outcome</a></li>
+          <li><a href="#spin">Spin It Yourself</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>"Just pick a random number" sounds simple, but building a picker that's actually mathematically fair — where every option truly has an identical chance of winning, no matter how many options there are — involves a couple of subtle steps that a lot of quick implementations skip.</p>
+
+        <h2 id="modulo-bias">The Hidden Bias in Naive Randomness</h2>
+        <p>A common shortcut for picking a random option out of, say, 7 choices is to generate a large random number and take its remainder when divided by 7 (the modulo operation). The problem is that if the total range of possible random numbers doesn't divide evenly by 7, some remainders end up landing very slightly more often than others purely as an artifact of the leftover, unevenly distributed values at the top of the range. It's a small skew — often a fraction of a percent — but it means the picker isn't perfectly fair, which matters if you care about the math actually being correct rather than just looking random.</p>
+
+        <h2 id="rejection">How Rejection Sampling Fixes It</h2>
+        <p>The fix is called rejection sampling: instead of accepting every random number generated, the largest possible range is trimmed down to the biggest multiple of the option count that still fits, and any generated number that falls in the small leftover remainder is thrown away and re-rolled. Because only numbers within that evenly-divisible range are ever used for the final modulo calculation, every option ends up with an exactly equal, mathematically provable chance of being selected — no matter whether there are 2 options or 20.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> Rejection sampling occasionally has to re-roll a number, but this happens invisibly and near-instantly — it doesn't meaningfully slow anything down, it just quietly removes the bias a naive modulo approach would otherwise introduce.
+        </div>
+
+        <h2 id="crypto">Why Cryptographic Randomness, Specifically</h2>
+        <p>There are two broad categories of random number generation in a browser: <code>Math.random()</code>, a fast pseudorandom generator meant for things like animations and games, and the Web Crypto API's <code>crypto.getRandomValues()</code>, designed for security-sensitive uses like generating passwords or encryption keys. The cryptographic generator draws from a much higher-quality source of entropy and isn't predictable even in principle, which makes it the more rigorous (if technically unnecessary for casual use) choice for a picker that wants to claim genuine fairness rather than "good enough" randomness.</p>
+
+        <h2 id="animation">Why the Animation Doesn't Affect the Outcome</h2>
+        <p>It's worth being explicit about this because it's genuinely not obvious from watching a wheel spin: the winning option is calculated the instant the spin is triggered, before any visual animation plays. The wheel's rotation, deceleration, and the pointer landing on a specific slice are purely a presentation layer built to visually reveal an already-determined result — similar to how a shuffled deck of cards is already in its final order the moment it's shuffled, even though dealing it out happens one card at a time afterward.</p>
+
+        <h2 id="spin">Spin It Yourself</h2>
+        <p>Enter any list of options into the free <a href="../tools/random-decision-wheel">Random Decision Wheel</a> and spin it for a fair, animated pick — great for anything from choosing a restaurant to picking who goes first.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>Is the spin actually fair and random?</strong> Yes — the winning slice is chosen using your browser's cryptographically secure random number generator (the same kind used for passwords) with rejection sampling, which guarantees every option has an exactly equal chance of being picked, regardless of how many options there are.</p>
+        <p><strong>What is "modulo bias" and why does it matter for random pickers?</strong> If you generate a large random number and reduce it to a smaller range using the modulo (remainder) operator, some remainders end up very slightly more likely than others whenever the range doesn't divide the total number of possible values evenly. It's a small effect, but it means a naive implementation isn't perfectly fair — which is exactly the bias that rejection sampling is designed to eliminate.</p>
+        <p><strong>What does "rejection sampling" actually do?</strong> It discards and re-rolls any generated number that falls in the small leftover range that would otherwise cause modulo bias, only accepting numbers that divide evenly into the desired range. The result is a selection where every option has a mathematically exact, equal probability, at the cost of very occasionally generating a number twice.</p>
+        <p><strong>Is the spinning animation just for show, or does it affect the result?</strong> The winning option is determined the instant you click "Spin" — the animation is purely a visual reveal of that already-decided result, not something that influences which option wins.</p>
+
+        <div class="tip-box">
+          Need to make a fair random pick right now? Try the free <a href="../tools/random-decision-wheel">Random Decision Wheel</a> — no sign-up, nothing sent to a server.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

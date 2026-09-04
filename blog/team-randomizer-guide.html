@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fair Random Groups: How Shuffling Actually Works | Fixoona</title>
+  <meta name="description" content="Why a naive shuffle can quietly favor certain orderings, how the Fisher-Yates algorithm avoids that bias, and how uneven groups get split as fairly as possible." />
+  <meta name="keywords" content="fisher yates shuffle explained, how does random shuffle work, split list into groups fairly, biased shuffle algorithm" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/team-randomizer-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Fair Random Groups: How Shuffling Actually Works" />
+  <meta property="og:description" content="Why a naive shuffle can be biased, and how a proper algorithm avoids it." />
+  <meta property="og:url" content="https://fixoona.com/blog/team-randomizer-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Fair Random Groups: How Shuffling Actually Works" />
+  <meta name="twitter:description" content="Why a naive shuffle can be biased, and how a proper algorithm avoids it." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Fair Random Groups: How Shuffling Actually Works",
+    "description": "Why a naive shuffle can be biased, and how a proper algorithm avoids it.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/team-randomizer-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Fair Random Groups Guide", "item": "https://fixoona.com/blog/team-randomizer-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How are the groups actually randomized?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The full list is shuffled using a cryptographically secure random number generator (the same kind used for passwords), then split into the number of groups you chose in order — this guarantees every possible ordering of the list is equally likely, rather than using a weaker or predictable shuffling method." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why can sorting a list with a random comparator produce a biased shuffle?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Sorting algorithms make comparison decisions based on the specific pairs they happen to compare, and different sorting algorithms compare different pairs in different orders — so feeding a sort function a random \"coin flip\" comparator doesn't make every final ordering equally likely. Certain orderings end up quietly more probable than others depending on the sort algorithm's internal comparison pattern, which is a well-known trap." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if the number of people doesn't divide evenly into the groups?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The extra people are distributed one at a time across the earliest groups, so group sizes never differ by more than one person — for example, splitting 10 people into 3 groups produces sizes of 4, 3, and 3, not one oversized and two undersized groups." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my list of names sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the shuffling and grouping happen entirely in your browser using JavaScript, so the list you enter is never sent to a server." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Fair Random Groups Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Text Guides · 5 min read · Updated September 2026</p>
+      <h1>Fair Random Groups: How Shuffling Actually Works</h1>
+      <div class="article-hero-img" aria-hidden="true">👥</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#fisher-yates">A Truly Fair Shuffle</a></li>
+          <li><a href="#biased-shuffle">The Hidden Bias in a Naive Shuffle</a></li>
+          <li><a href="#uneven-groups">Splitting Groups That Don't Divide Evenly</a></li>
+          <li><a href="#crypto-random">Cryptographic Randomness vs. Math.random()</a></li>
+          <li><a href="#randomize">Randomizing a Group Instantly</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>"Just shuffle the list" sounds like a solved problem, but a surprising number of common shuffling implementations are quietly biased — some orderings end up more likely than others, even though it looks random on the surface. Splitting a group fairly starts with getting the shuffle itself right.</p>
+
+        <h2 id="fisher-yates">A Truly Fair Shuffle</h2>
+        <p>The standard algorithm for a genuinely unbiased shuffle is the Fisher-Yates shuffle. It works backward through the list: for each position, starting from the last, pick a random remaining element (from the start of the list up to and including the current position) and swap it into that position, then move one position earlier and repeat. Done correctly, every one of the n-factorial possible orderings of the list is exactly equally likely — not approximately, but exactly, which is a stronger guarantee than it might sound.</p>
+
+        <h2 id="biased-shuffle">The Hidden Bias in a Naive Shuffle</h2>
+        <p>A common but flawed shortcut is sorting the list using a comparator that returns a random result, like <code>array.sort(() => Math.random() - 0.5)</code>. This looks random and often "seems" to work, but it isn't actually fair: sorting algorithms make their comparison decisions in a specific, algorithm-dependent pattern, not by comparing every possible pair equally. Feeding random results into that pattern produces orderings where some arrangements come up more often than others — the bias is subtle enough to pass a casual glance but real enough to matter for anything where fairness is the point, like assigning teams.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> If you're implementing your own shuffle for anything where fairness matters — drawing raffle winners, assigning teams, randomizing a quiz's answer order — use Fisher-Yates specifically rather than a sort-based trick, even though the sort-based version often looks correct in casual testing.
+        </div>
+
+        <h2 id="uneven-groups">Splitting Groups That Don't Divide Evenly</h2>
+        <p>Once the list is shuffled, splitting it into a set number of even groups is straightforward when the total divides evenly — but it rarely does. The fair approach is to compute the base group size (total divided by group count, rounded down) and then distribute the leftover people one at a time across the earliest groups, so no group ends up more than one person larger than any other. Splitting 17 people into 4 groups this way produces sizes of 5, 4, 4, and 4 — never a lopsided 8-3-3-3 split just because the numbers didn't divide cleanly.</p>
+
+        <h2 id="crypto-random">Cryptographic Randomness vs. Math.random()</h2>
+        <p>JavaScript's built-in <code>Math.random()</code> is fine for most casual randomness, but it isn't designed to be unpredictable in a security sense — its internal algorithm is deterministic and, in principle, its outputs could be predicted by someone who knows enough about the implementation and prior outputs. For anything where the randomness needs a stronger guarantee, the browser's <code>crypto.getRandomValues()</code> API draws from a cryptographically secure random number generator instead — the same underlying source used to generate passwords and encryption keys — which is a meaningfully stronger source of unpredictability, even for something as low-stakes as picking teams.</p>
+
+        <h2 id="randomize">Randomizing a Group Instantly</h2>
+        <p>Paste in a list of names and split them into fair, evenly-sized groups using a proper cryptographically random shuffle with the free <a href="../tools/team-randomizer">Team Randomizer</a>.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>How are the groups actually randomized?</strong> The full list is shuffled using a cryptographically secure random number generator (the same kind used for passwords), then split into the number of groups you chose in order — this guarantees every possible ordering of the list is equally likely, rather than using a weaker or predictable shuffling method.</p>
+        <p><strong>Why can sorting a list with a random comparator produce a biased shuffle?</strong> Sorting algorithms make comparison decisions based on the specific pairs they happen to compare, and different sorting algorithms compare different pairs in different orders — so feeding a sort function a random "coin flip" comparator doesn't make every final ordering equally likely. Certain orderings end up quietly more probable than others depending on the sort algorithm's internal comparison pattern, which is a well-known trap.</p>
+        <p><strong>What happens if the number of people doesn't divide evenly into the groups?</strong> The extra people are distributed one at a time across the earliest groups, so group sizes never differ by more than one person — for example, splitting 10 people into 3 groups produces sizes of 4, 3, and 3, not one oversized and two undersized groups.</p>
+        <p><strong>Is my list of names sent anywhere?</strong> No — the shuffling and grouping happen entirely in your browser using JavaScript, so the list you enter is never sent to a server.</p>
+
+        <div class="tip-box">
+          Need fair teams right now? Try the free <a href="../tools/team-randomizer">Team Randomizer</a> — paste your names, pick a group count, done.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

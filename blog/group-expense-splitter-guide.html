@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Algorithm Behind "Who Owes Who" | Fixoona</title>
+  <meta name="description" content="How a group expense splitter turns a messy pile of unequal payments into the smallest possible number of payments needed to settle up, using a simple greedy algorithm." />
+  <meta name="keywords" content="how to split group expenses fairly, minimize number of payments splitwise, debt simplification algorithm" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/group-expense-splitter-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="The Algorithm Behind &quot;Who Owes Who&quot;" />
+  <meta property="og:description" content="How a greedy algorithm minimizes the payments needed to settle a group expense." />
+  <meta property="og:url" content="https://fixoona.com/blog/group-expense-splitter-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Algorithm Behind &quot;Who Owes Who&quot;" />
+  <meta name="twitter:description" content="How a greedy algorithm minimizes the payments needed to settle a group expense." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "The Algorithm Behind \"Who Owes Who\"",
+    "description": "How a greedy algorithm minimizes the payments needed to settle a group expense.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/group-expense-splitter-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Group Expense Splitter Guide", "item": "https://fixoona.com/blog/group-expense-splitter-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does a group expense splitter figure out who owes who?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It computes each person's net balance (what they paid minus their equal fair share of the total), then repeatedly matches whoever is owed the most money with whoever owes the most money until every balance reaches zero. This greedy settle-up approach minimizes the total number of payments needed." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why not just have everyone pay back whoever they specifically owe?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Tracking every individual owed amount between every pair of people in a group trip quickly produces far more transactions than necessary — if three people all owe each other different amounts in a circle, several of those debts can cancel out mathematically. Settling based on net balances instead of pairwise debts is what allows the total number of payments to shrink dramatically, sometimes down to just one or two transfers for an entire group." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the order people get matched in change the final result?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It doesn't change who owes what in total — every person's net balance is fixed by what they actually paid versus their fair share. It can change exactly which individual payments settle the group, but the total amount changing hands and everyone's final balance always comes out the same regardless of matching order." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Group Expense Splitter Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Finance Guides · 5 min read · Updated September 2026</p>
+      <h1>The Algorithm Behind "Who Owes Who"</h1>
+      <div class="article-hero-img" aria-hidden="true">🧾</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#net-balance">Net Balances, Not Pairwise Debts</a></li>
+          <li><a href="#why-fewer">Why This Produces Fewer Payments</a></li>
+          <li><a href="#order">Does Matching Order Matter?</a></li>
+          <li><a href="#try">Settle Up Instantly</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>A group trip where everyone paid for different things always ends the same way — someone pulls out a phone and tries to figure out who owes who. There's a genuinely elegant bit of math behind doing that with the fewest possible payments.</p>
+
+        <h2 id="net-balance">Net Balances, Not Pairwise Debts</h2>
+        <p>Rather than tracking every individual debt between every pair of people, the calculation starts by working out each person's net balance: what they actually paid, minus their equal fair share of the group total. Someone who paid more than their share ends up with a positive balance (they're owed money); someone who paid less ends up negative (they owe money). From there, the algorithm repeatedly matches whoever is owed the most with whoever owes the most, transferring the smaller of the two amounts between them, and repeats until every balance reaches exactly zero.</p>
+
+        <h2 id="why-fewer">Why This Produces Fewer Payments</h2>
+        <p>If you tracked every specific pairwise debt from a trip — who individually paid for what and who owes each specific person — you'd often end up with far more transactions than actually necessary. Circular debts can cancel out mathematically even though they'd never cancel out if tracked person-to-person: if A owes B, B owes C, and C owes A the same amount, none of them actually owe anything once you look at net balances instead of individual transactions. This is exactly why the net-balance approach can settle an entire group trip in just one or two total payments, even when a dozen individual purchases were involved.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> Enter the actual amount each person paid, not what they think they "should" owe — the algorithm needs the real payment totals to correctly compute everyone's net balance and produce an accurate settle-up plan.
+        </div>
+
+        <h2 id="order">Does Matching Order Matter?</h2>
+        <p>The order in which the largest creditor and largest debtor get matched doesn't change anyone's final balance — that's fixed the moment the net balances are calculated from what everyone actually paid. What can differ slightly is exactly which individual transfers settle everything, but the total number of payments and the final result (everyone at zero) comes out the same regardless.</p>
+
+        <h2 id="try">Settle Up Instantly</h2>
+        <p>Enter what everyone paid into the free <a href="../tools/group-expense-splitter">Group Expense Splitter</a> to get the simplest possible set of payments to settle up.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>How does a group expense splitter figure out who owes who?</strong> It computes each person's net balance (what they paid minus their equal fair share of the total), then repeatedly matches whoever is owed the most money with whoever owes the most money until every balance reaches zero. This greedy settle-up approach minimizes the total number of payments needed.</p>
+        <p><strong>Why not just have everyone pay back whoever they specifically owe?</strong> Tracking every individual owed amount between every pair of people in a group trip quickly produces far more transactions than necessary — if three people all owe each other different amounts in a circle, several of those debts can cancel out mathematically. Settling based on net balances instead of pairwise debts is what allows the total number of payments to shrink dramatically, sometimes down to just one or two transfers for an entire group.</p>
+        <p><strong>Does the order people get matched in change the final result?</strong> It doesn't change who owes what in total — every person's net balance is fixed by what they actually paid versus their fair share. It can change exactly which individual payments settle the group, but the total amount changing hands and everyone's final balance always comes out the same regardless of matching order.</p>
+
+        <div class="tip-box">
+          Splitting a group trip or dinner? Try the free <a href="../tools/group-expense-splitter">Group Expense Splitter</a> — the fewest payments to settle up.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

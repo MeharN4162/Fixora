@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subnetting and CIDR Notation Explained | Fixoona</title>
+  <meta name="description" content="What a CIDR prefix like /24 actually means in binary, why a /24 network only has 254 usable addresses instead of 256, and how /31 point-to-point links are the exception." />
+  <meta name="keywords" content="what does cidr prefix mean, subnet mask binary explained, why 254 usable hosts not 256, point to point subnet" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/ip-subnet-calculator-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Subnetting and CIDR Notation Explained" />
+  <meta property="og:description" content="What a CIDR prefix means in binary, and why a /24 network has 254 usable addresses, not 256." />
+  <meta property="og:url" content="https://fixoona.com/blog/ip-subnet-calculator-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Subnetting and CIDR Notation Explained" />
+  <meta name="twitter:description" content="What a CIDR prefix means in binary, and why a /24 network has 254 usable addresses, not 256." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Subnetting and CIDR Notation Explained",
+    "description": "What a CIDR prefix means in binary, and why a /24 network has 254 usable addresses, not 256.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/ip-subnet-calculator-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "IP Subnet Calculator Guide", "item": "https://fixoona.com/blog/ip-subnet-calculator-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does the /24 in an address like 192.168.1.0/24 mean?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The number after the slash is the CIDR prefix length — it tells you how many of the address's 32 bits are fixed as the network portion. A /24 means the first 24 bits identify the network, leaving the remaining 8 bits for host addresses within it." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why are only 254 addresses usable in a /24 network, not 256?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Out of the 256 total addresses in a /24, the very first address is reserved as the network address (identifying the subnet itself) and the very last is reserved as the broadcast address (sent to every device on the subnet), leaving 254 addresses that can actually be assigned to devices." }
+      },
+      {
+        "@type": "Question",
+        "name": "What's different about /31 and /32 networks?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A /32 identifies exactly one single address with no network/broadcast split. A /31, per RFC 3021, is a special case used for point-to-point links where both addresses in the tiny 2-address range are usable, since there's no need for a separate broadcast address between exactly two devices." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does a smaller CIDR prefix number mean a bigger network?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The prefix number counts how many bits are locked to the network portion of the address — fewer locked bits leaves more bits free for host addresses, and each additional free bit doubles the number of possible hosts. A /16 fixes only 16 bits and leaves 16 free (65,536 addresses), while a /24 fixes 24 bits and leaves only 8 free (256 addresses), which is why the smaller number describes the larger network." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>IP Subnet Calculator Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Developer Guides · 6 min read · Updated September 2026</p>
+      <h1>Subnetting and CIDR Notation Explained</h1>
+      <div class="article-hero-img" aria-hidden="true">🌐</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#cidr">What the /24 Actually Means in Binary</a></li>
+          <li><a href="#network-broadcast">Why Two Addresses Are Always Reserved</a></li>
+          <li><a href="#smaller-is-bigger">Why a Smaller Prefix Means a Bigger Network</a></li>
+          <li><a href="#edge-cases">The /31 and /32 Edge Cases</a></li>
+          <li><a href="#calculate">Calculating a Subnet Instantly</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>An address like 192.168.1.10/24 looks straightforward until you're asked what the /24 actually does — and the honest answer requires thinking in binary for a minute, not decimal.</p>
+
+        <h2 id="cidr">What the /24 Actually Means in Binary</h2>
+        <p>An IPv4 address is really just a 32-bit number, split into four 8-bit chunks and written in decimal for human readability (the four numbers separated by dots). The CIDR prefix — the number after the slash — says how many of those 32 bits, counted from the left, are fixed as the "network" portion shared by every device on that subnet. A /24 fixes the first 24 bits (the first three of the four dotted numbers), leaving the remaining 8 bits free to identify individual hosts within that network. That's exactly why every device on a typical home network shares the same first three numbers (like 192.168.1.x) but has a different final number.</p>
+
+        <h2 id="network-broadcast">Why Two Addresses Are Always Reserved</h2>
+        <p>Within any subnet, two specific addresses are set aside and can't be assigned to a device. The lowest address in the range (all host bits set to 0) is reserved as the network address, which identifies the subnet as a whole rather than any single device on it. The highest address (all host bits set to 1) is reserved as the broadcast address, which is a special destination that every device on the subnet listens to. That's why a /24 network, with 256 total addresses, only has 254 that are actually assignable — the first and last are spoken for structurally, not by convention.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> When troubleshooting "why can't this device get address X," check whether X happens to be the network or broadcast address for that subnet — it's a common off-by-one mistake when manually assigning static IPs.
+        </div>
+
+        <h2 id="smaller-is-bigger">Why a Smaller Prefix Means a Bigger Network</h2>
+        <p>It can feel backwards at first, but a smaller prefix number always describes a larger network. The prefix counts locked network bits, and every bit that's not locked doubles the number of possible host addresses — so fewer locked bits (a smaller prefix) leaves more free bits, and more free bits means exponentially more addresses. A /16 locks only 16 bits and leaves 16 free, for 65,536 total addresses, while a /24 locks 24 bits and leaves only 8 free, for just 256. Going from /24 to /23 doesn't add a modest number of addresses — it doubles the entire subnet, because one more free bit doubles the range.</p>
+
+        <h2 id="edge-cases">The /31 and /32 Edge Cases</h2>
+        <p>The network/broadcast reservation rule has two documented exceptions at the extreme ends of the prefix range. A /32 has zero free bits, identifying exactly one single address with no network or broadcast concept at all. A /31 has just one free bit, giving a range of only two addresses — and rather than "waste" one of them as an unusable broadcast address, RFC 3021 specifically defines /31 as usable in full for point-to-point links (like a direct connection between two routers), where both addresses in that tiny range are valid hosts.</p>
+
+        <h2 id="calculate">Calculating a Subnet Instantly</h2>
+        <p>Enter an IPv4 address with a CIDR prefix into the free <a href="../tools/ip-subnet-calculator">IP Subnet Calculator</a> to get the network address, broadcast address, subnet mask, wildcard mask, and usable host range instantly.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>What does the /24 in an address like 192.168.1.0/24 mean?</strong> The number after the slash is the CIDR prefix length — it tells you how many of the address's 32 bits are fixed as the network portion. A /24 means the first 24 bits identify the network, leaving the remaining 8 bits for host addresses within it.</p>
+        <p><strong>Why are only 254 addresses usable in a /24 network, not 256?</strong> Out of the 256 total addresses in a /24, the very first address is reserved as the network address (identifying the subnet itself) and the very last is reserved as the broadcast address (sent to every device on the subnet), leaving 254 addresses that can actually be assigned to devices.</p>
+        <p><strong>What's different about /31 and /32 networks?</strong> A /32 identifies exactly one single address with no network/broadcast split. A /31, per RFC 3021, is a special case used for point-to-point links where both addresses in the tiny 2-address range are usable, since there's no need for a separate broadcast address between exactly two devices.</p>
+        <p><strong>Why does a smaller CIDR prefix number mean a bigger network?</strong> The prefix number counts how many bits are locked to the network portion of the address — fewer locked bits leaves more bits free for host addresses, and each additional free bit doubles the number of possible hosts. A /16 fixes only 16 bits and leaves 16 free (65,536 addresses), while a /24 fixes 24 bits and leaves only 8 free (256 addresses), which is why the smaller number describes the larger network.</p>
+
+        <div class="tip-box">
+          Need to work out a network address, broadcast address, or usable host range right now? Try the free <a href="../tools/ip-subnet-calculator">IP Subnet Calculator</a> — instant, no sign-up.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

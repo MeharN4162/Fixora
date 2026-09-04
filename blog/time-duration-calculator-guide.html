@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timesheet Math: Why Overnight Shifts Break Calculators | Fixoona</title>
+  <meta name="description" content="Why subtracting a start time from an end time breaks the moment a shift crosses midnight, and why timesheets use decimal hours instead of hours and minutes." />
+  <meta name="keywords" content="overnight shift time calculation, decimal hours vs minutes timesheet, how to calculate hours worked" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/time-duration-calculator-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Timesheet Math: Why Overnight Shifts Break Calculators" />
+  <meta property="og:description" content="Why an overnight shift breaks simple time subtraction, and how to fix it." />
+  <meta property="og:url" content="https://fixoona.com/blog/time-duration-calculator-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Timesheet Math: Why Overnight Shifts Break Calculators" />
+  <meta name="twitter:description" content="Why an overnight shift breaks simple time subtraction, and how to fix it." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Timesheet Math: Why Overnight Shifts Break Calculators",
+    "description": "Why an overnight shift breaks simple time subtraction, and how to fix it.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/time-duration-calculator-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Time Duration Calculator Guide", "item": "https://fixoona.com/blog/time-duration-calculator-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why does simple time subtraction break for an overnight shift?",
+        "acceptedAnswer": { "@type": "Answer", "text": "If a shift starts at 10 PM and ends at 6 AM, naively subtracting the start time from the end time produces a negative number, since 6:00 is numerically smaller than 22:00 on a 24-hour clock. The calculation has to detect that the end time is \"earlier\" than the start time and add 24 hours to the end time before subtracting, to correctly account for the shift crossing midnight into the next day." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do timesheets use decimal hours instead of hours and minutes?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Payroll calculations multiply hours worked by an hourly rate, and that math is far simpler with decimal hours than with hours-and-minutes format. 7 hours and 30 minutes becomes 7.5 in decimal form, which multiplies cleanly against an hourly rate, whereas the minutes portion of \"7:30\" isn't actually a base-100 fraction and would produce an incorrect result if multiplied directly." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you convert minutes into a decimal fraction of an hour?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Divide the minutes by 60, since an hour contains 60 minutes. 30 minutes becomes 30/60 = 0.5, 15 minutes becomes 15/60 = 0.25, and 45 minutes becomes 45/60 = 0.75. This is why decimal-hour values often look like familiar fractions — quarters, halves, and thirds of an hour convert to clean decimal values." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Time Duration Calculator Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Everyday Guides · 4 min read · Updated September 2026</p>
+      <h1>Timesheet Math: Why Overnight Shifts Break Calculators</h1>
+      <div class="article-hero-img" aria-hidden="true">⏱️</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#overnight">Why Overnight Shifts Break Simple Subtraction</a></li>
+          <li><a href="#decimal">Why Timesheets Use Decimal Hours</a></li>
+          <li><a href="#converting">Converting Minutes to a Decimal Fraction</a></li>
+          <li><a href="#try">Calculate a Duration Instantly</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>Working out how long a shift lasted seems like the simplest math there is — until the shift crosses midnight, and suddenly straightforward subtraction gives you a nonsensical negative number.</p>
+
+        <h2 id="overnight">Why Overnight Shifts Break Simple Subtraction</h2>
+        <p>A 24-hour clock resets to 00:00 at midnight, which means a shift starting at 10 PM (22:00) and ending at 6 AM (06:00 the next day) has an end time that's numerically smaller than its start time. Subtracting directly — 6:00 minus 22:00 — produces a negative duration, which is obviously wrong. The fix is to detect this case and add 24 hours to the end time before subtracting, which correctly accounts for the fact that the end time actually falls on the following calendar day.</p>
+
+        <h2 id="decimal">Why Timesheets Use Decimal Hours</h2>
+        <p>Payroll math multiplies hours worked by an hourly rate, and that calculation only works cleanly in decimal form. 7 hours and 30 minutes written as "7:30" isn't actually the number 7.30 — the minutes portion isn't a base-100 fraction, so multiplying 7.30 by an hourly rate would give a wrong answer. Converting properly to 7.5 decimal hours first makes the multiplication straightforward and accurate, which is exactly why payroll systems and timesheets standardize on decimal hours rather than the hours:minutes format people naturally think in.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> If you're manually calculating payroll hours, always convert to decimal before multiplying by a rate — multiplying an hours:minutes value directly against an hourly rate is one of the most common manual timesheet errors.
+        </div>
+
+        <h2 id="converting">Converting Minutes to a Decimal Fraction</h2>
+        <p>Since an hour contains 60 minutes, converting minutes to a decimal fraction just means dividing by 60. 30 minutes becomes 30 ÷ 60 = 0.5, 15 minutes becomes 15 ÷ 60 = 0.25, and 45 minutes becomes 45 ÷ 60 = 0.75. This is why decimal-hour values so often land on familiar-looking numbers like 0.25, 0.5, and 0.75 — they correspond to quarters, halves, and three-quarters of an hour, which are also the most common real-world shift-length increments.</p>
+
+        <h2 id="try">Calculate a Duration Instantly</h2>
+        <p>Enter a start and end time, including overnight spans, into the free <a href="../tools/time-duration-calculator">Time Duration Calculator</a> to get the exact duration in hours, minutes, and decimal hours.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>Why does simple time subtraction break for an overnight shift?</strong> If a shift starts at 10 PM and ends at 6 AM, naively subtracting the start time from the end time produces a negative number, since 6:00 is numerically smaller than 22:00 on a 24-hour clock. The calculation has to detect that the end time is "earlier" than the start time and add 24 hours to the end time before subtracting, to correctly account for the shift crossing midnight into the next day.</p>
+        <p><strong>Why do timesheets use decimal hours instead of hours and minutes?</strong> Payroll calculations multiply hours worked by an hourly rate, and that math is far simpler with decimal hours than with hours-and-minutes format. 7 hours and 30 minutes becomes 7.5 in decimal form, which multiplies cleanly against an hourly rate, whereas the minutes portion of "7:30" isn't actually a base-100 fraction and would produce an incorrect result if multiplied directly.</p>
+        <p><strong>How do you convert minutes into a decimal fraction of an hour?</strong> Divide the minutes by 60, since an hour contains 60 minutes. 30 minutes becomes 30/60 = 0.5, 15 minutes becomes 15/60 = 0.25, and 45 minutes becomes 45/60 = 0.75. This is why decimal-hour values often look like familiar fractions — quarters, halves, and thirds of an hour convert to clean decimal values.</p>
+
+        <div class="tip-box">
+          Calculating hours worked? Try the free <a href="../tools/time-duration-calculator">Time Duration Calculator</a> — handles overnight spans correctly.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

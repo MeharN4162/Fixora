@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Agent Strings Explained: What They Reveal and Why They Lie | Fixoona</title>
+  <meta name="description" content="Why every user agent string starts with 'Mozilla,' why Chrome's claims to be Safari, and why you should never trust a user agent for security decisions." />
+  <meta name="keywords" content="user agent string explained, why does chrome say safari, user agent spoofing, user agent client hints" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/user-agent-parser-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="User Agent Strings Explained: What They Reveal and Why They Lie" />
+  <meta property="og:description" content="Why every user agent string starts with 'Mozilla,' and why you shouldn't trust one for security." />
+  <meta property="og:url" content="https://fixoona.com/blog/user-agent-parser-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="User Agent Strings Explained: What They Reveal and Why They Lie" />
+  <meta name="twitter:description" content="Why every user agent string starts with 'Mozilla,' and why you shouldn't trust one for security." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "User Agent Strings Explained: What They Reveal and Why They Lie",
+    "description": "Why every user agent string starts with 'Mozilla,' why Chrome's claims to be Safari, and why you should never trust a user agent for security decisions.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/user-agent-parser-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "User Agent Strings Guide", "item": "https://fixoona.com/blog/user-agent-parser-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why do almost all user agent strings start with the word 'Mozilla'?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's a historical leftover from the mid-1990s browser wars. Early websites checked for the token \"Mozilla\" to decide whether to serve a page's newer HTML features to Netscape Navigator. When Internet Explorer and every browser since wanted access to those same pages, they started including \"Mozilla\" in their own user agent too — and the convention never went away, even though the browser called Mozilla (as in the organization) barely factors into most of them anymore." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does Chrome's user agent string mention Safari and Gecko?",
+        "acceptedAnswer": { "@type": "Answer", "text": "For the same compatibility reason — older sites checked for tokens like \"Safari\" or \"like Gecko\" to decide what features or layout to serve, so newer browsers kept including those tokens to avoid being mistakenly treated as an unsupported browser. This is why a Chrome user agent string can honestly contain the words Mozilla, AppleWebKit, KHTML, and Safari despite Chrome being none of those things in the way the name implies." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can a website safely trust the user agent for security decisions?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the user agent string is just a header the browser voluntarily sends, and it can be changed freely through browser developer tools, extensions, or a custom HTTP client, so it should never be treated as a reliable way to authenticate a device or block malicious traffic. It's useful for optional things like analytics or picking a reasonable default layout, not as a security control." }
+      },
+      {
+        "@type": "Question",
+        "name": "What are User-Agent Client Hints?",
+        "acceptedAnswer": { "@type": "Answer", "text": "They're a newer API that some browsers now use instead of exposing full device and version details in every request by default. Rather than passively broadcasting a detailed string on every single page load, a site has to explicitly request specific details (like the exact OS version) through JavaScript, which the browser can then choose to share — reducing how much passive fingerprinting data is sent by default." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .ua-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>User Agent Strings Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Developer Guides · 5 min read · Updated September 2026</p>
+      <h1>User Agent Strings Explained: What They Reveal and Why They Lie</h1>
+      <div class="article-hero-img" aria-hidden="true">🕵️</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#anatomy">Anatomy of a User Agent String</a></li>
+          <li><a href="#why-mozilla">Why It Always Starts With "Mozilla"</a></li>
+          <li><a href="#why-safari">Why Chrome's UA Mentions Safari and Gecko</a></li>
+          <li><a href="#spoofing">Why You Can't Trust It for Security</a></li>
+          <li><a href="#client-hints">User-Agent Client Hints</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>A user agent string looks like dense, garbled text at first glance, but it's really just a self-reported label the browser attaches to every request — and understanding why it's shaped the way it is explains some genuinely strange-looking quirks, like Chrome technically claiming to be Safari.</p>
+
+        <h2 id="anatomy">Anatomy of a User Agent String</h2>
+        <p>A typical user agent string is built from several space-separated tokens: a product name and version, a parenthesized block describing the platform and rendering details, and then one or more engine and browser tokens. For example, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36" tells you the operating system (Windows 10, 64-bit), the rendering engine family (WebKit-based, behaving like Gecko), and the actual browser (Chrome). Each token exists because, at some point in history, a website somewhere checked for it.</p>
+
+        <h2 id="why-mozilla">Why It Always Starts With "Mozilla"</h2>
+        <p>This is a leftover from the mid-1990s browser wars. Early websites checked for the token "Mozilla" to decide whether to serve a page's newer HTML features to Netscape Navigator, which called itself Mozilla internally. When Internet Explorer — and every browser released since — wanted access to those same pages, they started including "Mozilla" in their own user agent string too, and the convention simply never went away. It's a fossil, not a meaningful description of the browser you're using today.</p>
+
+        <h2 id="why-safari">Why Chrome's UA Mentions Safari and Gecko</h2>
+        <p>The same compatibility logic explains the rest of the string. Older sites checked for tokens like "Safari" or "like Gecko" to decide what layout or features to serve, so newer browsers kept including those tokens to avoid being mistakenly treated as an unsupported browser. That's why a real Chrome user agent string can honestly contain the words Mozilla, AppleWebKit, KHTML, and Safari, despite Chrome being none of those things in the way the names imply — it's inherited compatibility baggage, layered on for two decades.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> If you're building a website and tempted to branch logic on the user agent string, check whether a feature-detection approach (testing whether the browser actually supports the API you need, e.g. via <code>"someAPI" in window</code>) would work instead — it's more reliable than guessing capabilities from a string that's inherently unreliable and can be spoofed.
+        </div>
+
+        <h2 id="spoofing">Why You Can't Trust It for Security</h2>
+        <p>The user agent string is just an HTTP header the browser voluntarily sends — there's no verification behind it. It can be changed freely through browser developer tools, a browser extension, or any custom HTTP client, so a server has no real way to confirm it's accurate. That makes it fine for optional, low-stakes uses like analytics dashboards or picking a reasonable default layout, but it should never be relied on as a security control or a way to reliably block or allow specific devices.</p>
+
+        <h2 id="client-hints">User-Agent Client Hints</h2>
+        <p>Partly because of privacy concerns around passive fingerprinting, some browsers now support User-Agent Client Hints as an alternative to exposing full device and version details in every single request by default. Instead of broadcasting a detailed string on every page load, a site has to explicitly request specific details (like the exact OS version) through JavaScript, and the browser can choose whether to share them. Over time this is expected to make the classic user agent string itself less detailed, or "frozen," on major browsers — one more reason not to build critical logic around parsing it.</p>
+
+        <h2 id="try-it">Parsing a User Agent String Instantly</h2>
+        <p>Paste any user agent string — your own or one from a support ticket or server log — into our free <a href="../tools/user-agent-parser">User Agent Parser</a> to break it down into browser, engine, operating system, and device details instantly, entirely in your browser.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>Why do almost all user agent strings start with the word "Mozilla"?</strong> It's a historical leftover from the mid-1990s browser wars. Early websites checked for the token "Mozilla" to decide whether to serve a page's newer HTML features to Netscape Navigator. When Internet Explorer and every browser since wanted access to those same pages, they started including "Mozilla" in their own user agent too — and the convention never went away, even though the browser called Mozilla (as in the organization) barely factors into most of them anymore.</p>
+        <p><strong>Why does Chrome's user agent string mention Safari and Gecko?</strong> For the same compatibility reason — older sites checked for tokens like "Safari" or "like Gecko" to decide what features or layout to serve, so newer browsers kept including those tokens to avoid being mistakenly treated as an unsupported browser. This is why a Chrome user agent string can honestly contain the words Mozilla, AppleWebKit, KHTML, and Safari despite Chrome being none of those things in the way the name implies.</p>
+        <p><strong>Can a website safely trust the user agent for security decisions?</strong> No — the user agent string is just a header the browser voluntarily sends, and it can be changed freely through browser developer tools, extensions, or a custom HTTP client, so it should never be treated as a reliable way to authenticate a device or block malicious traffic. It's useful for optional things like analytics or picking a reasonable default layout, not as a security control.</p>
+        <p><strong>What are User-Agent Client Hints?</strong> They're a newer API that some browsers now use instead of exposing full device and version details in every request by default. Rather than passively broadcasting a detailed string on every single page load, a site has to explicitly request specific details (like the exact OS version) through JavaScript, which the browser can then choose to share — reducing how much passive fingerprinting data is sent by default.</p>
+
+        <div class="tip-box">
+          Have a user agent string to decode? Try the free <a href="../tools/user-agent-parser">User Agent Parser</a> — paste it in and get browser, engine, OS, and device details instantly, no sign-up.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

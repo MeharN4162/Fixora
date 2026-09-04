@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Color Blindness Simulation: How It Actually Works | Fixoona</title>
+  <meta name="description" content="What protanopia, deuteranopia, and tritanopia really change about vision, and why a good simulator has to work in linear color space instead of raw sRGB." />
+  <meta name="keywords" content="how does color blindness simulation work, protanopia vs deuteranopia, designing for color blindness, linear color space" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/color-blindness-simulator-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Color Blindness Simulation: How It Actually Works" />
+  <meta property="og:description" content="What color vision deficiency really changes, and why simulation math has to happen in linear color space." />
+  <meta property="og:url" content="https://fixoona.com/blog/color-blindness-simulator-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Color Blindness Simulation: How It Actually Works" />
+  <meta name="twitter:description" content="What color vision deficiency really changes, and why simulation math has to happen in linear color space." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Color Blindness Simulation: How It Actually Works",
+    "description": "What color vision deficiency really changes, and why simulation math has to happen in linear color space.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/color-blindness-simulator-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Color Blindness Simulator Guide", "item": "https://fixoona.com/blog/color-blindness-simulator-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What's the difference between protanopia, deuteranopia, and tritanopia?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Protanopia and deuteranopia both affect red-green distinction and together make up the vast majority of color blindness cases, differing in which retinal cone type is missing (long-wavelength for protanopia, medium-wavelength for deuteranopia). Tritanopia is much rarer and affects blue-yellow distinction instead, from a missing short-wavelength cone." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the color need to be converted to \"linear\" before the transformation is applied?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Standard image colors are stored in sRGB, which applies a gamma curve for efficient storage and isn't linearly proportional to actual light intensity. Color vision transformations are defined in terms of real light intensity, so the colors are converted to linear space, transformed, and converted back to sRGB for accurate results — skipping this step produces a noticeably less accurate simulation." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why shouldn't a design rely on color alone to convey information?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Roughly 1 in 12 men and a much smaller share of women have some form of color vision deficiency, so a red/green status dot or a chart that only distinguishes categories by hue will be genuinely ambiguous to a meaningful slice of any audience. Pairing color with a shape, label, pattern, or icon keeps the same information accessible regardless of how someone perceives color." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is color blindness the same thing as being unable to see any color at all?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the vast majority of color blindness is dichromacy, where one of the three cone types is missing or non-functional but the other two still work, so colors are compressed into fewer distinguishable hues rather than eliminated entirely. Complete color blindness (achromatopsia), where everything is perceived in shades of gray, is comparatively rare." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Color Blindness Simulator Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Image Guides · 6 min read · Updated September 2026</p>
+      <h1>Color Blindness Simulation: How It Actually Works</h1>
+      <div class="article-hero-img" aria-hidden="true">👁️</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#types">The Three Main Types Explained</a></li>
+          <li><a href="#linear">Why "Linear" Color Space Matters</a></li>
+          <li><a href="#design">Designing So Color Isn't the Only Signal</a></li>
+          <li><a href="#dichromacy">Dichromacy vs. Total Color Blindness</a></li>
+          <li><a href="#try">Simulating It Yourself</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>Color blindness doesn't mean seeing the world in gray. For almost everyone with it, color still exists — there are just fewer distinguishable hues than trichromatic (typical) vision perceives, because one of the three types of color-sensing cone cells in the retina is missing or not working correctly.</p>
+
+        <h2 id="types">The Three Main Types Explained</h2>
+        <p>Human color vision typically relies on three cone types, each most sensitive to a different range of wavelengths: long (red-leaning), medium (green-leaning), and short (blue-leaning). Losing one of these entirely is called dichromacy, and which cone is missing determines the type. Protanopia is the loss of long-wavelength cones and deuteranopia is the loss of medium-wavelength cones — both compress the red-green range and together account for the large majority of color blindness cases. Tritanopia, the loss of short-wavelength cones, is much rarer and instead compresses the blue-yellow range, which is a genuinely different kind of confusion than the red-green cases most people picture.</p>
+
+        <h2 id="linear">Why "Linear" Color Space Matters</h2>
+        <p>The pixel values in a JPEG or PNG (the sRGB numbers 0–255 per channel) aren't a direct measurement of light intensity. They're passed through a gamma curve first, which is a deliberate encoding choice that allocates more numeric precision to darker tones, matching how human vision perceives brightness differences unevenly. That's great for storage efficiency, but it means doing math directly on those stored numbers doesn't correspond to doing math on actual light. A dichromacy simulation is a transformation of how light stimulates cone cells, so it has to be computed in linear space — undo the gamma curve, apply the color transformation, then reapply the curve to get back to a displayable image. Skip that step and the simulated colors come out visibly wrong, usually too dark or too saturated in the wrong places.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> If you're checking a design or chart for color-blind accessibility, don't just eyeball it after one filter — click through protanopia, deuteranopia, and tritanopia individually. A palette that survives one type can still collapse two adjacent categories into the same shade under another.
+        </div>
+
+        <h2 id="design">Designing So Color Isn't the Only Signal</h2>
+        <p>The practical takeaway for anyone building a chart, a status indicator, or a map legend is to never make color the only way to tell two things apart. A red "error" dot next to a green "success" dot reads identically to someone with red-green color blindness unless there's also a shape, icon, label, or pattern difference. This is a well-established accessibility guideline precisely because red-green deficiency is common enough that "just use red and green" quietly locks out a real portion of any audience — not a rare edge case.</p>
+
+        <h2 id="dichromacy">Dichromacy vs. Total Color Blindness</h2>
+        <p>What most people call "color blind" is almost always dichromacy — one cone type gone, two still working, so color perception is compressed rather than removed. Complete color blindness, called achromatopsia, is a separate and much rarer condition where all color perception is lost and everything is seen in shades of gray, similar to converting an image straight to grayscale based on perceived luminance. It's worth simulating both cases when checking a design, since they represent genuinely different experiences of the same image.</p>
+
+        <h2 id="try">Simulating It Yourself</h2>
+        <p>To see exactly how an image, screenshot, or design mockup looks under each type of color vision deficiency, upload it to the free <a href="../tools/color-blindness-simulator">Color Blindness Simulator</a> and switch between protanopia, deuteranopia, tritanopia, and full achromatopsia. Everything runs locally in the browser using a scientifically grounded transformation model, so nothing you upload ever leaves your device.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>What's the difference between protanopia, deuteranopia, and tritanopia?</strong> Protanopia and deuteranopia both affect red-green distinction and together make up the vast majority of color blindness cases, differing in which retinal cone type is missing (long-wavelength for protanopia, medium-wavelength for deuteranopia). Tritanopia is much rarer and affects blue-yellow distinction instead, from a missing short-wavelength cone.</p>
+        <p><strong>Why does the color need to be converted to "linear" before the transformation is applied?</strong> Standard image colors are stored in sRGB, which applies a gamma curve for efficient storage and isn't linearly proportional to actual light intensity. Color vision transformations are defined in terms of real light intensity, so the colors are converted to linear space, transformed, and converted back to sRGB for accurate results — skipping this step produces a noticeably less accurate simulation.</p>
+        <p><strong>Why shouldn't a design rely on color alone to convey information?</strong> Roughly 1 in 12 men and a much smaller share of women have some form of color vision deficiency, so a red/green status dot or a chart that only distinguishes categories by hue will be genuinely ambiguous to a meaningful slice of any audience. Pairing color with a shape, label, pattern, or icon keeps the same information accessible regardless of how someone perceives color.</p>
+        <p><strong>Is color blindness the same thing as being unable to see any color at all?</strong> No — the vast majority of color blindness is dichromacy, where one of the three cone types is missing or non-functional but the other two still work, so colors are compressed into fewer distinguishable hues rather than eliminated entirely. Complete color blindness (achromatopsia), where everything is perceived in shades of gray, is comparatively rare.</p>
+
+        <div class="tip-box">
+          Want to check how your own image or design looks under different types of color vision deficiency right now? Try the free <a href="../tools/color-blindness-simulator">Color Blindness Simulator</a> — no sign-up, nothing uploaded to a server.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

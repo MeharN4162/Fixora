@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diceware Passphrases: Why Words Beat Random Characters | Fixoona</title>
+  <meta name="description" content="What Diceware actually is, why the EFF built a specific word list for it, and how to calculate exactly how much entropy a multi-word passphrase has." />
+  <meta name="keywords" content="diceware explained, what is a passphrase, eff word list entropy, passphrase vs password" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/passphrase-generator-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Diceware Passphrases: Why Words Beat Random Characters" />
+  <meta property="og:description" content="What Diceware is, why the EFF built a specific word list, and how passphrase entropy is calculated." />
+  <meta property="og:url" content="https://fixoona.com/blog/passphrase-generator-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Diceware Passphrases: Why Words Beat Random Characters" />
+  <meta name="twitter:description" content="What Diceware is, why the EFF built a specific word list, and how passphrase entropy is calculated." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Diceware Passphrases: Why Words Beat Random Characters",
+    "description": "What Diceware is, why the EFF built a specific word list, and how passphrase entropy is calculated.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/passphrase-generator-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Diceware Passphrases Guide", "item": "https://fixoona.com/blog/passphrase-generator-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Diceware, and why use a word list instead of random characters?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Diceware is a method (originally using physical dice) for generating passphrases by picking random words from a fixed list. A multi-word passphrase like \"correct horse battery staple\" can be both easier to remember and have more actual entropy than a shorter string of random characters, since each additional word multiplies the number of possible combinations." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does this use the EFF's specific word list instead of just any dictionary?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The Electronic Frontier Foundation's word list was deliberately designed for this purpose — it avoids offensive terms, avoids words that are hard to spell or easily confused with each other, and uses exactly 1,296 words (6 to the 4th power) so the security of each word can be precisely calculated." }
+      },
+      {
+        "@type": "Question",
+        "name": "How much entropy does a passphrase from this list actually have?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Each word chosen from the 1,296-word list contributes about 10.3 bits of entropy (log base 2 of 1,296). A 6-word passphrase has roughly 62 bits of entropy — comparable to or stronger than a fairly long random password, while being made of real, memorable words." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does adding a random symbol or number to a passphrase help much?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It adds a little entropy, but usually far less than adding one more word does. A single extra Diceware word from a 1,296-word list adds about 10.3 bits, while a single unpredictable extra character typically adds somewhere in the range of 4 to 6 bits — so if you want meaningfully more strength, another word is a bigger lever than a bolted-on symbol." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Diceware Passphrases Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Security Guides · 6 min read · Updated September 2026</p>
+      <h1>Diceware Passphrases: Why Words Beat Random Characters</h1>
+      <div class="article-hero-img" aria-hidden="true">🎲</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#diceware">What Diceware Actually Is</a></li>
+          <li><a href="#word-list">Why a Specifically Designed Word List</a></li>
+          <li><a href="#entropy">How to Calculate Entropy Yourself</a></li>
+          <li><a href="#comparison">Passphrase vs. Password: Which Wins</a></li>
+          <li><a href="#generate">Generating One Instantly</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>"Use a strong password" advice usually means longer strings of random letters, numbers, and symbols — which are also famously hard to remember. Diceware takes a different approach: instead of random characters, it strings together random real words, trading a bit of length for something a person can actually memorize.</p>
+
+        <h2 id="diceware">What Diceware Actually Is</h2>
+        <p>Diceware is a method for generating a passphrase by rolling physical dice to pick words at random from a numbered word list — the dice rolls translate into a lookup number, and that number maps to one word. The word choice is the important part: because each word is picked completely at random from a fixed list, and the list itself is public, the security of the resulting passphrase can be mathematically calculated rather than just assumed. The technique predates its digital implementations, but the core idea — random selection from a known, finite list — is exactly what a browser-based passphrase generator automates using cryptographically secure randomness instead of dice.</p>
+
+        <h2 id="word-list">Why a Specifically Designed Word List</h2>
+        <p>Not just any dictionary works well for this. The word list needs three properties: every word should be easy to spell correctly from memory, words shouldn't be easily confused with each other (which would make transcribing the passphrase error-prone), and the list should avoid offensive terms since it's public infrastructure anyone might use. The Electronic Frontier Foundation built a word list specifically with these constraints in mind, sized at exactly 1,296 words — 6 to the 4th power — a number chosen so the math of random selection from it stays clean and easy to verify.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> A passphrase's separator character barely matters for security — hyphens, spaces, or no separator at all add negligible entropy compared to the words themselves. Pick whichever separator is easiest for you to type accurately and consistently.
+        </div>
+
+        <h2 id="entropy">How to Calculate Entropy Yourself</h2>
+        <p>Entropy — a measure of how many equally likely possibilities there are — is calculated as log base 2 of the number of choices. For a 1,296-word list, that's log₂(1,296) ≈ 10.3 bits of entropy per word. Since each word is chosen independently, entropy adds up directly across words: a 4-word passphrase has about 41 bits, a 6-word passphrase has about 62 bits, and an 8-word passphrase has about 82 bits. Doubling the word count doesn't just double the security — it multiplies the total number of possible passphrases, since each added word multiplies (not adds to) the count of combinations.</p>
+
+        <h2 id="comparison">Passphrase vs. Password: Which Wins</h2>
+        <p>A common myth is that a short random-character password is automatically stronger than a longer passphrase because it "looks more random." In practice, entropy is what determines resistance to guessing, not visual complexity. A typical 8-character random password drawn from roughly 95 printable characters carries about 52 bits of entropy — noticeably less than a 6-word Diceware passphrase's roughly 62 bits, while being considerably harder for a person to memorize and type correctly.</p>
+
+        <h2 id="generate">Generating One Instantly</h2>
+        <p>Generate a fresh Diceware-style passphrase using the real EFF word list and cryptographically secure randomness with the free <a href="../tools/passphrase-generator">Passphrase Generator</a> — adjust the word count and watch the entropy meter update live.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>What is Diceware, and why use a word list instead of random characters?</strong> Diceware is a method (originally using physical dice) for generating passphrases by picking random words from a fixed list. A multi-word passphrase like "correct horse battery staple" can be both easier to remember and have more actual entropy than a shorter string of random characters, since each additional word multiplies the number of possible combinations.</p>
+        <p><strong>Why does this use the EFF's specific word list instead of just any dictionary?</strong> The Electronic Frontier Foundation's word list was deliberately designed for this purpose — it avoids offensive terms, avoids words that are hard to spell or easily confused with each other, and uses exactly 1,296 words (6 to the 4th power) so the security of each word can be precisely calculated.</p>
+        <p><strong>How much entropy does a passphrase from this list actually have?</strong> Each word chosen from the 1,296-word list contributes about 10.3 bits of entropy (log base 2 of 1,296). A 6-word passphrase has roughly 62 bits of entropy — comparable to or stronger than a fairly long random password, while being made of real, memorable words.</p>
+        <p><strong>Does adding a random symbol or number to a passphrase help much?</strong> It adds a little entropy, but usually far less than adding one more word does. A single extra Diceware word from a 1,296-word list adds about 10.3 bits, while a single unpredictable extra character typically adds somewhere in the range of 4 to 6 bits — so if you want meaningfully more strength, another word is a bigger lever than a bolted-on symbol.</p>
+
+        <div class="tip-box">
+          Ready for a memorable, genuinely strong passphrase? Try the free <a href="../tools/passphrase-generator">Passphrase Generator</a> — no sign-up, nothing sent to a server.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

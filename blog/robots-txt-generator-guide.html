@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What Robots.txt Can and Can't Actually Do | Fixoona</title>
+  <meta name="description" content="How robots.txt rules are actually interpreted by crawlers, the common misconception about hiding pages from Google, and how the sitemap directive fits in." />
+  <meta name="keywords" content="robots.txt explained, does robots.txt hide pages from google, robots.txt rules and syntax" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/robots-txt-generator-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="What Robots.txt Can and Can't Actually Do" />
+  <meta property="og:description" content="How robots.txt rules are actually interpreted by crawlers, and the common misconception about hiding pages from Google." />
+  <meta property="og:url" content="https://fixoona.com/blog/robots-txt-generator-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="What Robots.txt Can and Can't Actually Do" />
+  <meta name="twitter:description" content="How robots.txt rules are actually interpreted by crawlers, and the common misconception about hiding pages from Google." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "What Robots.txt Can and Can't Actually Do",
+    "description": "How robots.txt rules are actually interpreted by crawlers, the common misconception about hiding pages from Google, and how the sitemap directive fits in.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/robots-txt-generator-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Robots.txt Generator Guide", "item": "https://fixoona.com/blog/robots-txt-generator-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where do I put the generated robots.txt file?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Upload it to the root of your domain so it's reachable at yourdomain.com/robots.txt — search engines specifically look for it at that exact location and won't find it anywhere else." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does blocking a page in robots.txt guarantee it stays out of Google's index?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Not entirely — robots.txt only tells crawlers not to fetch a page's content. If other sites link to that URL, Google can sometimes still index the URL itself (without its content) unless you also use a noindex meta tag on the page, which does require it to be crawlable." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the Sitemap line actually do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's a courtesy pointer telling any crawler exactly where your sitemap.xml lives, so it can find and process all your important URLs efficiently, rather than relying purely on discovering links by crawling around your site." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the information I enter sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — the file is built entirely in your browser using JavaScript, so nothing you enter is sent to a server." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Robots.txt Generator Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Developer Guides · 6 min read · Updated September 2026</p>
+      <h1>What Robots.txt Can and Can't Actually Do</h1>
+      <div class="article-hero-img" aria-hidden="true">🤖</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#not-a-lock">It's a Request, Not a Lock</a></li>
+          <li><a href="#hiding-misconception">The "Hiding From Google" Misconception</a></li>
+          <li><a href="#syntax">Reading Allow, Disallow, and Wildcards</a></li>
+          <li><a href="#sitemap">Where the Sitemap Line Fits In</a></li>
+          <li><a href="#generate">Generate One Instantly</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>robots.txt is one of the oldest and simplest web standards still in daily use, but it's also one of the most misunderstood — mostly because its name sounds like it controls something stronger than it actually does.</p>
+
+        <h2 id="not-a-lock">It's a Request, Not a Lock</h2>
+        <p>robots.txt is a voluntary convention, not an enforced security boundary. Well-behaved crawlers — Google, Bing, and most legitimate search bots — read the file and respect its rules before crawling your site. But nothing about the file technically prevents a browser, a scraper, or a malicious bot from ignoring it entirely and requesting a disallowed page directly. If a URL genuinely needs to stay private, robots.txt is the wrong tool — that's a job for authentication or server-side access control instead.</p>
+
+        <h2 id="hiding-misconception">The "Hiding From Google" Misconception</h2>
+        <p>Disallowing a path in robots.txt stops crawlers from fetching that page's content, but it doesn't stop the URL itself from potentially appearing in search results. If enough other sites link to that disallowed URL, Google can index the URL as a bare link — sometimes shown with no description, just the address — because it never needed to crawl the page to know the URL exists. Truly preventing a page from appearing in search results requires a noindex meta tag or HTTP header on the page itself, which ironically means the page needs to stay crawlable for Google to see and honor that instruction.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> If you actually want a page out of search results entirely, use noindex on the page (and leave it crawlable) rather than disallowing it in robots.txt — combining both often backfires, since a disallowed page can't be crawled to discover the noindex tag telling Google to drop it.
+        </div>
+
+        <h2 id="syntax">Reading Allow, Disallow, and Wildcards</h2>
+        <p>Each rule set starts with a User-agent line specifying which crawler it applies to (an asterisk means "all crawlers"), followed by Disallow lines listing paths that crawler shouldn't fetch, and optionally Allow lines carving out exceptions within a disallowed area. An empty Disallow line (just "Disallow:" with nothing after it) means nothing is blocked — full access — which is different from "Disallow: /", which blocks the entire site starting from the root.</p>
+
+        <h2 id="sitemap">Where the Sitemap Line Fits In</h2>
+        <p>The Sitemap directive is unrelated to the Allow/Disallow rules — it doesn't control access at all. It's simply a pointer telling any crawler where to find your sitemap.xml file, which lists your important URLs directly rather than making the crawler discover them purely by following links around your site. Including it is a small efficiency courtesy that can help large or newer sites get crawled more completely.</p>
+
+        <h2 id="generate">Generate One Instantly</h2>
+        <p>Choose Allow All, Custom Rules, or Block All, add your sitemap URL, and get a correctly formatted file with our free <a href="../tools/robots-txt-generator">Robots.txt Generator</a> — copy the result and upload it to your site's root as robots.txt.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>Where do I put the generated robots.txt file?</strong> Upload it to the root of your domain so it's reachable at yourdomain.com/robots.txt — search engines specifically look for it at that exact location and won't find it anywhere else.</p>
+        <p><strong>Does blocking a page in robots.txt guarantee it stays out of Google's index?</strong> Not entirely — robots.txt only tells crawlers not to fetch a page's content. If other sites link to that URL, Google can sometimes still index the URL itself (without its content) unless you also use a noindex meta tag on the page, which does require it to be crawlable.</p>
+        <p><strong>What does the Sitemap line actually do?</strong> It's a courtesy pointer telling any crawler exactly where your sitemap.xml lives, so it can find and process all your important URLs efficiently, rather than relying purely on discovering links by crawling around your site.</p>
+        <p><strong>Is the information I enter sent anywhere?</strong> No — the file is built entirely in your browser using JavaScript, so nothing you enter is sent to a server.</p>
+
+        <div class="tip-box">
+          Need a robots.txt file right now? Try the free <a href="../tools/robots-txt-generator">Robots.txt Generator</a> — no sign-up, correctly formatted every time.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

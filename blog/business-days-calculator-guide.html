@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Days Explained: Weekends, Holidays, and Deadlines | Fixoona</title>
+  <meta name="description" content="What actually counts as a business day, why holidays aren't handled automatically, and the common 'next business day' trap in deadline math." />
+  <meta name="keywords" content="what counts as a business day, business days vs calendar days, next business day rule, working days explained" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/business-days-calculator-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="Business Days Explained: Weekends, Holidays, and Deadlines" />
+  <meta property="og:description" content="What counts as a business day, and why holidays aren't handled automatically." />
+  <meta property="og:url" content="https://fixoona.com/blog/business-days-calculator-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Business Days Explained: Weekends, Holidays, and Deadlines" />
+  <meta name="twitter:description" content="What counts as a business day, and why holidays aren't handled automatically." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Business Days Explained: Weekends, Holidays, and Deadlines",
+    "description": "What counts as a business day, and why holidays aren't handled automatically.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/business-days-calculator-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Business Days Explained", "item": "https://fixoona.com/blog/business-days-calculator-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Which days count as weekends by default?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Saturday and Sunday are treated as non-business days by default, matching the standard Monday-to-Friday work week used in most countries — though some countries use a different weekend (like Friday–Saturday), which a generic calculator won't know to apply automatically." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why doesn't a business day calculator already know my country's holidays?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Public holidays vary enormously by country, region, and even individual company policy, so a generic calculator can't safely assume any of them — that's why holidays typically need to be entered manually rather than applied automatically." }
+      },
+      {
+        "@type": "Question",
+        "name": "If a deadline falls on a weekend, does it move automatically?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Not unless a tool specifically builds that in — most calculators simply count or skip weekend days, they don't automatically roll a landed-on-a-weekend deadline forward to the next business day unless that logic is explicitly added." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are the dates I enter sent anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — all the date math happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Business Days Explained</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Business Guides · 5 min read · Updated September 2026</p>
+      <h1>Business Days Explained: Weekends, Holidays, and Deadlines</h1>
+      <div class="article-hero-img" aria-hidden="true">📅</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#what-counts">What Actually Counts as a Business Day</a></li>
+          <li><a href="#inclusive">Inclusive vs. Exclusive Counting</a></li>
+          <li><a href="#holidays">Why Holidays Aren't Automatic</a></li>
+          <li><a href="#next-business-day">The "Next Business Day" Trap</a></li>
+          <li><a href="#calculate">Count or Add Business Days Instantly</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>"Business days" sounds like a precise term, but the exact set of days it excludes depends on your country, your industry, and sometimes the specific contract you're reading — assuming the generic definition can quietly cost you a day or more on a real deadline.</p>
+
+        <h2 id="what-counts">What Actually Counts as a Business Day</h2>
+        <p>The standard definition excludes Saturday and Sunday, counting only Monday through Friday as business days. That's the default nearly every calculator, contract, and shipping estimate assumes. But it's a Western-centric default — several countries observe a different weekend entirely (Friday–Saturday is common across parts of the Middle East, for example), so "business day" isn't a universal constant, it's a convention tied to a specific work week.</p>
+
+        <h2 id="inclusive">Inclusive vs. Exclusive Counting</h2>
+        <p>When counting business days between a start and end date, both endpoints are typically included in the total if they themselves fall on a business day. A Monday-to-Friday span, for instance, counts as 5 business days, not 4 — the same off-by-one ambiguity that trips people up with plain calendar-day counting shows up here too, just filtered through the weekend rule first.</p>
+
+        <h2 id="holidays">Why Holidays Aren't Automatic</h2>
+        <p>Public holidays are the part almost no generic calculator can safely guess. They vary by country, by region within a country, and sometimes by individual company policy — a bank holiday isn't necessarily a stock market holiday, and neither is necessarily a federal government holiday. Because of that variation, a business day calculator typically requires holidays to be entered manually rather than assumed, which means it's on you to double-check any date range against the specific calendar that actually governs your deadline.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> For a contract or legal deadline specifically, check whether "business days" has an explicit definition written into the document itself — some contracts define it more narrowly (excluding certain holidays, or specifying a particular jurisdiction's calendar) than the generic weekday-only assumption.
+        </div>
+
+        <h2 id="next-business-day">The "Next Business Day" Trap</h2>
+        <p>A common source of confusion: if a deadline computed some other way happens to land on a Saturday, does it automatically shift to the following Monday? Not by default. A basic calculator just counts or skips non-business days as instructed — it doesn't automatically detect that a computed result fell on a weekend and roll it forward unless that specific rule is built in. Always double-check whether the process you're following intends an automatic roll-forward or expects you to catch that case manually.</p>
+
+        <h2 id="calculate">Count or Add Business Days Instantly</h2>
+        <p>Count the exact business days between two dates, or add a number of business days to a date — with custom holidays skipped too — using the free <a href="../tools/business-days-calculator">Business Days Calculator</a>. No sign-up, and nothing you enter leaves your browser.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>Which days count as weekends by default?</strong> Saturday and Sunday are treated as non-business days by default, matching the standard Monday-to-Friday work week used in most countries — though some countries use a different weekend (like Friday–Saturday), which a generic calculator won't know to apply automatically.</p>
+        <p><strong>Why doesn't a business day calculator already know my country's holidays?</strong> Public holidays vary enormously by country, region, and even individual company policy, so a generic calculator can't safely assume any of them — that's why holidays typically need to be entered manually rather than applied automatically.</p>
+        <p><strong>If a deadline falls on a weekend, does it move automatically?</strong> Not unless a tool specifically builds that in — most calculators simply count or skip weekend days, they don't automatically roll a landed-on-a-weekend deadline forward to the next business day unless that logic is explicitly added.</p>
+        <p><strong>Are the dates I enter sent anywhere?</strong> No — all the date math happens entirely in your browser using JavaScript, so nothing you enter is ever sent to a server.</p>
+
+        <div class="tip-box">
+          Need to count or add business days right now? Try the free <a href="../tools/business-days-calculator">Business Days Calculator</a> — no sign-up.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

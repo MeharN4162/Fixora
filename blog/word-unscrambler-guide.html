@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Word Unscramblers Find Every Answer | Fixoona</title>
+  <meta name="description" content="How an anagram solver checks thousands of dictionary words against your letters in an instant, and how Scrabble tile point values are actually assigned." />
+  <meta name="keywords" content="how does a word unscrambler work, anagram solver algorithm, scrabble letter point values" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/word-unscrambler-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="How Word Unscramblers Find Every Answer" />
+  <meta property="og:description" content="How an anagram solver checks a dictionary against your letters instantly." />
+  <meta property="og:url" content="https://fixoona.com/blog/word-unscrambler-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How Word Unscramblers Find Every Answer" />
+  <meta name="twitter:description" content="How an anagram solver checks a dictionary against your letters instantly." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How Word Unscramblers Find Every Answer",
+    "description": "How an anagram solver checks a dictionary against your letters instantly.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/word-unscrambler-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "Word Unscrambler Guide", "item": "https://fixoona.com/blog/word-unscrambler-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does a word unscrambler actually find valid words?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It checks your letters against a large dictionary word list, testing which words can be formed using only the letters you have, without reusing a letter more times than it appears. Rather than trying every possible rearrangement, it typically sorts each candidate word's letters and compares that sorted form against a sorted version of your input, which is a fast way to test if one is a subset of the other." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does it find some obscure words I've never heard of?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's checking against a comprehensive dictionary word list, which includes plenty of valid but uncommon words that rarely come up in everyday conversation. A word being obscure doesn't make it invalid — in games like Scrabble, unusual but legitimate words are often exactly what separates a good score from a great one." }
+      },
+      {
+        "@type": "Question",
+        "name": "How are Scrabble letter point values decided?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Each letter's point value is based on how frequently it appears in English and how difficult it is to use. Common letters like E, A, and O are worth 1 point since they're easy to play, while rare letters like Q, Z, X, and J are worth 8 to 10 points because they're harder to fit into a word." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>Word Unscrambler Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Text Guides · 4 min read · Updated September 2026</p>
+      <h1>How Word Unscramblers Find Every Answer</h1>
+      <div class="article-hero-img" aria-hidden="true">🔤</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#matching">How Letters Get Matched to Real Words</a></li>
+          <li><a href="#obscure">Why It Finds Words You've Never Heard Of</a></li>
+          <li><a href="#points">How Scrabble Point Values Are Decided</a></li>
+          <li><a href="#try">Unscramble Your Letters</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>A jumble of letters that means nothing to you can hide a dozen valid words at once — the trick isn't intelligence, it's a fast, systematic way of testing letters against a dictionary.</p>
+
+        <h2 id="matching">How Letters Get Matched to Real Words</h2>
+        <p>An unscrambler works through a large dictionary word list, checking each candidate word to see whether it can be built entirely from the letters you provided, without using any letter more times than it actually appears in your input. A common, efficient trick is to sort the letters of both your input and each candidate word alphabetically — if a candidate word's sorted letters are all present in your sorted input (accounting for repeats), it's a valid match. This lets the check run in a fraction of a second even against a dictionary with hundreds of thousands of entries.</p>
+
+        <h2 id="obscure">Why It Finds Words You've Never Heard Of</h2>
+        <p>The dictionary being checked against is comprehensive by design, which means it includes plenty of legitimate but rarely-used words alongside common ones. An unfamiliar result isn't a bug — it's just a real word that doesn't come up often in daily conversation. In competitive word games, knowing these less common words is often exactly what turns an average play into a high-scoring one.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> If you're stuck on a word game with a specific set of letters plus a wildcard (blank tile), try running the unscrambler on your letters without the wildcard first — it's often faster to spot the pattern, then mentally substitute the blank into the result.
+        </div>
+
+        <h2 id="points">How Scrabble Point Values Are Decided</h2>
+        <p>Each letter tile's point value reflects two things: how common that letter is in English, and how hard it is to fit into a word. Frequently used, easy-to-play letters like E, A, I, O, N, R, T, L, S, and U are worth just 1 point. Rarer letters that show up in fewer valid words — like Q, Z, X, and J — are worth far more (8 to 10 points), since successfully using them at all is the harder achievement.</p>
+
+        <h2 id="try">Unscramble Your Letters</h2>
+        <p>Type in your letters and let the free <a href="../tools/word-unscrambler">Word Unscrambler &amp; Anagram Solver</a> find every valid word, complete with Scrabble point values.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>How does a word unscrambler actually find valid words?</strong> It checks your letters against a large dictionary word list, testing which words can be formed using only the letters you have, without reusing a letter more times than it appears. Rather than trying every possible rearrangement, it typically sorts each candidate word's letters and compares that sorted form against a sorted version of your input, which is a fast way to test if one is a subset of the other.</p>
+        <p><strong>Why does it find some obscure words I've never heard of?</strong> It's checking against a comprehensive dictionary word list, which includes plenty of valid but uncommon words that rarely come up in everyday conversation. A word being obscure doesn't make it invalid — in games like Scrabble, unusual but legitimate words are often exactly what separates a good score from a great one.</p>
+        <p><strong>How are Scrabble letter point values decided?</strong> Each letter's point value is based on how frequently it appears in English and how difficult it is to use. Common letters like E, A, and O are worth 1 point since they're easy to play, while rare letters like Q, Z, X, and J are worth 8 to 10 points because they're harder to fit into a word.</p>
+
+        <div class="tip-box">
+          Stuck on a jumble of letters? Try the free <a href="../tools/word-unscrambler">Word Unscrambler &amp; Anagram Solver</a> — every valid word, instantly.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

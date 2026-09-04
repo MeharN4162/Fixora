@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7005459782661796" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLDS0R6T4C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLDS0R6T4C');
+  </script>
+  <meta charset="UTF-8" />
+  <script>(function(){try{var t=localStorage.getItem("fixora_theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YAML vs JSON: How They Differ and Where Conversions Break | Fixoona</title>
+  <meta name="description" content="Why YAML's indentation rules trip people up, the infamous Norway Problem, and what gets lost when you convert between YAML and JSON." />
+  <meta name="keywords" content="yaml vs json, yaml norway problem, yaml indentation rules, converting yaml to json" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fixoona.com/blog/yaml-json-converter-guide" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Fixoona" />
+  <meta property="og:title" content="YAML vs JSON: How They Differ and Where Conversions Break" />
+  <meta property="og:description" content="Why YAML's indentation trips people up, and what actually gets lost converting to JSON." />
+  <meta property="og:url" content="https://fixoona.com/blog/yaml-json-converter-guide" />
+  <meta property="og:image" content="https://fixoona.com/assets/img/og-cover.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="YAML vs JSON: How They Differ and Where Conversions Break" />
+  <meta name="twitter:description" content="Why YAML's indentation trips people up, and what actually gets lost converting to JSON." />
+
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "YAML vs JSON: How They Differ and Where Conversions Break",
+    "description": "Why YAML's indentation rules trip people up, the infamous Norway Problem, and what gets lost when you convert between YAML and JSON.",
+    "author": { "@type": "Organization", "name": "Fixoona" },
+    "publisher": { "@type": "Organization", "name": "Fixoona" },
+    "datePublished": "2026-09-02",
+    "dateModified": "2026-09-02",
+    "mainEntityOfPage": "https://fixoona.com/blog/yaml-json-converter-guide"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fixoona.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://fixoona.com/all-guides" },
+      { "@type": "ListItem", "position": 3, "name": "YAML vs JSON Guide", "item": "https://fixoona.com/blog/yaml-json-converter-guide" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why is YAML so strict about indentation?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Unlike JSON, which uses braces and brackets to mark where an object or array begins and ends, YAML uses indentation level itself to represent that nesting — so a single misplaced space genuinely changes what a document means, rather than just being a style issue. YAML also forbids literal tab characters for indentation entirely, which is a common source of \"invalid indentation\" errors when copying YAML from somewhere that used tabs." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the YAML \"Norway Problem\"?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It's a famous YAML gotcha where an unquoted value like NO (commonly used as the ISO country code for Norway) gets automatically interpreted as the boolean false, because YAML treats several unquoted words — including no, yes, on, off, true, and false — as booleans rather than as plain text. The fix is always to quote any value that could be mistaken for a boolean, number, or null." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does converting YAML to JSON lose any information?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Comments are always lost, since JSON has no comment syntax at all. YAML-specific features like anchors and aliases (reusable references within the same document) are also resolved away — the JSON output contains the fully expanded data, not a reference back to the original anchor, since JSON has no equivalent concept." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why did my conversion fail with a specific line and column number?",
+        "acceptedAnswer": { "@type": "Answer", "text": "That's the real parser error message, pointing to exactly where the YAML or JSON syntax is invalid — usually inconsistent indentation (YAML is indentation-sensitive) or a missing comma or quote (for JSON)." }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="../index" class="nav-brand">
+        <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="../index">Home</a></li>
+          <li><a href="../all-tools">All Tools</a></li>
+          <li><a href="../all-guides" class="active">Guides</a></li>
+          <li><a href="../about">About</a></li>
+          <li><a href="../contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index">Home</a><span class="sep">/</span>
+        <a href="../all-guides">Guides</a><span class="sep">/</span>
+        <span>YAML vs JSON Guide</span>
+      </nav>
+    </div>
+
+    <section class="article-head container">
+      <p class="meta">Developer Guides · 6 min read · Updated September 2026</p>
+      <h1>YAML vs JSON: How They Differ and Where Conversions Break</h1>
+      <div class="article-hero-img" aria-hidden="true">📄</div>
+    </section>
+
+    <div class="container article-layout">
+      <aside class="toc">
+        <h4>On This Page</h4>
+        <ul>
+          <li><a href="#why-two-formats">Why Two Formats for the Same Job</a></li>
+          <li><a href="#indentation">Why YAML's Indentation Rules Are Strict</a></li>
+          <li><a href="#norway-problem">The Norway Problem</a></li>
+          <li><a href="#anchors">Anchors, Aliases, and What Gets Lost</a></li>
+          <li><a href="#try-it">Converting Instantly</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </aside>
+
+      <article class="article-body">
+        <p>YAML and JSON both describe the same kind of structured data — objects, arrays, strings, numbers, booleans — but they encode it so differently that a document can be perfectly valid in one format and silently mean something different once converted. Most of the surprises come down to a handful of specific YAML quirks.</p>
+
+        <h2 id="why-two-formats">Why Two Formats for the Same Job</h2>
+        <p>JSON was designed to be simple and unambiguous for machines to parse — every object and array is explicitly wrapped in braces or brackets, so there's little room for a parser to guess wrong. YAML was designed to be easier for humans to read and write by hand, favoring indentation and minimal punctuation over explicit delimiters, which is why configuration files (Docker Compose, Kubernetes manifests, CI pipelines) are so often written in YAML while APIs almost always exchange JSON. The tradeoff is that YAML's human-friendliness comes with a much larger, more surprising rule set underneath.</p>
+
+        <h2 id="indentation">Why YAML's Indentation Rules Are Strict</h2>
+        <p>Unlike JSON, which uses braces and brackets to mark where an object or array begins and ends, YAML uses the indentation level itself to represent that nesting — so a single misplaced space genuinely changes what a document means, rather than just being a style issue. YAML also forbids literal tab characters for indentation entirely, which is a common source of "invalid indentation" errors when copying YAML from an editor or terminal that used tabs instead of spaces.</p>
+
+        <h2 id="norway-problem">The Norway Problem</h2>
+        <p>This is a famous, real gotcha in YAML 1.1 (the version most parsers implement): an unquoted value like <code>NO</code> — commonly used as the ISO country code for Norway — gets automatically interpreted as the boolean <code>false</code>, because YAML treats several unquoted words, including <code>no</code>, <code>yes</code>, <code>on</code>, <code>off</code>, <code>true</code>, and <code>false</code>, as booleans rather than as plain text. The same applies to things that look like numbers or dates. The fix is always the same: quote any value that could plausibly be mistaken for a boolean, number, or null, e.g. <code>country: "NO"</code>.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> When writing YAML by hand, quote string values liberally rather than relying on YAML to guess correctly — it costs nothing and eliminates an entire category of silent, hard-to-spot bugs like the Norway Problem.
+        </div>
+
+        <h2 id="anchors">Anchors, Aliases, and What Gets Lost</h2>
+        <p>YAML supports anchors (<code>&amp;name</code>) and aliases (<code>*name</code>), which let one part of a document reuse a value defined elsewhere, avoiding repetition. JSON has no equivalent concept, so converting YAML with anchors into JSON resolves them away — the output contains the fully expanded, repeated data rather than a reference back to the original anchor. Comments are lost entirely in either direction, since JSON has no comment syntax at all to preserve them in.</p>
+
+        <h2 id="try-it">Converting Instantly</h2>
+        <p>Paste YAML or JSON into our free <a href="../tools/yaml-json-converter">YAML to JSON Converter</a> to convert it instantly using a real parser (js-yaml) — with a real error message, including line and column, if something's actually invalid.</p>
+
+        <h2 id="faq">FAQ</h2>
+        <p><strong>Why is YAML so strict about indentation?</strong> Unlike JSON, which uses braces and brackets to mark where an object or array begins and ends, YAML uses indentation level itself to represent that nesting — so a single misplaced space genuinely changes what a document means, rather than just being a style issue. YAML also forbids literal tab characters for indentation entirely, which is a common source of "invalid indentation" errors when copying YAML from somewhere that used tabs.</p>
+        <p><strong>What is the YAML "Norway Problem"?</strong> It's a famous YAML gotcha where an unquoted value like NO (commonly used as the ISO country code for Norway) gets automatically interpreted as the boolean false, because YAML treats several unquoted words — including no, yes, on, off, true, and false — as booleans rather than as plain text. The fix is always to quote any value that could be mistaken for a boolean, number, or null.</p>
+        <p><strong>Does converting YAML to JSON lose any information?</strong> Comments are always lost, since JSON has no comment syntax at all. YAML-specific features like anchors and aliases (reusable references within the same document) are also resolved away — the JSON output contains the fully expanded data, not a reference back to the original anchor, since JSON has no equivalent concept.</p>
+        <p><strong>Why did my conversion fail with a specific line and column number?</strong> That's the real parser error message, pointing to exactly where the YAML or JSON syntax is invalid — usually inconsistent indentation (YAML is indentation-sensitive) or a missing comma or quote (for JSON).</p>
+
+        <div class="tip-box">
+          Need to convert between formats right now? Try the free <a href="../tools/yaml-json-converter">YAML to JSON Converter</a> — no sign-up, nothing uploaded.
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../index" class="nav-brand">
+            <img src="../assets/img/logo-icon.png" alt="Fixoona" class="nav-brand-icon" width="26" height="48" />
+          </a>
+          <p>Free, fast, privacy-friendly tools and how-to guides for everyday tech problems.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Tools</h4>
+          <ul>
+            <li><a href="../tools/pdf-compressor">PDF Compressor</a></li>
+            <li><a href="../tools/image-resizer">Image Resizer</a></li>
+            <li><a href="../tools/word-counter">Word Counter</a></li>
+            <li><a href="../tools/password-generator">Password Generator</a></li>
+            <li><a href="../all-tools">See All 193 Tools →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Guides</h4>
+          <ul>
+            <li><a href="compress-pdf-guide">Compress a PDF</a></li>
+            <li><a href="image-format-guide">Image Formats</a></li>
+            <li><a href="strong-password-guide">Strong Passwords</a></li>
+            <li><a href="../all-guides">See All Guides →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="../about">About Us</a></li>
+            <li><a href="../contact">Contact</a></li>
+            <li><a href="../privacy-policy">Privacy Policy</a></li>
+            <li><a href="../terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Fixoona. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
