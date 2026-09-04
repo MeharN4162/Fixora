@@ -641,7 +641,7 @@ p {
     grid-template-columns: 30px 1fr;
     column-gap: 8px;
     row-gap: 2px;
-    padding: 11px 40px 11px 10px;
+    padding: 11px 46px 11px 10px;
     height: 56px;
   }
 
@@ -758,7 +758,7 @@ p {
     "cta  cta";
   column-gap: 14px;
   row-gap: 3px;
-  padding: 16px 44px 16px 18px;
+  padding: 16px 50px 16px 18px;
   align-items: start;
   height: 112px;
 }
@@ -2400,8 +2400,8 @@ p {
 
 @media (max-width: 640px) {
   .back-to-top {
-    right: 16px;
-    bottom: 76px;
+    right: 31px;
+    bottom: 92px;
     width: 40px;
     height: 40px;
   }
